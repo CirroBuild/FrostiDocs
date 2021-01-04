@@ -63,7 +63,6 @@ network stack used to handle all incoming network connections. Following our new
 support for Kafka, QuestDB's network stack now ingests time series data from
 Kafka topics reliably, without garbage collection.
 
-
 ## TCP flow control
 
 When we have multiple nodes on a network, there are usually disparities in their
