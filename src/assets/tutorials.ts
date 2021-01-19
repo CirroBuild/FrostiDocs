@@ -32,19 +32,12 @@ const tutorials: FlatTutorial[] = [
     image: "/img/tutorial/2020-12-17/banner.jpg",
   },
   {
-    author: "Chankey Pathak",
-    date: "2020-10-20",
-    content: "Learn how to create tables in QuestDB, insert data, and plot charts with matplotlib in Python via a Jupyter Notebook.",
-    link: "https://tutswiki.com/setup-access-questdb-python-notebook/",
-    title: "Setup and access QuestDB in Python using a Jupyter Notebook",
-  },
-  {
     author: "David G. Simmons",
     date: "2020-08-25",
     content:
       "In this video, David describes why a performant time-series database is critical for IoT use cases and shows how to set up and use QuestDB for ingesting sensor data from Arduino boards.",
     link: "https://www.youtube.com/watch?v=5IsPIpcVCoE",
-    title: "Sending IoT Data from Arduino to QuestDB",
+    title: "Video: Sending IoT Data from Arduino to QuestDB",
   },
   {
     author: "David McKay",
@@ -60,7 +53,7 @@ const tutorials: FlatTutorial[] = [
     content:
       "How do you get the most out of your IoT data? Listen and watch as David Simmons answers this question and more during this Virtual Lunch & Learn session!",
     link: "https://www.youtube.com/watch?v=RseiLoBRcAg",
-    title: "QuestDB virtual lunch and learn",
+    title: "Video: QuestDB virtual lunch and learn",
   },
   {
     author: "David G. Simmons",
@@ -72,18 +65,19 @@ const tutorials: FlatTutorial[] = [
   },
   {
     author: "David G. Simmons",
-    date: "2020-06-20",
-    content: "Tutorial for creating tables in QuestDB, generating data, using Pandas to read dataframes, and plotting charts using matplotlib via a Jupyter Notebook.",
-    link: "https://dzone.com/articles/questdb-tutorial-for-python",
-    title: "QuestDB Tutorial for Python",
-  },
-  {
-    author: "David G. Simmons",
     date: "2020-06-19",
     content:
       "In this video, David shows how to set up QuestDB on a Raspberry Pi and ingest and query IoT sensor data.",
     link: "https://www.youtube.com/watch?v=wjkDbgi_mec",
-    title: "Running QuestDB on Raspberry Pi and K8s Networking",
+    title: "Video: Running QuestDB on Raspberry Pi and K8s Networking",
+  },
+  {
+    author: "Michael Beale",
+    date: "2020-05-20",
+    content:
+      "In this tutorial, Michael Beale writes about how he managed to simplify his ETL pipeline",
+    link: "https://towardsdatascience.com/bypassing-pandas-memory-limitations-9abb574fdf76",
+    title: "Bypassing Pandas Memory Limitations",
   },
 ]
 
