@@ -40,12 +40,21 @@ guide on the Telegraf agent for collecting and sending metrics to QuestDB via
 this protocol can be found on the
 [Telegraf guide](/docs/third-party-tools/telegraf/).
 
+:::info
+
+The following examples add a timestamp property to each line protocol message.
+This property is optional and can be omitted to allow the server to
+automatically assign the the server's system time as the row's timestamp value.
+
+:::
+
 <!-- prettier-ignore-start -->
 
 <Tabs defaultValue="nodejs" values={[
   { label: "NodeJS", value: "nodejs" },
   { label: "Go", value: "go" },
-  { label: "Java", value: "java" }
+  { label: "Java", value: "java" },
+  { label: "Python", value: "python" },
 ]}>
 
 <!-- prettier-ignore-end -->
@@ -180,6 +189,29 @@ public class LineTCPSenderMain {
 ```
 
 </TabItem>
+
+<TabItem value="python">
+
+```python
+import time
+import socket
+
+HOST = 'localhost'
+PORT = 9009
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+try:
+  sock.sendto(('trades,name=test_ilp1 value=12.4 %d' % (time.time_ns())).encode(), (HOST, PORT))
+  sock.sendto(('trades,name=test_ilp2 value=11.4 %d' % (time.time_ns())).encode(), (HOST, PORT))
+except socket.error as e:
+  print("Got error: %s" % (e))
+
+sock.close()
+```
+
+</TabItem>
+
 </Tabs>
 
 ## Postgres compatibility
@@ -565,8 +597,8 @@ curl -F data=@data.csv http://localhost:9000/imp
 ```
 
 This example overwrites an existing table, specifies a timestamp format and a
-designated timestamp column. For more information on the optional parameters for specifying timestamp
-formats, partitioning and renaming tables, see the
+designated timestamp column. For more information on the optional parameters for
+specifying timestamp formats, partitioning and renaming tables, see the
 [REST API documentation](/docs/reference/api/rest#examples).
 
 ```bash title="Providing a user-defined schema"
