@@ -10,6 +10,9 @@ createTableDef
   ('timestamp' columnRef) ('partition' 'by' ('NONE' | 'DAY' | 'MONTH' | 'YEAR'))?
   )?
 
+alterTable 
+  ::= 'ALTER' 'TABLE' tableName ( 'ADD' | 'ALTER' | 'DROP' | 'RENAME' )
+
 castDef 
   ::= 'cast' '(' columnRef 'as' typeDef ')'
 
@@ -125,5 +128,17 @@ groupBy
 with
   ::= 'WITH' ( subQueryName 'AS' '(' subQuery ')' ( ',' subQueryName 'AS' '(' subQuery ')' )*) mainQuery
 
-renameColumn
-  ::= 'ALTER' 'TABLE' tableName 'RENAME' 'COLUMN' columnName 'TO' columnName
+addIndex
+ ::= 'ALTER' 'COLUMN' columnName 'ADD' 'INDEX'
+
+dropColumn
+ ::= 'DROP' 'COLUMN' columnName (',' columnName)*
+
+addColumn
+ ::= 'ADD' 'COLUMN' columnName typeDef (',' columnName typeDef)*
+
+dropPartition
+ ::= 'DROP' 'PARTITION' 'LIST' partitionName (',' partitionName)*
+
+renameColumn  
+  ::= 'RENAME' columnName 'TO' columnName
