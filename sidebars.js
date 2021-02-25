@@ -97,11 +97,7 @@ module.exports = {
             "reference/api/java-embedded",
           ],
         },
-        {
-          type: "category",
-          label: "Clients",
-          items: ["reference/client/cli", "reference/client/web-console"],
-        },
+        "reference/command-line-options",
         {
           id: "reference/configuration",
           type: "doc",
@@ -164,6 +160,7 @@ module.exports = {
             "reference/sql/with",
           ],
         },
+        "reference/web-console",
       ],
     },
   ].filter(Boolean),

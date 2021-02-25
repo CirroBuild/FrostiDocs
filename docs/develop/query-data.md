@@ -401,5 +401,4 @@ my_table;
 Aside from the Code Editor, the Web Console includes a Visualization panel for
 viewing query results as tables or graphs and an Import tab for uploading
 datasets as CSV files. For more details on these components and general use of
-the console, see the
-[Web Console reference](/docs/reference/client/web-console/) page.
+the console, see the [Web Console reference](/docs/reference/web-console/) page.
