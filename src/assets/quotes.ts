@@ -42,6 +42,20 @@ const quotes: Quote[] = [
     company: "DATRON",
   },
   {
+    website: "https://www.ably.io/",
+    logo: {
+      alt: "Ably logo",
+      src: "/img/pages/customers/logos/ably.svg",
+      height: 28,
+      width: 100,
+    },
+    text:
+      "QuestDB allows me to build tools and systems without having to learn proprietary query languages while maintaining industry-leading performance and a straightforward setup.",
+    author: "Ben Gamble",
+    role: "Head of Dev Rel",
+    company: "Ably",
+  },
+  {
     website: "https://toggle.ai/",
     logo: {
       alt: "Toggle logo",
@@ -124,20 +138,6 @@ const quotes: Quote[] = [
     author: "Randy Caldejon",
     role: "CEO",
     company: "Counterflow AI",
-  },
-  {
-    website: "https://razorpay.com/",
-    logo: {
-      alt: "Razorpay logo",
-      src: "/img/pages/customers/logos/razorpay.svg",
-      height: 24,
-      width: 113,
-    },
-    text:
-      "I am honestly impressed by the database’s performance and simplicity - we are thinking of moving some of our real time workloads to QuestDB.",
-    author: "Venkatesan Vaidhyanathan",
-    role: "Senior Technical Architect",
-    company: "Razorpay",
   },
 ]
 
