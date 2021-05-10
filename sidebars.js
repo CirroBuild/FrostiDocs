@@ -68,12 +68,25 @@ module.exports = {
       label: "Guides",
       type: "category",
       items: [
-        "guides/v6-migration",
-        "guides/importing-data",
-        "guides/influxdb-line-protocol",
-        "guides/aws-packer",
-        "guides/kubernetes",
-        "guides/google-cloud-platform",
+       "guides/v6-migration",
+        {
+          label: "Ingestion",
+          type: "category",
+          items: [
+            "guides/importing-data",
+            "guides/influxdb-line-protocol",
+            "guides/hysteresis",
+          ],
+        },
+        {
+          label: "Deployment",
+          type: "category",
+          items: [
+            "guides/aws-packer",
+            "guides/kubernetes",
+            "guides/google-cloud-platform",
+          ],
+        },
       ],
     },
     {
