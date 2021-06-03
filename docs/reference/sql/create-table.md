@@ -179,7 +179,16 @@ may be set during table creation using the `WITH` keyword. The following two
 parameters may be applied:
 
 - `maxUncommittedRows` - equivalent to `cairo.max.uncommitted.rows`
-- `commitLag` - equivalent to `cairo.commit.lag`
+- `commitLag` - equivalent to `cairo.commit.lag` expects a value with a modifier
+  to specify the unit of time for the value:
+
+  | unit | description  |
+  | ---- | ------------ |
+  | us   | microseconds |
+  | s    | seconds      |
+  | m    | minutes      |
+  | h    | hours        |
+  | d    | days         |
 
 For more information on commit lag and the maximum uncommitted rows, see the
 guide for [out-of-order commits](/docs/guides/out-of-order-commit-lag/).
@@ -255,7 +264,7 @@ count, or the _lag_ boundary is met:
 
 ```questdb-sql
 CREATE TABLE my_table (timestamp TIMESTAMP) timestamp(timestamp)
-PARTITION BY DAY WITH maxUncommittedRows=250000, commitLag=240s
+PARTITION BY DAY WITH maxUncommittedRows=250000, commitLag = 240s
 ```
 
 For more information on out-of-order lag and uncommitted rows, see the

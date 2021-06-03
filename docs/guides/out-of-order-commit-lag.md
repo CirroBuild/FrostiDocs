@@ -160,7 +160,7 @@ docker run -p 9000:9000 \
  questdb/questdb
 ```
 
-### Per-table lag and maximum uncommitted rows
+### Per-table commit lag and maximum uncommitted rows
 
 It's possible to set out-of-order values per table when creating a new table as
 part of the `PARTITION BY` clause. Configuration is passed using the `WITH`
@@ -197,10 +197,12 @@ and
 ALTER TABLE my_table SET PARAM commitLag = 20s
 ```
 
-For more information on checking table metadata, see the
+For more information on setting table parameters via SQL, see the
+[SET PARAM](/docs/reference/sql/alter-table-set-param/) reference. Additional
+details on checking table metadata is described in the
 [meta functions](/docs/reference/function/meta/) documentation page.
 
-### INSERT lag and batch size
+### INSERT commit lag and batch size
 
 The `INSERT` keyword may be passed parameters for handling the expected _lag_ of
 out-of-order records and a _batch_ size for the number of rows to process and
@@ -208,10 +210,13 @@ insert at once. The following query shows an `INSERT AS SELECT` operation with
 lag and batch size applied:
 
 ```questdb-sql
-INSERT batch 100000 lag 180000000 INTO trades
+INSERT batch 100000 commitLag 180s INTO trades
 SELECT ts, instrument, quantity, price
 FROM unordered_trades
 ```
+
+For more information on using `INSERT` statements with parameters, see the
+[INSERT parameters](/docs/reference/sql/insert/#parameters) documentation.
 
 :::info
 
