@@ -105,8 +105,8 @@ Postgres client (as used in the Kafka project via Kafka Connect):
 - higher-throughput
 - robust ingestion from multiple sources into tables
 - configurable commit-lag for out-of-order data
-- schema-less/-agnostic ingestion (i.e. adding new fields will dynamically
-  create new columns)
+- schema-agnostic ingestion (i.e. adding new fields will dynamically create new
+  columns)
 
 The message format for InfluxDB looks as follows:
 
@@ -126,26 +126,24 @@ To start, first pull the latest version of QuestDB (v6.0.3 or higher):
 docker pull questdb/questdb:latest
 ```
 
-Run the image with InfluxDB port (`9009`) open:
+Run the image with the following command:
 
 ```bash
-docker run -p 9000:9000 -p 8812:8812 -p 9009:9009 questdb/questdb
+docker run -p 9000:9000 -p 9009:9009 questdb/questdb
 ```
 
-Open up the Console UI on port `9000` and create a basic table:
-
-```questdb-sql
-CREATE TABLE crypto(currency STRING,
-                    exchange STRING,
-                    price DOUBLE,
-                    timestamp TIMESTAMP)
-timestamp(timestamp) PARTITION BY DAY;
-```
+Port `9009` is used for sending new data to QuestDB using InfluxDB line
+protocol, and the web interface for QuestDB is exposed on port `9000` to explore
+data and run SQL queries.
 
 For the purposes of the demo, I’ve decided to pull the price of Bitcoin from
 Binance and Gemini every second. To test the out-of-order ingestion more
 obvious, I purposely introduced a random delay between 1–5s before sending price
 data from Gemini.
+
+We do not need to create tables beforehand when using InfluxDB line protocol, so
+we can directly run the following script and a table `crypto` will be created on
+the fly:
 
 ```javascript
 const axios = require("axios")
@@ -167,7 +165,7 @@ async function main() {
     const { data } = await axios.get(
       "https://api.binance.us/api/v3/avgPrice?symbol=BTCUSD",
     )
-    const row = `crypto,currency=BTC exchange="Binance",price=${data.price} ${
+    const row = `crypto,currency=BTC,exchange=Binance price=${data.price} ${
       Date.now() * 1e6
     }`
 
@@ -180,7 +178,7 @@ async function main() {
     const { data } = await axios.get("https://api.gemini.com/v1/pricefeed")
     const { price } = data.find((i) => i.pair === "BTCUSD")
 
-    const row = `crypto,currency=BTC exchange="Gemini",price=${price} ${
+    const row = `crypto,currency=BTC,exchange=Gemini price=${price} ${
       Date.now() * 1e6
     }`
 
