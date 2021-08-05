@@ -98,6 +98,29 @@ sensors temperature=22,humidity=50 1465839830100399000\n
 | humidity    | DOUBLE    | `50`                          |
 | timestamp   | TIMESTAMP | `2016-06-13T17:43:50.100399Z` |
 
+## Table schema
+
+It is not necessary to create a table schema for messages passed via InfluxDB
+line protocol. A table will be dynamically created if one does not exist. If new
+columns are added as field or tag sets, the table is automatically updated and
+the new column will be back-propagated with null values.
+
+:::info
+
+General hints for table and schema design can be found in the
+[capacity planning documentation](/docs/operations/capacity-planning/#choosing-a-schema).
+
+:::
+
+When new tables are created by inserting records via InfluxDB line protocol, a
+default [partitioning strategy](/docs/concept/partitions/) by `DAY` is applied.
+This default can be overridden using `line.tcp.default.partition.by` via
+[server configuration](/docs/reference/configuration/):
+
+```bash title="server.conf"
+line.tcp.default.partition.by=MONTH
+```
+
 ## Naming restrictions
 
 Tag keys and field keys in InfluxDB line protocol messages equate to column
@@ -134,8 +157,12 @@ QuestDB:
 _sensor_data,_sensor=london_1 _value=12.4,string="sensor data, rev 1"
 ```
 
-Note that spaces and commas do not require an escaping backslash in the field
-value for `string`.
+Spaces and commas do not require an escaping backslash in the field value for
+`string`, but whitespace in tags (`symbol`) must be escaped:
+
+```bash
+_sensor_data,_sensor="berlin\ 2" _value=12.4,string="sensor data, rev 1"
+```
 
 ## Data types
 
@@ -205,26 +232,6 @@ The following example adds a `boolean` type column called `warning`:
 ```bash
 sensors,location=london temperature=22,warning=false
 ```
-
-## Table schema
-
-It is not necessary to create a table schema for messages passed via InfluxDB
-line protocol. A table will be dynamically created if one does not exist. If new
-columns are added as field or tag sets, the table is automatically updated to
-reflect the new structure and the new column will be back-propagated with null
-values.
-
-When new tables are created by inserting records via InfluxDB line protocol, a
-default [partitioning strategy](/docs/concept/partitions/) by `DAY` is applied.
-This default can be overridden by means of passing server configuration for
-`line.tcp.default.partition.by`, i.e.
-
-```bash title="server.conf"
-line.tcp.default.partition.by=MONTH
-```
-
-For information describing how to pass server settings to QuestDB, see the
-[configuration documentation](/docs/reference/configuration/) page.
 
 ## QuestDB listener configuration
 

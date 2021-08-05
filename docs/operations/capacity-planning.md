@@ -18,6 +18,83 @@ settings are configured in QuestDB by either a `server.conf` configuration file
 or as environment variables. For more details on applying configuration settings
 in QuestDB, refer to the [configuration](/docs/reference/configuration/) page.
 
+## Storage
+
+The following section describes aspects to be considered regarding the storage
+of data.
+
+### Partitioning
+
+When creating tables, a partitioning strategy is recommended in order to be able
+to enforce a data retention policy to save disk space, and for optimizations on
+the number of concurrent file reads performed by the system. For more
+information on this topic, see the following resources:
+
+- [partitions](/docs/concept/partitions/) page which provides a general overview
+  of this concept
+- [data retention](/docs/operations/data-retention/) guide provides further
+  details on partitioning tables with examples on how to drop partitions by time
+  range
+
+**Records per partition**
+
+The number of records per partition should factor into the partitioning strategy
+(`DAY`, `MONTH`, `YEAR`). Having too many records per partition or having too
+few records per partition and having query operations across too many partitions
+has the result of slower query times. A general guideline is that roughly
+between 1 million and 100 million records is optimal per partition.
+
+### Choosing a schema
+
+This section provides some hints for choosing the right schema for a dataset
+based on the storage space that types occupy in QuestDB.
+
+#### Symbols
+
+[Symbols](/docs/concept/symbol/) are a data type that is recommended to be used
+for strings that are repeated often in a dataset. The benefit of using this data
+type is lower storage requirements than regular strings and faster performance
+on queries as symbols are internally stored as `int` values.
+
+:::info
+
+Only symbols can be indexed in QuestDB. Although multiple indexes can be
+specified for a table, there would be a performance impact on the rate of
+ingestion.
+
+:::
+
+The following example shows the creation of a table with a `symbol` type that
+has multiple options passed for performance optimization.
+
+```questdb-sql
+CREATE TABLE my_table(
+    symb SYMBOL capacity 256 nocache index capacity 1048576,
+    ts TIMESTAMP, s STRING
+) timestamp(ts)  PARTITION BY DAY;
+```
+
+This example adds a `symbol` type with:
+
+- **capacity** specified to estimate how many unique symbols values to expect
+- **caching** disabled which allows dealing with larger value counts
+- **index** for the symbol column with a storage block value
+
+A full description of the options used above for `symbol` types can be found in
+the [CREATE TABLE](/docs/reference/sql/create-table/#symbol) page.
+
+#### Numbers
+
+The storage space that numbers occupy can be optimized by choosing `byte`,
+`short`, and `int` data types appropriately. When values are not expected to
+exceed the limit for that particular type, savings on disk space can be made.
+
+| type  | storage per value | numeric range             |
+| ----- | ----------------- | ------------------------- |
+| byte  | 8 bits            | -128 to 127               |
+| short | 16 bits           | -32768 to 32767           |
+| int   | 32 bits           | -2147483648 to 2147483647 |
+
 ## CPU configuration
 
 In QuestDB, there are worker pools which can help separate CPU load between
@@ -154,83 +231,6 @@ configuration can be applied which sets a dedicated worker and pins it with
 pg.worker.count=4
 pg.worker.affinity=1,2,3,4
 ```
-
-## Storage
-
-The following section describes aspects to be considered regarding the storage
-of data.
-
-### Partitioning
-
-When creating tables, a partitioning strategy is recommended in order to be able
-to enforce a data retention policy to save disk space, and for optimizations on
-the number of concurrent file reads performed by the system. For more
-information on this topic, see the following resources:
-
-- [partitions](/docs/concept/partitions/) page which provides a general overview
-  of this concept
-- [data retention](/docs/operations/data-retention/) guide provides further
-  details on partitioning tables with examples on how to drop partitions by time
-  range
-
-**Records per partition**
-
-The number of records per partition should factor into the partitioning strategy
-(`DAY`, `MONTH`, `YEAR`). Having too many records per partition or having too
-few records per partition and having query operations across too many partitions
-has the result of slower query times. A general guideline is that roughly
-between 1 million and 100 million records is optimal per partition.
-
-### Choosing a schema
-
-This section provides some hints for choosing the right schema for a dataset
-based on the storage space that types occupy in QuestDB.
-
-#### Symbols
-
-[Symbols](/docs/concept/symbol/) are a data type that is recommended to be used
-for strings that are repeated often in a dataset. The benefit of using this data
-type is lower storage requirements than regular strings and faster performance
-on queries as symbols are internally stored as `int` values.
-
-:::info
-
-Only symbols can be indexed in QuestDB. Although multiple indexes can be
-specified for a table, there would be a performance impact on the rate of
-ingestion.
-
-:::
-
-The following example shows the creation of a table with a `symbol` type that
-has multiple options passed for performance optimization.
-
-```questdb-sql
-CREATE TABLE my_table(
-    symb SYMBOL capacity 256 nocache index capacity 1048576,
-    ts TIMESTAMP, s STRING
-) timestamp(ts)  PARTITION BY DAY;
-```
-
-This example adds a `symbol` type with:
-
-- **capacity** specified to estimate how many unique symbols values to expect
-- **caching** disabled which allows dealing with larger value counts
-- **index** for the symbol column with a storage block value
-
-A full description of the options used above for `symbol` types can be found in
-the [CREATE TABLE](/docs/reference/sql/create-table/#symbol) page.
-
-#### Numbers
-
-The storage space that numbers occupy can be optimized by choosing `byte`,
-`short`, and `int` data types appropriately. When values are not expected to
-exceed the limit for that particular type, savings on disk space can be made.
-
-| type  | storage per value | numeric range             |
-| ----- | ----------------- | ------------------------- |
-| byte  | 8 bits            | -128 to 127               |
-| short | 16 bits           | -32768 to 32767           |
-| int   | 32 bits           | -2147483648 to 2147483647 |
 
 ## Network Configuration
 
