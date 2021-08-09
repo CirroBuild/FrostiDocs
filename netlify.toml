@@ -1,6 +1,6 @@
 [build]
   base = "/"
-  command = "yarn build"
+  command = "yarn docusaurus clear && yarn build"
   publish = "build"
 
 [[plugins]]
