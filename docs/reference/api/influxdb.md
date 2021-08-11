@@ -6,14 +6,17 @@ description: InfluxDB line protocol reference documentation.
 QuestDB implements the
 [InfluxDB line protocol](https://docs.influxdata.com/influxdb/v1.8/write_protocols/line_protocol_tutorial/)
 to ingest data. This enables you to use QuestDB as a drop-in replacement for
-InfluxDB and others implementing the protocol.
+InfluxDB and others implementing the protocol. QuestDB can listen for line
+protocol packets both over [TCP](#tcp-receiver) and [UDP](#udp-receiver).
 
-It is not necessary to create a table schema beforehand: the table will be
-created on the fly. If new columns are added, the table is automatically updated
-to reflect the new structure.
+:::info
 
-QuestDB can listen for line protocol packets both over [TCP](#tcp-receiver) and
-[UDP](#udp-receiver).
+This page describes InfluxDB line protocol APIs. More details on the protocol,
+including including practical hints for understanding and working with the
+message format can be found in the
+[InfluxDB line protocol guide](/docs/guides/influxdb-line-protocol).
+
+:::
 
 ## Usage
 
@@ -104,65 +107,12 @@ using `-p 9009:9009`. This port can be customized.
 
 ### Authentication
 
-Although the original protocol does not support it, we added authentication for
-our TCP users. This works by using an
+Although the original protocol does not support it, we have added authentication
+over TCP. This works by using an
 [elliptic curve P-256](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography)
-JSON Web Token (JWT) to sign a server challenge.
-
-#### Server
-
-In order to use this feature, you need to create an authentication file using
-the following template:
-
-```bash
-# [key/user id] [key type] {key details} ...
-#
-testUser1 ec-p-256-sha256 fLKYEaoEb9lrn3nkwLDA-M_xnuFOdSt9y0Z7_vWSHLU Dt5tbS1dEDMSYfym3fgMv0B99szno-dFc1rYF9t0aac
-```
-
-Only elliptic curve (for curve P-256) are supported (key type ec-p-256-sha256).
-This algorithm is also called ES256.
-
-Once you created the file, you will need to reference it in the
-[configuration](/docs/reference/configuration/) for the key
-`line.tcp.auth.db.path`. Example: `line.tcp.auth.db.path=conf/auth.txt`.
-
-#### Client
-
-For the server configuration above, the corresponding JSON Web Key stored on the
-client would be:
-
-```json
-{
-  "kty": "EC",
-  "d": "5UjEMuA0Pj5pjK8a-fa24dyIf-Es5mYny3oE_Wmus48",
-  "crv": "P-256",
-  "kid": "testUser1",
-  "x": "fLKYEaoEb9lrn3nkwLDA-M_xnuFOdSt9y0Z7_vWSHLU",
-  "y": "Dt5tbS1dEDMSYfym3fgMv0B99szno-dFc1rYF9t0aac"
-}
-```
-
-For this kind of key, the `d` parameter is used to generate the the secret key.
-The `x` and `y` parameters are used to generate the public key (values that we
-retrieve in the server authentication file).
-
-#### Generate a JSON Web Key
-
-To create a JSON Web Key, you can use this
-[online generator](https://jsfiddle.net/patrick73/3uhkyqz6/latest/).
-Alternatively, you can use this [3rd party website](https://mkjwk.org/) (please
-select `EC` -> `P-256` -> `Encryption` -> `ES256`). For production use, we
-recommend that you generate your keys using [OpenSSL](https://www.openssl.org/).
-
-#### Final steps
-
-The server will now expect the client to send its key id (terminated with `\n`)
-straight after `connect()`. The server will respond with a challenge (printable
-characters terminated with `\n`). The client needs to sign the challenge and
-respond to the server with the `base64` encoded signature (terminated with
-`\n`). If all is good the client can then continue, if not the server will
-disconnect and log the failure.
+JSON Web Token (JWT) to sign a server challenge. Details of authentication over
+ILP can be found in the
+[authentication documentation](/docs/develop/authenticate/)
 
 ### Load balancing
 
