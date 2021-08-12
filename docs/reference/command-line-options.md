@@ -64,6 +64,16 @@ questdb.exe [start|stop|status|install|remove] \
 | `-f`   | Force re-deploying the Web Console. Without this option, the Web Console is cached and deployed only when missing.                                                                                                   |
 | `-j`   | **Windows only!** This option allows to specify a path to `JAVA_HOME`.                                                                                                                                               |
 
+:::info
+
+When running multiple QuestDB sertvices, a tag must be used to disambiguate
+between services for `start` and `stop` commands. There will be conflicting
+ports and root directories if only the tag flag is specified when starting
+multiple services. Each new service should have it's own config file or should
+be started with separate port and root directory options.
+
+:::
+
 <!-- prettier-ignore-start -->
 
 

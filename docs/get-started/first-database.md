@@ -1,20 +1,20 @@
 ---
-title: Create my first database
+title: Create my first dataset
 description:
-  Guide showing how to insert, query and delete rows in the context of time
-  series data.
+  This document shows how to work with QuestDB as a time series database by
+  generating dummy time series data, insert the data into a table, then querying
+  and cleaning up the example data set.
 ---
 
-The goal of this guide is to explore QuestDB's features to interact with time
-series data. This assumes you have an instance running. You can find guides to
-setup QuestDB on the [introduction page](/docs/introduction/).
+The goal of this guide is to explore QuestDB's features and to interact with
+time series data and assumes you have an instance running. You can find guides
+to setup QuestDB on the [introduction page](/docs/introduction/). In this
+tutorial, you will learn how to
 
-In this tutorial, you will learn how to
-
-- [Create tables](#creating-a-table)
-- [Populate tables with sample data](#inserting-data)
-- [Run simple and advanced queries](#running-queries)
-- [Delete tables](#deleting-tables)
+1. [Create tables](#creating-a-table)
+2. [Populate tables with sample data](#inserting-data)
+3. [Run simple and advanced queries](#running-queries)
+4. [Delete tables](#deleting-tables)
 
 As an example, we will look at hypothetical temperature readings from a variety
 of sensors.
@@ -32,8 +32,9 @@ You can also run the same SQL via the
 
 ## Creating a table
 
-The first step is to create tables. One will contain the metadata of our
-sensors, the other will contain the readings from these sensors.
+The first step is to create tables. One table will contain the metadata of our
+sensors, and the other will contain the actual readings (payload data) from
+these sensors.
 
 Let's start by creating the `sensors` table:
 
@@ -48,7 +49,7 @@ For more information about this statement, please refer to the
 
 Let's populate our `sensors` table with procedurally-generated data:
 
-```questdb-sql title="Insert as select"
+```questdb-sql title="Insert as SELECT"
 INSERT INTO sensors
     SELECT
         x ID, --increasing integer
@@ -58,13 +59,13 @@ INSERT INTO sensors
 ;
 ```
 
-For more information about this statement, please refer to the
-[INSERT](/docs/reference/sql/insert/) reference documentation. About the
-functions, please refer to the
-[random generator](/docs/reference/function/random-value-generator/) and the
+For more information about insert statements, refer to the
+[INSERT](/docs/reference/sql/insert/) reference documentation. To learn more
+about the functions used here, see the
+[random generator](/docs/reference/function/random-value-generator/) and
 [row generator](/docs/reference/function/row-generator/) pages.
 
-Our `sensors` table now contains 10,000 randomly generated sensor values of
+Our `sensors` table now contains 10,000 randomly-generated sensor values of
 different makes and in various cities. It should look like the table below:
 
 | ID  | make              | city     |
@@ -139,7 +140,8 @@ SELECT avg(temp) FROM readings;
 | --------------- |
 | 18.999217780895 |
 
-We can now leverage our `sensors` table to get more interesting data:
+We can now use the `sensors` table alongside the `readings` table to get more
+interesting results using a `JOIN`:
 
 ```questdb-sql
 SELECT *
@@ -188,7 +190,7 @@ JOIN
     FROM sensors
     WHERE city='Miami' AND make='Omron') a
 ON readings.sensorId = a.sensId
-WHERE ts ='2019-10-21;1d' -- this is an interval between 21-10 and 1 day later
+WHERE ts IN '2019-10-21;1d' -- this is an interval between 21-10 and 1 day later
 ```
 
 The results should look like the table below:
@@ -208,7 +210,8 @@ pages.
 
 ## Deleting tables
 
-Upon dropping the table, all data is deleted:
+We can now clean up the demo data by using `DROP TABLE` SQL. Be careful using
+this statement as QuestDB cannot recover data that is deleted in this way:
 
 ```questdb-sql
 DROP TABLE readings;
