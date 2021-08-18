@@ -1,6 +1,6 @@
 ---
 title: Deploy a QuestDB AMI to AWS using Packer
-sidebar_label: AWS AMI using Packer
+sidebar_label: Custom AWS AMI with Packer
 description:
   This document describes how to build an AMI with QuestDB installed using
   Packer and how to run this AMI on Amazon Web Services

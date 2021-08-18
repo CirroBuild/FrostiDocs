@@ -75,7 +75,7 @@ module.exports = {
           label: "Deployment",
           type: "category",
           items: [
-            "guides/aws-packer",
+            "guides/aws-official-ami",
             "guides/kubernetes",
             "guides/google-cloud-platform",
           ],
