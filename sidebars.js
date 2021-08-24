@@ -26,7 +26,6 @@ if (process.env.NODE_ENV === "development") {
 
 module.exports = {
   docs: [
-    guidelines,
     {
       id: "introduction",
       type: "doc",
@@ -65,23 +64,22 @@ module.exports = {
       ],
     },
     {
-      label: "Guides",
+      label: "Deployment",
       type: "category",
       items: [
-        "guides/out-of-order-commit-lag",
-        "guides/influxdb-line-protocol",
-        "guides/working-with-timestamps-timezones",
-        {
-          label: "Deployment",
-          type: "category",
-          items: [
-            "guides/aws-official-ami",
-            "guides/kubernetes",
-            "guides/google-cloud-platform",
-          ],
-        },
-        "guides/importing-data",
-        "guides/v6-migration",
+        "guides/aws-official-ami",
+        "guides/kubernetes",
+        "guides/google-cloud-platform",
+        "guides/digitalocean",
+      ],
+    },
+    {
+      label: "Operations",
+      type: "category",
+      items: [
+        "operations/capacity-planning",
+        "operations/data-retention",
+        "operations/health-monitoring",
       ],
     },
     {
@@ -94,12 +92,14 @@ module.exports = {
       ],
     },
     {
-      label: "Operations",
+      label: "Guides",
       type: "category",
       items: [
-        "operations/capacity-planning",
-        "operations/data-retention",
-        "operations/health-monitoring",
+        "guides/out-of-order-commit-lag",
+        "guides/influxdb-line-protocol",
+        "guides/working-with-timestamps-timezones",
+        "guides/importing-data",
+        "guides/v6-migration",
       ],
     },
     {
