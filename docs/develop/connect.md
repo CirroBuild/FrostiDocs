@@ -191,10 +191,10 @@ string username = "admin";
 string password = "quest";
 string database = "qdb";
 int port = 8812;
-var connectionString = $"host=localhost;port={port};username={username};password={password};
+var connectionString = $@"host=localhost;port={port};username={username};password={password};
 database={database};ServerCompatibilityMode=NoTypeLoading;";
 
-await using NpgsqlConnection connection = new(connectionString);
+await using NpgsqlConnection connection = new NpgsqlConnection(connectionString);
 await connection.OpenAsync();
 ```
 

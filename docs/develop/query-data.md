@@ -359,14 +359,14 @@ string username = "admin";
 string password = "quest";
 string database = "qdb";
 int port = 8812;
-var connectionString = $"host=localhost;port={port};username={username};password={password};
+var connectionString = $@"host=localhost;port={port};username={username};password={password};
 database={database};ServerCompatibilityMode=NoTypeLoading;";
-await using NpgsqlConnection connection = new(connectionString);
+await using NpgsqlConnection connection = new NpgsqlConnection(connectionString);
 await connection.OpenAsync();
 
 var sql = "SELECT x FROM long_sequence(5);";
 
-await using NpgsqlCommand command = new (sql, connection);
+await using NpgsqlCommand command = new NpgsqlCommand(sql, connection);
 await using (var reader = await command.ExecuteReaderAsync()) {
     while (await reader.ReadAsync())
     {
