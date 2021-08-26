@@ -97,14 +97,6 @@ const CareersPage = () => {
             <h2 className={caCss.card__title} ref={titleRef}>
               Current openings
             </h2>
-            <p className={caCss.card__content}>
-              We are always interested in hiring new talent, so if you are
-              looking for a role that is not listed, you can contact us anyway!
-              Send your CV with any relevant links (GitHub, LinkedIn, personal
-              website, etc.) to{" "}
-              <a href="mailto:careers@questdb.io">careers@questdb.io</a>, we
-              will review your application and be in touch.
-            </p>
           </div>
           <div className={clsx(caCss.card__side, caCss["card__side--center"])}>
             <a className={joCss.job} href="head-of-talent/">
