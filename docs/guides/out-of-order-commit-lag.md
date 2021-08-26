@@ -202,21 +202,32 @@ For more information on setting table parameters via SQL, see the
 details on checking table metadata is described in the
 [meta functions](/docs/reference/function/meta/) documentation page.
 
-### INSERT commit lag and batch size
+### Out-of-order CSV import
 
-The `INSERT` keyword may be passed parameters for handling the expected _lag_ of
-out-of-order records and a _batch_ size for the number of rows to process and
-insert at once. The following query shows an `INSERT AS SELECT` operation with
-lag and batch size applied:
+It's also possible to set `commitLag` and `maxUncommittedRows` via REST API when
+importing data via the `/imp` endpoint. The following example imports a file
+which contains out-of-order records. The `timestamp` and `partitionBy`
+parameters **must be provided** for commit lag and max uncommitted rows to have
+any effect:
+
+```shell
+curl -F data=@weather.csv \
+'http://localhost:9000/imp?&timestamp=ts&partitionBy=DAY&commitLag=120000000&maxUncommittedRows=10000'
+```
+
+### INSERT as SELECT with batch size and lag
+
+The `INSERT` keyword may be
+[passed parameters](/docs/reference/sql/insert/#parameters) for handling the
+expected _lag_ of out-of-order records and a _batch_ size can be specified for
+the number of rows to process and insert at once. The following query shows an
+`INSERT AS SELECT` operation with lag and batch size applied:
 
 ```questdb-sql
 INSERT batch 100000 commitLag 180s INTO trades
 SELECT ts, instrument, quantity, price
 FROM unordered_trades
 ```
-
-For more information on using `INSERT` statements with parameters, see the
-[INSERT parameters](/docs/reference/sql/insert/#parameters) documentation.
 
 :::info
 

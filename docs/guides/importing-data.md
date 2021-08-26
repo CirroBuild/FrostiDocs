@@ -157,23 +157,32 @@ INSERT batch 100000 commitLag 180s INTO my_table
 SELECT * FROM unordered_table
 ```
 
-### Example
+### Examples
 
-Given a large dataset `weather-unordered.csv` with out-of-order records, an
-ordered table may be created using the following steps:
+Given a data set `weather-unordered.csv` which contains out-of-order records, an
+ordered table may be created by setting `commitLag` and `maxUncommittedRows` via
+REST API using the `/imp` endpoint. The following example imports a file which
+contains out-of-order records:
 
-1. Import the unordered dataset
-   [via the Web Console](/docs/reference/web-console/#import). The REST API may
-   also be used for the same operation:
+```shell
+curl -F data=@weather-unordered.csv \
+'http://localhost:9000/imp?&timestamp=ts&partitionBy=DAY&commitLag=120000000&maxUncommittedRows=10000'
+```
 
-   ```shell title="Importing unordered CSV data via curl"
-   curl -F data=@weather-unordered.csv 'http://localhost:9000/imp'
-   ```
+:::info
 
-2. Create a table with the schema of the imported data and apply a partitioning
-   strategy. Records are not yet inserted due to the use of `WHERE 1 != 1`. The
-   `timestamp` column may be cast as a `timestamp` if the import did not
-   automatically detect the correct format:
+The `timestamp` and `partitionBy` parameters **must be provided** for commit lag
+and max uncommitted rows to have any effect in the API call above.
+
+:::
+
+Alternatively, it's possible to create an ordered table via `INSERT AS SELECT`.
+Given an existing table 'weather-unordered' which contains out-of-order records:
+
+1. Create a new table with the schema of the existing table and apply a
+   partitioning strategy. Records are not yet inserted due to the use of
+   `WHERE 1 != 1`. The `timestamp` column may be cast as a `timestamp` if the
+   import did not automatically detect the correct format:
 
    ```questdb-sql
    CREATE TABLE weather AS (
@@ -185,12 +194,12 @@ ordered table may be created using the following steps:
      rain1H,
      rain6H,
      rain24H
-   FROM 'weather-unordered.csv' WHERE 1 != 1
+   FROM 'weather-unordered' WHERE 1 != 1
    ) timestamp(timestamp) PARTITION BY DAY;
    ```
 
-3. Insert the unordered records into the partitioned table and provide a `lag`
-   and `batch` size:
+2. Insert the unordered records into the partitioned table and provide a
+   `commitLag` and `batch` size:
 
    ```questdb-sql
    INSERT batch 100000 commitLag 180s INTO weather
@@ -202,7 +211,7 @@ ordered table may be created using the following steps:
      rain1H,
      rain6H,
      rain24H
-   FROM 'weather-unordered.csv';
+   FROM 'weather-unordered';
    ```
 
 To confirm that the table is ordered, the `isOrdered()` function may be used:

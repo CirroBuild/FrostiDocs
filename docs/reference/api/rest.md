@@ -47,17 +47,19 @@ documentation.
 `/imp` is expecting an HTTP POST request using the `multipart/form-data`
 Content-Type with following optional URL parameters which must be URL encoded:
 
-| Parameter     | Required | Default          | Description                                                                                                                                                                                                          |
-| ------------- | -------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `atomicity`   | No       | `2`              | `0`, `1` or `2`. Behaviour when an error is detected in the data. `0`: the entire file will be skipped. `1`: the row is skipped. `2`: the column is skipped.                                                         |
-| `durable`     | No       | `false`          | `true` or `false`. When set to `true`, import will be resilient against OS errors or power losses by forcing the data to be fully persisted before sending a response back to the user.                              |
-| `fmt`         | No       | `tabular`        | Can be set to `json` to get the response formatted as such.                                                                                                                                                          |
-| `forceHeader` | No       | `false`          | `true` or `false`. When `false`, QuestDB will try to infer if the first line of the file is the header line. When set to `true`, QuestDB will expect that line to be the header line.                                |
-| `name`        | No       | Name of the file | Name of the table to create, [see below](/docs/reference/api/rest/#names).                                                                                                                                           |
-| `overwrite`   | No       | `false`          | `true` or `false`. When set to true, any existing data or structure will be overwritten.                                                                                                                             |
-| `partitionBy` | No       | `NONE`           | See [partitions](/docs/concept/partitions/#properties).                                                                                                                                                              |
-| `skipLev`     | No       | `false`          | `true` or `false`. Skip “Line Extra Values”, when set to true, the parser will ignore those extra values rather than ignoring entire line. An extra value is something in addition to what is defined by the header. |
-| `timestamp`   | No       |                  | Name of the column that will be used as a [designated timestamp](/docs/concept/designated-timestamp/).                                                                                                               |
+| Parameter            | Required | Default          | Description                                                                                                                                                                                                          |
+| -------------------- | -------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `atomicity`          | No       | `2`              | `0`, `1` or `2`. Behaviour when an error is detected in the data. `0`: the entire file will be skipped. `1`: the row is skipped. `2`: the column is skipped.                                                         |
+| `commitLag`          | No       | `0`              | commit lag of the import in microsecond precision (e.g. 2 minutes is expressed as 120000000, 120 followed by 6 zeros). For context, see [the commit lag guide](/docs/guides/out-of-order-commit-lag).                |
+| `durable`            | No       | `false`          | `true` or `false`. When set to `true`, import will be resilient against OS errors or power losses by forcing the data to be fully persisted before sending a response back to the user.                              |
+| `fmt`                | No       | `tabular`        | Can be set to `json` to get the response formatted as such.                                                                                                                                                          |
+| `forceHeader`        | No       | `false`          | `true` or `false`. When `false`, QuestDB will try to infer if the first line of the file is the header line. When set to `true`, QuestDB will expect that line to be the header line.                                |
+| `maxUncommittedRows` | No       | 0                | The maximum number of uncommitted rows to keep in memory before triggering a sort and commit operation. For context, see [the commit lag guide](/docs/guides/out-of-order-commit-lag).                               |
+| `name`               | No       | Name of the file | Name of the table to create, [see below](/docs/reference/api/rest/#names).                                                                                                                                           |
+| `overwrite`          | No       | `false`          | `true` or `false`. When set to true, any existing data or structure will be overwritten.                                                                                                                             |
+| `partitionBy`        | No       | `NONE`           | See [partitions](/docs/concept/partitions/#properties).                                                                                                                                                              |
+| `skipLev`            | No       | `false`          | `true` or `false`. Skip “Line Extra Values”, when set to true, the parser will ignore those extra values rather than ignoring entire line. An extra value is something in addition to what is defined by the header. |
+| `timestamp`          | No       |                  | Name of the column that will be used as a [designated timestamp](/docs/concept/designated-timestamp/).                                                                                                               |
 
 ```shell title="Example usage"
 curl -F data=@weather.csv \
@@ -271,6 +273,18 @@ parsing the timestamp column:
 |              2  |          tempF  |                      INT  |           0  |
 |              3  |          dewpF  |                      INT  |           0  |
 +------------------------------------------------------------------------------+
+```
+
+#### Out-of-order import
+
+The following example imports a file which contains out-of-order records. The
+`timestamp` and `partitionBy` parameters **must be provided** for commit lag and
+max uncommitted rows to have any effect. For more information on these
+parameters, see [the commit lag guide](/docs/guides/out-of-order-commit-lag).
+
+```shell
+curl -F data=@weather.csv \
+'http://localhost:9000/imp?&timestamp=ts&partitionBy=DAY&commitLag=120000000&maxUncommittedRows=10000'
 ```
 
 ## /exec - Execute queries
