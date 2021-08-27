@@ -22,6 +22,33 @@ more in the [designated timestamp](/docs/concept/designated-timestamp/) section.
 ![Flow chart showing the syntax of the SAMPLE BY keywords](/img/docs/diagrams/sampleBy.svg)
 ![Flow chart showing the syntax of the ALIGN TO keywords](/img/docs/diagrams/alignToCalTimeZone.svg)
 
+## Sample units
+
+The size of sampled groups are specified with the following syntax:
+
+```questdb-sql
+SAMPLE BY n{units}
+```
+
+Where the unit for sampled groups may be one of the following:
+
+| unit | description |
+| ---- | ----------- |
+| `T`  | millisecond |
+| `s`  | second      |
+| `m`  | minute      |
+| `h`  | hour        |
+| `d`  | day         |
+| `M`  | month       |
+
+For example, given a table `trades`, the following query returns the number of
+trades per hour:
+
+```questdb-sql
+SELECT ts, count() FROM trades
+SAMPLE BY 1h
+```
+
 ## Sample calculation
 
 The default time calculation of sampled groups is an absolute value, in other
