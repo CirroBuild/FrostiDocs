@@ -107,7 +107,7 @@ influenced by this JDK version. To find the JDK version used by a QuestDB build,
 run the following SQL:
 
 ```questdb-sql
-select build()
+SELECT build()
 ```
 
 | build                                                                                              |
@@ -126,7 +126,7 @@ These functions are used to convert a Unix timestamp, or a string equivalent
 cast to timestamp as follows:
 
 ```questdb-sql
-select to_timezone(1623167145000000, 'Europe/Berlin')
+SELECT to_timezone(1623167145000000, 'Europe/Berlin')
 ```
 
 | to_timezone                 |
@@ -134,7 +134,7 @@ select to_timezone(1623167145000000, 'Europe/Berlin')
 | 2021-06-08T17:45:45.000000Z |
 
 ```questdb-sql
-select to_utc(1623167145000000, 'Europe/Berlin')
+SELECT to_utc(1623167145000000, 'Europe/Berlin')
 ```
 
 | to_utc                      |
@@ -151,7 +151,7 @@ or transitions. The following example takes a Unix timestamp in microseconds and
 converts it to a time zone `+2` hours offset from UTC:
 
 ```questdb-sql
-select to_timezone(1213086329000000, '+02:00')
+SELECT to_timezone(1213086329000000, '+02:00')
 ```
 
 | to_timezone                 |
@@ -159,7 +159,7 @@ select to_timezone(1213086329000000, '+02:00')
 | 2008-06-10T10:25:29.000000Z |
 
 ```questdb-sql
-select to_utc('2008-06-10T10:25:29.000000Z', '+02:00')
+SELECT to_utc('2008-06-10T10:25:29.000000Z', '+02:00')
 ```
 
 | to_timezone                 |

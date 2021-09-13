@@ -73,7 +73,7 @@ ALTER TABLE my_table SET PARAM commitLag = 20s
 Checking the values per-table may be done using the `tables()` function:
 
 ```questdb-sql title="List table metadata"
-select id, name, maxUncommittedRows, commitLag from tables();
+SELECT id, name, maxUncommittedRows, commitLag FROM tables();
 ```
 
 | id  | name     | maxUncommittedRows | commitLag |

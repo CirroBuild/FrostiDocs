@@ -31,7 +31,7 @@ brew install questdb
 ```
 
 On macOS, the root directory of QuestDB including
-[server configuration](/docs/reference/configuration) files are located in the
+[server configuration](/docs/reference/configuration/) files are located in the
 following directory:
 
 ```bash

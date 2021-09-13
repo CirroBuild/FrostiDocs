@@ -34,7 +34,7 @@ SELECT user_name FROM first_5_users;
 ```
 
 ```questdb-sql title="Flag whether individual trips are longer or shorter than average"
-WITH avg_distance AS (select avg(trip_distance) average FROM trips)
+WITH avg_distance AS (SELECT avg(trip_distance) average FROM trips)
 SELECT pickup_datetime, trips.trip_distance > avg_distance.average longer_than_average
 FROM trips CROSS JOIN avg_distance;
 ```

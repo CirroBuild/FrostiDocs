@@ -13,7 +13,7 @@ const prismIncludeLanguages = (PrismObject) => {
     })
     Prism.languages["questdb-sql"] = {
       comment: {
-        pattern: /(^|[^\\])(?:\/\*[\s\S]*?\*\/|(?:--|\/\/|#).*)/,
+        pattern: /(^|[^\\])(?:\/\*[\s\S]*?\*\/|(?:--|\/\/).*)/,
         lookbehind: true,
       },
       dataType: new RegExp(`\\b(?:${dataTypes.join("|")})\\b`, "i"),
@@ -36,7 +36,7 @@ const prismIncludeLanguages = (PrismObject) => {
       keyword: new RegExp(`\\b(?:${keywords.join("|")})\\b`, "i"),
       boolean: new RegExp(`\\b(?:${constants.join("|")})\\b`, "i"),
       number: /\b0x[\da-f]+\b|\b\d+\.?\d*|\B\.\d+\b/i,
-      number: /[+-]?\b\d+(?:(?:\.\d*)?(?:[eE][+-]?\d+)?)?\b/i,
+      number: /[+-]?\b\d+(?:(?:\.\d*)?(?:[eE][+-]?\d+)?)?\b|(\#{1,2}([a-zA-Z_$]|[a-zA-Z0-9_$])*)/i,
       operator: /[\+|\-|\/|\/\/|%|<@>|@>|<@|&|\^|~|<|>|<=|=>|==|!=|<>|=|!~]/i,
       punctuation: /[;[\]()`,.]/,
     }

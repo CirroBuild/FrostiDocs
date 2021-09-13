@@ -2523,10 +2523,10 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.12.tgz#431ec342a7195622f86688bbda82e3166ce8cb28"
   integrity sha512-6RglhutqrGFMO1MNUXp95RBuYIuc8wTnMAV5MUhLmjTOy78ncwOw7RgeQ/HeymkKXRhZd0s2DNrM1rL7unk3MQ==
 
-"@questdb/sql-grammar@1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@questdb/sql-grammar/-/sql-grammar-1.0.7.tgz#2f984339cd42bb22012f5e7da12541fd45ef6e0d"
-  integrity sha512-YycmGd6qouWntvEPx1XhY2xnsSZ2BZq930BuK66HlKgjUtlQzEWp9aOaXAUtN0YUqxOdYAIU/y+ZHfzdx4E1yw==
+"@questdb/sql-grammar@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@questdb/sql-grammar/-/sql-grammar-1.0.9.tgz#c29dbe6445b40d03ae87123e3b18ccb763b13d58"
+  integrity sha512-rRehxki89J0Zvj2FRG1SG0Mim+iWMr89zF9+GcAcCx6l9GgCf+yzq493vn2H3S/6tZj+JyVnIUul8Mk0DEyRWQ==
 
 "@rollup/plugin-babel@^5.2.0":
   version "5.3.0"

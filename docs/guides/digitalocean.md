@@ -21,7 +21,7 @@ The prerequisites for deploying QuestDB on DigitalOcean are as follows:
 - A DigitalOcean account (sign up using
   [the QuestDB referral link](https://m.do.co/c/50d6b551562b) for 100 USD free
   credit)
-- Basic `shell` knowledge for executing commands on the DigitalOCean droplet
+- Basic `shell` knowledge for executing commands on the DigitalOcean droplet
 
 ## Create a QuestDB Droplet
 

@@ -160,7 +160,7 @@ be used.
 
 ```questdb-sql
 SELECT to_timezone(ts, 'PST') ts, count
-FROM (select ts, count()
+FROM (SELECT ts, count()
       FROM sensors SAMPLE BY 2h
       ALIGN TO CALENDAR TIME ZONE 'PST')
 ```

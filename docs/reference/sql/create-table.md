@@ -151,7 +151,7 @@ benefits of using this type, see the [symbol](/docs/concept/symbol/) overview.
 `timestamp` - references a column in new table, which will be the designated
 timestamp. Such column must be of type `timestamp`. For more information on
 designated timestamps, see the
-[designated timestamp](/docs/concept/designated-timestamp) reference.
+[designated timestamp](/docs/concept/designated-timestamp/) reference.
 
 :::caution
 
@@ -285,7 +285,7 @@ documentation for
 
 #### Cloning existing SQL structure
 
-When SQL is `select * from tab` or any arbitrary SQL result, the table data will
+When SQL is `SELECT * FROM tab` or any arbitrary SQL result, the table data will
 be copied with the corresponding structure.
 
 ```questdb-sql title="Create table as select"

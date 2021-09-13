@@ -122,6 +122,100 @@ SELECT * FROM readings
 WHERE date_time > now() - 60000000L;
 ```
 
+## timestamp_ceil
+
+`timestamp_ceil(unit, timestamp)` - performs a ceiling calculation on a
+timestamp by given unit.
+
+A unit must be provided to specify which granularity to perform rounding.
+
+**Arguments:**
+
+`timestamp_ceil(unit, timestamp)` has the following arguments:
+
+`unit` - may be one of the following:
+
+- `T` milliseconds
+- `s` seconds
+- `m` minutes
+- `h` hours
+- `d` days
+- `M` months
+- `y` year
+
+`timestamp` - any timestamp value
+
+**Return value:**
+
+Return value type is `timestamp`.
+
+**Examples:**
+
+```questdb-sql
+WITH t AS (SELECT cast('2016-02-10T16:18:22.862145Z' AS timestamp) ts)
+SELECT
+  ts,
+  timestamp_ceil('T', ts) c_milli,
+  timestamp_ceil('s', ts) c_second,
+  timestamp_ceil('m', ts) c_minute,
+  timestamp_ceil('h', ts) c_hour,
+  timestamp_ceil('d', ts) c_day,
+  timestamp_ceil('M', ts) c_month,
+  timestamp_ceil('y', ts) c_year
+  FROM t
+```
+
+| ts                          | c_milli                     | c_second                    | c_minute                    | c_hour                      | c_day                       | c_month                     | c_year                       |
+| --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | ---------------------------- |
+| 2016-02-10T16:18:22.862145Z | 2016-02-10T16:18:22.863000Z | 2016-02-10T16:18:23.000000Z | 2016-02-10T16:19:00.000000Z | 2016-02-10T17:00:00.000000Z | 2016-02-11T00:00:00.000000Z | 2016-03-01T00:00:00.000000Z | 2017-01-01T00:00:00.000000Z" |
+
+## timestamp_floor
+
+`timestamp_floor(unit, timestamp)` - performs a floor calculation on a timestamp
+by given unit.
+
+A unit must be provided to specify which granularity to perform rounding.
+
+**Arguments:**
+
+`timestamp_floor(unit, timestamp)` has the following arguments:
+
+`unit` - may be one of the following:
+
+- `T` milliseconds
+- `s` seconds
+- `m` minutes
+- `h` hours
+- `d` days
+- `M` months
+- `y` year
+
+`timestamp` - any timestamp value
+
+**Return value:**
+
+Return value type is `timestamp`.
+
+**Examples:**
+
+```questdb-sql
+WITH t AS (SELECT cast('2016-02-10T16:18:22.862145Z' AS timestamp) ts)
+SELECT
+  ts,
+  timestamp_floor('T', ts) f_milli,
+  timestamp_floor('s', ts) f_second,
+  timestamp_floor('m', ts) f_minute,
+  timestamp_floor('h', ts) f_hour,
+  timestamp_floor('d', ts) f_day,
+  timestamp_floor('M', ts) f_month,
+  timestamp_floor('y', ts) f_year
+  FROM t
+```
+
+| ts                          | f_milli                     | f_second                    | f_minute                    | f_hour                      | f_day                       | f_month                     | f_year                      |
+| --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- |
+| 2016-02-10T16:18:22.862145Z | 2016-02-10T16:18:22.862000Z | 2016-02-10T16:18:22.000000Z | 2016-02-10T16:18:00.000000Z | 2016-02-10T16:00:00.000000Z | 2016-02-10T00:00:00.000000Z | 2016-02-01T00:00:00.000000Z | 2016-01-01T00:00:00.000000Z |
+
 ## to_timestamp
 
 `to_timestamp(string, format)` - converts string to `timestamp` by using the
@@ -304,7 +398,7 @@ Return value type is `timestamp`
 - Unix UTC timestamp in microseconds to `Europe/Berlin`
 
 ```questdb-sql
-select to_timezone(1623167145000000, 'Europe/Berlin')
+SELECT to_timezone(1623167145000000, 'Europe/Berlin')
 ```
 
 | to_timezone                 |
@@ -314,7 +408,7 @@ select to_timezone(1623167145000000, 'Europe/Berlin')
 - Unix UTC timestamp in microseconds to PST by UTC offset
 
 ```questdb-sql
-select to_timezone(1623167145000000, '-08:00')
+SELECT to_timezone(1623167145000000, '-08:00')
 ```
 
 | to_timezone                 |
@@ -324,7 +418,7 @@ select to_timezone(1623167145000000, '-08:00')
 - Timestamp as string to `PST`
 
 ```questdb-sql
-select to_timezone('2021-06-08T13:45:45.000000Z', 'PST')
+SELECT to_timezone('2021-06-08T13:45:45.000000Z', 'PST')
 ```
 
 | to_timezone                 |
@@ -355,7 +449,7 @@ Return value type is `timestamp`
   UTC
 
 ```questdb-sql
-select to_utc(1623167145000000, 'Europe/Berlin')
+SELECT to_utc(1623167145000000, 'Europe/Berlin')
 ```
 
 | to_utc                      |
@@ -365,7 +459,7 @@ select to_utc(1623167145000000, 'Europe/Berlin')
 - Unix timestamp in microseconds from PST to UTC by UTC offset
 
 ```questdb-sql
-select to_utc(1623167145000000, '-08:00')
+SELECT to_utc(1623167145000000, '-08:00')
 ```
 
 | to_utc                      |
@@ -375,7 +469,7 @@ select to_utc(1623167145000000, '-08:00')
 - Timestamp as string in `PST` to UTC
 
 ```questdb-sql
-select to_utc('2021-06-08T13:45:45.000000Z', 'PST')
+SELECT to_utc('2021-06-08T13:45:45.000000Z', 'PST')
 ```
 
 | to_utc                      |
@@ -444,11 +538,11 @@ Return value type is `int`
 **Examples:**
 
 ```questdb-sql title="Difference in days"
-select datediff(
+SELECT datediff(
     'd',
     to_timestamp('2020-01-23','yyyy-MM-dd'),
     to_timestamp('2020-01-27','yyyy-MM-dd'))
-from long_sequence(1);
+FROM long_sequence(1);
 ```
 
 | datediff |
@@ -456,11 +550,11 @@ from long_sequence(1);
 | 4        |
 
 ```questdb-sql title="Difference in months"
-select datediff(
+SELECT datediff(
     'M',
     to_timestamp('2020-01-23','yyyy-MM-dd'),
     to_timestamp('2020-02-24','yyyy-MM-dd'))
-from long_sequence(1);
+FROM long_sequence(1);
 ```
 
 | datediff |
@@ -493,7 +587,7 @@ FROM long_sequence(1);
 | 123    |
 
 ```questdb-sql title="Using in an aggregation"
-select millis(ts), count() from transactions;
+SELECT millis(ts), count() FROM transactions;
 ```
 
 | second | count |
@@ -529,7 +623,7 @@ FROM long_sequence(1);
 | 456    |
 
 ```questdb-sql title="Using in an aggregation"
-select micros(ts), count() from transactions;
+SELECT micros(ts), count() FROM transactions;
 ```
 
 | second | count |
@@ -565,7 +659,7 @@ FROM long_sequence(1);
 | 43     |
 
 ```questdb-sql title="Using in an aggregation"
-select second(ts), count() from transactions;
+SELECT second(ts), count() FROM transactions;
 ```
 
 | second | count |
@@ -601,7 +695,7 @@ FROM long_sequence(1);
 | 43     |
 
 ```questdb-sql title="Using in an aggregation"
-select minute(ts), count() from transactions;
+SELECT minute(ts), count() FROM transactions;
 ```
 
 | minute | count |
@@ -637,7 +731,7 @@ FROM long_sequence(1);
 | 12   |
 
 ```questdb-sql title="Using in an aggregation"
-select hour(ts), count() from transactions;
+SELECT hour(ts), count() FROM transactions;
 ```
 
 | hour | count |
@@ -673,7 +767,7 @@ FROM long_sequence(1);
 | 01  |
 
 ```questdb-sql title="Using in an aggregation"
-select day(ts), count() from transactions;
+SELECT day(ts), count() FROM transactions;
 ```
 
 | day | count |
@@ -709,7 +803,7 @@ FROM long_sequence(1);
 | 03    |
 
 ```questdb-sql title="Using in an aggregation"
-select month(ts), count() from transactions;
+SELECT month(ts), count() FROM transactions;
 ```
 
 | month | count |
@@ -744,7 +838,7 @@ FROM long_sequence(1);
 | 2020 |
 
 ```questdb-sql title="Using in an aggregation"
-select month(ts), count() from transactions;
+SELECT month(ts), count() FROM transactions;
 ```
 
 | year | count |
@@ -769,7 +863,7 @@ Return value type is `boolean`
 **Examples:**
 
 ```questdb-sql
-select year(ts), is_leap_year(ts) from myTable;
+SELECT year(ts), is_leap_year(ts) FROM myTable;
 ```
 
 | year | is_leap_year |
@@ -797,7 +891,7 @@ Return value type is `int`
 **Examples:**
 
 ```questdb-sql
-select month(ts), days_in_month(ts) from myTable;
+SELECT month(ts), days_in_month(ts) FROM myTable;
 ```
 
 | month | days_in_month |
@@ -824,7 +918,7 @@ Return value type is `int`
 **Examples:**
 
 ```questdb-sql
-select to_str(ts,'EE'),day_of_week(ts) from myTable;
+SELECT to_str(ts,'EE'),day_of_week(ts) FROM myTable;
 ```
 
 | day       | day_of_week |
@@ -853,7 +947,7 @@ Return value type is `int`
 **Examples:**
 
 ```questdb-sql
-select to_str(ts,'EE'),day_of_week_sunday_first(ts) from myTable;
+SELECT to_str(ts,'EE'),day_of_week_sunday_first(ts) FROM myTable;
 ```
 
 | day       | day_of_week_sunday_first |

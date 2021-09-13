@@ -61,10 +61,10 @@ try (CairoEngine engine = new CairoEngine(configuration)) {
     final SqlExecutionContextImpl ctx = new SqlExecutionContextImpl(engine, 1);
     try (SqlCompiler compiler = new SqlCompiler(engine)) {
 
-        compiler.compile("create table abc (a int, b byte, c short, d long, e float, g double, h date, i symbol, j string, k boolean, ts timestamp) timestamp(ts)", ctx);
+        compiler.compile("create table abc (a int, b byte, c short, d long, e float, g double, h date, i symbol, j string, k boolean, l geohash(8c), ts timestamp) timestamp(ts)", ctx);
 
         try (TableWriter writer = engine.getWriter(ctx.getCairoSecurityContext(), "abc")) {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 11; i++) {
                 TableWriter.Row row = writer.newRow(Os.currentTimeMicros());
                 row.putInt(0, 123);
                 row.putByte(1, (byte) 1111);
@@ -76,6 +76,7 @@ try (CairoEngine engine = new CairoEngine(configuration)) {
                 row.putSym(7, "xyz");
                 row.putStr(8, "abc");
                 row.putBool(9, true);
+                row.putGeoHash(10, GeoHashes.fromString("u33dr01d", 0, 8));
                 row.append();
             }
             writer.commit();
@@ -127,7 +128,7 @@ There are several ways to create new table ; using `SqlCompiler` is the easiest.
 
 ```java title="Example of creating new table"
 try (SqlCompiler compiler = new SqlCompiler(engine)) {
-    compiler.compile("create table abc (a int, b byte, c short, d long, e float, g double, h date, i symbol, j string, k boolean, ts timestamp) timestamp(ts)", ctx);
+    compiler.compile("create table abc (a int, b byte, c short, d long, e float, g double, h date, i symbol, j string, k boolean, l geohash(8c), ts timestamp) timestamp(ts)", ctx);
 ```
 
 As you will be able to see below, the table field types and indexes must match
@@ -239,7 +240,7 @@ try (CairoEngine engine = new CairoEngine(configuration)) {
     try (SqlCompiler compiler = new SqlCompiler(engine)) {
 
         PageFrameCursor cursor = ...; // Setup PageFrameCursor instance
-        compiler.compile("create table abc (a int, b byte, c short, d long, e float, g double, h date, i symbol, j string, k boolean, ts timestamp) timestamp(ts)", ctx);
+        compiler.compile("create table abc (a int, b byte, c short, d long, e float, g double, h date, i symbol, j string, k boolean, l geohash(8c), ts timestamp) timestamp(ts)", ctx);
 
         try (TableWriter writer = engine.getWriter(ctx.getCairoSecurityContext(), "abc")) {
             int columnCount = writer.getMetadata().getColumnCount();

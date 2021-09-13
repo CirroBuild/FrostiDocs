@@ -40,6 +40,7 @@ module.exports = {
         "concept/partitions",
         "concept/symbol",
         "concept/indexes",
+        "concept/geohashes",
         "concept/root-directory-structure",
       ],
     },
@@ -61,6 +62,17 @@ module.exports = {
         "develop/insert-data",
         "develop/query-data",
         "develop/authenticate",
+      ],
+    },
+    {
+      label: "Guides",
+      type: "category",
+      items: [
+        "guides/working-with-timestamps-timezones",
+        "guides/importing-data",
+        "guides/influxdb-line-protocol",
+        "guides/out-of-order-commit-lag",
+        "guides/v6-migration",
       ],
     },
     {
@@ -92,17 +104,6 @@ module.exports = {
       ],
     },
     {
-      label: "Guides",
-      type: "category",
-      items: [
-        "guides/out-of-order-commit-lag",
-        "guides/influxdb-line-protocol",
-        "guides/working-with-timestamps-timezones",
-        "guides/importing-data",
-        "guides/v6-migration",
-      ],
-    },
-    {
       label: "Reference",
       type: "category",
       items: [
@@ -121,6 +122,7 @@ module.exports = {
           id: "reference/configuration",
           type: "doc",
         },
+        "reference/sql/datatypes",
         {
           type: "category",
           label: "Functions",
@@ -133,6 +135,7 @@ module.exports = {
             "reference/function/numeric",
             "reference/function/random-value-generator",
             "reference/function/row-generator",
+            "reference/function/spatial",
             "reference/function/text",
             "reference/function/timestamp-generator",
             "reference/function/timestamp",
@@ -141,14 +144,14 @@ module.exports = {
         {
           type: "category",
           label: "Operators",
-          items: ["reference/operators/bitwise"],
+          items: ["reference/operators/bitwise", "reference/operators/spatial"],
         },
         {
           type: "category",
           label: "SQL",
           items: [
             "concept/sql-execution-order",
-            "reference/sql/datatypes",
+
             {
               type: "category",
               label: "ALTER TABLE",
