@@ -116,7 +116,7 @@ const config = {
     },
     prism: {
       defaultLanguage: "questdb-sql",
-      additionalLanguages: ["rust", "csharp"],
+      additionalLanguages: ["rust", "csharp", "julia"],
       theme: require("./src/internals/prism-dracula"),
     },
     algolia: {

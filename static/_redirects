@@ -15,3 +15,5 @@
 /docs/reference/client/web-console /docs/reference/web-console
 /docs/guides/hysteresis /docs/guides/out-of-order-commit-lag
 /tutorial/2021/09/05/telegraf-and-questdb-for-storing-metrics-in-a-timeseries-database /tutorial/2021/07/09/telegraf-and-questdb-for-storing-metrics-in-a-timeseries-database
+/blog/2021/09/13/release-6-0-5 /blog/2021/09/13/release-6-0-5-geospatial-data
+/blog/2021/07/16/release-6-0-4 /blog/2021/07/16/release-6-0-4-prometheus-metrics
