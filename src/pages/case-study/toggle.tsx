@@ -37,9 +37,9 @@ const Toggle = () => {
               <img
                 alt="Toggle.global logo"
                 className={juCss.jumbotron__logo}
-                height={15}
+                height={56}
                 src="/img/pages/customers/logos/toggle.svg"
-                width={100}
+                width={140}
               />
             </Button>
             <span className={juCss.jumbotron__name}>Case study</span>
@@ -58,7 +58,7 @@ const Toggle = () => {
 
         <div className={juCss.jumbotron__banner}>
           <img
-            alt="Toggle.global background"
+            alt="An illustration representing data as a connected mesh network"
             height={370}
             src="/img/pages/case-study/toggle/banner.png"
             width={1110}
@@ -121,10 +121,8 @@ const Toggle = () => {
 
       <section className={clsx(seCss.section, caCss.card)}>
         <p className={caCss.card__title}>
-          <span className={caCss.card__quote}>&ldquo;</span>TOGGLE is a SaaS
-          company building state-of-the-art AI technology to help investors turn
-          Big Data into investment insights.
-          <span className={caCss.card__quote}>&rdquo;</span>
+          TOGGLE is a SaaS company building state-of-the-art AI technology to
+          help investors turn Big Data into investment insights.
         </p>
 
         <p className={caCss.card__subtitle}>
@@ -231,10 +229,11 @@ const Toggle = () => {
             )}
           >
             <p className={caCss.card__title}>
-              <span className={caCss.card__quote}>&ldquo;</span>The QuestDB team
-              assisted us in all steps along the way. They were proactive in
-              supporting our changeover, helping to debug issues as they arose,
-              and optimize our deployment as we moved things into production.
+              <span className={caCss.card__quote}>&ldquo;</span>
+              The QuestDB team assisted us in all steps along the way. They were
+              proactive in supporting our changeover, helping to debug issues as
+              they arose, and optimize our deployment as we moved things into
+              production.
               <span className={caCss.card__quote}>&rdquo;</span>
             </p>
             <p className={caCss.card__title}>

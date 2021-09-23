@@ -4,6 +4,7 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  transform: scale(0.8);
 }
 
 .logo__padded {
@@ -12,7 +13,7 @@
 
 .logo__wrapper {
   display: flex;
-  padding: 1rem 0.5rem;
+  padding: 0.1rem 0.1rem;
   justify-content: center;
   flex: 1 0 auto;
   filter: brightness(0) invert(1);

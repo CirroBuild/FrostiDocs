@@ -1,6 +1,7 @@
 import clsx from "clsx"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import React, { useCallback, useEffect, useState } from "react"
+import Customers from "../components/Customers"
 
 import Button from "@theme/Button"
 import Chevron from "@theme/Chevron"
@@ -16,7 +17,6 @@ import juCss from "../css/index/jumbotron.module.css"
 import meCss from "../css/index/menu.module.css"
 import shCss from "../css/index/showcase.module.css"
 import usCss from "../css/index/usp.module.css"
-import cuCss from "../css/index/customer.module.css"
 import prCss from "../css/property.module.css"
 import seCss from "../css/section.module.css"
 
@@ -209,78 +209,6 @@ const Integration = () => (
         />
         Tableau
       </p>
-    </div>
-  </section>
-)
-
-const Customers = () => (
-  <section className={clsx(seCss["section--slim"])}>
-    <div className={cuCss.logo}>
-      <div className={cuCss.logo__item}>
-        <img
-          alt="DATRON logo"
-          height={22}
-          src="/img/pages/customers/logos/datron.svg"
-          width={110}
-        />
-      </div>
-      <div className={cuCss.logo__item}>
-        <img
-          alt="Kepler logo"
-          height={34}
-          src="/img/pages/customers/logos/kepler.svg"
-          width={140}
-        />
-      </div>
-      <div className={cuCss.logo__item}>
-        <img
-          alt="Verizon logo"
-          height={25}
-          src="/img/pages/customers/logos/verizon.svg"
-          width={110}
-        />
-      </div>
-      <div className={cuCss.logo__item}>
-        <img
-          alt="YCombinator logo"
-          className={cuCss.logo__img}
-          height={34}
-          src="/img/pages/customers/logos/yc.png"
-          width={34}
-        />
-      </div>
-      <div className={cuCss.logo__item}>
-        <img
-          alt="Innova logo"
-          height={20}
-          src="/img/pages/customers/logos/innova.svg"
-          width={100}
-        />
-      </div>
-      <div className={cuCss.logo__item}>
-        <img
-          alt="Ably logo"
-          height={28}
-          src="/img/pages/customers/logos/ably.svg"
-          width={90}
-        />
-      </div>
-      <div className={cuCss.logo__item}>
-        <img
-          alt="Insurance Information Institute logo"
-          height={41}
-          src="/img/pages/customers/logos/iii.svg"
-          width={140}
-        />
-      </div>
-      <div className={cuCss.logo__item}>
-        <img
-          alt="First Advantage logo"
-          height={35}
-          src="/img/pages/customers/logos/fadv.svg"
-          width={180}
-        />
-      </div>
     </div>
   </section>
 )
@@ -871,7 +799,7 @@ const Home = () => {
       title={title}
     >
       <Top />
-      <Customers />
+      <Customers nbElements={6} />
       <Usp />
       <Integration />
       <FeatureTabs />

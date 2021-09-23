@@ -85,7 +85,7 @@ conn = LibPQ.Connection("""
       target_session_attrs = any
 ```
 
-It's is very easy; Julia thinks that it is a regular Postgres database. We can
+It's very easy; Julia thinks that it is a regular Postgres database. We can
 quickly move on to working with the data. I started with getting all trades out
 of the database:
 

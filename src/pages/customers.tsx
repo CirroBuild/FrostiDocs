@@ -1,21 +1,102 @@
 import clsx from "clsx"
-import React from "react"
+import React, { useCallback, useState } from "react"
+import { CSSTransition, TransitionGroup } from "react-transition-group"
 
 import Button from "@theme/Button"
+import Chevron from "@theme/Chevron"
 import PageLayout from "@theme/PageLayout"
+import useResizeObserver from "@theme/useResizeObserver"
 
 import caCss from "../css/customers/card.module.css"
-import loCss from "../css/customers/logo.module.css"
 import juCss from "../css/customers/jumbotron.module.css"
 import quCss from "../css/customers/quote.module.css"
 import seCss from "../css/section.module.css"
-import quotes from "../assets/quotes"
+import _quotes from "../assets/quotes"
 
-const Customers = () => {
+// temporary duplication across customer and enterprise page for quote module
+
+const quotes = _quotes.map(({ author, company, logo, role, text }) => {
+  const Quote = () => (
+    <div key={company} className={quCss.quote}>
+      <div className={quCss.quote__symbol} />
+
+      <div className={quCss.quote__logo}>
+        <img
+          alt={logo.alt}
+          className="responsive-image"
+          height={logo.height}
+          src={logo.src}
+          width={logo.width}
+        />
+      </div>
+
+      <p className={quCss.quote__content}>{text}</p>
+
+      <p className={quCss.quote__author}>
+        <span className={quCss.quote__chevron}>&gt;</span>
+        {author}
+        <br />
+        {role}
+        ,&nbsp;
+        {company}
+      </p>
+    </div>
+  )
+
+  return Quote
+})
+
+type BulletProps = {
+  index: number
+  onClick: (index: number) => void
+  page: number
+  viewportSize: number
+}
+
+const Bullet = ({ index, onClick, page, viewportSize }: BulletProps) => {
+  const handleClick = useCallback(() => {
+    onClick(index * viewportSize)
+  }, [index, onClick, viewportSize])
+
+  return (
+    <span
+      className={clsx(quCss.controls__pin, {
+        [quCss["controls__pin--selected"]]: page === index,
+      })}
+      onClick={handleClick}
+    />
+  )
+}
+
+const QUOTE_WIDTH = 350
+
+const Customer = () => {
   const title = "Customers"
   const description =
     "Discover how QuestDB is powering the core infrastructure of companies dealing with time-series data"
 
+  const { ref, width } = useResizeObserver<HTMLDivElement>()
+  // An "item" is a quote
+  // Index in the array of quotes of the item that is "focused"
+  const [index, setIndex] = useState(0)
+  // How many items we can show on the screen
+  const viewportSize = Math.max(1, Math.floor((width ?? 0) / QUOTE_WIDTH))
+  // How many items will actually be displayed (can be smaller than viewportSize)
+  const viewportCount =
+    viewportSize === 0 ? 0 : Math.ceil(quotes.length / viewportSize)
+  // Page number
+  const page = Math.floor(index / viewportSize)
+  // The quotes to show
+  const viewportQuotes = quotes.slice(
+    page * viewportSize,
+    (page + 1) * viewportSize,
+  )
+  const increaseIndex = useCallback(() => {
+    setIndex((index) => Math.min(index + viewportSize, quotes.length - 1))
+  }, [viewportSize])
+  const decreaseIndex = useCallback(() => {
+    setIndex((index) => Math.max(index - viewportSize, 0))
+  }, [viewportSize])
   return (
     <PageLayout canonical="/customers" description={description} title={title}>
       <section className={clsx(seCss.section, seCss["section--odd"])}>
@@ -28,9 +109,9 @@ const Customers = () => {
                 juCss.jumbotron__subtitle,
               )}
             >
-              Here we bring you a collection of stories highlighting how QuestDB
-              is powering the core infrastructure of companies dealing with
-              time-series data.
+              These are some of the most innovative stories from our users
+              highlighting how QuestDB is powering the core infrastructure of
+              companies working with time-series data.
             </p>
           </div>
           <div className={juCss.jumbotron__illustration}>
@@ -43,112 +124,97 @@ const Customers = () => {
           </div>
         </div>
       </section>
+      <section
+        className={clsx(seCss["section--inner"], seCss["section--column"])}
+      >
+        <h2 className={quCss.title}>What our users say about QuestDB</h2>
 
-      <section className={clsx(seCss["section--inner"], loCss.logo)}>
-        <Button
-          className={loCss.logo__wrapper}
-          href="https://www.datron.com"
-          variant="plain"
-        >
-          <img
-            alt="Datron logo"
-            className="responsive-image"
-            height={20}
-            src="/img/pages/customers/logos/datron.svg"
-            width={110}
-          />
-        </Button>
-        <Button
-          className={loCss.logo__wrapper}
-          href="https://www.keplercheuvreux.com/en/"
-          variant="plain"
-        >
-          <img
-            alt="Kepler logo"
-            className="responsive-image"
-            height={34}
-            src="/img/pages/customers/logos/kepler.svg"
-            width={140}
-          />
-        </Button>
-        <Button
-          className={loCss.logo__wrapper}
-          href="https://www.verizon.com/"
-          variant="plain"
-        >
-          <img
-            alt="Verizon logo"
-            className="responsive-image"
-            height={22}
-            src="/img/pages/customers/logos/verizon.svg"
-            width={110}
-          />
-        </Button>
-        <Button
-          className={loCss.logo__wrapper}
-          href="https://www.ycombinator.com/"
-          variant="plain"
-        >
-          <img
-            alt="YCombinator logo"
-            className="responsive-image"
-            height={34}
-            src="/img/pages/customers/logos/yc.png"
-            width={34}
-          />
-        </Button>
-        <Button
-          className={loCss.logo__wrapper}
-          href="https://www.innova.com.tr/en"
-          variant="plain"
-        >
-          <img
-            alt="Innova logo"
-            className="responsive-image"
-            height={20}
-            src="/img/pages/customers/logos/innova.svg"
-            width={100}
-          />
-        </Button>
-        <Button
-          className={loCss.logo__wrapper}
-          href="https://www.ably.io/"
-          variant="plain"
-        >
-          <img
-            alt="Ably logo"
-            className="responsive-image"
-            height={28}
-            src="/img/pages/customers/logos/ably.svg"
-            width={90}
-          />
-        </Button>
-        <Button
-          className={loCss.logo__wrapper}
-          href="https://www.iii.org/"
-          variant="plain"
-        >
-          <img
-            alt="Insurance Information Institute logo"
-            className="responsive-image"
-            height={41}
-            src="/img/pages/customers/logos/iii.svg"
-            width={140}
-          />
-        </Button>
-        <Button
-          className={loCss.logo__wrapper}
-          href="https://fadv.com/"
-          variant="plain"
-        >
-          <img
-            alt="First Advantage logo"
-            className="responsive-image"
-            height={35}
-            src="/img/pages/customers/logos/fadv.svg"
-            width={180}
-          />
-        </Button>
+        <div className={quCss.carousel} ref={ref}>
+          <TransitionGroup component={null}>
+            <CSSTransition key={page} timeout={200} classNames="item">
+              <div className={quCss.carousel__group}>
+                {viewportQuotes.map((Quote) => (
+                  <Quote key={quotes.indexOf(Quote)} />
+                ))}
+              </div>
+            </CSSTransition>
+          </TransitionGroup>
+        </div>
+
+        <div className={quCss.controls}>
+          <div
+            className={clsx(
+              quCss["controls__chevron-wrapper"],
+              quCss["controls__chevron-wrapper--left"],
+              {
+                [quCss["controls__chevron-wrapper--hidden"]]: page === 0,
+              },
+            )}
+            onClick={decreaseIndex}
+          >
+            <Chevron className={quCss.controls__chevron} side="left" />
+          </div>
+
+          <div className={quCss.controls__middle}>
+            {Array(viewportCount)
+              .fill(0)
+              .map((_, idx) => (
+                <Bullet
+                  index={idx}
+                  key={idx}
+                  onClick={setIndex}
+                  page={page}
+                  viewportSize={viewportSize}
+                />
+              ))}
+          </div>
+
+          <div
+            className={clsx(
+              quCss["controls__chevron-wrapper"],
+              quCss["controls__chevron-wrapper--right"],
+              {
+                [quCss["controls__chevron-wrapper--hidden"]]:
+                  page === viewportCount - 1,
+              },
+            )}
+            onClick={increaseIndex}
+          >
+            <Chevron className={quCss.controls__chevron} side="right" />
+          </div>
+        </div>
+      </section>
+
+      <section className={clsx(seCss.section, seCss["section--inner"])}>
+        <div className={caCss.card}>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="Yahoo logo"
+              height={400}
+              src="/img/pages/case-study/yahoo/summary.jpg"
+              width={525}
+            />
+          </div>
+          <p className={caCss.card__summary}>
+            <img
+              alt="Yahoo logo"
+              className={caCss.card__logo}
+              height={50}
+              src="/img/pages/customers/cards/yahoo.svg"
+              width={140}
+            />
+            “We use QuestDB to monitor metrics for autoscaling decisions within
+            our ML engine that provides search, recommendation, and
+            personalization via models and aggregations on continuously-changing
+            data.”
+            <em className={caCss.card__author}>
+              - <strong>Jon Bratseth</strong>, Yahoo
+            </em>
+            <Button className={caCss.card__cta} to="/case-study/yahoo/">
+              View full case study
+            </Button>
+          </p>
+        </div>
       </section>
       <section className={clsx(seCss.section, seCss["section--inner"])}>
         <div className={caCss.card}>
@@ -156,15 +222,15 @@ const Customers = () => {
             <img
               alt="Toggle.global logo"
               className={caCss.card__logo}
-              height={20}
-              src="/img/pages/customers/logos/toggle.svg"
-              width={137.5}
+              height={50}
+              src="/img/pages/customers/cards/toggle.svg"
+              width={140}
             />
             “We switched from InfluxDB to QuestDB to get queries that are on
             average 300x faster utilizing 1/4 of the hardware, without ever
             overtaxing our servers.”
             <em className={caCss.card__author}>
-              - <strong>Armenak Mayalian</strong>, CTO
+              - <strong>Armenak Mayalian</strong>, Toggle
             </em>
             <Button className={caCss.card__cta} to="/case-study/toggle/">
               View full case study
@@ -194,9 +260,9 @@ const Customers = () => {
             <img
               alt="Datron logo"
               className={caCss.card__logo}
-              height={24}
-              src="/img/pages/customers/logos/datron.svg"
-              width={124}
+              height={50}
+              src="/img/pages/customers/cards/datron.svg"
+              width={140}
             />
             “QuestDB offers new possibilities while reducing costs and
             simplifying data analysis.”
@@ -215,9 +281,9 @@ const Customers = () => {
             <img
               alt="Innova logo"
               className={caCss.card__logo}
-              height={30}
-              src="/img/pages/customers/logos/innova.svg"
-              width={100}
+              height={50}
+              src="/img/pages/customers/cards/innova.svg"
+              width={140}
             />
             “QuestDB allows us to query data while writing millions of records.
             It is an excellent database for time series analysis, calculation of
@@ -239,41 +305,8 @@ const Customers = () => {
           </div>
         </div>
       </section>
-      <section
-        className={clsx(
-          seCss.section,
-          seCss["section--inner"],
-          seCss["section--center"],
-        )}
-      >
-        {quotes.map(({ author, company, logo, role, text, website }) => (
-          <div key={company} className={quCss.quote}>
-            <Button
-              className={quCss.quote__company}
-              href={website}
-              variant="plain"
-            >
-              <img
-                alt={logo.alt}
-                className={loCss.logo__image}
-                height={logo.height}
-                src={logo.src}
-                width={logo.width}
-              />
-            </Button>
-            <p className={quCss.quote__text}>{text}</p>
-            <p>
-              <strong>{author}</strong>
-              <br />
-              {role}
-              <span className={quCss.quote__separator} />
-              <strong>{company}</strong>
-            </p>
-          </div>
-        ))}
-      </section>
     </PageLayout>
   )
 }
 
-export default Customers
+export default Customer

@@ -38,9 +38,9 @@ const Innova = () => {
               <img
                 alt="Innova logo"
                 className={juCss.jumbotron__logo}
-                height={30}
+                height={56}
                 src="/img/pages/customers/logos/innova.svg"
-                width={100}
+                width={140}
               />
             </Button>
             <span className={juCss.jumbotron__name}>Case study</span>
@@ -60,7 +60,7 @@ const Innova = () => {
 
         <div className={juCss.jumbotron__banner}>
           <img
-            alt="Innova background"
+            alt="An illustration showing a person inspecting a chart of data from multiple international locations"
             height={400}
             src="/img/pages/case-study/innova/illustration.png"
             width={600}
@@ -123,12 +123,10 @@ const Innova = () => {
 
       <section className={clsx(seCss.section, caCss.card)}>
         <p className={caCss.card__title}>
-          <span className={caCss.card__quote}>&ldquo;</span>Innova develops big
-          data solutions for financial transactions, BI systems, IT
-          infrastructure, security, and network operators. Our services include
-          real-time analytics of the network infrastructure of the largest
-          Telecommunications provider in Turkey.
-          <span className={caCss.card__quote}>&rdquo;</span>
+          Innova develops big data solutions for financial transactions, BI
+          systems, IT infrastructure, security, and network operators. Our
+          services include real-time analytics of the network infrastructure of
+          the largest Telecommunications provider in Turkey.
         </p>
 
         <p className={caCss.card__subtitle}>

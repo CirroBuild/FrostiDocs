@@ -14,25 +14,39 @@ type Quote = {
 
 const quotes: Quote[] = [
   {
-    website: "https://www.verizon.com/",
+    website: "https://www.airbus.com/",
     logo: {
-      alt: "Verizon logo",
-      src: "/img/pages/customers/logos/verizon.svg",
-      height: 22,
-      width: 100,
+      alt: "Airbus logo",
+      src: "/img/pages/customers/cards/airbus.svg",
+      height: 56,
+      width: 140,
     },
     text:
-      "Verizon Media serves close to a billion users at a rate of 500k queries per second. We use QuestDB to monitor metrics for autoscaling decisions within our Vespa engine that provides search, recommendation, and personalization via ML models and aggregations on continuously-changing data.",
+      "QuestDB is used at Airbus for real-time applications involving hundreds of millions of data points per day. For us, QuestDB is an outstanding solution that meets (and exceeds) our performance requirements.",
+    author: "Oliver Pfeiffer",
+    role: "Software Architect",
+    company: "Airbus",
+  },
+  {
+    website: "https://www.yahoo.com/",
+    logo: {
+      alt: "Yahoo logo",
+      src: "/img/pages/customers/cards/yahoo.svg",
+      height: 56,
+      width: 140,
+    },
+    text:
+      "We use QuestDB to monitor metrics for autoscaling decisions within our ML engine that provides search, recommendation, and personalization via models and aggregations on continuously changing data.",
     author: "Jon Bratseth",
     role: "VP Architect",
-    company: "Verizon Media",
+    company: "Yahoo",
   },
   {
     website: "https://www.keplercheuvreux.com/en/",
     logo: {
       alt: "Kepler logo",
-      src: "/img/pages/customers/logos/kepler.svg",
-      height: 34,
+      src: "/img/pages/customers/cards/kepler.svg",
+      height: 56,
       width: 140,
     },
     text:
@@ -45,9 +59,9 @@ const quotes: Quote[] = [
     website: "https://www.datron.com/",
     logo: {
       alt: "Datron logo",
-      src: "/img/pages/customers/logos/datron.svg",
-      height: 19,
-      width: 100,
+      src: "/img/pages/customers/cards/datron.svg",
+      height: 56,
+      width: 140,
     },
     text:
       "With QuestDB's turnkey solution in Docker, we quickly built a solid foundation for a data acquisition pipeline with billions of measurements.",
@@ -59,9 +73,9 @@ const quotes: Quote[] = [
     website: "https://www.ably.io/",
     logo: {
       alt: "Ably logo",
-      src: "/img/pages/customers/logos/ably.svg",
-      height: 28,
-      width: 100,
+      src: "/img/pages/customers/cards/ably.svg",
+      height: 56,
+      width: 140,
     },
     text:
       "QuestDB allows me to build tools and systems without having to learn proprietary query languages while maintaining industry-leading performance and a straightforward setup.",
@@ -73,9 +87,9 @@ const quotes: Quote[] = [
     website: "https://toggle.ai/",
     logo: {
       alt: "Toggle logo",
-      src: "/img/pages/customers/logos/toggle.svg",
-      height: 24,
-      width: 100,
+      src: "/img/pages/customers/cards/toggle.svg",
+      height: 56,
+      width: 140,
     },
     text:
       "We switched from InfluxDB to QuestDB to get queries that are on average 300x faster utilizing 1/4 of the hardware, without ever overtaxing our servers.",
@@ -87,9 +101,9 @@ const quotes: Quote[] = [
     website: "https://www.innova.com.tr/en/about-us/about-innova",
     logo: {
       alt: "Innova logo",
-      src: "/img/pages/customers/logos/innova.svg",
-      height: 18,
-      width: 88,
+      src: "/img/pages/customers/logos/turk_telekom.svg",
+      height: 56,
+      width: 140,
     },
     text:
       "QuestDB allows us to query data while writing millions of records. It is an excellent database for time series analysis and can efficiently store our data. QuestDB’s community is constantly growing and its popularity is on the rise.",
@@ -101,9 +115,9 @@ const quotes: Quote[] = [
     website: "https://www.samtec.com/",
     logo: {
       alt: "Samtec logo",
-      src: "/img/pages/customers/logos/samtec.svg",
-      height: 24,
-      width: 81,
+      src: "/img/pages/customers/cards/samtec.svg",
+      height: 56,
+      width: 140,
     },
     text:
       "QuestDB is the most promising open source platform for time series analytics. It's thoughtfully designed to be both wicked fast and easy to use.",
@@ -115,29 +129,15 @@ const quotes: Quote[] = [
     website: "https://www.biba.uni-bremen.de/en/institute/infrastructure.html",
     logo: {
       alt: "BIBA logo",
-      src: "/img/pages/customers/logos/biba.svg",
-      height: 24,
-      width: 50,
+      src: "/img/pages/customers/cards/biba.svg",
+      height: 56,
+      width: 140,
     },
     text:
       "At BIBA, we leverage QuestDB in IoT and Industrial Automation. Aside from out-of-the-box readiness, the performance is fantastic, and the ease of usage provides us a path to perform faster and better analyses.",
     author: "Shan Desai",
     role: "Research Scientist",
     company: "BIBA",
-  },
-  {
-    website: "https://www.counterflow.ai/",
-    logo: {
-      alt: "Counterflow AI logo",
-      src: "/img/pages/customers/logos/counterflow.svg",
-      height: 57,
-      width: 120,
-    },
-    text:
-      "QuestDB is impressive and stands out as a superior option. We use it as the basis of our time series analytics.",
-    author: "Randy Caldejon",
-    role: "CEO",
-    company: "Counterflow AI",
   },
 ]
 

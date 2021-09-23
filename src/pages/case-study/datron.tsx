@@ -35,11 +35,11 @@ const DATRON = () => {
               variant="plain"
             >
               <img
-                alt="A CNC machine built by DATRON milling aluminium"
+                alt="DATRON logo"
                 className={juCss.jumbotron__logo}
-                height={24}
+                height={56}
                 src="/img/pages/customers/logos/datron.svg"
-                width={124}
+                width={140}
               />
             </Button>
             <span className={juCss.jumbotron__name}>Case study</span>
@@ -58,7 +58,7 @@ const DATRON = () => {
 
         <div className={juCss.jumbotron__banner}>
           <img
-            alt="DATRON.global background"
+            alt="A CNC machine built by DATRON milling aluminium"
             height={251}
             src="/img/pages/case-study/datron/banner.jpg"
             width={1200}
@@ -121,10 +121,9 @@ const DATRON = () => {
 
       <section className={clsx(seCss.section, caCss.card)}>
         <p className={caCss.card__title}>
-          <span className={caCss.card__quote}>&ldquo;</span>DATRON builds
-          high-speed industrial CNC machines which output high-frequency sensor
-          data requiring massive ingestion rates at the data layer.
-          <span className={caCss.card__quote}>&rdquo;</span>
+          DATRON builds high-speed industrial CNC machines which output
+          high-frequency sensor data requiring massive ingestion rates at the
+          data layer.
         </p>
 
         <p className={caCss.card__subtitle}>
