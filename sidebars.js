@@ -92,6 +92,7 @@ module.exports = {
         "operations/capacity-planning",
         "operations/data-retention",
         "operations/health-monitoring",
+        "operations/backup",
       ],
     },
     {
