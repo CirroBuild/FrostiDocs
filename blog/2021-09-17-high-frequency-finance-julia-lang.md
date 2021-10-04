@@ -110,7 +110,7 @@ plot(trades.timestamp, trades.price, label=:none, fmt=:png)
 import Screenshot from "@theme/Screenshot"
 
 <Screenshot
-  alt="Ploting SQL query results of entire table from QuestDB via Julia"
+  alt="Plotting SQL query results of entire table from QuestDB via Julia"
   height={598}
   src="/img/blog/2021-09-17/sql-connection-via-julia.png"
   width={650}
@@ -136,7 +136,7 @@ plot(acplot, aclogplot, fmt=:png)
 ```
 
 <Screenshot
-  alt="Ploting SQL query results of entire table from QuestDB via Julia"
+  alt="Plotting order sign correlation in QuestDB via Julia"
   height={598}
   src="/img/blog/2021-09-17/order-sign-correlation.png"
   width={650}
@@ -172,7 +172,7 @@ plot!(log.(1:length(ac)), coef(sideModel)[1] .+ coef(sideModel)[2] .* log.(1:len
 ```
 
 <Screenshot
-  alt="Ploting SQL query results of entire table from QuestDB via Julia"
+  alt="Plotting order sign correlation in QuestDB via Julia"
   height={598}
   src="/img/blog/2021-09-17/order-sign-correlation-2.png"
   width={650}
@@ -203,7 +203,7 @@ plot(tradesSizePlot, tradesSizeLogPlot, fmt=:png)
 ```
 
 <Screenshot
-  alt="Ploting SQL query results of entire table from QuestDB via Julia"
+  alt="Plotting size distribution in QuestDB via Julia"
   height={598}
   src="/img/blog/2021-09-17/size-distribution.png"
   width={650}
@@ -226,7 +226,7 @@ plot(bds, alphak, xlabel="k", ylabel="Alpha", label=:none, fmt=:png)
 ```
 
 <Screenshot
-  alt="Ploting SQL query results of entire table from QuestDB via Julia"
+  alt="Plotting size distribution in QuestDB via Julia"
   height={598}
   src="/img/blog/2021-09-17/size-distribution-2.png"
   width={650}
@@ -307,7 +307,7 @@ plot!(-1:0.1:1, coef(miModel)[1] .* collect(-1:0.1:1), label="Model", linewidth=
 ```
 
 <Screenshot
-  alt="Ploting SQL query results of entire table from QuestDB via Julia"
+  alt="Plotting market impact in QuestDB via Julia"
   height={598}
   src="/img/blog/2021-09-17/market-impact.png"
   width={650}
@@ -359,7 +359,7 @@ logCostPlot = plot(log.(costData.MeanSize),
 ```
 
 <Screenshot
-  alt="Ploting SQL query results of entire table from QuestDB via Julia"
+  alt="Plotting top of book results in QuestDB via Julia"
   height={598}
   src="/img/blog/2021-09-17/top-of-book.png"
   width={650}
@@ -410,7 +410,7 @@ plot!(-8:0.1:3, coef(costModel)[1] .+ coef(costModel)[2] .* (-8:0.1:3),
 ```
 
 <Screenshot
-  alt="Ploting SQL query results of entire table from QuestDB via Julia"
+  alt="Plotting top of book results in QuestDB via Julia"
   height={598}
   src="/img/blog/2021-09-17/top-of-book-2.png"
   width={650}
