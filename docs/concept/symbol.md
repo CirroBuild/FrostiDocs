@@ -46,8 +46,9 @@ documentation. Further details on indexes are described on the
 ## Properties
 
 - Symbol tables are stored separately from column data.
-- Q conversion from `string` to `int` and vice-versa when reading or writing
+- Fast conversion from `string` to `int` and vice-versa when reading or writing
   data.
 - Columns defined as `symbol` types support indexing.
-- Users may elect that QuestDB stores `symbol` types in the heap for improved
-  query speed.
+- Users may configure QuestDB to store `symbol` types in memory for improved
+  query speed (see the `cairo.default.symbol.cache.flag`
+  [configuration option](/docs/reference/configuration)).
