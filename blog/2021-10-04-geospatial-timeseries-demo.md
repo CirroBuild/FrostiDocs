@@ -231,8 +231,8 @@ WHERE geo6 within(#ezz, #u33d8);
 The implementation of `within` was designed to be used with additional
 time-based filtering, so that we can efficiently sample data sets in terms of
 time and space. The query performance of slicing time and space in this way
-should be fast enough to power real-time maps which have use sliders to jog
-through slices of time:
+should be fast enough to power real-time mapping tools which make use of UI
+sliders to jog through slices of time:
 
 ```questdb-sql
 SELECT * FROM pos LATEST BY id
