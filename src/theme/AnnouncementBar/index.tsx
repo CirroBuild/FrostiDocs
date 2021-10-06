@@ -1,7 +1,8 @@
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import React from "react"
 
 import useUserPreferencesContext from "@theme/hooks/useUserPreferencesContext"
+
+import customFields from "../../config/customFields"
 
 import styles from "./styles.module.css"
 
@@ -10,7 +11,6 @@ const AnnouncementBar = () => {
     isAnnouncementBarClosed,
     closeAnnouncementBar,
   } = useUserPreferencesContext()
-  const { siteConfig } = useDocusaurusContext()
 
   if (isAnnouncementBarClosed) {
     return null
@@ -22,7 +22,7 @@ const AnnouncementBar = () => {
         If you like QuestDB,&nbsp;
         <a
           className={styles.announcement__link}
-          href={siteConfig.customFields.githubUrl}
+          href={customFields.githubUrl}
           rel="noopener noreferrer"
           target="_blank"
         >

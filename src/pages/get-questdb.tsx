@@ -1,6 +1,5 @@
 import clsx from "clsx"
 import { differenceInDays, format, formatDistanceToNowStrict } from "date-fns"
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import { usePluginData } from "@docusaurus/useGlobalData"
 import React, { ReactNode, useEffect, useState } from "react"
 
@@ -15,6 +14,8 @@ import heCss from "../css/get-questdb/help.module.css"
 import ilCss from "../css/get-questdb/illustration.module.css"
 import seCss from "../css/section.module.css"
 import { getAssets, getOs, Os, Release } from "../utils"
+
+import customFields from "../config/customFields"
 
 type BinaryProps = Readonly<{
   architecture: boolean
@@ -99,7 +100,6 @@ const GetQuestdbPage = () => {
   const title = "Download QuestDB"
   const description =
     "Download QuestDB, an open source time series SQL database for fast ingestion and queries"
-  const { siteConfig } = useDocusaurusContext()
   const { release } = usePluginData<{ release: Release }>("fetch-release")
   const [os, setOs] = useState<Os | undefined>()
   const [releaseDate, setReleaseDate] = useState(
@@ -261,8 +261,8 @@ brew install questdb`}
             )}
           >
             You can find below download links for the latest version of QuestDB
-            ({siteConfig.customFields.version}). Once your download is finished,
-            you can check our documentation for{" "}
+            ({customFields.version}). Once your download is finished, you can
+            check our documentation for{" "}
             <a href="/docs/get-started/docker/">Docker</a>, the{" "}
             <a href="/docs/get-started/binaries/">binaries</a> or{" "}
             <a href="/docs/get-started/homebrew/">Homebrew</a> to get started.
@@ -283,9 +283,7 @@ brew install questdb`}
               })}
             >
               Latest Release:&nbsp;
-              <span className={ctCss.cta__version}>
-                {siteConfig.customFields.version}
-              </span>
+              <span className={ctCss.cta__version}>{customFields.version}</span>
               &nbsp;({releaseDate})
             </p>
             {os != null && os !== "macos" && assets[os] && (
@@ -306,7 +304,7 @@ brew install questdb`}
             </a>
             <a
               className={chCss.changelog__link}
-              href={`${siteConfig.customFields.githubUrl}/tags`}
+              href={`${customFields.githubUrl}/tags`}
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -352,12 +350,12 @@ brew install questdb`}
           title="Kubernetes (via Helm)"
         >
           <CodeBlock className="language-shell">
-            {`helm repo add questdb https://helm.${siteConfig.customFields.domain}/
-helm install my-questdb questdb/questdb --version ${siteConfig.customFields.helmVersion}`}
+            {`helm repo add questdb https://helm.${customFields.domain}/
+helm install my-questdb questdb/questdb --version ${customFields.helmVersion}`}
           </CodeBlock>
           <p className={biCss.binary__docs}>
             <a
-              href={siteConfig.customFields.artifactHubUrl}
+              href={customFields.artifactHubUrl}
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -418,7 +416,7 @@ helm install my-questdb questdb/questdb --version ${siteConfig.customFields.helm
             {`<dependency>
   <groupId>org.questdb</groupId>
   <artifactId>questdb</artifactId>
-  <version>${siteConfig.customFields.version}</version>
+  <version>${customFields.version}</version>
 </dependency>`}
           </CodeBlock>
           <p className={biCss.binary__docs}>
@@ -439,7 +437,7 @@ helm install my-questdb questdb/questdb --version ${siteConfig.customFields.helm
           title="Gradle"
         >
           <CodeBlock className="language-shell">
-            {`implementation 'org.questdb:questdb:${siteConfig.customFields.version}'`}
+            {`implementation 'org.questdb:questdb:${customFields.version}'`}
           </CodeBlock>
           <div style={{ height: "2.75rem" }} />
           <p className={biCss.binary__docs}>
@@ -485,7 +483,7 @@ helm install my-questdb questdb/questdb --version ${siteConfig.customFields.helm
               rel="noopener noreferrer"
               target="_blank"
             >
-              v{siteConfig.customFields.version} CHANGELOG
+              v{customFields.version} CHANGELOG
             </a>{" "}
             for information on the latest release.
           </p>

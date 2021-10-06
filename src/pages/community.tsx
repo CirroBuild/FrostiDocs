@@ -1,11 +1,11 @@
 import React from "react"
 import clsx from "clsx"
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import PageLayout from "@theme/PageLayout"
 import Button from "@theme/Button"
 import seCss from "../css/section.module.css"
 import paCss from "../css/community/page.module.css"
 import MailchimpSubscribe from "react-mailchimp-subscribe"
+import customFields from "../config/customFields"
 
 type FormProps = {
   status: string
@@ -77,7 +77,6 @@ const contribution: Contribute[] = [
 ]
 
 const Community = () => {
-  const { siteConfig } = useDocusaurusContext()
   const newsletterUrl =
     "https://questdb.us7.list-manage.com/subscribe/post?u=f692ae4038a31e8ae997a0f29&amp;id=bdd4ec2744"
   const title = "QuestDB developer community"
@@ -137,17 +136,11 @@ const Community = () => {
                 className={`${paCss.default_text} ${paCss.join_slack_description}`}
               >
                 Join our growing community on &nbsp;
-                <a
-                  className={paCss.link_item}
-                  href={siteConfig.customFields.slackUrl}
-                >
+                <a className={paCss.link_item} href={customFields.slackUrl}>
                   QuestDB’s Slack
                 </a>
               </p>
-              <a
-                className={paCss.link_item}
-                href={siteConfig.customFields.slackUrl}
-              >
+              <a className={paCss.link_item} href={customFields.slackUrl}>
                 <img
                   src="/img/pages/community/slack-logo.svg"
                   alt="slack logo"
@@ -192,10 +185,7 @@ const Community = () => {
               </p>
               <p className={paCss.property}>
                 You have{" "}
-                <a
-                  className={paCss.link_item}
-                  href={siteConfig.customFields.githubUrl}
-                >
+                <a className={paCss.link_item} href={customFields.githubUrl}>
                   starred our GitHub repository
                 </a>
               </p>
@@ -203,17 +193,14 @@ const Community = () => {
                 You{" "}
                 <a
                   className={paCss.link_item}
-                  href={siteConfig.customFields.stackoverflowUrl}
+                  href={customFields.stackoverflowUrl}
                 >
                   watch our Stack Overflow tag
                 </a>
               </p>
               <p className={paCss.property}>
                 You have joined our{" "}
-                <a
-                  className={paCss.link_item}
-                  href={siteConfig.customFields.slackUrl}
-                >
+                <a className={paCss.link_item} href={customFields.slackUrl}>
                   Community Slack
                 </a>
               </p>
@@ -242,7 +229,7 @@ const Community = () => {
               You have asked or answered a question on Stack Overflow{" "}
               <a
                 className={paCss.link_item}
-                href={siteConfig.customFields.stackoverflowUrl}
+                href={customFields.stackoverflowUrl}
               >
                 with the QuestDB tag
               </a>

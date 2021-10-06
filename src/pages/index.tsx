@@ -2,6 +2,7 @@ import clsx from "clsx"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import React, { useCallback, useEffect, useState } from "react"
 import Customers from "../components/Customers"
+import customFields from "../config/customFields"
 
 import Button from "@theme/Button"
 import Chevron from "@theme/Chevron"
@@ -242,10 +243,7 @@ const Top = () => {
         </p>
 
         <div className={juCss.jumbotron__cta}>
-          <Button
-            className={juCss.jumbotron__link}
-            href={siteConfig.customFields.demoUrl}
-          >
+          <Button className={juCss.jumbotron__link} href={customFields.demoUrl}>
             Live Demo
           </Button>
           <Button
@@ -253,7 +251,7 @@ const Top = () => {
               juCss.jumbotron__link,
               juCss["jumbotron__cta--github"],
             )}
-            href={siteConfig.customFields.githubUrl}
+            href={customFields.githubUrl}
             icon={
               <img
                 alt="GitHub logo"
@@ -280,7 +278,7 @@ const Top = () => {
 docker run -p 9000:9000 questdb/questdb`}
           </code>
           <a
-            href={siteConfig.customFields.dockerUrl}
+            href={customFields.dockerUrl}
             rel="noopener noreferrer"
             target="_blank"
           >
@@ -448,8 +446,6 @@ const Cards = () => (
 )
 
 const Console = () => {
-  const { siteConfig } = useDocusaurusContext()
-
   return (
     <section
       className={clsx(
@@ -528,16 +524,13 @@ const Console = () => {
           <div className={flCss.flashy__links}>
             <a
               className={flCss.flashy__link}
-              href={siteConfig.customFields.githubUrl}
+              href={customFields.githubUrl}
               rel="noopener noreferrer"
               target="_blank"
             >
               Go to GitHub&nbsp;&nbsp;&gt;
             </a>
-            <a
-              className={flCss.flashy__link}
-              href={siteConfig.customFields.slackUrl}
-            >
+            <a className={flCss.flashy__link} href={customFields.slackUrl}>
               Join Slack&nbsp;&nbsp;&gt;
             </a>
           </div>
@@ -789,13 +782,12 @@ ${mergeQuery}`}
 }
 
 const Home = () => {
-  const { siteConfig } = useDocusaurusContext()
   const title = "QuestDB"
 
   return (
     <PageLayout
       canonical=""
-      description={siteConfig.customFields.description}
+      description={customFields.description}
       title={title}
     >
       <Top />

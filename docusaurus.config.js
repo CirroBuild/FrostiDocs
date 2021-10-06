@@ -1,29 +1,7 @@
 const visit = require("unist-util-visit")
 const ssrTemplate = require("./src/internals/ssr.template")
-
-const githubOrgUrl = "https://github.com/questdb"
-const domain = "questdb.io"
-
-const customFields = {
-  artifactHubUrl: "https://artifacthub.io/packages/helm/questdb/questdb",
-  copyright: `Copyright © ${new Date().getFullYear()} QuestDB`,
-  crunchbaseUrl: "https://www.crunchbase.com/organization/quest-db",
-  demoUrl: `https://demo.${domain}`,
-  description:
-    "QuestDB is an open source database designed to make time-series lightning fast and easy. It exposes a high performance REST API and is Postgres compatible.",
-  dockerUrl: "https://hub.docker.com/r/questdb/questdb",
-  domain,
-  githubOrgUrl,
-  githubUrl: `${githubOrgUrl}/questdb`,
-  helmVersion: "0.11.0",
-  linkedInUrl: "https://www.linkedin.com/company/questdb/",
-  oneLiner: "Fast SQL open source database for time series - QuestDB",
-  slackUrl: `https://slack.${domain}`,
-  stackoverflowUrl: "https://stackoverflow.com/questions/tagged/questdb",
-  twitterUrl: "https://twitter.com/questdb",
-  version: "6.0.7.1",
-  videosUrl: "https://www.youtube.com/channel/UChqKEmOyiD9c6QFx2mjKwiA",
-}
+const consts = require("./src/config/consts")
+const customFields = require("./src/config/customFields")
 
 function variable() {
   const RE_VAR = /{@([\w-_]+)@}/g
@@ -54,13 +32,13 @@ function variable() {
 const config = {
   title: "QuestDB: the database for time series",
   tagline: "QuestDB is the fastest open source time series database",
-  url: `https://${customFields.domain}`,
+  url: `https://${consts.domain}`,
   baseUrl: "/",
   baseUrlIssueBanner: false,
   favicon: "/img/favicon.png",
   organizationName: "QuestDB",
   projectName: "questdb",
-  customFields,
+  customFields: customFields,
   plugins: [
     require.resolve("./plugins/fetch-release/index"),
     require.resolve("./plugins/webpack-ts/index"),

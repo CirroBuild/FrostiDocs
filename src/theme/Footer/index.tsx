@@ -2,6 +2,7 @@ import clsx from "clsx"
 import useBaseUrl from "@docusaurus/useBaseUrl"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import React from "react"
+import customFields from "../../config/customFields"
 
 import Button from "@theme/Button"
 import useMetadataContext from "@theme/useMetadataContext"
@@ -75,7 +76,7 @@ const Footer = () => {
 
           <Button
             className={footerStyles.footer__github}
-            href={siteConfig.customFields.githubUrl}
+            href={customFields.githubUrl}
             icon={
               <img
                 alt="GitHub logo"
@@ -123,7 +124,7 @@ const Footer = () => {
       </div>
       <div className={footerStyles.footer__bottom}>
         <p className={footerStyles.footer__copyright}>
-          {siteConfig.customFields.copyright}
+          {customFields.copyright}
           <ul>
             <li className={footerStyles.footer__item}>
               <a className={footerStyles.footer__link} href="/privacy-notice/">

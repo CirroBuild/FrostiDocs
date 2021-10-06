@@ -4,6 +4,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import React, { TransitionEvent, useCallback, useState } from "react"
 import { renderRoutes } from "react-router-config"
 import { MDXProvider } from "@mdx-js/react"
+import customFields from "../../config/customFields"
 
 import type { Props } from "@theme/DocPage"
 import DocSidebar from "@theme/DocSidebar"
@@ -74,7 +75,7 @@ const DocPage = ({
 
   return (
     <PageLayout
-      description={siteConfig.customFields.description}
+      description={customFields.description}
       key={isClient.toString()}
       title="Introduction"
     >
