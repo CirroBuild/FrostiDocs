@@ -191,21 +191,30 @@ const Community = () => {
                 To claim your swag for the this level:
               </p>
               <p className={paCss.property}>
+                You have{" "}
+                <a
+                  className={paCss.link_item}
+                  href={siteConfig.customFields.githubUrl}
+                >
+                  starred our GitHub repository
+                </a>
+              </p>
+              <p className={paCss.property}>
+                You{" "}
+                <a
+                  className={paCss.link_item}
+                  href={siteConfig.customFields.stackoverflowUrl}
+                >
+                  watch our Stack Overflow tag
+                </a>
+              </p>
+              <p className={paCss.property}>
                 You have joined our{" "}
                 <a
                   className={paCss.link_item}
                   href={siteConfig.customFields.slackUrl}
                 >
                   Community Slack
-                </a>
-              </p>
-              <p className={paCss.property}>
-                You have{" "}
-                <a
-                  className={paCss.link_item}
-                  href={siteConfig.customFields.githubUrl}
-                >
-                  starred our repository on GitHub
                 </a>
               </p>
               <div className={paCss.custom_box}>
@@ -239,12 +248,12 @@ const Community = () => {
               </a>
             </p>
             <p className={paCss.property}>
-              You have voted, commented on, or opened a{" "}
+              You have opened a valid{" "}
               <a
                 className={paCss.link_item}
-                href="https://github.com/questdb/questdb/issues"
+                href="https://github.com/questdb/questdb"
               >
-                GitHub issue
+                GitHub issue or Pull Request
               </a>
             </p>
             <div className={paCss.contribution}>
