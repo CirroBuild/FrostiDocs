@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: space-between;
   font-size: var(--font-size-big-2);
-  transform: scale(0.92);
+  transform: scale(0.8);
 }
 
 @media (max-width: 996px) {
@@ -28,7 +28,6 @@
   .integration__item {
     min-height: 150px;
     min-width: 170px;
-    transform: scale(0.8);
     font-size: var(--font-size-big-1);
   }
 }

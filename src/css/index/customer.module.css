@@ -47,7 +47,7 @@
     display: none;
   }
   .logo__item {
-    margin: 0 50px 0 50px;
+    margin: 0 10px 0 10px;
     transform: scale(0.8);
   }
 }
@@ -63,13 +63,26 @@
   margin: 0;
   display: none;
   height: auto;
-  width: 100%;
+  margin: auto;
+  width: 500px;
   justify-content: center;
   flex-wrap: wrap;
   padding: 0px;
   flex-direction: row;
   align-content: center;
   box-sizing: border-box;
+}
+
+@media (max-width: 996px) {
+  .logo__mobile {
+    width: 660px;
+  }
+}
+
+@media (max-width: 660px) {
+  .logo__mobile {
+    width: 100%;
+  }
 }
 
 .logo__mobile_container {

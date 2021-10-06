@@ -9,6 +9,7 @@ import Chevron from "@theme/Chevron"
 import CodeBlock from "@theme/CodeBlock"
 import PageLayout from "@theme/PageLayout"
 import useWindowWidth from "@theme/useWindowWidth"
+import SvgImage from "../components/SvgImage"
 
 import doCss from "../css/index/docker.module.css"
 import feCss from "../css/index/feature.module.css"
@@ -20,6 +21,23 @@ import shCss from "../css/index/showcase.module.css"
 import usCss from "../css/index/usp.module.css"
 import prCss from "../css/property.module.css"
 import seCss from "../css/section.module.css"
+
+import GithubLogo from "../assets/img/github.svg"
+import PgLogo from "../assets/img/pages/index/integrations/pg.svg"
+import GrafanaLogo from "../assets/img/pages/index/integrations/grafana.svg"
+import KafkaLogo from "../assets/img/pages/index/integrations/kafka.svg"
+import PythonLogo from "../assets/img/pages/index/integrations/python.svg"
+import PandasLogo from "../assets/img/pages/index/integrations/pandas.svg"
+import InfluxdataLogo from "../assets/img/pages/index/integrations/influxdata.svg"
+import TableauLogo from "../assets/img/pages/index/integrations/tableau.svg"
+import MetabaseLogo from "../assets/img/pages/index/integrations/metabase.svg"
+import DockerLogo from "../assets/img/pages/index/docker.svg"
+import PgwireLogo from "../assets/img/pages/index/pgwire.svg"
+import FossIcon from "../assets/img/pages/index/foss.svg"
+import SearchTimeIcon from "../assets/img/pages/index/searchTime.svg"
+import SliceTimeIcon from "../assets/img/pages/index/sliceTime.svg"
+import NavigateTimeIcon from "../assets/img/pages/index/navigateTime.svg"
+import MergeTimeIcon from "../assets/img/pages/index/mergeTime.svg"
 
 const FeatureTabs = () => {
   const [opened, setOpened] = useState<"digital" | "realtime" | "integration">(
@@ -148,67 +166,36 @@ const Integration = () => (
 
     <div className={inCss.integration}>
       <p className={inCss.integration__item}>
-        <img
-          src="/img/pages/index/integrations/pg.svg"
-          alt="Postgres logo"
-          width={90}
-          height={94}
-        />
+        <SvgImage image={<PgLogo />} title="Postgres logo" />
         Postgres
       </p>
       <p className={inCss.integration__item}>
-        <img
-          src="/img/pages/index/integrations/grafana.svg"
-          alt="Grafana logo"
-          width={84}
-          height={91}
-        />
+        <SvgImage image={<GrafanaLogo />} title="Grafana logo" />
         Grafana
       </p>
       <p className={inCss.integration__item}>
-        <img
-          src="/img/pages/index/integrations/kafka.svg"
-          alt="Kafka logo"
-          width={56}
-          height={91}
-        />
+        <SvgImage image={<KafkaLogo />} title="Kafka logo" />
         Kafka
       </p>
       <p className={inCss.integration__item}>
-        <img
-          src="/img/pages/index/integrations/python.svg"
-          alt="Python logo"
-          width={90}
-          height={89}
-        />
+        <SvgImage image={<PythonLogo />} title="Python logo" />
         Python
       </p>
       <p className={inCss.integration__item}>
-        <img
-          src="/img/pages/index/integrations/pandas.svg"
-          alt="Pandas logo"
-          width={63}
-          height={99}
-        />
+        <SvgImage image={<PandasLogo />} title="Pandas logo" />
         Pandas
       </p>
       <p className={inCss.integration__item}>
-        <img
-          src="/img/pages/index/integrations/influxdata.svg"
-          alt="Telegraf logo"
-          height={100}
-          width={99}
-        />
+        <SvgImage image={<InfluxdataLogo />} title="Telegraf logo" />
         Telegraf
       </p>
       <p className={inCss.integration__item}>
-        <img
-          src="/img/pages/index/integrations/tableau.svg"
-          alt="Tableau logo"
-          width={102}
-          height={100}
-        />
+        <SvgImage image={<TableauLogo />} title="Tableau logo" />
         Tableau
+      </p>
+      <p className={inCss.integration__item}>
+        <SvgImage image={<MetabaseLogo />} title="Metabase logo" />
+        Metabase
       </p>
     </div>
   </section>
@@ -252,15 +239,7 @@ const Top = () => {
               juCss["jumbotron__cta--github"],
             )}
             href={customFields.githubUrl}
-            icon={
-              <img
-                alt="GitHub logo"
-                height={26}
-                src="/img/github.svg"
-                title="GitHub"
-                width={26}
-              />
-            }
+            icon={<SvgImage image={<GithubLogo />} title="GitHub" />}
             variant="secondary"
           >
             GitHub
@@ -282,13 +261,9 @@ docker run -p 9000:9000 questdb/questdb`}
             rel="noopener noreferrer"
             target="_blank"
           >
-            <img
-              alt="Docker logo"
-              className={doCss.docker__icon}
-              height={60}
-              src="/img/pages/index/docker.svg"
+            <SvgImage
+              image={<DockerLogo className={doCss.docker__icon} />}
               title="Docker"
-              width={60}
             />
           </a>
         </pre>
@@ -493,13 +468,7 @@ const Console = () => {
         )}
       >
         <div className={clsx(flCss.flashy, flCss["flashy--primary"])}>
-          <img
-            alt="Postgres logo"
-            height={76}
-            src="/img/pages/index/pgwire.svg"
-            title="Postgres"
-            width={76}
-          />
+          <SvgImage image={<PgwireLogo />} title="Postgres logo" />
           <h3 className={flCss.flashy__title}>Postgres compatibility</h3>
           <p className={flCss.flashy__content}>
             Interact with QuestDB using the Postgres layer and any tool that
@@ -508,13 +477,7 @@ const Console = () => {
         </div>
 
         <div className={flCss.flashy}>
-          <img
-            alt="Antenna"
-            height={76}
-            src="/img/pages/index/foss.svg"
-            title="Open source"
-            width={76}
-          />
+          <SvgImage image={<FossIcon />} title="Antenna" />
           <h3 className={flCss.flashy__title}>Open source</h3>
           <p className={flCss.flashy__content}>
             QuestDB is open source. Follow us on GitHub. Watch the repo to get
@@ -697,12 +660,9 @@ ${mergeQuery}`}
               onClick={handleClick1}
             >
               <h3 className={shCss.showcase__header}>
-                <img
-                  alt="Magnifying glass icon"
-                  className={shCss.showcase__icon}
-                  height={18}
-                  src="/img/pages/index/searchTime.svg"
-                  width={19}
+                <SvgImage
+                  image={<SearchTimeIcon className={shCss.showcase__icon} />}
+                  title="Magnifying glass icon"
                 />
                 Search Time
               </h3>
@@ -718,12 +678,9 @@ ${mergeQuery}`}
               onClick={handleClick2}
             >
               <h3 className={shCss.showcase__header}>
-                <img
-                  alt="Knife icon"
-                  className={shCss.showcase__icon}
-                  height={22}
-                  src="/img/pages/index/sliceTime.svg"
-                  width={23}
+                <SvgImage
+                  image={<SliceTimeIcon className={shCss.showcase__icon} />}
+                  title="Knife icon"
                 />
                 Slice Time
               </h3>
@@ -739,12 +696,9 @@ ${mergeQuery}`}
               onClick={handleClick3}
             >
               <h3 className={shCss.showcase__header}>
-                <img
-                  alt="Indication arrow icon"
-                  className={shCss.showcase__icon}
-                  height={18}
-                  src="/img/pages/index/navigateTime.svg"
-                  width={19}
+                <SvgImage
+                  image={<NavigateTimeIcon className={shCss.showcase__icon} />}
+                  title="Indication arrow icon"
                 />
                 Navigate Time
               </h3>
@@ -760,12 +714,9 @@ ${mergeQuery}`}
               onClick={handleClick4}
             >
               <h3 className={shCss.showcase__header}>
-                <img
-                  alt="Two overlapping squares"
-                  className={shCss.showcase__icon}
-                  height={19}
-                  src="/img/pages/index/mergeTime.svg"
-                  width={19}
+                <SvgImage
+                  image={<MergeTimeIcon className={shCss.showcase__icon} />}
+                  title="Two overlapping squares"
                 />
                 Merge Time
               </h3>

@@ -34,7 +34,7 @@
   background-color: var(--palette-pink-darker);
 }
 
-.button--icon img {
+.button--icon img, .button--icon svg {
   margin-right: 0.5rem;
 }
 

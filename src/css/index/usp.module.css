@@ -53,6 +53,6 @@
 
   .usp__illustration {
     margin-bottom: 2rem;
-    align-self: center;
+    align-self: flex-start;
   }
 }
