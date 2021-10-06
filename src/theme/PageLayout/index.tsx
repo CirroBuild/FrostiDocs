@@ -17,6 +17,7 @@ export type Props = {
   altFooter: boolean
   canonical?: string
   flex: boolean
+  replaceTitle?: boolean
 } & ComponentProps<typeof Layout>
 
 const PageLayout = ({
@@ -30,6 +31,7 @@ const PageLayout = ({
   noFooter,
   permalink,
   title,
+  replaceTitle = false,
   wrapperClassName,
 }: Props) => {
   const { siteConfig } = useDocusaurusContext()
@@ -38,7 +40,13 @@ const PageLayout = ({
     themeConfig: { image: defaultImage },
     url: siteUrl,
   } = siteConfig
-  const metaTitle = title != null ? `${title} | ${siteTitle}` : siteTitle
+
+  const metaTitle = replaceTitle
+    ? title
+    : title != null
+    ? `${title} | ${siteTitle}`
+    : siteTitle
+
   const metaImage = image ?? defaultImage
   const metaImageUrl = useBaseUrl(metaImage, { absolute: true })
   const isBlogPost =
@@ -74,7 +82,10 @@ const PageLayout = ({
             <meta property="og:description" content={description} />
           )}
           <meta name="twitter:title" content={metaTitle} />
-          <meta name="twitter:image:alt" content={`Image for "${metaTitle}"`} />
+          <meta
+            name="twitter:image:alt"
+            content={`Image for "${String(metaTitle)}"`}
+          />
           {keywords != null && keywords.length > 0 && (
             <meta
               name="keywords"

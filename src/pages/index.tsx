@@ -733,13 +733,14 @@ ${mergeQuery}`}
 }
 
 const Home = () => {
-  const title = "QuestDB"
+  const title = "QuestDB | Time series data, faster"
 
   return (
     <PageLayout
       canonical=""
       description={customFields.description}
       title={title}
+      replaceTitle
     >
       <Top />
       <Customers nbElements={6} />
