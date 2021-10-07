@@ -322,7 +322,7 @@ const Community = () => {
               </p>
               <p className={`${paCss.default_text} ${paCss.mb5}`}>
                 Send an email to{" "}
-                <a className={paCss.link_item} href="mailto: swag@questdb.io">
+                <a className={paCss.link_item} href="mailto:swag@questdb.io">
                   swag@questdb.io
                 </a>{" "}
                 with the following information:
