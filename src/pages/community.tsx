@@ -190,18 +190,18 @@ const Community = () => {
                 </a>
               </p>
               <p className={paCss.property}>
-                You{" "}
+                You have{" "}
                 <a
                   className={paCss.link_item}
                   href={customFields.stackoverflowUrl}
                 >
-                  watch our Stack Overflow tag
+                  watched our Stack Overflow tag
                 </a>
               </p>
               <p className={paCss.property}>
-                You have joined our{" "}
+                You have{" "}
                 <a className={paCss.link_item} href={customFields.slackUrl}>
-                  Community Slack
+                  joined our Community Slack
                 </a>
               </p>
               <div className={paCss.custom_box}>
@@ -209,7 +209,7 @@ const Community = () => {
                   What you get:
                 </p>
                 <p className={paCss.second_text}>
-                  Stickers, pins, bottles and virtual swag{" "}
+                  QuestDB stickers, soft touch pen{" "}
                   <span className={paCss.pink__color}>(new!)</span>
                 </p>
               </div>
@@ -291,7 +291,9 @@ const Community = () => {
               <p className={`${paCss.default_text} ${paCss.mb5}`}>
                 What you get:
               </p>
-              <p className={paCss.second_text}>High-quality QuestDB t-shirt</p>
+              <p className={paCss.second_text}>
+                Stickers, high-quality QuestDB T-shirt
+              </p>
             </div>
           </div>
         </div>
@@ -321,28 +323,16 @@ const Community = () => {
                 How can you claim swag?
               </p>
               <p className={`${paCss.default_text} ${paCss.mb5}`}>
-                Send an email to{" "}
-                <a className={paCss.link_item} href="mailto:swag@questdb.io">
-                  swag@questdb.io
+                Fill out the{" "}
+                <a
+                  className={paCss.link_item}
+                  href="https://forms.gle/X6ze4mJqaUC6odaEA"
+                >
+                  swag request form
                 </a>{" "}
-                with the following information:
+                with required information. And our team will validate your
+                request!
               </p>
-              <p className={paCss.list__description}>
-                Subject: Level (1/2/3) Swag!
-              </p>
-              <p className={paCss.list__description}>
-                Your message must contain:
-              </p>
-              <div className={paCss.message__contents}>
-                <p className={paCss.message__content}>First name & last name</p>
-                <p className={paCss.message__content}>A shipping address</p>
-                <p className={paCss.message__content}>
-                  Shirt size (if applicable)
-                </p>
-                <p className={paCss.message__content}>
-                  Claim details e.g. (GitHub username, relevant URLs)
-                </p>
-              </div>
             </div>
           </div>
           <div className={`${paCss.half__section} ${paCss.section_center}`}>
