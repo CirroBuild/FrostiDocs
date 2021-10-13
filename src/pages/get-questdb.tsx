@@ -100,7 +100,9 @@ const GetQuestdbPage = () => {
   const title = "Download QuestDB"
   const description =
     "Download QuestDB, an open source time series SQL database for fast ingestion and queries"
-  const { release } = usePluginData<{ release: Release }>("fetch-release")
+  const { release } = usePluginData<{ release: Release }>(
+    "fetch-latest-release",
+  )
   const [os, setOs] = useState<Os | undefined>()
   const [releaseDate, setReleaseDate] = useState(
     format(new Date(release.published_at), "MMMM M, yyyy"),
@@ -261,10 +263,9 @@ brew install questdb`}
             )}
           >
             You can find below download links for the latest version of QuestDB
-            ({customFields.version}). Once your download is finished, you can
-            check our documentation for{" "}
-            <a href="/docs/get-started/docker/">Docker</a>, the{" "}
-            <a href="/docs/get-started/binaries/">binaries</a> or{" "}
+            ({release.name}). Once your download is finished, you can check our
+            documentation for <a href="/docs/get-started/docker/">Docker</a>,
+            the <a href="/docs/get-started/binaries/">binaries</a> or{" "}
             <a href="/docs/get-started/homebrew/">Homebrew</a> to get started.
           </p>
 
@@ -283,7 +284,7 @@ brew install questdb`}
               })}
             >
               Latest Release:&nbsp;
-              <span className={ctCss.cta__version}>{customFields.version}</span>
+              <span className={ctCss.cta__version}>{release.name}</span>
               &nbsp;({releaseDate})
             </p>
             {os != null && os !== "macos" && assets[os] && (
@@ -416,7 +417,7 @@ helm install my-questdb questdb/questdb --version ${customFields.helmVersion}`}
             {`<dependency>
   <groupId>org.questdb</groupId>
   <artifactId>questdb</artifactId>
-  <version>${customFields.version}</version>
+  <version>${release.name}</version>
 </dependency>`}
           </CodeBlock>
           <p className={biCss.binary__docs}>
@@ -437,7 +438,7 @@ helm install my-questdb questdb/questdb --version ${customFields.helmVersion}`}
           title="Gradle"
         >
           <CodeBlock className="language-shell">
-            {`implementation 'org.questdb:questdb:${customFields.version}'`}
+            {`implementation 'org.questdb:questdb:${release.name}'`}
           </CodeBlock>
           <div style={{ height: "2.75rem" }} />
           <p className={biCss.binary__docs}>
@@ -483,7 +484,7 @@ helm install my-questdb questdb/questdb --version ${customFields.helmVersion}`}
               rel="noopener noreferrer"
               target="_blank"
             >
-              v{customFields.version} CHANGELOG
+              v{release.name} CHANGELOG
             </a>{" "}
             for information on the latest release.
           </p>

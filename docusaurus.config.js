@@ -40,7 +40,7 @@ const config = {
   projectName: "questdb",
   customFields: customFields,
   plugins: [
-    require.resolve("./plugins/fetch-release/index"),
+    require.resolve("./plugins/fetch-latest-release/index"),
     require.resolve("./plugins/webpack-ts/index"),
     require.resolve("./plugins/optimize/index"),
     require.resolve("./plugins/manifest/index"),

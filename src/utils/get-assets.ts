@@ -6,6 +6,7 @@ export type Release = {
     size: number
   }[]
   html_url: string
+  name: string
   published_at: string
 }
 /* eslint-enable */
