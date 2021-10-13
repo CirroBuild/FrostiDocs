@@ -81,7 +81,7 @@ module.exports = {
     "object-shorthand": ["error", "always"],
     "no-var": ["error"],
     "no-console": ["warn", { allow: ["warn", "error", "info"] }],
-    "prettier/prettier": ["error"],
+    "prettier/prettier": ["warn"],
   },
   settings: {
     react: { version: "detect" },

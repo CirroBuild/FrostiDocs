@@ -11,7 +11,8 @@
     "build": "USE_SIMPLE_CSS_MINIFIER=true PWA_SW_CUSTOM= docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
-    "serve": "docusaurus serve"
+    "serve": "docusaurus serve",
+    "prepare": "node ./prepare.js"
   },
   "dependencies": {
     "@docusaurus/core": "2.0.0-alpha.75",
@@ -90,7 +91,10 @@
     }
   },
   "lint-staged": {
-    "static/img/**/*": "scripts/check-size-hook.sh"
+    "static/img/**/*": "scripts/check-size-hook.sh",
+    "**/**/*.{js.jsx,js,es6,jsx,ts,tsx,md,yml}": [
+      "prettier --config ./prettier.config.js --write"
+    ]
   },
   "resolutions": {
     "sharp": "0.26.3"
