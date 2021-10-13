@@ -28,7 +28,7 @@ const CareersPage = () => {
             <h1 className={caCss["card__title--important"]}>Careers</h1>
             <p className={caCss.card__content}>
               We help developers handle explosive amounts of data while getting
-              them started in just a few minutes with the simplest and most
+              them started in just a few minutes with the fastest and most
               accessible time series database.
             </p>
             <Button className={caCss.card__cta} onClick={handleClick}>
@@ -70,24 +70,24 @@ const CareersPage = () => {
               We hire talented and passionate people who share our mission to
               empower developers to solve their problems with data. We are
               building breakthrough technology to power the infrastructure of
-              tomorrow.
+              tomorrow
             </p>
             <ul className={liCss.list}>
               <li className={liCss.list__item}>
                 We are a company with thousands of users; our mission is to
-                empower them.
+                empower them
               </li>
               <li className={liCss.list__item}>
                 We invest in a culture that promotes ownership, autonomy and
-                independent thinking.
+                independent thinking
               </li>
               <li className={liCss.list__item}>
                 We have transparent leadership and value employees’ strategic
-                inputs.
+                inputs
               </li>
               <li className={liCss.list__item}>
                 Our team is ambitious and tackles the most difficult problems at
-                the deepest data infrastructure layer.
+                the deepest data infrastructure layer
               </li>
             </ul>
           </div>
@@ -99,8 +99,8 @@ const CareersPage = () => {
             </h2>
           </div>
           <div className={clsx(caCss.card__side, caCss["card__side--center"])}>
-            <a className={joCss.job} href="head-of-talent/">
-              <h3 className={joCss.job__title}>Head of Talent</h3>
+            <a className={joCss.job} href="backend-software-engineer/">
+              <h3 className={joCss.job__title}>Core Database Engineers</h3>
               <p className={joCss.job__location}>Remote</p>
               <span className={joCss.job__cta}>
                 Details&nbsp;
@@ -113,7 +113,20 @@ const CareersPage = () => {
               </span>
             </a>
             <a className={joCss.job} href="senior-cloud-engineer/">
-              <h3 className={joCss.job__title}>Senior Cloud Engineer</h3>
+              <h3 className={joCss.job__title}>Cloud Engineers</h3>
+              <p className={joCss.job__location}>Remote</p>
+              <span className={joCss.job__cta}>
+                Details&nbsp;
+                <img
+                  alt="Right arrow"
+                  height={20}
+                  src="/img/pages/careers/arrowRight.svg"
+                  width={20}
+                />
+              </span>
+            </a>
+            <a className={joCss.job} href="customer-success-engineer/">
+              <h3 className={joCss.job__title}>Customer Success Engineers</h3>
               <p className={joCss.job__location}>Remote</p>
               <span className={joCss.job__cta}>
                 Details&nbsp;
@@ -126,20 +139,9 @@ const CareersPage = () => {
               </span>
             </a>
             <a className={joCss.job} href="developer-relations-engineer/">
-              <h3 className={joCss.job__title}>Developer Relations Engineer</h3>
-              <p className={joCss.job__location}>Remote</p>
-              <span className={joCss.job__cta}>
-                Details&nbsp;
-                <img
-                  alt="Right arrow"
-                  height={20}
-                  src="/img/pages/careers/arrowRight.svg"
-                  width={20}
-                />
-              </span>
-            </a>
-            <a className={joCss.job} href="backend-software-engineer/">
-              <h3 className={joCss.job__title}>Software Engineer, Backend</h3>
+              <h3 className={joCss.job__title}>
+                Developer Relations Engineers
+              </h3>
               <p className={joCss.job__location}>Remote</p>
               <span className={joCss.job__cta}>
                 Details&nbsp;
@@ -152,9 +154,33 @@ const CareersPage = () => {
               </span>
             </a>
             <a className={joCss.job} href="front-end-engineer/">
-              <h3 className={joCss.job__title}>
-                Lead Software Engineer, Frontend
-              </h3>
+              <h3 className={joCss.job__title}>Frontend Engineers</h3>
+              <p className={joCss.job__location}>Remote</p>
+              <span className={joCss.job__cta}>
+                Details&nbsp;
+                <img
+                  alt="Right arrow"
+                  height={20}
+                  src="/img/pages/careers/arrowRight.svg"
+                  width={20}
+                />
+              </span>
+            </a>
+            <a className={joCss.job} href="head-of-talent/">
+              <h3 className={joCss.job__title}>People & Talent Acquisition</h3>
+              <p className={joCss.job__location}>Remote</p>
+              <span className={joCss.job__cta}>
+                Details&nbsp;
+                <img
+                  alt="Right arrow"
+                  height={20}
+                  src="/img/pages/careers/arrowRight.svg"
+                  width={20}
+                />
+              </span>
+            </a>
+            <a className={joCss.job} href="technical-content-writer/">
+              <h3 className={joCss.job__title}>Technical Content Writers</h3>
               <p className={joCss.job__location}>Remote</p>
               <span className={joCss.job__cta}>
                 Details&nbsp;
@@ -184,24 +210,33 @@ const CareersPage = () => {
             />
           </div>
           <div className={caCss.card__side}>
-            <h2 className={caCss.card__title}>About QuestDB</h2>
-            <p className={caCss.card__content}>
-              We have built the fastest open source time series database from
-              the ground up to offer breakthrough performance for real-time
-              analytics using SQL.
-            </p>
-            <p className={caCss.card__content}>
-              We bring experience and technical approaches from low-latency
-              trading to leverage real-time data processing in various use cases
-              and industries.
-            </p>
-            <p className={caCss.card__content}>
-              Our users deploy QuestDB to make time series analysis fast,
-              efficient, and convenient in financial services, IoT, application
-              monitoring, and machine learning. We are a remote-first company
-              based in London and backed by leading venture capital firms and Y
-              Combinator.
-            </p>
+            <h2 className={caCss.card__title}>What we offer</h2>
+            <ul className={liCss.list}>
+              <li className={liCss.list__item}>
+                Generous equity options package
+              </li>
+              <li className={liCss.list__item}>Flexible working hours</li>
+              <li className={liCss.list__item}>100% remote</li>
+              <li className={liCss.list__item}>
+                Freedom of choice for your technical equipment
+              </li>
+              <li className={liCss.list__item}>
+                Wonderful, highly qualified colleagues
+              </li>
+              <li className={liCss.list__item}>
+                Truly international: more than 10 different nationalities
+              </li>
+              <li className={liCss.list__item}>
+                A transparent, collaborative & inclusive culture
+              </li>
+              <li className={liCss.list__item}>
+                Exciting opportunities for career progression as we grow
+              </li>
+              <li className={liCss.list__item}>
+                Little to zero controls combined with autonomous work where you
+                set your own pace in a collaborative environment
+              </li>
+            </ul>
           </div>
         </div>
       </section>

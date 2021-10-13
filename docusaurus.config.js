@@ -150,6 +150,10 @@ const config = {
               label: "Videos",
               to: customFields.videosUrl,
             },
+            {
+              label: "Careers",
+              to: "/careers/"
+            }
           ],
         },
         {
