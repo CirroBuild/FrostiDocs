@@ -147,13 +147,9 @@ const config = {
               to: "/tutorial",
             },
             {
-              label: "Videos",
-              to: customFields.videosUrl,
-            },
-            {
               label: "Careers",
-              to: "/careers/"
-            }
+              to: "/careers/",
+            },
           ],
         },
         {
@@ -245,12 +241,12 @@ const config = {
               to: "/blog/",
             },
             {
-              label: "Videos",
-              to: customFields.videosUrl,
-            },
-            {
               label: "Roadmap",
               href: `${customFields.githubUrl}/projects`,
+            },
+            {
+              label: "Videos",
+              to: customFields.videosUrl,
             },
           ],
         },
