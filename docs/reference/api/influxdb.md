@@ -26,12 +26,12 @@ message format can be found in the
 table_name,tagset fieldset timestamp
 ```
 
-| Element      | Definition                                                                                                                          |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `table_name` | Name of the table where QuestDB will write data.                                                                                    |
-| `tagset`     | Array of string key-value pairs separated by commas that represent the reading's associated metadata                                |
-| `fieldset`   | Array of key-value pairs separated by commas that represent readings. The keys are string, values can be string, numeric or boolean |
-| `timestamp`  | UNIX timestamp. By default in nanoseconds. Can be changed in the configuration                                                      |
+| Element      | Definition                                                                                                                                     |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `table_name` | Name of the table where QuestDB will write data.                                                                                               |
+| `tagset`     | Array of string key-value pairs separated by commas that represent the reading's associated metadata                                           |
+| `fieldset`   | Array of key-value pairs separated by commas that represent readings. The keys are string, values can be string, numeric, boolean or timestamp |
+| `timestamp`  | UNIX timestamp. By default in nanoseconds. Can be changed in the configuration                                                                 |
 
 ### Behaviour
 

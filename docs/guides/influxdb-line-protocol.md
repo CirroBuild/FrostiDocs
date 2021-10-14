@@ -64,7 +64,7 @@ In the context of QuestDB, the elements of an ILP message are parsed as follows:
 table,symbol=symbolValue fieldKey="fieldValue" 1465839830100399000
 ----- ------------------ --------------------- -------------------
   |          |                     |                   |
-Table     Symbols         String/Numeric/Bool      Timestamp
+Table     Symbols        String/Num/Bool/Time      Timestamp
 ```
 
 Adding multiple symbol and numeric values to messages is done by a
@@ -164,6 +164,9 @@ Spaces and commas do not require an escaping backslash in the field value for
 _sensor_data,_sensor="berlin\ 2" _value=12.4,string="sensor data, rev 1"
 ```
 
+InfluxDB does not support timestamp field values while QuestDB supports
+them as a protocol extension.
+
 ## Data types
 
 Field values may be parsed by QuestDB as one of the following types:
@@ -172,6 +175,7 @@ Field values may be parsed by QuestDB as one of the following types:
 - `long`
 - `boolean`
 - `string`
+- `timestamp` (ILP extension)
 
 All subsequent field values must match the type of the first row written to a
 given column.
@@ -232,6 +236,19 @@ The following example adds a `boolean` type column called `warning`:
 ```bash
 sensors,location=london temperature=22,warning=false
 ```
+
+### Timestamp
+
+Timestamp fields are an ILP protocol extension available in QuestDB. To store
+timestamp values, a trailing `t` must follow the timestamp value.
+
+The following example adds a `timestamp` type column called `last_seen`:
+
+```bash
+sensors,location=london temperature=22,last_seen=1632598871000000t
+```
+
+QuestDB handles `timestamp` field values as a UNIX timestamp in nanoseconds.
 
 ## QuestDB listener configuration
 
