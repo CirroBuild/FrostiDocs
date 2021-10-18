@@ -162,8 +162,7 @@ func checkErr(err error) {
 <TabItem value="java">
 
 ```java
-import io.questdb.cutlass.line.LineProtoSender;
-import io.questdb.cutlass.line.tcp.LineTCPProtoSender;
+import io.questdb.cutlass.line.LineTcpSender;
 import io.questdb.network.Net;
 import io.questdb.std.Os;
 
@@ -187,7 +186,7 @@ public class LineTCPSenderMain {
         int port = 9009;
         int bufferCapacity = 256 * 1024;
 
-        try (LineProtoSender sender = new LineTCPProtoSender(Net.parseIPv4(hostIPv4), port, bufferCapacity)) {
+        try (LineTcpSender sender = new LineTcpSender(Net.parseIPv4(hostIPv4), port, bufferCapacity)) {
             sender
                     .metric("trades")
                     .tag("name", "test_ilp1")

@@ -326,12 +326,12 @@ caching of records pointless.
 
 QuestDB library provides fast and efficient way of sending line protocol
 messages. Sender implementation entry point is
-`io.questdb.cutlass.line.udp.LineProtoSender`, it is fully zero-GC and has
+`io.questdb.cutlass.line.udp.LineUdpSender`, it is fully zero-GC and has
 latency in a region of 200ns per message.
 
 ### Get started
 
-- **Step 1:** Create an instance of `LineProtoSender`.
+- **Step 1:** Create an instance of `LineUdpSender`.
 
 | Arguments              | Description                                                                                                                  |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -341,7 +341,7 @@ latency in a region of 200ns per message.
 | `ttl`                  | UDP packet TTL. Set this number appropriate to how many VLANs your messages have to traverse before reaching the destination |
 
 ```java title="Example"
-LineProtoSender sender = new LineProtoSender(0, Net.parseIPv4("232.1.2.3"), 9009, 110, 2);
+LineUdpSender sender = new LineUdpSender(0, Net.parseIPv4("232.1.2.3"), 9009, 110, 2);
 ```
 
 - **Step 2:** Create `entries` by building each entry's tagset and fieldset.
@@ -379,7 +379,7 @@ This example sends multicast messages to `232.1.2.3:9009`. In this mode multiple
 QuestDB instances can receive the same message.
 
 ```java title="Sending InfluxDB line protocol"
-LineProtoSender sender = new LineProtoSender(0, Net.parseIPv4("232.1.2.3"), 9009, 1024, 2);
+LineUdpSender sender = new LineUdpSender(0, Net.parseIPv4("232.1.2.3"), 9009, 1024, 2);
 sender.metric("readings").tag("city", "London").tag("by", "quest").field("temp", 3400).$(Os.currentTimeMicros());
 sender.metric("readings").tag("city", "London").tag("by", "quest").field("temp", 3400).$(Os.currentTimeMicros());
 sender.metric("readings").tag("city", "London").tag("by", "quest").field("temp", 3400).$(Os.currentTimeMicros());
