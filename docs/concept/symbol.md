@@ -51,4 +51,4 @@ documentation. Further details on indexes are described on the
 - Columns defined as `symbol` types support indexing.
 - Users may configure QuestDB to store `symbol` types in memory for improved
   query speed (see the `cairo.default.symbol.cache.flag`
-  [configuration option](/docs/reference/configuration)).
+  [configuration option](/docs/reference/configuration/)).

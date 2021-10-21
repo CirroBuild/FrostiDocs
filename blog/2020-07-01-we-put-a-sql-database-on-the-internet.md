@@ -110,21 +110,22 @@ It was not disappointing!
 > performance. Even after decades in high performance computing, we are still
 > learning something new every day.
 >
-> [1][https://questdb.io/blog/2020/04/02/using-simd-to-aggregate-billions-of-rows-per-second](/blog/2020/04/02/using-simd-to-aggregate-billions-of-rows-per-second)
-
-[2][https://www.agner.org/optimize/vectorclass.pdf](https://www.agner.org/optimize/vectorclass.pdf)
-
-[3][https://www.youtube.com/watch?v=nchmeumjzf4](https://www.youtube.com/watch?v=ncHmEUmJZf4)
-
-[4][https://github.com/abseil/abseil-cpp](https://github.com/abseil/abseil-cpp)
-
-[5][https://github.com/questdb/questdb/blob/master/core/src/main](https://github.com/questdb/questdb/blob/master/core/src/main)...
-
-[6][https://github.com/questdb/questdb/blob/master/core/src/main](https://github.com/questdb/questdb/blob/master/core/src/main)...
-
-[7][https://questdb.io/blog/2020/03/15/interthread](/blog/2020/03/15/interthread)
-
-[8][https://github.com/questdb/questdb](https://github.com/questdb/questdb)
+> [1]
+> https://questdb.io/blog/2020/04/02/using-simd-to-aggregate-billions-of-rows-per-second
+>
+> [2] https://www.agner.org/optimize/vectorclass.pdf
+>
+> [3] https://www.youtube.com/watch?v=nchmeumjzf4
+>
+> [4] https://github.com/abseil/abseil-cpp
+>
+> [5] https://github.com/questdb/questdb/blob/master/core/src/main
+>
+> [6] https://github.com/questdb/questdb/blob/master/core/src/main
+>
+> [7] https://questdb.io/blog/2020/03/15/interthread
+>
+> [8] https://github.com/questdb/questdb
 
 And then we posted the link to the live database.
 

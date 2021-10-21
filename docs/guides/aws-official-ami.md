@@ -41,7 +41,7 @@ The server configuration file is at the following location on the AMI:
 ```
 
 For details on the server properties and using this file, see the
-[server configuration documentation](https://questdb.io/docs/reference/configuration).
+[server configuration documentation](/docs/reference/configuration/).
 
 The default ports used by QuestDB interfaces are as follows:
 
@@ -75,7 +75,7 @@ The credentials for InfluxDB line protocol can be found at
 ```
 
 For details on authentication using this protocol, see the
-[InfluxDB line protocol authentication guide](https://questdb.io/docs/develop/authenticate).
+[InfluxDB line protocol authentication guide](/docs/develop/authenticate/).
 
 ### Disabling authentication
 

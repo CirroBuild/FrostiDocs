@@ -81,7 +81,7 @@ the inputs in more detail:
 
 QuestDB expects influx line protocol messages over TCP on port `9009`. To change
 the default port, see the
-[InfluxDB line protocol (TCP)](/docs/reference/configuration#influxdb-line-protocol-tcp)
+[InfluxDB line protocol (TCP)](/docs/reference/configuration/#influxdb-line-protocol-tcp)
 section of the server configuration page.
 
 Create a new file named `questdb_tcp.conf` in one of the locations Telegraf can

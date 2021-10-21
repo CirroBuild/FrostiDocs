@@ -58,8 +58,8 @@ efficiency on repeated queries:
 ```
 
 The documentation pages have more complete code examples which show how to
-[insert data](/docs/develop/insert-data#postgres-compatibility) and
-[query Data](/docs/develop/query-data#postgres-compatibility) using popular
+[insert data](/docs/develop/insert-data/#postgres-compatibility) and
+[query Data](/docs/develop/query-data/#postgres-compatibility) using popular
 tools and frameworks in Node, Go, Rust, Java and Python.
 
 ## Adding Grafana alerting
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS my_table (ts TIMESTAMP, value INT) timestamp(ts);
 ```
 
 Full examples using this statement in multiple languages can be found on the
-[Insert data](/docs/develop/insert-data#postgres-compatibility) page.
+[Insert data](/docs/develop/insert-data/#postgres-compatibility) page.
 
 ## Error prevention when disk full
 

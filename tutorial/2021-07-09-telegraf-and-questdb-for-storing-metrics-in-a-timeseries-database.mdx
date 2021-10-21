@@ -36,16 +36,15 @@ application data or even filesystem changes.
 Although Telegraf can collect an exceptional amount and variety of data, we need
 to store and visualize this information at some point. Considering that we
 collect the metrics over time, a convenient way to store time series data is
-using a time series database. We'll use [QuestDB](https://questdb.io/) for
-ingestion and perform some basic visualization for this tutorial.
+using a time series database. We'll use QuestDB for ingestion and perform some
+basic visualization for this tutorial.
 
 ## Multiple telegraf clients and out-of-order data
 
 When you use multiple clients, it can happen that data coming from various
 sources simultaneously can arrive out-of-order by time. QuestDB used to have the
 downside of dropping this kind of out-of-order data. The QuestDB team solved
-this as of
-[the 6.0 release](https://questdb.io/blog/2021/04/20/questdb-release-6-0-alpha),
+this as of [the 6.0 release](/blog/2021/04/20/questdb-release-6-0-alpha/),
 meaning there is no need to apply any workarounds like sorting data ourselves
 before inserting.
 
@@ -120,8 +119,7 @@ synthetic data. From the QuestDB docs:
 
 > QuestDB exposes a reader for InfluxDB line protocol which allows using QuestDB
 > as a drop-in replacement for InfluxDB and other systems which implement this
-> protocol. –
-> [questdb.io](https://questdb.io/docs/guides/influxdb-line-protocol/)
+> protocol. – [questdb.io](/docs/guides/influxdb-line-protocol/)
 
 We will utilize InfluxDB line protocol to send data via Telegraf to QuestDB
 directly. The next step is to create some Droplets, start Telegraf agents, and
@@ -337,7 +335,7 @@ database like QuestDB for reports and visualization.
 
 For next steps, we can experiment with some of the additional integrations that
 Telegraf supports to grab insights from other applications and
-[use the Grafana integration that QuestDB offers](https://questdb.io/tutorial/2020/10/19/grafana/)
+[use the Grafana integration that QuestDB offers](/tutorial/2020/10/19/grafana/)
 to set up more detailed dashboards for visualization or even alerting and
 notifications.
 

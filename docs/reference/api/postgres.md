@@ -25,12 +25,12 @@ QuestDB. Some features that exists for Postgres do not apply to QuestDB.
 Examples which demonstrate how to use Postgres clients in a number of different
 languages can be found on the following pages:
 
-- [Connect](/docs/develop/connect#postgres-compatibility) shows how to create a
+- [Connect](/docs/develop/connect/#postgres-compatibility) shows how to create a
   connection to QuestDB using Postgres
-- [Insert data](/docs/develop/insert-data#postgres-compatibility) demonstrates
+- [Insert data](/docs/develop/insert-data/#postgres-compatibility) demonstrates
   how to use paramaterized queries and prepared statements to insert data
-- [Query data](/docs/develop/query-data#postgres-compatibility) shows how to run
-  queries against tables
+- [Query data](/docs/develop/query-data/#postgres-compatibility) shows how to
+  run queries against tables
 
 ### List of unsupported features
 

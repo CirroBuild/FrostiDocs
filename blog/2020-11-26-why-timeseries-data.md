@@ -130,14 +130,14 @@ Further, we summarise how QuestDB addresses those needs.
   and requires very fast aggregation functions to be computed live. In order to
   facilitate such queries, QuestDB built a native extension to ANSI SQL with the
   function [SAMPLE BY](/docs/reference/sql/sample-by/#examples). Note: our
-  [Grafana tutorial](/tutorial/2020/10/19/grafana) shows downsampling examples.
+  [Grafana tutorial](/tutorial/2020/10/19/grafana/) shows downsampling examples.
 
 - **Interval search**
 
   Fast retrieving data over arbitrary intervals. For example, zooming into a
   specific timeframe preceding a monitoring alert to better understand the
   underlying cause in real-time. QuestDB’s
-  [WHERE](/docs/reference/sql/where#symbol-and-string) clause for timestamp
+  [WHERE](/docs/reference/sql/where/#symbol-and-string) clause for timestamp
   search is fast and efficient but requires a designated timestamp.
 
 - **Time series joins**
@@ -167,7 +167,7 @@ Further, we summarise how QuestDB addresses those needs.
 
   Being able to ingest unstructured time-series data succinctly is a must.
   QuestDB supports the
-  [InfluxDB line protocol](/tutorial/2020/07/22/influxdb-lp-on-tcp) that is the
+  [InfluxDB line protocol](/tutorial/2020/07/22/influxdb-lp-on-tcp/) that is the
   industry standard for observability use cases, with the ability to create new
   columns on the fly without specifying a schema ahead of time.
 

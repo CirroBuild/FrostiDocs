@@ -280,7 +280,7 @@ Note that conversion of ISO timestamp format is optional. QuestDB automatically
 converts `STRING` to `TIMESTAMP` if it is partial or full form of
 `yyyy-MM-ddTHH:mm:ss.SSSUUU` or `yyyy-MM-dd HH:mm:ss.SSSUUU` with valid time
 offset `+01:00` or `Z`. See more examples at
-[Native timestamp format](/docs/reference/sql/where#native-timestamp-format)
+[Native timestamp format](/docs/reference/sql/where/#native-timestamp-format)
 
 ## to_date
 

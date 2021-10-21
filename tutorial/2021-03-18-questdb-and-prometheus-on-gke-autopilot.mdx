@@ -138,7 +138,7 @@ At this point, we have a healthy, running instance of QuestDB. However, without
 inspecting the application logs, there is no easy way to determine the overall
 system health and grab metrics from QuestDB. For performance reasons, QuestDB
 team decided to decouple the REST endpoint from its min
-[HTTP server that holds a simple health status](https://questdb.io/docs/operations/health-monitoring/)
+[HTTP server that holds a simple health status](/docs/operations/health-monitoring/)
 on port 9003. This port is currently not exposed via the Helm chart, so the
 `StatefulSet` and `Service` sections need to be changed to allow probes to
 periodically check this endpoint.

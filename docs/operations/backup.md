@@ -50,9 +50,8 @@ documentation.
 cairo.sql.backup.root=/path/to/backup/dir
 ```
 
-A backup can then be triggered via
-[SQL command](https://questdb.io/docs/reference/sql/backup) and the backup is
-complete as soon as the SQL query has finished executing:
+A backup can then be triggered via [SQL command](/docs/reference/sql/backup/)
+and the backup is complete as soon as the SQL query has finished executing:
 
 ```questdb-sql
 -- backup whole database

@@ -58,4 +58,4 @@ curl -v http://127.0.0.1:9003/status
 ## Configuration
 
 The configuration section for the `min` HTTP server is available in the
-[minimal HTTP server reference](/docs/reference/configuration#minimal-http-server).
+[minimal HTTP server reference](/docs/reference/configuration/#minimal-http-server).

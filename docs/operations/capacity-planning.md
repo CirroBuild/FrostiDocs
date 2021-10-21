@@ -121,7 +121,7 @@ well as affinity to pin processes to specific CPUs by ID. Shared worker threads
 service SQL execution subsystems and, in the default configuration, every other
 subsystem. With the exception of SQL, every other subsystem can be configured to
 use their own worker threads. More information on these settings can be found on
-the [shared workers](/docs/reference/configuration#shared-worker) configuration
+the [shared workers](/docs/reference/configuration/#shared-worker) configuration
 page.
 
 ### Writer page size

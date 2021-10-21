@@ -14,7 +14,7 @@ protocol packets both over [TCP](#tcp-receiver) and [UDP](#udp-receiver).
 This page describes InfluxDB line protocol APIs. More details on the protocol,
 including including practical hints for understanding and working with the
 message format can be found in the
-[InfluxDB line protocol guide](/docs/guides/influxdb-line-protocol).
+[InfluxDB line protocol guide](/docs/guides/influxdb-line-protocol/).
 
 :::
 

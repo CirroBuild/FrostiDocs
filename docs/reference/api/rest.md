@@ -37,7 +37,7 @@ If the data follows a uniform pattern, the number of lines which are analyzed
 for schema detection can be reduced to improve performance during uploads using
 the `http.text.analysis.max.lines` key. Usage of this setting is described in
 the
-[HTTP server configuration](/docs/reference/configuration#minimal-http-server)
+[HTTP server configuration](/docs/reference/configuration/#minimal-http-server)
 documentation.
 
 :::
@@ -280,7 +280,7 @@ parsing the timestamp column:
 The following example imports a file which contains out-of-order records. The
 `timestamp` and `partitionBy` parameters **must be provided** for commit lag and
 max uncommitted rows to have any effect. For more information on these
-parameters, see [the commit lag guide](/docs/guides/out-of-order-commit-lag).
+parameters, see [the commit lag guide](/docs/guides/out-of-order-commit-lag/).
 
 ```shell
 curl -F data=@weather.csv \
