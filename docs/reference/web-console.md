@@ -5,8 +5,8 @@ description:
   data
 ---
 
-The Web Console allows you to interact with QuestDB. It provides you with tools
-to query data and visualize it in a table or using graphs.
+The Web Console is a client that allows you to interact with QuestDB. It
+provides UI tools to query data and visualize the results in a table or plot.
 
 import Screenshot from "@theme/Screenshot"
 
@@ -35,7 +35,8 @@ running locally, this will be [http://localhost:9000](http://localhost:9000).
 
 ## Code editor
 
-By default, the Web Console opens on the code editor.
+The default panel shown in the web console is the code editor which allows you
+to write and run SQL queries.
 
 ### Shortcuts
 
@@ -47,7 +48,7 @@ By default, the Web Console opens on the code editor.
 ### Behaviour
 
 As you can write multiple SQL commands separated by a semicolon, the Web Console
-uses the following logic to decide which command to execute:
+uses the following logic to decide which queries to execute:
 
 - Check if a query or part of a query is highlighted. If yes, it will be
   executed, otherwise:
@@ -69,6 +70,21 @@ editor. You can then choose chart type, for example `line` and then press
 
 You can download the query result by clicking the `CSV` button. This file will
 be useful to test the import functionality below.
+
+## Notification panel
+
+The panel at the bottom of the web console shows the status of the most-recent
+query. This panel can be toggled by clicking the up-arrow icon on the right of
+the panel and shows the last 20 messages and notifications after query
+execution.
+
+<Screenshot
+  alt="Screenshot of the Web Console showing the location of the Import tab"
+  height={535}
+  small
+  src="/img/docs/console/query-log.png"
+  width={650}
+/>
 
 ## Import
 
@@ -110,7 +126,7 @@ Description of the import statuses
 ### Amending the schema
 
 Although the schema is automatically detected, you can amend the type of any
-column of an imported dataset using the following steps:
+column of an imported data set using the following steps:
 
 - Click on the file you want to amend in the Import screen. The schema will be
   displayed in a table in the lower-half of the screen.
@@ -127,7 +143,7 @@ column of an imported dataset using the following steps:
 
 ### Custom import
 
-You can amend the import behaviour with the following options. This will trigger
+You can amend the import behavior with the following options. This will trigger
 to import the data again.
 
 | Option | Name                         | Description                                                        |
@@ -140,3 +156,18 @@ to import the data again.
 To start the import, click the following button:
 
 ![Upload button from the Web Console](/img/docs/console/uploadButton.png)
+
+## Providing an asset path
+
+It's possible to provide an asset path if QuestDB is being run from somewhere
+that is not the server root. In this case, create a `.env` file in the UI
+directory of QuestDB and provide the path to web console assets as follows:
+
+```bash
+ASSET_PATH=/path/to/questdb/ui
+```
+
+An
+[example dotenv](https://github.com/questdb/questdb/blob/master/ui/.env.example)
+file is provided which can be renamed to `.env` and placed in QuestDB's UI
+directory.
