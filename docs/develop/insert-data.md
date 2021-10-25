@@ -79,6 +79,8 @@ can be found on the [Telegraf guide](/docs/third-party-tools/telegraf/).
 <TabItem value="nodejs">
 
 ```javascript
+"use strict"
+
 const net = require("net")
 
 const client = new net.Socket()
@@ -93,18 +95,30 @@ function run() {
       `trades,name=test_ilp2 value=11.4 ${Date.now() * 1e6}`,
     ]
 
-    rows.forEach((row) => {
-      client.write(`${row}\n`)
-    })
+    function write(idx) {
+      if (idx === rows.length) {
+        client.destroy()
+        return
+      }
 
-    client.destroy()
+      client.write(rows[idx] + "\n", (err) => {
+        if (err) {
+          console.error(err)
+          process.exit(1)
+        }
+        write(++idx)
+      })
+    }
+
+    write(0)
   })
 
-  client.on("data", function (data) {
-    console.log("Received: " + data)
+  client.on("error", (err) => {
+    console.error(err)
+    process.exit(1)
   })
 
-  client.on("close", function () {
+  client.on("close", () => {
     console.log("Connection closed")
   })
 }

@@ -215,6 +215,8 @@ this endpoint is accessible on port `9009`.
 <TabItem value="nodejs">
 
 ```javascript
+"use strict"
+
 const net = require("net")
 
 const client = new net.Socket()
