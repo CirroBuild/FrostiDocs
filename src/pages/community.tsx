@@ -170,11 +170,11 @@ const Community = () => {
           <div className={paCss.flex__section}>
             <div className={paCss.half__section}>
               <img
-                src="/img/pages/community/stickers-mugs.png"
+                src="/img/pages/community/swag-level-1.png"
                 alt="A mug and a pack of stickers printed with the QuestDB logo"
                 className={paCss.section_image}
                 width={500}
-                height={414}
+                height={415}
               />
             </div>
             <div className={paCss.half__section}>
