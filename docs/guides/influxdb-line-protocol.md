@@ -164,8 +164,8 @@ Spaces and commas do not require an escaping backslash in the field value for
 _sensor_data,_sensor="berlin\ 2" _value=12.4,string="sensor data, rev 1"
 ```
 
-InfluxDB does not support timestamp field values while QuestDB supports
-them as a protocol extension.
+InfluxDB does not support timestamp field values while QuestDB supports them as
+a protocol extension.
 
 ## Data types
 
@@ -240,15 +240,29 @@ sensors,location=london temperature=22,warning=false
 ### Timestamp
 
 Timestamp fields are an ILP protocol extension available in QuestDB. To store
-timestamp values, a trailing `t` must follow the timestamp value.
-
-The following example adds a `timestamp` type column called `last_seen`:
+timestamp values, a trailing `t` must follow the UNIX timestamp value in
+**microseconds**. The following example adds a `timestamp` type column called
+`last_seen`:
 
 ```bash
-sensors,location=london temperature=22,last_seen=1632598871000000t
+sensors,location=london temperature=22,last_seen=1635414140500776t
 ```
 
-QuestDB handles `timestamp` field values as a UNIX timestamp in nanoseconds.
+For illustration, here's a Python snippet which demonstrates dynamic creation of
+timestamp columns using the `t` suffix:
+
+```python
+import socket
+from time import time_ns
+
+now_ns = time_ns()
+now_micros = time_ns() / 1000
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+    sock.connect(("localhost", 9009))
+    sock.sendall(('table_one last_seen=1635414140500776t %d\n' %(now_ns)).encode())
+    sock.sendall(('table_two last_seen=%dt %d\n' %(now_micros, now_ns)).encode())
+```
 
 ## QuestDB listener configuration
 
