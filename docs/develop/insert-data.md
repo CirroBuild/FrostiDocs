@@ -6,6 +6,10 @@ description:
   as the InfluxDB integration.
 ---
 
+import CodeBlock from "@theme/CodeBlock"
+import InterpolateReleaseData from "../../src/components/InterpolateReleaseData"
+import InsertDataJava from "../../src/components/InsertDataJava"
+
 This page shows how to insert data into QuestDB using different programming
 languages and tools. To ingest data to a running instance, there are three main
 methods for inserting data:
@@ -74,9 +78,11 @@ can be found on the [Telegraf guide](/docs/third-party-tools/telegraf/).
   { label: "Python", value: "python" },
 ]}>
 
+
 <!-- prettier-ignore-end -->
 
 <TabItem value="nodejs">
+
 
 ```javascript
 "use strict"
@@ -128,7 +134,9 @@ run()
 
 </TabItem>
 
+
 <TabItem value="go">
+
 
 ```go
 package main
@@ -173,54 +181,17 @@ func checkErr(err error) {
 
 </TabItem>
 
+
 <TabItem value="java">
 
-```java
-import io.questdb.cutlass.line.LineTcpSender;
-import io.questdb.network.Net;
-import io.questdb.std.Os;
 
-public class LineTCPSenderMain {
-    /*
-        Maven:
-
-            <dependency>
-                <groupId>org.questdb</groupId>
-                <artifactId>questdb</artifactId>
-                <version>{@version@}</version>
-            </dependency>
-
-        Gradle:
-
-            compile group: 'org.questdb', name: 'questdb', version: '{@version@}'
-
-     */
-    public static void main(String[] args) {
-        String hostIPv4 = "127.0.0.1";
-        int port = 9009;
-        int bufferCapacity = 256 * 1024;
-
-        try (LineTcpSender sender = new LineTcpSender(Net.parseIPv4(hostIPv4), port, bufferCapacity)) {
-            sender
-                    .metric("trades")
-                    .tag("name", "test_ilp1")
-                    .field("value", 12.4)
-                    .$(Os.currentTimeNanos());
-            sender
-                    .metric("trades")
-                    .tag("name", "test_ilp2")
-                    .field("value", 11.4)
-                    .$(Os.currentTimeNanos());
-
-            sender.flush();
-        }
-    }
-}
-```
+<InsertDataJava />
 
 </TabItem>
 
+
 <TabItem value="python">
+
 
 ```python
 import time
@@ -248,7 +219,9 @@ sock.close()
 
 </TabItem>
 
+
 </Tabs>
+
 
 ## Postgres compatibility
 
@@ -271,6 +244,7 @@ supported features can be found on the
 <!-- prettier-ignore-end -->
 
 <TabItem value="nodejs">
+
 
 This example uses the [`pg` package](https://www.npmjs.com/package/pg) which
 allows for quickly building queries using Postgres wire protocol. Details on the
@@ -335,7 +309,9 @@ start()
 
 </TabItem>
 
+
 <TabItem value="go">
+
 
 This example uses the [pgx](https://github.com/jackc/pgx) driver and toolkit for
 postgres in Go. More details on the use of this toolkit can be found on the
@@ -398,7 +374,9 @@ func main() {
 
 </TabItem>
 
+
 <TabItem value="rust">
+
 
 The following example shows how to use parameterized queries and prepared
 statements using the [rust-postgres](https://docs.rs/postgres/0.19.0/postgres/)
@@ -442,7 +420,9 @@ fn main() -> Result<(), Error> {
 
 </TabItem>
 
+
 <TabItem value="java">
+
 
 ```java
 package com.myco;
@@ -477,6 +457,7 @@ class App {
 ```
 
 </TabItem>
+
 
 <!--
 
@@ -548,7 +529,8 @@ gcc libpq_example.c -o run_example.c -I pgsql/include -L /usr/local/Cellar/postg
 
 <TabItem value="python">
 
-This example uses the [psychopg2](https://github.com/psycopg/psycopg2) database
+
+This example uses the [psycopg2](https://github.com/psycopg/psycopg2) database
 adapter which does not support prepared statements (bind variables). This
 functionality is on the roadmap for the antecedent
 [psychopg3](https://github.com/psycopg/psycopg3/projects/1) adapter.
@@ -593,7 +575,9 @@ finally:
 
 </TabItem>
 
+
 </Tabs>
+
 
 ## REST API
 
@@ -627,6 +611,7 @@ import TabItem from "@theme/TabItem"
 
 <TabItem value="curl">
 
+
 This example imports a CSV file with automatic schema detection.
 
 ```shell title="Basic import"
@@ -646,7 +631,9 @@ curl \
 
 </TabItem>
 
+
 <TabItem value="nodejs">
+
 
 ```javascript
 const fetch = require("node-fetch")
@@ -682,7 +669,9 @@ run()
 
 </TabItem>
 
+
 <TabItem value="python">
+
 
 ```python
 import requests
@@ -699,7 +688,9 @@ except requests.exceptions.RequestException as e:
 
 </TabItem>
 
+
 <TabItem value="go">
+
 
 ```go
 package main
@@ -759,7 +750,9 @@ func checkErr(err error) {
 
 </TabItem>
 
+
 </Tabs>
+
 
 ### `/exec` endpoint
 
@@ -778,6 +771,7 @@ Alternatively, the `/exec` endpoint can be used to create a table and the
 <!-- prettier-ignore-end -->
 
 <TabItem value="curl">
+
 
 ```shell
 # Create Table
@@ -802,7 +796,9 @@ curl -G \
 
 </TabItem>
 
+
 <TabItem value="nodejs">
+
 
 The `node-fetch` package can be installed using `npm i node-fetch`.
 
@@ -848,7 +844,9 @@ insertData()
 
 </TabItem>
 
+
 <TabItem value="python">
+
 
 ```python
 import requests
@@ -873,7 +871,9 @@ run_query("INSERT INTO trades VALUES('abc', 123456);")
 
 </TabItem>
 
+
 <TabItem value="go">
+
 
 ```go
 package main
@@ -925,7 +925,9 @@ func checkErr(err error) {
 
 </TabItem>
 
+
 </Tabs>
+
 
 ## Web Console
 

@@ -3,6 +3,9 @@ title: Java (embedded)
 description: Java embedded API reference documentation.
 ---
 
+import CodeBlock from "@theme/CodeBlock"
+import InterpolateReleaseData from "../../../src/components/InterpolateReleaseData"
+
 QuestDB is written in Java and can be used as any other Java library. Moreover,
 it is a single JAR with no additional dependencies.
 
@@ -16,35 +19,63 @@ import TabItem from "@theme/TabItem"
   { label: "Gradle", value: "gradle" },
 ]}>
 
+
 <TabItem value="maven">
 
-```xml title="JDK11"
-<dependency>
-    <groupId>org.questdb</groupId>
-    <artifactId>questdb</artifactId>
-    <version>{@version@}</version>
-</dependency>
-```
 
-```xml title="JDK8"
+<InterpolateReleaseData
+  renderText={(release) => {
+    return (
+      <CodeBlock className="language-xml" title={"JDK11"}>
+        {`
 <dependency>
-    <groupId>org.questdb</groupId>
-    <artifactId>questdb-jdk8</artifactId>
-    <version>{@version@}</version>
+  <groupId>org.questdb</groupId>
+  <artifactId>questdb</artifactId>
+  <version>${release.name}</version>
 </dependency>
-```
+      `}
+      </CodeBlock>
+    )
+  }}
+/>
+
+<InterpolateReleaseData
+  renderText={(release) => {
+    return (
+      <CodeBlock className="language-xml" title={"JDK8"}>
+        {`
+<dependency>
+  <groupId>org.questdb</groupId>
+  <artifactId>questdb-jdk8</artifactId>
+  <version>${release.name}</version>
+</dependency>
+      `}
+      </CodeBlock>
+    )
+  }}
+/>
 
 </TabItem>
+
 
 <TabItem value="gradle">
 
-```shell
-implementation 'org.questdb:questdb:{@version@}'
-```
+
+<InterpolateReleaseData
+  renderText={(release) => {
+    return (
+      <CodeBlock className="language-shell">
+        implementation 'org.questdb:questdb:{release.name}'
+      </CodeBlock>
+    )
+  }}
+/>
 
 </TabItem>
 
+
 </Tabs>
+
 
 ## Writing data
 
@@ -326,8 +357,8 @@ caching of records pointless.
 
 QuestDB library provides fast and efficient way of sending line protocol
 messages. Sender implementation entry point is
-`io.questdb.cutlass.line.udp.LineUdpSender`, it is fully zero-GC and has
-latency in a region of 200ns per message.
+`io.questdb.cutlass.line.udp.LineUdpSender`, it is fully zero-GC and has latency
+in a region of 200ns per message.
 
 ### Get started
 

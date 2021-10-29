@@ -6,6 +6,9 @@ description:
   Get QuestDB page.
 ---
 
+import CodeBlock from "@theme/CodeBlock"
+import InterpolateReleaseData from "../../src/components/InterpolateReleaseData"
+
 This page describes how to install and use QuestDB via binaries. QuestDB comes
 with a script `questdb.sh` for Linux/FreeBSD and an executable `questdb.exe` for
 Windows. If you are looking for macOS, please check our
@@ -22,9 +25,15 @@ release notes are on our [GitHub release]({@githubUrl@}/releases) page.
 
 The file is named:
 
-```shell
-questdb-{@version@}-no-jre-bin.tar.gz
-```
+<InterpolateReleaseData
+  renderText={(release) => {
+    return (
+      <CodeBlock className="language-shell">
+        {`questdb-${release.name}-no-jre-bin.tar.gz`}
+      </CodeBlock>
+    )
+  }}
+/>
 
 This binary is approximately 4MB.
 
@@ -72,29 +81,54 @@ import TabItem from "@theme/TabItem"
 
 <TabItem value="linux">
 
-```shell
-questdb-{@version@}-rt-linux-amd64.tar.gz
-```
+
+<InterpolateReleaseData
+  renderText={(release) => {
+    return (
+      <CodeBlock className="language-shell">
+        {`questdb-${release.name}-rt-linux-amd64.tar.gz`}
+      </CodeBlock>
+    )
+  }}
+/>
 
 </TabItem>
+
 
 <TabItem value="bsd">
 
-```shell
-questdb-{@version@}-rt-freebsd-amd64.tar.gz
-```
+
+<InterpolateReleaseData
+  renderText={(release) => {
+    return (
+      <CodeBlock className="language-shell">
+        {`questdb-${release.name}-rt-freebsd-amd64.tar.gz`}
+      </CodeBlock>
+    )
+  }}
+/>
 
 </TabItem>
+
 
 <TabItem value="windows">
 
-```shell
-questdb-{@version@}-rt-windows-amd64.tar.gz
-```
+
+<InterpolateReleaseData
+  renderText={(release) => {
+    return (
+      <CodeBlock className="language-shell">
+        {`questdb-${release.name}-rt-windows-amd64.tar.gz`}
+      </CodeBlock>
+    )
+  }}
+/>
 
 </TabItem>
 
+
 </Tabs>
+
 
 This binary weights around 20MB, this depends on your operating system.
 
@@ -116,37 +150,70 @@ runtime is packaged directly with QuestDB.
 
 <TabItem value="any">
 
-```shell
-tar -xvf questdb-{@version@}-no-jre-bin.tar.gz
-```
+
+<InterpolateReleaseData
+  renderText={(release) => {
+    return (
+      <CodeBlock className="language-shell">
+        {`tar -xvf questdb-${release.name}-no-jre-bin.tar.gz`}
+      </CodeBlock>
+    )
+  }}
+/>
 
 </TabItem>
+
 
 <TabItem value="linux">
 
-```shell
-tar -xvf questdb-{@version@}-rt-linux-amd64.tar.gz
-```
+
+<InterpolateReleaseData
+  renderText={(release) => {
+    return (
+      <CodeBlock className="language-shell">
+        {`tar -xvf questdb-${release.name}-rt-linux-amd64.tar.gz`}
+      </CodeBlock>
+    )
+  }}
+/>
 
 </TabItem>
+
 
 <TabItem value="bsd">
 
-```shell
-tar -xvf questdb-{@version@}-rt-freebsd-amd64.tar.gz
-```
+
+<InterpolateReleaseData
+  renderText={(release) => {
+    return (
+      <CodeBlock className="language-shell">
+        {`tar -xvf questdb-${release.name}-rt-freebsd-amd64.tar.gz`}
+      </CodeBlock>
+    )
+  }}
+/>
 
 </TabItem>
+
 
 <TabItem value="windows">
 
-```shell
-tar -xvf questdb-{@version@}-rt-windows-amd64.tar.gz
-```
+
+<InterpolateReleaseData
+  renderText={(release) => {
+    return (
+      <CodeBlock className="language-shell">
+        {`tar -xvf questdb-${release.name}-rt-windows-amd64.tar.gz`}
+      </CodeBlock>
+    )
+  }}
+/>
 
 </TabItem>
 
+
 </Tabs>
+
 
 ## Next steps
 
