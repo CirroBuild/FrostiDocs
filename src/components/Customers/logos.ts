@@ -15,7 +15,7 @@ export const logos: CustomerLogo[] = [
   },
   {
     src: "/img/pages/customers/logos/yc.svg",
-    alt: "YCombinator logo",
+    alt: "Y Combinator logo",
   },
   {
     src: "/img/pages/customers/logos/ably.svg",
