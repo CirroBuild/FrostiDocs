@@ -155,10 +155,10 @@ statements that we can input directly:
 Paste the following query into the editor:
 
 ```
-SELECT pickupDatetime AS time,
-       avg(tripDistance) AS distance
-FROM ('taxi_trips_feb_2018.csv' timestamp(pickupDatetime))
-WHERE $__timeFilter(pickupDatetime)
+SELECT pickup_datetime AS time,
+       avg(trip_distance) AS distance
+FROM ('taxi_trips_feb_2018.csv' timestamp(pickup_datetime))
+WHERE $__timeFilter(pickup_datetime)
 SAMPLE BY $__interval
 ```
 
@@ -177,10 +177,10 @@ We have built our first panel with aggregations:
 #### Query details
 
 To graph the average trip distance above, we use the `avg()` function on the
-`tripDistance` column. This function aggregates data over the specified sampling
-interval. If the sampling interval is **1-hour**, we are calculating the average
-distance traveled during each 1-hour interval. You can find more information on
-QuestDB
+`trip_distance` column. This function aggregates data over the specified
+sampling interval. If the sampling interval is **1-hour**, we are calculating
+the average distance traveled during each 1-hour interval. You can find more
+information on QuestDB
 [aggregate functions on our documentation](/docs/reference/function/aggregation/).
 
 There are also 2 key Grafana-specific expressions used which can be identified
@@ -190,7 +190,7 @@ by the `$__` prefix:
 dashboard. By using this function, the sampling interval changes automatically
 as the user zooms in and out of the panel.
 
-`$__timeFilter(pickupDatetime)` tells Grafana to send the start-time and
+`$__timeFilter(pickup_datetime)` tells Grafana to send the start-time and
 end-time defined in the dashboard to the QuestDB server. Given the settings we
 have configured so far with our date range, Grafana translates this to the
 following:
@@ -213,11 +213,11 @@ name of `A`
 
 ```
 --Cash
-SELECT pickupDatetime AS time,
-       avg(tripDistance) AS cash
-FROM ('taxi_trips_feb_2018.csv' timestamp(pickupDatetime))
-WHERE $__timeFilter(pickupDatetime)
-AND paymentType IN ('Cash')
+SELECT pickup_datetime AS time,
+       avg(trip_distance) AS cash
+FROM ('taxi_trips_feb_2018.csv' timestamp(pickup_datetime))
+WHERE $__timeFilter(pickup_datetime)
+AND payment_type IN ('Cash')
 SAMPLE BY $__interval
 ```
 
@@ -226,11 +226,11 @@ the following in text mode:
 
 ```
 --Card
-SELECT pickupDatetime AS time,
-       avg(tripDistance) AS card
-FROM ('taxi_trips_feb_2018.csv' timestamp(pickupDatetime))
-WHERE $__timeFilter(pickupDatetime)
-AND paymentType IN ('Card')
+SELECT pickup_datetime AS time,
+       avg(trip_distance) AS card
+FROM ('taxi_trips_feb_2018.csv' timestamp(pickup_datetime))
+WHERE $__timeFilter(pickup_datetime)
+AND payment_type IN ('Card')
 SAMPLE BY $__interval
 ```
 
@@ -250,10 +250,10 @@ Let’s add another panel:
 
 ```
 SELECT
-pickupDatetime AS "time",
+pickup_datetime AS "time",
 count()
-FROM ('taxi_trips_feb_2018.csv' timestamp(pickupDatetime))
-WHERE $__timeFilter(pickupDatetime)
+FROM ('taxi_trips_feb_2018.csv' timestamp(pickup_datetime))
+WHERE $__timeFilter(pickup_datetime)
 SAMPLE BY $__interval;
 ```
 
@@ -275,20 +275,18 @@ Grafana's `$__interval` property:
 The daily cycle of activity is visible, with rides peaking in the early evening
 and reaching a low in the middle of the night.
 
-<!-- TODO: uncomment when https://github.com/questdb/questdb/pull/736 is available on docker:latest
-
 ## ASOF JOIN
 
-`ASOF` joins allow us to join 2 tables based on timestamp where timestamps do
+`ASOF JOIN` allows us to join 2 tables based on timestamp where timestamps do
 not exactly match. To join the taxi trips data with weather data, enter the
 following query:
 
 ```
 SELECT
-    pickupDatetime as "time",
-    avg(fareAmount) as sumOfFares,
+    pickup_datetime as "time",
+    avg(fare_amount) as fare_amount,
     avg(rain1H) as rain1H
-FROM (('taxi_trips_feb_2018.csv' timestamp(pickupDatetime)) WHERE $__timeFilter(pickupDatetime))
+FROM (('taxi_trips_feb_2018.csv' timestamp(pickup_datetime)) WHERE $__timeFilter(pickup_datetime))
 ASOF JOIN (weather.csv timestamp(timestamp))
 SAMPLE BY $__interval;
 ```
@@ -298,12 +296,13 @@ chart:
 
 - Set the **From** value to `2018-02-07 00:00:00`
 - Set the **To** value to `2018-02-14 23:59:59` and click **Apply time range**
-- Click on the yellow line beside the **rain1H** label and in the Y-Axis menu,
-  enable **use right Y-Axis**
+- Enable dual Y-axis in the option panel by using **Overrides**, simply
+  assgining different axis placements and units for fields `fare_amount` and
+  `rain1H`.
 
 <Screenshot
-  alt="Showing how to enable 2nd Y-axis by clicking on the line next to the series name."
-  src="/img/tutorial/2020-10-19/enabling-2nd-y-axis.png"
+  alt="Assign different placement and units respectively for average fare amount and hourly precipitation."
+  src="/img/tutorial/2020-10-19/enable-2nd-y-axis.png"
 />
 
 In this graph, we have 2 series, in green we have the fare amount sampled
@@ -315,8 +314,6 @@ between rain and the amount spent on taxi rides.
   alt="A panel showing taxi fares plotted against rain fall"
   src="/img/tutorial/2020-10-19/panel-taxi-fares-and-rain.png"
 />
-
--->
 
 ## Conclusion
 
