@@ -313,7 +313,7 @@ const Community = () => {
               To claim your swag for the this level:
             </p>
             <p className={paCss.property}>
-              You have written a{" "}
+              You have written an original{" "}
               <a className={paCss.link_item} href="/tutorial/">
                 tutorial or guide using QuestDB
               </a>
@@ -330,8 +330,8 @@ const Community = () => {
                 >
                   swag request form
                 </a>{" "}
-                with required information. And our team will validate your
-                request!
+                with required information. Our team will review and validate
+                your requests.
               </p>
             </div>
           </div>
