@@ -1,5 +1,5 @@
 ---
-title: The art of thread messaging
+title: How we built inter-thread messaging from scratch
 author: Vlad Ilyushchenko
 author_title: QuestDB Team
 author_url: https://github.com/bluestreak01
