@@ -249,10 +249,7 @@ settings = Settings()
 ```
 
 In the settings, you can notice we already defined the `celery_broker` and
-`database_url` settings with unusual default values. The hostnames are the name
-of the containers we defined in `docker-compose.yml`. This is not a typo nor a
-coincidence. As the linked container's names are available as hostnames within
-the containers, we can connect to the desired services.
+`database_url` settings with unusual default values.
 
 Some bits are missing at the moment. We still have to define the correct
 settings and run the worker in a Docker container. To keep our environment
@@ -334,7 +331,7 @@ def fetch(symbol: str):
         conn.execute(text(query))
 ```
 
-Going through the the code above:
+Going through the code above:
 
 ```python
 import finnhub
