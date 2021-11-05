@@ -1,56 +1,104 @@
 ---
 title: LATEST BY keyword
 sidebar_label: LATEST BY
-description: LATEST BY SQL keyword reference documentation.
+description:
+  Reference documentation for using LATEST BY keywords with examples for
+  illustration.
 ---
 
-`LATEST BY` finds the latest entry by timestamp for a given key or combination
-of keys as part of a [SELECT statement](/docs/reference/sql/select/).
+`LATEST BY` is used as part of a [SELECT statement](/docs/reference/sql/select/)
+for returning the most recent records per unique column value, commonly on
+`STRING` and `SYMBOL` column types.
 
-To find the latest values, QuestDB will search time series from the newest
-values to the oldest.
+To illustrate how `LATEST BY` is intended to be used, we can consider the
+`trips` table [in the QuestDB demo instance](https://demo.questdb.io/). This
+table has a `payment_type` column as `SYMBOL` type which specifies the method of
+payment per trip. We can find the most recent trip for each unique method of
+payment with the following query:
 
-- For single SYMBOL columns, QuestDB will know all distinct values upfront and
-  stop once the latest entry has been found for each symbol value.
-- For other field types, or multiple fields, QuestDB will scan the entire time
-  series. Although scan is very fast this means the performance will degrade on
-  hundreds of millions of records for non-symbol keys.
+```questdb-sql
+SELECT payment_type, pickup_datetime, trip_distance
+FROM trips
+LATEST BY payment_type;
+```
+
+| payment_type | pickup_datetime             | trip_distance |
+| ------------ | --------------------------- | ------------- |
+| Dispute      | 2014-12-31T23:55:27.000000Z | 1.2           |
+| Voided       | 2019-06-27T17:56:45.000000Z | 1.9           |
+| Unknown      | 2019-06-30T23:57:42.000000Z | 3.9           |
+| No Charge    | 2019-06-30T23:59:30.000000Z | 5.2           |
+| Cash         | 2019-06-30T23:59:54.000000Z | 2             |
+| Card         | 2019-06-30T23:59:56.000000Z | 1             |
 
 :::note
 
-To use `LATEST BY`, one column needs to be designated as `timestamp`. Find out
-more in the [designated timestamp](/docs/concept/designated-timestamp/) section.
-
-:::
-
-## Syntax
-
-![Flow chart showing the syntax of the LATEST BY keyword](/img/docs/diagrams/latestBy.svg)
-
-:::note
-
-By default, QuestDB executes `where` clauses before `latest by`. To execute
-`where` after `latest by`, you need to use sub-queries using brackets. You can
-learn how to do this in the [examples](#execution-order).
+To use `LATEST BY`, a column needs to be specified as a **designated
+timestamp**. More information can be found in the
+[designated timestamp](/docs/concept/designated-timestamp/) page for specifying
+this at table creation or at query time.
 
 :::
 
 ## Examples
 
+For these examples, we can create a table called `balances` with the following
+SQL:
+
+```questdb-sql
+CREATE TABLE balances (
+    cust_id SYMBOL,
+    balance_ccy SYMBOL,
+    balance DOUBLE,
+    ts TIMESTAMP
+) TIMESTAMP(ts) PARTITION BY DAY
+
+insert into balances values ('1', 'USD', 600.5, '2020-04-22T16:03:43.504432Z');
+insert into balances values ('2', 'USD', 950, '2020-04-22T16:08:34.404665Z');
+insert into balances values ('2', 'EUR', 780.2, '2020-04-22T16:11:22.704665Z');
+insert into balances values ('1', 'USD', 1500, '2020-04-22T16:11:32.904234Z');
+insert into balances values ('1', 'EUR', 650.5, '2020-04-22T16:11:32.904234Z');
+insert into balances values ('2', 'USD', 900.75, '2020-04-22T16:12:43.504432Z');
+insert into balances values ('2', 'EUR', 880.2, '2020-04-22T16:18:34.404665Z');
+insert into balances values ('1', 'USD', 330.5, '2020-04-22T16:20:14.404997Z');
+```
+
+This provides us with a table with the following content:
+
+| cust_id | balance_ccy | balance | ts                          |
+| ------- | ----------- | ------- | --------------------------- |
+| 1       | USD         | 600.5   | 2020-04-22T16:01:22.104234Z |
+| 2       | USD         | 950     | 2020-04-22T16:03:43.504432Z |
+| 2       | EUR         | 780.2   | 2020-04-22T16:08:34.404665Z |
+| 1       | USD         | 1500    | 2020-04-22T16:11:22.704665Z |
+| 1       | EUR         | 650.5   | 2020-04-22T16:11:32.904234Z |
+| 2       | USD         | 900.75  | 2020-04-22T16:12:43.504432Z |
+| 2       | EUR         | 880.2   | 2020-04-22T16:18:34.404665Z |
+| 1       | USD         | 330.5   | 2020-04-22T16:20:14.404997Z |
+
 ### Single column
 
-LATEST BY can be used with single columns. When this column is of type SYMBOL,
-the query will end as soon as all distinct symbol values have been found.
+When `LATEST BY` is provided a single column is of type `SYMBOL`, the query will
+end as soon as all distinct symbol values have been found.
 
-```questdb-sql title="Latest temperature by city"
-SELECT city, temperature
-FROM weather
-LATEST BY city;
+```questdb-sql title="Latest records by customer ID"
+SELECT * FROM balances
+LATEST BY cust_id;
 ```
+
+The query returns two rows with the most recent records per unique `cust_id`
+value:
+
+| cust_id | balance_ccy | balance | ts                          |
+| ------- | ----------- | ------- | --------------------------- |
+| 2       | EUR         | 880.2   | 2020-04-22T16:18:34.404665Z |
+| 1       | USD         | 330.5   | 2020-04-22T16:20:14.404997Z |
 
 ### Multiple columns
 
-LATEST BY can also reference multiple columns although this can be slower.
+When multiple columns are specified in `LATEST BY` queries, the returned results
+are the most recent **unique combinations** of the column values. This example
+query returns `LATEST BY` customer ID and balance currency:
 
 ```questdb-sql title="Latest balance by customer and currency"
 SELECT cust_id, balance_ccy, balance
@@ -58,57 +106,69 @@ FROM balances
 LATEST BY cust_id, balance_ccy;
 ```
 
-### Execution order
-
-The below queries illustrate how to change the execution order in a query by
-using brackets. Assume the following table
+The results return the most recent records for each unique combination of
+`cust_id` and `balance_ccy`.
 
 | cust_id | balance_ccy | balance | inactive | ts                          |
 | ------- | ----------- | ------- | -------- | --------------------------- |
-| 1       | USD         | 1500    | FALSE    | 2020-04-22T16:11:22.704665Z |
 | 1       | EUR         | 650.5   | FALSE    | 2020-04-22T16:11:32.904234Z |
 | 2       | USD         | 900.75  | FALSE    | 2020-04-22T16:12:43.504432Z |
 | 2       | EUR         | 880.2   | FALSE    | 2020-04-22T16:18:34.404665Z |
 | 1       | USD         | 330.5   | FALSE    | 2020-04-22T16:20:14.404997Z |
 
+:::info
+
+For single `SYMBOL` columns, QuestDB will know all distinct values upfront and
+stop scanning table contents once the latest entry has been found for each
+distinct symbol value. When `LATEST BY` is provided multiple columns, QuestDB
+has to scan the entire table to find distinct combinations of column values.
+Although scanning is fast, performance will degrade on hundreds of millions of
+records. If there are multiple columns in the `LATEST BY` clause, this will
+result in a full table scan.
+
+:::
+
+### Execution order
+
+The following queries illustrate how to change the execution order in a query by
+using brackets.
+
 ### WHERE first
 
 ```questdb-sql
-SELECT * FROM balances LATEST BY cust_id, balance_ccy
+SELECT * FROM balances LATEST BY cust_id
 WHERE balance > 800;
 ```
 
-This query executes `WHERE` before `LATEST BY`. It will return the latest
-balance which is above 800. The steps are:
+This query executes `WHERE` before `LATEST BY` and returns the most recent
+balance which is above 800. The execution order is as follows:
 
-- Filter out all balances below 800.
-- Finds the latest balance for each combination of cust_id and balance_ccy.
+- filter out all balances below 800
+- find the latest balance by `cust_id`
 
-Since the latest USD balance for customer 1 is equal to 330.5, it is filtered
-out in the first step. Therefore, the returned balance is 1500, which is the
-latest possible balance above 800.
-
-| cust_id | balance_ccy | balance | inactive | ts                          |
-| ------- | ----------- | ------- | -------- | --------------------------- |
-| 1       | USD         | 1500    | FALSE    | 2020-04-22T16:11:22.704665Z |
-| 2       | USD         | 900.75  | FALSE    | 2020-04-22T16:12:43.504432Z |
-| 2       | EUR         | 880.2   | FALSE    | 2020-04-22T16:18:34.404665Z |
+| cust_id | balance_ccy | balance | ts                          |
+| ------- | ----------- | ------- | --------------------------- |
+| 1       | USD         | 1500    | 2020-04-22T16:11:22.704665Z |
+| 2       | EUR         | 880.2   | 2020-04-22T16:18:34.404665Z |
 
 ### LATEST BY first
 
 ```questdb-sql
-(SELECT * FROM balances LATEST BY cust_id, balance_ccy) --note the brackets
+(SELECT * FROM balances LATEST BY cust_id) --note the brackets
 WHERE balance > 800;
 ```
 
-This query executes `LATEST BY` before `WHERE`. It returns the latest balances,
-then filters out those below 800. The steps are
+This query executes `LATEST BY` before `WHERE` and returns the most recent
+records , then filters out those below 800. The steps are
 
-- Find the latest balances, regardless of value
+- Find the latest balances by customer ID
 - Filter out balances below 800. Since the latest balance for customer 1 is
-  equal to 330.5, it is filtered out in the second step.
+  equal to 330.5, it is filtered out in this step.
 
 | cust_id | balance_ccy | balance | inactive | ts                          |
 | ------- | ----------- | ------- | -------- | --------------------------- |
-| 2       | USD         | 900.75  | FALSE    | 2020-04-22T16:12:43.504432Z |
 | 2       | EUR         | 880.2   | FALSE    | 2020-04-22T16:18:34.404665Z |
+
+## Syntax
+
+![Flow chart showing the syntax of the LATEST BY keyword](/img/docs/diagrams/latestBy.svg)
