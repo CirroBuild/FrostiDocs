@@ -11,6 +11,7 @@ keywords:
   - performance
   - opensource
   - architecture
+image: /img/blog/2021-11-09/banner.png
 tags: [team, engineering, story]
 ---
 
