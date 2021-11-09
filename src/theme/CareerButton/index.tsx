@@ -16,8 +16,7 @@ const CareerButton = ({ title, bambooUrl }: Props) => {
       <p className={styles.content}>
         Apply for the {title} position by visiting the link below and submitting
         your personal details. Attach links to your portfolio where relevant
-        (LinkedIn, GitHub, personal website, etc.) and include a few words about
-        why you are interested in QuestDB.
+        (LinkedIn, GitHub, personal website, etc.)
       </p>
       <div className={styles.button}>
         <Button to={bambooUrl}>Apply here</Button>
