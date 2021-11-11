@@ -26,7 +26,7 @@ SELECT firstName, lastName, concat(firstName, ' ', lastName) FROM names;
 
 :::tip
 
-`concat()` can be used to generate `line protocol`. See example below.
+`concat()` can be used to generate `line protocol`. See an example below.
 
 :::
 
@@ -73,6 +73,113 @@ SELECT name a, length(name) b FROM names limit 4
 | AMELIE | 6   |
 | TOM    | 3   |
 | null   | -1  |
+
+## left
+
+`left(string, count)` - extracts a substring of the given length from a string
+(starting from left).
+
+**Arguments:**
+
+- `string` is a string to extract from.
+- `count` is an integer specifying the count of characters to be extracted into
+  a substring.
+
+**Return value:**
+
+Returns a string with the extracted characters.
+
+**Examples:**
+
+```questdb-sql title="Example"
+SELECT name, left('Thompson', 3) l FROM names LIMIT 3
+```
+
+| name   | l   |
+| ------ | --- |
+| AARON  | AAR |
+| AMELIE | AME |
+| TOM    | TOM |
+
+## right
+
+`right(string, count)` - extracts a substring of the given length from a string
+(starting from right).
+
+**Arguments:**
+
+- `string` is a string to extract from.
+- `count` is an integer specifying the count of characters to be extracted into
+  a substring.
+
+**Return value:**
+
+Returns a string with the extracted characters.
+
+**Examples:**
+
+```questdb-sql title="Example"
+SELECT name, right('Thompson', 2) r FROM names LIMIT 3
+```
+
+| name   | l   |
+| ------ | --- |
+| AARON  | ON  |
+| AMELIE | IE  |
+| TOM    | OM  |
+
+## strpos
+
+`strpos(string, substring)` - searches for a substring in a string, and returns
+the position. If the substring is not found, this function returns `0`. The
+performed search is case-sensitive.
+
+**Arguments:**
+
+- `string` is a string to search in.
+- `substring` is a string to search for.
+
+**Return value:**
+
+Returns an integer for the substring position. Positions start from `1`.
+
+**Examples:**
+
+```questdb-sql title="Example"
+SELECT name, strpos(name, 'Thompson') idx FROM full_names LIMIT 4
+```
+
+| name          | idx |
+| ------------- | --- |
+| Tim Thompson  | 5   |
+| Anna Thompson | 6   |
+| Anna Mason    | 0   |
+| Tom Johnson   | 0   |
+
+Assuming we have a table `example_table` with a single string type column `col`:
+
+| col        |
+| ---------- |
+| apple,pear |
+| cat,dog    |
+| ...        |
+
+As a more advanced example, we can use `strpos()` to split the string values of
+`col`, in this case splitting at the comma `,` character. By using
+`left()`/`right()` functions, we can choose the string values at the left and
+right of the comma:
+
+```questdb-sql title="Splitting string into two separate columns"
+SELECT col,
+       left(col, strpos(col, ',') - 1) as col1,
+       right(col, length(col) - strpos(col, ',')) as col2
+FROM example_table;
+```
+
+| col        | col1  | col2 |
+| ---------- | ----- | ---- |
+| apple,pear | apple | pear |
+| cat,dog    | cat   | dog  |
 
 ## ~
 

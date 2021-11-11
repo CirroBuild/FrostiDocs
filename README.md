@@ -28,6 +28,10 @@ TypeScript, the styles in vanilla CSS with variables using
 yarn
 ```
 
+Note. On Linux you may have to install `autoconf` package to have a successful
+installation. On Ubuntu it should be enough to run
+`sudo apt-get install autoconf` command to install the package.
+
 ## Local development
 
 ```script
