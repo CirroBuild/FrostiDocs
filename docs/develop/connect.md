@@ -32,9 +32,13 @@ import TabItem from "@theme/TabItem"
   { label: "psql", value: "psql" },
 ]}>
 
+
 <TabItem value="nodejs">
 
+
 ```javascript
+"use strict"
+
 const { Client } = require("pg")
 
 const start = async () => {
@@ -49,12 +53,14 @@ const start = async () => {
   console.log("Connected")
 }
 
-start()
+start().catch(console.error)
 ```
 
 </TabItem>
 
+
 <TabItem value="go">
+
 
 ```go
 package main
@@ -87,7 +93,9 @@ func main() {
 
 </TabItem>
 
+
 <TabItem value="psql">
+
 
 ```shell
 # With the client already installed locally
@@ -99,7 +107,9 @@ docker run -it --rm --network=host -e PGPASSWORD=quest postgres psql -h localhos
 
 </TabItem>
 
+
 <TabItem value="java">
+
 
 ```java
 package com.myco;
@@ -125,7 +135,9 @@ public class ConnectExample {
 
 </TabItem>
 
+
 <TabItem value="c">
+
 
 ```c
 // compile with
@@ -151,7 +163,9 @@ int main() {
 
 </TabItem>
 
+
 <TabItem value="python">
+
 
 ```python
 import psycopg2
@@ -183,7 +197,9 @@ finally:
 
 </TabItem>
 
+
 <TabItem value="csharp">
+
 
 ```csharp
 using Npgsql;
@@ -200,7 +216,9 @@ await connection.OpenAsync();
 
 </TabItem>
 
+
 </Tabs>
+
 
 ## InfluxDB line protocol
 
@@ -212,7 +230,9 @@ this endpoint is accessible on port `9009`.
   { label: "Go", value: "go" },
 ]}>
 
+
 <TabItem value="nodejs">
+
 
 ```javascript
 "use strict"
@@ -235,7 +255,9 @@ run()
 
 </TabItem>
 
+
 <TabItem value="go">
+
 
 ```go
 package main
@@ -267,5 +289,6 @@ func checkErr(err error) {
 ```
 
 </TabItem>
+
 
 </Tabs>

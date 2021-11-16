@@ -77,6 +77,7 @@ import TabItem from "@theme/TabItem"
 
 <TabItem value="curl">
 
+
 ```shell
 curl -G \
   --data-urlencode "query=SELECT x FROM long_sequence(5);" \
@@ -85,7 +86,9 @@ curl -G \
 
 </TabItem>
 
+
 <TabItem value="nodejs">
+
 
 ```javascript
 const fetch = require("node-fetch")
@@ -113,7 +116,9 @@ run()
 
 </TabItem>
 
+
 <TabItem value="python">
+
 
 ```python
 import requests
@@ -135,7 +140,9 @@ except requests.exceptions.RequestException as e:
 
 </TabItem>
 
+
 <TabItem value="go">
+
 
 ```go
 package main
@@ -178,7 +185,9 @@ func checkErr(err error) {
 
 </TabItem>
 
+
 </Tabs>
+
 
 ## Postgres compatibility
 
@@ -200,36 +209,37 @@ that QuestDB exposes which is accessible by default via port `8812`.
 
 <TabItem value="nodejs">
 
+
 ```javascript
+"use strict"
+
 const { Client } = require("pg")
 
 const start = async () => {
-  try {
-    const client = new Client({
-      database: "qdb",
-      host: "127.0.0.1",
-      password: "quest",
-      port: 8812,
-      user: "admin",
-    })
-    await client.connect()
+  const client = new Client({
+    database: "qdb",
+    host: "127.0.0.1",
+    password: "quest",
+    port: 8812,
+    user: "admin",
+  })
+  await client.connect()
 
-    const res = await client.query("SELECT x FROM long_sequence(5);")
+  const res = await client.query("SELECT x FROM long_sequence(5);")
 
-    console.log(res.rows)
+  console.log(res.rows)
 
-    await client.end()
-  } catch (e) {
-    console.log(e)
-  }
+  await client.end()
 }
 
-start()
+start().catch(console.error)
 ```
 
 </TabItem>
 
+
 <TabItem value="go">
+
 
 ```go
 package main
@@ -281,7 +291,9 @@ func checkErr(err error) {
 
 </TabItem>
 
+
 <TabItem value="c">
+
 
 ```c
 // compile with
@@ -320,7 +332,9 @@ int main() {
 
 </TabItem>
 
+
 <TabItem value="java">
+
 
 ```java
 package com.myco;
@@ -351,7 +365,9 @@ public class App {
 
 </TabItem>
 
+
 <TabItem value="csharp">
+
 
 ```csharp
 using Npgsql;
@@ -379,7 +395,9 @@ await using (var reader = await command.ExecuteReaderAsync()) {
 
 </TabItem>
 
+
 <TabItem value="python">
+
 
 ```python
 import psycopg2
@@ -409,5 +427,6 @@ finally:
 ```
 
 </TabItem>
+
 
 </Tabs>

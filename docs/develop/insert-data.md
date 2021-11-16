@@ -257,54 +257,55 @@ microsecond resolution. For accurate microsecond timestamps, the
 which makes system calls to `tv_usec` from C++.
 
 ```javascript
+"use strict"
+
 const { Client } = require("pg")
 
 const start = async () => {
-  try {
-    const client = new Client({
-      database: "qdb",
-      host: "127.0.0.1",
-      password: "quest",
-      port: 8812,
-      user: "admin",
-    })
-    await client.connect()
+  const client = new Client({
+    database: "qdb",
+    host: "127.0.0.1",
+    password: "quest",
+    port: 8812,
+    user: "admin",
+  })
+  await client.connect()
 
-    const createTable = await client.query(
-      "CREATE TABLE IF NOT EXISTS trades (ts TIMESTAMP, date DATE, name STRING, value INT) timestamp(ts);",
-    )
-    console.log(createTable)
+  const createTable = await client.query(
+    "CREATE TABLE IF NOT EXISTS trades (ts TIMESTAMP, date DATE, name STRING, value INT) timestamp(ts);",
+  )
+  console.log(createTable)
 
-    const insertData = await client.query(
-      "INSERT INTO trades VALUES($1, $2, $3, $4);",
-      [Date.now() * 1000, Date.now(), "node pg example", 123],
-    )
-    await client.query("COMMIT")
+  let now = new Date().toISOString()
+  const insertData = await client.query(
+    "INSERT INTO trades VALUES($1, $2, $3, $4);",
+    [now, now, "node pg example", 123],
+  )
+  await client.query("COMMIT")
 
-    console.log(insertData)
+  console.log(insertData)
 
-    for (let rows = 0; rows < 10; rows++) {
-      // Providing a 'name' field allows for prepared statements / bind variables
-      const query = {
-        name: "insert-values",
-        text: "INSERT INTO trades VALUES($1, $2, $3, $4);",
-        values: [Date.now() * 1000, Date.now(), "node pg prep statement", rows],
-      }
-      const preparedStatement = await client.query(query)
+  for (let rows = 0; rows < 10; rows++) {
+    // Providing a 'name' field allows for prepared statements / bind variables
+    now = new Date().toISOString()
+    const query = {
+      name: "insert-values",
+      text: "INSERT INTO trades VALUES($1, $2, $3, $4);",
+      values: [now, now, "node pg prep statement", rows],
     }
-
-    await client.query("COMMIT")
-
-    const readAll = await client.query("SELECT * FROM trades")
-    console.log(readAll.rows)
-
-    await client.end()
-  } catch (e) {
-    console.log(e)
+    await client.query(query)
   }
+  await client.query("COMMIT")
+
+  const readAll = await client.query("SELECT * FROM trades")
+  console.log(readAll.rows)
+
+  await client.end()
 }
 
 start()
+  .then(() => console.log("Done"))
+  .catch(console.error)
 ```
 
 </TabItem>
