@@ -9,3 +9,11 @@
     paths = [
       "node_modules/.cache",
     ]
+
+[[redirects]]
+  from = "/careers/head-of-talent/"
+  to = "/careers/people-and-talent-acquisition/"
+
+[[redirects]]
+  from = "/careers/backend-software-engineer/"
+  to = "/careers/core-database-engineer/"

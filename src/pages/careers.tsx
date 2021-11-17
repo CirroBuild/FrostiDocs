@@ -99,7 +99,7 @@ const CareersPage = () => {
             </h2>
           </div>
           <div className={clsx(caCss.card__side, caCss["card__side--center"])}>
-            <a className={joCss.job} href="backend-software-engineer/">
+            <a className={joCss.job} href="core-database-engineer/">
               <h3 className={joCss.job__title}>Core Database Engineers</h3>
               <p className={joCss.job__location}>Remote</p>
               <span className={joCss.job__cta}>
@@ -166,7 +166,7 @@ const CareersPage = () => {
                 />
               </span>
             </a>
-            <a className={joCss.job} href="head-of-talent/">
+            <a className={joCss.job} href="people-and-talent-acquisition/">
               <h3 className={joCss.job__title}>People & Talent Acquisition</h3>
               <p className={joCss.job__location}>Remote</p>
               <span className={joCss.job__cta}>
