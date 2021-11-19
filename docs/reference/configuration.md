@@ -164,8 +164,8 @@ writer threads in a QuestDB instance.
 | ----------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | line.tcp.n.updates.per.load.balance | 10000   | Maximum number of updates in a given table since the last load balancing before triggering a new load balancing job.                             |
 | line.tcp.max.load.ratio             | 1.9     | Maximum load ratio (max loaded worker/min loaded worker) before QuestDB will attempt to rebalance the load between the writer workers.           |
-| line.tcp.max.uncommitted.rows       | 1000    | Maximum number of uncommitted rows, note that rows will always be committed if they have been received line.tcp.maintenance.job.interval ms ago. |
-| line.tcp.maintenance.job.interval   | 1000    | Maximum amount of time in between maintenance jobs, these will commit any uncommitted data.                                                      |
+| cairo.max.uncommitted.rows          | 500000  | Maximum number of uncommitted rows, note that rows will always be committed if they have been received line.tcp.maintenance.job.interval ms ago. |
+| line.tcp.maintenance.job.interval   | 30000   | Maximum amount of time (in milliseconds) between maintenance jobs, these will commit any uncommitted data.                                       |
 
 ### Minimal HTTP server
 

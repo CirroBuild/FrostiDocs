@@ -134,8 +134,8 @@ busiest worker thread will be reassigned to the least busy worker thread.
 
 Uncommitted rows are committed either:
 
-- after `line.tcp.maintenance.job.hysterisis.in.ms` milliseconds have passed
-- once reaching `line.tcp.max.uncommitted.rows` uncommitted rows.
+- after `line.tcp.maintenance.job.interval` milliseconds have passed
+- once reaching `cairo.max.uncommitted.rows` uncommitted rows.
 
 ### Configuration
 
@@ -170,9 +170,9 @@ QuestDB to listen for `unicast`.
 
 Uncommitted rows are committed either:
 
+- after `line.tcp.maintenance.job.interval` milliseconds have passed
 - after receiving a number of continuous messages equal to
-  `line.udp.commit.rate`
-- when messages are no longer being received
+  `line.udp.commit.rate` or `cairo.max.uncommitted.rows` whichever is smaller.
 
 ### Configuration
 
