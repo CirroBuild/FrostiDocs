@@ -8,19 +8,19 @@ description: SAMPLE BY SQL keyword reference documentation.
 aggregates of homogeneous time chunks as part of a
 [SELECT statement](/docs/reference/sql/select/). Users performing `SAMPLE BY`
 queries on datasets **with missing data** may make use of the
-[FILL](/docs/reference/sql/fill/) keyword to specify a fill behavior.
+[FILL](#fill-options) keyword to specify a fill behavior.
 
-:::note
+```questdb-sql title="Sample trades table in 30 minute intervals"
+SELECT time, avg(price) FROM trades SAMPLE BY 30m
+```
 
-To use `SAMPLE BY`, one column needs to be designated as `timestamp`. Find out
-more in the [designated timestamp](/docs/concept/designated-timestamp/) section.
+:::info
+
+To use `SAMPLE BY`, a table column needs to be specified as a designated
+timestamp. Details about this concept can be found in the
+[designated timestamp](/docs/concept/designated-timestamp/) documentation.
 
 :::
-
-## Syntax
-
-![Flow chart showing the syntax of the SAMPLE BY keywords](/img/docs/diagrams/sampleBy.svg)
-![Flow chart showing the syntax of the ALIGN TO keywords](/img/docs/diagrams/alignToCalTimeZone.svg)
 
 ## Sample units
 
@@ -45,9 +45,122 @@ For example, given a table `trades`, the following query returns the number of
 trades per hour:
 
 ```questdb-sql
-SELECT ts, count() FROM trades
-SAMPLE BY 1h
+SELECT ts, count() FROM trades SAMPLE BY 1h
 ```
+
+## Fill options
+
+The `FILL` keyword is optional and expects a single `fillOption` strategy which
+will be applied to a single aggregate column. The following restrictions apply:
+
+- Keywords denoting fill strategies may not be combined. Only one option from
+  `NONE`, `NULL`, `PREV`, `LINEAR` and constants may be used.
+- `FILL()` does not support a list and therefore can only be applied to a single
+  aggregate column.
+
+| fillOption | Description                                                                                                               |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `NONE`     | No fill applied. If there is no data, the time sample will be skipped in the results. A table could be missing intervals. |
+| `NULL`     | Fills with `NULL` values.                                                                                                 |
+| `PREV`     | Fills using the previous value.                                                                                           |
+| `LINEAR`   | Fills by linear interpolation of the 2 surrounding points.                                                                |
+| `x`        | Fills with a constant value - where `x` is the desired value, for example `FILL(100.05)`.                                 |
+
+Consider an example table named `prices` which has no records during the entire
+third hour (`2021-01-01T03`):
+
+| ts                          | price |
+| --------------------------- | ----- |
+| 2021-01-01T01:00:00.000000Z | p1    |
+| 2021-01-01T02:00:00.000000Z | p2    |
+| 2021-01-01T04:00:00.000000Z | p4    |
+| 2021-01-01T05:00:00.000000Z | p5    |
+
+The following query returns the maximum price per hour. As there are missing
+values, an aggregate cannot be calculated:
+
+```questdb-sql
+SELECT ts, max(price) max FROM prices SAMPLE BY 1h;
+```
+
+A row is missing for the `2021-01-01T03:00:00.000000Z` sample:
+
+| ts                          | max  |
+| --------------------------- | ---- |
+| 2021-01-01T01:00:00.000000Z | max1 |
+| 2021-01-01T02:00:00.000000Z | max2 |
+| 2021-01-01T04:00:00.000000Z | max4 |
+| 2021-01-01T05:00:00.000000Z | max5 |
+
+A `FILL` strategy can be employed which fills with the previous value using
+`PREV`:
+
+```questdb-sql
+SELECT ts, max(price) max FROM prices SAMPLE BY 1h FILL(PREV);
+```
+
+| ts                              | max      |
+| ------------------------------- | -------- |
+| 2021-01-01T01:00:00.000000Z     | max1     |
+| 2021-01-01T02:00:00.000000Z     | max2     |
+| **2021-01-01T03:00:00.000000Z** | **max2** |
+| 2021-01-01T04:00:00.000000Z     | max4     |
+| 2021-01-01T05:00:00.000000Z     | max5     |
+
+Linear interpolation is done using the `LINEAR` fill option:
+
+```questdb-sql
+SELECT ts, max(price) max FROM prices SAMPLE BY 1h FILL(LINEAR);
+```
+
+| ts                              | max               |
+| ------------------------------- | ----------------- |
+| 2021-01-01T01:00:00.000000Z     | max1              |
+| 2021-01-01T02:00:00.000000Z     | max2              |
+| **2021-01-01T03:00:00.000000Z** | **(max2+max4)/2** |
+| 2021-01-01T04:00:00.000000Z     | max4              |
+| 2021-01-01T05:00:00.000000Z     | max5              |
+
+A constant value can be used as a `fillOption`:
+
+```questdb-sql
+SELECT ts, max(price) max FROM prices SAMPLE BY 1h FILL(100.5);
+```
+
+| ts                              | max       |
+| ------------------------------- | --------- |
+| 2021-01-01T01:00:00.000000Z     | max1      |
+| 2021-01-01T02:00:00.000000Z     | max2      |
+| **2021-01-01T03:00:00.000000Z** | **100.5** |
+| 2021-01-01T04:00:00.000000Z     | max4      |
+| 2021-01-01T05:00:00.000000Z     | max5      |
+
+Finally, `NULL` may be used as a `fillOption`:
+
+```questdb-sql
+SELECT ts, max(price) max FROM prices SAMPLE BY 1h FILL(NULL);
+```
+
+| ts                              | max      |
+| ------------------------------- | -------- |
+| 2021-01-01T01:00:00.000000Z     | max1     |
+| 2021-01-01T02:00:00.000000Z     | max2     |
+| **2021-01-01T03:00:00.000000Z** | **null** |
+| 2021-01-01T04:00:00.000000Z     | max4     |
+| 2021-01-01T05:00:00.000000Z     | max5     |
+
+:::info
+
+The `FILL` keyword must precede alignment described in the
+[sample calculation section](#sample-calculation), i.e.:
+
+```questdb-sql
+SELECT ts, max(price) max FROM prices
+SAMPLE BY 1h FILL(LINEAR)
+ALIGN TO ...
+```
+
+:::
 
 ## Sample calculation
 
@@ -248,9 +361,8 @@ Assume the following table `trades`:
 
 This query will return the number of trades per hour:
 
-```questdb-sql title="trades - hourly interval"
-SELECT ts, count() FROM trades
-SAMPLE BY 1h
+```questdb-sql title="Hourly interval"
+SELECT ts, count() FROM trades SAMPLE BY 1h;
 ```
 
 | ts                          | count |
@@ -262,9 +374,8 @@ SAMPLE BY 1h
 
 The following will return the trade volume in 30 minute intervals
 
-```questdb-sql title="trades - 30 minute interval"
-SELECT ts, sum(quantity*price) FROM trades
-SAMPLE BY 30m
+```questdb-sql title="30 minute interval"
+SELECT ts, sum(quantity*price) FROM trades SAMPLE BY 30m;
 ```
 
 | ts                          | sum    |
@@ -278,9 +389,8 @@ SAMPLE BY 30m
 The following will return the average trade notional (where notional is = q \*
 p) by day:
 
-```questdb-sql title="trades - daily interval"
-SELECT ts, avg(quantity*price) FROM trades
-SAMPLE BY 1d
+```questdb-sql title="Daily interval"
+SELECT ts, avg(quantity*price) FROM trades SAMPLE BY 1d;
 ```
 
 | ts                          | avg               |
@@ -289,12 +399,17 @@ SAMPLE BY 1d
 
 To make this sample align to calendar dates:
 
-```questdb-sql
-SELECT ts, avg(quantity*price) FROM trades
-SAMPLE BY 1d ALIGN TO CALENDAR
+```questdb-sql title="Calendar alignment"
+SELECT ts, avg(quantity*price) FROM trades SAMPLE BY 1d ALIGN TO CALENDAR;
 ```
 
 | ts                          | avg    |
 | --------------------------- | ------ |
 | 2021-05-31T00:00:00.000000Z | 1000.5 |
 | 2021-06-01T00:00:00.000000Z | 8007.2 |
+
+## Syntax
+
+![Flow chart showing the syntax of the SAMPLE BY keywords](/img/docs/diagrams/sampleBy.svg)
+![Flow chart showing the syntax of the ALIGN TO keywords](/img/docs/diagrams/alignToCalTimeZone.svg)
+![Flow chart showing the syntax of the FILL keyword](/img/docs/diagrams/fill.svg)
