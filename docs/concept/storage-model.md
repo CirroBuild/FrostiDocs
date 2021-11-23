@@ -16,8 +16,7 @@ in the same order that it was ingested.
 QuestDB appends one column at a time and each one is updated using the same
 method. The tail of column file is mapped into the memory page in RAM and the
 column append is effectively a memory write at an address. Once the memory page
-is exhausted it is unmapped (thus writing data to disk) and a new page is
-mapped.
+is exhausted it is unmapped and a new page is mapped.
 
 **This method ensures minimum resource churn and consistent append latency.**
 
