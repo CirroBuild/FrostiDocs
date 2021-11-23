@@ -300,3 +300,16 @@ body {
   opacity: 0;
   transition: opacity 200ms ease-in;
 }
+
+/**
+ *
+ * Hide the "See all ## results" link at the bottom of the search widget.
+ * See https://github.com/facebook/docusaurus/issues/5084 for context.
+ *
+ **/
+.DocSearch-Dropdown-Container .DocSearch-HitsFooter {
+  display: none;
+}
+.DocSearch-Dropdown-Container {
+  padding-bottom: var(--docsearch-spacing);
+}
