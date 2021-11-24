@@ -208,6 +208,7 @@ export default function pluginContentTutorial(
                   loader: require.resolve("@docusaurus/mdx-loader"),
                   options: {
                     remarkPlugins: options.remarkPlugins,
+                    rehypePlugins: options.rehypePlugins,
                     staticDir: path.join(siteDir, STATIC_DIR_NAME),
                     metadataPath: (mdxPath: string) => {
                       const aliasedPath = aliasedSitePath(mdxPath, siteDir)
@@ -231,7 +232,9 @@ export default function pluginContentTutorial(
 export function validateOptions({
   validate,
   options,
-}: OptionValidationContext<TutorialPluginOptions>): ValidationResult<TutorialPluginOptions> {
+}: OptionValidationContext<TutorialPluginOptions>): ValidationResult<
+  TutorialPluginOptions
+> {
   const validatedOptions = validate(PluginOptionSchema, options)
   return validatedOptions
 }

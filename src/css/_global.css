@@ -301,6 +301,8 @@ body {
   transition: opacity 200ms ease-in;
 }
 
+.katex { font-size: 1.5em; }
+
 /**
  *
  * Hide the "See all ## results" link at the bottom of the search widget.

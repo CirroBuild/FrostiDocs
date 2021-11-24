@@ -2,6 +2,8 @@ const visit = require("unist-util-visit")
 const ssrTemplate = require("./src/internals/ssr.template")
 const consts = require("./src/config/consts")
 const customFields = require("./src/config/customFields")
+const math = require("remark-math")
+const katex = require("rehype-katex")
 
 function variable() {
   const RE_VAR = /{@([\w-_]+)@}/g
@@ -47,7 +49,8 @@ const config = {
     [
       require.resolve("./plugins/tutorial/compiled/index"),
       {
-        remarkPlugins: [variable],
+        remarkPlugins: [variable, math],
+        rehypePlugins: [katex],
       },
     ],
     [
@@ -258,11 +261,13 @@ const config = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          remarkPlugins: [variable],
+          remarkPlugins: [variable, math],
+          rehypePlugins: [katex],
           sidebarPath: require.resolve("./sidebars.js"),
         },
         blog: {
-          remarkPlugins: [variable],
+          remarkPlugins: [variable, math],
+          rehypePlugins: [katex],
           feedOptions: {
             type: "all",
             copyright: customFields.copyright,
@@ -277,7 +282,10 @@ const config = {
           trailingSlash: true,
         },
         theme: {
-          customCss: require.resolve("./src/css/_global.css"),
+          customCss: [
+            require.resolve("./src/css/katex.min.css"),
+            require.resolve("./src/css/_global.css"),
+          ],
         },
       },
     ],

@@ -12,6 +12,7 @@ export interface TutorialPluginOptions {
   id?: string
   path: string
   remarkPlugins: []
+  rehypePlugins: []
   routeBasePath: string
   include: string[]
   truncateMarker: RegExp
