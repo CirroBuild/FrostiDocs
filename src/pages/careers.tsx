@@ -112,6 +112,19 @@ const CareersPage = () => {
                 />
               </span>
             </a>
+            <a className={joCss.job} href="senior-backend-engineer-python/">
+              <h3 className={joCss.job__title}>Senior Backend Engineers</h3>
+              <p className={joCss.job__location}>Remote</p>
+              <span className={joCss.job__cta}>
+                Details&nbsp;
+                <img
+                  alt="Right arrow"
+                  height={20}
+                  src="/img/pages/careers/arrowRight.svg"
+                  width={20}
+                />
+              </span>
+            </a>
             <a className={joCss.job} href="senior-cloud-engineer/">
               <h3 className={joCss.job__title}>Cloud Engineers</h3>
               <p className={joCss.job__location}>Remote</p>
