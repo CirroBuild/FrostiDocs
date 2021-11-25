@@ -66,6 +66,22 @@ All the data comes from Coinbase, one of the largest crypto exchanges, and gives
 a good picture of what the market looks like. We will be using both the price
 data and the trade data to perform our analysis.
 
+For convenience, these datasets are made available on S3 and can be loaded into
+a running QuestDB instance using the REST API:
+
+```bash
+# Download the example data
+curl https://s3.eu-west-1.amazonaws.com/questdb.io/datasets/hff-tutorial/prices.csv --output prices.csv
+curl https://s3.eu-west-1.amazonaws.com/questdb.io/datasets/hff-tutorial/trades.csv --output trades.csv
+
+# Import prices
+curl -F schema='[{"name":"timestamp", "type": "TIMESTAMP", "pattern": "yyyy-MM-ddTHH:mm:ss.SSS"}]' \
+     -F data=@prices.csv 'http://localhost:9000/imp?&timestamp=timestamp'
+# Import trades
+curl -F schema='[{"name":"timestamp", "type": "TIMESTAMP", "pattern": "yyyy-MM-ddTHH:mm:ss.SSS"}]' \
+     -F data=@trades.csv 'http://localhost:9000/imp?&timestamp=timestamp'
+```
+
 ## Understanding high frequency prices
 
 If we go to Yahoo finance and look at the
