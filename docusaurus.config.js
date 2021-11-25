@@ -245,7 +245,7 @@ const config = {
             },
             {
               label: "Roadmap",
-              href: `${customFields.githubUrl}/projects`,
+              href: `https://github.com/orgs/questdb/projects/1/views/5`,
             },
             {
               label: "Videos",
