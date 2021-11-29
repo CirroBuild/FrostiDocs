@@ -1,11 +1,16 @@
 import type { Content, FrontMatter, Metadata } from "@theme/BlogPostPage"
 
+export enum FeatureType {
+  RESOURCE = "resource",
+  COMPARISON = "comparison",
+}
+
 type FlatTutorial = FrontMatter &
   Readonly<{
     content: string
     date: string
     link: string
-    featured?: boolean
+    featureType?: FeatureType
   }>
 
 const tutorials: FlatTutorial[] = [
@@ -17,7 +22,7 @@ const tutorials: FlatTutorial[] = [
     link:
       "https://towardsdatascience.com/sql-extensions-for-time-series-data-in-questdb-f6b53acf3213",
     title: "SQL Extensions for Time-Series Data in QuestDB",
-    featured: true,
+    featureType: FeatureType.RESOURCE,
     image: "/img/tutorial/shared/og-sql.png",
   },
   {
@@ -28,7 +33,7 @@ const tutorials: FlatTutorial[] = [
     link:
       "https://towardsdatascience.com/schemaless-ingestion-in-questdb-using-influxdb-line-protocol-18850e69b453?gi=113183e2c22b",
     title: "Schemaless ingestion in QuestDB using InfluxDB Line Protocol",
-    featured: true,
+    featureType: FeatureType.RESOURCE,
     image: "/img/tutorial/shared/og-influx-line-protocol.png",
   },
   {
@@ -97,12 +102,12 @@ export type Tutorial = Readonly<{
 }>
 
 const normalize = (data: FlatTutorial[]): Tutorial[] =>
-  data.map(({ author, content, date, featured, image, link, title }) => ({
+  data.map(({ author, content, date, featureType, image, link, title }) => ({
     content: {
       frontMatter: {
         author,
         content,
-        featured,
+        featureType,
         image,
         title,
       },

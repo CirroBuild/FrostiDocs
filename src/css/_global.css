@@ -87,6 +87,7 @@
   --ifm-pre-background: var(--palette-midnight);
   --ifm-table-cell-padding: 0.15rem 1rem;
   --ifm-toc-border-color: var(--palette-white-10);
+  --ifm-heading-line-height: 1.5;
 }
 
 html[data-theme="dark"] {

@@ -6,7 +6,7 @@ import PageLayout from "@theme/PageLayout"
 import TutorialPostItem from "@theme/TutorialPostItem"
 
 import seCss from "../../css/section.module.css"
-import tutorials, { Tutorial } from "../../assets/tutorials"
+import tutorials, { FeatureType, Tutorial } from "../../assets/tutorials"
 import styles from "./styles.module.css"
 
 type Props = Readonly<{
@@ -38,12 +38,16 @@ function TutorialListPage(props: Props) {
       new Date(b.content.metadata.date).getTime() -
       new Date(a.content.metadata.date).getTime(),
   )
-  const featured = all.filter(
-    ({ content }) => content.frontMatter.featured === true,
+  const featuredResources = all.filter(
+    ({ content }) => content.frontMatter.featureType === FeatureType.RESOURCE,
   )
+
+  const featuredComparisons = all.filter(
+    ({ content }) => content.frontMatter.featureType === FeatureType.COMPARISON,
+  )
+
   const cards = all.filter(
-    ({ content }) =>
-      content.frontMatter.featured == null || !content.frontMatter.featured,
+    ({ content }) => content.frontMatter.featureType == null,
   )
   const description =
     "Content from the QuestDB team and community contributors for learning about time series analytics, visualization, integrations, and example applications using QuestDB."
@@ -80,18 +84,31 @@ function TutorialListPage(props: Props) {
       </section>
 
       <div className="container margin-vert--lg">
-        {featured.length > 0 && (
+        {featuredComparisons.length > 0 && (
           <>
-            <h2 className={styles.cards__title}>Featured resources</h2>
+            <h2 className={styles.cards__title}>
+              Comparing time-series databases
+            </h2>
             <div className="row">
               <main className={clsx("col", styles.cards__container)}>
-                {renderCards(featured)}
+                {renderCards(featuredComparisons)}
               </main>
             </div>
           </>
         )}
 
-        <h2 className={styles.cards__title}>All resources</h2>
+        {featuredResources.length > 0 && (
+          <>
+            <h2 className={styles.cards__title}>Featured tutorials</h2>
+            <div className="row">
+              <main className={clsx("col", styles.cards__container)}>
+                {renderCards(featuredResources)}
+              </main>
+            </div>
+          </>
+        )}
+
+        <h2 className={styles.cards__title}>All tutorials and resources</h2>
         <div className="row">
           <main className={clsx("col", styles.cards__container)}>
             {renderCards(cards)}
