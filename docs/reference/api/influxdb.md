@@ -29,8 +29,8 @@ table_name,tagset fieldset timestamp
 | Element      | Definition                                                                                                                                     |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `table_name` | Name of the table where QuestDB will write data.                                                                                               |
-| `tagset`     | Array of string key-value pairs separated by commas that represent the reading's associated metadata                                           |
-| `fieldset`   | Array of key-value pairs separated by commas that represent readings. The keys are string, values can be string, numeric, boolean or timestamp |
+| `tagset`     | Array of key-value pairs separated by commas that will be parsed as symbol columns                                                             |
+| `fieldset`   | Array of key-value pairs separated by commas that will be parsed as numeric, string and other column types                                     |
 | `timestamp`  | UNIX timestamp. By default in nanoseconds. Can be changed in the configuration                                                                 |
 
 ### Behaviour
