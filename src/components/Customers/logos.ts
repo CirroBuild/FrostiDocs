@@ -47,8 +47,8 @@ export const logos: CustomerLogo[] = [
   {
     src: "/img/pages/customers/cards/syndica.svg",
     alt: "Syndica",
-    width: 140,
-    height: 56,
+    height: 30,
+    width: 113,
   },
   {
     src: "/img/pages/customers/logos/biba.svg",
