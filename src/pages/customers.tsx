@@ -27,6 +27,7 @@ const quotes = _quotes.map(({ author, company, logo, role, text }) => {
           height={logo.height}
           src={logo.src}
           width={logo.width}
+          style={{ top: logo.offset ?? 0 }}
         />
       </div>
 

@@ -5,6 +5,7 @@ type Quote = {
     src: string
     height: number
     width: number
+    offset?: number
   }
   text: string
   author: string
@@ -54,6 +55,49 @@ const quotes: Quote[] = [
     author: "Jean-Francois Perreton",
     role: "Head of Algo Quant",
     company: "Kepler Cheuvreux",
+  },
+  {
+    website: "https://aquis.eu/",
+    logo: {
+      alt: "Aquis Exchange logo",
+      src: "/img/pages/customers/cards/aquis.svg",
+      height: 30,
+      width: 100,
+      offset: 5,
+    },
+    text:
+      "QuestDB is a time series database truly built by developers for developers. We found that QuestDB provides a unicorn solution to handle extreme TPS while also offering a simplified SQL programming interface.",
+    author: "Viet Lee",
+    role: "CTO",
+    company: "Aquis Exchange",
+  },
+  {
+    website: "https://www.publicissapient.com/",
+    logo: {
+      alt: "Sapient logo",
+      src: "/img/pages/customers/cards/sapient.svg",
+      height: 28,
+      width: 140,
+    },
+    text:
+      "Sapient ingests, analyzes, and converts billions of data points into meaningful insights through AI, machine learning, and always-on optimization. We chose QuestDB for the simplicity of SQL, high-throughput ingestion, and PostgreSQL wire compatibility with our tooling.",
+    author: "Dan Worth",
+    role: "Principal Software Engineer",
+    company: "Sapient",
+  },
+  {
+    website: "https://syndica.io",
+    logo: {
+      alt: "Syndica logo",
+      src: "/img/pages/customers/cards/syndica.svg",
+      height: 30,
+      width: 113,
+    },
+    text:
+      "QuestDB outperforms every database we've tested and delivered a 10x improvement in querying speed. It's become a critical piece of our infrastructure.",
+    author: "Ahmed Abbasi",
+    role: "Co-Founder/CEO",
+    company: "Syndica",
   },
   {
     website: "https://www.datron.com/",

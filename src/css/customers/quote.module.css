@@ -55,6 +55,10 @@
   filter: brightness(0) invert(1);
 }
 
+.quote__logo img {
+  position: relative;
+}
+
 .quote__content {
   display: flex;
   flex: 1;
