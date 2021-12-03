@@ -1,7 +1,9 @@
 .logo__item {
   display: flex;
   align-items: center;
+  justify-content: center;
   min-height: 10px;
+  width: 140px;
   padding: 0px;
   font-size: var(--font-size-big-2);
   transform: scale(0.7);
