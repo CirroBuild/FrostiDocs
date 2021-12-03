@@ -80,7 +80,7 @@ const quotes: Quote[] = [
       width: 140,
     },
     text:
-      "Sapient ingests, analyzes, and converts billions of data points into meaningful insights through AI, machine learning, and always-on optimization. We chose QuestDB for the simplicity of SQL, high-throughput ingestion, and PostgreSQL wire compatibility with our tooling.",
+      "Sapient ingests, analyzes and converts billions of data points into meaningful insights through AI and machine learning. We chose QuestDB for the simplicity of SQL, high-throughput ingestion, and PostgreSQL wire compatibility with our tooling.",
     author: "Dan Worth",
     role: "Principal Software Engineer",
     company: "Sapient",
@@ -94,7 +94,7 @@ const quotes: Quote[] = [
       width: 113,
     },
     text:
-      "QuestDB outperforms every database we've tested and delivered a 10x improvement in querying speed. It's become a critical piece of our infrastructure.",
+      "QuestDB outperforms every database we have tested and delivered a 10x improvement in querying speed. It has become a critical piece of our infrastructure.",
     author: "Ahmed Abbasi",
     role: "Co-Founder/CEO",
     company: "Syndica",

@@ -24,7 +24,13 @@ const Slideshow = ({ nbElements }: Props) => {
       <div className={cuCss.logo__desktop}>
         {logos.map((logo) => (
           <div key={logo.alt} className={cuCss.logo__item}>
-            <img alt={logo.alt} height={56} src={logo.src} width={140} />
+            <img
+              alt={logo.alt}
+              height={logo.height}
+              src={logo.src}
+              width={logo.width}
+              style={{ top: logo.offset ?? 0 }}
+            />
           </div>
         ))}
       </div>
@@ -38,9 +44,10 @@ const Slideshow = ({ nbElements }: Props) => {
                 <div key={panelLogo.alt} className={cuCss.logo__item}>
                   <img
                     alt={panelLogo.alt}
-                    height={56}
+                    height={panelLogo.height}
                     src={panelLogo.src}
-                    width={140}
+                    width={panelLogo.width}
+                    style={{ top: panelLogo.offset ?? 0 }}
                   />
                 </div>
               ))}

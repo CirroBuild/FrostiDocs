@@ -1,11 +1,16 @@
 .logo__item {
   display: flex;
+  align-items: center;
   min-height: 10px;
   padding: 0px;
   font-size: var(--font-size-big-2);
   transform: scale(0.7);
   margin: 0 4px 12px 4px;
   filter: brightness(0) invert(0.9);
+}
+
+.logo__item img {
+  position: relative;
 }
 
 @media (max-width: 996px) {
