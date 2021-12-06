@@ -118,8 +118,8 @@ const quotes: Quote[] = [
     logo: {
       alt: "Ably logo",
       src: "/img/pages/customers/cards/ably.svg",
-      height: 56,
-      width: 140,
+      height: 46,
+      width: 120,
     },
     text:
       "QuestDB allows me to build tools and systems without having to learn proprietary query languages while maintaining industry-leading performance and a straightforward setup.",
