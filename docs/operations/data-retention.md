@@ -31,9 +31,10 @@ Users cannot alter the partitioning strategy after a table is created.
 
 Tables can be partitioned by one of the following:
 
-- `DAY`
-- `MONTH`
 - `YEAR`
+- `MONTH`
+- `DAY`
+- `HOUR`
 
 ```questdb-sql title="Creating a table and partitioning by DAY"
 CREATE TABLE my_table(ts TIMESTAMP, symb SYMBOL, price DOUBLE) timestamp(ts)

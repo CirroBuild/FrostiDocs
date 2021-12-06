@@ -44,9 +44,9 @@ following:
 db
 └── sensor_data
     ├── 2020.detached
-    │   ├── device_version.d
-    │   ├── driver.d
-    │   └── ...
+    │   ├── device_version.d
+    │   ├── driver.d
+    │   └── ...
     └── 2021
         ├── device_version.d
         ├── driver.d
@@ -67,7 +67,7 @@ partition has been successfully attached:
 db
 └── sensor_data
     ├── 2020
-    │   └── ...
+    │   └── ...
     └── 2021
         └── ...
 ```
@@ -79,7 +79,7 @@ Details of creating backups can be found on the
 
 :::
 
-Partitions may be referred to by `YEAR`, `MONTH` or `DAY`:
+Partitions may be referred to by `YEAR`, `MONTH`, `DAY`, or `HOUR`:
 
 ```questdb-sql title="Attach a partition by name"
 --DAY

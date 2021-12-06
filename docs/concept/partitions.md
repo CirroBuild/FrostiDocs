@@ -20,8 +20,8 @@ import Screenshot from "@theme/Screenshot"
 
 ## Properties
 
-- Available partition intervals are `NONE`, `DAY`, `MONTH` and `YEAR`.
-- Default behaviour is `PARTITION BY NONE`.
+- Available partition intervals are `NONE`, `YEAR`, `MONTH`, `DAY`, and `HOUR`.
+- Default behavior is `PARTITION BY NONE`.
 - Partitions are defined at table creation. For more information, refer to
   [CREATE TABLE section](/docs/reference/sql/create-table/).
 

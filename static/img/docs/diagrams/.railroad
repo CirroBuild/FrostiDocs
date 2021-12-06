@@ -7,7 +7,7 @@ createTableDef
   'as' '(' selectSql ')'  (',' castDef)* (',' indexDef)*
   )
   ) (
-  ('timestamp' columnRef) ('partition' 'by' ('NONE' | 'DAY' | 'MONTH' | 'YEAR'))?
+  ('timestamp' '(' columnRef ')' ) ('partition' 'by' ('NONE' | 'YEAR' | 'MONTH' | 'DAY' | 'HOUR' ))?
   )?
 
 alterTable 
@@ -23,7 +23,7 @@ typeDef
   ::= (
   'boolean' | 'byte' | 'short' | 'char' | 'int' | 'float' |
   ('symbol' ('capacity' distinctValueEstimate)? ('CACHE' | 'NOCACHE')? inlineIndexDef?) |
-  'string' | 'long' | 'date' | 'timestamp' | 'double' | 'binary' | 'long256'
+  'string' | 'long' | 'date' | 'timestamp' | 'double' | 'binary' | 'long256' | 'geohash(<size>)'
   )
 
 indexDef 

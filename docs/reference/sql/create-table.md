@@ -1,157 +1,181 @@
 ---
-title: CREATE TABLE keyword
+title: CREATE TABLE reference
 sidebar_label: CREATE TABLE
-description: CREATE TABLE SQL keyword reference documentation.
+description: CREATE TABLE SQL keywords reference documentation.
 ---
 
-To create a new table in the database, the `CREATE TABLE` query followed by
-column definitions can be used:
+To create a new table in the database, the `CREATE TABLE` keywords followed by
+column definitions are used:
 
-```questdb-sql title="Create a table with a designated timestamp"
+```questdb-sql
 CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP, s STRING)
   timestamp(ts);
 ```
 
-**Hint:** checking table metadata can be done via the `tables()` and
-`table_columns()` functions which are described in the
+:::info
+
+Checking table metadata can be done via the `tables()` and `table_columns()`
+functions which are described in the
 [meta functions](/docs/reference/function/meta/) documentation page.
 
-## Syntax
+:::
 
-![Flow chart showing the syntax of the CREATE TABLE keyword](/img/docs/diagrams/createTable.svg)
-
-The following sections describe the keywords and definitions illustrated in this
-diagram.
-
-### IF NOT EXISTS
+## IF NOT EXISTS
 
 An optional `IF NOT EXISTS` clause may be added directly after the
 `CREATE TABLE` keywords to indicate that a new table should be created if one
 with the desired table name does not already exist.
 
-### tableName
+```questdb-sql
+CREATE TABLE IF NOT EXISTS test_table(price DOUBLE, ts TIMESTAMP) timestamp(ts);
+```
 
-`tableName` - name is used to reference the table in SQL statements. Internally
-the table name is used as a directory name on the file system. It can contain
-both ASCII and Unicode characters.
+## Table name
 
-:::note
+Internally the table name is used as a directory name on the file system. It can
+contain both ASCII and Unicode characters. The table name **must be unique** and
+an error is returned if a table already exists with the requested name. Table
+names containing spaces or period `.` character must be enclosed in **double
+quotes**, for example:
 
-- `tableName` must be a unique name. An error is returned if a table already
-  exists with the requested name.
+```questdb-sql
+CREATE TABLE "example out of.space" (a INT);
+INSERT INTO "example out of.space" values (1);
+```
 
-- Table names containing spaces or period `.` character must be enclosed in
-  **double quotes**, for example:
+## Column name
 
-  ```questdb-sql
-  CREATE TABLE "example out of.space" (a INT);
-  INSERT INTO "example out of.space" values (1);
-  ```
-
-:::
-
-### columnName
-
-`columnName` - name used to reference a column of a table. As with table names,
-the column name is used for file names internally. Although it does support both
-ASCII and Unicode characters, character restrictions specific to the file system
-still apply.
+As with table names, the column name is used for file names internally. Although
+it does support both ASCII and Unicode characters, character restrictions
+specific to the file system still apply. Tables may have up to **2,147,483,647**
+columns.
 
 :::note
 
-- `columnName` must be unique within each table and **must not** contain a
-  period `.` character.
-
-- The maximum number of columns in a table is **2,147,483,647**
+Column names must be unique within each table and **must not** contain a period
+`.` character.
 
 :::
 
-### typeDef
+## Type definition
 
-`typeDef` - column [type definition](/docs/reference/sql/datatypes/) with
-additional options for `symbol` type.
+When specifying a column, a name and
+[type definition](/docs/reference/sql/datatypes/) must be provided. The `symbol`
+type may have additional optional parameters applied.
 
 ![Flow chart showing the syntax of the different column types](/img/docs/diagrams/columnTypeDef.svg)
 
-#### Symbol
+### Symbols
 
 Optional keywords and parameters may follow the `symbol` type which allow for
 further optimization on the handling of this type. For more information on the
 benefits of using this type, see the [symbol](/docs/concept/symbol/) overview.
 
-**Capacity:**
+#### Symbol capacity
 
-- `CAPACITY` - an optional keyword used when specifying a symbol type on table
-  creation used to indicate how many distinct values this column is expected to
-  have. When `distinctValueEstimate` is not explicitly specified, a default
-  value of `cairo.default.symbol.capacity` is used.
+`CAPACITY` is an optional keyword used when defining a symbol type on table
+creation to indicate how many distinct values this column is expected to have.
+When `distinctValueEstimate` is not explicitly specified, a default value of
+`cairo.default.symbol.capacity` is used.
 
-- `distinctValueEstimate` - the value used to size data structures for
-  [symbols](/docs/concept/symbol/). These data structures will resize themselves
-  when necessary to allow QuestDB to function correctly. Underestimating the
-  symbol value count may result in drop of performance whereas over-estimating
-  may result in higher disk space and memory consumption.
+`distinctValueEstimate` - the value used to size data structures for
+[symbols](/docs/concept/symbol/). These data structures will resize themselves
+when necessary to allow QuestDB to function correctly. Underestimating the
+symbol value count may result in drop of performance whereas over-estimating may
+result in higher disk space and memory consumption.
 
-**Caching:**
+```questdb-sql
+CREATE TABLE my_table(symb SYMBOL capacity 128, price DOUBLE, ts TIMESTAMP),
+  index (symb) timestamp(ts);
+```
 
-- `CACHE | NOCACHE` - a flag to tell QuestDB how to cache a
-  [symbol](/docs/concept/symbol/). `CACHE` means that QuestDB will use Java Heap
-  based Map to resolve symbol values and keys. When a column has a large number
-  of distinct symbol values (over 100,000, for example), the heap impact might
-  be significant and may cause OutOfMemory errors, depending on the heap size.
-  To avoid Java Heap impact, `NOCACHE` leverages an off-heap structure which can
-  deal with larger value counts but is slower.
+The symbol capacity is not to be confused with **index capacity** described in
+[column indexes](#column-indexes) below.
 
-  The default option for `symbol` types is `CACHE`.
+```questdb-sql
+CREATE TABLE my_table
+  (symb SYMBOL capacity 128 nocache index capacity 256, price DOUBLE, ts TIMESTAMP)
+timestamp(ts);
+```
 
-**Index:**
+#### Symbol caching
 
-- `inlineIndexDef` - when present, QuestDB will create and maintain an
-  [index](/docs/concept/indexes/) for a `symbol` column. An index capacity
-  definition may be provided (`indexCapacityDef`) for storage configuration.
+`CACHE | NOCACHE` is used to specify whether a symbol should be cached. `CACHE`
+means that QuestDB will use a Java Heap-based Map to resolve symbol values and
+keys. When a column has a large number of distinct symbol values (over 100,000,
+for example), the heap impact might be significant and may cause OutOfMemory
+errors, depending on the heap size.
 
-  ![Flow chart showing the syntax of the INDEX keyword](/img/docs/diagrams/inlineIndexDef.svg)
+To avoid Java Heap impact, `NOCACHE` leverages an off-heap structure which can
+deal with larger value counts but is slower. The default option for `symbol`
+types is `CACHE`.
 
-- `indexCapacityDef` - storage options for the index using a `valueBlockSize`
+```questdb-sql
+CREATE TABLE my_table
+  (symb SYMBOL capacity 128 nocache, price DOUBLE, ts TIMESTAMP)
+timestamp(ts);
+```
 
-  ![Flow chart showing the syntax of the CAPACITY keyword](/img/docs/diagrams/indexCapacityDef.svg)
+### Casting types
 
-- `valueBlockSize` - index storage parameter that specifies how many row IDs to
-  store in a single storage block on disk. This value is optional and will
-  default to the value of the `cairo.index.value.block.size`
-  [configuration key](/docs/reference/configuration/). Fewer blocks used to
-  store row IDs achieves better performance. At the same time over-sizing
-  `valueBlockSize` will result in higher than necessary disk space usage.
-
-  Consider an example table with 200 unique stock symbols and 1,000,000,000
-  records over time. The index will have to store 1,000,000,000 / 200 row IDs
-  for each symbol, i.e. 5,000,000 per symbol.
-
-  - If `valueBlockSize` is 1,048,576 in this case, QuestDB will use 5 blocks to
-    store the row IDs
-  - If `valueBlockSize` is 1,024 in this case, the block count will be 4,883
-
-### castDef
-
-- `castDef` - casts type of cherry-picked column. `columnRef` must reference
-  existing column in the `selectSql`
+`castDef` - casts the type of a specific column. `columnRef` must reference
+existing column in the `selectSql`
 
 ![Flow chart showing the syntax of the cast function](/img/docs/diagrams/castDef.svg)
 
-### indexDef
+```questdb-sql
+CREATE TABLE test AS (SELECT cast(x as DOUBLE) x FROM long_sequence(10));
+```
 
-- `indexDef` - instructs QuestDB to create an index for one of table's columns.
-  This clause references column name to be indexed. The referenced column must
-  be of type `SYMBOL`
+## Column indexes
+
+Index definitions (`indexDef`) are used to create an
+[index](/docs/concept/indexes/) for a table column. The referenced table column
+must be of type `SYMBOL`.
 
 ![Flow chart showing the syntax of the index function](/img/docs/diagrams/indexDef.svg)
 
-### timestamp
+```questdb-sql
+CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP),
+  index (symb) timestamp(ts);
+```
 
-`timestamp` - references a column in new table, which will be the designated
-timestamp. Such column must be of type `timestamp`. For more information on
-designated timestamps, see the
-[designated timestamp](/docs/concept/designated-timestamp/) reference.
+An index capacity may be provided for the index using and references a
+`valueBlockSize`
+
+![Flow chart showing the syntax of the CAPACITY keyword](/img/docs/diagrams/indexCapacityDef.svg)
+
+```questdb-sql
+CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP),
+  index (symb capacity 128) timestamp(ts);
+-- equivalent to
+CREATE TABLE my_table(symb SYMBOL index capacity 128, price DOUBLE, ts TIMESTAMP),
+  timestamp(ts);
+```
+
+`valueBlockSize` is an index storage parameter that specifies how many row IDs
+to store in a single storage block on disk. This value is optional and will
+default to the value of the `cairo.index.value.block.size`
+[configuration key](/docs/reference/configuration/). Fewer blocks used to store
+row IDs achieves better performance. At the same time over-sizing
+`valueBlockSize` will result in higher than necessary disk space usage.
+
+Consider an example table with 200 unique stock symbols and 1,000,000,000
+records over time. The index will have to store 1,000,000,000 / 200 row IDs for
+each symbol, i.e. 5,000,000 per symbol.
+
+- If `valueBlockSize` is 1,048,576 in this case, QuestDB will use 5 blocks to
+  store the row IDs
+- If `valueBlockSize` is 1,024 in this case, the block count will be 4,883
+
+The query above may be written as follows:
+
+## Designated timestamp
+
+The timestamp function allows for specifying which column (which must be of
+`timestamp` type) should be a designated timestamp for the table. For more
+information, see the [designated timestamp](/docs/concept/designated-timestamp/)
+reference.
 
 :::caution
 
@@ -160,15 +184,17 @@ created.
 
 :::
 
-### partition
+## Partitioning
 
-`partition by` - the [partitioning strategy](/docs/concept/partitions/) for the
-table. The default partitioning strategy of table is `NONE` and tables can be
-partitioned by one of the following:
+`PARTITION BY` allows for specifying the
+[partitioning strategy](/docs/concept/partitions/) for the table. The default
+partitioning strategy is `NONE` and tables can be partitioned by one of the
+following:
 
-- `DAY`
-- `MONTH`
 - `YEAR`
+- `MONTH`
+- `DAY`
+- `HOUR`
 
 :::caution
 
@@ -177,7 +203,7 @@ created.
 
 :::
 
-### WITH table parameters
+## WITH table parameters
 
 ![Flow chart showing the syntax of keyword to specify WITH table commit parameters](/img/docs/diagrams/createTableWithCommitParam.svg)
 
@@ -200,12 +226,11 @@ parameters may be applied:
 For more information on commit lag and the maximum uncommitted rows, see the
 guide for [out-of-order commits](/docs/guides/out-of-order-commit-lag/).
 
+## Create table syntax diagram
+
+![Flow chart showing the syntax of the CREATE TABLE keyword](/img/docs/diagrams/createTable.svg)
+
 ## Examples
-
-This section demonstrates how to use the [CREATE TABLE](#create-table) and
-[CREATE TABLE AS](#create-table-as) syntax.
-
-### CREATE TABLE
 
 The following examples demonstrate creating tables from basic statements, and
 introduce features such as partitioning and designated timestamps. For more
@@ -248,38 +273,6 @@ CREATE TABLE
   timestamp(ts)
 PARTITION BY DAY;
 ```
-
-### CREATE TABLE IF NOT EXISTS
-
-The following example will create a table `my_table` if one does not already
-exist with the name `my_table`:
-
-```questdb-sql
-CREATE TABLE IF NOT EXISTS
-  my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP, s STRING)
-  timestamp(ts)
-PARTITION BY DAY;
-```
-
-### CREATE TABLE WITH
-
-#### Specifying commit lag and maximum uncommitted rows
-
-Let's assume we have out-of-order records arriving at a table `my_table`. If we
-know beforehand that the maximum _lag_ of later records is likely to be 240
-seconds, we can schedule sorting and commits of out-of-order data to occur
-within this time boundary. The _lag_ configuration can be combined with the
-maximum uncommitted rows so that a commit will occur based on expected row
-count, or the _lag_ boundary is met:
-
-```questdb-sql
-CREATE TABLE my_table (ts TIMESTAMP) timestamp(ts)
-PARTITION BY DAY WITH maxUncommittedRows=250000, commitLag = 240s
-```
-
-For more information on out-of-order lag and uncommitted rows, see the
-documentation for
-[out-of-order data commits](/docs/guides/out-of-order-commit-lag/).
 
 ### CREATE TABLE AS
 
@@ -330,3 +323,26 @@ CREATE TABLE taxi_trips AS(
 ) timestamp(pickup_time)
 PARTITION BY MONTH;
 ```
+
+### CREATE TABLE WITH parameters
+
+Adding `WITH` to a create table statement allows for providing table-specific
+configuration.
+
+#### Specifying commit lag and maximum uncommitted rows
+
+Let's assume we have out-of-order records arriving at a table `my_table`. If we
+know beforehand that the maximum _lag_ of later records is likely to be 240
+seconds, we can schedule sorting and commits of out-of-order data to occur
+within this time boundary. The _lag_ configuration can be combined with the
+maximum uncommitted rows so that a commit will occur based on expected row
+count, or the _lag_ boundary is met:
+
+```questdb-sql
+CREATE TABLE my_table (ts TIMESTAMP) timestamp(ts)
+PARTITION BY DAY WITH maxUncommittedRows=250000, commitLag = 240s
+```
+
+For more information on out-of-order lag and uncommitted rows, see the
+documentation for
+[out-of-order data commits](/docs/guides/out-of-order-commit-lag/).
