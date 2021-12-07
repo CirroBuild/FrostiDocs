@@ -65,7 +65,7 @@ latestBy
   ::= 'SELECT' ( columnName (',' columnName)* ) 'FROM' tableName 'LATEST' 'BY' ( columnName (',' columnName)* )
 
 limit
-  ::= 'SELECT' someSelectStatement 'LIMIT' ( numberOfRecords | (upperBound ',' lowerBound) ) ';'
+  ::= 'SELECT' someSelectStatement 'LIMIT' ( numberOfRecords | (lowerBound ',' upperBound) ) ';'
 
 fill
   ::= someSampleBySelectQuery 'FILL' ( ( 'NONE' | 'NULL' | 'PREV' | 'LINEAR' | 'x' ) ',' )*

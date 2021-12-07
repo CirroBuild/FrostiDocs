@@ -43,12 +43,12 @@
     <text class="nonterminal" x="409" y="21">numberOfRecords</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#upperBound" xlink:title="upperBound">
     <rect x="401" y="47" width="96" height="32"/>
     <rect x="399" y="45" width="96" height="32" class="nonterminal"/>
-    <text class="nonterminal" x="409" y="65">upperBound</text></a><rect x="517" y="47" width="24" height="32" rx="10"/>
+    <text class="nonterminal" x="409" y="65">lowerBound</text></a><rect x="517" y="47" width="24" height="32" rx="10"/>
     <rect x="515" y="45" width="24" height="32" class="terminal" rx="10"/>
     <text class="terminal" x="525" y="65">,</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lowerBound" xlink:title="lowerBound">
     <rect x="561" y="47" width="94" height="32"/>
     <rect x="559" y="45" width="94" height="32" class="nonterminal"/>
-    <text class="nonterminal" x="569" y="65">lowerBound</text></a><rect x="695" y="3" width="24" height="32" rx="10"/>
+    <text class="nonterminal" x="569" y="65">upperBound</text></a><rect x="695" y="3" width="24" height="32" rx="10"/>
     <rect x="693" y="1" width="24" height="32" class="terminal" rx="10"/>
     <text class="terminal" x="703" y="21">;</text>
     <path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 17 h2 m0 0 h10 m70 0 h10 m0 0 h10 m160 0 h10 m0 0 h10 m60 0 h10 m20 0 h10 m132 0 h10 m0 0 h122 m-294 0 h20 m274 0 h20 m-314 0 q10 0 10 10 m294 0 q0 -10 10 -10 m-304 10 v24 m294 0 v-24 m-294 24 q0 10 10 10 m274 0 q10 0 10 -10 m-284 10 h10 m96 0 h10 m0 0 h10 m24 0 h10 m0 0 h10 m94 0 h10 m20 -44 h10 m24 0 h10 m3 0 h-3"/>

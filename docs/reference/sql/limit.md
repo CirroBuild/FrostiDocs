@@ -38,7 +38,8 @@ SELECT * FROM ratings LIMIT 2,5;
 
 `negative` range parameters will return results from the bottom of the table.
 Assuming a table with `n` records, the following will return records between n-7
-(exclusive) and n-3 (inclusive), i.e {n-6, n-5, n-4, n-3}
+(exclusive) and n-3 (inclusive), i.e {n-6, n-5, n-4, n-3}. Both `upperBound` and
+`lowerBound` must be negative numbers, in this case:
 
 ```questdb-sql title="Range results (negative)"
 SELECT * FROM ratings LIMIT -7, -3;
