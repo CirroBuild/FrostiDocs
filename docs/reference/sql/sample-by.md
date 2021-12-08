@@ -206,26 +206,6 @@ This query will return two rows:
 The timestamp value for the 24 hour groups start at the first-observed
 timestamp.
 
-### ALIGN TO CALENDAR
-
-Sample calculation may also be aligned to calendar dates using
-`ALIGN TO CALENDAR` keywords:
-
-```questdb-sql
-SELECT ts, count() FROM sensors
-SAMPLE BY 1d
-ALIGN TO CALENDAR
-```
-
-In this case, given the example table above and sampling by 1 day, the 24 hour
-samples begin at `2021-05-31T00:00:00.000000Z`:
-
-| ts                          | count |
-| --------------------------- | ----- |
-| 2021-05-31T00:00:00.000000Z | 1     |
-| 2021-06-01T00:00:00.000000Z | 4     |
-| 2021-06-02T00:00:00.000000Z | 2     |
-
 ### ALIGN TO CALENDAR TIME ZONE
 
 A time zone may be provided for sampling with calendar alignment. Details on the
