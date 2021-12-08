@@ -41,7 +41,7 @@ export const investorsColumn2: Investor[] = [
   },
   {
     name: "Tobi Knaup",
-    position: "EO D2iQ",
+    position: "CEO D2iQ",
   },
   {
     name: "Andrew Alexeev",
