@@ -1,0 +1,33 @@
+.investors {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 1rem;
+  margin-top: 2rem;
+}
+
+.investors__logos svg:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.investor {
+  margin-bottom: 1rem;
+}
+
+.investor__name {
+  margin-bottom: 0;
+  font-size: var(--font-size-large);
+  font-weight: var(--ifm-font-weight-bold);
+}
+
+@media (max-width: 997px) {
+  .investors {
+    grid-template-columns: 1fr;
+    grid-row-gap: 1rem;
+  }
+
+  .investors__logos {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+}

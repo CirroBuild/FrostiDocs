@@ -1,0 +1,13 @@
+.logos {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 1rem;
+  margin-top: 2rem;
+}
+
+.logo__item {
+  display: flex;
+  min-height: 10px;
+  padding: 0px;
+  filter: brightness(0) invert(0.9);
+}

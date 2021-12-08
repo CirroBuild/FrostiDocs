@@ -300,11 +300,7 @@ const Community = () => {
       </section>
       <section className={clsx(seCss["section--odd"])}>
         <div
-          className={clsx(
-            seCss["section--inner"],
-            paCss.flex__reverse_section,
-            seCss["section--center"],
-          )}
+          className={clsx(seCss["section--inner"], paCss.flex__reverse_section)}
         >
           <div className={paCss.half__section}>
             <p className={paCss.level__title}>Level 3</p>

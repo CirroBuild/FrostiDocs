@@ -43,6 +43,8 @@ const config = {
   customFields: customFields,
   plugins: [
     require.resolve("./plugins/fetch-latest-release/index"),
+    require.resolve("./plugins/fetch-repo/index"),
+    require.resolve("./plugins/fetch-contributors-count/index"),
     require.resolve("./plugins/webpack-ts/index"),
     require.resolve("./plugins/optimize/index"),
     require.resolve("./plugins/manifest/index"),
@@ -153,6 +155,10 @@ const config = {
               label: "Careers",
               to: "/careers/",
             },
+            {
+              label: "About us",
+              to: "/about-us/",
+            },
           ],
         },
         {
@@ -204,6 +210,10 @@ const config = {
             {
               label: "Careers",
               to: "/careers/",
+            },
+            {
+              label: "About us",
+              to: "/about-us/",
             },
           ],
         },

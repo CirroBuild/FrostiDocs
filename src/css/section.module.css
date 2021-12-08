@@ -65,6 +65,11 @@
   font-size: var(--font-size-big-4);
 }
 
+.section__title__em {
+  color: var(--palette-pink);
+  font-style: normal;
+}
+
 .section__title--accent {
   font-size: var(--font-size-big-5);
 }
@@ -92,6 +97,10 @@
   flex-direction: column;
   flex: 1;
   align-items: center;
+}
+
+.section__header__left {
+  align-items: flex-start;
 }
 
 .section__illustration {
