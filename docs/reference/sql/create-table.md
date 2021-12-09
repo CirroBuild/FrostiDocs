@@ -168,8 +168,6 @@ each symbol, i.e. 5,000,000 per symbol.
   store the row IDs
 - If `valueBlockSize` is 1,024 in this case, the block count will be 4,883
 
-The query above may be written as follows:
-
 ## Designated timestamp
 
 The timestamp function allows for specifying which column (which must be of

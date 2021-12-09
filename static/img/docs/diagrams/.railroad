@@ -22,7 +22,7 @@ inlineIndexDef
 typeDef 
   ::= (
   'boolean' | 'byte' | 'short' | 'char' | 'int' | 'float' |
-  ('symbol' ('capacity' distinctValueEstimate)? ('CACHE' | 'NOCACHE')? inlineIndexDef?) |
+  ('symbol' (('capacity' distinctValueEstimate) ('CACHE' | 'NOCACHE')?)? inlineIndexDef?) |
   'string' | 'long' | 'date' | 'timestamp' | 'double' | 'binary' | 'long256' | 'geohash(<size>)'
   )
 
