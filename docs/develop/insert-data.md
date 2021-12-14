@@ -782,16 +782,7 @@ curl -G \
 
 # Insert a row
 curl -G \
-  --data-urlencode "query=INSERT INTO trades VALUES('abc', 123456);" \
-  http://localhost:9000/exec
-```
-
-Note that these two queries can be combined into a single curl request:
-
-```shell
-curl -G \
-  --data-urlencode "query=CREATE TABLE IF NOT EXISTS trades(name STRING, value INT);\
-  INSERT INTO trades VALUES('abc', 123456);" \
+  --data-urlencode "query=INSERT INTO trades VALUES('abc', 123456)" \
   http://localhost:9000/exec
 ```
 
@@ -812,7 +803,7 @@ const HOST = "http://localhost:9000"
 async function createTable() {
   try {
     const queryData = {
-      query: "CREATE TABLE IF NOT EXISTS trades (name STRING, value INT);",
+      query: "CREATE TABLE IF NOT EXISTS trades (name STRING, value INT)",
     }
 
     const response = await fetch(`${HOST}/exec?${qs.encode(queryData)}`)
@@ -827,7 +818,7 @@ async function createTable() {
 async function insertData() {
   try {
     const queryData = {
-      query: "INSERT INTO trades VALUES('abc', 123456);",
+      query: "INSERT INTO trades VALUES('abc', 123456)",
     }
 
     const response = await fetch(`${HOST}/exec?${qs.encode(queryData)}`)
@@ -865,9 +856,9 @@ def run_query(sql_query):
     print("Error: %s" % (e))
 
 # create table
-run_query("CREATE TABLE IF NOT EXISTS trades (name STRING, value INT);")
+run_query("CREATE TABLE IF NOT EXISTS trades (name STRING, value INT)")
 # insert row
-run_query("INSERT INTO trades VALUES('abc', 123456);")
+run_query("INSERT INTO trades VALUES('abc', 123456)")
 ```
 
 </TabItem>
