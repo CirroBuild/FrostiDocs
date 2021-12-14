@@ -209,9 +209,13 @@ protocol to notify the sender. Data may be discarded because of:
 InfluxDB line protocol does not commit data every line or when a sender
 disconnects, but instead uses a number of rules to break incoming data into
 commit batches. This results in data not being visible in `SELECT` queries
-immediately after being received. The default behavior is a `30s` delay from the
-time a message is received to be able to `SELECT` the data in a QuestDB server.
-The interval can be configured in `server.conf` using the
+immediately after being received. The default behavior is to commit when
+uncommited row count exceeds configured parameter `maxUncommittedRows` for the
+table of when no data received for the table for `30s`.
+
+Changing the `maxUncommittedRows` parameter is described in more details in
+[per-table commit lag and maximum uncommitted rows](/docs/guides/out-of-order-commit-lag/#per-table-commit-lag-and-maximum-uncommitted-rows).
+The `30s` default commit interval can be configured in `server.conf` using the
 `line.tcp.maintenance.job.interval` parameter, see more at the documentation for
 [ILP Commit Strategy](/docs/reference/api/influxdb/#commit-strategy-1).
 

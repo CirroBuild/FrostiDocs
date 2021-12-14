@@ -4,30 +4,30 @@ sidebar_label: JOIN
 description: JOIN SQL keyword reference documentation.
 ---
 
-QuestDB supports the following types of joins: `INNER`, `OUTER`, `CROSS`, `ASOF`
-and `SPLICE`. `FULL` joins are not yet implemented and are on our roadmap. All
-supported join types can be combined in a single SQL statement; QuestDB SQL's
-optimiser determines the best execution order and algorithms.
+QuestDB supports the following types of joins: `INNER`, `LEFT (OUTER)`, `CROSS`,
+`ASOF` and `SPLICE`. `FULL` joins are not yet implemented and are on our
+roadmap. All supported join types can be combined in a single SQL statement;
+QuestDB SQL's optimizer determines the best execution order and algorithms.
 
-There are no known limitations on size of tables or sub-queries participating in
-joins and there are no limitations on number of joins either.
+There are no known limitations on size of tables or sub-queries used in joins
+and there are no limitations on number of joins either.
 
 ## Join syntax
 
 ![Flow chart showing the syntax of the JOIN keyword](/img/docs/diagrams/join.svg)
 
-Following data join columns from joined tables are combined in single row. Same
-name columns originating from different tables will be automatically aliased to
-create unique column namespace of the result set.
+Columns from joined tables are combined in single row. Columns with the same
+name originating from different tables will be automatically aliased to create a
+unique column namespace of the resulting set.
 
-Though it is a best practice to diligently specify join conditions, QuestDB will
-also analyse `WHERE` clause for implicit join condition and will derive
+Though it is usually preferable to explicitly specify join conditions, QuestDB
+will analyze `WHERE` clauses for implicit join conditions and will derive
 transient join conditions where necessary.
 
 :::tip
 
 When tables are joined on column that has the same name in both tables you can
-use shorthand `ON (column)` clause
+use the `ON (column)` shorthand.
 
 :::
 
@@ -61,8 +61,8 @@ FROM a, b
 WHERE a.id = b.id;
 ```
 
-The type of join as well as the column will be inferred from the where clause,
-and may end up being either `INNER` or `CROSS` join. For the example above, the
+The type of join as well as the column will be inferred from the `WHERE` clause,
+and may be either an `INNER` or `CROSS` join. For the example above, the
 equivalent explicit statement would be:
 
 ```questdb-sql
@@ -73,14 +73,11 @@ JOIN b ON (id);
 
 ## (INNER) JOIN
 
-### Overview
-
 `(INNER) JOIN` is used to return rows from 2 tables where the records on the
-compared column have matching values in both tables
+compared column have matching values in both tables. `JOIN` is interpreted as
+`INNER JOIN` by default, making the `INNER` keyword implicit.
 
-### Examples
-
-The following query will return the movieId and the average rating from table
+The following query will return the `movieId` and the average rating from table
 `ratings`. It will also add a column for the `title` from table `movies`. The
 corresponding title will be identified based on the `movieId` in the `ratings`
 table matching an `id` in the `movies` table.
@@ -90,64 +87,52 @@ SELECT movieId a, title, avg(rating)
 FROM ratings
 INNER JOIN (SELECT movieId id, title FROM movies)
 ON ratings.movieId = id;
-```
 
-By default `JOIN` is interpreted as `INNER JOIN`. Therefore `INNER` does not
-need to be specified.
-
-```questdb-sql title="Dropping INNER"
+-- Omitting 'INNER' makes the query equivalent:
 SELECT movieId a, title, avg(rating)
 FROM ratings
 JOIN (SELECT movieId id, title FROM movies)
 ON ratings.movieId = id;
 ```
 
-## OUTER JOIN
+## LEFT (OUTER) JOIN
 
-### Overview
+`LEFT OUTER JOIN` or simply `LEFT JOIN` will return **all** records from the
+left table, and if matched, the records of the right table. When there is no
+match for the right table, it will return `NULL` values in right table fields.
 
-`OUTER JOIN` will return **all** records from the LEFT table, and if matched,
-the records of the RIGHT table. When there is no match for the RIGHT table, it
-will return `NULL` values in right table fields
+The general syntax is as follows:
 
-### Examples
-
-General syntax is as follows:
-
-```questdb-sql
+```questdb-sql title="LEFT JOIN ON"
 SELECT tab1.colA, tab2.colB
 FROM table1 tab1
-OUTER JOIN table2 tab2
+LEFT OUTER JOIN table2 tab2
+ON tab1.colA = tab2.colB;
+
+-- Omitting 'OUTER' makes the query equivalent:
+SELECT tab1.colA, tab2.colB
+FROM table1 tab1
+LEFT JOIN table2 tab2
 ON tab1.colA = tab2.colB;
 ```
 
-`OUTER JOIN` query can also be used to select all rows in left table that do not
-exist in right table.
+An `OUTER JOIN` query can also be used to select all rows in the left table that
+do not exist in the right table.
 
 ```questdb-sql
 SELECT tab1.colA, tab2.colB
 FROM table1 tab1
-OUTER JOIN table2 tab2
+LEFT OUTER JOIN table2 tab2
 ON tab1.colA = tab2.colB
 WHERE tab2.colB = NULL;
 ```
 
 ## CROSS JOIN
 
-### Overview
-
-`CROSS JOIN` will return the cartesian product of the two tables being joined.
-It can be used to a table with all possible combinations.
-
-:::note
-
-`CROSS JOIN` does not have `ON` clause.
-
-:::
-
-### Example
-
-The following will return all possible combinations of starters and deserts
+`CROSS JOIN` will return the Cartesian product of the two tables being joined
+and can be used to create a table with all possible combinations of columns. The
+following query will return all possible combinations of `starters` and
+`deserts`:
 
 ```questdb-sql
 SELECT *
@@ -155,9 +140,13 @@ FROM starters
 CROSS JOIN deserts;
 ```
 
-## ASOF JOIN
+:::note
 
-### Overview
+`CROSS JOIN` does not have an `ON` clause.
+
+:::
+
+## ASOF JOIN
 
 `ASOF` joins are used on time series data to join two tables based on timestamp
 where timestamps do not exactly match. For a given record at a given timestamp,
@@ -177,9 +166,7 @@ table is created as ordered by time order of records is enforced and timestamp
 column name is in table metadata. `ASOF` join will use timestamp column from
 metadata.
 
-### Example
-
-Consider the following tables.
+Given the following tables:
 
 | ts                          | ask |
 | --------------------------- | --- |
@@ -193,7 +180,7 @@ Consider the following tables.
 | 2019-10-17T00:00:00.300000Z | 102 |
 | 2019-10-17T00:00:00.500000Z | 103 |
 
-Therefore the following query:
+An `ASOF JOIN` query can look like the following:
 
 ```questdb-sql
 SELECT bids.ts timebid, bid, ask
@@ -201,7 +188,7 @@ FROM bids
 ASOF JOIN asks;
 ```
 
-Will return the following:
+The above query returns these results:
 
 | timebid                     | bid | ask |
 | --------------------------- | --- | --- |
@@ -209,13 +196,9 @@ Will return the following:
 | 2019-10-17T00:00:00.300000Z | 102 | 101 |
 | 2019-10-17T00:00:00.500000Z | 103 | 102 |
 
-:::note
-
-There is no `ASKS` at timestamp `2019-10-17T00:00:00.100000Z`. The `ASOF JOIN`
-will look for the value in the `BIDS` table that has the closest timestamp
-inferior or equal to the target timestamp.
-
-:::
+Note that there is no `ASKS` at timestamp `2019-10-17T00:00:00.100000Z`. The
+`ASOF JOIN` will look for the value in the `BIDS` table that has the closest
+timestamp prior to or equal to the target timestamp.
 
 In case tables do not have designated timestamp column, but data is in
 chronological order, timestamp columns can be specified at runtime:
@@ -226,18 +209,10 @@ FROM (bids timestamp(ts))
 ASOF JOIN (asks timestamp (ts));
 ```
 
-:::caution
-
-`ASOF` join does not check timestamp order, if data is not in chronological
-order join result is non-deterministic
-
-:::
-
-Above query assumes that there is only one instrument in `BIDS` and `ASKS`
-tables and therefore does not use the optional `ON` clause.
-
-If both tables store data for multiple instruments `ON` clause will allow you to
-find bids for asks with matching instrument value.
+The query above assumes that there is only one instrument in `BIDS` and `ASKS`
+tables and therefore does not use the optional `ON` clause. If both tables store
+data for multiple instruments `ON` clause will allow you to find bids for asks
+with matching instrument value:
 
 ```questdb-sql
 SELECT *
@@ -245,16 +220,62 @@ FROM asks
 ASOF JOIN bids ON (instrument);
 ```
 
-## SPLICE JOIN
+:::caution
 
-### Overview
+`ASOF` join does not check timestamp order, if data is not in chronological
+order, the join result is non-deterministic.
+
+:::
+
+## LT JOIN
+
+`LT` join is very similar to `ASOF`, except that it searches for the last row
+from the right table strictly before the row from the left table. There will be
+one or no rows joined from the right table per each row from the left table.
+
+Consider the following tables:
+
+| ts                          | ask |
+| --------------------------- | --- |
+| 2019-10-17T00:00:00.000000Z | 100 |
+| 2019-10-17T00:00:00.300000Z | 101 |
+| 2019-10-17T00:00:00.400000Z | 102 |
+
+| ts                          | bid |
+| --------------------------- | --- |
+| 2019-10-17T00:00:00.000000Z | 101 |
+| 2019-10-17T00:00:00.300000Z | 102 |
+| 2019-10-17T00:00:00.500000Z | 103 |
+
+An `LT JOIN` can be built using the following query:
+
+```questdb-sql
+SELECT bids.ts timebid, asks.ts timeask, bid, ask
+FROM bids
+LT JOIN asks;
+```
+
+The query above returns the following results:
+
+| timebid                     | timeask                     | bid | ask  |
+| --------------------------- | --------------------------- | --- | ---- |
+| 2019-10-17T00:00:00.000000Z | NULL                        | 101 | NULL |
+| 2019-10-17T00:00:00.300000Z | 2019-10-17T00:00:00.000000Z | 102 | 100  |
+| 2019-10-17T00:00:00.500000Z | 2019-10-17T00:00:00.400000Z | 103 | 102  |
+
+:::note
+
+`LT` join is often useful to join a table to itself in order to get preceding
+values for every row.
+
+:::
+
+## SPLICE JOIN
 
 `SPLICE JOIN` is a full `ASOF JOIN`. It will return all the records from both
 tables. For each record from left table splice join will find prevailing record
 from right table and for each record from right table - prevailing record from
 left table.
-
-### Examples
 
 Considering the following tables.
 
@@ -270,7 +291,7 @@ Considering the following tables.
 | 2019-10-17T00:00:00.300000Z | 102 |
 | 2019-10-17T00:00:00.500000Z | 103 |
 
-This query:
+A `SPLICE JOIN` can be built as follows:
 
 ```questdb-sql
 SELECT bids.ts timebid, bid, ask
@@ -278,7 +299,7 @@ FROM bids
 SPLICE JOIN asks;
 ```
 
-Will return the following results
+This query returns the following results:
 
 | timebid                     | bid  | ask |
 | --------------------------- | ---- | --- |
@@ -290,7 +311,7 @@ Will return the following results
 | 2019-10-17T00:00:00.500000Z | 103  | 102 |
 
 Note that the above query does not use the optional `ON` clause. In case you
-need additional filtering on the two tables, you can use the `ON` clause as
+need additional filtering on the two tables, the `ON` clause can be used as
 follows:
 
 ```questdb-sql
