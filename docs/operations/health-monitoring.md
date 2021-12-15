@@ -2,10 +2,27 @@
 title: Health monitoring
 description:
   How to configure health monitoring for querying the status of a QuestDB
-  instance
+  instance using an embedded server, Prometheus metrics and Alertmanager.
 ---
 
-## Overview
+This document describes the options available for monitoring the health of a
+QuestDB instance. There are options for minimal health checks via a `min` server
+which provides a basic 'up/down' check, or detailed metrics in Prometheus format
+exposed via an HTTP endpoint.
+
+## Prometheus metrics endpoint
+
+Prometheus is an open-source systems monitoring and alerting toolkit. Prometheus
+collects and stores metrics as time series data, i.e. metrics information is
+stored with the timestamp at which it was recorded, alongside optional key-value
+pairs called labels.
+
+QuestDB exposes a `/metrics` endpoint which provides internal system metrics in
+Prometheus format. To use this this functionality and get started with example
+configuration, refer to the
+[Prometheus documentation](/docs/third-party-tools/prometheus/).
+
+## Min health server
 
 REST APIs will often be situated behind a load balancer that uses a monitor URL
 for its configuration. Having a load balancer query the QuestDB REST endpoints
@@ -18,7 +35,8 @@ endpoints used for querying and ingesting data. For this purpose, a `min` HTTP
 server runs embedded in a QuestDB instance and has a separate log and thread
 pool configuration.
 
-## Usage
+The configuration section for the `min` HTTP server is available in the
+[minimal HTTP server reference](/docs/reference/configuration/#minimal-http-server).
 
 The `min` server is enabled by default and will reply to any `HTTP GET` request
 to port `9003`:
@@ -51,11 +69,14 @@ system is operational:
 Path segments are ignored which means that optional paths may be used in the URL
 and the server will respond with identical results, e.g.:
 
-```shell title="GET health status with arbitraty path"
+```shell title="GET health status with arbitrary path"
 curl -v http://127.0.0.1:9003/status
 ```
 
-## Configuration
+:::info
 
-The configuration section for the `min` HTTP server is available in the
-[minimal HTTP server reference](/docs/reference/configuration/#minimal-http-server).
+The `/metrics` path segment is reserved for metrics exposed in Prometheus
+format. For more details, see the
+[Prometheus documentation](/docs/third-party-tools/prometheus/).
+
+:::

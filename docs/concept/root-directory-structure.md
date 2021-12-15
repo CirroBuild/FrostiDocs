@@ -14,6 +14,51 @@ questdb
 └── public
 ```
 
+By default, QuestDB's root directory will be the following:
+
+<!-- prettier-ignore-start -->
+
+<Tabs defaultValue="nix" values={[
+  { label: "Linux/FreeBSD", value: "nix" },
+  { label: "macOS (Homebrew)", value: "macos" },
+  { label: "Windows", value: "windows" },
+]}>
+
+<!-- prettier-ignore-end -->
+
+<TabItem value="nix">
+
+
+```shell
+$HOME/.questdb
+```
+
+</TabItem>
+
+
+<TabItem value="macos">
+
+
+```shell
+/usr/local/var/questdb
+```
+
+</TabItem>
+
+
+<TabItem value="windows">
+
+
+```shell
+C:\Windows\System32\questdb
+```
+
+</TabItem>
+
+
+</Tabs>
+
+
 ## `conf` directory
 
 Contains configuration files for QuestDB:

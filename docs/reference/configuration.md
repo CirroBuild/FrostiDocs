@@ -60,7 +60,7 @@ shared.worker.count=5
 ```
 
 ```shell title="Customizing the worker count via environment variable"
-export QBD_SHARED_WORKER_COUNT=5
+export QDB_SHARED_WORKER_COUNT=5
 ```
 
 ## Docker
@@ -83,7 +83,8 @@ This publishes the following ports:
   [Web Console](/docs/reference/web-console/)
 - `-p 9009:9009` - [InfluxDB line protocol](/docs/reference/api/influxdb/)
 - `-p 8812:8812` - [Postgres wire protocol](/docs/reference/api/postgres/)
-- `-p 9003:9003` - [Min health server](#minimal-http-server)
+- `-p 9003:9003` -
+  [Min health server and Prometheus metrics](#minimal-http-server)
 
 The examples in this section change the default HTTP and REST API port from
 `9000` to `4000` for illustrative purposes, and demonstrate how to publish this
@@ -95,7 +96,7 @@ Server configuration can be passed to QuestDB running in Docker by using the
 `-e` flag to pass an environment variable to a container:
 
 ```bash
-docker run -p 4000:4000 -e QBD_HTTP_BIND_TO=0.0.0.0:4000 questdb/questdb
+docker run -p 4000:4000 -e QDB_HTTP_BIND_TO=0.0.0.0:4000 questdb/questdb
 ```
 
 ### Mounting a volume
@@ -173,8 +174,13 @@ This server runs embedded in a QuestDB instance by default and enables health
 checks of an instance via HTTP. It responds to all requests with a HTTP status
 code of `200` unless the QuestDB process dies.
 
-Examples of how to use this server, along with expected responses, can be found
-on the [health monitoring page](/docs/operations/health-monitoring/).
+:::info
+
+Port `9003` also provides a `/metrics` endpoint with Prometheus metrics exposed.
+Examples of how to use the min server and Prometheus endpoint can be found on
+the [health monitoring page](/docs/operations/health-monitoring/).
+
+:::
 
 | Property         | Default      | Description                                                                                                                                            |
 | ---------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -416,7 +422,7 @@ these methods.
 
 ### Configuration file
 
-Logs may be configured via a dedicated file named `log-stdout.conf`.
+Logs may be configured via a dedicated configuration file `log-stdout.conf`.
 
 ```shell title="log-stdout.conf"
 # list of configured writers
@@ -435,10 +441,28 @@ w.stdout.level=INFO,ERROR
 QuestDB will look for `/log-stdout.conf` on the classpath unless this name is
 overridden via a "system" property: `-Dout=/something_else.conf`.
 
-### Docker
+### Environment variables
+
+Values in the log configuration file can be overridden with environment
+variables. All configuration keys must be formatted as described in the
+[environment variables](#environment-variables) section above.
+
+For example, to set logging on `ERROR` level only:
+
+```shell title="Setting log level to ERROR in log-stdout.conf"
+w.stdout.level=ERROR
+```
+
+This can be passed as an environment variable as follows:
+
+```shell title="Setting log level to ERROR via environment variable"
+export QDB_LOG_W_STDOUT_LEVEL=ERROR
+```
+
+### Configuring Docker logging
 
 When mounting a volume to a Docker container, a logging configuration file may
-be provided in the container located at `/conf/log.conf`. For example, a file
+be provided in the container located at `./conf/log.conf`. For example, a file
 with the following contents can be created:
 
 ```shell title="./conf/log.conf"
@@ -467,23 +491,100 @@ docker run -p 9000:9000 -v "$(pwd):/root/.questdb/" questdb/questdb
 ```
 
 The container logs will be written to disk using the logging level and file name
-provided in the `conf/log.conf` file, in this case in `./questdb-docker.log`.
+provided in the `./conf/log.conf` file, in this case in `./questdb-docker.log`.
 
-### Environment variables
+### Prometheus Alertmanager
 
-Values in the `log-stdout.conf` file can be overridden with environment
-variables. All configuration keys must be formatted as described in the
-[environment variables](#environment-variables) section above.
+QuestDB includes a log writer that sends any message logged at critical level
+(logger.critical("may-day")) to Prometheus Alertmanager over a TCP/IP socket.
+Details for configuring this can be found in the
+[Prometheus documentation](/docs/third-party-tools/prometheus/).
 
-For example, to set logging on `ERROR` level only:
+To configure this writer, add it to the `writers` config alongside other log
+writers.
 
-```shell title="Setting log level to ERROR in log-stdout.conf"
-w.stdout.level=ERROR
+```bash title="log.conf"
+# Which writers to enable
+writers=stdout,alert
+
+# stdout
+w.stdout.class=io.questdb.log.LogConsoleWriter
+w.stdout.level=INFO
+
+# Prometheus Alerting
+w.alert.class=io.questdb.log.LogAlertSocketWriter
+w.alert.level=CRITICAL
+w.alert.location=/alert-manager-tpt.json
+w.alert.alertTargets=localhost:9093,localhost:9096,otherhost:9093
+w.alert.defaultAlertHost=localhost
+w.alert.defaultAlertPort=9093
+
+# The `inBufferSize` and `outBufferSize` properties are the size in bytes for the
+# socket write buffers.
+w.alert.inBufferSize=2M
+w.alert.outBufferSize=4M
+# Delay in milliseconds between two consecutive attempts to alert when
+# there is only one target configured
+w.alert.reconnectDelay=250
 ```
 
-```shell title="Setting log level to ERROR via environment variable"
-export QDB_LOG_W_STDOUT_LEVEL=ERROR
+Of all properties, only `w.alert.class` and `w.alert.level` are required, the
+rest assume default values as stated above (except for `w.alert.alertTargets`
+which is empty by default).
+
+Alert targets are specified using `w.alert.alertTargets` as a comma-separated
+list of up to 12 `host:port` TCP/IP addresses. Specifying a port is optional and
+defaults to the value of `defaultAlertHost`. One of these alert managers is
+picked at random when QuestDB starts, and a connection is created.
+
+All alerts will be sent to the chosen server unless it becomes unavailable. If
+it is unavailable, the next server is chosen. If there is only one server
+configured and a fail-over cannot occur, a delay of 250 milliseconds is added
+between send attempts.
+
+The `w.alert.location` property refers to the path (absolute, otherwise relative
+to `-d database-root`) of a template file. By default it is a resource file
+which contains:
+
+```json title="/alert-manager-tpt.json"
+[
+  {
+    "Status": "firing",
+    "Labels": {
+      "alertname": "QuestDbInstanceLogs",
+      "service": "QuestDB",
+      "category": "application-logs",
+      "severity": "critical",
+      "version": "${QDB_VERSION}",
+      "cluster": "${CLUSTER_NAME}",
+      "orgid": "${ORGID}",
+      "namespace": "${NAMESPACE}",
+      "instance": "${INSTANCE_NAME}",
+      "alertTimestamp": "${date: yyyy/MM/ddTHH:mm:ss.SSS}"
+    },
+    "Annotations": {
+      "description": "ERROR/cl:${CLUSTER_NAME}/org:${ORGID}/ns:${NAMESPACE}/db:${INSTANCE_NAME}",
+      "message": "${ALERT_MESSAGE}"
+    }
+  }
+]
 ```
+
+Four environment variables can be defined, and referred to with the
+`${VAR_NAME}` syntax:
+
+- _ORGID_
+- _NAMESPACE_
+- _CLUSTER_NAME_
+- _INSTANCE_NAME_
+
+Their default value is `GLOBAL`, they mean nothing outside of a cloud
+environment.
+
+In addition, `ALERT_MESSAGE` is a place holder for the actual `critical` message
+being sent, and `QDB_VERSION` is the runtime version of the QuestDB instance
+sending the alert. The `${date: <format>}` syntax can be used to produce a
+timestamp at the time of sending the alert.
 
 ### Debug
 
