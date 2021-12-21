@@ -5,8 +5,6 @@ description:
   server operation continues uninterrupted.
 ---
 
-## Background
-
 Capacity planning should be considered as part of the requirements of deploying
 QuestDB to forecast CPU, memory, network capacity, and a combination of these
 elements, depending on the expected demands of the system. This page describes
@@ -18,10 +16,20 @@ settings are configured in QuestDB by either a `server.conf` configuration file
 or as environment variables. For more details on applying configuration settings
 in QuestDB, refer to the [configuration](/docs/reference/configuration/) page.
 
-## Storage
+## Storage and filesystem
 
-The following section describes aspects to be considered regarding the storage
-of data.
+The following sections describe aspects to be considered regarding the storage
+of data and filesystem considerations.
+
+:::caution
+
+- QuestDB officially supports **EXT4** or **XTS** or any filesystem that
+  supports [mmap](https://man7.org/linux/man-pages/man2/mmap.2.html).
+
+- Users **can't use NFS or a similar networked filesystem** directly with a
+  QuestDB database.
+
+:::
 
 ### Partitioning
 
