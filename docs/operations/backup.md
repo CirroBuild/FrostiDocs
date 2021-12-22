@@ -31,7 +31,7 @@ types of supported filesystems and what data is included in backups:
   backup. Any data inserted while a backup is underway is not stored as part of
   the backup.
 
-- Users can't use NFS or a similar networked filesystem directly with QuestDB,
+- Users can't use NFS or a similar distributed filesystem directly with QuestDB,
   but users may copy a backup to such a filesystem after a backup has been made.
 
 :::

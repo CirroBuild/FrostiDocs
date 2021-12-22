@@ -26,7 +26,7 @@ of data and filesystem considerations.
 - QuestDB officially supports **EXT4** or **XTS** or any filesystem that
   supports [mmap](https://man7.org/linux/man-pages/man2/mmap.2.html).
 
-- Users **can't use NFS or a similar networked filesystem** directly with a
+- Users **can't use NFS or a similar distributed filesystem** directly with a
   QuestDB database.
 
 :::
