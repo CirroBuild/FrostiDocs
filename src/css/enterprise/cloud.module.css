@@ -4,27 +4,27 @@
   align-items: center;
 }
 
-.cloud > img {
+.cloud > svg {
   height: auto;
 }
 
-.cloud > img:not(:last-child) {
+.cloud > svg:not(:last-child) {
   margin-right: 4rem;
 }
 
 @media (max-width: 996px) {
-  .cloud > img {
+  .cloud > svg {
     max-height: 28px;
     width: auto;
   }
 
-  .cloud > img:not(:last-child) {
+  .cloud > svg:not(:last-child) {
     margin-right: 2rem;
   }
 }
 
 @media (max-width: 480px) {
-  .cloud > img {
+  .cloud > svg {
     max-height: 24px;
   }
 }

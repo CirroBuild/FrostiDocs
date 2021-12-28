@@ -144,6 +144,10 @@ const config = {
               to: "/enterprise",
             },
             {
+              label: "Cloud",
+              to: "/cloud",
+            },
+            {
               label: "Blog",
               to: "/blog",
             },
@@ -202,6 +206,10 @@ const config = {
             {
               label: "Enterprise",
               to: "/enterprise/",
+            },
+            {
+              label: "Cloud",
+              to: "/cloud",
             },
             {
               label: "Customers",

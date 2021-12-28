@@ -18,6 +18,12 @@ import prCss from "../css/property.module.css"
 import seCss from "../css/section.module.css"
 import _quotes from "../assets/quotes"
 
+import SvgImage from "../components/SvgImage"
+
+import AwsLogo from "../assets/img/aws.svg"
+import AzureLogo from "../assets/img/azure.svg"
+import GoogleCloudLogo from "../assets/img/gc.svg"
+
 const quotes = _quotes.map(({ author, company, logo, role, text }) => {
   const Quote = () => (
     <div key={company} className={quCss.quote}>
@@ -214,25 +220,19 @@ const Enterprise = () => {
           </p>
 
           <div className={clsx(clCss.cloud)}>
-            <img
-              alt="AWS logo"
-              height={44}
-              src="/img/pages/enterprise/aws.png"
-              width={73}
+            <SvgImage
+              image={<AwsLogo width="73" height="44" />}
+              title="AWS logo"
             />
 
-            <img
-              alt="Google Cloud Platform logo"
-              height={34}
-              src="/img/pages/enterprise/gcp.png"
-              width={219}
+            <SvgImage
+              image={<GoogleCloudLogo width="219" height="34" />}
+              title="Google Cloud logo"
             />
 
-            <img
-              alt="Microsoft Azure logo"
-              src="/img/pages/enterprise/azure.png"
-              height={34}
-              width={116}
+            <SvgImage
+              image={<AzureLogo width="116" height="34" />}
+              title="Google Cloud logo"
             />
           </div>
         </div>
