@@ -123,6 +123,11 @@ setting the property `http.security.readonly=true` in your `server.conf`.
 Details of setting this configuration can be found on QuestDB's
 [configuration page](/docs/reference/configuration/).
 
+To avoid unnecessary memory usage, it is also recommended to disable SELECT query
+cache by setting the property `pg.select.cache.enabled=true` in your `server.conf`.
+That's because Grafana does not use prepared statements when sending the queries
+and the query cache becomes much less efficient.
+
 ### Create a dashboard and a panel
 
 Now that we have a data source and a dashboard, we can add a panel. Navigate to

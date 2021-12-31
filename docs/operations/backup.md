@@ -77,7 +77,7 @@ curl -G --data-urlencode "query=BACKUP database;" \
 :::caution
 
 To run a reliable filesystem backup, the QuestDB instance must be shut down
-**or** no write operations should running while disk backup is being created.
+**or** no write operations should be running while disk backup is being created.
 
 :::
 

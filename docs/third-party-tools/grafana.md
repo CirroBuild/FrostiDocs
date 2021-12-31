@@ -19,6 +19,13 @@ QuestDB with Grafana step by step.
   [binaries](/docs/get-started/binaries/) or
   [Homebrew](/docs/get-started/homebrew/) for macOS users.
 
+## Configure database
+
+To avoid unnecessary memory usage, it is recommended to disable QuestDB's SELECT
+query cache by setting the property `pg.select.cache.enabled=true` in your
+`server.conf`. That's because Grafana does not use prepared statements when
+sending the queries and the query cache becomes much less efficient.
+
 ## Add a data source
 
 1. Open Grafana's UI (by default available at `http://localhost:3000`)
