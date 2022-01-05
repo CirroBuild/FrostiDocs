@@ -349,12 +349,25 @@ func main() {
   if err != nil {
     log.Fatalln(err)
   }
+
+  // Insert all rows in a single commit
+  tx, err := conn.Begin(ctx)
+  if err != nil {
+    log.Fatalln(err)
+  }
+
   for i := 0; i < 10; i++ {
     // Execute 'ps1' statement with a string and the loop iterator value
     _, err = conn.Exec(ctx, "ps1", time.Now(), time.Now().Round(time.Millisecond), "go prepared statement", i+1)
     if err != nil {
       log.Fatalln(err)
     }
+  }
+
+  // Commit the transaction
+  err = tx.Commit(ctx)
+  if err != nil {
+    log.Fatalln(err)
   }
 
   // Read all rows from table
