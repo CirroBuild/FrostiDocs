@@ -16,7 +16,7 @@ keywords:
   - venture capital
   - startup
   - team
-image: /img/blog/2022-01-03/banner.png
+image: /img/blog/2022-01-03/banner.jpg
 tags: [funding, story, news, hackernews]
 ---
 
