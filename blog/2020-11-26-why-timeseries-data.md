@@ -3,7 +3,7 @@ title:
   What is time-series data, and why are we building a time-series database
   (TSDB)?
 author: Nicolas Hourcard
-author_title: QuestDB Team
+author_title: Co-founder & CEO, QuestDB
 author_url: https://github.com/tris0laris
 author_image_url: https://avatars.githubusercontent.com/tris0laris
 description:
