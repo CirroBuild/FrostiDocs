@@ -1,5 +1,5 @@
 ---
-title: Why I joined QuestDB as a core database engineer - Miguel Arregui
+title: Why I joined QuestDB as a core database engineer
 author: Miguel Arregui
 author_title: QuestDB Team
 author_url: https://github.com/marregui

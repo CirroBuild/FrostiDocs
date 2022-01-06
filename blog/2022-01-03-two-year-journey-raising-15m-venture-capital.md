@@ -64,11 +64,10 @@ eventually convinced several other European funds with a growing interest in
 open source startups such as Seedcamp to invest as well. In March 2020, we
 raised \$2m overall, which kicked things off.
 
-We had just launched the open source version of QuestDB and we wanted to let
-developers know about it to gather feedback. We had just implemented SIMD
-instructions to run fast SQL queries and released a live demo including a
-dataset of 1.6 billion rows with SQL queries that could be executed in
-milliseconds<sup>[1]</sup>.
+We launched an open source version of QuestDB and we wanted to let developers
+know about it to gather feedback. We had just implemented SIMD instructions to
+run fast SQL queries and released a live demo including a dataset of 1.6 billion
+rows with SQL queries that could be executed in milliseconds<sup>[1]</sup>.
 
 ## Joining Y Combinator
 
@@ -106,8 +105,8 @@ progress, initially.
 
 ## Successfully raising a Series A round
 
-Our community continued to grow and the project just crossed 5k GitHub stars as
-we shipped our biggest release to date<sup>[4]</sup>. We had more than 50 code
+Our community continued to grow and the project crossed 5k GitHub stars as we
+shipped our biggest release to date<sup>[4]</sup>. We had more than 50 code
 contributors on GitHub and more than 800 developers joined our Slack community,
 while our unique instances deployed grew by 500% year to date.
 
@@ -127,7 +126,7 @@ GitHub, Docker, Reddit, NGINX, Instana, D2iQ, Coinbase, Cisco, Microsoft,
 Airbnb, PostHog, Supabase, and FingerprintJS. The same applies to the lead
 investor as our board member Florian Leibert is the co-founder of Mesosphere
 which is built around the open source project Mesos. We also welcomed Salil
-Deshpande at Uncorrelated Capital who has a track record in open source
+Deshpande at Uncorrelated Ventures who has a track record in open source
 companies investments such as Redis, Datastax, Netdata, Hazelcast, Armory, dYdX,
 SpringSource, Gradle etc.
 
