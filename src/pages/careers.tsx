@@ -113,7 +113,22 @@ const CareersPage = () => {
               </span>
             </a>
             <a className={joCss.job} href="developer-in-test/">
-              <h3 className={joCss.job__title}>Developer in Test</h3>
+              <h3 className={joCss.job__title}>Developers in Test</h3>
+              <p className={joCss.job__location}>Remote</p>
+              <span className={joCss.job__cta}>
+                Details&nbsp;
+                <img
+                  alt="Right arrow"
+                  height={20}
+                  src="/img/pages/careers/arrowRight.svg"
+                  width={20}
+                />
+              </span>
+            </a>
+            <a className={joCss.job} href="developer-relations-engineer/">
+              <h3 className={joCss.job__title}>
+                Developer Relations Engineers
+              </h3>
               <p className={joCss.job__location}>Remote</p>
               <span className={joCss.job__cta}>
                 Details&nbsp;
@@ -140,21 +155,6 @@ const CareersPage = () => {
             </a>
             <a className={joCss.job} href="senior-cloud-engineer/">
               <h3 className={joCss.job__title}>Cloud Engineers</h3>
-              <p className={joCss.job__location}>Remote</p>
-              <span className={joCss.job__cta}>
-                Details&nbsp;
-                <img
-                  alt="Right arrow"
-                  height={20}
-                  src="/img/pages/careers/arrowRight.svg"
-                  width={20}
-                />
-              </span>
-            </a>
-            <a className={joCss.job} href="developer-relations-engineer/">
-              <h3 className={joCss.job__title}>
-                Developer Relations Engineers
-              </h3>
               <p className={joCss.job__location}>Remote</p>
               <span className={joCss.job__cta}>
                 Details&nbsp;
