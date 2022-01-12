@@ -183,25 +183,6 @@ line.tcp.worker.count=2
 line.tcp.worker.affinity=1,2
 ```
 
-#### Balancing work
-
-The following configuration settings may be applied in relation to balancing
-unequal distribution of work across writer threads. The number of updates per
-load balance refers to the number of updates (per table) between attempts to
-redistribute the load between writer workers.
-
-The maximum load ratio defaults to `1.9` and this figure is the ratio of least
-busy worker to most busy worker. This value of `1.9` means redistribution of
-work will occur when a thread is performing almost twice as much work as a
-thread with least amount of work.
-
-```bash title="server.conf"
-# for balancing work when writers spread across multiple tables
-line.tcp.n.updates.per.load.balance=2048
-# Maximum load ratio (max loaded worker/min loaded worker)
-line.tcp.max.load.ratio=1.9
-```
-
 #### Committing records
 
 These two configuration settings are relevant for maintenance jobs which commit
