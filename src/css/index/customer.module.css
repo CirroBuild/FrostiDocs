@@ -11,6 +11,10 @@
   filter: brightness(0) invert(0.9);
 }
 
+:global(html[data-theme="light"]) .logo__item {
+  filter: brightness(0) invert(0.4);
+}
+
 .logo__item img {
   position: relative;
 }

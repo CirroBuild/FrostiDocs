@@ -199,7 +199,7 @@ const Team = () => {
                 <div className={teCss.team__article__details}>
                   <div className={teCss.team__article__image}>
                     <img
-                      src="/img/pages/about-us/miguel.jpg"
+                      src="/img/pages/about-us/miguel.png"
                       alt="Miguel Arregui photo"
                       width="50"
                       height="50"

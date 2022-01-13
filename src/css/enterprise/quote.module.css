@@ -26,8 +26,8 @@
   padding: 2rem;
   flex: 1;
   flex-direction: column;
-  border-radius: var(--ifm-global-border-radius);
-  background: var(--palette-rock);
+  border-radius: var(--theme-card-border-radius);
+  background: var(--theme-card-bg-color);
   user-select: none;
   max-width: 530px;
 }
@@ -46,6 +46,11 @@
     no-repeat !important;
 }
 
+
+:global(html[data-theme="light"]) .quote__symbol {
+  filter: invert(1) opacity(0.5);
+}
+
 .quote__logo {
   display: flex;
   height: 31px;
@@ -53,6 +58,10 @@
   margin-bottom: 1rem;
   align-items: center;
   filter: brightness(0) invert(1);
+}
+
+:global(html[data-theme="light"]) .quote__logo {
+  filter: brightness(0) opacity(0.5);
 }
 
 .quote__content {

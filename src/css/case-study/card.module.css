@@ -4,7 +4,7 @@
   margin: 0 auto;
   margin-top: 4.5rem;
   padding: 4.5rem 0;
-  background: var(--palette-white-03);
+  background: var(--theme-card-bg-color);
 }
 
 .card__title,

@@ -15,7 +15,7 @@ import ManagedQuestdbIcon from "../assets/img/pages/cloud/managed-questdb.svg"
 import AwsLogo from "../assets/img/aws.svg"
 
 import seCss from "../css/section.module.css"
-import foCss from "../css/cloud/form.module.css"
+import foCss from "../css/enterprise/form.module.css"
 import ilCss from "../css/cloud/illustration.module.css"
 import hlCss from "../css/cloud/highlights.module.css"
 import flCss from "../css/cloud/flashy.module.css"

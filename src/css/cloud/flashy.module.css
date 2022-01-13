@@ -2,7 +2,7 @@
   padding: 2rem 1.25rem;
   max-width: 355px;
   border-radius: 16px;
-  background: var(--palette-rock);
+  background: var(--theme-card-bg-color);
   margin-bottom: 1.5rem;
   text-align: center;
 }

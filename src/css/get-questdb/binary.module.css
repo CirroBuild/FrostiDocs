@@ -7,9 +7,9 @@
   padding: 1.5rem;
   flex: 0 1 356px;
   flex-direction: column;
-  background: var(--palette-rock);
+  background: var(--theme-card-bg-color);
   font-size: var(--font-size-normal);
-  border-radius: var(--ifm-global-border-radius);
+  border-radius: var(--theme-card-border-radius);
 }
 
 .binary :global(.prism-code) {

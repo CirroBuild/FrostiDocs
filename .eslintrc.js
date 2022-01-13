@@ -73,6 +73,7 @@ module.exports = {
     "react/jsx-curly-spacing": "error",
     "react/jsx-no-comment-textnodes": "warn",
     "react/jsx-curly-brace-presence": "error",
+    "react/prop-types": "off",
     "jsx-quotes": ["error", "prefer-double"],
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
     "@typescript-eslint/explicit-function-return-type": "off",

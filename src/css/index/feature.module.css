@@ -17,3 +17,7 @@
 .feature__content {
   margin: 0;
 }
+
+html[data-theme="light"] .feature {
+  background: var(--palette-white);
+}

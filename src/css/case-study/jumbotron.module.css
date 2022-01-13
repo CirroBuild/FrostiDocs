@@ -22,6 +22,10 @@
   transition: filter var(--ifm-transition-fast) ease-out;
 }
 
+html[data-theme="light"] .jumbotron__logo {
+  filter: invert(1) brightness(0) opacity(0.8);
+}
+
 .jumbotron__logo:hover {
   filter: none;
 }

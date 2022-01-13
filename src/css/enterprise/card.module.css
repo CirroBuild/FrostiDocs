@@ -5,8 +5,8 @@
   padding: 4.5rem 3rem;
   margin: 1rem;
   flex-direction: column;
-  background: var(--palette-rock);
-  border-radius: var(--ifm-global-border-radius);
+  background: var(--theme-card-bg-color);
+  border-radius: var(--theme-card-border-radius);
 }
 
 .card__image {

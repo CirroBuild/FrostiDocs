@@ -21,9 +21,16 @@
   font-weight: var(--ifm-font-weight-bold);
 }
 
+
 .flashy__content {
   font-size: var(--font-size-large);
 }
+
+:global(html[data-theme="light"]) .flashy__title,
+:global(html[data-theme="light"]) .flashy__content {
+  color: var(--palette-white);
+}
+
 
 .flashy__links {
   display: flex;

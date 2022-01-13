@@ -21,6 +21,10 @@
   background: var(--palette-midnight);
 }
 
+:global(html[data-theme="light"]) .jumbotron__illustration {
+  background-color: transparent;
+}
+
 .jumbotron__left {
   display: flex;
   padding-right: 4rem;

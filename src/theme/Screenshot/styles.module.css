@@ -1,5 +1,6 @@
 .image {
   height: auto;
+  background-color: var(--theme-screenshot-background-color);
 }
 
 .shadow {

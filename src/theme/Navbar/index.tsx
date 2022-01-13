@@ -2,6 +2,8 @@ import clsx from "clsx"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import React, { ComponentProps, useCallback, useState, useEffect } from "react"
 
+import Toggle from "@theme/Toggle"
+
 import Button from "@theme/Button"
 import SearchBar from "@theme/SearchBar"
 import useLockBodyScroll from "@theme/hooks/useLockBodyScroll"
@@ -10,7 +12,23 @@ import useWindowSize, { windowSizes } from "@theme/hooks/useWindowSize"
 import styles from "./styles.module.css"
 import NavbarItem from "@theme/NavbarItem"
 
+import { useThemeConfig } from "@docusaurus/theme-common"
+import useThemeContext from "@theme/hooks/useThemeContext"
+
 const DefaultNavItemPosition = "right"
+
+function useColorModeToggle() {
+  const {
+    colorMode: { disableSwitch },
+  } = useThemeConfig()
+  const { isDarkTheme, setLightTheme, setDarkTheme } = useThemeContext()
+  const toggle = useCallback(
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+    (e) => (e.target.checked ? setDarkTheme() : setLightTheme()),
+    [setLightTheme, setDarkTheme],
+  )
+  return { isDarkTheme, toggle, disabled: disableSwitch }
+}
 
 function splitNavItemsByPosition(
   items: Array<ComponentProps<typeof NavbarItem>>,
@@ -55,6 +73,8 @@ function Navbar(): JSX.Element {
   }, [])
 
   const windowSize = useWindowSize()
+
+  const colorModeToggle = useColorModeToggle()
 
   useEffect(() => {
     if (windowSize === windowSizes.desktop) {
@@ -108,6 +128,13 @@ function Navbar(): JSX.Element {
           {rightItems.map((item, i) => (
             <NavbarItem {...item} key={i} />
           ))}
+          {!colorModeToggle.disabled && (
+            <Toggle
+              className={styles.themeToggleInHeading}
+              checked={colorModeToggle.isDarkTheme}
+              onChange={colorModeToggle.toggle}
+            />
+          )}
           <SearchBar
             handleSearchBarToggle={setIsSearchBarExpanded}
             isSearchBarExpanded={isSearchBarExpanded}
@@ -143,6 +170,14 @@ function Navbar(): JSX.Element {
           >
             QuestDB
           </a>
+
+          {!colorModeToggle.disabled && (
+            <Toggle
+              className={styles.themeToggleInSidebar}
+              checked={colorModeToggle.isDarkTheme}
+              onChange={colorModeToggle.toggle}
+            />
+          )}
         </div>
         <div className="navbar-sidebar__items">
           <div className="menu">

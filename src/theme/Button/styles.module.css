@@ -25,13 +25,12 @@
 }
 
 .button--primary {
-  background-color: var(--palette-pink);
-  color: var(--palette-white);
-}
+  background-color: var(--theme-button-primary-background-color);
+  color: var(--theme-button-primary-text-color); }
 
 .button--primary:hover {
-  color: var(--palette-white);
-  background-color: var(--palette-pink-darker);
+  background-color: var(--theme-button-primary-hover-background-color);
+  color: var(--theme-button-primary-text-color);
 }
 
 .button--icon img, .button--icon svg {
@@ -39,23 +38,23 @@
 }
 
 .button--secondary {
-  background-color: var(--palette-white);
-  color: var(--palette-charade);
+  background-color: var(--theme-button-secondary-background-color);
+  color: var(--theme-button-secondary-text-color);
 }
 
 .button--secondary:hover {
-  color: var(--palette-charade);
-  background-color: var(--palette-white-darker);
+  background-color: var(--theme-button-secondary-hover-background-color);
+  color: var(--theme-button-secondary-text-color);
 }
 
 .button--tertiary {
-  background-color: var(--palette-white-10);
-  color: var(--palette-white);
+  background-color: var(--theme-button-tertiary-background-color);
+  color: var(--theme-button-tertiary-text-color);
 }
 
 .button--tertiary:hover {
-  color: var(--palette-white);
-  background-color: var(--palette-white-20);
+  color: var(--theme-button-tertiary-text-color);
+  background-color: var(--theme-button-tertiary-hover-background-color);
 }
 
 .button--small {

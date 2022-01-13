@@ -41,6 +41,8 @@ const config = {
   organizationName: "QuestDB",
   projectName: "questdb",
   customFields: customFields,
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
   plugins: [
     require.resolve("./plugins/fetch-latest-release/index"),
     require.resolve("./plugins/fetch-repo/index"),
@@ -89,7 +91,7 @@ const config = {
     },
     colorMode: {
       defaultMode: "dark",
-      disableSwitch: true,
+      disableSwitch: false,
       respectPrefersColorScheme: false,
     },
     image: "/img/og.gif",

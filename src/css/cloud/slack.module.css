@@ -3,7 +3,7 @@
   align-items: center;
   width: 100%;
   padding: 1.5rem;
-  background: var(--palette-rock);
+  background: var(--theme-card-bg-color);
   font-size: var(--font-size-normal);
   border-radius: var(--ifm-global-border-radius);
 }

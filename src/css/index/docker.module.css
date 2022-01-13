@@ -28,6 +28,10 @@
   display: block;
 }
 
+html[data-theme='light'] .docker__code {
+  color: var(--palette-white);
+}
+
 .docker__icon {
   position: absolute;
   left: -25px;

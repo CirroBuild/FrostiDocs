@@ -25,9 +25,9 @@
   width: 100%;
   margin-top: 3rem;
   padding: 1.5rem;
-  background: #454759;
+  background: var(--theme-card-secondary-bg-color);
   font-size: var(--font-size-normal);
-  border-radius: var(--ifm-global-border-radius);
+  border-radius: var(--theme-card-border-radius);
 }
 
 .team__work__text {
@@ -67,7 +67,7 @@
 }
 
 .team__article__title a {
-  color: var(--palette-white);
+  color: var(--theme-team-article-title-color);
 }
 
 .team__article__image {

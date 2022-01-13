@@ -11,3 +11,7 @@
   padding: 0px;
   filter: brightness(0) invert(0.9);
 }
+
+html[data-theme="light"] .logo__item {
+  filter: brightness(0) opacity(0.6);
+}

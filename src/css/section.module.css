@@ -53,7 +53,7 @@
 }
 
 .section--odd {
-  background: var(--palette-rock);
+  background-color: var(--theme-section-odd-bg-color);
 }
 
 .section--showcase {

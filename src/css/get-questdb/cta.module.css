@@ -10,7 +10,7 @@
   align-items: center;
   border-radius: calc(var(--ifm-global-border-radius) / 2);
   color: var(--palette-pale-blue);
-  background: var(--palette-rock);
+  background: var(--theme-input-bg-color);
   font-size: var(--font-size-normal);
 }
 
