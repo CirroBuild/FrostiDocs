@@ -23,8 +23,9 @@ the latest entry by timestamp for a given key or combination of keys as part of
 a `SELECT` statement.
 
 ```questdb-sql title="LATEST BY customer ID and currency"
-SELECT * FROM balances LATEST BY customer_id, currency
-WHERE balance > 800;
+SELECT * FROM balances
+WHERE balance > 800
+LATEST ON ts PARTITION BY customer_id, currency;
 ```
 
 ### SAMPLE BY

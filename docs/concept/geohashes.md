@@ -244,7 +244,7 @@ We can check if the last-known location of a device is a specific geohash with
 the following query which will return an exact match based on geohash:
 
 ```questdb-sql
-SELECT * FROM geo_data LATEST BY device_id WHERE g8c = #u33dr01d
+SELECT * FROM geo_data WHERE g8c = #u33dr01d LATEST ON ts PARTITION BY device_id
 ```
 
 | ts                          | device_id | g1c | g8c      |
@@ -274,8 +274,9 @@ recent entries by device ID if the `g8c` column contains a geohash within
 `u33d`:
 
 ```questdb-sql title="LATEST BY usage"
-SELECT * FROM geo_data LATEST BY device_id
-WHERE g8c within(#u33d);
+SELECT * FROM geo_data
+WHERE g8c within(#u33d)
+LATEST ON ts PARTITION BY device_id;
 ```
 
 :::info
@@ -422,7 +423,7 @@ try:
         print(row)
 
     print("Records within 'u33d' geohash:")
-    cursor.execute("SELECT * FROM geo_data LATEST BY device_id WHERE g8c within(#u33d);")
+    cursor.execute("SELECT * FROM geo_data WHERE g8c within(#u33d) LATEST ON ts PARTITION BY device_id;")
     records = cursor.fetchall()
     for row in records:
         print(row)

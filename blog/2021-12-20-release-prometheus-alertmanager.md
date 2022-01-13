@@ -22,7 +22,7 @@ tags: [engineering, release, team, prometheus]
 import Banner from "@theme/Banner"
 
 <Banner
-  alt="Latest festures in QuestDB version 6.1.3 including Prometheus and Alertmanager"
+  alt="Latest features in QuestDB version 6.1.3 including Prometheus and Alertmanager"
   height={360}
   src="/img/blog/2021-12-20/banner.png"
   width={650}

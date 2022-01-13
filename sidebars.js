@@ -37,6 +37,7 @@ module.exports = {
         "concept/storage-model",
         "concept/designated-timestamp",
         "concept/sql-extensions",
+        "concept/jit-compiler",
         "concept/partitions",
         "concept/symbol",
         "concept/indexes",

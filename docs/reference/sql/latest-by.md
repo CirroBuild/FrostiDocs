@@ -6,9 +6,10 @@ description:
   illustration.
 ---
 
-`LATEST BY` is used as part of a [SELECT statement](/docs/reference/sql/select/)
-for returning the most recent records per unique column value, commonly on
-`STRING` and `SYMBOL` column types.
+`LATEST ON PARTITION BY` is used as part of a
+[SELECT statement](/docs/reference/sql/select/) for returning the most recent
+records per unique column value, commonly on `STRING` and `SYMBOL` column types.
+For the sake of brevity we to refer to this clause as `LATEST BY`.
 
 To illustrate how `LATEST BY` is intended to be used, we can consider the
 `trips` table [in the QuestDB demo instance](https://demo.questdb.io/). This
@@ -19,7 +20,7 @@ payment with the following query:
 ```questdb-sql
 SELECT payment_type, pickup_datetime, trip_distance
 FROM trips
-LATEST BY payment_type;
+LATEST ON pickup_datetime PARTITION BY payment_type;
 ```
 
 | payment_type | pickup_datetime             | trip_distance |
@@ -31,10 +32,25 @@ LATEST BY payment_type;
 | Cash         | 2019-06-30T23:59:54.000000Z | 2             |
 | Card         | 2019-06-30T23:59:56.000000Z | 1             |
 
+You can also write this query with the old syntax:
+
+```questdb-sql
+SELECT payment_type, pickup_datetime, trip_distance
+FROM trips
+LATEST BY payment_type;
+```
+
+The old `LATEST BY` syntax is considered deprecated. While it's still supported
+by the database, you should use the new `LATEST ON PARTITION BY` syntax in your
+applications. The first key difference is that the new syntax requires a
+timestamp column to be always specified. The second difference is that with the
+new syntax the `LATEST BY` has to follow the `WHERE` clause, while with the old
+syntax it was vice versa.
+
 :::note
 
-To use `LATEST BY`, a column needs to be specified as a **designated
-timestamp**. More information can be found in the
+To use `LATEST BY`, a column used in the `LATEST ON` part needs to be specified
+as a **designated timestamp**. More information can be found in the
 [designated timestamp](/docs/concept/designated-timestamp/) page for specifying
 this at table creation or at query time.
 
@@ -83,7 +99,7 @@ end as soon as all distinct symbol values have been found.
 
 ```questdb-sql title="Latest records by customer ID"
 SELECT * FROM balances
-LATEST BY cust_id;
+LATEST ON ts PARTITION BY cust_id;
 ```
 
 The query returns two rows with the most recent records per unique `cust_id`
@@ -103,7 +119,7 @@ query returns `LATEST BY` customer ID and balance currency:
 ```questdb-sql title="Latest balance by customer and currency"
 SELECT cust_id, balance_ccy, balance
 FROM balances
-LATEST BY cust_id, balance_ccy;
+LATEST ON ts PARTITION BY cust_id, balance_ccy;
 ```
 
 The results return the most recent records for each unique combination of
@@ -136,8 +152,9 @@ using brackets.
 ### WHERE first
 
 ```questdb-sql
-SELECT * FROM balances LATEST BY cust_id
-WHERE balance > 800;
+SELECT * FROM balances
+WHERE balance > 800
+LATEST ON ts PARTITION BY cust_id;
 ```
 
 This query executes `WHERE` before `LATEST BY` and returns the most recent
@@ -154,12 +171,12 @@ balance which is above 800. The execution order is as follows:
 ### LATEST BY first
 
 ```questdb-sql
-(SELECT * FROM balances LATEST BY cust_id) --note the brackets
+(SELECT * FROM balances LATEST ON ts PARTITION BY cust_id) --note the brackets
 WHERE balance > 800;
 ```
 
 This query executes `LATEST BY` before `WHERE` and returns the most recent
-records , then filters out those below 800. The steps are
+records, then filters out those below 800. The steps are
 
 - Find the latest balances by customer ID
 - Filter out balances below 800. Since the latest balance for customer 1 is
@@ -172,3 +189,7 @@ records , then filters out those below 800. The steps are
 ## Syntax
 
 ![Flow chart showing the syntax of the LATEST BY keyword](/img/docs/diagrams/latestBy.svg)
+
+## Deprecated syntax
+
+![Flow chart showing the old, deprecated syntax of the LATEST BY keyword](/img/docs/diagrams/latestByDeprecated.svg)

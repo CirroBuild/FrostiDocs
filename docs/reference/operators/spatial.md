@@ -47,8 +47,9 @@ Given a table with the following contents:
 The `within` operator can be used to filter results by geohash:
 
 ```questdb-sql
-SELECT * FROM pos LATEST BY uuid
-WHERE g8c within(#ezz, #u33d8);
+SELECT * FROM pos
+WHERE g8c within(#ezz, #u33d8)
+LATEST ON ts PARTITON BY uuid;
 ```
 
 This yields the following results:
@@ -62,8 +63,9 @@ Additionally, prefix-like matching can be performed to evaluate if geohashes
 exist within a larger grid:
 
 ```questdb-sql
-SELECT * FROM pos LATEST BY uuid
-WHERE g8c within(#u33);
+SELECT * FROM pos
+WHERE g8c within(#u33)
+LATEST ON ts PARTITON BY uuid;
 ```
 
 | ts                          | device_id | g1c | g8c      |

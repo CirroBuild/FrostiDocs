@@ -62,6 +62,9 @@ distinct
   ::= 'SELECT' 'DISTINCT' ( columnName (',' columnName)* ) 'FROM' tableName
 
 latestBy
+  ::= 'SELECT' ( columnName (',' columnName)* ) 'FROM' tableName 'LATEST' 'ON' '(' columnName ')' 'PARTITION' 'BY' ( columnName (',' columnName)* )
+
+latestByDeprecated
   ::= 'SELECT' ( columnName (',' columnName)* ) 'FROM' tableName 'LATEST' 'BY' ( columnName (',' columnName)* )
 
 limit

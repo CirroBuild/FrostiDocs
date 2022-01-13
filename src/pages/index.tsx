@@ -526,9 +526,9 @@ const sliceQuery = `SELECT timestamp, avg(tempC)
 FROM sensors
 SAMPLE BY 5m;`
 
-const navigateQuery = `SELECT sensorName, tempC
+const navigateQuery = `SELECT timestamp, sensorName, tempC
 FROM sensors
-LATEST BY sensorName;`
+LATEST ON timestamp PARTITION BY sensorName;`
 
 const mergeQuery = `SELECT sensors.timestamp ts, rain1H
 FROM sensors
