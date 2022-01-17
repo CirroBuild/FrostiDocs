@@ -34,11 +34,20 @@ inserting out-of-order records into an ordered dataset:
 ```questdb-sql title="Inserting all columns"
 INSERT INTO trades
 VALUES(
-    to_timestamp('2019-10-17T00:00:00', 'yyyy-MM-ddTHH:mm:ss'),
+    '2021-10-05T11:31:35.878Z',
     'AAPL',
     255,
     123.33,
     'B');
+```
+
+```questdb-sql title="Bulk inserts"
+INSERT INTO trades
+VALUES
+    ('2021-10-05T11:31:35.878Z', 'AAPL', 245, 123.4, 'C'),
+    ('2021-10-05T12:31:35.878Z', 'AAPL', 245, 123.3, 'C'),
+    ('2021-10-05T13:31:35.878Z', 'AAPL', 250, 123.1, 'C'),
+    ('2021-10-05T14:31:35.878Z', 'AAPL', 250, 123.0, 'C');
 ```
 
 ```questdb-sql title="Specifying schema"

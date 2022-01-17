@@ -33,7 +33,11 @@ indexCapacityDef
   ::= 'capacity' valueBlockSize
 
 insertInto
-  ::= 'INSERT' ('batch' batchCount 'commitLag' n ( 'us' | 's' | 'm' | 'h' | 'd' ))? 'INTO' tableName (('('columnName (',' columnName)*) ')')? ('VALUES' '(' value (',' value)* ')' | 'SELECT' queryDef )
+  ::= 'INSERT' ('batch' batchCount 'commitLag' n ( 'us' | 's' | 'm' | 'h' | 'd' ))?
+  'INTO' tableName ( ( '(' columnName (',' columnName)*) ')')?
+  ( 'VALUES' ( ( '(' value ( ',' value)* ')' ) (',' '(' value ( ',' value)* ')' )* ) | 'SELECT' queryDef )
+  ';'
+
 Backup
   ::= 'BACKUP' ( 'TABLE' tableName ( ',' tableName )* | 'DATABASE' ) ';'
 
