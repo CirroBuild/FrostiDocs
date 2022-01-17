@@ -94,7 +94,7 @@ try (CairoEngine engine = new CairoEngine(configuration)) {
 
         compiler.compile("create table abc (a int, b byte, c short, d long, e float, g double, h date, i symbol, j string, k boolean, l geohash(8c), ts timestamp) timestamp(ts)", ctx);
 
-        try (TableWriter writer = engine.getWriter(ctx.getCairoSecurityContext(), "abc")) {
+        try (TableWriter writer = engine.getWriter(ctx.getCairoSecurityContext(), "abc", "testing")) {
             for (int i = 0; i < 11; i++) {
                 TableWriter.Row row = writer.newRow(Os.currentTimeMicros());
                 row.putInt(0, 123);
@@ -157,7 +157,7 @@ always be 1.
 Before we start writing data using `TableWriter`, the target table has to exist.
 There are several ways to create new table ; using `SqlCompiler` is the easiest.
 
-```java title="Example of creating new table"
+```java title="Creating new table"
 try (SqlCompiler compiler = new SqlCompiler(engine)) {
     compiler.compile("create table abc (a int, b byte, c short, d long, e float, g double, h date, i symbol, j string, k boolean, l geohash(8c), ts timestamp) timestamp(ts)", ctx);
 ```
@@ -172,16 +172,17 @@ We use engine to create instance of `TableWriter`. This will enable reusing this
 writer again.
 
 ```java title="New table writer instance"
-try (TableWriter writer = engine.getWriter(ctx.getCairoSecurityContext(), "abc")) {
+try (TableWriter writer = engine.getWriter(ctx.getCairoSecurityContext(), "abc", "testing")) {
 ```
 
-The writer will hold exclusive lock on table `abc` until it is closed. This lock
-is both intra and inter-process. If you have two Java applications accessing the
-same table only one will succeed at one time.
+The writer will hold exclusive lock on table `abc` until it is closed and
+`testing` will be used as the lock reason. This lock is both intra and
+inter-process. If you have two Java applications accessing the same table only
+one will succeed at one time.
 
 #### Create a new row
 
-```java title="Example of creating new table row with timestamp"
+```java title="Creating new table row with timestamp"
 TableWriter.Row row = writer.newRow(Os.currentTimeMicros());
 ```
 
@@ -191,7 +192,7 @@ determine a partition for the new row. Its value has to be either increment or
 stay the same as the last row. When the table is not partitioned and does not
 have a designated timestamp column, timestamp value can be omitted.
 
-```java title="Example of creating new table row without timestamp"
+```java title="Creating new table row without timestamp"
 TableWriter.Row row = writer.newRow();
 ```
 
@@ -200,7 +201,7 @@ TableWriter.Row row = writer.newRow();
 There are put\* methods for every supported data type. Columns are updated by an
 index as opposed to by name.
 
-```java title="Example of populating table column"
+```java title="Populating table column"
 row.putLong(3, 333);
 ```
 
@@ -211,14 +212,14 @@ will default to NULL values.
 
 Following method call:
 
-```java title="Example of appending a new row"
+```java title="Appending a new row"
 row.append();
 ```
 
 Appended rows are not visible to readers until they are committed. An unneeded
 row can also be canceled if required.
 
-```java title="Example of cancelling half-populated row"
+```java title="Cancelling half-populated row"
 row.cancel();
 ```
 
@@ -273,7 +274,7 @@ try (CairoEngine engine = new CairoEngine(configuration)) {
         PageFrameCursor cursor = ...; // Setup PageFrameCursor instance
         compiler.compile("create table abc (a int, b byte, c short, d long, e float, g double, h date, i symbol, j string, k boolean, l geohash(8c), ts timestamp) timestamp(ts)", ctx);
 
-        try (TableWriter writer = engine.getWriter(ctx.getCairoSecurityContext(), "abc")) {
+        try (TableWriter writer = engine.getWriter(ctx.getCairoSecurityContext(), "abc", "testing")) {
             int columnCount = writer.getMetadata().getColumnCount();
             TableBlockWriter blockWriter = writer.newBlock();
 
