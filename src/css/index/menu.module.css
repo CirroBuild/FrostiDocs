@@ -85,3 +85,9 @@
     bottom: -5rem;
   }
 }
+
+@media (max-width: 450px) {
+  .menu__button {
+    font-size: calc(var(--font-size-small) - 3px);
+  }
+}
