@@ -4,7 +4,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group"
 
 import Button from "@theme/Button"
 import Chevron from "@theme/Chevron"
-import PageLayout from "@theme/PageLayout"
+import Layout from "../theme/Layout"
 import useResizeObserver from "@theme/useResizeObserver"
 
 import caCss from "../css/customers/card.module.css"
@@ -99,7 +99,7 @@ const Customer = () => {
     setIndex((index) => Math.max(index - viewportSize, 0))
   }, [viewportSize])
   return (
-    <PageLayout canonical="/customers" description={description} title={title}>
+    <Layout canonical="/customers" description={description} title={title}>
       <section className={clsx(seCss.section, seCss["section--odd"])}>
         <div className={juCss.jumbotron}>
           <div className={juCss.jumbotron__left}>
@@ -306,7 +306,7 @@ const Customer = () => {
           </div>
         </div>
       </section>
-    </PageLayout>
+    </Layout>
   )
 }
 
