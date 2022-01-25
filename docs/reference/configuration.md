@@ -375,10 +375,16 @@ PostgresSQL wire protocol.
 | pg.worker.affinity                  | -1,-1        | Comma-separated list of thread numbers which should be pinned for Postgres ingestion. Example `line.tcp.worker.affinity=1,2,3`.                                                                   |
 | pg.halt.on.error                    | false        | Whether ingestion should stop upon internal error.                                                                                                                                                |
 
-### InfluxDB line protocol (TCP)
+### InfluxDB line protocol
 
 This section describes ingestion settings for incoming messages using InfluxDB
-line protocol over TCP.
+line protocol.
+
+| Property                  | Default | Description                                                                                             |
+| ------------------------- | ------- | ------------------------------------------------------------------------------------------------------- |
+| line.default.partition.by | DAY     | The default partitioning strategy applied to new tables dynamically created by sending records via ILP. |
+
+#### TCP specific settings
 
 | Property                             | Default      | Description                                                                                                                                   |
 | ------------------------------------ | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -388,7 +394,6 @@ line protocol over TCP.
 | line.tcp.net.connection.timeout      | 300000       | Connection idle timeout in milliseconds. Connections are closed by the server when this timeout lapses.                                       |
 | line.tcp.net.connection.hint         | false        | Windows specific flag to overcome OS limitations on TCP backlog size                                                                          |
 | line.tcp.auth.db.path                |              | Path which points to the authentication db file.                                                                                              |
-| line.tcp.default.partition.by        | DAY          | The default partitioning strategy applied to new tables dynamically created by sending records via ILP created.                               |
 | line.tcp.net.interest.queue.capacity | 1024         | Internal queue size. This is also related to `active.connection.limit` in a way that sizes larger than connection max remove any waiting.     |
 | line.tcp.net.listen.backlog          | 50000        | Backlog argument value for [listen()](https://man7.org/linux/man-pages/man2/listen.2.html) call.                                              |
 | line.tcp.net.recv.buf.size           | -1           | Maximum buffer receive size on each TCP socket. If value is -1, the socket receive buffer remains unchanged from OS default.                  |
@@ -402,10 +407,7 @@ line protocol over TCP.
 | line.tcp.io.worker.affinity          | 0            | Comma-separated list of thread numbers which should be pinned for line protocol ingestion over TCP. Example `line.tcp.worker.affinity=1,3,4`. |
 | line.tcp.halt.on.error               | false        | Whether ingestion should stop upon internal error.                                                                                            |
 
-### InfluxDB line protocol (UDP)
-
-This section describes ingestion settings for incoming messages using InfluxDB
-line protocol over UDP.
+#### UDP specific settings
 
 | Property                     | Default      | Description                                                                                                                                                                                                                      |
 | ---------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

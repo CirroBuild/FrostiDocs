@@ -170,8 +170,7 @@ This default can be overridden for both the TCP and UDP interfaces via
 [server configuration](/docs/reference/configuration/):
 
 ```bash title="server.conf"
-line.tcp.default.partition.by=MONTH
-line.udp.default.partition.by=HOUR
+line.default.partition.by=MONTH
 ```
 
 ## Naming restrictions
