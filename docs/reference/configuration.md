@@ -161,10 +161,11 @@ configuration) every other subsystem.
 This section describes configuration settings for the distribution of work by
 writer threads in a QuestDB instance.
 
-| Property                          | Default | Description                                                                                                                                        |
-| --------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| cairo.max.uncommitted.rows        | 500000  | Maximum number of uncommitted rows, note that rows will always be committed if they have been received `line.tcp.maintenance.job.interval` ms ago. |
-| line.tcp.maintenance.job.interval | 30000   | Maximum amount of time (in milliseconds) between maintenance jobs, these will commit any uncommitted data.                                         |
+| Property                          | Default | Description                                                                                                                               |
+| --------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| cairo.max.uncommitted.rows        | 500000  | Maximum number of uncommitted rows per table, when the number of pending rows exceeds this parameter on a table, a commit will be issued. |
+| line.tcp.commit.timeout           | 1000    | Pending rows will be committed after `line.tcp.commit.timeout` milliseconds inactivity on each table.                                     |
+| line.tcp.maintenance.job.interval | 30000   | Maximum amount of time (in milliseconds) between maintenance jobs, these will commit any uncommitted data on inactive tables.             |
 
 ### Minimal HTTP server
 
