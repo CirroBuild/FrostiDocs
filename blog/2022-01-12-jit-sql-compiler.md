@@ -184,7 +184,7 @@ SQL JIT compiler is a beta feature and is disabled by default. To enable it, you
 should change the `cairo.sql.jit.mode` setting in your `server.conf` file.
 
 ```bash title="path/to/server.conf"
-cairo.sql.jit.mode=scalar
+cairo.sql.jit.mode=on
 ```
 
 Embedded API users are able to enable the compiler globally by providing their
