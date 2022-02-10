@@ -7,7 +7,7 @@ keywords:
   - google
   - cryptocurrency
   - benchmark
-image: /img/tutorial/shared/og-google-data-studio.png
+image: /img/tutorial/shared/og-solana-eth.png
 featureType: resource
 ---
 
@@ -114,7 +114,7 @@ Wait for the pod to become healthy and provision a load balancer:
 />
 
 Under Kubernetes Engine > Services & Ingress, check the IP address of the
-questdb service. There is a link which you can follow to port `9000` which will
+QuestDB service. There is a link which you can follow to port `9000` which will
 bring you to the web UI for QuestDB. To insert data, click the **Upload** icon
 on the left-hand panel and import the CSV data:
 
@@ -204,7 +204,7 @@ can use PgBouncer to secure Google Data Studio to
 [PgBouncer](https://www.pgbouncer.org/) and leverage a service mesh inside
 Kubernetes to secure PgBouncer to QuestDB. You can also put QuestDB behind a
 firewall and only whitelist the
-[IPs that Dats Studio uses](https://support.google.com/datastudio/answer/7288010?hl=en#zippy=%2Cin-this-article)
+[IPs that Data Studio uses](https://support.google.com/datastudio/answer/7288010?hl=en#zippy=%2Cin-this-article)
 to access the database.
 
 Google Data Studio might be lacking for serious data analysis needs beyond
