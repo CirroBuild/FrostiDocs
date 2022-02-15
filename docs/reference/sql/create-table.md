@@ -5,12 +5,16 @@ description: CREATE TABLE SQL keywords reference documentation.
 ---
 
 To create a new table in the database, the `CREATE TABLE` keywords followed by
-column definitions are used:
+column definitions are used.
 
 ```questdb-sql
 CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP, s STRING)
   timestamp(ts);
 ```
+
+## Syntax
+
+![Flow chart showing the syntax of the CREATE TABLE keyword](/img/docs/diagrams/createTable.svg)
 
 :::info
 
@@ -223,10 +227,6 @@ parameters may be applied:
 
 For more information on commit lag and the maximum uncommitted rows, see the
 guide for [out-of-order commits](/docs/guides/out-of-order-commit-lag/).
-
-## Create table syntax diagram
-
-![Flow chart showing the syntax of the CREATE TABLE keyword](/img/docs/diagrams/createTable.svg)
 
 ## Examples
 

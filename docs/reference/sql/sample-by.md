@@ -22,6 +22,12 @@ timestamp. Details about this concept can be found in the
 
 :::
 
+## Syntax
+
+![Flow chart showing the syntax of the SAMPLE BY keywords](/img/docs/diagrams/sampleBy.svg)
+![Flow chart showing the syntax of the ALIGN TO keywords](/img/docs/diagrams/alignToCalTimeZone.svg)
+![Flow chart showing the syntax of the FILL keyword](/img/docs/diagrams/fill.svg)
+
 ## Sample units
 
 The size of sampled groups are specified with the following syntax:
@@ -388,8 +394,3 @@ SELECT ts, avg(quantity*price) FROM trades SAMPLE BY 1d ALIGN TO CALENDAR;
 | 2021-05-31T00:00:00.000000Z | 1000.5 |
 | 2021-06-01T00:00:00.000000Z | 8007.2 |
 
-## Syntax
-
-![Flow chart showing the syntax of the SAMPLE BY keywords](/img/docs/diagrams/sampleBy.svg)
-![Flow chart showing the syntax of the ALIGN TO keywords](/img/docs/diagrams/alignToCalTimeZone.svg)
-![Flow chart showing the syntax of the FILL keyword](/img/docs/diagrams/fill.svg)

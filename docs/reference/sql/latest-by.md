@@ -11,6 +11,10 @@ description:
 records per unique column value, commonly on `STRING` and `SYMBOL` column types.
 For the sake of brevity we to refer to this clause as `LATEST BY`.
 
+## Syntax
+
+![Flow chart showing the syntax of the LATEST BY keyword](/img/docs/diagrams/latestBy.svg)
+
 To illustrate how `LATEST BY` is intended to be used, we can consider the
 `trips` table [in the QuestDB demo instance](https://demo.questdb.io/). This
 table has a `payment_type` column as `SYMBOL` type which specifies the method of
@@ -185,10 +189,6 @@ records, then filters out those below 800. The steps are
 | cust_id | balance_ccy | balance | inactive | ts                          |
 | ------- | ----------- | ------- | -------- | --------------------------- |
 | 2       | EUR         | 880.2   | FALSE    | 2020-04-22T16:18:34.404665Z |
-
-## Syntax
-
-![Flow chart showing the syntax of the LATEST BY keyword](/img/docs/diagrams/latestBy.svg)
 
 ## Deprecated syntax
 

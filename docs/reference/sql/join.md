@@ -12,7 +12,7 @@ QuestDB SQL's optimizer determines the best execution order and algorithms.
 There are no known limitations on size of tables or sub-queries used in joins
 and there are no limitations on number of joins either.
 
-## Join syntax
+## Syntax
 
 ![Flow chart showing the syntax of the JOIN keyword](/img/docs/diagrams/join.svg)
 

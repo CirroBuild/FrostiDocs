@@ -10,11 +10,7 @@ Type conversion. Can be either:
 - [Implicit](#implicit-conversion), in which case it will be automatically
   performed when required by the context.
 
-## Explicit conversion
-
-Types can be converted from one to another using the `cast()` function.
-
-### Syntax
+## Syntax
 
 ![Flow chart showing the syntax of the CAST keyword](/img/docs/diagrams/cast.svg)
 
@@ -26,7 +22,11 @@ where:
 
 `cast` can be used a part of arithmetic expression as normal
 
-### Examples
+## Explicit conversion
+
+Types can be converted from one to another using the `cast()` function.
+
+## Examples
 
 ```questdb-sql title="Queries"
 SELECT
