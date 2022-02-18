@@ -105,3 +105,11 @@
 [[redirects]]
   from = "/people-and-talent-acquisition"
   to = "/careers"
+
+[[redirects]]
+  from = "/docs/reference/api/influxdb"
+  to = "/docs/reference/api/ilp/overview"
+
+[[redirects]]
+  from = "/docs/guides/influxdb-line-protocol"
+  to = "/docs/reference/api/ilp/overview"

@@ -71,7 +71,6 @@ module.exports = {
       items: [
         "guides/working-with-timestamps-timezones",
         "guides/importing-data",
-        "guides/influxdb-line-protocol",
         "guides/out-of-order-commit-lag",
         "guides/v6-migration",
       ],
@@ -116,7 +115,16 @@ module.exports = {
           items: [
             "reference/api/rest",
             "reference/api/postgres",
-            "reference/api/influxdb",
+            {
+              type: "category",
+              label: "InfluxDB Line Protocol",
+              items: [
+                "reference/api/ilp/overview",
+                "reference/api/ilp/columnset-types",
+                "reference/api/ilp/tcp-receiver",
+                "reference/api/ilp/udp-receiver",
+              ]
+            },
             "reference/api/java-embedded",
           ],
         },
