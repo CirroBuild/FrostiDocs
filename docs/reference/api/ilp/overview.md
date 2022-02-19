@@ -28,7 +28,9 @@ table_name,symbolset columnset timestamp\n
 `name` in the `name=value` pair always corresponds to `column name` in the
 table.
 
-:::note Each ILP message has to end with new line `\n` character. :::
+:::note 
+Each ILP message has to end with new line `\n` character. 
+:::
 
 ### Behaviour
 
@@ -194,9 +196,11 @@ when present, is a timestamp in Epoch nanoseconds. When the timestamp is
 omitted, the server will insert each message using the system clock as the row
 timestamp.
 
-:::warning While `columnset` `timestamp` type units are `microseconds`, the
+:::warning 
+While `columnset` `timestamp` type units are `microseconds`, the
 designated timestamp units are `nanoseconds`. These are default units, which can
-be overridden via `line.tcp.timestamp` :::
+be overridden via `line.tcp.timestamp` 
+:::
 
 ```shell title="Example of ILP message with desginated timestamp value"
 tracking,loc=north val=200i 1000000000\n

@@ -177,8 +177,10 @@ Another consideration is the number of tables updates concurrently.
 handle multiple tables concurrently. `1:1` ratio is the maximum required ratio
 between `writer` threads and tables.
 
-:::note Sending updates for multiple tables from single TCP connection might be
-inefficient. Configure `writer pool` size to 1 for optimal performance. :::
+:::note
+Sending updates for multiple tables from single TCP connection might be
+inefficient. Configure `writer pool` size to 1 for optimal performance.
+:::
 
 When ingesting data out of order (O3) `shared pool` accelerates O3 tasks. It is
 also responsible for SQL execution. `shared pool` size should be set to use the

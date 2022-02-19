@@ -115,7 +115,9 @@ The result:
 | ------------------- | ------ | ---------------------- | ---- |
 | 1638202821000000000 | BTCUSD | this is a "rare" value | John |
 
-:::note String values must be UTF8 encoded before sending. :::
+:::note
+String values must be UTF8 encoded before sending.
+:::
 
 ### Cast table
 
