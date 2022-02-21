@@ -107,6 +107,10 @@
   to = "/careers"
 
 [[redirects]]
+  from = "/docs/reference/sql/latest-by"
+  to = "/docs/reference/sql/latest-on"
+
+[[redirects]]
   from = "/docs/reference/api/influxdb"
   to = "/docs/reference/api/ilp/overview"
 
