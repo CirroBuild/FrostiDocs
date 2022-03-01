@@ -84,7 +84,7 @@
   --ifm-heading-line-height: 1.5;
 
   --theme-text-color: var(--ifm-font-color-base);
-  --theme-navbar-background-color: rgba(33,34,44,0.6);
+  --theme-navbar-background-color: rgba(33,34,44,0.8);
 
   --theme-input-bg-color: #44475A;
   --theme-input-text-color: #B1B5D3;
@@ -169,7 +169,7 @@ html[data-theme="light"] {
   --image-shadow: 0 10px 20px 5px var(--palette-dark-20);
 
   --theme-text-color: var(--ifm-font-color-base);
-  --theme-navbar-background-color: rgba(250,250,250,0.6);
+  --theme-navbar-background-color: rgba(250,250,250,0.8);
 
   --theme-section-odd-bg-color: #F0F1F5;
   --theme-input-bg-color: #F0F1F5;
