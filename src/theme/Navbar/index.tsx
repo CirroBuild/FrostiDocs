@@ -160,6 +160,16 @@ function Navbar(): JSX.Element {
           >
             Benchmark
           </Button>
+
+          <Button
+            icon={<div className={styles.ukraineFlagIcon} />}
+            className={styles.supportUkraineButton}
+            variant="plain"
+            size="xsmall"
+            href="https://supportukrainenow.org/"
+          >
+            Support Ukraine
+          </Button>
         </div>
       </div>
       <div

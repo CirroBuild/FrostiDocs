@@ -165,3 +165,37 @@
   }
 }
 
+.supportUkraineButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--ukraine-blue);
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  font-weight: bold;
+  color: var(--ukraine-blue);
+}
+
+@media screen and (max-width: 1739px) {
+  .supportUkraineButton {
+    top: 110%;
+    right: 15px;
+    font-size: 0.8rem;
+  }
+}
+
+.ukraineFlagIcon {
+  width: 25px;
+  height: 20px;
+  margin-right: 0.5rem;
+
+  background: linear-gradient(
+    0,
+    var(--ukraine-yellow),
+    var(--ukraine-yellow) 50%,
+    var(--ukraine-blue) 50%,
+    var(--ukraine-blue) 100%
+  );
+}
