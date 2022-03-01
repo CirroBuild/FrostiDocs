@@ -86,15 +86,9 @@ function Navbar(): JSX.Element {
 
   return (
     <nav
-      className={clsx(
-        "navbar",
-        styles.navbar,
-        "navbar--light",
-        "navbar--fixed-top",
-        {
-          "navbar-sidebar--show": sidebarShown,
-        },
-      )}
+      className={clsx("navbar", "navbar--light", "navbar--fixed-top", {
+        "navbar-sidebar--show": sidebarShown,
+      })}
     >
       <div className={clsx("navbar__inner", styles.inner)}>
         <div className="navbar__items">

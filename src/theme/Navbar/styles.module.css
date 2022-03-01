@@ -29,25 +29,6 @@
 .inner {
   margin: 0 auto;
   padding: 0 var(--ifm-spacing-horizontal);
-  background: var(--theme-navbar-background-color);
-}
-
-.navbar {
-  --ukraine-yellow: rgba(255, 215, 0, 1);
-  --ukraine-blue: rgba(0, 87, 184, 1);
-  background: linear-gradient(
-    0,
-    var(--ukraine-yellow),
-    var(--ukraine-yellow) 50%,
-    var(--ukraine-blue) 50%,
-    var(--ukraine-blue) 100%
-  );
-}
-
-@media screen and (min-width: 1740px) {
-  .inner{
-    border-radius: var(--ifm-global-border-radius);
-  }
 }
 
 :global(.navbar__item--slack),
