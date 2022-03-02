@@ -11,7 +11,7 @@ import seCss from "../../css/section.module.css"
 import chCss from "../../css/case-study/chart.module.css"
 
 const Tqs = () => {
-  const title = "TQS use QuestDB for industrial telemetry data"
+  const title = "TQS uses QuestDB for industrial telemetry data"
   const description =
     "QuestDB is used as a time series database to store sensor data in the cloud infrastructure of modern pharmaceutical production processing facilities."
 
@@ -59,7 +59,7 @@ const Tqs = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              TQS Industries
+              TQS Integration
             </a>{" "}
             uses QuestDB in industrial telemetry solutions for clients in the
             Life Science, Pharmaceutical, Energy, and Renewables industries. TQS
@@ -135,7 +135,7 @@ const Tqs = () => {
 
       <section className={clsx(seCss.section, caCss.card)}>
         <p className={caCss.card__title}>
-          TQS Industries build reference architecture for software applications
+          TQS Integration builds reference architecture for software applications
           dealing with industrial telemetry that produce and process hundreds of
           thousands of events per second. QuestDB is used when they require a
           time series database for data visualization, real-time analytics,
@@ -143,7 +143,7 @@ const Tqs = () => {
         </p>
 
         <p className={caCss.card__subtitle}>
-          In this case study, Senior Data Scientist Holger Amort describes how
+          In this case study, Senior Data Scientist, Holger Amort, describes how
           and why QuestDB is relied upon within high-performance reference
           architecture built at TQS Integration.
         </p>

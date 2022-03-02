@@ -12,7 +12,7 @@ import chCss from "../../css/case-study/chart.module.css"
 
 const Sapient = () => {
   const title =
-    "Sapient use QuestDB for real-time analytics in smart infrastructure"
+    "Sapient uses QuestDB for real-time analytics in smart infrastructure"
   const description =
     "QuestDB is used as a time series database by Sapient for usage insights, anomaly detection, and predictive maintenance."
 
@@ -46,7 +46,7 @@ const Sapient = () => {
             <span className={juCss.jumbotron__name}>Case study</span>
           </div>
           <h1 className={seCss.section__title}>
-            Sapient use QuestDB for real-time analytics in smart infrastructure
+            Sapient uses QuestDB for real-time analytics in smart infrastructure
           </h1>
           <p
             className={clsx(
