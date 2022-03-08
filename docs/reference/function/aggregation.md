@@ -249,8 +249,8 @@ Return value type is the same as the type of the argument.
 SELECT max(amount) FROM transactions;
 ```
 
-| min  |
-| ---- |
+| max  |
+|------|
 | 55.3 |
 
 ```questdb-sql title="Highest transaction amount by payment_type"
