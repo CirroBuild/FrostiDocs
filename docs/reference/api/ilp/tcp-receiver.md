@@ -106,6 +106,13 @@ configuration property:
 line.tcp.min.idle.ms.before.writer.release=30000
 ```
 
+The following server configuration property controls the interval to run idle
+table checks:
+
+```shell title="Setting maintenance interval (millis)"
+line.tcp.maintenance.job.interval=1000
+```
+
 ### Interval-based commit
 
 A table's commit lag metadata property determines how much uncommitted data will
@@ -116,20 +123,22 @@ the commit lag value for each table. The difference is that the commit interval
 is a wall clock.
 
 The commit interval is calculated for each table as a fraction of the commit lag
+
 $$
 commitInterval = commitLag * fraction
 $$
-This fraction is `0.5` by default so if the table has a commit lag of `1` minute the
-commit interval will be `30` seconds. The fraction used to derive the commit interval
-can be set by the below configuration parameter.
+
+This fraction is `0.5` by default so if the table has a commit lag of `1` minute
+the commit interval will be `30` seconds. The fraction used to derive the commit
+interval can be set by the below configuration parameter.
 
 ```shell title="Setting commit interval fraction"
 line.tcp.commit.interval.fraction=0.2
 ```
 
 If there is no commit lag set for a table or the fraction is set to 0, the
-default commit interval of 2 seconds will be used. This can be changed in
-the configuration:
+default commit interval of 2 seconds will be used. This can be changed in the
+configuration:
 
 ```shell title="Setting the default commit interval in milliseconds"
 line.tcp.commit.interval.default=5000
@@ -148,12 +157,6 @@ the application will see the first 20 seconds of the data, with the remaining 60
 seconds uncommitted. Each subsequent commit will reveal more data in 20-second
 increments. It should be noted that both commit lag and commit interval should
 be carefully chosen with both data visibility and ingestion performance in mind.
-
-This parameter is set using in the following server configuration property:
-
-```shell title="Setting maintenance insterval (millis)"
-line.tcp.maintenance.job.interval=1000
-```
 
 ## Capacity planning
 
@@ -178,8 +181,10 @@ handle multiple tables concurrently. `1:1` ratio is the maximum required ratio
 between `writer` threads and tables.
 
 :::note
+
 Sending updates for multiple tables from single TCP connection might be
 inefficient. Configure `writer pool` size to 1 for optimal performance.
+
 :::
 
 When ingesting data out of order (O3) `shared pool` accelerates O3 tasks. It is

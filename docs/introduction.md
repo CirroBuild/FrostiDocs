@@ -165,6 +165,7 @@ when starting services:
 - [SAMPLE BY](/docs/reference/sql/sample-by/)
 - [SELECT](/docs/reference/sql/select/)
 - [SHOW](/docs/reference/sql/show/)
+- [SNAPSHOT](/docs/reference/sql/snapshot/)
 - [TRUNCATE TABLE](/docs/reference/sql/truncate/)
 - [VACUUM PARTITIONS](/docs/reference/sql/vacuum-partitions/)
 - [UNION](/docs/reference/sql/union/)

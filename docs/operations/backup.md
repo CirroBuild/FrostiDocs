@@ -72,16 +72,17 @@ curl -G --data-urlencode "query=BACKUP database;" \
   http://localhost:9000/exec
 ```
 
-## Creating a filesystem backup
+## Creating a filesystem backup (disk snapshot)
 
 :::caution
 
-To run a reliable filesystem backup, the QuestDB instance must be shut down
-**or** no write operations should be running while disk backup is being created.
+To run a reliable filesystem backup without database downtime, you should use
+`SNAPSHOT PREPARE`/`SNAPSHOT COMPLETE`
+[SQL statements](/docs/reference/sql/snapshot/).
 
 :::
 
-The most common way to perform cloud-native filesystem snapshots are described
+The most common ways to perform cloud-native filesystem snapshots are described
 in the following resources, which rely on similar steps but have minor
 differences in terminology and services:
 

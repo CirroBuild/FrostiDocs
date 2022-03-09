@@ -40,7 +40,7 @@ For example, the server configuration key for shared workers must be passed as
 described below:
 
 | `server.conf` key     | env var                   |
-|-----------------------|---------------------------|
+| --------------------- | ------------------------- |
 | `shared.worker.count` | `QDB_SHARED_WORKER_COUNT` |
 
 :::note
@@ -161,7 +161,7 @@ Shared worker threads service SQL execution subsystems and (in the default
 configuration) every other subsystem.
 
 | Property                  | Default | Description                                                                                                                                                  |
-|---------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | shared.worker.count       | 2       | Number of worker threads shared across the application. Increasing this number will increase parallelism in the application at the expense of CPU resources. |
 | shared.worker.affinity    |         | Comma-delimited list of CPU ids, one per thread specified in `shared.worker.count`. By default, threads have no CPU affinity.                                |
 | shared.worker.haltOnError | false   | Toggle whether worker should stop on error.                                                                                                                  |
@@ -172,7 +172,7 @@ This section describes configuration settings for the distribution of work by
 writer threads in a QuestDB instance.
 
 | Property                          | Default | Description                                                                                                                               |
-|-----------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | cairo.max.uncommitted.rows        | 500000  | Maximum number of uncommitted rows per table, when the number of pending rows exceeds this parameter on a table, a commit will be issued. |
 | line.tcp.commit.timeout           | 1000    | Pending rows will be committed after `line.tcp.commit.timeout` milliseconds inactivity on each table.                                     |
 | line.tcp.maintenance.job.interval | 30000   | Maximum amount of time (in milliseconds) between maintenance jobs, these will commit any uncommitted data on inactive tables.             |
@@ -192,7 +192,7 @@ the [health monitoring page](/docs/operations/health-monitoring/).
 :::
 
 | Property                        | Default      | Description                                                                                                                                                                    |
-|---------------------------------|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | http.min.enabled                | true         | Enable or disable Minimal HTTP server.                                                                                                                                         |
 | http.min.bind.to                | 0.0.0.0:9003 | IPv4 address and port of the server. `0` means it will bind to all network interfaces, otherwise the IP address must be one of the existing network adapters.                  |
 | http.min.net.connection.limit   | 4            | Active connection limit                                                                                                                                                        |
@@ -208,7 +208,7 @@ default on port `9000`. For details on the use of this component, refer to the
 [web console documentation](/docs/reference/web-console/) page.
 
 | Property                                     | Default        | Description                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|----------------------------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | http.enabled                                 | true           | Enable or disable HTTP server.                                                                                                                                                                                                                                                                                                                                                                                                         |
 | http.bind.to                                 | 0.0.0.0:9000   | IP address and port of HTTP server. A value of `0` means that the HTTP server will bind to all network interfaces. You can specify IP address of any individual network interface on your system.                                                                                                                                                                                                                                      |
 | http.net.connection.limit                    | 256            | The number of simultaneous TCP connection to the HTTP server. The rationale of the value is to control server memory consumption.                                                                                                                                                                                                                                                                                                      |
@@ -265,13 +265,15 @@ This section describes configuration settings for the Cairo SQL engine in
 QuestDB.
 
 | Property                                       | Default           | Description                                                                                                                                                                                                              |
-|------------------------------------------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | query.timeout.sec                              | 60                | A global timeout (in seconds) for long-running queries.                                                                                                                                                                  |
 | cairo.sql.copy.root                            | null              | Input root directory for CSV imports via `copy` SQL.                                                                                                                                                                     |
 | cairo.sql.backup.root                          | null              | Output root directory for backups.                                                                                                                                                                                       |
 | cairo.sql.backup.dir.datetime.format           | null              | Date format for backup directory.                                                                                                                                                                                        |
 | cairo.sql.backup.dir.tmp.name                  | tmp               | Name of tmp directory used during backup.                                                                                                                                                                                |
 | cairo.sql.backup.mkdir.mode                    | 509               | Permission used when creating backup directories.                                                                                                                                                                        |
+| cairo.snapshot.instance.id                     | empty string      | Instance id to be included into disk snapshots.                                                                                                                                                                          |
+| cairo.snapshot.recovery.enabled                | true              | When `false`, disables snapshot recovery on database start.                                                                                                                                                              |
 | cairo.root                                     | db                | Directory for storing db tables and metadata. This directory is inside the server root directory provided at startup.                                                                                                    |
 | cairo.commit.mode                              | nosync            | How changes to table are flushed to disk upon commit. Choices: `nosync`, `async` (flush call schedules update, returns immediately), `sync` (waits for flush to complete).                                               |
 | cairo.create.as.select.retry.count             | 5                 | Number of types table creation or insertion will be attempted.                                                                                                                                                           |
@@ -344,7 +346,7 @@ This section describes configuration settings for client connections using
 PostgresSQL wire protocol.
 
 | Property                         | Default      | Description                                                                                                                                                                                       |
-|----------------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | pg.enabled                       | true         | Configuration for enabling or disabling the Postres interface.                                                                                                                                    |
 | pg.net.bind.to                   | 0.0.0.0:8812 | IP address and port of Postgres wire protocol server. 0 means that the server will bind to all network interfaces. You can specify IP address of any individual network interface on your system. |
 | pg.net.connection.limit          | 10           | The number of simultaneous PostgreSQL connections to the server. This value is intended to control server memory consumption.                                                                     |
@@ -378,13 +380,13 @@ This section describes ingestion settings for incoming messages using InfluxDB
 line protocol.
 
 | Property                  | Default | Description                                                                                             |
-|---------------------------|---------|---------------------------------------------------------------------------------------------------------|
+| ------------------------- | ------- | ------------------------------------------------------------------------------------------------------- |
 | line.default.partition.by | DAY     | The default partitioning strategy applied to new tables dynamically created by sending records via ILP. |
 
 #### TCP specific settings
 
 | Property                          | Default      | Description                                                                                                                                   |
-|-----------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | line.tcp.enabled                  | true         | Enable or disable line protocol over TCP.                                                                                                     |
 | line.tcp.net.bind.to              | 0.0.0.0:9009 | IP address of the network interface to bind listener to and port. By default, TCP receiver listens on all network interfaces.                 |
 | line.tcp.net.connection.limit     | 10           | The number of simultaneous connections to the server. This value is intended to control server memory consumption.                            |
@@ -404,11 +406,10 @@ line protocol.
 | line.tcp.default.partition.by     | DAY          | Table partition strategy to be used with tables that are created automatically by ILP. Possible values are: `HOUR`, `DAY`, `MONTH` and `YEAR` |
 | line.tcp.disconnect.on.error      | true         | Disconnect TCP socket that sends malformed messages.                                                                                          |
 
-
 #### UDP specific settings
 
 | Property                     | Default      | Description                                                                                                                                                                                                                      |
-|------------------------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | line.udp.join                | 232.1.2.3    | Multicast address receiver joins. This values is ignored when receiver is in "unicast" mode.                                                                                                                                     |
 | line.udp.bind.to             | 0.0.0.0:9009 | IP address of the network interface to bind listener to and port. By default UDP receiver listens on all network interfaces.                                                                                                     |
 | line.udp.commit.rate         | 1000000      | For packet bursts the number of continuously received messages after which receiver will force commit. Receiver will commit irrespective of this parameter when there are no messages.                                           |
@@ -429,7 +430,7 @@ us improve the product over time. We do not collect any personally-identifying
 information, and we do not share any of this data with third parties.
 
 | Property          | Default | Description                                           |
-|-------------------|---------|-------------------------------------------------------|
+| ----------------- | ------- | ----------------------------------------------------- |
 | telemetry.enabled | true    | Enable or disable anonymous usage metrics collection. |
 
 ## Logging

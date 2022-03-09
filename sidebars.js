@@ -195,6 +195,7 @@ module.exports = {
             "reference/sql/sample-by",
             "reference/sql/select",
             "reference/sql/show",
+            "reference/sql/snapshot",
             "reference/sql/truncate",
             "reference/sql/union",
             "reference/sql/vacuum-partitions",

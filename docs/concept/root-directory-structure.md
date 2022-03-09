@@ -11,7 +11,8 @@ questdb
 ├── conf
 ├── db
 ├── log
-└── public
+├── public
+└── snapshot (optional)
 ```
 
 By default, QuestDB's root directory will be the following:
@@ -28,16 +29,13 @@ By default, QuestDB's root directory will be the following:
 
 <TabItem value="nix">
 
-
 ```shell
 $HOME/.questdb
 ```
 
 </TabItem>
 
-
 <TabItem value="macos">
-
 
 ```shell
 /usr/local/var/questdb
@@ -45,9 +43,7 @@ $HOME/.questdb
 
 </TabItem>
 
-
 <TabItem value="windows">
-
 
 ```shell
 C:\Windows\System32\questdb
@@ -55,9 +51,7 @@ C:\Windows\System32\questdb
 
 </TabItem>
 
-
 </Tabs>
-
 
 ## `conf` directory
 
@@ -194,3 +188,8 @@ Contains the web files for the Web Console:
     ├── qdb.css
     └── ...
 ```
+
+## `snapshot` directory
+
+Created when a filesystem (disk) [snapshot](/docs/reference/sql/snapshot/) is
+collected. Contains table metadata file copies.
