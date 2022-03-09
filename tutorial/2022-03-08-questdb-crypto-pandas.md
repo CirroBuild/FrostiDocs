@@ -48,10 +48,10 @@ For simplicity, we will run QuestDB locally via Docker and import the datasets
 via the console UI. Download and run the latest version of QuestDB:
 
 ```
-$ docker run -p 9000:9000 \\
-   -p 9009:9009 \\
-   -p 8812:8812 \\
-   -p 9003:9003 \\
+$ docker run -p 9000:9000 \
+   -p 9009:9009 \
+   -p 8812:8812 \
+   -p 9003:9003 \
    questdb/questdb
 ```
 
