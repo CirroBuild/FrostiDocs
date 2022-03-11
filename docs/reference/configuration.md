@@ -166,17 +166,6 @@ configuration) every other subsystem.
 | shared.worker.affinity    |         | Comma-delimited list of CPU ids, one per thread specified in `shared.worker.count`. By default, threads have no CPU affinity.                                |
 | shared.worker.haltOnError | false   | Toggle whether worker should stop on error.                                                                                                                  |
 
-#### Load balancing
-
-This section describes configuration settings for the distribution of work by
-writer threads in a QuestDB instance.
-
-| Property                          | Default | Description                                                                                                                               |
-| --------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| cairo.max.uncommitted.rows        | 500000  | Maximum number of uncommitted rows per table, when the number of pending rows exceeds this parameter on a table, a commit will be issued. |
-| line.tcp.commit.timeout           | 1000    | Pending rows will be committed after `line.tcp.commit.timeout` milliseconds inactivity on each table.                                     |
-| line.tcp.maintenance.job.interval | 30000   | Maximum amount of time (in milliseconds) between maintenance jobs, these will commit any uncommitted data on inactive tables.             |
-
 ### Minimal HTTP server
 
 This server runs embedded in a QuestDB instance by default and enables health
@@ -267,6 +256,8 @@ QuestDB.
 | Property                                       | Default           | Description                                                                                                                                                                                                              |
 | ---------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | query.timeout.sec                              | 60                | A global timeout (in seconds) for long-running queries.                                                                                                                                                                  |
+| cairo.max.uncommitted.rows                     | 500000            | Maximum number of uncommitted rows per table, when the number of pending rows exceeds this parameter on a table, a commit will be issued.                                                                                |
+| cairo.commit.lag                               | 300000            | Expected maximum time lag for out-of-order rows in milliseconds.                                                                                                                                                         |
 | cairo.sql.copy.root                            | null              | Input root directory for CSV imports via `copy` SQL.                                                                                                                                                                     |
 | cairo.sql.backup.root                          | null              | Output root directory for backups.                                                                                                                                                                                       |
 | cairo.sql.backup.dir.datetime.format           | null              | Date format for backup directory.                                                                                                                                                                                        |
@@ -385,26 +376,30 @@ line protocol.
 
 #### TCP specific settings
 
-| Property                          | Default      | Description                                                                                                                                   |
-| --------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| line.tcp.enabled                  | true         | Enable or disable line protocol over TCP.                                                                                                     |
-| line.tcp.net.bind.to              | 0.0.0.0:9009 | IP address of the network interface to bind listener to and port. By default, TCP receiver listens on all network interfaces.                 |
-| line.tcp.net.connection.limit     | 10           | The number of simultaneous connections to the server. This value is intended to control server memory consumption.                            |
-| line.tcp.net.connection.timeout   | 300000       | Connection idle timeout in milliseconds. Connections are closed by the server when this timeout lapses.                                       |
-| line.tcp.net.connection.hint      | false        | Windows specific flag to overcome OS limitations on TCP backlog size                                                                          |
-| line.tcp.net.connection.rcvbuf    | -1           | Maximum buffer receive size on each TCP socket. If value is -1, the socket receive buffer remains unchanged from OS default.                  |
-| line.tcp.auth.db.path             |              | Path which points to the authentication db file.                                                                                              |
-| line.tcp.connection.pool.capacity | 64           | The maximum amount of pooled connections this interface may have.                                                                             |
-| line.tcp.timestamp                | n            | Input timestamp resolution. Possible values are `n`, `u`, `ms`, `s` and `h`.                                                                  |
-| line.tcp.msg.buffer.size          | 32768        | Size of the buffer read from queue. Maximum size of write request, regardless of the number of measurements.                                  |
-| line.tcp.max.measurement.size     | 32768        | Maximum size of any measurement.                                                                                                              |
-| line.tcp.writer.queue.size        | 128          | Size of the queue between network I/O and writer jobs. Each queue entry represents a measurement.                                             |
-| line.tcp.writer.worker.count      | 1            | Number of dedicated I/O worker threads assigned to write data to tables. When `0`, the writer jobs will use the shared pool.                  |
-| line.tcp.writer.worker.affinity   |              | Comma-separated list of thread numbers which should be pinned for line protocol ingestion over TCP. CPU core indexes are 0-based.             |
-| line.tcp.io.worker.count          | 0            | Number of dedicated I/O worker threads assigned to parse TCP input. When `0`, the writer jobs will use the shared pool.                       |
-| line.tcp.io.worker.affinity       |              | Comma-separated list of thread numbers which should be pinned for line protocol ingestion over TCP. CPU core indexes are 0-based.             |
-| line.tcp.default.partition.by     | DAY          | Table partition strategy to be used with tables that are created automatically by ILP. Possible values are: `HOUR`, `DAY`, `MONTH` and `YEAR` |
-| line.tcp.disconnect.on.error      | true         | Disconnect TCP socket that sends malformed messages.                                                                                          |
+| Property                                   | Default      | Description                                                                                                                                                                                                                                           |
+| ------------------------------------------ | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| line.tcp.enabled                           | true         | Enable or disable line protocol over TCP.                                                                                                                                                                                                             |
+| line.tcp.net.bind.to                       | 0.0.0.0:9009 | IP address of the network interface to bind listener to and port. By default, TCP receiver listens on all network interfaces.                                                                                                                         |
+| line.tcp.net.connection.limit              | 10           | The number of simultaneous connections to the server. This value is intended to control server memory consumption.                                                                                                                                    |
+| line.tcp.net.connection.timeout            | 300000       | Connection idle timeout in milliseconds. Connections are closed by the server when this timeout lapses.                                                                                                                                               |
+| line.tcp.net.connection.hint               | false        | Windows specific flag to overcome OS limitations on TCP backlog size                                                                                                                                                                                  |
+| line.tcp.net.connection.rcvbuf             | -1           | Maximum buffer receive size on each TCP socket. If value is -1, the socket receive buffer remains unchanged from OS default.                                                                                                                          |
+| line.tcp.auth.db.path                      |              | Path which points to the authentication db file.                                                                                                                                                                                                      |
+| line.tcp.connection.pool.capacity          | 64           | The maximum amount of pooled connections this interface may have.                                                                                                                                                                                     |
+| line.tcp.timestamp                         | n            | Input timestamp resolution. Possible values are `n`, `u`, `ms`, `s` and `h`.                                                                                                                                                                          |
+| line.tcp.msg.buffer.size                   | 32768        | Size of the buffer read from queue. Maximum size of write request, regardless of the number of measurements.                                                                                                                                          |
+| line.tcp.maintenance.job.interval          | 30000        | Maximum amount of time (in milliseconds) between maintenance jobs, these will commit any uncommitted data on inactive tables.                                                                                                                         |
+| line.tcp.min.idle.ms.before.writer.release | 30000        | Minimum amount of idle time before a table writer is released in milliseconds.                                                                                                                                                                        |
+| line.tcp.commit.interval.fraction          | 0.5          | Commit lag fraction. Used to calculate commit interval for the table according to the following formula: `commit_interval = commit_lag ∗ fraction`. The calculated commit interval defines how long uncommitted data will need to remain uncommitted. |
+| line.tcp.commit.interval.default           | 2000         | Default commit interval in milliseconds. Used when no commit lag set for a table or the fraction is set to 0.                                                                                                                                         |
+| line.tcp.max.measurement.size              | 32768        | Maximum size of any measurement.                                                                                                                                                                                                                      |
+| line.tcp.writer.queue.size                 | 128          | Size of the queue between network I/O and writer jobs. Each queue entry represents a measurement.                                                                                                                                                     |
+| line.tcp.writer.worker.count               | 1            | Number of dedicated I/O worker threads assigned to write data to tables. When `0`, the writer jobs will use the shared pool.                                                                                                                          |
+| line.tcp.writer.worker.affinity            |              | Comma-separated list of thread numbers which should be pinned for line protocol ingestion over TCP. CPU core indexes are 0-based.                                                                                                                     |
+| line.tcp.io.worker.count                   | 0            | Number of dedicated I/O worker threads assigned to parse TCP input. When `0`, the writer jobs will use the shared pool.                                                                                                                               |
+| line.tcp.io.worker.affinity                |              | Comma-separated list of thread numbers which should be pinned for line protocol ingestion over TCP. CPU core indexes are 0-based.                                                                                                                     |
+| line.tcp.default.partition.by              | DAY          | Table partition strategy to be used with tables that are created automatically by ILP. Possible values are: `HOUR`, `DAY`, `MONTH` and `YEAR`                                                                                                         |
+| line.tcp.disconnect.on.error               | true         | Disconnect TCP socket that sends malformed messages.                                                                                                                                                                                                  |
 
 #### UDP specific settings
 

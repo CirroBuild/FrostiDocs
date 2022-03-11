@@ -34,7 +34,7 @@ import Screenshot from "@theme/Screenshot"
 
 If any new timestamp value has a high probability to arrive within 10 seconds of
 the previously received value, the boundary for this data is `10 seconds` and we
-name this **lag**.
+name this **commit lag** or just **lag**.
 
 When the order of timestamp values follow this pattern, it will be recognized by
 our out-of-order algorithm and prioritized using an optimized processing path. A
@@ -48,7 +48,7 @@ occur when:
 
 - they are outside a window of time for which they are expected to be
   out-of-order or
-- when the row-count passes a certain threshold.
+- when the row count passes a certain threshold.
 
 :::info
 
@@ -64,23 +64,21 @@ The following server configuration parameters are user-configurable:
 ```bash
 # the maximum number of uncommitted rows
 cairo.max.uncommitted.rows=X
-# the maximum time between jobs that commit uncommitted rows
+# the expected maximum time lag for out-of-order rows in milliseconds
 cairo.commit.lag=X
-# the maximum time between ILP jobs that commit uncommitted rows
-line.tcp.maintenance.job.interval=X
 ```
 
-These parameters are enforced so that commits occur **if any one of these
-conditions are met**, therefore out-of-order commits occur based on the age of
-out-of-order records or by record count.
+The `cairo.max.uncommitted.rows` value defines row-based commit strategy. This
+strategy means that the database will issue a commit when the number of
+uncommitted rows reaches `cairo.max.uncommitted.rows`.
 
-An out-of-order commit will occur:
+Apart from the row-based commit strategy, the ILP server also implements
+interval-based and idle table timeout commit strategies. Refer to the
+[ILP commit strategy](/docs/reference/api/ilp/tcp-receiver#commit-strategy) page
+to learn more.
 
-- every `cairo.max.uncommitted.rows` **or**
-- if records haven't been committed for `line.tcp.maintenance.job.interval`
-
-If a commit occurs due to `cairo.max.uncommitted.rows` being reached, then
-`cairo.commit.lag` will be applied.
+The `cairo.commit.lag` value is applied each time when a commit happens. As a
+result, data older than the lag value will be committed and become visible.
 
 ## When to change out-of-order commit configuration
 
@@ -91,7 +89,6 @@ is as follows:
 ```txt title="Defaults"
 cairo.commit.lag=300000
 cairo.max.uncommitted.rows=500000
-line.tcp.maintenance.job.interval=30000
 ```
 
 Users should modify out-of-order parameters if there is a known or expected
@@ -102,7 +99,7 @@ pattern for:
 
 For optimal ingestion performance, the number of commits of out-of-order data
 should be minimized. For this reason, if throughput is low and timestamps are
-expected to be consistently delayed up to thirty seconds, the following
+expected to be consistently delayed up to 30 seconds, the following
 configuration settings can be applied
 
 ```txt title="server.conf"
@@ -130,13 +127,11 @@ These settings may be applied via
 ```txt title="server.conf"
 cairo.max.uncommitted.rows=500
 cairo.commit.lag=10000
-line.tcp.maintenance.job.interval=1000
 ```
 
 As with other server configuration parameters, these settings may be passed as
 environment variables:
 
-- `QDB_LINE_TCP_MAINTENANCE_JOB_INTERVAL`
 - `QDB_CAIRO_MAX_UNCOMMITTED_ROWS`
 - `QDB_CAIRO_COMMIT_LAG`
 
@@ -171,7 +166,7 @@ keyword with the following two parameters:
 
 ```questdb-sql title="Setting out-of-order table parameters via SQL"
 CREATE TABLE my_table (timestamp TIMESTAMP) timestamp(timestamp)
-PARTITION BY DAY WITH maxUncommittedRows=250000, commitLag=240s
+PARTITION BY DAY WITH maxUncommittedRows=250000, commitLag=240s;
 ```
 
 Checking the values per-table may be done using the `tables()` function:
@@ -188,13 +183,13 @@ select id, name, maxUncommittedRows, commitLag from tables();
 The values can changed per each table with:
 
 ```questdb-sql title="Altering maximum number of out-of-order rows via SQL"
-ALTER TABLE my_table SET PARAM maxUncommittedRows = 10000
+ALTER TABLE my_table SET PARAM maxUncommittedRows = 10000;
 ```
 
 and
 
 ```questdb-sql title="Altering out-of-order commit lag via SQL"
-ALTER TABLE my_table SET PARAM commitLag = 20s
+ALTER TABLE my_table SET PARAM commitLag = 20s;
 ```
 
 For more information on setting table parameters via SQL, see the
