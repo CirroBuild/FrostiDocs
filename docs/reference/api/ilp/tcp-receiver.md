@@ -178,12 +178,18 @@ will be wasting server CPU.
 Another consideration is the number of tables updates concurrently.
 `writer pool` should be tuned to increase concurrency. `writer` threads can also
 handle multiple tables concurrently. `1:1` ratio is the maximum required ratio
-between `writer` threads and tables.
+between `writer` threads and tables. If `1:1` ratio is not an option, avoid
+writing to all tables from each connection. Instead, group connections and
+tables. For example, if there are 10 tables, 8 TCP connections and `writer pool`
+size is set to 2, 4 TCP connections may be used to write into tables 1-5, while
+4 connections may write into tables 6-10.
 
 :::note
 
-Sending updates for multiple tables from single TCP connection might be
-inefficient. Configure `writer pool` size to 1 for optimal performance.
+Sending updates for multiple tables from a single TCP connection might be
+inefficient. Consider using multiple connections to improve performance. If a
+single connection is unavoidable, keep `writer pool` size set to 1 for optimal
+CPU resource utilization.
 
 :::
 
