@@ -221,6 +221,45 @@ const Customer = () => {
         <div className={caCss.card}>
           <p className={caCss.card__summary}>
             <img
+              alt="LiveAction logo"
+              className={caCss.card__logo}
+              height={80}
+              src="/img/pages/customers/logos/liveaction.svg"
+              width={120}
+            />
+            “QuestDB is impressive and stands out as a superior option. We use
+            it as the basis of our time series analytics for network threat
+            detection.”
+            <em className={caCss.card__author}>
+              - <strong>Randy Caldejon</strong>, VP, ThreatEye Product
+              Development, LiveAction
+            </em>
+            <Button className={caCss.card__cta} to="/case-study/liveaction/">
+              View full case study
+            </Button>
+          </p>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="Logo for liveaction AI's network threat detection suite ThreatEye"
+              height={360}
+              src="/img/pages/case-study/liveaction/summary.jpg"
+              width={640}
+            />
+          </div>
+        </div>
+      </section>
+      <section className={clsx(seCss.section, seCss["section--inner"])}>
+        <div className={caCss.card}>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="Logo of Sapient Industries along with an illustration of their analytics dashboard."
+              height={360}
+              src="/img/pages/case-study/sapient-industries/card.png"
+              width={640}
+            />
+          </div>
+          <p className={caCss.card__summary}>
+            <img
               alt="Sapient Industries logo"
               className={caCss.card__logo}
               height={80}
@@ -242,26 +281,10 @@ const Customer = () => {
               View full case study
             </Button>
           </p>
-          <div className={caCss.card__illustration}>
-            <img
-              alt="Logo of Sapient Industries along with an illustration of their analytics dashboard."
-              height={360}
-              src="/img/pages/case-study/sapient-industries/card.png"
-              width={640}
-            />
-          </div>
         </div>
       </section>
       <section className={clsx(seCss.section, seCss["section--inner"])}>
         <div className={caCss.card}>
-          <div className={caCss.card__illustration}>
-            <img
-              alt="A graphic with the logo of TQS Integration"
-              height={360}
-              src="/img/pages/case-study/tqs-integration/card.png"
-              width={640}
-            />
-          </div>
           <p className={caCss.card__summary}>
             <img
               alt="TQS Integration logo"
@@ -271,7 +294,7 @@ const Customer = () => {
               width={140}
             />
             “TQS Integration uses QuestDB in data architecture solutions for
-            clients in Life Science, Food & Beverage, Energy, and Renewables. We
+            clients in Life Science, Pharmaceutical, Energy, and Renewables. We
             use QuestDB when we require a time series database that’s simple and
             efficient for data collection, contextualization, visualization, and
             analytics.”
@@ -286,10 +309,24 @@ const Customer = () => {
               View full case study
             </Button>
           </p>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="A graphic with the logo of TQS Integration"
+              height={360}
+              src="/img/pages/case-study/tqs-integration/card.png"
+              width={640}
+            />
+          </div>
         </div>
       </section>
       <section className={clsx(seCss.section, seCss["section--inner"])}>
         <div className={caCss.card}>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="An photo of a cellphone with the Turk Telekom logo"
+              src="/img/pages/case-study/turk-telekom/card.png"
+            />
+          </div>
           <p className={caCss.card__summary}>
             <img
               alt="Türk Telekom logo"
@@ -309,24 +346,10 @@ const Customer = () => {
               View full case study
             </Button>
           </p>
-          <div className={caCss.card__illustration}>
-            <img
-              alt="An photo of a cellphone with the Turk Telekom logo"
-              src="/img/pages/case-study/turk-telekom/card.png"
-            />
-          </div>
         </div>
       </section>
       <section className={clsx(seCss.section, seCss["section--inner"])}>
         <div className={caCss.card}>
-          <div className={caCss.card__illustration}>
-            <img
-              alt="Comparison of AI and chess to investing"
-              height={453}
-              src="/img/pages/case-study/toggle/summary.png"
-              width={600}
-            />
-          </div>
           <p className={caCss.card__summary}>
             <img
               alt="Toggle.global logo"
@@ -345,6 +368,14 @@ const Customer = () => {
               View full case study
             </Button>
           </p>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="Comparison of AI and chess to investing"
+              height={453}
+              src="/img/pages/case-study/toggle/summary.png"
+              width={600}
+            />
+          </div>
         </div>
       </section>
     </Layout>
