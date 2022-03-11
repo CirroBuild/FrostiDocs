@@ -135,11 +135,11 @@ const Tqs = () => {
 
       <section className={clsx(seCss.section, caCss.card)}>
         <p className={caCss.card__title}>
-          TQS Integration builds reference architecture for software applications
-          dealing with industrial telemetry that produce and process hundreds of
-          thousands of events per second. QuestDB is used when they require a
-          time series database for data visualization, real-time analytics,
-          anomaly detection, and predictive maintenance.
+          TQS Integration builds reference architecture for software
+          applications dealing with industrial telemetry that produce and
+          process hundreds of thousands of events per second. QuestDB is used
+          when they require a time series database for data visualization,
+          real-time analytics, anomaly detection, and predictive maintenance.
         </p>
 
         <p className={caCss.card__subtitle}>
