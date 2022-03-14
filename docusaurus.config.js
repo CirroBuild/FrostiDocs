@@ -88,7 +88,7 @@ const config = {
   ],
   themeConfig: {
     announcementBar: {
-      id: "github-star",
+      id: "meetup-2022-03-17",
     },
     colorMode: {
       defaultMode: "dark",
