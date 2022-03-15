@@ -102,7 +102,7 @@ const config = {
     },
     prism: {
       defaultLanguage: "questdb-sql",
-      additionalLanguages: ["rust", "csharp", "julia", "cpp", "java"],
+      additionalLanguages: ["rust", "csharp", "julia", "cpp", "java", "ebnf"],
       theme: require("./src/internals/prism-github"),
       darkTheme: require("./src/internals/prism-dracula"),
     },
