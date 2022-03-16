@@ -19,7 +19,7 @@ const AnnouncementBar = () => {
   return (
     <div className={styles.announcement} role="banner">
       <p className={styles.announcement__content}>
-        Join our QuestDB meetup on the 17th of March!&nbsp;
+        Join the QuestDB meetup on the 17th of March!&nbsp;
         <a
           className={styles.announcement__link}
           href={customFields.meetupCalendarUrl}
