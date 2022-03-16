@@ -242,7 +242,7 @@ const Customer = () => {
             <img
               alt="Logo for liveaction AI's network threat detection suite ThreatEye"
               height={360}
-              src="/img/pages/case-study/liveaction/summary.jpg"
+              src="/img/pages/case-study/liveaction/summary.png"
               width={640}
             />
           </div>

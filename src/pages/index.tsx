@@ -366,34 +366,46 @@ const Cards = () => (
         )}
       >
         <div className={feCss.feature}>
-          <h3 className={feCss.feature__header}>DevOps monitoring</h3>
+          <h3 className={feCss.feature__header}>
+            DevOps, monitoring and observability
+          </h3>
           <p className={feCss.feature__content}>
-            Collect metrics and events from your infrastructure (CPU, memory,
-            networks, etc.) and get real-time visibility into your entire stack.
+            Collect CPU, memory and storage metrics from your infrastructure and
+            get real-time visibility into your entire stack.
           </p>
         </div>
 
         <div className={feCss.feature}>
           <h3 className={feCss.feature__header}>Financial market data</h3>
           <p className={feCss.feature__content}>
-            Store market data to identify historical trends and correlations
-            using statistical methods and generate trading signals.
+            Store market tick data to identify historical trends, find
+            correlations and analyze trades in real-time. Build aggregated views
+            across multiple venues and efficiently compute live order books.
+          </p>
+        </div>
+
+        <div className={feCss.feature}>
+          <h3 className={feCss.feature__header}>Network traffic analysis</h3>
+          <p className={feCss.feature__content}>
+            Collect sFlow or other network traffic metadata to run analytics and
+            detect anomalies in real-time.
           </p>
         </div>
 
         <div className={feCss.feature}>
           <h3 className={feCss.feature__header}>Connected devices</h3>
           <p className={feCss.feature__content}>
-            Capture, store and respond to data from sensors at any resolution in
-            industrial applications.
+            Capture, store and respond to sensor data and telemetry at any
+            resolution in industrial or machine-to-machine applications.
           </p>
         </div>
 
         <div className={feCss.feature}>
           <h3 className={feCss.feature__header}>Application metrics</h3>
           <p className={feCss.feature__content}>
-            Empower your application users to track and visualize logs, API
-            calls, and any application activity in real-time.
+            Empower application developers and UX teams to track and visualize
+            user behavior data, API calls, data latency, and other application
+            events in real-time.
           </p>
         </div>
 
@@ -405,14 +417,6 @@ const Cards = () => (
             Use QuestDB with popular Python frameworks and tools for leveraging
             anomaly detection algorithms, machine learning libraries,
             statistical analysis with Pandas, or Jupyter notebooks.
-          </p>
-        </div>
-
-        <div className={feCss.feature}>
-          <h3 className={feCss.feature__header}>Integrated data</h3>
-          <p className={feCss.feature__content}>
-            Pull together all your application, device, and infrastructure data
-            for a complete, 360º view of all aspects of your business.
           </p>
         </div>
       </div>
