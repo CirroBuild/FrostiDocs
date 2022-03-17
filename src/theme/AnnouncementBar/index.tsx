@@ -19,16 +19,16 @@ const AnnouncementBar = () => {
   return (
     <div className={styles.announcement} role="banner">
       <p className={styles.announcement__content}>
-        Join the QuestDB meetup on the 17th of March!&nbsp;
+        If you like QuestDB,&nbsp;
         <a
           className={styles.announcement__link}
-          href={customFields.meetupCalendarUrl}
+          href={customFields.githubUrl}
           rel="noopener noreferrer"
           target="_blank"
         >
-          Add the event to your calendar
+          give us a star on GitHub
         </a>
-        &nbsp;📅
+        ! ⭐️
       </p>
 
       <button
