@@ -13,6 +13,13 @@ import Banner from "@theme/Banner"
 <Banner alt="Grafana logo, QuestDB logo, Bitcoin logo" height={467}
 src="/img/tutorial/2022-03-15/banner.png" width={650}></Banner>
 
+This post comes from Tancrede Collard, who has written an excellent tutorial
+that shows how to use Python to fetch cryptocurrency data from Coinbase, store
+it in QuestDB, and visualize the data using Grafana. Thanks for the submission,
+Tancrede!
+
+## Visualizing time series data
+
 When analyzing streaming data such as cryptocurrency or market metrics, the
 foundation of the data processing pipeline is efficient storage and queries. To
 use this data for insights and analytics, data visualization is a convenient way
@@ -100,7 +107,7 @@ account. For this tutorial, we'll use a simple Python script to periodically
 poll the endpoint for a given currency pair. The loop does 3 things:
 
 1. fetch SELL (bid) and BUY (ask) prices
-1. send the current bid &amp; ask prices to QuestDB via ILP
+1. send the current bid & ask prices to QuestDB via ILP
 1. sleep 2 seconds before looping to step 1
 
 The script uses `requests` for the HTTP requests to the Coinbase API and

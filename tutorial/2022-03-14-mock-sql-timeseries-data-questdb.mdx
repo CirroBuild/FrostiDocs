@@ -2,7 +2,7 @@
 title: How to generate time-series data in QuestDB
 author: Gábor Boros
 description:
-  Learn how to mock timeseries data using built-in  SQLfunctions in QuestDB to
+  Learn how to mock timeseries data using built-in SQL functions in QuestDB to
   generate dummy data for testing and rapid prototyping according to your
   schemas.
 image: /img/tutorial/shared/og-sql.png
@@ -18,6 +18,13 @@ import Screenshot from "@theme/Screenshot"
   width={770}
 />
 
+This post comes from Gábor Boros, who has written an excellent tutorial that
+shows how to mock timeseries data using built-in SQL functions in QuestDB to
+generate dummy data for testing and rapid prototyping according to custom
+schemas. Thanks for the submission, Gábor!
+
+## Mocking and generating time series data
+
 As developers, we often have to generate sample data for numerous reasons:
 feeding integration tests, realistic staging environments or developing an
 application locally.
@@ -26,8 +33,8 @@ This process can be time-consuming, especially when we need data on a bigger
 scale. Fortunately, some databases are helping our work and trying to offload
 some weight from our shoulders by providing functions to generate data.
 
-In this tutorial, we discover how to generate test data using QuestDB, the
-fastest time series database.
+This tutorial will cover how to generate test data using QuestDB using built-in
+generators so you can quickly mock data similar to your own production data.
 
 ## Types of time series data
 
