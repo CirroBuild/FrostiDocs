@@ -72,7 +72,7 @@ const quotes: Quote[] = [
     company: "Aquis Exchange",
   },
   {
-    website: "https://www.publicissapient.com/",
+    website: "https://www.sapient.industries/?utm_source=questdb",
     logo: {
       alt: "Sapient logo",
       src: "/img/pages/customers/cards/sapient.svg",
