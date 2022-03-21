@@ -133,9 +133,9 @@ const Counterflow = () => {
 
         <p className={caCss.card__subtitle}>
           In this case study, VP Product Development of ThreatEye and founder of
-          Counterflow AI Randy Caldejon describes how and why QuestDB is an
-          important component of their SaaS platform for time-series and
-          behavioural analytics.
+          Counterflow AI (now LiveAction), Randy Caldejon describes how and why
+          QuestDB is an important component of their SaaS platform for
+          time-series and behavioural analytics.
         </p>
       </section>
 
@@ -231,10 +231,12 @@ const Counterflow = () => {
           <p className="font-size--large">
             We’re analyzing over 150 features of network flows, and our
             customers want to see common aggregations such as{" "}
-            <b>top-n clients</b> consuming data on the network. SQL
-            compatibility makes this easy to calculate in QuestDB, quick to
-            verify in the web console, or visualize with Grafana using Postgres
-            wire.
+            <b>top-n clients</b> consuming data on the network or TLS
+            connections with unusual entropy scores. SQL compatibility makes
+            this easy to calculate in QuestDB and quick to verify in the web
+            console. Even better, the Postgres interface offers our security
+            analytics team the flexibility to dive into deeper analysis using
+            Jupyter Hub.
           </p>
 
           <p className="font-size--large">
@@ -242,6 +244,14 @@ const Counterflow = () => {
             to 40Gbps worth of inspected network data. High-performance is
             critical to ensure scalable and reliable analytics when deploying in
             high-throughput scenarios such as enterprise networks.
+          </p>
+
+          <p className="font-size--large">
+            LiveAction plans to introduce a community version of the ThreatEye
+            analysis pipeline in Q2 2022. The pipeline includes native
+            integration with QuestDB. The community version will be released as
+            ThreatEye Toolkit and will be available as a Docker container on
+            Docker Hub.
           </p>
 
           <img
