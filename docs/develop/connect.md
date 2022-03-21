@@ -222,8 +222,9 @@ await connection.OpenAsync();
 
 ## InfluxDB line protocol
 
-QuestDB implements the [InfluxDB line protocol](/docs/reference/api/ilp/overview/),
-this endpoint is accessible on port `9009`.
+QuestDB implements the
+[InfluxDB line protocol](/docs/reference/api/ilp/overview/), this endpoint is
+accessible on port `9009`.
 
 <Tabs defaultValue="nodejs" values={[
   { label: "NodeJS", value: "nodejs" },

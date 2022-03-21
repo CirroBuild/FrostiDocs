@@ -72,20 +72,6 @@ const quotes: Quote[] = [
     company: "Aquis Exchange",
   },
   {
-    website: "https://www.sapient.industries/?utm_source=questdb",
-    logo: {
-      alt: "Sapient logo",
-      src: "/img/pages/customers/cards/sapient.svg",
-      height: 28,
-      width: 140,
-    },
-    text:
-      "Sapient ingests, analyzes and converts billions of data points into meaningful insights through AI and machine learning. We chose QuestDB for the simplicity of SQL, high-throughput ingestion, and PostgreSQL wire compatibility with our tooling.",
-    author: "Dan Worth",
-    role: "Principal Software Engineer",
-    company: "Sapient Industries",
-  },
-  {
     website: "https://syndica.io",
     logo: {
       alt: "Syndica logo",
@@ -98,6 +84,20 @@ const quotes: Quote[] = [
     author: "Ahmed Abbasi",
     role: "Co-Founder/CEO",
     company: "Syndica",
+  },
+  {
+    website: "https://www.liveaction.com/",
+    logo: {
+      alt: "LiveAction logo",
+      src: "/img/pages/customers/logos/liveaction.svg",
+      height: 56,
+      width: 140,
+    },
+    text:
+      "QuestDB is impressive and stands out as a superior option. We use it as the basis of our time series analytics for network threat detection.",
+    author: "Randy Caldejon",
+    role: "VP Product Development ThreatEye",
+    company: "LiveAction",
   },
   {
     website: "https://www.tqsintegration.com",
@@ -114,18 +114,18 @@ const quotes: Quote[] = [
     company: "TQS Integration",
   },
   {
-    website: "https://www.ably.io/",
+    website: "https://www.samtec.com/",
     logo: {
-      alt: "Ably logo",
-      src: "/img/pages/customers/cards/ably.svg",
-      height: 46,
-      width: 120,
+      alt: "Samtec logo",
+      src: "/img/pages/customers/cards/samtec.svg",
+      height: 56,
+      width: 140,
     },
     text:
-      "QuestDB allows me to build tools and systems without having to learn proprietary query languages while maintaining industry-leading performance and a straightforward setup.",
-    author: "Ben Gamble",
-    role: "Head of Dev Rel",
-    company: "Ably",
+      "QuestDB is the most promising open source platform for time series analytics. It's thoughtfully designed to be both wicked fast and easy to use.",
+    author: "Nick Slocum",
+    role: "Senior Software Engineer",
+    company: "Samtec",
   },
   {
     website: "https://toggle.ai/",
@@ -142,6 +142,20 @@ const quotes: Quote[] = [
     company: "Toggle",
   },
   {
+    website: "https://www.publicissapient.com/",
+    logo: {
+      alt: "Sapient logo",
+      src: "/img/pages/customers/cards/sapient.svg",
+      height: 28,
+      width: 140,
+    },
+    text:
+      "Sapient ingests, analyzes and converts billions of data points into meaningful insights through AI and machine learning. We chose QuestDB for the simplicity of SQL, high-throughput ingestion, and PostgreSQL wire compatibility with our tooling.",
+    author: "Dan Worth",
+    role: "Principal Software Engineer",
+    company: "Sapient Industries",
+  },
+  {
     website: "https://www.turktelekom.com.tr/en",
     logo: {
       alt: "Türk Telekom logo",
@@ -156,33 +170,20 @@ const quotes: Quote[] = [
     company: "Innova (Türk Telekom)",
   },
   {
-    website: "https://www.samtec.com/",
+    website: "https://www.ably.io/",
     logo: {
-      alt: "Samtec logo",
-      src: "/img/pages/customers/cards/samtec.svg",
-      height: 56,
-      width: 140,
+      alt: "Ably logo",
+      src: "/img/pages/customers/cards/ably.svg",
+      height: 46,
+      width: 120,
     },
     text:
-      "QuestDB is the most promising open source platform for time series analytics. It's thoughtfully designed to be both wicked fast and easy to use.",
-    author: "Nick Slocum",
-    role: "Senior Software Engineer",
-    company: "Samtec",
+      "QuestDB allows me to build tools and systems without having to learn proprietary query languages while maintaining industry-leading performance and a straightforward setup.",
+    author: "Ben Gamble",
+    role: "Head of Dev Rel",
+    company: "Ably",
   },
-  {
-    website: "https://www.biba.uni-bremen.de/en/institute/infrastructure.html",
-    logo: {
-      alt: "BIBA logo",
-      src: "/img/pages/customers/cards/biba.svg",
-      height: 56,
-      width: 140,
-    },
-    text:
-      "At BIBA, we leverage QuestDB in IoT and Industrial Automation. Aside from out-of-the-box readiness, the performance is fantastic, and the ease of usage provides us a path to perform faster and better analyses.",
-    author: "Shan Desai",
-    role: "Research Scientist",
-    company: "BIBA",
-  },
+
 ]
 
 export default quotes

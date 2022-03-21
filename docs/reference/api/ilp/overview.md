@@ -28,9 +28,7 @@ table_name,symbolset columnset timestamp\n
 `name` in the `name=value` pair always corresponds to `column name` in the
 table.
 
-:::note 
-Each ILP message has to end with new line `\n` character. 
-:::
+:::note Each ILP message has to end with new line `\n` character. :::
 
 ### Behaviour
 
@@ -191,16 +189,14 @@ supported value types:
 
 ### Designated timestamp
 
-Designated timestamp is the trailing value of an ILP message. It is optional, and
-when present, is a timestamp in Epoch nanoseconds. When the timestamp is
+Designated timestamp is the trailing value of an ILP message. It is optional,
+and when present, is a timestamp in Epoch nanoseconds. When the timestamp is
 omitted, the server will insert each message using the system clock as the row
 timestamp.
 
-:::warning 
-While `columnset` `timestamp` type units are `microseconds`, the
+:::warning While `columnset` `timestamp` type units are `microseconds`, the
 designated timestamp units are `nanoseconds`. These are default units, which can
-be overridden via `line.tcp.timestamp` 
-:::
+be overridden via `line.tcp.timestamp` :::
 
 ```shell title="Example of ILP message with desginated timestamp value"
 tracking,loc=north val=200i 1000000000\n
@@ -210,8 +206,9 @@ tracking,loc=north val=200i 1000000000\n
 tracking,loc=north val=200i\n
 ```
 
-:::note
-We recommend populating designated timestamp via trailing value syntax above
-:::
+:::note We recommend populating designated timestamp via trailing value syntax
+above :::
 
-It is also possible to populate designated timestamp via `coulumnset`. Please see [mixed timestamp](/docs/reference/api/ilp/columnset-types#timestamp) reference.
+It is also possible to populate designated timestamp via `coulumnset`. Please
+see [mixed timestamp](/docs/reference/api/ilp/columnset-types#timestamp)
+reference.

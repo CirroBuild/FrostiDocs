@@ -10,8 +10,12 @@ featureType: resource
 
 import Banner from "@theme/Banner"
 
-<Banner alt="Grafana logo, QuestDB logo, Bitcoin logo" height={467}
-src="/img/tutorial/2022-03-15/banner.png" width={650}></Banner>
+<Banner
+  alt="Grafana logo, QuestDB logo, Bitcoin logo"
+  height={467}
+  src="/img/tutorial/2022-03-15/banner.png"
+  width={650}
+></Banner>
 
 This post comes from Tancrede Collard, who has written an excellent tutorial
 that shows how to use Python to fetch cryptocurrency data from Coinbase, store

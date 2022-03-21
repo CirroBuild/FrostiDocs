@@ -250,7 +250,7 @@ SELECT max(amount) FROM transactions;
 ```
 
 | max  |
-|------|
+| ---- |
 | 55.3 |
 
 ```questdb-sql title="Highest transaction amount by payment_type"

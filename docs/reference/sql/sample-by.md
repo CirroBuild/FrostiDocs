@@ -393,4 +393,3 @@ SELECT ts, avg(quantity*price) FROM trades SAMPLE BY 1d ALIGN TO CALENDAR;
 | --------------------------- | ------ |
 | 2021-05-31T00:00:00.000000Z | 1000.5 |
 | 2021-06-01T00:00:00.000000Z | 8007.2 |
-

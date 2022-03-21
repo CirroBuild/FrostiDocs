@@ -185,7 +185,9 @@ cairo.sql.append.page.size=1
 
 ### InfluxDB over TCP
 
-We have [a documentation page](/docs/reference/api/ilp/tcp-receiver/#capacity-planning) dedicated to capacity planning for ILP ingestion.
+We have
+[a documentation page](/docs/reference/api/ilp/tcp-receiver/#capacity-planning)
+dedicated to capacity planning for ILP ingestion.
 
 ### InfluxDB over UDP
 

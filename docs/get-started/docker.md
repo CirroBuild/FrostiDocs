@@ -65,13 +65,16 @@ import TabItem from "@theme/TabItem"
 
 <TabItem value="linux">
 
+
 ```shell
 /root/.questdb
 ```
 
 </TabItem>
 
+
 <TabItem value="windows">
+
 
 ```shell
 C:\questdb
@@ -79,7 +82,9 @@ C:\questdb
 
 </TabItem>
 
+
 </Tabs>
+
 
 ## Container status
 
