@@ -130,10 +130,7 @@ transactions are not visible to readers.
 files. At this point data is handed over to the OS and is resilient against
 QuestDB internal errors and unlikely but hypothetically possible crashes. This
 is default method of appending data and it is chosen for its performance
-characteristics. In cases where transaction has to be resilient against OS
-errors or power losses physical durability can be enforced. At a cost of append
-performance QuestDB storage engine will also guarantee that each memory block is
-flushed to physical device.
+characteristics.
 
 ### Examples
 

@@ -54,20 +54,24 @@ committed — no intermediate uncommitted data will be show in a query result.
 
 To guarantee **atomicity**, each table maintains a `last_committed_record_count`
 in a separate file. By convention, any table reader will never read more records
-than `tx_count`. This enables the **isolation** property: where uncommitted data
-cannot be read. Since uncommitted data is appended directly to the table, the
-transaction size is only limited by the available disk space.
+than the transaction count. This enables the **isolation** property: where
+uncommitted data cannot be read. Since uncommitted data is appended directly to
+the table, the transaction size is only limited by the available disk space.
 
-Once all data is appended, QuestDB `commit()` ensures that the `tx_count` is
-updated atomically both in multi-threaded and multi-process environments. It
+Once all data is appended, QuestDB `commit()` ensures that the transaction count
+is updated atomically both in multi-threaded and multi-process environments. It
 does so lock-free to ensure minimal impact on concurrent reads.
 
 The **consistency** assurance of the data stored is limited to QuestDB
 auto-repairing abnormally terminated transactions. We do not yet support
 user-defined constraints, checks and triggers.
 
-Data **durability** can be configured with `commit()` optionally being able to
-invoke `msync()` with a choice of synchronous or asynchronous IO.
+By default QuestDB relies on OS-level data **durability** leaving the OS to
+write dirty pages to disk. Data durability can be also configured with
+`commit()` optionally being able to invoke `msync()` with a choice of
+synchronous or asynchronous IO. The `msync()` calls are made for column files
+only, so while the `sync`/`async` commit modes improve the overall durability,
+they don't guarantee durability in the face of OS errors or power loss.
 
 <Screenshot
   alt="Diagram of a commit across several column files"
