@@ -56,13 +56,14 @@ SELECT ts, count() FROM trades SAMPLE BY 1h
 
 ## Fill options
 
-The `FILL` keyword is optional and expects a single `fillOption` strategy which
-will be applied to a single aggregate column. The following restrictions apply:
+The `FILL` keyword is optional and expects one or more `fillOption` strategies
+which will be applied to one or more aggregate columns. The following
+restrictions apply:
 
 - Keywords denoting fill strategies may not be combined. Only one option from
   `NONE`, `NULL`, `PREV`, `LINEAR` and constants may be used.
-- `FILL()` does not support a list and therefore can only be applied to a single
-  aggregate column.
+- `LINEAR` strategy is not supported for keyed queries, i.e. queries that
+  contain non-aggregated columns other than the timestamp in the SELECT clause.
 
 | fillOption | Description                                                                                                               |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -167,6 +168,22 @@ ALIGN TO ...
 ```
 
 :::
+
+### Multiple fill values
+
+`FILL()` accepts a list of values where each value corresponds to a single
+aggregate column in the SELECT clause order:
+
+```questdb-sql
+SELECT min(price), max(price), avg(price), ts
+FROM prices
+SAMPLE BY 1h
+FILL(NULL, 10, PREV);
+```
+
+In the above query `min(price)` aggregate will get `FILL(NULL)` strategy
+applied, `max(price)` will get `FILL(10)`, and `avg(price)` will get
+`FILL(PREV)`.
 
 ## Sample calculation
 
