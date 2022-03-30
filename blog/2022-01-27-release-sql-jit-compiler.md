@@ -208,7 +208,7 @@ working on replication, further JIT-compiled filter performance improvements,
 and more.
 
 We hope you enjoyed the features and functionality in version 6.2. See the
-[release notes on GitHub](https://github.com/questdb/questdb/releases/tag/6.2.0)
+[release notes on GitHub](https://github.com/questdb/questdb/releases/tag/6.2)
 for the complete list of additions and fixes. We’re eagerly awaiting your
 feedback, so feel free to reach out and let us know how it's running. You can
 let us know how we're doing or just come by and say hello

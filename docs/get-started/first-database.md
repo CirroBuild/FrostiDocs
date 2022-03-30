@@ -66,14 +66,21 @@ about the functions used here, see the
 [row generator](/docs/reference/function/row-generator/) pages.
 
 Our `sensors` table now contains 10,000 randomly-generated sensor values of
-different makes and in various cities. It should look like the table below:
+different makes and in various cities. Use this command to view the table:
+
+
+```questdb-sql
+'sensors';
+```
+
+It should look like the table below:
 
 | ID  | make              | city     |
 | --- | ----------------- | -------- |
-| 1   | RS Pro            | New York |
-| 2   | Honeywell         | Chicago  |
-| 3   | United Automation | Miami    |
-| 4   | Honeywell         | Chicago  |
+| 1   | Honeywell         | Chicago  |
+| 2   | United Automation | Miami    |
+| 3   | Honeywell         | Chicago  | 
+| 4   | Omron             | Miami    | 
 | ... | ...               | ...      |
 
 Let's now create some sensor readings. In this case, we will create the table
