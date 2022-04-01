@@ -79,7 +79,7 @@ const FeatureTabs = () => {
               size="small"
               variant={opened === "digital" ? "primary" : "tertiary"}
             >
-              Digital transformation
+              Simplicity
             </Button>
             <Button
               className={meCss.menu__button}
@@ -87,7 +87,7 @@ const FeatureTabs = () => {
               size="small"
               variant={opened === "realtime" ? "primary" : "tertiary"}
             >
-              Real-time insights
+              Performance
             </Button>
             <Button
               className={meCss.menu__button}
@@ -95,7 +95,7 @@ const FeatureTabs = () => {
               size="small"
               variant={opened === "integration" ? "primary" : "tertiary"}
             >
-              Enterprise integration
+              Open Source
             </Button>
           </div>
 
@@ -105,11 +105,11 @@ const FeatureTabs = () => {
                 [meCss["menu__panel--active"]]: opened === "digital",
               })}
             >
-              <p className={prCss.property}>Reduce hardware costs</p>
-              <p className={prCss.property}>Contain operational complexity</p>
-              <p className={prCss.property}>Decrease development costs</p>
-              <p className={prCss.property}>Cloud native (AWS, Azure, GCP)</p>
-              <p className={prCss.property}>On-premises or embedded</p>
+              <p className={prCss.property}>Query with SQL</p>
+              <p className={prCss.property}>Deploy via Docker or binaries</p>
+              <p className={prCss.property}>Interactive web console</p>
+              <p className={prCss.property}>Postgres and InfluxDB line protocols</p>
+              <p className={prCss.property}>Cloud-native or on-premises</p>
             </div>
 
             <div
@@ -117,10 +117,11 @@ const FeatureTabs = () => {
                 [meCss["menu__panel--active"]]: opened === "realtime",
               })}
             >
-              <p className={prCss.property}>Streaming</p>
-              <p className={prCss.property}>Operational analytics / OLAP</p>
-              <p className={prCss.property}>Monitoring and observability</p>
-              <p className={prCss.property}>Predictive analytics</p>
+              <p className={prCss.property}>High-throughput ingestion</p>
+              <p className={prCss.property}>Optimized SQL queries</p>
+              <p className={prCss.property}>Real-time streaming</p>
+              <p className={prCss.property}>Lower infrastructure costs</p>
+              <p className={prCss.property}>Less operational complexity</p>
             </div>
 
             <div
@@ -128,16 +129,15 @@ const FeatureTabs = () => {
                 [meCss["menu__panel--active"]]: opened === "integration",
               })}
             >
-              <p className={prCss.property}>Active directory</p>
-              <p className={prCss.property}>High-performance replication</p>
-              <p className={prCss.property}>High-availability</p>
-              <p className={prCss.property}>Clustering</p>
-              <p className={prCss.property}>Enterprise security</p>
-              <p className={prCss.property}>Postgres compatible</p>
+              <p className={prCss.property}>Apache License 2.0</p>
+              <p className={prCss.property}>Thriving developer community</p>
+              <p className={prCss.property}>Transparent development</p>
+              <p className={prCss.property}>Popular open source integrations</p>
+              <p className={prCss.property}>Embedded in Java applications</p>
             </div>
 
-            <Button className={meCss.menu__cta} to="/enterprise">
-              Enterprise &gt;
+            <Button className={meCss.menu__cta} to="https://github.com/questdb/questdb#try-questdb">
+              Get Started &gt;
             </Button>
           </div>
         </div>
