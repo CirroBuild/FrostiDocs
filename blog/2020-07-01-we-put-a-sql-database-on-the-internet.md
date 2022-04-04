@@ -123,7 +123,7 @@ It was not disappointing!
 >
 > [6] https://github.com/questdb/questdb/blob/master/core/src/main
 >
-> [7] https://questdb.io/blog/2020/03/15/interthread
+> [7] https://questdb.io/blog/2021/11/03/interthread/
 >
 > [8] https://github.com/questdb/questdb
 
