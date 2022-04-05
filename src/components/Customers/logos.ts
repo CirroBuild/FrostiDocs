@@ -51,8 +51,8 @@ export const logos: CustomerLogo[] = [
     width: 113,
   },
   {
-    src: "/img/pages/customers/logos/biba.svg",
-    alt: "BIBA logo",
+    src: "/img/pages/customers/logos/ca.svg",
+    alt: "Copenhagen Atomics logo",
     width: 140,
     height: 56,
   },

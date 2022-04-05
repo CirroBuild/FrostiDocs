@@ -86,6 +86,20 @@ const quotes: Quote[] = [
     company: "Syndica",
   },
   {
+    website: "https://www.copenhagenatomics.com/",
+    logo: {
+      alt: "Copenhagen Atomics logo",
+      src: "/img/pages/customers/logos/ca.svg",
+      height: 30,
+      width: 113,
+    },
+    text:
+      "QuestDB was our choice for real time data due to high performance, open source, high flexibility and great support. Performance was significantly better than the competition and we believe that QuestDB will become market leading.",
+    author: "Lasse Tarp",
+    role: "Software Group manager",
+    company: "Copenhagen Atomics",
+  },
+  {
     website: "https://www.liveaction.com/",
     logo: {
       alt: "LiveAction logo",
@@ -169,21 +183,6 @@ const quotes: Quote[] = [
     role: "Software Engineer",
     company: "Innova (Türk Telekom)",
   },
-  {
-    website: "https://www.ably.io/",
-    logo: {
-      alt: "Ably logo",
-      src: "/img/pages/customers/cards/ably.svg",
-      height: 46,
-      width: 120,
-    },
-    text:
-      "QuestDB allows me to build tools and systems without having to learn proprietary query languages while maintaining industry-leading performance and a straightforward setup.",
-    author: "Ben Gamble",
-    role: "Head of Dev Rel",
-    company: "Ably",
-  },
-
 ]
 
 export default quotes

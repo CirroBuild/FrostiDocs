@@ -44,8 +44,8 @@ const usedByLogos: CustomerLogo[] = [
     height: 56,
   },
   {
-    src: "/img/pages/customers/logos/turk_telekom.svg",
-    alt: "Turk Telekom logo",
+    src: "/img/pages/customers/logos/ca.svg",
+    alt: "Copenhagen Atomics logo",
     width: 140,
     height: 56,
   },
