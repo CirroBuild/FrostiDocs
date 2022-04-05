@@ -257,7 +257,7 @@ const Yahoo = () => {
               <span className={caCss.card__quote}>&rdquo;</span>
             </p>
             <p className={caCss.card__title}>
-              <b>Jon Brateseth, VP Architect at Yahoo</b>
+              <b>Jon Bratseth, VP Architect at Yahoo</b>
             </p>
           </div>
         </div>
