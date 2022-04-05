@@ -89,7 +89,7 @@ const Sapient = () => {
               className={ouCss.outcome__icon}
               src="/img/pages/case-study/icons/workflow.svg"
             />
-            Compatibile with RESTful components, PostgreSQL tooling
+            Compatible with RESTful components, PostgreSQL tooling
           </p>
           <p className={ouCss.outcome}>
             <img
