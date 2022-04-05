@@ -50,7 +50,7 @@ updates **atomically**. Updates to a table are applied in the context of a table
 transaction which is either committed or rolled back in an atomic operation.
 Queries that are concurrent with table updates are consistent in the sense that
 they will return data either as it was before or after the table transaction was
-committed — no intermediate uncommitted data will be show in a query result.
+committed — no intermediate uncommitted data will be shown in a query result.
 
 To guarantee **atomicity**, each table maintains a `last_committed_record_count`
 in a separate file. By convention, any table reader will never read more records
@@ -84,8 +84,8 @@ they don't guarantee durability in the face of OS errors or power loss.
 
 The QuestDB storage model uses memory mapped files and cross-process atomic
 transaction updates as a low overhead method of inter-process communication.
-Data committed by one process can be instantaneously read by another process
-either randomly (via queries) or incrementally (as data queue). QuestDB provides
+Data committed by one process can be instantaneously read by another process,
+either randomly (via queries) or incrementally (as a data queue). QuestDB provides
 a variety of reader implementations.
 
 <Screenshot
