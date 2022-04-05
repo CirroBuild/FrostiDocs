@@ -45,6 +45,12 @@ const currentOpenings: Opening[] = [
     title: "Technical Content Writers",
     location: "Remote",
   },
+
+  {
+    href: "solution-engineer/",
+    title: "Solution Engineer",
+    location: "Remote",
+  },
 ]
 
 const CareersPage = () => {

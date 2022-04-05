@@ -108,7 +108,9 @@ const FeatureTabs = () => {
               <p className={prCss.property}>Query with SQL</p>
               <p className={prCss.property}>Deploy via Docker or binaries</p>
               <p className={prCss.property}>Interactive web console</p>
-              <p className={prCss.property}>Postgres and InfluxDB line protocols</p>
+              <p className={prCss.property}>
+                Postgres and InfluxDB line protocols
+              </p>
               <p className={prCss.property}>Cloud-native or on-premises</p>
             </div>
 
@@ -136,7 +138,10 @@ const FeatureTabs = () => {
               <p className={prCss.property}>Embedded in Java applications</p>
             </div>
 
-            <Button className={meCss.menu__cta} to="https://github.com/questdb/questdb#try-questdb">
+            <Button
+              className={meCss.menu__cta}
+              to="https://github.com/questdb/questdb#try-questdb"
+            >
               Get Started &gt;
             </Button>
           </div>
