@@ -6,10 +6,10 @@ description:
   illustration.
 ---
 
-For scenarios where multiple time series are stored in the same table it is
+For scenarios where multiple time series are stored in the same table, it is
 relatively difficult to identify the latest items of these time series with
-standard SQL syntax. QuestDB introduces `LATEST ON` clause for
-[SELECT statement](/docs/reference/sql/select/) to remove the boilerplate
+standard SQL syntax. QuestDB introduces `LATEST ON` clause for a
+[SELECT statement](/docs/reference/sql/select/) to remove boilerplate
 clutter and splice the table with relative ease.
 
 ## Syntax
@@ -30,7 +30,7 @@ where:
 for returning the most recent records per unique time series identified by the
 `PARTITION BY` column values.
 
-To illustrate how `LATEST ON` is intended to be used, we can consider the
+To illustrate how `LATEST ON` is intended to be used, consider the
 `trips` table [in the QuestDB demo instance](https://demo.questdb.io/). This
 table has a `payment_type` column as `SYMBOL` type which specifies the method of
 payment per trip. We can find the most recent trip for each unique method of
@@ -57,7 +57,7 @@ specified in the `PARTITION BY` part of the `LATEST ON` clause. In our example
 those time series are represented by different payment types. Then the column
 used in the `LATEST ON` part of the clause stands for the designated timestamp
 column for the table. This allows the database to find the latest value within
-each of the time series.
+each time series.
 
 The below sections will demonstrate other ways to use the `LATEST ON` clause.
 
@@ -71,10 +71,10 @@ LATEST BY payment_type;
 
 The old `LATEST BY` syntax is considered deprecated. While it's still supported
 by the database, you should use the new `LATEST ON PARTITION BY` syntax in your
-applications. The first key difference is that the new syntax requires a
-timestamp column to be always specified. The second difference is that with the
-new syntax the `LATEST ON` has to follow the `WHERE` clause, while with the old
-syntax it was vice versa.
+applications. There are two key requirements when using the new syntax: 
+
+1. A timestamp column must always be specified
+2. `LATEST ON` has to follow the `WHERE` clause. In the old syntax, it was vice versa.
 
 :::note
 
@@ -123,8 +123,8 @@ This provides us with a table with the following content:
 
 ### Single column
 
-When `LATEST ON` is provided a single column is of type `SYMBOL`, the query will
-end as soon as all distinct symbol values have been found.
+When `LATEST ON` is provided a single column of the type `SYMBOL`, the query will
+end after all distinct symbol values are found.
 
 ```questdb-sql title="Latest records by customer ID"
 SELECT * FROM balances
@@ -247,10 +247,10 @@ WHERE balance > 800;
 ```
 
 This query executes `LATEST ON` before `WHERE` and returns the most recent
-records, then filters out those below 800. The steps are
+records, then filters out those below 800. The steps are:
 
-- Find the latest balances by customer ID.
-- Filter out balances below 800. Since the latest balance for customer 1 is
+1. Find the latest balances by customer ID.
+2. Filter out balances below 800. Since the latest balance for customer 1 is
   equal to 330.5, it is filtered out in this step.
 
 | cust_id | balance_ccy | balance | inactive | ts                          |
@@ -268,10 +268,10 @@ out those below 800.
 WHERE balance > 800;
 ```
 
-Note that QuestDB allows you to omit the `SELECT * FROM` part of the query, so
-we didn't include to keep the query compact.
+Since QuestDB allows you to omit the `SELECT * FROM` part of the query,
+we omitted it to keep the query compact.
 
-Such combination is very powerful since it allows you to find the latest values
+Such a combination is very powerful since it allows you to find the latest values
 for a time-slice of the data and then apply a filter to them in a single query.
 
 ## Deprecated syntax
