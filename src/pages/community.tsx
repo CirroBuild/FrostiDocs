@@ -181,7 +181,7 @@ const Community = () => {
               <p className={paCss.level__title}>Level 1</p>
               <h2 className={paCss.section__title}>Show the love</h2>
               <p className={paCss.default_text}>
-                To claim your swag for the this level:
+                To claim your swag for this level:
               </p>
               <p className={paCss.property}>
                 You have{" "}
@@ -223,7 +223,7 @@ const Community = () => {
             <p className={paCss.level__title}>Level 2</p>
             <h2 className={paCss.section__title}>Open-source contributor</h2>
             <p className={paCss.default_text}>
-              To claim your swag for the this level:
+              To claim your swag for this level:
             </p>
             <p className={paCss.property}>
               You have asked or answered a question on Stack Overflow{" "}
@@ -306,7 +306,7 @@ const Community = () => {
             <p className={paCss.level__title}>Level 3</p>
             <h2 className={paCss.section__title}>Dedicated to the Quest</h2>
             <p className={paCss.default_text}>
-              To claim your swag for the this level:
+              To claim your swag for this level:
             </p>
             <p className={paCss.property}>
               You have written an original{" "}
