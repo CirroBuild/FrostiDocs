@@ -6,9 +6,9 @@
   "scripts": {
     "prestart": "tsc --project plugins/tsconfig.json",
     "start": "docusaurus start",
-    "pre-build": "FORCE=true node scripts/optimise-images.js",
+    "pre-build": "cross-env FORCE=true node scripts/optimise-images.js",
     "prebuild": "docusaurus clear && node scripts/optimise-images.js && npm run prestart",
-    "build": "USE_SIMPLE_CSS_MINIFIER=true PWA_SW_CUSTOM= docusaurus build",
+    "build": "cross-env USE_SIMPLE_CSS_MINIFIER=true PWA_SW_CUSTOM= docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
@@ -44,6 +44,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "4.8.1",
     "@typescript-eslint/parser": "4.8.1",
+    "cross-env": "^7.0.3",
     "eslint": "7.13.0",
     "eslint-config-prettier": "6.15.0",
     "eslint-config-standard": "16.0.2",
