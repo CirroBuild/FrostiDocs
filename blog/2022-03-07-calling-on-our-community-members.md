@@ -30,7 +30,11 @@ import Banner from "@theme/Banner"
 />
 
 There is a lot of Ukraine in QuestDB: Our co-founder Vlad and two of our
-engineers, Alex and Eugene, are both Ukrainians.
+engineers, Alex and Eugene, are both Ukrainians. This is our response
+and our call on all our users to join us in helping the people of
+Ukraine.
+
+<!--truncate-->
 
 Eugene was working from his home in Kyiv - the war now forced him and his family
 to hide in a bunker. Last Thursday he managed to join our daily standup call in
