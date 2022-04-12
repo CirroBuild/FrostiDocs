@@ -117,3 +117,8 @@
 [[redirects]]
   from = "/docs/guides/influxdb-line-protocol"
   to = "/docs/reference/api/ilp/overview"
+
+[[headers]]
+  for = "/blog/*"
+  [headers.values]
+    Content-Security-Policy = "frame-src 'self' dashboard.questdb.io app.netlify.com;"
