@@ -66,6 +66,12 @@
   padding: 0 1rem;
 }
 
+.button--xxsmall {
+  height: 2rem;
+  font-weight: normal;
+  font-size: 0.9rem;
+}
+
 .button--uppercase {
   text-transform: uppercase;
 }
@@ -78,6 +84,11 @@
   .button--xsmall {
     padding: 0 1rem;
   }
+
+  .button--xxsmall {
+    padding: 0 0.9rem;
+  }
+
 
   .button--plain {
     padding: 0;

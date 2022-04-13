@@ -10,7 +10,7 @@ type Props = Readonly<{
   href?: string
   newTab: boolean
   onClick?: () => void
-  size: "normal" | "small" | "xsmall"
+  size: "normal" | "small" | "xsmall" | "xxsmall"
   to?: string
   type?: "button" | "submit"
   uppercase: boolean
@@ -39,6 +39,7 @@ const Button = ({
     [styles["button--plain"]]: variant === "plain",
     [styles["button--uppercase"]]: uppercase,
     [styles["button--xsmall"]]: size === "xsmall",
+    [styles["button--xxsmall"]]: size === "xxsmall",
   })
 
   if (href != null) {

@@ -15,7 +15,29 @@ keywords:
 tags: [crypto, bitcoin, coinbase, grafana, opensource, candlestick]
 ---
 
+import Button from "@theme/Button"
 import Banner from "@theme/Banner"
+
+export const QueryButton = ({ href }) => (
+  <Button href={href} variant="secondary" size="xxsmall" uppercase={false}>
+    Open this query in Web Console
+  </Button>
+)
+
+export const Grafana = ({ src }) => (
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-end",
+    }}
+  >
+    <iframe src={src} width="100%" height="300" frameborder="0" />
+    <Button href={src} variant="plain" size="xxsmall" uppercase={false}>
+      Open in new window
+    </Button>
+  </div>
+)
 
 <Banner
   alt="Latest features in QuestDB version 6.2 including SQL JIT compiler"
@@ -59,25 +81,23 @@ To find out the latest prices of BTC and ETH in USD. We use the
 [`LATEST ON`](https://questdb.io/docs/reference/sql/latest-on) syntax, which is
 native to QuestDB's SQL Engine:
 
-```questdb-sql title="Latest BTC and ETH prices"
-SELECT * FROM trades
-WHERE symbol in ('BTC-USD', 'ETH-USD')
-LATEST ON timestamp PARTITION BY symbol;
-```
+<p>
 
-Click
-[here](https://demo.questdb.io/?query=SELECT%20%2a%20FROM%20trades%0AWHERE%20symbol%20in%20%28%27BTC-USD%27%2C%20%27ETH-USD%27%29%0ALATEST%20ON%20timestamp%20PARTITION%20BY%20symbol%3B)
-to fill the pre-written query directly in the SQL editor, then run the query.
+  ```questdb-sql title="Latest BTC and ETH prices"
+  SELECT * FROM trades
+  WHERE symbol in ('BTC-USD', 'ETH-USD')
+  LATEST ON timestamp PARTITION BY symbol;
+  ```
 
-Below is the chart for Bitcoin and Ethereum prices with a time sample of 10
+  <QueryButton
+    href="https://demo.questdb.io/?query=SELECT%20%2a%20FROM%20trades%0AWHERE%20symbol%20in%20%28%27BTC-USD%27%2C%20%27ETH-USD%27%29%0ALATEST%20ON%20timestamp%20PARTITION%20BY%20symbol%3B"
+  />
+</p>
+
+Below is a real-time chart for Bitcoin and Ethereum prices with a time sample of 10
 seconds.
 
-<iframe
-  src="https://dashboard.questdb.io/d-solo/624FG0snk/public-dashboard-1?orgId=1&panelId=10&refresh=5s"
-  width="100%"
-  height="300"
-  frameborder="0"
-></iframe>
+<Grafana src="https://dashboard.questdb.io/d-solo/624FG0snk/public-dashboard-1?orgId=1&panelId=10&refresh=5s" />
 
 ## Candle chart sampled by time
 
@@ -86,32 +106,30 @@ volumes with 15-minute intervals. We use the
 [`SAMPLE BY`](https://questdb.io/docs/reference/sql/sample-by/) syntax, which
 aggregates time series data into homogeneous time chunks:
 
-```questdb-sql title="Candle chart with 15-minute intervals"
-SELECT 
-    timestamp,
-    first(price) AS open,
-    last(price) AS close,
-    min(price),
-    max(price),
-    sum(amount) AS volume
-FROM trades
-WHERE symbol = 'BTC-USD' AND timestamp > dateadd('d', -1, now())
-SAMPLE BY 15m ALIGN TO CALENDAR;
-```
+<p>
 
-Click
-[here](https://demo.questdb.io/?query=SELECT%20%0A%20%20%20%20timestamp%2C%0A%20%20%20%20first%28price%29%20AS%20open%2C%0A%20%20%20%20last%28price%29%20AS%20close%2C%0A%20%20%20%20min%28price%29%2C%0A%20%20%20%20max%28price%29%2C%0A%20%20%20%20sum%28amount%29%20AS%20volume%0AFROM%20trades%0AWHERE%20symbol%20%3D%20%27BTC-USD%27%20AND%20timestamp%20%3E%20dateadd%28%27d%27%2C%20-1%2C%20now%28%29%29%0ASAMPLE%20BY%2015m%20ALIGN%20TO%20CALENDAR%3B)
-to fill the pre-written query directly in the SQL editor, then run the query.
+  ```questdb-sql title="Candle chart with 15-minute intervals"
+  SELECT 
+      timestamp,
+      first(price) AS open,
+      last(price) AS close,
+      min(price),
+      max(price),
+      sum(amount) AS volume
+  FROM trades
+  WHERE symbol = 'BTC-USD' AND timestamp > dateadd('d', -1, now())
+  SAMPLE BY 15m ALIGN TO CALENDAR;
+  ```
+
+  <QueryButton
+    href="https://demo.questdb.io/?query=SELECT%20%0A%20%20%20%20timestamp%2C%0A%20%20%20%20first%28price%29%20AS%20open%2C%0A%20%20%20%20last%28price%29%20AS%20close%2C%0A%20%20%20%20min%28price%29%2C%0A%20%20%20%20max%28price%29%2C%0A%20%20%20%20sum%28amount%29%20AS%20volume%0AFROM%20trades%0AWHERE%20symbol%20%3D%20%27BTC-USD%27%20AND%20timestamp%20%3E%20dateadd%28%27d%27%2C%20-1%2C%20now%28%29%29%0ASAMPLE%20BY%2015m%20ALIGN%20TO%20CALENDAR%3B"
+  />
+</p>
 
 This real-time chart on Grafana plots the candle chart with a time sample of 10
 seconds. We also show the volume traded on a secondary axis.
 
-<iframe
-  src="https://dashboard.questdb.io/d-solo/624FG0snk/public-dashboard-1?orgId=1&panelId=8&refresh=5s"
-  width="100%"
-  height="300"
-  frameborder="0"
-></iframe>
+<Grafana src="https://dashboard.questdb.io/d-solo/624FG0snk/public-dashboard-1?orgId=1&panelId=8&refresh=5s" />
 
 ## VWAP Bitcoin price sampled by time
 
@@ -121,29 +139,27 @@ for the volume of trades during that period. This query includes the
 accelerated by our new JIT Compiler (see the _lightning_ in the logs). And once
 again, we downsample the dataset using `SAMPLE BY`.
 
-```questdb-sql title="Volume-weighted average price"
-SELECT 
-    timestamp,
-    sum(price * amount) / sum(amount) AS vwap_price,
-    sum(amount) AS volume
-FROM trades
-WHERE symbol = 'BTC-USD' AND timestamp > dateadd('d', -1, now())
-SAMPLE BY 15m ALIGN TO CALENDAR;
-```
+<p>
 
-Click
-[here](https://demo.questdb.io/?query=SELECT%20%0A%20%20%20%20timestamp%2C%0A%20%20%20%20sum%28price%20%2a%20amount%29%20%2F%20sum%28amount%29%20AS%20vwap_price%2C%0A%20%20%20%20sum%28amount%29%20AS%20volume%0AFROM%20trades%0AWHERE%20symbol%20%3D%20%27BTC-USD%27%20AND%20timestamp%20%3E%20dateadd%28%27d%27%2C%20-1%2C%20now%28%29%29%0ASAMPLE%20BY%2015m%20ALIGN%20TO%20CALENDAR%3B)
-to fill the pre-written query directly in the SQL editor, then run the query.
+  ```questdb-sql title="Volume-weighted average price"
+  SELECT 
+      timestamp,
+      sum(price * amount) / sum(amount) AS vwap_price,
+      sum(amount) AS volume
+  FROM trades
+  WHERE symbol = 'BTC-USD' AND timestamp > dateadd('d', -1, now())
+  SAMPLE BY 15m ALIGN TO CALENDAR;
+  ```
 
-The following chart displays the distribution of trades based on their size and
-paints a more granular picture of volume traded.
+  <QueryButton
+    href="https://demo.questdb.io/?query=SELECT%20%0A%20%20%20%20timestamp%2C%0A%20%20%20%20sum%28price%20%2a%20amount%29%20%2F%20sum%28amount%29%20AS%20vwap_price%2C%0A%20%20%20%20sum%28amount%29%20AS%20volume%0AFROM%20trades%0AWHERE%20symbol%20%3D%20%27BTC-USD%27%20AND%20timestamp%20%3E%20dateadd%28%27d%27%2C%20-1%2C%20now%28%29%29%0ASAMPLE%20BY%2015m%20ALIGN%20TO%20CALENDAR%3B"
+  />
+</p>
 
-<iframe
-  src="https://dashboard.questdb.io/d-solo/624FG0snk/public-dashboard-1?orgId=1&panelId=12&refresh=5s"
-  width="100%"
-  height="300"
-  frameborder="0"
-></iframe>
+The following real-time chart displays the distribution of trades based on their
+size and paints a more granular picture of volume traded.
+
+<Grafana src="https://dashboard.questdb.io/d-solo/624FG0snk/public-dashboard-1?orgId=1&panelId=12&refresh=5s" />
 
 ## Implied BTC-ETH exchange rate
 
@@ -152,39 +168,37 @@ timestamps. In order to join these two series where timestamps do not exactly
 match, use the `ASOF JOIN` syntax and then divide the price of BTC-USD with the
 price of ETH-USD to get the implied BTC/ETH rate.
 
-```questdb-sql title="Implied BTC-ETH exchange rate"
-WITH btc AS (
-    SELECT timestamp, price
-    FROM trades
-    WHERE symbol = 'BTC-USD' AND timestamp > dateadd('d', -30, now())
-), 
-eth AS (
-    SELECT timestamp, price
-    FROM trades
-    WHERE symbol = 'ETH-USD' and timestamp > dateadd('d', -30, now())
-)
-SELECT 
-    btc.timestamp btc_time, 
-    btc.price btc_price, 
-    eth.price eth_price, 
-    round(btc.price/eth.price, 3) btc_to_eth_ratio
-FROM btc
-ASOF JOIN eth;
-```
+<p>
 
-Click
-[here](https://demo.questdb.io/?query=WITH%20btc%20AS%20%28%0A%20%20%20%20SELECT%20timestamp%2C%20price%0A%20%20%20%20FROM%20trades%0A%20%20%20%20WHERE%20symbol%20%3D%20%27BTC-USD%27%20AND%20timestamp%20%3E%20dateadd%28%27d%27%2C%20-30%2C%20now%28%29%29%0A%29%2C%20%0Aeth%20AS%20%28%0A%20%20%20%20SELECT%20timestamp%2C%20price%0A%20%20%20%20FROM%20trades%0A%20%20%20%20WHERE%20symbol%20%3D%20%27ETH-USD%27%20and%20timestamp%20%3E%20dateadd%28%27d%27%2C%20-30%2C%20now%28%29%29%0A%29%0ASELECT%20%0A%20%20%20%20btc.timestamp%20btc_time%2C%20%0A%20%20%20%20btc.price%20btc_price%2C%20%0A%20%20%20%20eth.price%20eth_price%2C%20%0A%20%20%20%20round%28btc.price%2Feth.price%2C%203%29%20btc_to_eth_ratio%0AFROM%20btc%0AASOF%20JOIN%20eth%3B)
-to fill the pre-written query directly in the SQL editor, then run the query.
+  ```questdb-sql title="Implied BTC-ETH exchange rate"
+  WITH btc AS (
+      SELECT timestamp, price
+      FROM trades
+      WHERE symbol = 'BTC-USD' AND timestamp > dateadd('d', -30, now())
+  ), 
+  eth AS (
+      SELECT timestamp, price
+      FROM trades
+      WHERE symbol = 'ETH-USD' and timestamp > dateadd('d', -30, now())
+  )
+  SELECT 
+      btc.timestamp btc_time, 
+      btc.price btc_price, 
+      eth.price eth_price, 
+      round(btc.price/eth.price, 3) btc_to_eth_ratio
+  FROM btc
+  ASOF JOIN eth;
+  ```
 
-The following chart plots three series: BTC-USD, ETH-USD and the implied BTC-ETH
-cross price.
+  <QueryButton
+    href="https://demo.questdb.io/?query=WITH%20btc%20AS%20%28%0A%20%20%20%20SELECT%20timestamp%2C%20price%0A%20%20%20%20FROM%20trades%0A%20%20%20%20WHERE%20symbol%20%3D%20%27BTC-USD%27%20AND%20timestamp%20%3E%20dateadd%28%27d%27%2C%20-30%2C%20now%28%29%29%0A%29%2C%20%0Aeth%20AS%20%28%0A%20%20%20%20SELECT%20timestamp%2C%20price%0A%20%20%20%20FROM%20trades%0A%20%20%20%20WHERE%20symbol%20%3D%20%27ETH-USD%27%20and%20timestamp%20%3E%20dateadd%28%27d%27%2C%20-30%2C%20now%28%29%29%0A%29%0ASELECT%20%0A%20%20%20%20btc.timestamp%20btc_time%2C%20%0A%20%20%20%20btc.price%20btc_price%2C%20%0A%20%20%20%20eth.price%20eth_price%2C%20%0A%20%20%20%20round%28btc.price%2Feth.price%2C%203%29%20btc_to_eth_ratio%0AFROM%20btc%0AASOF%20JOIN%20eth%3B"
+  />
+</p>
 
-<iframe
-  src="https://dashboard.questdb.io/d-solo/624FG0snk/public-dashboard-1?orgId=1&panelId=14&refresh=5s"
-  width="100%"
-  height="300"
-  frameborder="0"
-></iframe>
+The following real-time chart plots three series: BTC-USD, ETH-USD and the
+implied BTC-ETH cross price.
+
+<Grafana src="https://dashboard.questdb.io/d-solo/624FG0snk/public-dashboard-1?orgId=1&panelId=14&refresh=5s"/>
 
 ## Conclusion
 
