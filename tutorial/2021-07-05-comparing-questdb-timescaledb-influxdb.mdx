@@ -352,13 +352,6 @@ the TSBS benchmark with the `cpu-only` use case using up to 14 works on
 `m5.8xlarge` instance on AWS (**NOTE:** the 1.4 million number is from using AMD
 Ryzen5 processor).
 
-<Screenshot
-  alt="A chart showing ingestion performance of InfluxDB, TimescaleDB, and ClickHouse versus QuestDB"
-  height={591}
-  src="/img/blog/2021-05-10/max-throughput-comparison.png"
-  width={770}
-/>
-
 For datasets with high cardinality (>10 million), QuestDB also outperformed
 other TSDBs with peak ingestion throughput of 904k rows/sec and sustaining about
 640k row/secs at 10 million devices using four threads on `m5.8xlarge` instance
@@ -368,7 +361,7 @@ QuestDB showed over a million rows/sec ingestion throughput.
 <Screenshot
   alt="A chart showing high-cardinality ingestion performance of InfluxDB, TimescaleDB, and ClickHouse versus QuestDB"
   height={591}
-  src="/img/blog/2021-06-16/maximum-throughput-by-device-scale-6-threads-ryzen.png"
+  src="/img/tutorial/2021-07-05/maximum-throughput.png"
   width={770}
 />
 
