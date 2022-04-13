@@ -119,6 +119,9 @@
   to = "/docs/reference/api/ilp/overview"
 
 [[headers]]
-  for = "/blog/*"
+  for = "/*"
   [headers.values]
-    Content-Security-Policy = "frame-src 'self' dashboard.questdb.io app.netlify.com;"
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "0"
+    X-Content-Type-Options = "nosniff"
+    Content-Security-Policy = "frame-src 'self' app.netlify.com *.questdb.io;"
