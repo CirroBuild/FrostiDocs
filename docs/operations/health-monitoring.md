@@ -20,7 +20,7 @@ pairs called labels.
 QuestDB exposes a `/metrics` endpoint which provides internal system metrics in
 Prometheus format. To use this functionality and get started with example
 configuration, refer to the
-[Prometheus documentation](/docs/third-party-tools/prometheus/).
+[Prometheus documentation](/docs/third-party-tools/prometheus).
 
 ## Min health server
 
@@ -36,7 +36,7 @@ server runs embedded in a QuestDB instance and has a separate log and thread
 pool configuration.
 
 The configuration section for the `min` HTTP server is available in the
-[minimal HTTP server reference](/docs/reference/configuration/#minimal-http-server).
+[minimal HTTP server reference](/docs/reference/configuration#minimal-http-server).
 
 The `min` server is enabled by default and will reply to any `HTTP GET` request
 to port `9003`:
@@ -77,14 +77,14 @@ curl -v http://127.0.0.1:9003/status
 
 The `/metrics` path segment is reserved for metrics exposed in Prometheus
 format. For more details, see the
-[Prometheus documentation](/docs/third-party-tools/prometheus/).
+[Prometheus documentation](/docs/third-party-tools/prometheus).
 
 :::
 
 ## Unhandled error detection
 
 When metrics subsystem is
-[enabled](/docs/third-party-tools/prometheus/#scraping-prometheus-metrics-from-questdb)
+[enabled](/docs/third-party-tools/prometheus#scraping-prometheus-metrics-from-questdb)
 on the database, the health endpoint checks the occurrences of unhandled,
 critical errors since the database start and, if any of them were detected, it
 returns HTTP 500 status code. The check is based on the

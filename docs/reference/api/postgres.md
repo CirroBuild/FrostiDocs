@@ -10,13 +10,21 @@ Postgres client or driver with QuestDB, at no extra cost.
 The storage model used by Postgres is fundamentally different to the one used by
 QuestDB. Some features that exists for Postgres do not apply to QuestDB.
 
+## Examples
+
+We provide examples in a number of programming languages.
+See our "develop" docs for:
+
+* [Inserting](/docs/develop/insert-data#postgresql-wire-protocol)
+* [Querying](/docs/develop/query-data#postgresql-wire-protocol)
+
 ## Compatibility
 
 ### List of supported features
 
 - Querying (all types expect `BLOB`)
 - Prepared statements with bind parameters (check for specific libraries
-  [below](/docs/reference/api/postgres/#libraries--programmatic-clients))
+  [below](/docs/reference/api/postgres#libraries--programmatic-clients))
 - `INSERT` statements with bind parameters (same)
 - DDL execution
 - Batch inserts with `JDBC`
@@ -25,12 +33,11 @@ QuestDB. Some features that exists for Postgres do not apply to QuestDB.
 Examples which demonstrate how to use Postgres clients in a number of different
 languages can be found on the following pages:
 
-- [Connect](/docs/develop/connect/#postgres-compatibility) shows how to create a
-  connection to QuestDB using Postgres
-- [Insert data](/docs/develop/insert-data/#postgres-compatibility) demonstrates
-  how to use paramaterized queries and prepared statements to insert data
-- [Query data](/docs/develop/query-data/#postgres-compatibility) shows how to
-  run queries against tables
+- [Insert data](/docs/develop/insert-data#postgresql-wire-protocol)
+  demonstrates how to use the parameterized queries and prepared statements to
+  insert data.
+- [Query data](/docs/develop/query-data#postgresql-wire-protocol) shows how to
+  run queries against tables.
 
 ### List of unsupported features
 

@@ -94,17 +94,17 @@ To illustrate how timestamps are handled, a table `my_table` containing 48
 records with timestamps every hour beginning at `00:00:00` on `2020-01-01` will
 be used in the following examples:
 
-| timestamp                   |
-| --------------------------- |
-| 2020-01-01T00:00:00.000000Z |
-| 2020-01-01T01:00:00.000000Z |
-| 2020-01-01T02:00:00.000000Z |
-| ...                         |
-| 2020-01-01T23:00:00.000000Z |
-| 2020-01-02T00:00:00.000000Z |
-| 2020-01-02T01:00:00.000000Z |
-| ...                         |
-| 2020-01-02T23:00:00.000000Z |
+|timestamp                  |
+|:--------------------------|
+|2020-01-01T00:00:00.000000Z|
+|2020-01-01T01:00:00.000000Z|
+|2020-01-01T02:00:00.000000Z|
+|...                        |
+|2020-01-01T23:00:00.000000Z|
+|2020-01-02T00:00:00.000000Z|
+|2020-01-02T01:00:00.000000Z|
+|...                        |
+|2020-01-02T23:00:00.000000Z|
 
 ### Timestamp string equality
 
@@ -120,20 +120,20 @@ The result will be 1 record with exact match of `2020-01-01T00:00:00.000000Z`.
 In other words, the string `2020-01-01` does not represent an interval, but a
 single `TIMESTAMP` data point of `2020-01-01T00:00:00.000000Z`
 
-| timestamp                   |
-| --------------------------- |
-| 2020-01-01T00:00:00.000000Z |
+|timestamp                  |
+|:--------------------------|
+|2020-01-01T00:00:00.000000Z|
 
 Before software version `6.0.1`, this would result in 24 records of all hours
 during date '2020-01-01'
 
-| timestamp                   |
-| --------------------------- |
-| 2020-01-01T00:00:00.000000Z |
-| 2020-01-01T01:00:00.000000Z |
-| 2020-01-01T02:00:00.000000Z |
-| ...                         |
-| 2020-01-01T23:00:00.000000Z |
+|timestamp                  |
+|:--------------------------|
+|2020-01-01T00:00:00.000000Z|
+|2020-01-01T01:00:00.000000Z|
+|2020-01-01T02:00:00.000000Z|
+|...                        |
+|2020-01-01T23:00:00.000000Z|
 
 In order to use the old semantics, the query must use the `IN` keyword instead
 of `=`:
@@ -158,20 +158,20 @@ The results are 47 records which have timestamps strictly greater than
 `2020-01-01T00:00:00.000000Z`. The string `2020-01-01` does not represent an
 interval, but a single `TIMESTAMP` data point of `2020-01-01T00:00:00.000000Z`:
 
-| timestamp                   |
-| --------------------------- |
-| 2020-01-01T01:00:00.000000Z |
-| ...                         |
-| 2020-01-02T23:00:00.000000Z |
+|timestamp                  |
+|:--------------------------|
+|2020-01-01T01:00:00.000000Z|
+|...                        |
+|2020-01-02T23:00:00.000000Z|
 
 Before software version `6.0.1`, this would result in 24 records, one for each
 hour during the date `2020-01-02`:
 
-| timestamp                   |
-| --------------------------- |
-| 2020-01-02T00:00:00.000000Z |
-| ...                         |
-| 2020-01-02T23:00:00.000000Z |
+|timestamp                  |
+|:--------------------------|
+|2020-01-02T00:00:00.000000Z|
+|...                        |
+|2020-01-02T23:00:00.000000Z|
 
 In order to use the old semantics, the query must use `>=` instead of `>`, and
 `<=` instead of `<`:
@@ -193,19 +193,19 @@ WHERE timestamp IN ('2020-01-01T00:00:00.000000Z', '2020-01-02T00:00:00.000000Z'
 The result is two records matching exactly `2020-01-01T00:00:00.000000Z` and
 `2020-01-02T00:00:00.000000Z`
 
-| timestamp                   |
-| --------------------------- |
-| 2020-01-02T00:00:00.000000Z |
-| 2020-01-02T00:00:00.000000Z |
+|timestamp                  |
+|:--------------------------|
+|2020-01-02T00:00:00.000000Z|
+|2020-01-02T00:00:00.000000Z|
 
 Before software version `6.0.1`, this would result in 25 records, one for each
 hour during the date `2020-01-01` and the `00:00:00` data point on `2020-01-02`:
 
-| timestamp                   |
-| --------------------------- |
-| 2020-01-02T00:00:00.000000Z |
-| ...                         |
-| 2020-01-02T00:00:00.000000Z |
+|timestamp                  |
+|:--------------------------|
+|2020-01-02T00:00:00.000000Z|
+|...                        |
+|2020-01-02T00:00:00.000000Z|
 
 In order to use the old semantics, the `BETWEEN` keyword should be used:
 

@@ -46,7 +46,7 @@ curl -F schema='[
 ```
 
 More information on the patterns for timestamps can be found on the
-[date and time functions](/docs/reference/function/date-time/#date-and-timestamp-format)
+[date and time functions](/docs/reference/function/date-time#date-and-timestamp-format)
 page.
 
 :::info
@@ -140,7 +140,7 @@ curl -F data=@weather.csv 'http://localhost:9000/imp'
 ```
 
 For more information on the `/imp` entry point, refer to the
-[REST API documentation](/docs/reference/api/rest/#imp---import-data).
+[REST API documentation](/docs/reference/api/rest#imp---import-data).
 
 ## Large datasets with out-of-order data
 
@@ -220,9 +220,9 @@ To confirm that the table is ordered, the `isOrdered()` function may be used:
 select isOrdered(timestamp) from weather
 ```
 
-| isOrdered |
-| --------- |
-| true      |
+|isOrdered|
+|:--------|
+|true     |
 
 More information about the use of `isOrdered()` can be found on the
-[boolean functions documentation](/docs/reference/function/boolean/).
+[boolean functions documentation](/docs/reference/function/boolean).

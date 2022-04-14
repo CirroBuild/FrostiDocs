@@ -31,21 +31,6 @@ module.exports = {
       type: "doc",
     },
     {
-      label: "Concepts",
-      type: "category",
-      items: [
-        "concept/storage-model",
-        "concept/designated-timestamp",
-        "concept/sql-extensions",
-        "concept/jit-compiler",
-        "concept/partitions",
-        "concept/symbol",
-        "concept/indexes",
-        "concept/geohashes",
-        "concept/root-directory-structure",
-      ],
-    },
-    {
       label: "Get Started",
       type: "category",
       items: [
@@ -62,7 +47,7 @@ module.exports = {
         "develop/connect",
         "develop/insert-data",
         "develop/query-data",
-        "develop/authenticate",
+        "develop/web-console",
       ],
     },
     {
@@ -71,6 +56,7 @@ module.exports = {
       items: [
         "guides/working-with-timestamps-timezones",
         "guides/importing-data",
+        "guides/modifying-data",
         "guides/out-of-order-commit-lag",
         "guides/v6-migration",
       ],
@@ -79,10 +65,10 @@ module.exports = {
       label: "Deployment",
       type: "category",
       items: [
-        "guides/aws-official-ami",
-        "guides/kubernetes",
-        "guides/google-cloud-platform",
-        "guides/digitalocean",
+        "deployment/aws-official-ami",
+        "deployment/kubernetes",
+        "deployment/google-cloud-platform",
+        "deployment/digitalocean",
       ],
     },
     {
@@ -106,6 +92,21 @@ module.exports = {
       ],
     },
     {
+      label: "Concepts",
+      type: "category",
+      items: [
+        "concept/storage-model",
+        "concept/designated-timestamp",
+        "concept/sql-extensions",
+        "concept/jit-compiler",
+        "concept/partitions",
+        "concept/symbol",
+        "concept/indexes",
+        "concept/geohashes",
+        "concept/root-directory-structure",
+      ],
+    },
+    {
       label: "Reference",
       type: "category",
       items: [
@@ -123,6 +124,7 @@ module.exports = {
                 "reference/api/ilp/columnset-types",
                 "reference/api/ilp/tcp-receiver",
                 "reference/api/ilp/udp-receiver",
+                "reference/api/ilp/authenticate",
               ]
             },
             "reference/api/java-embedded",
@@ -155,14 +157,16 @@ module.exports = {
         {
           type: "category",
           label: "Operators",
-          items: ["reference/operators/bitwise", "reference/operators/spatial"],
+          items: [
+            "reference/operators/bitwise",
+            "reference/operators/spatial",
+          ],
         },
         {
           type: "category",
           label: "SQL",
           items: [
             "concept/sql-execution-order",
-
             {
               type: "category",
               label: "ALTER TABLE",
@@ -202,8 +206,7 @@ module.exports = {
             "reference/sql/where",
             "reference/sql/with",
           ],
-        },
-        "reference/web-console",
+        }
       ],
     },
     {
@@ -212,6 +215,11 @@ module.exports = {
       items: [
         "faq/troubleshooting"
       ],
+    },
+    {
+      label: "Tutorials",
+      type: 'link',
+      href: '/tutorial',
     },
   ].filter(Boolean),
 }

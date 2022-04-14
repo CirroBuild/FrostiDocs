@@ -54,7 +54,7 @@ ALIGN TO CALENDAR TIME ZONE {tz_id} WITH OFFSET
 ```
 
 For more information on using calendar alignment with sampled groups, see the
-[SAMPLE BY documentation](/docs/reference/sql/sample-by/#align-to-calendar).
+[SAMPLE BY documentation](/docs/reference/sql/sample-by#align-to-calendar).
 
 ### SQL performance improvements
 
@@ -76,9 +76,9 @@ SELECT * FROM my_table LATEST BY indexed_col WHERE other_col > 9000;
 The new implementation for [Prometheus](https://prometheus.io/) monitoring
 allows for adding basic counters and will be improved in upcoming releases. To
 activate Prometheus metrics, set the `metrics.enabled` key to `true` in
-QuestDB's `server.conf` [configuration file](/docs/reference/configuration/):
+QuestDB's `server.conf` [configuration file](/docs/reference/configuration):
 
-```bash title=server.conf
+```ini title=server.conf
 metrics.enabled=true
 ```
 

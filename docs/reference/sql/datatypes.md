@@ -22,7 +22,7 @@ The type system is derived from Java types.
 | `double`          | `64`         | Yes      | Double precision IEEE 754 floating point value.                                                                                                                                                                                                                     |
 | `binary`          | `64+n*8`     | Yes      | Length-prefixed sequence of bytes whose length is stored as signed 64-bit integer with maximum value of `0x7fffffffffffffffL`.                                                                                                                                      |
 | `long256`         | `256`        | Yes      | Unsigned 256-bit integer. Does not support arbitrary arithmetic operations, but only equality checks. Suitable for storing hash code, such as crypto public addresses.                                                                                              |
-| `geohash(<size>)` | `8`-`64`     | Yes      | Geohash with precision specified as a number followed by `b` for bits, `c` for chars. See [the geohashes documentation](/docs/concept/geohashes/) for details on use and storage.                                                                                   |
+| `geohash(<size>)` | `8`-`64`     | Yes      | Geohash with precision specified as a number followed by `b` for bits, `c` for chars. See [the geohashes documentation](/docs/concept/geohashes) for details on use and storage.                                                                                   |
 
 ## Variable-sized type limitations
 

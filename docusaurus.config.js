@@ -102,7 +102,8 @@ const config = {
     },
     prism: {
       defaultLanguage: "questdb-sql",
-      additionalLanguages: ["rust", "csharp", "julia", "cpp", "java", "ebnf"],
+      additionalLanguages: [
+        "rust", "csharp", "julia", "cpp", "java", "ebnf", "ini", "toml"],
       theme: require("./src/internals/prism-github"),
       darkTheme: require("./src/internals/prism-dracula"),
     },
@@ -123,16 +124,20 @@ const config = {
           items: [
             {
               label: "Docker",
-              to: "/docs/get-started/docker/",
+              to: "/docs/get-started/docker",
             },
             {
               label: "Binaries",
-              to: "/docs/get-started/binaries/",
+              to: "/docs/get-started/binaries",
             },
             {
               label: "Homebrew",
-              to: "/docs/get-started/homebrew/",
+              to: "/docs/get-started/homebrew",
             },
+            {
+              label: "Create my first dataset",
+              to: "/docs/get-started/first-database"
+            }
           ],
         },
         {
@@ -161,11 +166,11 @@ const config = {
             },
             {
               label: "Careers",
-              to: "/careers/",
+              to: "/careers",
             },
             {
               label: "About us",
-              to: "/about-us/",
+              to: "/about-us",
             },
           ],
         },
@@ -175,7 +180,7 @@ const config = {
           items: [
             {
               label: "QuestDB Swag",
-              to: "/community/",
+              to: "/community",
             },
             {
               label: "GitHub",
@@ -197,7 +202,7 @@ const config = {
         },
         {
           label: "Documentation",
-          to: "/docs/introduction/",
+          to: "/docs/introduction",
           position: "left",
         },
       ],
@@ -209,7 +214,7 @@ const config = {
           items: [
             {
               label: "Enterprise",
-              to: "/enterprise/",
+              to: "/enterprise",
             },
             {
               label: "Cloud",
@@ -217,15 +222,15 @@ const config = {
             },
             {
               label: "Customers",
-              to: "/customers/",
+              to: "/customers",
             },
             {
               label: "Careers",
-              to: "/careers/",
+              to: "/careers",
             },
             {
               label: "About us",
-              to: "/about-us/",
+              to: "/about-us",
             },
           ],
         },
@@ -255,15 +260,15 @@ const config = {
           items: [
             {
               label: "Documentation",
-              to: "/docs/introduction/",
+              to: "/docs/introduction",
             },
             {
               label: "Tutorials",
-              to: "/tutorial/",
+              to: "/tutorial",
             },
             {
               label: "Blog",
-              to: "/blog/",
+              to: "/blog",
             },
             {
               label: "Roadmap",
@@ -301,7 +306,7 @@ const config = {
           // cacheTime: 600 * 1000, // 600 sec - cache purge period
           changefreq: "daily",
           priority: 0.7,
-          trailingSlash: true,
+          trailingSlash: false,
         },
         theme: {
           customCss: [

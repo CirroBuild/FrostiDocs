@@ -94,7 +94,7 @@ the database and inserting data.
 
 More details on deploying the droplet, along with information on securing the
 instance and the interfaces that are exposed can be found on the
-[DigitalOcean deploy guide](/docs/guides/digitalocean/).
+[DigitalOcean deploy guide](/docs/deployment/digitalocean).
 
 ## Get started with QuestDB on DigitalOcean
 
@@ -110,7 +110,7 @@ showing how to deploy QuestDB as a 1-Click application. The example stack uses
 Telegraf clients that collect system metrics from multiple DigitalOcean droplets
 and streams this monitoring information to a QuestDB instance for analysis and
 visualization. Check out the
-[QuestDB on DigitalOcean tutorial](/tutorial/2021/07/09/telegraf-and-questdb-for-storing-metrics-in-a-timeseries-database/)
+[QuestDB on DigitalOcean tutorial](/tutorial/2021/07/09/telegraf-and-questdb-for-storing-metrics-in-a-timeseries-database)
 to get started.
 
 <Screenshot

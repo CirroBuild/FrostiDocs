@@ -11,7 +11,7 @@ calculations.
 
 Checking if tables contain a designated timestamp column can be done via the
 `tables()` and `table_columns()` functions which are described in the
-[meta functions](/docs/reference/function/meta/) documentation page.
+[meta functions](/docs/reference/function/meta) documentation page.
 
 :::
 
@@ -37,9 +37,9 @@ INSERT INTO readings
 VALUES(systimestamp(), 123.5);
 ```
 
-| ts                          | reading |
-| --------------------------- | ------- |
-| 2020-01-02T19:28:48.727516Z | 123.5   |
+|ts                         |reading|
+|:--------------------------|:------|
+|2020-01-02T19:28:48.727516Z|123.5  |
 
 ## sysdate
 
@@ -65,9 +65,9 @@ INSERT INTO readings
 VALUES(sysdate(), 123.5);
 ```
 
-| sysdate                     | reading |
-| --------------------------- | ------- |
-| 2020-01-02T19:28:48.727516Z | 123.5   |
+|sysdate                    |reading|
+|:--------------------------|:------|
+|2020-01-02T19:28:48.727516Z|123.5  |
 
 ```questdb-sql title="Query based on last minute"
 SELECT * FROM readings
@@ -103,19 +103,19 @@ SELECT created, origin FROM telemetry
 WHERE created > dateadd('d', -1, now());
 ```
 
-| created                     | origin |
-| --------------------------- | ------ |
-| 2021-02-01T21:51:34.443726Z | 1      |
+|created                    |origin|
+|:--------------------------|:-----|
+|2021-02-01T21:51:34.443726Z|1     |
 
 ```questdb-sql title="Query returns same timestamp in every row"
 SELECT now() FROM long_sequence(3)
 ```
 
-| now                         |
-| --------------------------- |
-| 2021-02-01T21:51:34.443726Z |
-| 2021-02-01T21:51:34.443726Z |
-| 2021-02-01T21:51:34.443726Z |
+|now                        |
+|:--------------------------|
+|2021-02-01T21:51:34.443726Z|
+|2021-02-01T21:51:34.443726Z|
+|2021-02-01T21:51:34.443726Z|
 
 ```questdb-sql title="Query based on last minute"
 SELECT * FROM readings
@@ -165,9 +165,9 @@ SELECT
   FROM t
 ```
 
-| ts                          | c_milli                     | c_second                    | c_minute                    | c_hour                      | c_day                       | c_month                     | c_year                       |
-| --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | ---------------------------- |
-| 2016-02-10T16:18:22.862145Z | 2016-02-10T16:18:22.863000Z | 2016-02-10T16:18:23.000000Z | 2016-02-10T16:19:00.000000Z | 2016-02-10T17:00:00.000000Z | 2016-02-11T00:00:00.000000Z | 2016-03-01T00:00:00.000000Z | 2017-01-01T00:00:00.000000Z" |
+|ts                         |c_milli                    |c_second                   |c_minute                   |c_hour                     |c_day                      |c_month                    |c_year                      |
+|:--------------------------|:--------------------------|:--------------------------|:--------------------------|:--------------------------|:--------------------------|:--------------------------|:---------------------------|
+|2016-02-10T16:18:22.862145Z|2016-02-10T16:18:22.863000Z|2016-02-10T16:18:23.000000Z|2016-02-10T16:19:00.000000Z|2016-02-10T17:00:00.000000Z|2016-02-11T00:00:00.000000Z|2016-03-01T00:00:00.000000Z|2017-01-01T00:00:00.000000Z"|
 
 ## timestamp_floor
 
@@ -212,9 +212,9 @@ SELECT
   FROM t
 ```
 
-| ts                          | f_milli                     | f_second                    | f_minute                    | f_hour                      | f_day                       | f_month                     | f_year                      |
-| --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- |
-| 2016-02-10T16:18:22.862145Z | 2016-02-10T16:18:22.862000Z | 2016-02-10T16:18:22.000000Z | 2016-02-10T16:18:00.000000Z | 2016-02-10T16:00:00.000000Z | 2016-02-10T00:00:00.000000Z | 2016-02-01T00:00:00.000000Z | 2016-01-01T00:00:00.000000Z |
+|ts                         |f_milli                    |f_second                   |f_minute                   |f_hour                     |f_day                      |f_month                    |f_year                     |
+|:--------------------------|:--------------------------|:--------------------------|:--------------------------|:--------------------------|:--------------------------|:--------------------------|:--------------------------|
+|2016-02-10T16:18:22.862145Z|2016-02-10T16:18:22.862000Z|2016-02-10T16:18:22.000000Z|2016-02-10T16:18:00.000000Z|2016-02-10T16:00:00.000000Z|2016-02-10T00:00:00.000000Z|2016-02-01T00:00:00.000000Z|2016-01-01T00:00:00.000000Z|
 
 ## to_timestamp
 
@@ -245,42 +245,42 @@ SELECT to_timestamp('2020-03-01:15:43:21.127329', 'yyyy-MM-dd:HH:mm:ss.SSSUUU')
 FROM long_sequence(1);
 ```
 
-| to_timestamp                |
-| --------------------------- |
-| 2020-03-01T15:43:21.127329Z |
+|to_timestamp               |
+|:--------------------------|
+|2020-03-01T15:43:21.127329Z|
 
 ```questdb-sql title="matching with nanosecond precision"
 SELECT to_timestamp('2020-03-01:15:43:00.000000000Z', 'yyyy-MM-dd:HH:mm:ss.SSSUUUNNNZ')
 FROM long_sequence(1);
 ```
 
-| to_timestamp                |
-| --------------------------- |
-| 2020-03-01T15:43:00.000000Z |
+|to_timestamp               |
+|:--------------------------|
+|2020-03-01T15:43:00.000000Z|
 
 ```questdb-sql title="string does not match format"
 SELECT to_timestamp('2020-03-01:15:43:21', 'yyyy')
 FROM long_sequence(1);
 ```
 
-| to_timestamp |
-| ------------ |
-| null         |
+|to_timestamp|
+|:-----------|
+|null        |
 
 ```questdb-sql title="Using with INSERT"
 INSERT INTO measurements
 values(to_timestamp('2019-12-12T12:15', 'yyyy-MM-ddTHH:mm'), 123.5);
 ```
 
-| timestamp                   | value |
-| --------------------------- | ----- |
-| 2019-12-12T12:15:00.000000Z | 123.5 |
+|timestamp                  |value|
+|:--------------------------|:----|
+|2019-12-12T12:15:00.000000Z|123.5|
 
 Note that conversion of ISO timestamp format is optional. QuestDB automatically
 converts `STRING` to `TIMESTAMP` if it is partial or full form of
 `yyyy-MM-ddTHH:mm:ss.SSSUUU` or `yyyy-MM-dd HH:mm:ss.SSSUUU` with valid time
 offset `+01:00` or `Z`. See more examples at
-[Native timestamp format](/docs/reference/sql/where/#native-timestamp-format)
+[Native timestamp format](/docs/reference/sql/where#native-timestamp-format)
 
 ## to_date
 
@@ -311,27 +311,27 @@ SELECT to_date('2020-03-01:15:43:21', 'yyyy-MM-dd:HH:mm:ss')
 FROM long_sequence(1);
 ```
 
-| to_date                  |
-| ------------------------ |
-| 2020-03-01T15:43:21.000Z |
+|to_date                 |
+|:-----------------------|
+|2020-03-01T15:43:21.000Z|
 
 ```questdb-sql title="string does not match format"
 SELECT to_date('2020-03-01:15:43:21', 'yyyy')
 FROM long_sequence(1);
 ```
 
-| to_date |
-| ------- |
-| null    |
+|to_date|
+|:------|
+|null   |
 
 ```questdb-sql title="Using with INSERT"
 INSERT INTO measurements
 values(to_date('2019-12-12T12:15', 'yyyy-MM-ddTHH:mm'), 123.5);
 ```
 
-| date                     | value |
-| ------------------------ | ----- |
-| 2019-12-12T12:15:00.000Z | 123.5 |
+|date                    |value|
+|:-----------------------|:----|
+|2019-12-12T12:15:00.000Z|123.5|
 
 ## to_str
 
@@ -362,9 +362,9 @@ Return value type is `string`
 SELECT to_str(systimestamp(), 'yyyy-MM-dd') FROM long_sequence(1);
 ```
 
-| to_str     |
-| ---------- |
-| 2020-03-04 |
+|to_str    |
+|:---------|
+|2020-03-04|
 
 - With unrecognized timestamp definition
 
@@ -372,16 +372,16 @@ SELECT to_str(systimestamp(), 'yyyy-MM-dd') FROM long_sequence(1);
 SELECT to_str(systimestamp(), 'yyyy-MM-dd gooD DAY 123') FROM long_sequence(1);
 ```
 
-| to_str                  |
-| ----------------------- |
-| 2020-03-04 gooD DAY 123 |
+|to_str                 |
+|:----------------------|
+|2020-03-04 gooD DAY 123|
 
 ## to_timezone
 
 `to_timezone(timestamp, timezone)` - converts a timestamp value to a specified
 timezone. For more information on the time zone database used for this function,
 see the
-[QuestDB time zone database documentation](/docs/guides/working-with-timestamps-timezones/).
+[QuestDB time zone database documentation](/docs/guides/working-with-timestamps-timezones).
 
 **Arguments:**
 
@@ -401,9 +401,9 @@ Return value type is `timestamp`
 SELECT to_timezone(1623167145000000, 'Europe/Berlin')
 ```
 
-| to_timezone                 |
-| --------------------------- |
-| 2021-06-08T17:45:45.000000Z |
+|to_timezone                |
+|:--------------------------|
+|2021-06-08T17:45:45.000000Z|
 
 - Unix UTC timestamp in microseconds to PST by UTC offset
 
@@ -411,9 +411,9 @@ SELECT to_timezone(1623167145000000, 'Europe/Berlin')
 SELECT to_timezone(1623167145000000, '-08:00')
 ```
 
-| to_timezone                 |
-| --------------------------- |
-| 2021-06-08T07:45:45.000000Z |
+|to_timezone                |
+|:--------------------------|
+|2021-06-08T07:45:45.000000Z|
 
 - Timestamp as string to `PST`
 
@@ -421,9 +421,9 @@ SELECT to_timezone(1623167145000000, '-08:00')
 SELECT to_timezone('2021-06-08T13:45:45.000000Z', 'PST')
 ```
 
-| to_timezone                 |
-| --------------------------- |
-| 2021-06-08T06:45:45.000000Z |
+|to_timezone                |
+|:--------------------------|
+|2021-06-08T06:45:45.000000Z|
 
 ## to_utc
 
@@ -431,7 +431,7 @@ SELECT to_timezone('2021-06-08T13:45:45.000000Z', 'PST')
 UTC. May be provided a timezone in string format or a UTC offset in hours and
 minutes. For more information on the time zone database used for this function,
 see the
-[QuestDB time zone database documentation](/docs/guides/working-with-timestamps-timezones/).
+[QuestDB time zone database documentation](/docs/guides/working-with-timestamps-timezones).
 
 **Arguments:**
 
@@ -452,9 +452,9 @@ Return value type is `timestamp`
 SELECT to_utc(1623167145000000, 'Europe/Berlin')
 ```
 
-| to_utc                      |
-| --------------------------- |
-| 2021-06-08T13:45:45.000000Z |
+|to_utc                     |
+|:--------------------------|
+|2021-06-08T13:45:45.000000Z|
 
 - Unix timestamp in microseconds from PST to UTC by UTC offset
 
@@ -462,9 +462,9 @@ SELECT to_utc(1623167145000000, 'Europe/Berlin')
 SELECT to_utc(1623167145000000, '-08:00')
 ```
 
-| to_utc                      |
-| --------------------------- |
-| 2021-06-08T23:45:45.000000Z |
+|to_utc                     |
+|:--------------------------|
+|2021-06-08T23:45:45.000000Z|
 
 - Timestamp as string in `PST` to UTC
 
@@ -472,9 +472,9 @@ SELECT to_utc(1623167145000000, '-08:00')
 SELECT to_utc('2021-06-08T13:45:45.000000Z', 'PST')
 ```
 
-| to_utc                      |
-| --------------------------- |
-| 2021-06-08T20:45:45.000000Z |
+|to_utc                     |
+|:--------------------------|
+|2021-06-08T20:45:45.000000Z|
 
 ## dateadd
 
@@ -498,27 +498,27 @@ SELECT systimestamp(), dateadd('h', 2, systimestamp())
 FROM long_sequence(1);
 ```
 
-| systimestamp                | dateadd                     |
-| --------------------------- | --------------------------- |
-| 2020-04-17T00:30:51.380499Z | 2020-04-17T02:30:51.380499Z |
+|systimestamp               |dateadd                    |
+|:--------------------------|:--------------------------|
+|2020-04-17T00:30:51.380499Z|2020-04-17T02:30:51.380499Z|
 
 ```questdb-sql title="Adding days"
 SELECT systimestamp(), dateadd('d', 2, systimestamp())
 FROM long_sequence(1);
 ```
 
-| systimestamp                | dateadd                     |
-| --------------------------- | --------------------------- |
-| 2020-04-17T00:30:51.380499Z | 2020-04-19T00:30:51.380499Z |
+|systimestamp               |dateadd                    |
+|:--------------------------|:--------------------------|
+|2020-04-17T00:30:51.380499Z|2020-04-19T00:30:51.380499Z|
 
 ```questdb-sql title="Adding months"
 SELECT systimestamp(), dateadd('M', 2, systimestamp())
 FROM long_sequence(1);
 ```
 
-| systimestamp                | dateadd                     |
-| --------------------------- | --------------------------- |
-| 2020-04-17T00:30:51.380499Z | 2020-06-17T00:30:51.380499Z |
+|systimestamp               |dateadd                    |
+|:--------------------------|:--------------------------|
+|2020-04-17T00:30:51.380499Z|2020-06-17T00:30:51.380499Z|
 
 ## datediff
 
@@ -545,9 +545,9 @@ SELECT datediff(
 FROM long_sequence(1);
 ```
 
-| datediff |
-| -------- |
-| 4        |
+|datediff|
+|:-------|
+|4       |
 
 ```questdb-sql title="Difference in months"
 SELECT datediff(
@@ -557,9 +557,9 @@ SELECT datediff(
 FROM long_sequence(1);
 ```
 
-| datediff |
-| -------- |
-| 1        |
+|datediff|
+|:-------|
+|1       |
 
 ## millis
 
@@ -582,21 +582,21 @@ SELECT millis(
 FROM long_sequence(1);
 ```
 
-| millis |
-| ------ |
-| 123    |
+|millis|
+|:-----|
+|123   |
 
 ```questdb-sql title="Using in an aggregation"
 SELECT millis(ts), count() FROM transactions;
 ```
 
-| second | count |
-| ------ | ----- |
-| 0      | 2323  |
-| 1      | 6548  |
-| ...    | ...   |
-| 998    | 9876  |
-| 999    | 2567  |
+|second|count|
+|:-----|:----|
+|0     |2323 |
+|1     |6548 |
+|...   |...  |
+|998   |9876 |
+|999   |2567 |
 
 ## micros
 
@@ -618,21 +618,21 @@ SELECT micros(to_timestamp('2020-03-01:15:43:21.123456', 'yyyy-MM-dd:HH:mm:ss.SS
 FROM long_sequence(1);
 ```
 
-| millis |
-| ------ |
-| 456    |
+|millis|
+|:-----|
+|456   |
 
 ```questdb-sql title="Using in an aggregation"
 SELECT micros(ts), count() FROM transactions;
 ```
 
-| second | count |
-| ------ | ----- |
-| 0      | 2323  |
-| 1      | 6548  |
-| ...    | ...   |
-| 998    | 9876  |
-| 999    | 2567  |
+|second|count|
+|:-----|:----|
+|0     |2323 |
+|1     |6548 |
+|...   |...  |
+|998   |9876 |
+|999   |2567 |
 
 ## second
 
@@ -654,21 +654,21 @@ SELECT second(to_timestamp('2020-03-01:15:43:21', 'yyyy-MM-dd:HH:mm:ss'))
 FROM long_sequence(1);
 ```
 
-| second |
-| ------ |
-| 43     |
+|second|
+|:-----|
+|43    |
 
 ```questdb-sql title="Using in an aggregation"
 SELECT second(ts), count() FROM transactions;
 ```
 
-| second | count |
-| ------ | ----- |
-| 0      | 2323  |
-| 1      | 6548  |
-| ...    | ...   |
-| 58     | 9876  |
-| 59     | 2567  |
+|second|count|
+|:-----|:----|
+|0     |2323 |
+|1     |6548 |
+|...   |...  |
+|58    |9876 |
+|59    |2567 |
 
 ## minute
 
@@ -690,21 +690,21 @@ SELECT minute(to_timestamp('2020-03-01:15:43:21', 'yyyy-MM-dd:HH:mm:ss'))
 FROM long_sequence(1);
 ```
 
-| minute |
-| ------ |
-| 43     |
+|minute|
+|:-----|
+|43    |
 
 ```questdb-sql title="Using in an aggregation"
 SELECT minute(ts), count() FROM transactions;
 ```
 
-| minute | count |
-| ------ | ----- |
-| 0      | 2323  |
-| 1      | 6548  |
-| ...    | ...   |
-| 58     | 9876  |
-| 59     | 2567  |
+|minute|count|
+|:-----|:----|
+|0     |2323 |
+|1     |6548 |
+|...   |...  |
+|58    |9876 |
+|59    |2567 |
 
 ## hour
 
@@ -726,21 +726,21 @@ SELECT hour(to_timestamp('2020-03-01:15:43:21', 'yyyy-MM-dd:HH:mm:ss'))
 FROM long_sequence(1);
 ```
 
-| hour |
-| ---- |
-| 12   |
+|hour|
+|:---|
+|12  |
 
 ```questdb-sql title="Using in an aggregation"
 SELECT hour(ts), count() FROM transactions;
 ```
 
-| hour | count |
-| ---- | ----- |
-| 0    | 2323  |
-| 1    | 6548  |
-| ...  | ...   |
-| 22   | 9876  |
-| 23   | 2567  |
+|hour|count|
+|:---|:----|
+|0   |2323 |
+|1   |6548 |
+|... |...  |
+|22  |9876 |
+|23  |2567 |
 
 ## day
 
@@ -762,21 +762,21 @@ SELECT day(to_timestamp('2020-03-01:15:43:21', 'yyyy-MM-dd:HH:mm:ss'))
 FROM long_sequence(1);
 ```
 
-| day |
-| --- |
-| 01  |
+|day|
+|:--|
+|01 |
 
 ```questdb-sql title="Using in an aggregation"
 SELECT day(ts), count() FROM transactions;
 ```
 
-| day | count |
-| --- | ----- |
-| 1   | 2323  |
-| 2   | 6548  |
-| ... | ...   |
-| 30  | 9876  |
-| 31  | 2567  |
+|day|count|
+|:--|:----|
+|1  |2323 |
+|2  |6548 |
+|...|...  |
+|30 |9876 |
+|31 |2567 |
 
 ## month
 
@@ -798,21 +798,21 @@ SELECT month(to_timestamp('2020-03-01:15:43:21', 'yyyy-MM-dd:HH:mm:ss'))
 FROM long_sequence(1);
 ```
 
-| month |
-| ----- |
-| 03    |
+|month|
+|:----|
+|03   |
 
 ```questdb-sql title="Using in an aggregation"
 SELECT month(ts), count() FROM transactions;
 ```
 
-| month | count |
-| ----- | ----- |
-| 1     | 2323  |
-| 2     | 6548  |
-| ...   | ...   |
-| 11    | 9876  |
-| 12    | 2567  |
+|month|count|
+|:----|:----|
+|1    |2323 |
+|2    |6548 |
+|...  |...  |
+|11   |9876 |
+|12   |2567 |
 
 ## year
 
@@ -833,19 +833,19 @@ SELECT year(to_timestamp('2020-03-01:15:43:21', 'yyyy-MM-dd:HH:mm:ss'))
 FROM long_sequence(1);
 ```
 
-| year |
-| ---- |
-| 2020 |
+|year|
+|:---|
+|2020|
 
 ```questdb-sql title="Using in an aggregation"
 SELECT month(ts), count() FROM transactions;
 ```
 
-| year | count |
-| ---- | ----- |
-| 2015 | 2323  |
-| 2016 | 9876  |
-| 2017 | 2567  |
+|year|count|
+|:---|:----|
+|2015|2323 |
+|2016|9876 |
+|2017|2567 |
 
 ## is_leap_year
 
@@ -866,14 +866,14 @@ Return value type is `boolean`
 SELECT year(ts), is_leap_year(ts) FROM myTable;
 ```
 
-| year | is_leap_year |
-| ---- | ------------ |
-| 2020 | true         |
-| 2021 | false        |
-| 2022 | false        |
-| 2023 | false        |
-| 2024 | true         |
-| 2025 | false        |
+|year|is_leap_year|
+|:---|:-----------|
+|2020|true        |
+|2021|false       |
+|2022|false       |
+|2023|false       |
+|2024|true        |
+|2025|false       |
 
 ## days_in_month
 
@@ -894,13 +894,13 @@ Return value type is `int`
 SELECT month(ts), days_in_month(ts) FROM myTable;
 ```
 
-| month | days_in_month |
-| ----- | ------------- |
-| 4     | 30            |
-| 5     | 31            |
-| 6     | 30            |
-| 7     | 31            |
-| 8     | 31            |
+|month|days_in_month|
+|:----|:------------|
+|4    |30           |
+|5    |31           |
+|6    |30           |
+|7    |31           |
+|8    |31           |
 
 ## day_of_week
 
@@ -921,15 +921,15 @@ Return value type is `int`
 SELECT to_str(ts,'EE'),day_of_week(ts) FROM myTable;
 ```
 
-| day       | day_of_week |
-| --------- | ----------- |
-| Monday    | 1           |
-| Tuesday   | 2           |
-| Wednesday | 3           |
-| Thursday  | 4           |
-| Friday    | 5           |
-| Saturday  | 6           |
-| Sunday    | 7           |
+|day      |day_of_week|
+|:--------|:----------|
+|Monday   |1          |
+|Tuesday  |2          |
+|Wednesday|3          |
+|Thursday |4          |
+|Friday   |5          |
+|Saturday |6          |
+|Sunday   |7          |
 
 ## day_of_week_sunday_first
 
@@ -950,15 +950,15 @@ Return value type is `int`
 SELECT to_str(ts,'EE'),day_of_week_sunday_first(ts) FROM myTable;
 ```
 
-| day       | day_of_week_sunday_first |
-| --------- | ------------------------ |
-| Monday    | 2                        |
-| Tuesday   | 3                        |
-| Wednesday | 4                        |
-| Thursday  | 5                        |
-| Friday    | 6                        |
-| Saturday  | 7                        |
-| Sunday    | 1                        |
+|day      |day_of_week_sunday_first|
+|:--------|:-----------------------|
+|Monday   |2                       |
+|Tuesday  |3                       |
+|Wednesday|4                       |
+|Thursday |5                       |
+|Friday   |6                       |
+|Saturday |7                       |
+|Sunday   |1                       |
 
 ## Date and Timestamp format
 
@@ -966,32 +966,32 @@ Format is a combination of letters from table below combined with arbitrary
 text. Format letters are case-sensitive and are used as is (e.g. without any
 prefix)
 
-| Letter | Date or Time Component                           | Presentation       | Examples                              |
-| ------ | ------------------------------------------------ | ------------------ | ------------------------------------- |
-| `G`    | Era designator                                   | Text               | AD                                    |
-| `y`    | Year                                             | Year               | 1996; 96                              |
-| `Y`    | Week year                                        | Year               | 2009; 09                              |
-| `M`    | Month in year                                    | Month              | July; Jul; 07                         |
-| `w`    | Week in year                                     | Number             | 27                                    |
-| `W`    | Week in month                                    | Number             | 2                                     |
-| `D`    | Day in year                                      | Number             | 189                                   |
-| `d`    | Day in month                                     | Number             | 10                                    |
-| `F`    | Day of week in month                             | Number             | 2                                     |
-| `E`    | Day name in week                                 | Text               | Tuesday; Tue                          |
-| `u`    | Day number of week (1 = Monday, ..., 7 = Sunday) | Number             | 1                                     |
-| `a`    | Am/pm marker                                     | Text               | PM                                    |
-| `H`    | Hour in day (0-23)                               | Number             | 0                                     |
-| `k`    | Hour in day (1-24)                               | Number             | 24                                    |
-| `K`    | Hour in am/pm (0-11)                             | Number             | 0                                     |
-| `h`    | Hour in am/pm (1-12)                             | Number             | 12                                    |
-| `m`    | Minute in hour                                   | Number             | 30                                    |
-| `s`    | Second in minute                                 | Number             | 55                                    |
-| `S`    | Millisecond                                      | Number             | 978                                   |
-| `z`    | Time zone                                        | General time zone  | Pacific Standard Time; PST; GMT-08:00 |
-| `Z`    | Time zone                                        | RFC 822 time zone  | -0800                                 |
-| `X`    | Time zone                                        | ISO 8601 time zone | -08; -0800; -08:00                    |
-| `U`    | Microsecond                                      | Number             | 698                                   |
-| `N`    | Nanosecond                                       | Number             | 125                                   |
+|Letter|Date or Time Component                          |Presentation      |Examples                             |
+|:-----|:-----------------------------------------------|:-----------------|:------------------------------------|
+|`G`   |Era designator                                  |Text              |AD                                   |
+|`y`   |Year                                            |Year              |1996; 96                             |
+|`Y`   |Week year                                       |Year              |2009; 09                             |
+|`M`   |Month in year                                   |Month             |July; Jul; 07                        |
+|`w`   |Week in year                                    |Number            |27                                   |
+|`W`   |Week in month                                   |Number            |2                                    |
+|`D`   |Day in year                                     |Number            |189                                  |
+|`d`   |Day in month                                    |Number            |10                                   |
+|`F`   |Day of week in month                            |Number            |2                                    |
+|`E`   |Day name in week                                |Text              |Tuesday; Tue                         |
+|`u`   |Day number of week (1 = Monday, ..., 7 = Sunday)|Number            |1                                    |
+|`a`   |Am/pm marker                                    |Text              |PM                                   |
+|`H`   |Hour in day (0-23)                              |Number            |0                                    |
+|`k`   |Hour in day (1-24)                              |Number            |24                                   |
+|`K`   |Hour in am/pm (0-11)                            |Number            |0                                    |
+|`h`   |Hour in am/pm (1-12)                            |Number            |12                                   |
+|`m`   |Minute in hour                                  |Number            |30                                   |
+|`s`   |Second in minute                                |Number            |55                                   |
+|`S`   |Millisecond                                     |Number            |978                                  |
+|`z`   |Time zone                                       |General time zone |Pacific Standard Time; PST; GMT-08:00|
+|`Z`   |Time zone                                       |RFC 822 time zone |-0800                                |
+|`X`   |Time zone                                       |ISO 8601 time zone|-08; -0800; -08:00                   |
+|`U`   |Microsecond                                     |Number            |698                                  |
+|`N`   |Nanosecond                                      |Number            |125                                  |
 
 ### See also
 

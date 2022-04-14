@@ -26,19 +26,19 @@ Return value type is `double`.
 SELECT avg(amount) FROM transactions;
 ```
 
-| avg  |
-| ---- |
-| 22.4 |
+|avg |
+|:---|
+|22.4|
 
 ```questdb-sql title="Average transaction amount by payment_type"
 SELECT payment_type, avg(amount) FROM transactions;
 ```
 
-| cash_or_card | avg   |
-| ------------ | ----- |
-| cash         | 22.1  |
-| card         | 27.4  |
-| null         | 18.02 |
+|cash_or_card|avg  |
+|:-----------|:----|
+|cash        |22.1 |
+|card        |27.4 |
+|null        |18.02|
 
 ## count
 
@@ -60,9 +60,9 @@ Return value type is `long`.
 SELECT count() FROM transactions;
 ```
 
-| count |
-| ----- |
-| 100   |
+|count|
+|:----|
+|100  |
 
 - Count of rows in the transactions table aggregated by `payment_type` value.
 
@@ -70,11 +70,11 @@ SELECT count() FROM transactions;
 SELECT payment_type, count() FROM transactions;
 ```
 
-| cash_or_card | count |
-| ------------ | ----- |
-| cash         | 25    |
-| card         | 70    |
-| null         | 5     |
+|cash_or_card|count|
+|:-----------|:----|
+|cash        |25   |
+|card        |70   |
+|null        |5    |
 
 :::note
 
@@ -100,9 +100,9 @@ Return value type is `long`.
 SELECT count_distinct(side) FROM transactions;
 ```
 
-| count_distinct |
-| -------------- |
-| 2              |
+|count_distinct|
+|:-------------|
+|2             |
 
 - Count of distinct counterparties in the transactions table aggregated by
   `payment_type` value.
@@ -111,11 +111,11 @@ SELECT count_distinct(side) FROM transactions;
 SELECT payment_type, count_distinct(counterparty) FROM transactions;
 ```
 
-| cash_or_card | count_distinct |
-| ------------ | -------------- |
-| cash         | 3              |
-| card         | 23             |
-| null         | 5              |
+|cash_or_card|count_distinct|
+|:-----------|:-------------|
+|cash        |3             |
+|card        |23            |
+|null        |5             |
 
 :::note
 
@@ -135,11 +135,11 @@ Return value type is `string`.
 
 Given a table with the following contents:
 
-| device_id  | temperature | ts                          |
-| ---------- | ----------- | --------------------------- |
-| arduino-01 | 12          | 2021-06-02T14:33:19.970258Z |
-| arduino-02 | 10          | 2021-06-02T14:33:21.703934Z |
-| arduino-03 | 18          | 2021-06-02T14:33:23.707013Z |
+|device_id |temperature|ts                         |
+|:---------|:----------|:--------------------------|
+|arduino-01|12         |2021-06-02T14:33:19.970258Z|
+|arduino-02|10         |2021-06-02T14:33:21.703934Z|
+|arduino-03|18         |2021-06-02T14:33:23.707013Z|
 
 The following query returns the first symbol value for the `device_id` column
 which is of `SYMBOL` type:
@@ -148,9 +148,9 @@ which is of `SYMBOL` type:
 SELECT first(device_id) FROM sensors;
 ```
 
-| first      |
-| ---------- |
-| arduino-01 |
+|first     |
+|:---------|
+|arduino-01|
 
 ## haversine_dist_deg
 
@@ -197,9 +197,9 @@ SELECT ksum(a)
 FROM (SELECT rnd_double() a FROM long_sequence(100));
 ```
 
-| ksum              |
-| ----------------- |
-| 52.79143968514029 |
+|ksum             |
+|:----------------|
+|52.79143968514029|
 
 ## last
 
@@ -213,11 +213,11 @@ Return value type is `string`.
 
 Given a table with the following contents:
 
-| device_id  | temperature | ts                          |
-| ---------- | ----------- | --------------------------- |
-| arduino-01 | 12          | 2021-06-02T14:33:19.970258Z |
-| arduino-02 | 10          | 2021-06-02T14:33:21.703934Z |
-| arduino-03 | 18          | 2021-06-02T14:33:23.707013Z |
+|device_id |temperature|ts                         |
+|:---------|:----------|:--------------------------|
+|arduino-01|12         |2021-06-02T14:33:19.970258Z|
+|arduino-02|10         |2021-06-02T14:33:21.703934Z|
+|arduino-03|18         |2021-06-02T14:33:23.707013Z|
 
 The following query returns the last symbol value for the `device_id` column
 which is of `SYMBOL` type:
@@ -226,9 +226,9 @@ which is of `SYMBOL` type:
 SELECT last(device_id) FROM sensors;
 ```
 
-| last       |
-| ---------- |
-| arduino-03 |
+|last      |
+|:---------|
+|arduino-03|
 
 ## max
 
@@ -249,19 +249,19 @@ Return value type is the same as the type of the argument.
 SELECT max(amount) FROM transactions;
 ```
 
-| max  |
-| ---- |
-| 55.3 |
+|max |
+|:---|
+|55.3|
 
 ```questdb-sql title="Highest transaction amount by payment_type"
 SELECT payment_type, max(amount) FROM transactions;
 ```
 
-| cash_or_card | amount |
-| ------------ | ------ |
-| cash         | 31.5   |
-| card         | 55.3   |
-| null         | 29.2   |
+|cash_or_card|amount|
+|:-----------|:-----|
+|cash        |31.5  |
+|card        |55.3  |
+|null        |29.2  |
 
 ## min
 
@@ -282,19 +282,19 @@ Return value type is the same as the type of the argument.
 SELECT min(amount) FROM transactions;
 ```
 
-| min  |
-| ---- |
-| 12.5 |
+|min |
+|:---|
+|12.5|
 
 ```questdb-sql title="Lowest transaction amount, by payment_type"
 SELECT payment_type, min(amount) FROM transactions;
 ```
 
-| cash_or_card | min  |
-| ------------ | ---- |
-| cash         | 12.5 |
-| card         | 15.3 |
-| null         | 22.2 |
+|cash_or_card|min |
+|:-----------|:---|
+|cash        |12.5|
+|card        |15.3|
+|null        |22.2|
 
 ## nsum
 
@@ -318,9 +318,9 @@ SELECT nsum(a)
 FROM (SELECT rnd_double() a FROM long_sequence(100));
 ```
 
-| nsum             |
-| ---------------- |
-| 49.5442334742831 |
+|nsum            |
+|:---------------|
+|49.5442334742831|
 
 ## sum
 
@@ -340,18 +340,18 @@ Return value type is the same as the type of the argument.
 SELECT sum(quantity) FROM transactions;
 ```
 
-| sum |
-| --- |
-| 100 |
+|sum|
+|:--|
+|100|
 
 ```questdb-sql title="Sum all quantities in the transactions table, aggregated by item"
 SELECT item, sum(quantity) FROM transactions;
 ```
 
-| item   | count |
-| ------ | ----- |
-| apple  | 53    |
-| orange | 47    |
+|item  |count|
+|:-----|:----|
+|apple |53   |
+|orange|47   |
 
 ### Overflow
 

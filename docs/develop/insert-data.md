@@ -1,46 +1,76 @@
----
-title: Insert data
-description:
-  This page demonstrates how to insert time series data into QuestDB from
-  NodeJS, Java, Go and cURL. The examples show how to use the REST API as well
-  as the InfluxDB integration.
----
+# Insert data
 
-import CodeBlock from "@theme/CodeBlock"
-import InterpolateReleaseData from "../../src/components/InterpolateReleaseData"
-import InsertDataJava from "../../src/components/InsertDataJava"
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
 
 This page shows how to insert data into QuestDB using different programming
-languages and tools. To ingest data to a running instance, there are three main
-methods for inserting data:
+languages and tools.
 
-- [InfluxDB line](#influxdb-line-protocol) protocol (ILP) which provides
-  flexibility, ease of use, and high ingestion rates
-- [Postgres wire](#postgres-compatibility) protocol for compatibility with a
-  range of clients or fallback over ILP
-- [Rest API](#rest-api) which can be used for importing datasets from CSV
+[InfluxDB Line Protocol](#influxdb-line-protocol) is the recommended primary
+ingestion method in QuestDB and is recommended for high-performance
+applications.
 
-:::tip
+For operational (ad-hoc) data ingestion the [Web Console](#web-console) makes it
+easy to upload CSV files and insert via SQL statements. You can also perform
+these same actions via the [HTTP REST API](#http-rest-api).
 
-InfluxDB Line Protocol is the recommended primary ingestion method in QuestDB.
-To query ingested data, users should utilize the Web Console and REST API on
-port `9000` or use a Postgres wire client. Methods for querying data are
-described on the [query data documentation](/docs/develop/query-data/) page.
+Applications that intend to insert via SQL programmatically should prefer the
+[PostgreSQL wire protocol](#postgresql-wire-protocol) as it provides
+parameterized querys which avoid SQL injection issues.
 
-:::
+In summary, these are the different options:
 
-## Prerequisites
+* [Web Console](#web-console)
+  * CSV upload.
+  * SQL `INSERT` statements.
+* [InfluxDB Line Protocol](#influxdb-line-protocol)
+  * High performance.
+  * Optional automatic timestamps.
+  * Optional integrated authentication.
+  * Client libraries in various programming languages.
+* [PostgreSQL wire protocol](#postgresql-wire-protocol)
+  * SQL `INSERT` statements, including parameterized queries.
+  * Use `psql` on the command line.
+  * Interoperability with third-party tools and libraries.
+* [HTTP REST API](#http-rest-api)
+  * CSV upload.
+  * SQL `INSERT` statements.
+  * Use `curl` on the command line.
 
-This page assumes that QuestDB is running and accessible. QuestDB can be run
-using either [Docker](/docs/get-started/docker/), the
-[binaries](/docs/get-started/binaries/) or
-[Homebrew](/docs/get-started/homebrew/) for macOS users.
+## Web Console
 
-## InfluxDB line protocol
+QuestDB ships with an embedded [Web Console](/docs/develop/web-console) running
+by default on port `9000`.
 
-QuestDB implements InfluxDB line protocol which is accessible by default on TCP
-port `9009`. This allows using QuestDB as a drop-in replacement for InfluxDB and
-other systems implementing the protocol.
+```questdb-sql title='Creating a table and inserting some data'
+
+CREATE TABLE takeaway_order (ts TIMESTAMP, id SYMBOL, status SYMBOL)
+  TIMESTAMP(ts);
+
+INSERT INTO takeaway_order VALUES (now(), 'order1', 'placed');
+INSERT INTO takeaway_order VALUES (now(), 'order2', 'placed');
+```
+
+SQL statements can be written in the code editor and executed by clicking the
+**Run** button. Note that the web console runs a single statement at a time.
+You can also use the Web Console to upload CSV.
+
+## InfluxDB Line Protocol
+
+The InfluxDB Line Protocol (ILP) is a text protocol over TCP or UDP on port
+9009.
+
+It is a one-way protocol to insert data, focusing on simplicity
+and performance.
+
+Here is a summary table is how it compares with ways to insert data that we
+support:
+
+|Protocol                 |Record Insertion Reporting       |Data Insertion Performance |
+|:------------------------|:--------------------------------|:--------------------------|
+|InfluxDB Line Protocol   |Server logs; Disconnect on error | **Best**                  |
+|CSV upload via HTTP REST |Configurable                     | Very Good                 |
+|SQL `INSERT` statements  |Transaction-level                | Good                      |
 
 This interface is the preferred ingestion method as it provides the following
 benefits:
@@ -49,41 +79,290 @@ benefits:
 - robust ingestion from multiple sources into tables with dedicated systems for
   reducing congestion
 - configurable commit-lag for out-of-order data via
-  [server configuration](/docs/reference/configuration/#influxdb-line-protocol-tcp)
+  [server configuration](/docs/reference/configuration#influxdb-line-protocol-tcp)
   settings
 
-For additional details on the message format, ports and authentication can be
-found on the [InfluxDB line protocol](/docs/reference/api/ilp/overview/) page,
-and a guide on the Telegraf agent for collecting and sending metrics to QuestDB
-via this protocol can be found on the
-[Telegraf guide](/docs/third-party-tools/telegraf/).
+With sufficient client-side validation, the lack of errors to the client and
+confirmation isn't necessarily a concern: QuestDB will log out any issues
+and disconnect on error. The database will process any valid lines up to that
+point and insert rows.
 
-:::info
+On the [InfluxDB line protocol](/docs/reference/api/ilp/overview) page, you may
+find additional details on the message format, ports and authentication.
 
-- Each line protocol message must be delimited with newline `\n` characters.
+The [Telegraf guide](/docs/third-party-tools/telegraf) helps you configure a
+Telegraf agent to collect and send metrics to QuestDB via ILP.
 
-- The timestamp element of InfluxDB line protocol messages is optional and when
-  omitted, the server will automatically assign the server's system time as the
-  row's timestamp value.
+### ILP Client Libraries
 
-:::
+We have client libraries for a growing number of languages:
 
-<!-- prettier-ignore-start -->
+* **C and C++**: [https://github.com/questdb/c-questdb-client](https://github.com/questdb/c-questdb-client)
 
-<Tabs defaultValue="nodejs" values={[
+* **Java**: [https://search.maven.org/artifact/org.questdb/questdb](https://search.maven.org/artifact/org.questdb/questdb)
+
+* **C#**: [https://github.com/questdb/net-questdb-client](https://github.com/questdb/net-questdb-client)
+
+* For other languages, we have examples and a [protocol reference](/docs/reference/api/ilp/overview).
+
+### Examples
+
+These examples send a few rows of input. These use client libraries for C++, C#,
+Java and C, and raw TCP socket connections for NodeJS, Go and Python.
+
+<Tabs defaultValue="cpp" values={[
+  { label: "C++", value: "cpp" },
+  { label: "Java", value: "java" },
+  { label: "C#", value: "csharp" },
+  { label: "C", value: "c" },
   { label: "NodeJS", value: "nodejs" },
   { label: "Go", value: "go" },
-  { label: "Java", value: "java" },
-  { label: "Python", value: "python" },
+  { label: "Python", value: "python" }
 ]}>
 
 
-<!-- prettier-ignore-end -->
+<TabItem value="cpp">
+
+```cpp
+// https://github.com/questdb/c-questdb-client
+
+#include <questdb/ilp/line_sender.hpp>
+#include <iostream>
+
+using namespace questdb::ilp::literals;
+
+int main()
+{
+    try
+    {
+        questdb::ilp::line_sender sender{"localhost", 9009};
+
+        // We prepare all our table names and colum names in advance.
+        // If we're inserting multiple rows, this allows us to avoid
+        // re-validating the same strings over and over again.
+        auto table_name = "trades"_name;
+        auto name_name = "name"_name;
+        auto value_name = "value"_name;
+
+        sender
+            .table(trades_name)
+            .symbol(name_name, "test_ilp1"_utf8)
+            .column(value_name, 12.4)
+            .at_now();
+        sender
+            .table(trades_name)
+            .symbol(name_name, "test_ilp2"_utf8)
+            .column(value_name, 11.4)
+            .at_now();
+
+        sender.flush();
+
+        return 0;
+    }
+    catch (const questdb::ilp::line_sender_error& err)
+    {
+        std::cerr
+            << "Error running example: "
+            << err.what()
+            << std::endl;
+
+        return 1;
+    }
+}
+
+```
+
+</TabItem>
+
+<TabItem value="java">
+
+
+```java
+/*
+    https://search.maven.org/artifact/org.questdb/questdb
+
+    Maven:
+        <dependency>
+            <groupId>org.questdb</groupId>
+            <artifactId>questdb</artifactId>
+            <version>6.2.1</version>
+        </dependency>
+
+    Gradle:
+        compile group: 'org.questdb', name: 'questdb', version: '6.2.1'
+*/
+
+import io.questdb.cutlass.line.LineTcpSender;
+import io.questdb.network.Net;
+import io.questdb.std.Os;
+
+public class LineTCPSenderMain {
+    public static void main(String[] args) {
+        int host = Net.parseIPv4("127.0.0.1");
+        int port = 9009;
+        int bufferCapacity = 256 * 1024;
+
+        try (LineTcpSender sender = new LineTcpSender(host, port, bufferCapacity)) {
+            sender
+                    .metric("trades")
+                    .tag("name", "test_ilp1")
+                    .field("value", 12.4)
+                    .$(Os.currentTimeNanos());
+            sender
+                    .metric("trades")
+                    .tag("name", "test_ilp2")
+                    .field("value", 11.4)
+                    .$(Os.currentTimeNanos());
+
+            sender.flush();
+        }
+    }
+}
+```
+
+</TabItem>
+
+<TabItem value="csharp">
+
+```csharp
+// https://github.com/questdb/net-questdb-client
+
+using QuestDB;
+
+namespace QuestDBDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var address = IPAddress.Loopback.ToString();
+            using var sender = new LineTcpSender(address, 9009);
+
+            sender
+                .Table("trades")
+                .Symbol("name", "test_ilp1")
+                .Column("value", 12.4)
+                .AtNow();
+            sender
+                .Table("trades")
+                .Symbol("name", "test_ilp2")
+                .Column("value", 11.4)
+                .AtNow();
+            sender.flush();
+        }
+    }
+}
+
+```
+
+</TabItem>
+
+<TabItem value="c">
+
+```c
+// https://github.com/questdb/c-questdb-client
+
+#include <questdb/ilp/line_sender.h>
+#include <stdio.h>
+
+int main()
+{
+    line_sender_error* err = NULL;
+    line_sender* sender = NULL;
+
+    sender = line_sender_connect(
+        "0.0.0.0",    // bind to all outbound network interfaces
+        "localhost",  // QuestDB host
+        "9009",       // QuestDB port
+        &err);
+    if (!sender)
+        goto on_error;
+
+    // We prepare all our table names and colum names in advance.
+    // If we're inserting multiple rows, this allows us to avoid
+    // re-validating the same strings over and over again.
+    line_sender_name table_name;
+    if (!line_sender_name_init(&table_name, 6, "trades", &err))
+      goto on_error;
+
+    line_sender_name name_name;
+    if (!line_sender_name_init(&name_name, 4, "name", &err))
+        goto on_error;
+
+    line_sender_name value_name;
+    if (!line_sender_name_init(&value_name, 5, "value", &err))
+        goto on_error;
+
+
+    line_sender_utf8 test_ilp3_utf8;
+    if (!line_sender_utf8_init(&test_ilp2_utf8, 9, "test_ilp2", &err))
+        goto on_error;
+
+    // Prepare the first row.
+    if (!line_sender_table(sender, table_name, &err))
+        goto on_error;
+
+    line_sender_utf8 test_ilp1_utf8;
+    if (!line_sender_utf8_init(&test_ilp1_utf8, 9, "test_ilp1", &err))
+        goto on_error;
+
+    if (!line_sender_symbol(sender, name_name, test_ilp1_utf8, &err))
+        goto on_error;
+
+    if (!line_sender_column_f64(sender, value_name, 12.4, &err))
+        goto on_error;
+
+    if (!line_sender_at_now(sender, &err))
+        goto on_error;
+
+
+    // Prepare second row.
+    if (!line_sender_table(sender, table_name, &err))
+        goto on_error;
+
+    line_sender_utf8 test_ilp2_utf8;
+    if (!line_sender_utf8_init(&test_ilp2_utf8, 9, "test_ilp2", &err))
+        goto on_error;
+
+    if (!line_sender_symbol(sender, name_name, test_ilp2_utf8, &err))
+        goto on_error;
+
+    if (!line_sender_column_f64(sender, value_name, 11.4, &err))
+        goto on_error;
+
+    if (!line_sender_at_now(sender, &err))
+        goto on_error;
+
+
+    // Send.
+    if (!line_sender_flush(sender, &err))
+        goto on_error;
+
+    line_sender_close(sender);
+
+    return true;
+
+on_error: ;
+    size_t err_len = 0;
+    const char* err_msg = line_sender_error_msg(err, &err_len);
+    fprintf(stderr, "Error running example: %.*s\n", (int)err_len, err_msg);
+    line_sender_error_free(err);
+    if (sender)
+        line_sender_close(sender);
+    return 0;
+}
+```
+
+</TabItem>
 
 <TabItem value="nodejs">
 
 
 ```javascript
+// Raw socket connection with no validation and string quoting logic.
+// Refer to protocol description:
+// http://questdb.io/docs/reference/api/ilp/overview
+
 "use strict"
 
 const net = require("net")
@@ -138,6 +417,10 @@ run()
 
 
 ```go
+// Raw socket connection with no validation and string quoting logic.
+// Refer to protocol description:
+// http://questdb.io/docs/reference/api/ilp/overview
+
 package main
 
 import (
@@ -180,70 +463,337 @@ func checkErr(err error) {
 
 </TabItem>
 
-
-<TabItem value="java">
-
-
-<InsertDataJava />
-
-</TabItem>
-
-
 <TabItem value="python">
 
-
 ```python
+# Raw socket connection with no validation and string quoting logic.
+# Refer to protocol description:
+# http://questdb.io/docs/reference/api/ilp/overview
+
 import time
 import socket
+import sys
 
 HOST = 'localhost'
 PORT = 9009
 # For UDP, change socket.SOCK_STREAM to socket.SOCK_DGRAM
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+def send_utf8(msg):
+    sock.sendall(msg.encode())
+
 try:
-  sock.connect((HOST, PORT))
-  # Single record insert
-  sock.sendall(('trades,name=client_timestamp value=12.4 %d\n' %(time.time_ns())).encode())
-  # Omitting the timestamp allows the server to assign one
-  sock.sendall(('trades,name=server_timestamp value=12.4\n').encode())
-  # Streams of readings must be newline-delimited
-  sock.sendall(('trades,name=ilp_stream_1 value=12.4\ntrades,name=ilp_stream_2 value=11.4\n').encode())
+    sock.connect((HOST, PORT))
+    # Single record insert
+    send_utf8(f'trades,name=client_timestamp value=12.4 {time.time_ns()}\n')
+    # Omitting the timestamp allows the server to assign one
+    send_utf8('trades,name=server_timestamp value=12.4\n')
+    # Streams of readings must be newline-delimited
+    send_utf8('trades,name=ilp_stream_1 value=12.4\n' +
+              'trades,name=ilp_stream_2 value=11.4\n')
 
 except socket.error as e:
-  print("Got error: %s" % (e))
+    sys.stderr.write(f'Got error: {e}')
 
 sock.close()
 ```
 
 </TabItem>
 
-
 </Tabs>
 
+### Timestamps
 
-## Postgres compatibility
+Providing a timestamp is optional. If one isn't provided, the server will
+automatically assign the server's system time as the row's timestamp value.
 
-You can query data using the [Postgres](/docs/reference/api/postgres/) endpoint
-that QuestDB exposes. This is accessible via port `8812` by default. More
-information on the Postgres wire protocol implementation with details on
-supported features can be found on the
-[Postgres API reference](/docs/reference/api/postgres/) page.
+Timestamps are interpreted as the number of nanoseconds from 1st Jan 1970 UTC,
+unless otherwise configured. See `cairo.timestamp.locale` and
+`line.tcp.timestamp` [configuration options](/docs/reference/configuration).
 
-<!-- prettier-ignore-start -->
+### ILP Datatypes and Casts
 
-<Tabs defaultValue="nodejs" values={[
+#### Strings vs Symbols
+Strings may be recorded as either the `STRING` type or the `SYMBOL` type.
+
+Inspecting a sample ILP we can see how a space `' '` separator splits
+`SYMBOL` columns to the left from the rest of the columns.
+
+```text
+table_name,col1=symbol_val1,col2=symbol_val2 col3="string val",col4=10.5
+                                            ┬ 
+                                            ╰───────── separator
+```
+
+In this example, columns `col1` and `col2` are strings written to the database
+as `SYMBOL`s, whilst `col3` is written out as a `STRING`.
+
+`SYMBOL`s are strings with which are automatically
+[interned](https://en.wikipedia.org/wiki/String_interning) by the database on a
+per-column basis.
+You should use this type if you expect the string to be re-used over and over,
+such as is common with identifiers.
+
+For one-off strings use `STRING` columns which aren't interned.
+
+#### Casts
+
+QuestDB types are a superset of those supported by ILP.
+This means that when sending data you should be aware of the performed
+conversions.
+
+See:
+* [QuestDB Types in SQL](/docs/reference/sql/datatypes)
+* [ILP types and cast conversion tables](/docs/reference/api/ilp/columnset-types)
+
+### Constructing well-formed messages
+
+Different library implementations will perform different degrees content
+validation upfront before sending messages out. To avoid encoutering issues
+follow these guidelines.
+
+* **All strings must be UTF-8 encoded.**
+
+* **Columns should only appear once per row.**
+
+* **Symbol columns must be written out before other columns.**
+
+* **Table and column names can't have invalid characters.**
+  These should not contain `?`, `.`,`,`, `'`, `"`, `\`,
+  `/`, `:`, `(`, `)`, `+`, `-`, `*`, `%`, `~`,`' '` (space),
+  `\0` (nul terminator),
+  [ZERO WIDTH NO-BREAK SPACE](https://unicode-explorer.com/c/FEFF).
+
+* **Write timestamp column via designated API**, or at the end of the message
+  if you are using raw sockets. If you have multiple timestamp columns
+  write additional ones as column values.
+
+* **Don't change column type between rows.**
+
+* **Supply timestamps in order.** These need to be at least equal to previous
+  ones in the same table, unless using the out of order feature.
+  This is not necessary if you use the
+  [out-of-order](/docs/guides/out-of-order-commit-lag) feature.
+
+### Errors in Server Logs
+
+QuestDB will always log any ILP errors in its
+[server logs](/docs/concept/root-directory-structure#log-directory).
+
+From version 6.3, QuestDB will disconnect on the first error encountered on a
+given TCP ILP connection.
+
+Here is an example error from the server logs caused when a line attempted to
+insert a `STRING` into a `SYMBOL` column.
+
+```text
+2022-04-13T13:35:19.784654Z E i.q.c.l.t.LineTcpConnectionContext [3968] could not process line data [table=bad_ilp_example, msg=cast error for line protocol string [columnWriterIndex=0, columnType=SYMBOL], errno=0]
+2022-04-13T13:35:19.784670Z I tcp-line-server scheduling disconnect [fd=3968, reason=0]
+```
+
+### Inserting NULL values
+
+To insert a NULL value, skip the column (or symbol) for that row.
+
+For example:
+
+```text
+table1 a=10.5 1647357688714369403
+table1 b=1.25 1647357698714369403
+```
+
+Will insert as:
+
+|a     |b     |timestamp                  |
+|:-----|:-----|---------------------------|
+|10.5  |*NULL*|2022-03-15T15:21:28.714369Z|
+|*NULL*|1.25  |2022-03-15T15:21:38.714369Z|
+
+### If you don't immediately see data
+
+If you don't see your inserted data, this is usually down to one of two things:
+
+* You prepared the messages, but forgot to call `.flush()` or similar in your
+  client library, so no data was sent.
+
+* The internal timers and buffers within QuestDB did not commit the data yet.
+  For development (and development only), you may want to tweak configuration
+  settings to commit data more frequently.
+  ```ini title=server.conf
+  cairo.max.uncommitted.rows=1
+  line.tcp.maintenance.job.interval=100
+  ```
+  Refer to
+  [ILP's commit strategy](/docs/reference/api/ilp/tcp-receiver/#commit-strategy)
+  documentation for more on these configuration settings.
+
+### Authentication
+
+ILP can additionally provide authentication. This is an optional feature
+which is documented [here](/docs/reference/api/ilp/authenticate).
+
+### Third-party Library Compatibility
+
+Use our own client libraries and/or protocol documentation: Clients intended to
+work with InfluxDB will not work with QuestDB.
+
+## PostgreSQL wire protocol
+
+QuestDB also supports the same wire protocol as PostgreSQL, allowing you to
+connect and query the database with various third-party pre-existing client
+libraries and tools.
+
+You can connect to TCP port `8812` and use both `INSERT` and `SELECT` SQL
+queries.
+
+:::tip
+
+[InfluxDB Line Protocol](#influxdb-line-protocol) is the recommended primary
+ingestion method in QuestDB. SQL `INSERT` statements over the PostgreSQL offer
+feedback and error reporting, but have worse overall performance.
+
+:::
+
+Here are a few examples demonstrating SQL `INSERT` queries:
+
+<Tabs defaultValue="psql" values={[
+  { label: "psql", value: "psql" },
+  { label: "Python", value: "python" },
+  { label: "Java", value: "java" },
   { label: "NodeJS", value: "nodejs" },
   { label: "Go", value: "go" },
   { label: "Rust", value: "rust" },
-  { label: "Java", value: "java" },
-  { label: "Python", value: "python" },
 ]}>
 
-<!-- prettier-ignore-end -->
+<TabItem value="psql">
+
+Create the table:
+
+```shell
+psql -h localhost -p 8812 -U admin -d qdb \
+    -c "CREATE TABLE IF NOT EXISTS t1 (name STRING, value INT);"
+```
+
+Insert row:
+
+```shell
+psql -h localhost -p 8812 -U admin -d qdb -c "INSERT INTO t1 VALUES('a', 42)"
+```
+
+Query back:
+
+```shell
+psql -h localhost -p 8812 -U admin -d qdb -c "SELECT * FROM t1"
+```
+
+Note that you can also run `psql` from Docker without installing the client
+locally:
+```
+docker run -it --rm --network=host -e PGPASSWORD=quest \
+    postgres psql ....
+```
+
+</TabItem>
+
+<TabItem value="python">
+
+This example uses the [psycopg2](https://github.com/psycopg/psycopg2) database
+adapter, which does not support prepared statements (bind variables). This
+functionality is on the roadmap for the antecedent
+[psychopg3](https://github.com/psycopg/psycopg3/projects/1) adapter.
+
+```python
+import psycopg2 as pg
+import datetime as dt
+
+connection = None
+cursor = None
+try:
+    connection = pg.connect(
+        user='admin',
+        password='quest',
+        host='127.0.0.1',
+        port='8812',
+        database='qdb')
+    cursor = connection.cursor()
+
+    # text-only query
+    cursor.execute('''CREATE TABLE IF NOT EXISTS trades (
+        ts TIMESTAMP, date DATE, name STRING, value INT)
+        timestamp(ts);''')
+
+    # insert 10 records
+    for x in range(10):
+        now = dt.datetime.utcnow()
+        date = dt.datetime.now().date()
+        cursor.execute('''
+            INSERT INTO trades
+            VALUES (%s, %s, %s, %s);
+            ''',
+            (now, date, 'python example', x))
+
+    # commit records
+    connection.commit()
+
+    cursor.execute('SELECT * FROM trades;')
+    records = cursor.fetchall()
+    for row in records:
+        print(row)
+
+finally:
+    if cursor:
+        cursor.close()
+    if connection:
+        connection.close()
+    print('Postgres connection is closed.')
+```
+
+</TabItem>
+
+<TabItem value="java">
+
+```java
+package com.myco;
+
+import java.sql.*;
+import java.util.Properties;
+
+class App {
+  public static void main(String[] args) throws SQLException {
+    Properties properties = new Properties();
+    properties.setProperty("user", "admin");
+    properties.setProperty("password", "quest");
+    properties.setProperty("sslmode", "disable");
+
+    final Connection connection = DriverManager.getConnection(
+      "jdbc:postgresql://localhost:8812/qdb", properties);
+    connection.setAutoCommit(false);
+
+    final PreparedStatement statement = connection.prepareStatement(
+      "CREATE TABLE IF NOT EXISTS trades (" +
+      "    ts TIMESTAMP, date DATE, name STRING, value INT" +
+      ") timestamp(ts);");
+    statement.execute();
+
+    try (PreparedStatement preparedStatement = connection.prepareStatement(
+        "INSERT INTO TRADES  VALUES (?, ?, ?, ?)")) {
+      preparedStatement.setTimestamp(
+        1,
+        new Timestamp(io.questdb.std.Os.currentTimeMicros()));
+      preparedStatement.setDate(2, new Date(System.currentTimeMillis()));
+      preparedStatement.setString(3, "abc");
+      preparedStatement.setInt(4, 123);
+      preparedStatement.execute();
+    }
+    System.out.println("Done");
+    connection.close();
+  }
+}
+```
+
+</TabItem>
 
 <TabItem value="nodejs">
-
 
 This example uses the [`pg` package](https://www.npmjs.com/package/pg) which
 allows for quickly building queries using Postgres wire protocol. Details on the
@@ -271,7 +821,9 @@ const start = async () => {
   await client.connect()
 
   const createTable = await client.query(
-    "CREATE TABLE IF NOT EXISTS trades (ts TIMESTAMP, date DATE, name STRING, value INT) timestamp(ts);",
+    "CREATE TABLE IF NOT EXISTS trades (" +
+    "    ts TIMESTAMP, date DATE, name STRING, value INT" +
+    ") timestamp(ts);",
   )
   console.log(createTable)
 
@@ -309,12 +861,10 @@ start()
 
 </TabItem>
 
-
 <TabItem value="go">
 
-
 This example uses the [pgx](https://github.com/jackc/pgx) driver and toolkit for
-postgres in Go. More details on the use of this toolkit can be found on the
+PostgreSQL in Go. More details on the use of this toolkit can be found on the
 [GitHub repository for pgx](https://github.com/jackc/pgx/wiki/Getting-started-with-pgx).
 
 ```go
@@ -338,7 +888,10 @@ func main() {
   defer conn.Close(ctx)
 
   // text-based query
-  _, err := conn.Exec(ctx, "CREATE TABLE IF NOT EXISTS trades (ts TIMESTAMP, date DATE, name STRING, value INT) timestamp(ts);")
+  _, err := conn.Exec(ctx,
+    ("CREATE TABLE IF NOT EXISTS trades (" +
+     "    ts TIMESTAMP, date DATE, name STRING, value INT" +
+     ") timestamp(ts);"))
   if err != nil {
     log.Fatalln(err)
   }
@@ -357,7 +910,13 @@ func main() {
 
   for i := 0; i < 10; i++ {
     // Execute 'ps1' statement with a string and the loop iterator value
-    _, err = conn.Exec(ctx, "ps1", time.Now(), time.Now().Round(time.Millisecond), "go prepared statement", i+1)
+    _, err = conn.Exec(
+      ctx,
+      "ps1",
+      time.Now(),
+      time.Now().Round(time.Millisecond),
+      "go prepared statement",
+      i + 1)
     if err != nil {
       log.Fatalln(err)
     }
@@ -387,9 +946,7 @@ func main() {
 
 </TabItem>
 
-
 <TabItem value="rust">
-
 
 The following example shows how to use parameterized queries and prepared
 statements using the [rust-postgres](https://docs.rs/postgres/0.19.0/postgres/)
@@ -404,7 +961,10 @@ fn main() -> Result<(), Error> {
     let mut client = Client::connect("postgresql://admin:quest@localhost:8812/qdb", NoTls)?;
 
     // Basic query
-    client.batch_execute("CREATE TABLE IF NOT EXISTS trades (ts TIMESTAMP, date DATE, name STRING, value INT) timestamp(ts);")?;
+    client.batch_execute(
+      "CREATE TABLE IF NOT EXISTS trades ( \
+          ts TIMESTAMP, date DATE, name STRING, value INT \
+      ) timestamp(ts);")?;
 
     // Parameterized query
     let name: &str = "rust example";
@@ -418,7 +978,7 @@ fn main() -> Result<(), Error> {
 
     // Prepared statement
     let mut txn = client.transaction()?;
-    let statement = txn.prepare("insert into trades values ($1,$2,$3,$4)")?;
+    let statement = txn.prepare("INSERT INTO trades VALUES ($1,$2,$3,$4)")?;
     for value in 0..10 {
         let utc = Utc::now();
         let sys_time = SystemTime::now();
@@ -433,207 +993,92 @@ fn main() -> Result<(), Error> {
 
 </TabItem>
 
-
-<TabItem value="java">
-
-
-```java
-package com.myco;
-
-import java.sql.*;
-import java.util.Properties;
-
-class App {
-  public static void main(String[] args) throws SQLException {
-    Properties properties = new Properties();
-    properties.setProperty("user", "admin");
-    properties.setProperty("password", "quest");
-    properties.setProperty("sslmode", "disable");
-
-    final Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:8812/qdb", properties);
-    connection.setAutoCommit(false);
-
-    final PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS trades (ts TIMESTAMP, date DATE, name STRING, value INT) timestamp(ts);");
-    statement.execute();
-
-    try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO TRADES  VALUES (?, ?, ?, ?)")) {
-      preparedStatement.setTimestamp(1, new Timestamp(io.questdb.std.Os.currentTimeMicros()));
-      preparedStatement.setDate(2, new Date(System.currentTimeMillis()));
-      preparedStatement.setString(3, "abc");
-      preparedStatement.setInt(4, 123);
-      preparedStatement.execute();
-    }
-    System.out.println("Done");
-    connection.close();
-  }
-}
-```
-
-</TabItem>
-
-
-<!--
-
-<TabItem value="c">
-
-```c
-#include <libpq-fe.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/time.h>
-#include <string.h>
-
-void do_exit(PGconn* conn)
-{
-    PQfinish(conn);
-    exit(1);
-}
-int main()
-{
-    PGconn* conn = PQconnectdb(
-        "host=localhost user=admin password=quest port=8812 dbname=qdb");
-    if (PQstatus(conn) == CONNECTION_BAD) {
-        fprintf(stderr, "Connection to database failed: %s\n",
-            PQerrorMessage(conn));
-        do_exit(conn);
-    }
-    // Simple query
-    PGresult* res = PQexec(conn,
-        "CREATE TABLE IF NOT EXISTS trades (ts TIMESTAMP, name STRING, value INT) timestamp(ts);");
-    PQclear(res);
-
-    int i;
-    for (i = 0; i < 5; ++i) {
-        char timestamp[30];
-        char milis[7];
-        struct timeval tv;
-        time_t curtime;
-        gettimeofday(&tv, NULL);
-        strftime(timestamp, 30, "%Y-%m-%dT%H:%M:%S.", localtime(&tv.tv_sec));
-        snprintf(milis, 7, "%d", tv.tv_usec);
-        strcat(timestamp, milis);
-
-        const char* values[1] = { timestamp };
-        int lengths[1] = { strlen(timestamp) };
-        int binary[1] = { 0 };
-
-        res = PQexecParams(conn,
-            "INSERT INTO trades VALUES (to_timestamp($1, 'yyyy-MM-ddTHH:mm:ss.SSSUUU'), 'timestamp', 123);",
-            1, NULL, values, lengths, binary, 0);
-    }
-    res = PQexec(conn, "COMMIT");
-    printf("Done\n");
-    PQclear(res);
-    do_exit(conn);
-    return 0;
-}
-```
-
-```shell title="Compiling the example"
-# g++ on win
-g++ libpq_example.c -o run_example.exe -I pgsql\include -L dev\pgsql\lib -std=c++17 -lpthread -lpq
-
-# gcc on MacOS with homebrew postgres install
-gcc libpq_example.c -o run_example.c -I pgsql/include -L /usr/local/Cellar/postgresql/13.1/lib/postgresql -lpthread -lpq
-```
-
-</TabItem>
--->
-
-<TabItem value="python">
-
-
-This example uses the [psycopg2](https://github.com/psycopg/psycopg2) database
-adapter which does not support prepared statements (bind variables). This
-functionality is on the roadmap for the antecedent
-[psychopg3](https://github.com/psycopg/psycopg3/projects/1) adapter.
-
-```python
-import psycopg2 as pg
-import datetime as dt
-
-try:
-    connection = pg.connect(user="admin",
-                            password="quest",
-                            host="127.0.0.1",
-                            port="8812",
-                            database="qdb")
-    cursor = connection.cursor()
-
-    # text-only query
-    cursor.execute("CREATE TABLE IF NOT EXISTS trades (ts TIMESTAMP, date DATE, name STRING, value INT) timestamp(ts);")
-
-    # insert 10 records
-    for x in range(10):
-      now = dt.datetime.utcnow()
-      date = dt.datetime.now().date()
-      cursor.execute("""
-        INSERT INTO trades
-        VALUES (%s, %s, %s, %s);
-        """, (now, date, "python example", x))
-    # commit records
-    connection.commit()
-
-    cursor.execute("SELECT * FROM trades;")
-    records = cursor.fetchall()
-    for row in records:
-        print(row)
-
-finally:
-    if (connection):
-        cursor.close()
-        connection.close()
-        print("Postgres connection is closed")
-```
-
-</TabItem>
-
-
 </Tabs>
 
-
-## REST API
+## HTTP REST API
 
 QuestDB exposes a REST API for compatibility with a wide range of libraries and
 tools. The REST API is accessible on port `9000` and has the following
-entrypoints:
+insert-capable entrypoints:
 
-- `/imp` - import data
-- `/exec` - execute an SQL statement
+|Entrypoint                                |HTTP Method|Description                            |API Docs                                                    |
+|:-----------------------------------------|:----------|:--------------------------------------|:-----------------------------------------------------------|
+|[`/imp`](#imp-uploading-tabular-data)     |POST       |Import CSV data                        |[Reference](/docs/reference/api/rest#imp---import-data)     |
+|[`/exec?query=..`](#exec-sql-insert-query)|GET        |Run SQL Query returning JSON result set|[Reference](/docs/reference/api/rest#exec---execute-queries)|
 
-More details on the use of these entrypoints can be found on the
-[REST API reference](/docs/reference/api/rest/) page.
+For details such as content type, query parameters and more, refer to the
+[REST API](/docs/reference/api/rest) docs.
 
-### `/imp` endpoint
+### `/imp`: Uploading Tabular Data
 
-The `/imp` endpoint allows for importing a CSV file directly.
+:::tip
 
-<!-- prettier-ignore-start -->
+[InfluxDB Line Protocol](#influxdb-line-protocol) is the recommended primary
+ingestion method in QuestDB. CSV uploading offers insertion feedback and error
+reporting, but has worse overall performance.
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+See `/imp`'s [`atomicity`](/docs/reference/api/rest#url-parameters) query
+parameter to customize behavior on error.
+
+:::
+
+Let's assume you want to upload the following data via the `/imp` entrypoint:
+
+<Tabs defaultValue="csv" values={[
+  { label: "CSV", value: "csv" },
+  { label: "Table", value: "table" },
+]}>
+
+<TabItem value="csv">
+
+```csv title=data.csv
+col1,col2,col3
+a,10.5,True
+b,100,False
+c,,True
+```
+
+</TabItem>
+
+<TabItem value="table">
+
+|col1|col2  |col3   |
+|:---|:-----|:------|
+|a   |10.5  |*true* |
+|b   |100   |*false*|
+|c   |*NULL*|*true* |
+
+</TabItem>
+
+</Tabs>
+
+You can do so via the command line using `cURL` or programmatically via HTTP
+APIs in your scripts and applications.
+
+By default, the response is designed to be human-readable.
+Use the `fmt=json` query argument to obtain a response in JSON.
+You can also specify the schema explicitly.
+See the second example in Python for these features.
 
 <Tabs defaultValue="curl" values={[
   { label: "cURL", value: "curl" },
-  { label: "NodeJS", value: "nodejs" },
   { label: "Python", value: "python" },
+  { label: "NodeJS", value: "nodejs" },
   { label: "Go", value: "go" },
 ]}>
-
-<!-- prettier-ignore-end -->
 
 <TabItem value="curl">
 
 
 This example imports a CSV file with automatic schema detection.
 
-```shell title="Basic import"
-curl -F data=@data.csv http://localhost:9000/imp
+```shell title="Basic import with table name"
+curl -F data=@data.csv http://localhost:9000/imp?name=table_name
 ```
 
-This example overwrites an existing table, specifies a timestamp format and a
-designated timestamp column. For more information on the optional parameters for
-specifying timestamp formats, partitioning and renaming tables, see the
+This example overwrites an existing table and specifies a timestamp format and a
+designated timestamp column. For more information on the optional parameters to
+specify timestamp formats, partitioning and renaming tables, see the
 [REST API documentation](/docs/reference/api/rest#examples).
 
 ```bash title="Providing a user-defined schema"
@@ -644,6 +1089,77 @@ curl \
 
 </TabItem>
 
+
+<TabItem value="python">
+
+This first example shows uploading the `data.csv` file with automatic schema
+detection.
+
+```python
+import sys
+import requests
+
+csv = {'data': ('my_table', open('./data.csv', 'r'))}
+host = 'http://localhost:9000'
+
+try:
+    response = requests.post(host + '/imp', files=csv)
+    print(response.text)
+except requests.exceptions.RequestException as e:
+    print(f'Error: {e}', file=sys.stderr)
+```
+
+The second example creates a CSV buffer from Python objects and uploads them
+with a custom schema. Note UTF-8 encoding.
+
+The `fmt=json` parameter allows us to obtain a parseable response, rather than a
+tabular response designed for human consumption.
+
+```python
+import io
+import csv
+import requests
+import pprint
+import json
+
+
+def to_csv_str(table):
+    output = io.StringIO()
+    csv.writer(output, dialect='excel').writerows(table)
+    return output.getvalue().encode('utf-8')
+
+
+def main():
+    table_name = 'example_table2'
+    table = [
+        ['col1', 'col2', 'col3'],
+        ['a',    10.5,   True],
+        ['b',    100,    False],
+        ['c',    None,   True]]
+
+    table_csv = to_csv_str(table)
+    print(table_csv)
+    schema = json.dumps([
+        {'name': 'col1', 'type': 'SYMBOL'},
+        {'name': 'col2', 'type': 'DOUBLE'},
+        {'name': 'col3', 'type': 'BOOLEAN'}])
+    response = requests.post(
+        'http://localhost:9000/imp',
+        params={'fmt': 'json'},
+        files={
+            'schema': schema,
+            'data': (table_name, table_csv)}).json()
+
+    # You can parse the `status` field and `error` fields
+    # of individual columns. See Reference/API/REST docs for details.
+    pprint.pprint(response)
+
+
+if __name__ == '__main__':
+    main()
+```
+
+</TabItem>
 
 <TabItem value="nodejs">
 
@@ -681,26 +1197,6 @@ run()
 ```
 
 </TabItem>
-
-
-<TabItem value="python">
-
-
-```python
-import requests
-
-csv = {'data': ('my_table', open('./data.csv', 'r'))}
-host = 'http://localhost:9000'
-
-try:
-  response = requests.post(host + '/imp', files=csv)
-  print(response.text)
-except requests.exceptions.RequestException as e:
-  print("Error: %s" % (e))
-```
-
-</TabItem>
-
 
 <TabItem value="go">
 
@@ -763,25 +1259,30 @@ func checkErr(err error) {
 
 </TabItem>
 
-
 </Tabs>
 
+### `/exec`: SQL `INSERT` Query
 
-### `/exec` endpoint
+The `/exec` entrypoint takes a SQL query and returns results as JSON.
 
-Alternatively, the `/exec` endpoint can be used to create a table and the
-`INSERT` statement can be used to populate it with values:
+We can use this for quick SQL inserts too, but note that there's no support
+for parameterized queries that are necessary to avoid SQL injection issues.
 
-<!-- prettier-ignore-start -->
+:::tip
+
+Prefer the [PostgreSQL interface](#postgresql-wire-protocol) if you are
+generating sql programmatically.
+
+Prefer [ILP](#influxdb-line-protocol) if you need high-performance inserts.
+
+:::
 
 <Tabs defaultValue="curl" values={[
   { label: "cURL", value: "curl" },
-  { label: "NodeJS", value: "nodejs" },
   { label: "Python", value: "python" },
+  { label: "NodeJS", value: "nodejs" },
   { label: "Go", value: "go" },
 ]}>
-
-<!-- prettier-ignore-end -->
 
 <TabItem value="curl">
 
@@ -796,6 +1297,34 @@ curl -G \
 curl -G \
   --data-urlencode "query=INSERT INTO trades VALUES('abc', 123456)" \
   http://localhost:9000/exec
+```
+
+</TabItem>
+
+
+<TabItem value="python">
+
+
+```python
+import sys
+import requests
+import json
+
+host = 'http://localhost:9000'
+
+def run_query(sql_query):
+    query_params = {'query': sql_query, 'fmt' : 'json'}
+    try:
+        response = requests.get(host + '/exec', params=query_params)
+        json_response = json.loads(response.text)
+        print(json_response)
+    except requests.exceptions.RequestException as e:
+        print(f'Error: {e}', file=sys.stderr)
+
+# create table
+run_query("CREATE TABLE IF NOT EXISTS trades (name STRING, value INT)")
+# insert row
+run_query("INSERT INTO trades VALUES('abc', 123456)")
 ```
 
 </TabItem>
@@ -842,35 +1371,7 @@ async function insertData() {
   }
 }
 
-createTable()
-insertData()
-```
-
-</TabItem>
-
-
-<TabItem value="python">
-
-
-```python
-import requests
-import json
-
-host = 'http://localhost:9000'
-
-def run_query(sql_query):
-  query_params = {'query': sql_query, 'fmt' : 'json'}
-  try:
-    response = requests.get(host + '/exec', params=query_params)
-    json_response = json.loads(response.text)
-    print(json_response)
-  except requests.exceptions.RequestException as e:
-    print("Error: %s" % (e))
-
-# create table
-run_query("CREATE TABLE IF NOT EXISTS trades (name STRING, value INT)")
-# insert row
-run_query("INSERT INTO trades VALUES('abc', 123456)")
+createTable().then(insertData)
 ```
 
 </TabItem>
@@ -929,15 +1430,4 @@ func checkErr(err error) {
 
 </TabItem>
 
-
 </Tabs>
-
-
-## Web Console
-
-By default, QuestDB has an embedded Web Console running at
-http://[server-address]:9000. When running locally, this is accessible at
-[http://localhost:9000](http://localhost:9000). The Web Console can be used to
-explore table schemas, visualizing query results as tables or graphs, and
-importing datasets from CSV files. For details on these components, refer to the
-[Web Console reference](/docs/reference/web-console/) page.

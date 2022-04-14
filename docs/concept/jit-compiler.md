@@ -14,7 +14,7 @@ do so, the JIT compiler emits machine code with a single function that may also
 use SIMD (vector) instructions.
 
 For details on the implementation, motivation, and internals of this feature,
-see our [article about SQL JIT compilation](/blog/2022/01/12/jit-sql-compiler/).
+see our [article about SQL JIT compilation](/blog/2022/01/12/jit-sql-compiler).
 This post describes our storage model, how we built a JIT compiler for SQL and
 our plans for improving it in future.
 
@@ -48,10 +48,10 @@ AND (region = 'us-west-1' OR region = 'us-east-1');
 
 The JIT compiler is disabled by default due to the current beta status of this
 feature. To enable it, change the `cairo.sql.jit.mode` setting in the
-[server configuration](/docs/reference/configuration/) file from `off` to
+[server configuration](/docs/reference/configuration) file from `off` to
 `scalar`:
 
-```bash title="path/to/server.conf"
+```ini title="path/to/server.conf"
 cairo.sql.jit.mode=scalar
 ```
 

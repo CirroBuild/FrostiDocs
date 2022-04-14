@@ -12,7 +12,7 @@ complete, the SQL optimizer will start using the new index for SQL executions.
 :::info
 
 For more information about indexes please refer to the
-[INDEX documentation](/docs/concept/indexes/)
+[INDEX documentation](/docs/concept/indexes)
 
 :::
 

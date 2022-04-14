@@ -1,25 +1,28 @@
----
-title: Query data
-description:
-  This page describes how to query data from QuestDB with NodeJS, Java, Go, and
-  cURL. The examples show the Web Console, REST API, and Postgres wire protocol.
----
+# Query data
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
 
 This page describes how to query data from QuestDB using different programming
-languages and tools. To query data in a running instance, there are three main
-methods that can be used:
+languages and tools.
 
-1. [Web Console](#web-console) which provides a code editor, table schema
-   explorer and a data visualization panel
-2. [Rest API](#rest-api) which can be queried via HTTP
-3. [Postgres wire](#postgres-compatibility) protocol for compatibility with a
-   range of clients
+For ad-hoc SQL queries, including CSV download and charting use the web console.
+Applications can choose between the HTTP REST API which returns JSON or use
+the PostgreSQL wire protocol.
 
-## Prerequisites
+Here are all your options:
 
-QuestDB must be running and accessible, you can do so from
-[Docker](/docs/get-started/docker/), the [binaries](/docs/get-started/binaries/)
-or [Homebrew](/docs/get-started/homebrew/) for macOS users.
+* [Web Console](#web-console)
+  * SQL `SELECT` statements.
+  * Download query results as CSV.
+  * Chart query results.
+* [PostgreSQL wire protocol](#postgresql-wire-protocol)
+  * SQL `SELECT` statements.
+  * Use `psql` on the command line.
+  * Interoperability with third-party tools and libraries.
+* [HTTP REST API](#http-rest-api)
+  * SQL `SELECT` statements as JSON or CSV.
+  * Result paging.
 
 ## Web Console
 
@@ -27,18 +30,20 @@ QuestDB ships with an embedded Web Console running by default on port `9000`.
 
 import Screenshot from "@theme/Screenshot"
 
-<Screenshot
-  alt="Screenshot of the Web Console"
-  height={375}
-  small
-  src="/img/docs/console/overview.png"
-  width={500}
-/>
+<a href="web-console">
+    <Screenshot
+    alt="Screenshot of the Web Console"
+    height={375}
+    small
+    src="/img/docs/console/overview.png"
+    width={500}
+    />
+</a>
 
 To query data from the web console, SQL statements can be written in the code
-editor and executed by clicking **RUN**.
+editor and executed by clicking the **Run** button.
 
-```questdb-sql title="Listing tables and querying a table"
+```questdb-sql title='Listing tables and querying a table'
 SHOW TABLES;
 SELECT * FROM my_table;
 
@@ -49,163 +54,93 @@ my_table;
 Aside from the Code Editor, the Web Console includes a data visualization panel
 for viewing query results as tables or graphs and an Import tab for uploading
 datasets as CSV files. For more details on these components and general use of
-the console, see the [Web Console reference](/docs/reference/web-console/) page.
+the console, see the [Web Console](/docs/develop/web-console) page.
 
-## REST API
+## PostgreSQL wire protocol
 
-You can query data using the [REST API](/docs/reference/api/rest/), this will
-work with a very wide range of libraries and tools. The REST API is accessible
-on port `9000`.
+You can query data using the [Postgres](/docs/reference/api/postgres) endpoint
+that QuestDB exposes which is accessible by default via port `8812`.
 
-More information on the available endpoints alongside possible parameters and
-usage examples can be found on the
-[REST API reference](/docs/reference/api/rest/) page.
-
-<!-- prettier-ignore-start -->
-
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
-
-<Tabs defaultValue="curl" values={[
-  { label: "cURL", value: "curl" },
-  { label: "NodeJS", value: "nodejs" },
+<Tabs defaultValue="python" values={[
   { label: "Python", value: "python" },
+  { label: "Java", value: "java" },
+  { label: "NodeJS", value: "nodejs" },
   { label: "Go", value: "go" },
+  { label: "C#", value: "csharp" },
+  { label: "C", value: "c" },
 ]}>
-
-<!-- prettier-ignore-end -->
-
-<TabItem value="curl">
-
-
-```shell
-curl -G \
-  --data-urlencode "query=SELECT x FROM long_sequence(5);" \
-  http://localhost:9000/exec
-```
-
-</TabItem>
-
-
-<TabItem value="nodejs">
-
-
-```javascript
-const fetch = require("node-fetch")
-const qs = require("querystring")
-
-const HOST = "http://localhost:9000"
-
-async function run() {
-  try {
-    const queryData = {
-      query: "SELECT x FROM long_sequence(5);",
-    }
-
-    const response = await fetch(`${HOST}/exec?${qs.encode(queryData)}`)
-    const json = await response.json()
-
-    console.log(json)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-run()
-```
-
-</TabItem>
-
 
 <TabItem value="python">
 
 
 ```python
-import requests
-import json
+import psycopg2
 
-host = 'http://localhost:9000'
-
-sql_query = "select * from long_sequence(10)"
-
+connection = None
+cursor = None
 try:
-  response = requests.get(host + '/exec', params={'query': sql_query})
-  json_response = json.loads(response.text)
-  rows = json_response['dataset']
-  for row in rows:
-    print(row[0])
-except requests.exceptions.RequestException as e:
-  print("Error: %s" % (e))
+    connection = psycopg2.connect(
+        user='admin',
+        password='quest',
+        host='127.0.0.1',
+        port='8812',
+        database='qdb')
+    cursor = connection.cursor()
+    postgreSQL_select_Query = 'SELECT x FROM long_sequence(5);'
+    cursor.execute(postgreSQL_select_Query)
+    print('Selecting rows from test table using cursor.fetchall')
+    mobile_records = cursor.fetchall()
+
+    print("Print each row and it's columns values")
+    for row in mobile_records:
+        print("y = ", row[0], "\n")
+except (Exception, psycopg2.Error) as error:
+    print("Error while fetching data from PostgreSQL", error)
+finally:
+    if cursor:
+        cursor.close()
+    if connection:
+        connection.close()
+    print("PostgreSQL connection is closed")
 ```
 
 </TabItem>
 
 
-<TabItem value="go">
+<TabItem value="java">
 
 
-```go
-package main
+```java
+package com.myco;
 
-import (
-  "fmt"
-  "io/ioutil"
-  "log"
-  "net/http"
-  "net/url"
-)
+import java.sql.*;
+import java.util.Properties;
 
-func main() {
-  u, err := url.Parse("http://localhost:9000")
-  checkErr(err)
+public class App {
+    public static void main(String[] args) throws SQLException {
+        Properties properties = new Properties();
+        properties.setProperty("user", "admin");
+        properties.setProperty("password", "quest");
+        properties.setProperty("sslmode", "disable");
 
-  u.Path += "exec"
-  params := url.Values{}
-  params.Add("query", "SELECT x FROM long_sequence(5);")
-  u.RawQuery = params.Encode()
-  url := fmt.Sprintf("%v", u)
-
-  res, err := http.Get(url)
-  checkErr(err)
-
-  defer res.Body.Close()
-
-  body, err := ioutil.ReadAll(res.Body)
-  checkErr(err)
-
-  log.Println(string(body))
+        final Connection connection = DriverManager.getConnection(
+            "jdbc:postgresql://localhost:8812/qdb", properties);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT x FROM long_sequence(5);")) {
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    System.out.println(rs.getLong(1));
+                }
+            }
+        }
+        connection.close();
+    }
 }
 
-func checkErr(err error) {
-  if err != nil {
-    panic(err)
-  }
-}
 ```
 
 </TabItem>
 
-
-</Tabs>
-
-
-## Postgres compatibility
-
-You can query data using the [Postgres](/docs/reference/api/postgres/) endpoint
-that QuestDB exposes which is accessible by default via port `8812`.
-
-<!-- prettier-ignore-start -->
-
-<Tabs defaultValue="nodejs" values={[
-  { label: "NodeJS", value: "nodejs" },
-  { label: "Go", value: "go" },
-  { label: "Java", value: "java" },
-  { label: "C#", value: "csharp" },
-  { label: "C", value: "c" },
-  { label: "Python", value: "python" },
-]}>
-
-<!-- prettier-ignore-end -->
 
 <TabItem value="nodejs">
 
@@ -260,7 +195,9 @@ const (
 )
 
 func main() {
-  connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+  connStr := fmt.Sprintf(
+    "host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+    host, port, user, password, dbname)
   db, err := sql.Open("postgres", connStr)
   checkErr(err)
   defer db.Close()
@@ -302,10 +239,12 @@ func checkErr(err error) {
 #include <libpq-fe.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 void do_exit(PGconn *conn) {
   PQfinish(conn);
   exit(1);
 }
+
 int main() {
   PGconn *conn = PQconnectdb(
       "host=localhost user=admin password=quest port=8812 dbname=testdb");
@@ -328,39 +267,6 @@ int main() {
   PQfinish(conn);
   return 0;
 }
-```
-
-</TabItem>
-
-
-<TabItem value="java">
-
-
-```java
-package com.myco;
-
-import java.sql.*;
-import java.util.Properties;
-
-public class App {
-    public static void main(String[] args) throws SQLException {
-        Properties properties = new Properties();
-        properties.setProperty("user", "admin");
-        properties.setProperty("password", "quest");
-        properties.setProperty("sslmode", "disable");
-
-        final Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:8812/qdb", properties);
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT x FROM long_sequence(5);")) {
-            try (ResultSet rs = preparedStatement.executeQuery()) {
-                while (rs.next()) {
-                    System.out.println(rs.getLong(1));
-                }
-            }
-        }
-        connection.close();
-    }
-}
-
 ```
 
 </TabItem>
@@ -396,34 +302,218 @@ await using (var reader = await command.ExecuteReaderAsync()) {
 </TabItem>
 
 
+</Tabs>
+
+
+## HTTP REST API
+
+QuestDB exposes a REST API for compatibility with a wide range of libraries and
+tools. The REST API is accessible on port `9000` and has the following
+query-capable entrypoints:
+
+|Entrypoint                                 |HTTP Method|Description                            |API Docs                                                    |
+|:------------------------------------------|:----------|:--------------------------------------|:-----------------------------------------------------------|
+|[`/exp?query=..`](#exp-sql-query-to-csv)   |GET        |Export SQL Query as CSV                |[Reference](/docs/reference/api/rest#exp---export-data)     |
+|[`/exec?query=..`](#exec-sql-query-to-json)|GET        |Run SQL Query returning JSON result set|[Reference](/docs/reference/api/rest#exec---execute-queries)|
+
+For details such as content type, query parameters and more, refer to the
+[REST API](/docs/reference/api/rest) docs.
+
+### `/exp`: SQL Query to CSV
+
+The `/exp` entrypoint allows querying the database with a SQL select query and
+obtaining the results as CSV.
+
+For obtaining results in JSON, use `/exec` instead, documented next.
+
+<Tabs defaultValue="curl" values={[
+  { label: "cURL", value: "curl" },
+  { label: "Python", value: "python" },
+]}>
+
+<TabItem value="curl">
+
+```bash
+curl -G --data-urlencode \
+    "query=SELECT * FROM example_table2 LIMIT 3" \
+    http://localhost:9000/exp
+```
+
+```csv
+"col1","col2","col3"
+"a",10.5,true
+"b",100.0,false
+"c",,true
+```
+
+</TabItem>
+
+<TabItem value="python">
+
+```python
+import requests
+
+resp = requests.get(
+    'http://localhost:9000/exp',
+    {
+        'query': 'SELECT * FROM example_table2',
+        'limit': '3,6'   # Rows 3, 4, 5
+    })
+print(resp.text)
+```
+
+```csv
+"col1","col2","col3"
+"d",20.5,true
+"e",200.0,false
+"f",,true
+```
+
+</TabItem>
+
+</Tabs>
+
+### `/exec`: SQL Query to JSON
+
+The `/exec` entrypoint takes a SQL query and returns results as JSON.
+
+This is similar to the `/exec` entry point which returns results as CSV.
+
+### Querying Data
+
+<Tabs defaultValue="curl" values={[
+  { label: "cURL", value: "curl" },
+  { label: "Python", value: "python" },
+  { label: "NodeJS", value: "nodejs" },
+  { label: "Go", value: "go" },
+]}>
+
+<!-- prettier-ignore-end -->
+
+<TabItem value="curl">
+
+
+```shell
+curl -G \
+  --data-urlencode "query=SELECT x FROM long_sequence(5);" \
+  http://localhost:9000/exec
+```
+
+The JSON response contains the original query, a `"columns"` key with the schema
+of the results, a `"count"` number of rows and a `"dataset"` with the results.
+
+```json
+{
+    "query": "SELECT x FROM long_sequence(5);",
+    "columns": [
+        {"name": "x", "type": "LONG"}],
+    "dataset": [
+        [1],
+        [2],
+        [3],
+        [4],
+        [5]],
+    "count": 5
+}
+```
+
+</TabItem>
+
+
 <TabItem value="python">
 
 
 ```python
-import psycopg2
-try:
-    connection = psycopg2.connect(user="admin",
-                                  password="quest",
-                                  host="127.0.0.1",
-                                  port="8812",
-                                  database="qdb")
-    cursor = connection.cursor()
-    postgreSQL_select_Query = "SELECT x FROM long_sequence(5);"
-    cursor.execute(postgreSQL_select_Query)
-    print("Selecting rows from test table using cursor.fetchall")
-    mobile_records = cursor.fetchall()
+import sys
+import requests
 
-    print("Print each row and it's columns values")
-    for row in mobile_records:
-        print("y = ", row[0], "\n")
-except (Exception, psycopg2.Error) as error:
-    print("Error while fetching data from PostgreSQL", error)
-finally:
-    #closing database connection.
-    if (connection):
-        cursor.close()
-        connection.close()
-        print("PostgreSQL connection is closed")
+host = 'http://localhost:9000'
+
+sql_query = "select * from long_sequence(10)"
+
+try:
+    response = requests.get(
+        host + '/exec',
+        params={'query': sql_query}).json()
+    for row in response['dataset']:
+        print(row[0])
+except requests.exceptions.RequestException as e:
+    print(f'Error: {e}', file=sys.stderr)
+```
+
+</TabItem>
+
+
+<TabItem value="nodejs">
+
+
+```javascript
+const fetch = require("node-fetch")
+const qs = require("querystring")
+
+const HOST = "http://localhost:9000"
+
+async function run() {
+  try {
+    const queryData = {
+      query: "SELECT x FROM long_sequence(5);",
+    }
+
+    const response = await fetch(`${HOST}/exec?${qs.encode(queryData)}`)
+    const json = await response.json()
+
+    console.log(json)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+run()
+```
+
+</TabItem>
+
+
+<TabItem value="go">
+
+
+```go
+package main
+
+import (
+  "fmt"
+  "io/ioutil"
+  "log"
+  "net/http"
+  "net/url"
+)
+
+func main() {
+  u, err := url.Parse("http://localhost:9000")
+  checkErr(err)
+
+  u.Path += "exec"
+  params := url.Values{}
+  params.Add("query", "SELECT x FROM long_sequence(5);")
+  u.RawQuery = params.Encode()
+  url := fmt.Sprintf("%v", u)
+
+  res, err := http.Get(url)
+  checkErr(err)
+
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  checkErr(err)
+
+  log.Println(string(body))
+}
+
+func checkErr(err error) {
+  if err != nil {
+    panic(err)
+  }
+}
 ```
 
 </TabItem>

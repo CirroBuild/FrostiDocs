@@ -35,7 +35,7 @@ Bitcoin and other cryptocurrencies nosedived to their lowest in 2021. Given the
 volatile nature of this asset class, traders looking to navigate the market need
 fast and reliable price data from multiple exchanges. Earlier this year, I
 shared a way to
-[analyze cryptocurrency price trends in real-time](/tutorial/2021/02/18/realtime-crypto-tracker-with-kafka-and-questdb/)
+[analyze cryptocurrency price trends in real-time](/tutorial/2021/02/18/realtime-crypto-tracker-with-kafka-and-questdb)
 via Kafka and QuestDB. That project polled the Coinbase API for the latest price
 and calculated moving averages prior to sending it to a time series database for
 further analysis.
@@ -96,8 +96,8 @@ and network delays come into factor.
 
 QuestDB also recommends using the InfluxDB line protocol as the primary
 ingestion method for highest performance. In fact, QuestDB team
-[achieved write speeds of 1.43M rows/sec using an AMD Ryzen5](/blog/2021/05/10/questdb-release-6-0-tsbs-benchmark/)
-when running the [Time Series Benchmark Suite](/time-series-benchmark-suite/).
+[achieved write speeds of 1.43M rows/sec using an AMD Ryzen5](/blog/2021/05/10/questdb-release-6-0-tsbs-benchmark)
+when running the [Time Series Benchmark Suite](/time-series-benchmark-suite).
 
 InfluxDB line protocol also provides the following benefits over using the
 Postgres client (as used in the Kafka project via Kafka Connect):
@@ -197,7 +197,7 @@ main()
 ```
 
 To check if the data is committed in chronological order, I can run the
-[isOrdered](/docs/reference/function/boolean/) function in a query:
+[isOrdered](/docs/reference/function/boolean) function in a query:
 
 ```questdb-sql
 SELECT isOrdered(timestamp) is_ts_ordered FROM crypto
@@ -217,7 +217,7 @@ In a more realistic scenario, we would run different services on the cloud to
 pull data from various exchanges without intentional network delays. Once we
 figure out a pattern in terms of API response times or lags, we can optimize
 this process even further by
-[tweaking the commit lag variables](/docs/guides/out-of-order-commit-lag/) on
+[tweaking the commit lag variables](/docs/guides/out-of-order-commit-lag) on
 QuestDB.
 
 Specifying this known lag interval can reduce the compute resources QuestDB uses
@@ -240,7 +240,7 @@ For a project requiring high-throughput and performance needs, QuestDB provides
 nice features to enjoy the best of both worlds: fast ingestion via InfluxDB line
 protocol without worrying about data being out or order with full SQL support to
 analyze and act on that data. As with
-[the Kafka project](/tutorial/2021/02/18/realtime-crypto-tracker-with-kafka-and-questdb/),
+[the Kafka project](/tutorial/2021/02/18/realtime-crypto-tracker-with-kafka-and-questdb),
 feel free to connect it with your account to execute trades with the price data
 or build out more sophisticated statistical models.
 

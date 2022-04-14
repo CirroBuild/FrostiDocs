@@ -40,10 +40,10 @@ to write and run SQL queries.
 
 ### Shortcuts
 
-| Command       | Action                                                                      |
-| ------------- | --------------------------------------------------------------------------- |
-| Run query     | `f9` or `ctrl/cmd + enter`                                                  |
-| Locate cursor | `f2`, use this to focus the SQL editor on your cursor in order to locate it |
+|Command       |Action                                                                      |
+|:-------------|:---------------------------------------------------------------------------|
+|Run query     |`f9` or `ctrl/cmd + enter`                                                  |
+|Locate cursor |`f2`, use this to focus the SQL editor on your cursor in order to locate it |
 
 ### Behaviour
 
@@ -103,25 +103,25 @@ menu:
 
 Description of the fields in the import details table
 
-| Column        | Description                                                                                    |
-| ------------- | ---------------------------------------------------------------------------------------------- |
-| `File name`   | Name of the imported file. If imported from copy & paste, an automatically-generated file name |
-| `Size`        | Size of the imported file                                                                      |
-| `Total rows`  | Number of rows successfully imported                                                           |
-| `Failed rows` | Number of rows that failed to import                                                           |
-| `Header row`  | Whether the dataset has been recognized to have a header row or not                            |
-| `Status`      | Status of the import. See [import statuses](#import-statuses)                                  |
+|Column       |Description                                                                                    |
+|:------------|:----------------------------------------------------------------------------------------------|
+|`File name`  |Name of the imported file. If imported from copy & paste, an automatically-generated file name |
+|`Size`       |Size of the imported file                                                                      |
+|`Total rows` |Number of rows successfully imported                                                           |
+|`Failed rows`|Number of rows that failed to import                                                           |
+|`Header row` |Whether the dataset has been recognized to have a header row or not                            |
+|`Status`     |Status of the import. See [import statuses](#import-statuses)                                  |
 
 ### Import statuses
 
 Description of the import statuses
 
-| Status               | Description                                                                                                                                                                                      |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `importing`          | Data is currently being imported                                                                                                                                                                 |
-| `failed`             | Import failed, no data was imported                                                                                                                                                              |
-| `imported in [time]` | Import is finished. The completion time is displayed next to the status                                                                                                                          |
-| `exists`             | You are trying to import a file that already exists. To import it regardless, you can either **append** or **override**. See [importing again](#custom-import) for a more exhaustive description |
+|Status              |Description                                                                                                                                                                                     |
+|:-------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`importing`         |Data is currently being imported                                                                                                                                                                |
+|`failed`            |Import failed, no data was imported                                                                                                                                                             |
+|`imported in [time]`|Import is finished. The completion time is displayed next to the status                                                                                                                         |
+|`exists`            |You are trying to import a file that already exists. To import it regardless, you can either **append** or **override**. See [importing again](#custom-import) for a more exhaustive description|
 
 ### Amending the schema
 
@@ -146,12 +146,12 @@ column of an imported data set using the following steps:
 You can amend the import behavior with the following options. This will trigger
 to import the data again.
 
-| Option | Name                         | Description                                                        |
-| ------ | ---------------------------- | ------------------------------------------------------------------ |
-| `A`    | Append                       | Uploaded data will be appended to the end of the table             |
-| `O`    | Override                     | Uploaded data will override existing data in the table             |
-| `LEV`  | Skip lines with extra values | Skips rows that contain values that don't align with the schema    |
-| `H`    | Header row                   | Flag whether the first row should be considered to be a header row |
+|Option |Name                         |Description                                                        |
+|:------|:----------------------------|:------------------------------------------------------------------|
+|`A`    |Append                       |Uploaded data will be appended to the end of the table             |
+|`O`    |Override                     |Uploaded data will override existing data in the table             |
+|`LEV`  |Skip lines with extra values |Skips rows that contain values that don't align with the schema    |
+|`H`    |Header row                   |Flag whether the first row should be considered to be a header row |
 
 To start the import, click the following button:
 

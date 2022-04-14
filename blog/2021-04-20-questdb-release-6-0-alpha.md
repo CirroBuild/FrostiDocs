@@ -95,12 +95,12 @@ requirement for the use of this feature is that tables must have a partitioning
 strategy employed. New tables created over ILP have a partitioning strategy per
 `DAY` applied by default. For more information with SQL examples showing how to
 employ a partitioning strategy, see the
-[CREATE TABLE documentation](/docs/reference/sql/create-table/#create-table).
+[CREATE TABLE documentation](/docs/reference/sql/create-table#create-table).
 
 Additional server configuration parameters may be applied for optimizing
 out-of-order ingestion over InfluxDB Line Protocol. For more details on these
 values, see the
-[server.conf description](https://github.com/questdb/questdb/blob/ooo_cont/core/src/main/resources/io/questdb/site/conf/server.conf#L341-L350),
+[server.conf description](https://github.com/questdb/questdb/blob/7d9c76f82a94d9c872b5cb7f30b6f18b95b3e8e4/core/src/main/resources/io/questdb/site/conf/server.conf#L341-L350),
 or reach out with any questions in the meantime. A supplementary guide will
 follow soon which describes why and when to apply these settings to help with
 fine-tuning for your use case.

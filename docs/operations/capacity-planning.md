@@ -14,7 +14,7 @@ edge cases and common setup configurations.
 All the configuration settings referred to below except for OS settings are
 configured in QuestDB by either a `server.conf` configuration file or as
 environment variables. For more details on applying configuration settings in
-QuestDB, refer to the [configuration](/docs/reference/configuration/) page.
+QuestDB, refer to the [configuration](/docs/reference/configuration) page.
 
 ## Storage and filesystem
 
@@ -38,9 +38,9 @@ to enforce a data retention policy to save disk space, and for optimizations on
 the number of concurrent file reads performed by the system. For more
 information on this topic, see the following resources:
 
-- [partitions](/docs/concept/partitions/) page which provides a general overview
+- [partitions](/docs/concept/partitions) page which provides a general overview
   of this concept
-- [data retention](/docs/operations/data-retention/) guide provides further
+- [data retention](/docs/operations/data-retention) guide provides further
   details on partitioning tables with examples on how to drop partitions by time
   range
 
@@ -59,7 +59,7 @@ based on the storage space that types occupy in QuestDB.
 
 #### Symbols
 
-[Symbols](/docs/concept/symbol/) are a data type that is recommended to be used
+[Symbols](/docs/concept/symbol) are a data type that is recommended to be used
 for strings that are repeated often in a dataset. The benefit of using this data
 type is lower storage requirements than regular strings and faster performance
 on queries as symbols are internally stored as `int` values.
@@ -89,7 +89,7 @@ This example adds a `symbol` type with:
 - **index** for the symbol column with a storage block value
 
 A full description of the options used above for `symbol` types can be found in
-the [CREATE TABLE](/docs/reference/sql/create-table/#symbol) page.
+the [CREATE TABLE](/docs/reference/sql/create-table#symbol) page.
 
 #### Numbers
 
@@ -97,11 +97,11 @@ The storage space that numbers occupy can be optimized by choosing `byte`,
 `short`, and `int` data types appropriately. When values are not expected to
 exceed the limit for that particular type, savings on disk space can be made.
 
-| type  | storage per value | numeric range             |
-| ----- | ----------------- | ------------------------- |
-| byte  | 8 bits            | -128 to 127               |
-| short | 16 bits           | -32768 to 32767           |
-| int   | 32 bits           | -2147483648 to 2147483647 |
+|type |storage per value|numeric range            |
+|:----|:----------------|:------------------------|
+|byte |8 bits           |-128 to 127              |
+|short|16 bits          |-32768 to 32767          |
+|int  |32 bits          |-2147483648 to 2147483647|
 
 ## CPU configuration
 
@@ -129,7 +129,7 @@ well as affinity to pin processes to specific CPUs by ID. Shared worker threads
 service SQL execution subsystems and, in the default configuration, every other
 subsystem. Except for SQL, every other subsystem can be configured to use their
 own worker threads. More information on these settings can be found on the
-[shared worker](/docs/reference/configuration/#shared-worker) configuration
+[shared worker](/docs/reference/configuration#shared-worker) configuration
 page.
 
 QuestDB will allocate CPU resources differently depending on how many CPU cores
@@ -179,14 +179,14 @@ example, is a waste of OS resources. To changes the default value, set the
 `append.page.size` value in `server.conf` which is a rounded (ceiling) of the
 multiple of OS page sizes:
 
-```bash title="server.conf"
+```ini title="server.conf"
 cairo.sql.append.page.size=1
 ```
 
 ### InfluxDB over TCP
 
 We have
-[a documentation page](/docs/reference/api/ilp/tcp-receiver/#capacity-planning)
+[a documentation page](/docs/reference/api/ilp/tcp-receiver#capacity-planning)
 dedicated to capacity planning for ILP ingestion.
 
 ### InfluxDB over UDP
@@ -195,7 +195,7 @@ Given a single client sending data to QuestDB via InfluxDB line protocol over
 UDP, the following configuration can be applied which dedicates a thread for a
 UDP writer and specifies a CPU core by ID:
 
-```bash title="server.conf"
+```ini title="server.conf"
 line.udp.own.thread=true
 line.udp.own.thread.affinity=1
 ```
@@ -206,7 +206,7 @@ Given clients sending data to QuestDB via Postgres interface, the following
 configuration can be applied which sets a dedicated worker and pins it with
 `affinity` to a CPU by core ID:
 
-```bash title="server.conf"
+```ini title="server.conf"
 pg.worker.count=4
 pg.worker.affinity=1,2,3,4
 ```
@@ -218,7 +218,7 @@ configuration settings relating to the number of clients that may connect, the
 internal I/O capacity and connection timeout settings. These settings are
 configured in the `server.conf` file in the format:
 
-```bash
+```ini
 <protocol>.net.connection.<config>
 ```
 
@@ -230,18 +230,18 @@ Where `<protocol>` is one of:
 
 And `<config>` is one of the following settings:
 
-| key       | description                                                                                                                                                                                                                |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `limit`   | The number of simultaneous connections to the server. This value is intended to control server memory consumption.                                                                                                         |
-| `timeout` | Connection idle timeout in milliseconds. Connections are closed by the server when this timeout lapses.                                                                                                                    |
-| `hint`    | Applicable only for Windows, where TCP backlog limit is hit. For example Windows 10 allows max of 200 connection. Even if limit is set higher, without hint=true it won't be possible to connect more than 200 connection. |
-| `sndbuf`  | Maximum send buffer size on each TCP socket. If value is -1 socket send buffer remains unchanged from OS default.                                                                                                          |
-| `rcvbuf`  | Maximum receive buffer size on each TCP socket. If value is -1, the socket receive buffer remains unchanged from OS default.                                                                                               |
+|key      |description                                                                                                                                                                                                               |
+|:--------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`limit`  |The number of simultaneous connections to the server. This value is intended to control server memory consumption.                                                                                                        |
+|`timeout`|Connection idle timeout in milliseconds. Connections are closed by the server when this timeout lapses.                                                                                                                   |
+|`hint`   |Applicable only for Windows, where TCP backlog limit is hit. For example Windows 10 allows max of 200 connection. Even if limit is set higher, without hint=true it won't be possible to connect more than 200 connection.|
+|`sndbuf` |Maximum send buffer size on each TCP socket. If value is -1 socket send buffer remains unchanged from OS default.                                                                                                         |
+|`rcvbuf` |Maximum receive buffer size on each TCP socket. If value is -1, the socket receive buffer remains unchanged from OS default.                                                                                              |
 
 For example, this is configuration for Linux with relatively low number of
 concurrent connections:
 
-```bash title="server.conf InfluxDB line protocol network example configuration for moderate number of concurrent connections"
+```ini title="server.conf InfluxDB line protocol network example configuration for moderate number of concurrent connections"
 # bind to all IP addresses on port 9009
 line.tcp.net.bind.to=0.0.0.0:9009
 # maximum of 30 concurrent connection allowed
@@ -257,7 +257,7 @@ line.tcp.net.rcvbuf=4m
 Let's assume you would like to configure InfluxDB line protocol for large number
 of concurrent connection on Windows:
 
-```bash title="server.conf InfluxDB line protocol network example configuration for large number of concurrent connections on Windows"
+```ini title="server.conf InfluxDB line protocol network example configuration for large number of concurrent connections on Windows"
 # bind to specific NIC on port 9009, NIC is identified by IP address
 line.tcp.net.bind.to=10.75.26.3:9009
 # large number of concurrent connections
@@ -272,7 +272,7 @@ line.tcp.net.rcvbuf=1m
 ```
 
 For reference on the defaults of the `http` and `pg` protocols, refer to the
-[server configuration page](/docs/reference/configuration/)
+[server configuration page](/docs/reference/configuration)
 
 ## OS configuration
 
@@ -305,7 +305,7 @@ ulimit -Hn
 To increase this setting and have the configuration persistent, the limit on the
 number of concurrently open files can be changed in `/etc/sysctl.conf`:
 
-```bash title="/etc/sysctl.conf"
+```ini title="/etc/sysctl.conf"
 fs.file-max=100000
 ```
 
@@ -325,7 +325,7 @@ If the host machine has insufficient limits of map areas, this may result in out
 of memory exceptions. To increase this value and have the configuration
 persistent, mapped memory area limits can be changed in `/etc/sysctl.conf`:
 
-```bash title="/etc/sysctl.conf"
+```ini title="/etc/sysctl.conf"
 vm.max_map_count=262144
 ```
 

@@ -263,7 +263,7 @@ to Kahan compensated sum.
 We run all databases on an `c5.metal` AWS instance, which has two Intel 8275CL
 24-core CPUs and 192GB of memory. QuestDB was running on 16 threads. As we
 showed in a
-[previous article](/blog/2020/04/02/using-simd-to-aggregate-billions-of-rows-per-second/),
+[previous article](/blog/2020/04/02/using-simd-to-aggregate-billions-of-rows-per-second),
 adding more threads does not improve performance beyond a certain point.
 Clickhouse was running using all cores as per default configuration, however we
 increased the memory limit from the default value from 10GB to 40GB
@@ -272,7 +272,7 @@ increased the memory limit from the default value from 10GB to 40GB
 ### Test data
 
 We generated two test files using our
-[random generation functions](/docs/reference/function/random-value-generator/)
+[random generation functions](/docs/reference/function/random-value-generator)
 and exported the results to CSV. We then imported the CSV individually in the
 databases.
 

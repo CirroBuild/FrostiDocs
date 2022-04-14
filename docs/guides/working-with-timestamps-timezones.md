@@ -26,9 +26,9 @@ INSERT INTO my_table VALUES(1623167145123456, 12)
 my_table
 ```
 
-| ts                          | col1 |
-| --------------------------- | ---- |
-| 2021-06-08T15:45:45.123456Z | 12   |
+|ts                         |col1|
+|:--------------------------|:---|
+|2021-06-08T15:45:45.123456Z|12  |
 
 Timestamps may also inserted as strings in the following way:
 
@@ -37,10 +37,10 @@ INSERT INTO my_table VALUES('2021-06-08T16:45:45.123456Z', 13)
 my_table
 ```
 
-| ts                          | col1 |
-| --------------------------- | ---- |
-| 2021-06-08T15:45:45.123456Z | 12   |
-| 2021-06-08T16:45:45.123456Z | 13   |
+|ts                         |col1|
+|:--------------------------|:---|
+|2021-06-08T15:45:45.123456Z|12  |
+|2021-06-08T16:45:45.123456Z|13  |
 
 ## QuestDB's internal time zone database
 
@@ -53,9 +53,9 @@ from time zones.
 For this reason, a time zone may be referenced by abbreviated name, by full time
 zone name or by UTC offset:
 
-| Abbreviation | Time zone name   | UTC offset |
-| ------------ | ---------------- | ---------- |
-| EST          | America/New_York | -05:00     |
+|Abbreviation|Time zone name  |UTC offset|
+|:-----------|:---------------|:---------|
+|EST         |America/New_York|-05:00    |
 
 ### Referring to time zones
 
@@ -119,8 +119,8 @@ SELECT build()
 For convenience, QuestDB includes two functions for time zone conversions on
 timestamp values.
 
-- [to_timezone()](/docs/reference/function/date-time/#to_timezone)
-- [to_utc()](/docs/reference/function/date-time/#to_utc)
+- [to_timezone()](/docs/reference/function/date-time#to_timezone)
+- [to_utc()](/docs/reference/function/date-time#to_utc)
 
 These functions are used to convert a Unix timestamp, or a string equivalent
 cast to timestamp as follows:
@@ -129,22 +129,22 @@ cast to timestamp as follows:
 SELECT to_timezone(1623167145000000, 'Europe/Berlin')
 ```
 
-| to_timezone                 |
-| --------------------------- |
-| 2021-06-08T17:45:45.000000Z |
+|to_timezone                |
+|:--------------------------|
+|2021-06-08T17:45:45.000000Z|
 
 ```questdb-sql
 SELECT to_utc(1623167145000000, 'Europe/Berlin')
 ```
 
-| to_utc                      |
-| --------------------------- |
-| 2021-06-08T13:45:45.000000Z |
+|to_utc                     |
+|:--------------------------|
+|2021-06-08T13:45:45.000000Z|
 
 ### Using UTC offset for conversions
 
-The [to_timezone()](/docs/reference/function/date-time/#to_timezone) and
-[to_utc()](/docs/reference/function/date-time/#to_utc) functions may use UTC
+The [to_timezone()](/docs/reference/function/date-time#to_timezone) and
+[to_utc()](/docs/reference/function/date-time#to_utc) functions may use UTC
 offset for converting timestamp values. In some cases, this can be more reliable
 than string or time zone ID conversion given historic changes to time zone names
 or transitions. The following example takes a Unix timestamp in microseconds and
@@ -154,14 +154,14 @@ converts it to a time zone `+2` hours offset from UTC:
 SELECT to_timezone(1213086329000000, '+02:00')
 ```
 
-| to_timezone                 |
-| --------------------------- |
-| 2008-06-10T10:25:29.000000Z |
+|to_timezone                |
+|:--------------------------|
+|2008-06-10T10:25:29.000000Z|
 
 ```questdb-sql
 SELECT to_utc('2008-06-10T10:25:29.000000Z', '+02:00')
 ```
 
-| to_timezone                 |
-| --------------------------- |
-| 2008-06-10T08:25:29.000000Z |
+|to_timezone                |
+|:--------------------------|
+|2008-06-10T08:25:29.000000Z|

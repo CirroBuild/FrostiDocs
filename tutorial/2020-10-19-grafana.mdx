@@ -121,7 +121,7 @@ destructive to a dataset.
 To protect against this, set a dedicated QuestDB instance **read-only mode** by
 setting the property `http.security.readonly=true` in your `server.conf`.
 Details of setting this configuration can be found on QuestDB's
-[configuration page](/docs/reference/configuration/).
+[configuration page](/docs/reference/configuration).
 
 To avoid unnecessary memory usage, it is also recommended to disable SELECT query
 cache by setting the property `pg.select.cache.enabled=false` in your `server.conf`.
@@ -186,7 +186,7 @@ To graph the average trip distance above, we use the `avg()` function on the
 sampling interval. If the sampling interval is **1-hour**, we are calculating
 the average distance traveled during each 1-hour interval. You can find more
 information on QuestDB
-[aggregate functions on our documentation](/docs/reference/function/aggregation/).
+[aggregate functions on our documentation](/docs/reference/function/aggregation).
 
 There are also 2 key Grafana-specific expressions used which can be identified
 by the `$__` prefix:

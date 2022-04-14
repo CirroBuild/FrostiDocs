@@ -20,7 +20,7 @@ CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP, s STRING)
 
 Checking table metadata can be done via the `tables()` and `table_columns()`
 functions which are described in the
-[meta functions](/docs/reference/function/meta/) documentation page.
+[meta functions](/docs/reference/function/meta) documentation page.
 
 :::
 
@@ -64,7 +64,7 @@ Column names must be unique within each table and **must not** contain a period
 ## Type definition
 
 When specifying a column, a name and
-[type definition](/docs/reference/sql/datatypes/) must be provided. The `symbol`
+[type definition](/docs/reference/sql/datatypes) must be provided. The `symbol`
 type may have additional optional parameters applied.
 
 ![Flow chart showing the syntax of the different column types](/img/docs/diagrams/columnTypeDef.svg)
@@ -73,7 +73,7 @@ type may have additional optional parameters applied.
 
 Optional keywords and parameters may follow the `symbol` type which allow for
 further optimization on the handling of this type. For more information on the
-benefits of using this type, see the [symbol](/docs/concept/symbol/) overview.
+benefits of using this type, see the [symbol](/docs/concept/symbol) overview.
 
 #### Symbol capacity
 
@@ -83,7 +83,7 @@ When `distinctValueEstimate` is not explicitly specified, a default value of
 `cairo.default.symbol.capacity` is used.
 
 `distinctValueEstimate` - the value used to size data structures for
-[symbols](/docs/concept/symbol/). These data structures will resize themselves
+[symbols](/docs/concept/symbol). These data structures will resize themselves
 when necessary to allow QuestDB to function correctly. Underestimating the
 symbol value count may result in drop of performance whereas over-estimating may
 result in higher disk space and memory consumption.
@@ -134,7 +134,7 @@ CREATE TABLE test AS (SELECT cast(x as DOUBLE) x FROM long_sequence(10));
 ## Column indexes
 
 Index definitions (`indexDef`) are used to create an
-[index](/docs/concept/indexes/) for a table column. The referenced table column
+[index](/docs/concept/indexes) for a table column. The referenced table column
 must be of type `SYMBOL`.
 
 ![Flow chart showing the syntax of the index function](/img/docs/diagrams/indexDef.svg)
@@ -160,7 +160,7 @@ CREATE TABLE my_table(symb SYMBOL index capacity 128, price DOUBLE, ts TIMESTAMP
 `valueBlockSize` is an index storage parameter that specifies how many row IDs
 to store in a single storage block on disk. This value is optional and will
 default to the value of the `cairo.index.value.block.size`
-[configuration key](/docs/reference/configuration/). Fewer blocks used to store
+[configuration key](/docs/reference/configuration). Fewer blocks used to store
 row IDs achieves better performance. At the same time over-sizing
 `valueBlockSize` will result in higher than necessary disk space usage.
 
@@ -176,7 +176,7 @@ each symbol, i.e. 5,000,000 per symbol.
 
 The timestamp function allows for specifying which column (which must be of
 `timestamp` type) should be a designated timestamp for the table. For more
-information, see the [designated timestamp](/docs/concept/designated-timestamp/)
+information, see the [designated timestamp](/docs/concept/designated-timestamp)
 reference.
 
 :::caution
@@ -189,7 +189,7 @@ created.
 ## Partitioning
 
 `PARTITION BY` allows for specifying the
-[partitioning strategy](/docs/concept/partitions/) for the table. The default
+[partitioning strategy](/docs/concept/partitions) for the table. The default
 partitioning strategy is `NONE` and tables can be partitioned by one of the
 following:
 
@@ -226,7 +226,7 @@ parameters may be applied:
   | d    | days         |
 
 For more information on commit lag and the maximum uncommitted rows, see the
-guide for [out-of-order commits](/docs/guides/out-of-order-commit-lag/).
+guide for [out-of-order commits](/docs/guides/out-of-order-commit-lag).
 
 ## Examples
 
@@ -234,11 +234,11 @@ The following examples demonstrate creating tables from basic statements, and
 introduce features such as partitioning and designated timestamps. For more
 information on the concepts introduced to below, see
 
-- [designated timestamp](/docs/concept/designated-timestamp/) reference on
+- [designated timestamp](/docs/concept/designated-timestamp) reference on
   electing a timestamp column
-- [partition](/docs/concept/partitions/) documentation which describes how
+- [partition](/docs/concept/partitions) documentation which describes how
   partitions work in QuestDB
-- [symbol](/docs/concept/symbol/) reference for using the `symbol` data type
+- [symbol](/docs/concept/symbol) reference for using the `symbol` data type
 
 This example will create a table without a designated timestamp and does not
 have a partitioning strategy applied.
@@ -251,7 +251,7 @@ The same table can be created and a designated timestamp may be specified. New
 records with timestamps which are out-of-order (O3) chronologically will be
 ordered at the point of ingestion. Configuring how the system handles ingestion
 of out-of-order records is done via
-[commit lag](/docs/guides/out-of-order-commit-lag/) configuration.
+[commit lag](/docs/guides/out-of-order-commit-lag) configuration.
 
 ```questdb-sql title="Adding a designated timestamp"
 CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP, s STRING)
@@ -304,8 +304,8 @@ CREATE TABLE x AS (SELECT * FROM table WHERE false),
 ```
 
 Here we changed type of `price` (assuming it was `INT`) to `LONG` and changed
-type of `sym` to [symbol](/docs/concept/symbol/) and created an
-[index](/docs/concept/indexes/).
+type of `sym` to [symbol](/docs/concept/symbol) and created an
+[index](/docs/concept/indexes).
 
 #### Create a new table using SQL structure and data
 
@@ -341,4 +341,4 @@ PARTITION BY DAY WITH maxUncommittedRows=250000, commitLag = 240s
 
 For more information on out-of-order lag and uncommitted rows, see the
 documentation for
-[out-of-order data commits](/docs/guides/out-of-order-commit-lag/).
+[out-of-order data commits](/docs/guides/out-of-order-commit-lag).

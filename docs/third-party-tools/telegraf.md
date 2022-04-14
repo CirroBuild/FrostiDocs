@@ -19,9 +19,9 @@ visualization.
 ## Prerequisites
 
 - **QuestDB** must be running and accessible. You can do so from
-  [Docker](/docs/get-started/docker/), the
-  [binaries](/docs/get-started/binaries/), or
-  [Homebrew](/docs/get-started/homebrew/) for macOS users.
+  [Docker](/docs/get-started/docker), the
+  [binaries](/docs/get-started/binaries), or
+  [Homebrew](/docs/get-started/homebrew) for macOS users.
 
 - **Telegraf** can be installed using
   [homebrew](https://formulae.brew.sh/formula/telegraf),
@@ -81,7 +81,7 @@ the inputs in more detail:
 
 QuestDB expects influx line protocol messages over TCP on port `9009`. To change
 the default port, see the
-[InfluxDB line protocol (TCP)](/docs/reference/configuration/#influxdb-line-protocol-tcp)
+[InfluxDB line protocol (TCP)](/docs/reference/configuration#influxdb-line-protocol-tcp)
 section of the server configuration page.
 
 Create a new file named `questdb_tcp.conf` in one of the locations Telegraf can
@@ -130,13 +130,13 @@ Telegraf should report the following if configured correctly:
 By default, QuestDB listens for multicast line protocol packets over UDP on
 `232.1.2.3:9009`. To change the default ports that QuestDB is listening on, see
 the
-[InfluxDB line protocol (UDP)](/docs/reference/configuration/#influxdb-line-protocol-udp)
+[InfluxDB line protocol (UDP)](/docs/reference/configuration#influxdb-line-protocol-udp)
 section of the server configuration page.
 
 Create a new file named `questdb_udp.conf` in one of the locations Telegraf can
 load configuration files from and paste the following example:
 
-```shell title="/path/to/telegraf/config/questdb_udp.conf"
+```toml title="/path/to/telegraf/config/questdb_udp.conf"
 # Configuration for Telegraf agent
 [agent]
   ## Default data collection interval for all inputs

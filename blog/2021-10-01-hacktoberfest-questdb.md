@@ -69,7 +69,7 @@ Once you reach the
 [contribution target](https://hacktoberfest.digitalocean.com/resources/participation)
 of **4 valid pull requests**, you can claim the reward from the official
 organizer! In addition, if you successfully contribute to QuestDB projects, we
-offer extra SWAG for you through our [SWAG program](/community/)!
+offer extra SWAG for you through our [SWAG program](/community)!
 
 To make sure that your pull request is valid, please follow Hacktoberfest's
 [quality standard](https://hacktoberfest.digitalocean.com/resources/qualitystandards).

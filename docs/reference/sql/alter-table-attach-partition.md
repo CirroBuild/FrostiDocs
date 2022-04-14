@@ -75,7 +75,7 @@ db
 :::info
 
 Details of creating backups can be found on the
-[BACKUP syntax](/docs/reference/sql/backup/) reference page.
+[BACKUP syntax](/docs/reference/sql/backup) reference page.
 
 :::
 

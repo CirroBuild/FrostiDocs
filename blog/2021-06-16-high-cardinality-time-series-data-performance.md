@@ -107,7 +107,7 @@ scale_val x 3888
 ## Exploring high-cardinality in a time series database benchmark
 
 When we released QuestDB version 6.0,
-[we included benchmark results](/blog/2021/05/10/questdb-release-6-0-tsbs-benchmark/)
+[we included benchmark results](/blog/2021/05/10/questdb-release-6-0-tsbs-benchmark)
 that tested the performance of our new ingestion subsystem, but we didn't touch
 on the subject of cardinality at all. We wanted to explore this topic in more
 detail to see how QuestDB can handle different degrees of cardinality. We also

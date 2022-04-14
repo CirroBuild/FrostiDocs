@@ -183,7 +183,7 @@ the JIT compiler in future releases.
 SQL JIT compiler is a beta feature and is disabled by default. To enable it, you
 should change the `cairo.sql.jit.mode` setting in your `server.conf` file.
 
-```bash title="path/to/server.conf"
+```ini title="path/to/server.conf"
 cairo.sql.jit.mode=on
 ```
 

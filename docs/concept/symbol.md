@@ -39,9 +39,9 @@ CREATE TABLE my_table(symb SYMBOL index, price DOUBLE, ts TIMESTAMP)
 ```
 
 Additional options may be provided for greater control over indexing which is
-described on the [CREATE TABLE](/docs/reference/sql/create-table/)
+described on the [CREATE TABLE](/docs/reference/sql/create-table)
 documentation. Further details on indexes are described on the
-[index documentation](/docs/concept/indexes/).
+[index documentation](/docs/concept/indexes).
 
 ## Properties
 
@@ -51,4 +51,4 @@ documentation. Further details on indexes are described on the
 - Columns defined as `symbol` types support indexing.
 - Users may configure QuestDB to store `symbol` types in memory for improved
   query speed (see the `cairo.default.symbol.cache.flag`
-  [configuration option](/docs/reference/configuration/)).
+  [configuration option](/docs/reference/configuration)).

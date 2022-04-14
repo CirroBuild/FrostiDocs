@@ -73,7 +73,7 @@ The interface we'll be using for inserting data is ILP
 over TCP which runs on port 9009 by default. The server configuration for these
 keys looks as follows:
 
-```bash
+```ini
 ######################### LINE TCP settings ###############################
 line.tcp.enabled=true
 line.tcp.net.active.connection.limit=10
@@ -84,7 +84,7 @@ To avoid unnecessary memory usage when using Grafana, it's recommended to
 disable QuestDB's `SELECT` query cache with the following PostgreSQL property in
 QuestDB's server config:
 
-```bash
+```ini
 pg.select.cache.enabled=false
 ```
 

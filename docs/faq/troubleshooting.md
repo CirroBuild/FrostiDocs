@@ -12,33 +12,12 @@ InfluxDB line protocol (ILP) does not commit data on single lines or when the
 sender disconnects, but instead uses a number of rules to break incoming data
 into commit batches. This results in data not being visible in `SELECT` queries
 immediately after being received. Refer to
-[InfluxDB line protocol](/docs/reference/api/ilp/tcp-receiver/#commit-strategy)
+[InfluxDB line protocol](/docs/reference/api/ilp/tcp-receiver#commit-strategy)
 guide to understand these rules.
 
 ## How do I update or delete a row?
 
-`UPDATE` and `DELETE` statements will be included in the next QuestDB versions,
-but for now, they are not supported yet. There are some ways to delete rows:
-
-- In case if you want to delete all older rows, you could drop the whole
-  partition with the `ALTER TABLE DROP PARTITION`
-  [syntax](/docs/reference/sql/alter-table-drop-partition)
-- Write a copy of the table without the rows you want to delete, drop the table
-  and then rename the new table to the one you wanted.
-
-Here is an example of the second approach:
-
-```questdb-sql
-CREATE TABLE mytable_copy AS (
-    SELECT * FROM mytable WHERE column_value != 42
-) TIMESTAMP(ts) PARTITION BY DAY;
-
-DROP TABLE mytable;
-RENAME table mytable_copy TO mytable;
-```
-
-A similar approach with a table copy may be used to in order to update table
-rows.
+See our guide on [modifying data](/docs/guides/modifying-data).
 
 ## Why do I get `table busy` error messages when inserting data over PostgreSQL wire protocol?
 
@@ -64,7 +43,7 @@ io.questdb.cairo.CairoException: [24] could not open read-only [file=/root/.ques
 
 The machine may have insufficient limits for the maximum number of open files.
 Try checking the `ulimit` value on your machine. Refer to
-[capacity planning](/docs/operations/capacity-planning/#maximum-open-files) page
+[capacity planning](/docs/operations/capacity-planning#maximum-open-files) page
 for more details.
 
 ## Why do I see `errno=12` mmap messages in the server logs?
@@ -78,5 +57,13 @@ Log messages may appear like the following:
 The machine may have insufficient limits of memory map areas a process may have.
 Try checking and increasing the `vm.max_map_count` value on your machine. Refer
 to
-[capacity planning](/docs/operations/capacity-planning/#max-virtual-memory-areas-limit)
+[capacity planning](/docs/operations/capacity-planning#max-virtual-memory-areas-limit)
 page for more details.
+
+## How do I avoid duplicate rows with identical fields?
+
+We have an open
+[feature request to optionally de-duplicate rows](https://github.com/questdb/roadmap/issues/3)
+inserted with identical fields. Until then, you need to
+[modify the data](/docs/guides/modifying-data) after it's inserted and use a
+`GROUP BY` query to identify duplicates.

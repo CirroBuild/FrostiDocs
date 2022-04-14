@@ -5,9 +5,9 @@ description: Table and database metadata function reference documentation.
 ---
 
 These functions provide table information including column details and metadata
-such as [commit lag parameters](/docs/guides/out-of-order-commit-lag/). These
+such as [commit lag parameters](/docs/guides/out-of-order-commit-lag). These
 functions are particularly useful for checking if tables contain a
-[designated timestamp](/docs/concept/designated-timestamp/) column.
+[designated timestamp](/docs/concept/designated-timestamp) column.
 
 ## table_columns
 
@@ -33,7 +33,7 @@ Returns a `table` with the following columns:
   table
 
 For more details on the meaning and use of these values, see the
-[CREATE TABLE](/docs/reference/sql/create-table/) documentation.
+[CREATE TABLE](/docs/reference/sql/create-table) documentation.
 
 **Examples:**
 

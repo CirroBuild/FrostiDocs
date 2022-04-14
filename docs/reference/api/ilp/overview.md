@@ -7,8 +7,15 @@ description: InfluxDB line protocol reference documentation.
 QuestDB implements the
 [InfluxDB line protocol](https://docs.influxdata.com/influxdb/v1.8/write_protocols/line_protocol_tutorial/)
 to ingest data. QuestDB can listen for line protocol packets both over
-[TCP](/docs/reference/api/ilp/tcp-receiver/) and
-[UDP](/docs/reference/api/ilp/udp-receiver/).
+[TCP](/docs/reference/api/ilp/tcp-receiver) and
+[UDP](/docs/reference/api/ilp/udp-receiver).
+
+## Examples
+
+We provide examples in a number of programming languages.
+See our
+[ILP section](/docs/develop/insert-data#influxdb-line-protocol)
+of the "develop" docs.
 
 ## Usage
 
@@ -18,12 +25,12 @@ to ingest data. QuestDB can listen for line protocol packets both over
 table_name,symbolset columnset timestamp\n
 ```
 
-| Element      | Definition                                                                                 |
-| ------------ | ------------------------------------------------------------------------------------------ |
-| `table_name` | Name of the table where QuestDB will write data.                                           |
-| `symbolset`  | A set of `name=value` pairs separated by commas that will be parsed as symbol columns.     |
-| `columnset`  | A set of `name=value` pairs separated by commas that will be parsed as non-symbol columns. |
-| `timestamp`  | UNIX timestamp. By default in nanoseconds. Can be changed in the configuration.            |
+|Element     |Definition                                                                                |
+|:-----------|:-----------------------------------------------------------------------------------------|
+|`table_name`|Name of the table where QuestDB will write data.                                          |
+|`symbolset` |A set of `name=value` pairs separated by commas that will be parsed as symbol columns.    |
+|`columnset` |A set of `name=value` pairs separated by commas that will be parsed as non-symbol columns.|
+|`timestamp` |UNIX timestamp. By default in nanoseconds. Can be changed in the configuration.           |
 
 `name` in the `name=value` pair always corresponds to `column name` in the
 table.
@@ -36,10 +43,10 @@ table.
   create the table on the fly using the name provided. Column types will be
   automatically recognized and assigned based on the data.
 - The `timestamp` column is automatically created as
-  [designated timestamp](/docs/concept/designated-timestamp/) with the
-  [partition strategy](/docs/concept/partitions/) set to `NONE`. If you would
+  [designated timestamp](/docs/concept/designated-timestamp) with the
+  [partition strategy](/docs/concept/partitions) set to `NONE`. If you would
   like to define a partition strategy, you should
-  [CREATE](/docs/reference/sql/create-table/) the table beforehand.
+  [CREATE](/docs/reference/sql/create-table) the table beforehand.
 - When the timestamp is empty, QuestDB will use the server timestamp.
 
 ### Difference from InfluxDB
@@ -53,11 +60,11 @@ with QuestDB.
 
 Let's assume the following data:
 
-| timestamp           | city    | temperature | humidity | make      |
-| ------------------- | ------- | ----------- | -------- | --------- |
-| 1465839830100400000 | London  | 23.5        | 0.343    | Omron     |
-| 1465839830100600000 | Bristol | 23.2        | 0.443    | Honeywell |
-| 1465839830100700000 | London  | 23.6        | 0.358    | Omron     |
+|timestamp          |city   |temperature|humidity|make     |
+|:------------------|:------|:----------|:-------|:--------|
+|1465839830100400000|London |23.5       |0.343   |Omron    |
+|1465839830100600000|Bristol|23.2       |0.443   |Honeywell|
+|1465839830100700000|London |23.6       |0.358   |Omron    |
 
 The line protocol syntax for that table is:
 
@@ -69,7 +76,7 @@ readings,city=London,make=Omron temperature=23.6,humidity=0.348 1465839830100700
 
 This would create table similar to this SQL statement and populate it.
 
-```sql
+```questdb-sql
 create table readings (timestamp timestamp, city symbol, temperature double, humidity double, make symbol) timestamp(timestamp) partition by DAY;
 ```
 
@@ -89,11 +96,11 @@ readings,make=Honeywell temperature=23.2,humidity=0.443 1465839830100800000\n
 
 This would result in the following table:
 
-| timestamp           | city   | temperature | humidity | make      |
-| ------------------- | ------ | ----------- | -------- | --------- |
-| 1465839830100400000 | London | 23.5        | NULL     | NULL      |
-| 1465839830100700000 | London | 23.6        | NULL     | NULL      |
-| 1465839830100800000 | NULL   | 23.2        | 0.358    | Honeywell |
+|timestamp          |city  |temperature|humidity|make     |
+|:------------------|:-----|:----------|:-------|:--------|
+|1465839830100400000|London|23.5       |NULL    |NULL     |
+|1465839830100700000|London|23.6       |NULL    |NULL     |
+|1465839830100800000|NULL  |23.2       |0.358   |Honeywell|
 
 :::tip
 
@@ -145,7 +152,7 @@ between `symbolset` and `columnset`. Naming rules for columns are subject to
 
 ### Symbolset values
 
-`symbolset` values are always interpreted as [SYMBOL](/docs/concept/symbol/).
+`symbolset` values are always interpreted as [SYMBOL](/docs/concept/symbol).
 Parser takes values literally so please beware of accidentally using high
 cardinality types such as `9092i` or `1.245667`. This will result in a
 significant performance loss due to large mapping tables.
@@ -181,11 +188,11 @@ of new column or mapping strategy when column already exists. These types are
 limited by existing Influx Line Protocol specification. Wider QuestDB type
 system is available by creating table via SQL upfront. The following are
 supported value types:
-[Integer](/docs/reference/api/ilp/columnset-types/#integer),
-[Long256](/docs/reference/api/ilp/columnset-types/#long256),
-[Float](/docs/reference/api/ilp/columnset-types/#float),
-[String](/docs/reference/api/ilp/columnset-types/#string) and
-[Timestamp](/docs/reference/api/ilp/columnset-types/#timestamp)
+[Integer](/docs/reference/api/ilp/columnset-types#integer),
+[Long256](/docs/reference/api/ilp/columnset-types#long256),
+[Float](/docs/reference/api/ilp/columnset-types#float),
+[String](/docs/reference/api/ilp/columnset-types#string) and
+[Timestamp](/docs/reference/api/ilp/columnset-types#timestamp)
 
 ### Designated timestamp
 

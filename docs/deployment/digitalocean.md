@@ -73,7 +73,7 @@ The server configuration file is at the following location on the droplet:
 ```
 
 For details on the server properties and using this file, see the
-[server configuration documentation](/docs/reference/configuration/).
+[server configuration documentation](/docs/reference/configuration).
 
 The default ports used by QuestDB interfaces are as follows:
 
@@ -92,13 +92,13 @@ Credentials may be configured in the server configuration file:
 
 The default Postgres credentials should be changed:
 
-```conf
+```ini
 pg.user=...
 pg.password=...
 ```
 
 For details on authentication using InfluxDB line protocol, see the
-[InfluxDB line protocol authentication guide](/docs/develop/authenticate/).
+[InfluxDB line protocol authentication guide](/docs/reference/api/ilp/authenticate).
 
 ### Disabling authentication
 
@@ -106,7 +106,7 @@ If you would like to disable authentication for Postgres wire protocol or
 InfluxDB line protocol, comment out the following lines in the server
 configuration file:
 
-```bash title="/home/questdb/server.conf"
+```ini title="/home/questdb/server.conf"
 # pg.password=...
 
 # line.tcp.auth.db.path=conf/auth.txt
@@ -116,7 +116,7 @@ configuration file:
 
 Interfaces may be **disabled completely** with the following configuration:
 
-```bash title="/home/questdb/server.conf"
+```ini title="/home/questdb/server.conf"
 # disable postgres
 pg.enabled=false
 
@@ -130,7 +130,7 @@ http.enabled=false
 
 The HTTP interface may alternatively be set to **readonly**:
 
-```bash title="/home/questdb/server.conf"
+```ini title="/home/questdb/server.conf"
 # set HTTP interface to readonly
 http.security.readonly=true
 ```

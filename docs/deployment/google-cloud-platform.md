@@ -140,6 +140,6 @@ Alternatively, a request may be sent against the REST API exposed on port 9000:
 
 ```bash
 curl -G \
-  --data-urlencode "query=select * from telemetry_config" \
+  --data-urlencode "query=SELECT * FROM telemetry_config" \
   <external_ip>:9000/exec
 ```

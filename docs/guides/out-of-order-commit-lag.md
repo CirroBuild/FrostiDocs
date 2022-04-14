@@ -61,7 +61,7 @@ CSV import is complete.
 
 The following server configuration parameters are user-configurable:
 
-```bash
+```ini
 # the maximum number of uncommitted rows
 cairo.max.uncommitted.rows=X
 # the expected maximum time lag for out-of-order rows in milliseconds
@@ -86,7 +86,7 @@ The defaults for the out-of-order algorithm are optimized for real-world usage
 and should cover most patterns for timestamp arrival. The default configuration
 is as follows:
 
-```txt title="Defaults"
+```ini title="Defaults"
 cairo.commit.lag=300000
 cairo.max.uncommitted.rows=500000
 ```
@@ -102,7 +102,7 @@ should be minimized. For this reason, if throughput is low and timestamps are
 expected to be consistently delayed up to 30 seconds, the following
 configuration settings can be applied
 
-```txt title="server.conf"
+```ini title="server.conf"
 cairo.commit.lag=30000
 cairo.max.uncommitted.rows=500
 ```
@@ -112,7 +112,7 @@ uncommitted rows may be more appropriate. The following settings would assume a
 throughput of ten thousand records per second with a likely maximum of 1 second
 lateness for timestamp values:
 
-```txt title="server.conf"
+```ini title="server.conf"
 cairo.commit.lag=1000
 cairo.max.uncommitted.rows=10000
 ```
@@ -122,9 +122,9 @@ cairo.max.uncommitted.rows=10000
 ### Server-wide configuration
 
 These settings may be applied via
-[server configuration file](/docs/reference/configuration/):
+[server configuration file](/docs/reference/configuration):
 
-```txt title="server.conf"
+```ini title="server.conf"
 cairo.max.uncommitted.rows=500
 cairo.commit.lag=10000
 ```
@@ -172,13 +172,13 @@ PARTITION BY DAY WITH maxUncommittedRows=250000, commitLag=240s;
 Checking the values per-table may be done using the `tables()` function:
 
 ```questdb-sql title="List all tables"
-select id, name, maxUncommittedRows, commitLag from tables();
+SELECT id, name, maxUncommittedRows, commitLag FROM tables();
 ```
 
-| id  | name        | maxUncommittedRows | commitLag |
-| --- | ----------- | ------------------ | --------- |
-| 1   | my_table    | 250000             | 240000000 |
-| 2   | device_data | 10000              | 30000000  |
+|id |name       |maxUncommittedRows|commitLag|
+|:--|:----------|:-----------------|:--------|
+|1  |my_table   |250000            |240000000|
+|2  |device_data|10000             |30000000 |
 
 The values can changed per each table with:
 
@@ -193,9 +193,9 @@ ALTER TABLE my_table SET PARAM commitLag = 20s;
 ```
 
 For more information on setting table parameters via SQL, see the
-[SET PARAM](/docs/reference/sql/alter-table-set-param/) reference. Additional
+[SET PARAM](/docs/reference/sql/alter-table-set-param) reference. Additional
 details on checking table metadata is described in the
-[meta functions](/docs/reference/function/meta/) documentation page.
+[meta functions](/docs/reference/function/meta) documentation page.
 
 ### Out-of-order CSV import
 
@@ -213,7 +213,7 @@ curl -F data=@weather.csv \
 ### INSERT as SELECT with batch size and lag
 
 The `INSERT` keyword may be
-[passed parameters](/docs/reference/sql/insert/#parameters) for handling the
+[passed parameters](/docs/reference/sql/insert#parameters) for handling the
 expected _lag_ of out-of-order records and a _batch_ size can be specified for
 the number of rows to process and insert at once. The following query shows an
 `INSERT AS SELECT` operation with lag and batch size applied:
@@ -229,6 +229,6 @@ FROM unordered_trades
 Using the lag and batch size parameters during `INSERT AS SELECT` statements is
 a convenient strategy to load and order large datasets from CSV in bulk. This
 strategy along with an example workflow is described in the
-[importing data guide](/docs/guides/importing-data/).
+[importing data guide](/docs/guides/importing-data).
 
 :::

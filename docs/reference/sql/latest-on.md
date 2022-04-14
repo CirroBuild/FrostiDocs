@@ -9,7 +9,7 @@ description:
 For scenarios where multiple time series are stored in the same table, it is
 relatively difficult to identify the latest items of these time series with
 standard SQL syntax. QuestDB introduces `LATEST ON` clause for a
-[SELECT statement](/docs/reference/sql/select/) to remove boilerplate
+[SELECT statement](/docs/reference/sql/select) to remove boilerplate
 clutter and splice the table with relative ease.
 
 ## Syntax
@@ -26,7 +26,7 @@ where:
 
 ## Description
 
-`LATEST ON` is used as part of a [SELECT statement](/docs/reference/sql/select/)
+`LATEST ON` is used as part of a [SELECT statement](/docs/reference/sql/select)
 for returning the most recent records per unique time series identified by the
 `PARTITION BY` column values.
 
@@ -80,7 +80,7 @@ applications. There are two key requirements when using the new syntax:
 
 To use `LATEST ON`, a timestamp column used in the `LATEST ON` part needs to be
 specified as a **designated timestamp**. More information can be found in the
-[designated timestamp](/docs/concept/designated-timestamp/) page for specifying
+[designated timestamp](/docs/concept/designated-timestamp) page for specifying
 this at table creation or at query time.
 
 :::

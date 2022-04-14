@@ -19,8 +19,32 @@
   to = "/get-questdb"
 
 [[redirects]]
+  from = "/docs/reference/web-console"
+  to = "/docs/develop/web-console"
+
+[[redirects]]
+  from = "/docs/develop/authenticate"
+  to = "/docs/reference/api/ilp/authenticate"
+
+[[redirects]]
   from = "/docs/reference/client/grafana"
   to = "/docs/third-party-tools/grafana"
+
+[[redirects]]
+    from = "/docs/guides/aws-official-ami"
+    to = "/docs/deployment/aws-official-ami"
+
+[[redirects]]
+    from = "/docs/guides/digitalocean"
+    to = "/docs/deployment/digitalocean"
+
+[[redirects]]
+    from = "/docs/guides/google-cloud-platform"
+    to = "/docs/deployment/google-cloud-platform"
+
+[[redirects]]
+    from = "/docs/guides/kubernetes"
+    to = "/docs/deployment/kubernetes"
 
 [[redirects]]
   from = "/blog/2020/12/10/building-a-garbage-free-network-stack-for-kafka-streams"
@@ -117,6 +141,15 @@
 [[redirects]]
   from = "/docs/guides/influxdb-line-protocol"
   to = "/docs/reference/api/ilp/overview"
+
+# Deleted pages, redirected to closest equivalent.
+[[redirects]]
+    from = "/docs/guides/aws-packer"
+    to = "/docs/deployment/aws-official-ami"
+
+[[redirects]]
+    from = "/docs/operations/deployment"
+    to = "/docs/deployment/aws-official-ami"
 
 [[headers]]
   for = "/*"

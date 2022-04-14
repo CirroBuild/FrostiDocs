@@ -224,4 +224,4 @@ Want to try it yourself? You've read this far, you really should! got to
 
 We'd love to have you join us on our [community Slack]({@slackUrl@}) channel,
 give us a [star](https://github.com/questdb/questdb) on GitHub, and
-[download](/get-questdb/) and try it yourself!
+[download](/get-questdb) and try it yourself!

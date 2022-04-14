@@ -41,16 +41,16 @@ types of supported filesystems and what data is included in backups:
 When creating a point-in-time (PIT) backup in QuestDB, you can specify that the
 whole database or specific tables should be backed up. This process will create
 a backup in a directory specified by the user in the `cairo.sql.backup.root`
-[configuration key](/docs/reference/configuration/). For more details on passing
+[configuration key](/docs/reference/configuration). For more details on passing
 configuration in this manner, see the
-[server configuration](/docs/concept/root-directory-structure/#serverconf)
+[server configuration](/docs/concept/root-directory-structure#serverconf)
 documentation.
 
-```bash title="/path/to/server.conf"
+```ini title="/path/to/server.conf"
 cairo.sql.backup.root=/path/to/backup/dir
 ```
 
-A backup can then be triggered via [SQL command](/docs/reference/sql/backup/)
+A backup can then be triggered via [SQL command](/docs/reference/sql/backup)
 and the backup is complete as soon as the SQL query has finished executing:
 
 ```questdb-sql
@@ -64,7 +64,7 @@ Note that calling `BACKUP TABLE <table_name>` will only copy table data and
 metadata to the destination folder. This form of backup will not copy entire
 database configuration files required to perform a complete database restore.
 
-Alternatively, the [REST API](/docs/reference/api/rest/#exec---execute-queries)
+Alternatively, the [REST API](/docs/reference/api/rest#exec---execute-queries)
 can be used to execute the SQL for a database backup:
 
 ```bash title="Backing up a database via curl"
@@ -78,7 +78,7 @@ curl -G --data-urlencode "query=BACKUP database;" \
 
 To run a reliable filesystem backup without database downtime, you should use
 `SNAPSHOT PREPARE`/`SNAPSHOT COMPLETE`
-[SQL statements](/docs/reference/sql/snapshot/).
+[SQL statements](/docs/reference/sql/snapshot).
 
 :::
 
@@ -126,7 +126,7 @@ docker run \
 
 The database backup must contain database metadata files and directories (`db`,
 `config` etc.). The contents of these directories is described in more detail in
-the [root directory](/docs/concept/root-directory-structure/) documentation.
+the [root directory](/docs/concept/root-directory-structure) documentation.
 
 :::
 

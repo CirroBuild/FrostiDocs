@@ -33,7 +33,7 @@ added this functionality and how to enable it via QuestDB configuration.
 
 ## Adding InfluxDB line protocol support to QuestDB
 
-[InfluxDB line protocol](/docs/reference/api/ilp/overview/) is popular because
+[InfluxDB line protocol](/docs/reference/api/ilp/overview) is popular because
 it is a simple text based format, you simply open a socket and send data points
 line by line. Implementation is easy because encoding is trivial and there is no
 response to parse. The protocol can be used over UDP or TCP with minimal
@@ -65,7 +65,7 @@ hopefully future proof. The elliptic curve cryptographic keys have a public and
 secret component, it is possible to configure QuestDB with just the public part,
 thereby mitigating any risks of storing secret information on the server.
 Languages such as
-[JavaScript and Go](/docs/develop/insert-data/#influxdb-line-protocol) have
+[JavaScript and Go](/docs/develop/insert-data#influxdb-line-protocol) have
 standard libraries that implement ECC, the
 [JSON Web Key](https://tools.ietf.org/html/rfc7517) standard can be used to
 store and distribute the keys in a clear and ubiquitous manner.

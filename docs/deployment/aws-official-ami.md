@@ -1,6 +1,6 @@
 ---
 title: Launch the official QuestDB AMI via the AWS Marketplace
-sidebar_label: Official AWS Marketplace AMI
+sidebar_label: AWS Marketplace AMI
 description:
   This document describes how to launch the official AWS Marketplace AMI with
   QuestDB installed and how to access and secure the instance on Amazon Web
@@ -41,7 +41,7 @@ The server configuration file is at the following location on the AMI:
 ```
 
 For details on the server properties and using this file, see the
-[server configuration documentation](/docs/reference/configuration/).
+[server configuration documentation](/docs/reference/configuration).
 
 The default ports used by QuestDB interfaces are as follows:
 
@@ -61,7 +61,7 @@ Generated credentials can found in the server configuration file:
 The default Postgres username is `admin` and a password is randomly generated
 during startup:
 
-```conf
+```ini
 pg.user=admin
 pg.password=...
 ```
@@ -75,7 +75,7 @@ The credentials for InfluxDB line protocol can be found at
 ```
 
 For details on authentication using this protocol, see the
-[InfluxDB line protocol authentication guide](/docs/develop/authenticate/).
+[InfluxDB line protocol authentication guide](/docs/reference/api/ilp/authenticate).
 
 ### Disabling authentication
 
@@ -83,7 +83,7 @@ If you would like to disable authentication for Postgres wire protocol or
 InfluxDB line protocol, comment out the following lines in the server
 configuration file:
 
-```bash title="/var/lib/questdb/conf/server.conf"
+```ini title="/var/lib/questdb/conf/server.conf"
 # pg.password=...
 
 # line.tcp.auth.db.path=conf/auth.txt
@@ -93,7 +93,7 @@ configuration file:
 
 Interfaces may be **disabled completely** with the following configuration:
 
-```bash title="/var/lib/questdb/conf/server.conf"
+```ini title="/var/lib/questdb/conf/server.conf"
 # disable postgres
 pg.enabled=false
 
@@ -107,7 +107,7 @@ http.enabled=false
 
 The HTTP interface may alternatively be set to **readonly**:
 
-```bash title="/var/lib/questdb/conf/server.conf"
+```ini title="/var/lib/questdb/conf/server.conf"
 # set HTTP interface to readonly
 http.security.readonly=true
 ```

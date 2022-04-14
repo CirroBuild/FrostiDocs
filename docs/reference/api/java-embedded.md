@@ -365,12 +365,12 @@ in a region of 200ns per message.
 
 - **Step 1:** Create an instance of `LineUdpSender`.
 
-| Arguments              | Description                                                                                                                  |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `interfaceIPv4Address` | Network interface to use to send messages.                                                                                   |
-| `sendToIPv4Address`    | Destination IP address                                                                                                       |
-| `bufferCapacity`       | Send buffer capacity to batch messages. Do not configure this buffer over the MTU size                                       |
-| `ttl`                  | UDP packet TTL. Set this number appropriate to how many VLANs your messages have to traverse before reaching the destination |
+|Arguments             |Description                                                                                                                 |
+|:---------------------|:---------------------------------------------------------------------------------------------------------------------------|
+|`interfaceIPv4Address`|Network interface to use to send messages.                                                                                  |
+|`sendToIPv4Address`   |Destination IP address                                                                                                      |
+|`bufferCapacity`      |Send buffer capacity to batch messages. Do not configure this buffer over the MTU size                                      |
+|`ttl`                 |UDP packet TTL. Set this number appropriate to how many VLANs your messages have to traverse before reaching the destination|
 
 ```java title="Example"
 LineUdpSender sender = new LineUdpSender(0, Net.parseIPv4("232.1.2.3"), 9009, 110, 2);
@@ -384,12 +384,12 @@ sender.metric("table_name").tag("key","value").field("key", value).$(timestamp);
 
 where
 
-| Element                | Description                                        | Can be repeated |
-| ---------------------- | -------------------------------------------------- | --------------- |
-| `metric(tableName)`    | Specify which table the data is to be written into | no              |
-| `tag("key","value")`   | Use to add a new key-value entry as metadata       | yes             |
-| `field("key","value")` | Use to add a new key-value entry as reading        | yes             |
-| `$(timestamp)`         | Specify the timestamp for the reading              | no              |
+|Element               |Description                                       |Can be repeated|
+|:---------------------|:-------------------------------------------------|:--------------|
+|`metric(tableName)`   |Specify which table the data is to be written into|no             |
+|`tag("key","value")`  |Use to add a new key-value entry as metadata      |yes            |
+|`field("key","value")`|Use to add a new key-value entry as reading       |yes            |
+|`$(timestamp)`        |Specify the timestamp for the reading             |no             |
 
 :::tip
 

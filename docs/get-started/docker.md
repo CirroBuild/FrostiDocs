@@ -39,16 +39,16 @@ docker run -p 9000:9000 \
 
 This parameter will publish a port to the host, you can specify:
 
-- `-p 9000:9000` - [REST API](/docs/reference/api/rest/) and
-  [Web Console](/docs/reference/web-console/)
-- `-p 9009:9009` - [InfluxDB line protocol](/docs/reference/api/ilp/overview/)
-- `-p 8812:8812` - [Postgres wire protocol](/docs/reference/api/postgres/)
+- `-p 9000:9000` - [REST API](/docs/reference/api/rest) and
+  [Web Console](/docs/develop/web-console)
+- `-p 9009:9009` - [InfluxDB line protocol](/docs/reference/api/ilp/overview)
+- `-p 8812:8812` - [Postgres wire protocol](/docs/reference/api/postgres)
 - `-p 9003:9003` -
-  [Min health server](/docs/reference/configuration/#minimal-http-server)
+  [Min health server](/docs/reference/configuration#minimal-http-server)
 
 #### -v volumes
 
-The QuestDB [root_directory](/docs/concept/root-directory-structure/) will be in
+The QuestDB [root_directory](/docs/concept/root-directory-structure) will be in
 the following location:
 
 <!-- prettier-ignore-start -->
@@ -105,11 +105,11 @@ dd363939f261        questdb/questdb     "/app/bin/java -m io…"   3 seconds ago
 Now that QuestDB is running, you can start interacting with it:
 
 - If you published the port `9000`, you can follow our
-  [REST](/docs/reference/api/rest/) page
+  [REST](/docs/reference/api/rest) page
 - If you published the port `8812`, follow our
-  [Postgres](/docs/reference/api/postgres/) page
+  [Postgres](/docs/reference/api/postgres) page
 - If you published the port `9009`, follow our
-  [InfluxDB](/docs/reference/api/ilp/overview/) page
+  [InfluxDB](/docs/reference/api/ilp/overview) page
 
 ## Data persistence
 
@@ -139,7 +139,7 @@ migration or backups:
 ```
 
 For details on passing QuestDB server settings to a Docker container, see the
-[Docker section](/docs/reference/configuration/#docker) of the server
+[Docker section](/docs/reference/configuration#docker) of the server
 configuration documentation.
 
 ### Writing logs to disk
@@ -202,7 +202,7 @@ provided in the `conf/log.conf` file, in this case in `./questdb-docker.log`:
 ```
 
 For more information on logging, see the
-[configuration reference documentation](/docs/reference/configuration/#logging).
+[configuration reference documentation](/docs/reference/configuration#logging).
 
 ### Restart an existing container
 

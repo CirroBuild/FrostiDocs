@@ -79,7 +79,7 @@ import Screenshot from "@theme/Screenshot"
 />
 
 For more information on configuring QuestDB and Prometheus to graph QuestDB
-metrics, see the [Prometheus documentation](/docs/third-party-tools/prometheus/)
+metrics, see the [Prometheus documentation](/docs/third-party-tools/prometheus)
 for examples and hints for setup and configuration.
 
 ## Prometheus Alertmanager
@@ -89,12 +89,12 @@ Prometheus
 [Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/). To
 configure this writer, add it to the `writers` config alongside other log
 writers. Details on logging configuration can be found on the
-[server configuration documentation](/docs/reference/configuration/#configuration-file).
+[server configuration documentation](/docs/reference/configuration#configuration-file).
 
 Configuring that QuestDB should send alerts to Alertmanager alerting is done in
 QuestDB's log config with the address and port for Alertmanager:
 
-```bash title="./conf/log.conf"
+```ini title="./conf/log.conf"
 # Which writers to enable
 writers=stdout,alert
 
@@ -105,7 +105,7 @@ w.alert.alertTargets=172.17.0.2:9093
 ```
 
 For details on configuring QuestDB to send alerts to Alertmanager, see the
-[Prometheus documentation](/docs/third-party-tools/prometheus/) for examples and
+[Prometheus documentation](/docs/third-party-tools/prometheus) for examples and
 guides for setup and configuration.
 
 ## SQL syntax for bulk inserts
@@ -133,9 +133,9 @@ Users can now define automatic timeouts for SQL queries via server
 configuration. This is set using the `query.timeout.sec` server configuration
 and is a global timeout in seconds used for long-running queries. For more
 information on setting this parameter, see the
-[server configuration documentation](/docs/reference/configuration/).
+[server configuration documentation](/docs/reference/configuration).
 
-```bash title="/path/to/server.conf"
+```ini title="/path/to/server.conf"
 # Default is 60 sec
 query.timeout.sec=10
 ```

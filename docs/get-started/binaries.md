@@ -12,11 +12,11 @@ import InterpolateReleaseData from "../../src/components/InterpolateReleaseData"
 This page describes how to install and use QuestDB via binaries. QuestDB comes
 with a script `questdb.sh` for Linux/FreeBSD and an executable `questdb.exe` for
 Windows. If you are looking for macOS, please check our
-[Homebrew](/docs/get-started/homebrew/) section.
+[Homebrew](/docs/get-started/homebrew) section.
 
 ## Download
 
-You can find the latest binaries on the [Get QuestDB](/get-questdb/) page. The
+You can find the latest binaries on the [Get QuestDB](/get-questdb) page. The
 release notes are on our [GitHub release]({@githubUrl@}/releases) page.
 
 ## Prerequisites
@@ -218,5 +218,5 @@ runtime is packaged directly with QuestDB.
 ## Next steps
 
 Once you extracted the tarball, you are ready to use QuestDB. Navigate to our
-[command-line options](/docs/reference/command-line-options/) page to learn more
+[command-line options](/docs/reference/command-line-options) page to learn more
 about its usage.

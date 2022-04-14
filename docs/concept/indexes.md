@@ -10,19 +10,19 @@ An index stores the row locations for each value of the target column in order
 to provide faster read access. It allows you to bypass full table scans by
 directly accessing the relevant rows during queries with `WHERE` conditions.
 
-Indexing is available for [symbol](/docs/concept/symbol/) columns. Index support
+Indexing is available for [symbol](/docs/concept/symbol) columns. Index support
 for other types will be added over time.
 
 There are two ways to create an index:
 
 - At table creation time using
-  [CREATE TABLE](/docs/reference/sql/create-table/#index)
-- Using [ALTER TABLE](/docs/reference/sql/alter-table-alter-column-add-index/)
+  [CREATE TABLE](/docs/reference/sql/create-table#index)
+- Using [ALTER TABLE](/docs/reference/sql/alter-table-alter-column-add-index)
 
 ## How indexes work
 
 Index creates a table of row locations for each distinct value for the target
-[symbol](/docs/concept/symbol/). Once the index is created, inserting data into
+[symbol](/docs/concept/symbol). Once the index is created, inserting data into
 the table will update the index. Lookups on indexed values will be performed in
 the index table directly which will provide the memory locations of the items,
 thus avoiding unnecessary table scans.

@@ -55,7 +55,7 @@ look at Ethereum, Cardano, and Solana datasets.
 
 Although Google Data Studio can connect to any publicly-accessible PostgreSQL
 endpoint, I’ll be using Google Cloud since I’ve written about running
-[QuestDB on GKE Autopilot](/tutorial/2021/03/18/questdb-and-prometheus-on-gke-autopilot/)
+[QuestDB on GKE Autopilot](/tutorial/2021/03/18/questdb-and-prometheus-on-gke-autopilot)
 before. In your Google Cloud account:
 
 - Navigate to
@@ -83,7 +83,7 @@ $ gcloud container clusters \
 
 ## Running QuestDB on GKE using Helm
 
-QuestDB provides an [official Helm chart](/docs/guides/kubernetes/) that deploys
+QuestDB provides an [official Helm chart](/docs/deployment/kubernetes) that deploys
 a single `StatefulSet` pod with 50Gi PVC by default. To make the PostgreSQL wire
 endpoint accessible by Google Data Studio, we need to modify the service type
 and set the expose field to `true`. Create a new `values.yaml` file with the

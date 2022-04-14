@@ -31,7 +31,7 @@ brew install questdb
 ```
 
 On macOS, the root directory of QuestDB including
-[server configuration](/docs/reference/configuration/) files are located in the
+[server configuration](/docs/reference/configuration) files are located in the
 following directory:
 
 ```bash
@@ -70,5 +70,5 @@ brew doctor
 ## Next steps
 
 Once you installed the QuestDB with Homebrew, you can navigate to our
-[command-line options](/docs/reference/command-line-options/) page to learn more
+[command-line options](/docs/reference/command-line-options) page to learn more
 about its usage.

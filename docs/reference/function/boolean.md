@@ -24,11 +24,11 @@ Return value type is `boolean`.
 
 Given a table with the following contents:
 
-| numeric_sequence | ts                          |
-| ---------------- | --------------------------- |
-| 1                | 2021-05-01T11:00:00.000000Z |
-| 2                | 2021-05-01T12:00:00.000000Z |
-| 3                | 2021-05-01T13:00:00.000000Z |
+|numeric_sequence|ts                         |
+|:---------------|:--------------------------|
+|1               |2021-05-01T11:00:00.000000Z|
+|2               |2021-05-01T12:00:00.000000Z|
+|3               |2021-05-01T13:00:00.000000Z|
 
 ```questdb-sql
 SELECT isOrdered(numeric_sequence) is_num_ordered,
@@ -36,23 +36,23 @@ SELECT isOrdered(numeric_sequence) is_num_ordered,
 FROM my_table
 ```
 
-| is_num_ordered | is_ts_ordered |
-| -------------- | ------------- |
-| true           | true          |
+|is_num_ordered|is_ts_ordered|
+|:-------------|:------------|
+|true          |true         |
 
 Adding an integer and timestamp rows out-of-order
 
-| numeric_sequence | ts                          |
-| ---------------- | --------------------------- |
-| 1                | 2021-05-01T11:00:00.000000Z |
-| 2                | 2021-05-01T12:00:00.000000Z |
-| 3                | 2021-05-01T13:00:00.000000Z |
-| 2                | 2021-05-01T12:00:00.000000Z |
+|numeric_sequence|ts                         |
+|:---------------|:--------------------------|
+|1               |2021-05-01T11:00:00.000000Z|
+|2               |2021-05-01T12:00:00.000000Z|
+|3               |2021-05-01T13:00:00.000000Z|
+|2               |2021-05-01T12:00:00.000000Z|
 
 ```questdb-sql
 SELECT isOrdered(numeric_sequence) FROM my_table
 ```
 
-| is_num_ordered | is_ts_ordered |
-| -------------- | ------------- |
-| false          | false         |
+|is_num_ordered|is_ts_ordered|
+|:-------------|:------------|
+|false         |false        |

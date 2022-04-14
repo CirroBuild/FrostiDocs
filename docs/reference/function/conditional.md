@@ -31,11 +31,11 @@ The returned value is the first non-null argument passed.
 
 Given a table with the following records:
 
-| timestamp                   | amount |
-| --------------------------- | ------ |
-| 2021-02-11T09:39:16.332822Z | 1      |
-| 2021-02-11T09:39:16.333481Z | null   |
-| 2021-02-11T09:39:16.333511Z | 3      |
+|timestamp                  |amount|
+|:--------------------------|:-----|
+|2021-02-11T09:39:16.332822Z|1     |
+|2021-02-11T09:39:16.333481Z|null  |
+|2021-02-11T09:39:16.333511Z|3     |
 
 The following example demonstrates how to use `coalesce()` to return a default
 value of `0` for an expression if the `amount` column contains `null` values.
@@ -46,11 +46,11 @@ SELECT timestamp,
 FROM transactions
 ```
 
-| timestamp                   | amount_not_null |
-| --------------------------- | --------------- |
-| 2021-02-11T09:39:16.332822Z | 1               |
-| 2021-02-11T09:39:16.333481Z | 0               |
-| 2021-02-11T09:39:16.333511Z | 3               |
+|timestamp                  |amount_not_null|
+|:--------------------------|:--------------|
+|2021-02-11T09:39:16.332822Z|1              |
+|2021-02-11T09:39:16.333481Z|0              |
+|2021-02-11T09:39:16.333511Z|3              |
 
 ## nullif
 
@@ -74,11 +74,11 @@ The returned value is either `NULL`, or the first argument passed.
 
 Given a table with the following records:
 
-| timestamp                   | amount |
-| --------------------------- | ------ |
-| 2021-02-11T09:39:16.332822Z | 0      |
-| 2021-02-11T09:39:16.333481Z | 11     |
-| 2021-02-11T09:39:16.333511Z | 3      |
+|timestamp                  |amount|
+|:--------------------------|:-----|
+|2021-02-11T09:39:16.332822Z|0     |
+|2021-02-11T09:39:16.333481Z|11    |
+|2021-02-11T09:39:16.333511Z|3     |
 
 The following example demonstrates how to use `nullif()` to return a `null` if
 the `amount` column contains `0` values.
@@ -89,8 +89,8 @@ SELECT timestamp,
 FROM transactions
 ```
 
-| timestamp                   | amount_null_if_zero |
-| --------------------------- | ------------------- |
-| 2021-02-11T09:39:16.332822Z | null                |
-| 2021-02-11T09:39:16.333481Z | 11                  |
-| 2021-02-11T09:39:16.333511Z | 3                   |
+|timestamp                  |amount_null_if_zero|
+|:--------------------------|:------------------|
+|2021-02-11T09:39:16.332822Z|null               |
+|2021-02-11T09:39:16.333481Z|11                 |
+|2021-02-11T09:39:16.333511Z|3                  |

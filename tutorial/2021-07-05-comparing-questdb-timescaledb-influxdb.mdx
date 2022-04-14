@@ -320,7 +320,7 @@ requirements without sacrificing performance. QuestDB (YC S20) is an open-source
 TSDB written in Java and C++ that now ranks in the top 15
 [although it launched less than a year ago](https://news.ycombinator.com/item?id=23975807).
 Underneath the hood,
-[QuestDB utilizes memory-mapped files](/docs/concept/storage-model/) to support
+[QuestDB utilizes memory-mapped files](/docs/concept/storage-model) to support
 fast read and writes before data is committed to disk.
 
 <Screenshot
@@ -346,7 +346,7 @@ focused on three things:
   domain-specific language like Flux.
 
 In terms of performance, QuestDB
-[recently posted a blog post showing benchmark results](/blog/2021/05/10/questdb-release-6-0-tsbs-benchmark/)
+[recently posted a blog post showing benchmark results](/blog/2021/05/10/questdb-release-6-0-tsbs-benchmark)
 that achieved write speeds up to 1.4 million rows per second. QuestDB team used
 the TSBS benchmark with the `cpu-only` use case using up to 14 works on
 `m5.8xlarge` instance on AWS (**NOTE:** the 1.4 million number is from using AMD

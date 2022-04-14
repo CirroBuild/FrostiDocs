@@ -72,7 +72,7 @@ import Screenshot from "@theme/Screenshot"
 The SQL JIT compiler is a beta feature and is disabled by default. To enable it,
 you should change the `cairo.sql.jit.mode` setting in your `server.conf` file.
 
-```bash title="path/to/server.conf"
+```ini title="path/to/server.conf"
 cairo.sql.jit.mode=on
 ```
 
@@ -108,7 +108,7 @@ This syntax makes the LATEST BY clause consistent with the query execution order
 since LATEST BY now must follow the WHERE clause. Release 6.2 also includes a
 number of fixes to make sure that the WHERE always gets applied before the
 LATEST BY. For more details on the new syntax, see the
-[LATEST BY documentation](/docs/reference/sql/latest-on/).
+[LATEST BY documentation](/docs/reference/sql/latest-on).
 
 ## Optimize LIMIT SQL queries
 
@@ -139,9 +139,9 @@ available to SQL queries after 30 seconds, if the volume of data is small. This
 was an inconvenient default in a local development environment. From now on, the
 default timeout for ILP commit is set to 1 second. For more information on
 setting this parameter, see the
-[server configuration documentation](/docs/reference/configuration/).
+[server configuration documentation](/docs/reference/configuration).
 
-```bash title="/path/to/server.conf"
+```ini title="/path/to/server.conf"
 # Default is 1 sec
 line.tcp.commit.timeout=1000
 ```
@@ -158,7 +158,7 @@ statements when sending the queries and the built-in QuestDB's query cache
 becomes much less efficient. To avoid unnecessary memory usage, we added new
 settings that allow disabling the SELECT and INSERT query caches.
 
-```bash title="/path/to/server.conf"
+```ini title="/path/to/server.conf"
 # Default is true
 pg.select.cache.enabled=false
 # Default is true
@@ -196,7 +196,7 @@ table readers read the metadata atomically.
 ## Simplified network configuration
 
 We cleaned up all of the
-[network configuration](/docs/operations/capacity-planning/#network-configuration)
+[network configuration](/docs/operations/capacity-planning#network-configuration)
 settings and made them more intuitive and consistent. For the sake of backward
 compatibility, all old setting names are also supported. Still, we recommend our
 users update the configurations to improve the overall developer experience.

@@ -157,7 +157,7 @@ timestamp **prior to** the timestamp in the first table.
 
 To be able to leverage `ASOF JOIN`, both joined table must have a designated
 `timestamp` column. To designate a column as `timestamp`, please refer to the
-[CREATE TABLE](/docs/reference/sql/create-table/) section.
+[CREATE TABLE](/docs/reference/sql/create-table) section.
 
 :::
 

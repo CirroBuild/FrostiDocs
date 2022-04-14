@@ -14,7 +14,7 @@ leverage time-oriented language features and high-performance functionalities.
 
 Checking if tables contain a designated timestamp column can be done via the
 `tables()` and `table_columns()` functions which are described in the
-[meta functions](/docs/reference/function/meta/) documentation page.
+[meta functions](/docs/reference/function/meta) documentation page.
 
 :::
 
@@ -25,13 +25,13 @@ Checking if tables contain a designated timestamp column can be done via the
 - A designated timestamp is elected either:
   - during table creation
   - within a query using a
-    [timestamp function](/docs/reference/function/timestamp/)
+    [timestamp function](/docs/reference/function/timestamp)
 
 ## Out-of-order policy
 
 As of version 6.0.0, QuestDB supports ingestion of records which are
 out-of-order (O3) by time. Configuring how often out-of-order data is committed
-is done via [commit lag and row count](/docs/guides/out-of-order-commit-lag/).
+is done via [commit lag and row count](/docs/guides/out-of-order-commit-lag).
 
 :::info
 
@@ -47,6 +47,6 @@ recent timestamp in the column.
 Electing a designated timestamp allows you to:
 
 - Partition tables by time range. For more information, see the
-  [partitions reference](/docs/concept/partitions/).
+  [partitions reference](/docs/concept/partitions).
 - Use time series joins such as `ASOF JOIN`. For more information, see the
-  [JOIN reference](/docs/reference/sql/join/).
+  [JOIN reference](/docs/reference/sql/join).

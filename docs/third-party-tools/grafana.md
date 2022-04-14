@@ -6,8 +6,8 @@ description: Guide for time series data visualization with QuestDB and Grafana
 [Grafana](https://grafana.com/) is a popular observability and monitoring
 application used to visualize data and has an extensive ecosystem of widgets and
 plugins. QuestDB supports connecting to Grafana via the
-[Postgres](/docs/reference/api/postgres/) endpoint. There's also a
-[complete tutorial](/tutorial/2020/10/19/grafana/) that shows you how to use
+[Postgres](/docs/reference/api/postgres) endpoint. There's also a
+[complete tutorial](/tutorial/2020/10/19/grafana) that shows you how to use
 QuestDB with Grafana step by step.
 
 ## Prerequisites
@@ -15,9 +15,9 @@ QuestDB with Grafana step by step.
 - [Grafana](https://grafana.com/grafana/download) should be installed and
   running.
 - QuestDB should be installed and running via
-  [Docker](/docs/get-started/docker/), the
-  [binaries](/docs/get-started/binaries/) or
-  [Homebrew](/docs/get-started/homebrew/) for macOS users.
+  [Docker](/docs/get-started/docker), the
+  [binaries](/docs/get-started/binaries) or
+  [Homebrew](/docs/get-started/homebrew) for macOS users.
 
 ## Configure database
 

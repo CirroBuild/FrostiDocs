@@ -23,13 +23,13 @@ import Screenshot from "@theme/Screenshot"
 - Available partition intervals are `NONE`, `YEAR`, `MONTH`, `DAY`, and `HOUR`.
 - Default behavior is `PARTITION BY NONE`.
 - Partitions are defined at table creation. For more information, refer to
-  [CREATE TABLE section](/docs/reference/sql/create-table/).
+  [CREATE TABLE section](/docs/reference/sql/create-table).
 
 :::info
 
 Partitioning is only possible on tables which have a designated timestamp. For
 more information on designated timestamps, refer to the
-[designated timestamp section](/docs/concept/designated-timestamp/).
+[designated timestamp section](/docs/concept/designated-timestamp).
 
 :::
 
