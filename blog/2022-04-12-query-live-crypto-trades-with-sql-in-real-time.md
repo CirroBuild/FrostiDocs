@@ -1,10 +1,10 @@
 ---
-title: Query live crypto trades with SQL in real-time
+title: Demo of live crypto data streamed with QuestDB and Grafana
 author: Nicolas Hourcard
 author_title: QuestDB Team
 author_url: https://github.com/tris0laris
 author_image_url: https://avatars.githubusercontent.com/tris0laris
-description: Query live crypto trades with SQL in real-time
+description: Demo of live crypto data streamed with QuestDB and Grafana
 keywords:
   - crypto
   - bitcoin
