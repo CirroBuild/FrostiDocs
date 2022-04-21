@@ -151,6 +151,10 @@
     from = "/docs/operations/deployment"
     to = "/docs/deployment/aws-official-ami"
 
+[[redirects]]
+    from = "/blog/2022/04/12/query-live-crypto-trades-with-sql-in-real-time"
+    to = "/blog/2022/04/12/demo-live-crypto-data-streamed-with-questdb-and-grafana"
+
 [[headers]]
   for = "/*"
   [headers.values]

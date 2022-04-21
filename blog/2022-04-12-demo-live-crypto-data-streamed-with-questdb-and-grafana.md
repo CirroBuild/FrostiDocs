@@ -46,10 +46,8 @@ export const Grafana = ({ src }) => (
   width={650}
 />
 
-Up to this point, our live [demo](https://demo.questdb.io/) hosted a 1.6 billion
-rows dataset of historical taxi rides in NYC <sup>[1]</sup> and a geospatial
-dataset that contains the locations of 250k unique ships <sup>[2]</sup> over
-time. Today, we introduce a new dataset on the same demo instance: crypto market
+At QuestDB we are all about performance. To showcase querying capabilities of
+the database we have been running a live demo of historical taxi rides in NYC with 1.6 billion rows  <sup>[1]</sup> and a geospatial dataset that contains the locations of 250k unique ships <sup>[2]</sup> moving over time. You can analyze this dataset with SQL (link to demo) and see how fast each query is processed. Today, we introduce a new dataset on the same demo instance: crypto market
 data ingested in real-time from the Coinbase Exchange. For ingestion, we use a
 convenient Python library [Cryptofeed](https://github.com/bmoscon/cryptofeed), a
 cryptocurrency exchange feed handler that supports QuestDB. And for
