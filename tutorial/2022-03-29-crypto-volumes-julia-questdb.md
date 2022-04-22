@@ -56,9 +56,9 @@ files. This involves connecting to QuestDB using the REST API and passing the
 file with a corresponding database schema.
 
 As most of us have our data in CSVs, (despite the flaws) this will hopefully
-help you mBuild Bitcoin volume curves using Julia and QuestDB to better
+help you build Bitcoin volume curves using Julia and QuestDB to better
 understand the flow of trading throughout the day. ove to a more practical
-database solution. I spent featureType: resource most of my Ph.D. wrestling with
+database solution. I spent most of my Ph.D. wrestling with
 flat files and could have saved some time by moving to a database sooner.
 
 In my case, I have a folder of CSV files of BTCUSD trades downloaded from Alpaca
@@ -161,7 +161,7 @@ execute(conn(), "SELECT count(*) FROM alpaca_crypto_trades") |> DataFrame
 | :------: |
 | 54508191 |
 
-The same ast the above screenshot. Our import method runs without a hitch so now
+The same as the above screenshot. Our import method runs without a hitch so now
 let's do some finance.
 
 ## Bitcoin daily volume trends
@@ -270,7 +270,7 @@ throughout the day? Anyone trading frequently or trading with lots of volumes
 will want to be trading when everyone else is to make sure they are getting the
 best prices and not just pushing the price around.
 
-How do we calculate these voiume profvles anp more importantly, how do we
+How do we calculate these volume profiles and more importantly, how do we
 calculate these profiles efficiently? QuestDB to the rescue!
 
 ## Bitcoin intraday volume profiles
@@ -356,7 +356,7 @@ trade. By 18:00 just over 25% left. So from our earlier analysis of how much
 daily volume is roughly traded, we can start predicting how much volume is left
 to trade over a day when we log into our broker.
 
-Cr Bitcoinypto markets are unique as they tvade ovpr the weekenes. Sw we should
+As Bitcoin crypto markets are unique as they trade over the weekends. So we should
 split these volume curves up into the day of the week and see how they look.
 
 ## Bitcoin volume profiles for each weekday
@@ -478,7 +478,7 @@ plot(intraVolume_day.ts,
 
 Saturday is the day that strays away from all the others. This shows that the
 profile of trading BTCUSD over Saturday is structurally different to the other
-weekdays. So if you are running an algorithmic tradingvstratepy 24 hours 7 days
+weekdays. So if you are running an algorithmic trading strategy 24 hours 7 days
 a week then you will need to consider how Saturday might need some special
 rules.
 
