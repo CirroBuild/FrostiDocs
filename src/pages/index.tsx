@@ -30,7 +30,9 @@ import PythonLogo from "../assets/img/pages/index/integrations/python.svg"
 import PandasLogo from "../assets/img/pages/index/integrations/pandas.svg"
 import InfluxdataLogo from "../assets/img/pages/index/integrations/influxdata.svg"
 import TableauLogo from "../assets/img/pages/index/integrations/tableau.svg"
-import MetabaseLogo from "../assets/img/pages/index/integrations/metabase.svg"
+import PlotlyLogo from "../assets/img/pages/index/integrations/plotly.svg"
+import MindsdbLogo from "../assets/img/pages/index/integrations/mindsdb.svg"
+import CubeLogo from "../assets/img/pages/index/integrations/cube.svg"
 import DockerLogo from "../assets/img/pages/index/docker.svg"
 import PgwireLogo from "../assets/img/pages/index/pgwire.svg"
 import FossIcon from "../assets/img/pages/index/foss.svg"
@@ -151,6 +153,23 @@ const FeatureTabs = () => {
   )
 }
 
+const integrations: Array<{
+  label: string
+  image: React.ElementType
+  title: string
+}> = [
+  { image: PgLogo, title: "Postgres logo", label: "Postgres" },
+  { image: GrafanaLogo, title: "Grafana logo", label: "Grafana" },
+  { image: KafkaLogo, title: "Kafka logo", label: "Kafka" },
+  { image: PythonLogo, title: "Python logo", label: "Python" },
+  { image: PandasLogo, title: "Pandas logo", label: "Pandas" },
+  { image: InfluxdataLogo, title: "Telegraf logo", label: "Telegraf" },
+  { image: TableauLogo, title: "Tableau logo", label: "Tableau" },
+  { image: MindsdbLogo, title: "MindsDB logo", label: "MindsDB" },
+  { image: CubeLogo, title: "Cube logo", label: "Cube" },
+  { image: PlotlyLogo, title: "PlotlyLogo logo", label: "Plotly" },
+]
+
 const Integration = () => (
   <section
     className={clsx(
@@ -170,38 +189,15 @@ const Integration = () => (
     </h2>
 
     <div className={inCss.integration}>
-      <p className={inCss.integration__item}>
-        <SvgImage image={<PgLogo />} title="Postgres logo" />
-        Postgres
-      </p>
-      <p className={inCss.integration__item}>
-        <SvgImage image={<GrafanaLogo />} title="Grafana logo" />
-        Grafana
-      </p>
-      <p className={inCss.integration__item}>
-        <SvgImage image={<KafkaLogo />} title="Kafka logo" />
-        Kafka
-      </p>
-      <p className={inCss.integration__item}>
-        <SvgImage image={<PythonLogo />} title="Python logo" />
-        Python
-      </p>
-      <p className={inCss.integration__item}>
-        <SvgImage image={<PandasLogo />} title="Pandas logo" />
-        Pandas
-      </p>
-      <p className={inCss.integration__item}>
-        <SvgImage image={<InfluxdataLogo />} title="Telegraf logo" />
-        Telegraf
-      </p>
-      <p className={inCss.integration__item}>
-        <SvgImage image={<TableauLogo />} title="Tableau logo" />
-        Tableau
-      </p>
-      <p className={inCss.integration__item}>
-        <SvgImage image={<MetabaseLogo />} title="Metabase logo" />
-        Metabase
-      </p>
+      {integrations.map(({ label, image, title }, index: number) => {
+        const Image = image
+        return (
+          <div key={index} className={inCss.integration__item}>
+            <SvgImage image={<Image />} title={title} />
+            {label}
+          </div>
+        )
+      })}
     </div>
   </section>
 )
