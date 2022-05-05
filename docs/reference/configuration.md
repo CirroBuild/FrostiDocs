@@ -449,9 +449,9 @@ these methods.
 
 ### Configuration file
 
-Logs may be configured via a dedicated configuration file `log-stdout.conf`.
+Logs may be configured via a dedicated configuration file `log.conf`.
 
-```shell title="log-stdout.conf"
+```shell title="log.conf"
 # list of configured writers
 writers=file,stdout
 
@@ -465,8 +465,13 @@ w.stdout.class=io.questdb.log.LogConsoleWriter
 w.stdout.level=INFO,ERROR
 ```
 
-QuestDB will look for `/log-stdout.conf` on the classpath unless this name is
-overridden via a "system" property: `-Dout=/something_else.conf`.
+QuestDB will look for `/log.conf` first in `conf/` directory and then on the classpath unless this name is
+overridden via a command line property: `-Dout=/something_else.conf`.
+QuestDB will create `conf/log.conf` using default values If `-Dout` is not set and file doesn't exist .    
+                                                                   
+On Windows log messages go to depending on run mode :
+- interactive session - console and `$dataDir\log\stdout-%Y-%m-%dT%H-%M-%S.txt` (default is `.\log\stdout-%Y-%m-%dT%H-%M-%S.txt` )
+- service - `$dataDir\log\service-%Y-%m-%dT%H-%M-%S.txt` (default is `C:\Windows\System32\qdbroot\log\service-%Y-%m-%dT%H-%M-%S.txt` ) 
 
 ### Environment variables
 
