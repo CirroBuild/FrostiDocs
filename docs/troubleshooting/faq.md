@@ -1,6 +1,6 @@
 ---
-title: Troubleshooting
-description: Troubleshooting guide for QuestDB.
+title: FAQ
+description: FAQ for QuestDB troubleshooting.
 ---
 
 The following document contains common hardware and software configuration

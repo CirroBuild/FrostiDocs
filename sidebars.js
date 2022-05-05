@@ -210,10 +210,11 @@ module.exports = {
       ],
     },
     {
-      label: "FAQ",
+      label: "Troubleshooting",
       type: "category",
       items: [
-        "faq/troubleshooting"
+        "troubleshooting/faq",
+        "troubleshooting/os-error-codes"
       ],
     },
     {

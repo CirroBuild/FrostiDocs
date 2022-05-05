@@ -142,6 +142,10 @@
   from = "/docs/guides/influxdb-line-protocol"
   to = "/docs/reference/api/ilp/overview"
 
+[[redirects]]
+  from = "/docs/faq/troubleshooting"
+  to = "/docs/troubleshooting/faq"
+
 # Deleted pages, redirected to closest equivalent.
 [[redirects]]
     from = "/docs/guides/aws-packer"
