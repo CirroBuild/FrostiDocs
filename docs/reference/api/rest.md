@@ -478,7 +478,7 @@ curl -G \
   http://localhost:9000/exp
 ```
 
-A HTTP status code of `200` is returned with the following response body:
+A HTTP status code of `400` is returned with the following response body:
 
 ```json
 {
