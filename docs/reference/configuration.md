@@ -338,6 +338,7 @@ execution and therefore performance.
 
 | Property                               | Default | Description                                                                                                                                                                |
 | -------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| cairo.sql.parallel.filter.enabled      | true    | Enable or disable parallel SQL filter execution. JIT compilation takes place only when this setting is enabled.                                                            |
 | cairo.page.frame.shard.count           | 4       | Number of shards for both dispatch and reduce queues. Shards reduce queue contention between SQL statements that are executed concurrently.                                |
 | cairo.page.frame.reduce.queue.capacity | 64      | Reduce queue is used for data processing and should be large enough to supply tasks for worker threads (shared worked pool).                                               |
 | cairo.page.frame.rowid.list.capacity   | 256     | Row ID list initial capacity for each slot of the reduce queue. Larger values reduce memory allocation rate, but increase minimal RSS size.                                |
@@ -353,7 +354,7 @@ PostgresSQL wire protocol.
 | -------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | pg.enabled                       | true         | Configuration for enabling or disabling the Postres interface.                                                                                                                                    |
 | pg.net.bind.to                   | 0.0.0.0:8812 | IP address and port of Postgres wire protocol server. 0 means that the server will bind to all network interfaces. You can specify IP address of any individual network interface on your system. |
-| pg.net.connection.limit          | 10           | The number of simultaneous PostgreSQL connections to the server. This value is intended to control server memory consumption.                                                                     |
+| pg.net.connection.limit          | 10           | The number of simultaneous Postgres connections to the server. This value is intended to control server memory consumption.                                                                       |
 | pg.net.connection.timeout        | 300000       | Connection idle timeout in milliseconds. Connections are closed by the server when this timeout lapses.                                                                                           |
 | pg.net.connection.rcvbuf         | -1           | Maximum send buffer size on each TCP socket. If value is -1 socket send buffer remains unchanged from OS default.                                                                                 |
 | pg.net.connection.sndbuf         | -1           | Maximum receive buffer size on each TCP socket. If value is -1, the socket receive buffer remains unchanged from OS default.                                                                      |
@@ -480,13 +481,17 @@ w.stdout.class=io.questdb.log.LogConsoleWriter
 w.stdout.level=INFO,ERROR
 ```
 
-QuestDB will look for `/log.conf` first in `conf/` directory and then on the classpath unless this name is
-overridden via a command line property: `-Dout=/something_else.conf`.
-QuestDB will create `conf/log.conf` using default values If `-Dout` is not set and file doesn't exist .    
-                                                                   
+QuestDB will look for `/log.conf` first in `conf/` directory and then on the
+classpath unless this name is overridden via a command line property:
+`-Dout=/something_else.conf`. QuestDB will create `conf/log.conf` using default
+values If `-Dout` is not set and file doesn't exist .
+
 On Windows log messages go to depending on run mode :
-- interactive session - console and `$dataDir\log\stdout-%Y-%m-%dT%H-%M-%S.txt` (default is `.\log\stdout-%Y-%m-%dT%H-%M-%S.txt` )
-- service - `$dataDir\log\service-%Y-%m-%dT%H-%M-%S.txt` (default is `C:\Windows\System32\qdbroot\log\service-%Y-%m-%dT%H-%M-%S.txt` ) 
+
+- interactive session - console and `$dataDir\log\stdout-%Y-%m-%dT%H-%M-%S.txt`
+  (default is `.\log\stdout-%Y-%m-%dT%H-%M-%S.txt` )
+- service - `$dataDir\log\service-%Y-%m-%dT%H-%M-%S.txt` (default is
+  `C:\Windows\System32\qdbroot\log\service-%Y-%m-%dT%H-%M-%S.txt` )
 
 ### Environment variables
 
