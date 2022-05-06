@@ -18,14 +18,6 @@ see our [article about SQL JIT compilation](/blog/2022/01/12/jit-sql-compiler).
 This post describes our storage model, how we built a JIT compiler for SQL and
 our plans for improving it in future.
 
-:::info
-
-The JIT compiler is currently a beta feature, and therefore performance may vary
-as enhancements and improvements are added. For not-yet-implemented
-functionality, see the [known limitations](#known-limitations) section below.
-
-:::
-
 ## Queries eligible for JIT compilation
 
 The types of queries that are eligible for performance improvements via JIT
@@ -46,19 +38,18 @@ AND (region = 'us-west-1' OR region = 'us-east-1');
 
 ## JIT compiler usage
 
-The JIT compiler is disabled by default due to the current beta status of this
-feature. To enable it, change the `cairo.sql.jit.mode` setting in the
-[server configuration](/docs/reference/configuration) file from `off` to
-`scalar`:
+The JIT compiler is enabled by default for QuestDB 6.3 onwards. If you wish to
+disable it, change the `cairo.sql.jit.mode` setting in the
+[server configuration](/docs/reference/configuration) file from `on` to `off`:
 
 ```ini title="path/to/server.conf"
-cairo.sql.jit.mode=scalar
+cairo.sql.jit.mode=off
 ```
 
-Embedded API users are able to enable the compiler globally by providing their
-`CairoConfiguration` implementation. Alternatively, JIT compilation can be
-enabled for a single query by using the `SqlExecutionContext#setJitMode` method.
-The latter may look like the following:
+Embedded API users are able to enable or disable the compiler globally by
+providing their `CairoConfiguration` implementation. Alternatively, JIT
+compilation can be changed for a single query by using the
+`SqlExecutionContext#setJitMode` method. The latter may look like the following:
 
 ```java
 final CairoConfiguration configuration = new DefaultCairoConfiguration(temp.getRoot().getAbsolutePath());
@@ -81,7 +72,6 @@ Server logs should contain references to `SQL JIT compiler mode`:
 
 ```log
 2021-12-16T09:25:34.472450Z A server-main SQL JIT compiler mode: on
-2021-12-16T09:25:34.472475Z A server-main Note: JIT compiler mode is a beta feature.
 ```
 
 Due to certain limitations noted below, JIT compilation won't take place for all
@@ -95,7 +85,7 @@ see something similar in the server logs:
 
 ## Known limitations
 
-The first implementation of the JIT SQL compiler has a number of limitations:
+The current implementation of the JIT SQL compiler has a number of limitations:
 
 - Only x86-64 CPUs are currently supported.
 - Vectorized filter execution requires AVX2 instruction set.
