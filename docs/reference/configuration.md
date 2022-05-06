@@ -431,6 +431,21 @@ line protocol.
 | line.udp.timestamp           | n            | Input timestamp resolution. Possible values are `n`, `u`, `ms`, `s` and `h`.                                                                                                                                                     |
 | line.udp.commit.mode         | nosync       | Commit durability. Available values are `nosync`, `sync` and `async`.                                                                                                                                                            |
 
+### Config Validation
+
+The database startup phase checks for configuration issues, such as invalid or
+deprecated settings. Issues may be classified as advisories or errors.
+Advisory issues are [logged](/docs/concept/root-directory-structure#log-directory)
+without causing the database to stop its startup sequence: These are usually
+setting deprecation warnings.
+Configuration errors can optionally cause the database to fail its startup.
+
+| Property                 | Default | Description                                                    |
+|--------------------------|---------|----------------------------------------------------------------|
+| config.validation.strict | false   | When enabled, startup fails if there are configuration errors. |
+
+*We recommended enabling strict validation.*
+
 ### Telemetry
 
 QuestDB sends anonymous telemetry data with information about usage which helps
