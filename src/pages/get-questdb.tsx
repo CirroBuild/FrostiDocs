@@ -125,30 +125,6 @@ const GetQuestdbPage = () => {
   }, [release.published_at])
 
   const perOs = {
-    bsd: (
-      <Binary
-        architecture
-        href={assets.bsd.href}
-        logo={
-          <img
-            alt="BSD Logo"
-            height={49}
-            className={biCss.binary__logo}
-            src="/img/pages/getQuestdb/bsd.svg"
-            width={49}
-          />
-        }
-        rt
-        size={assets.bsd.size}
-        title="FreeBSD"
-      >
-        <p className={biCss.binary__docs}>
-          <a href="/docs/get-started/binaries#your-operating-system-version">
-            Docs
-          </a>
-        </p>
-      </Binary>
-    ),
     linux: (
       <Binary
         architecture
@@ -366,14 +342,12 @@ helm install my-questdb questdb/questdb --version ${customFields.helmVersion}`}
             {os !== "linux" && perOs.linux}
             {os !== "macos" && perOs.macos}
             {os !== "windows" && perOs.windows}
-            {os !== "bsd" && perOs.bsd}
           </>
         ) : (
           <>
             {perOs.linux}
             {perOs.macos}
             {perOs.windows}
-            {perOs.bsd}
           </>
         )}
         <Binary

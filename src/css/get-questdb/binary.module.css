@@ -20,6 +20,9 @@
 .binary :global(.prism-code > div) {
   padding-right: 0;
   padding-left: 0.9rem;
+}
+
+html[data-theme="dark"] .binary :global(.prism-code > div) {
   background: var(--palette-midnight) !important;
 }
 
