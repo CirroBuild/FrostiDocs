@@ -10,6 +10,8 @@ import Chevron from "@theme/Chevron"
 import Layout from "../theme/Layout"
 import useWindowWidth from "@theme/useWindowWidth"
 import SvgImage from "../components/SvgImage"
+import ActionCard from "../components/ActionCard"
+import Subscribe from "../components/Subscribe"
 
 import doCss from "../css/index/docker.module.css"
 import feCss from "../css/index/feature.module.css"
@@ -19,6 +21,7 @@ import juCss from "../css/index/jumbotron.module.css"
 import meCss from "../css/index/menu.module.css"
 import shCss from "../css/index/showcase.module.css"
 import usCss from "../css/index/usp.module.css"
+import footerCss from "../css/index/footer.module.css"
 import prCss from "../css/property.module.css"
 import seCss from "../css/section.module.css"
 
@@ -34,8 +37,8 @@ import PlotlyLogo from "../assets/img/pages/index/integrations/plotly.svg"
 import MindsdbLogo from "../assets/img/pages/index/integrations/mindsdb.svg"
 import CubeLogo from "../assets/img/pages/index/integrations/cube.svg"
 import DockerLogo from "../assets/img/pages/index/docker.svg"
-import PgwireLogo from "../assets/img/pages/index/pgwire.svg"
 import FossIcon from "../assets/img/pages/index/foss.svg"
+import SubscribeIcon from "../assets/img/pages/index/subscribeIcon.svg"
 import SearchTimeIcon from "../assets/img/pages/index/searchTime.svg"
 import SliceTimeIcon from "../assets/img/pages/index/sliceTime.svg"
 import NavigateTimeIcon from "../assets/img/pages/index/navigateTime.svg"
@@ -464,43 +467,37 @@ const Console = () => {
         width={600}
       />
 
-      <div
-        className={clsx(
-          seCss.section__footer,
-          seCss["section__footer--console"],
-        )}
-      >
-        <div className={clsx(flCss.flashy, flCss["flashy--primary"])}>
-          <SvgImage image={<PgwireLogo />} title="Postgres logo" />
-          <h3 className={flCss.flashy__title}>Postgres compatibility</h3>
-          <p className={flCss.flashy__content}>
-            Interact with QuestDB using the Postgres layer and any tool that
-            connects to it.
-          </p>
-        </div>
+      <div className={footerCss.cards}>
+        <ActionCard
+          icon={<FossIcon />}
+          title="Join our developer community"
+          description="QuestDB is open source. Follow us on Twitter, star our GitHub repo, and join our developer community on Slack!"
+        >
+          <a
+            className={flCss.flashy__link}
+            href={customFields.githubUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Go to GitHub&nbsp;&nbsp;&gt;
+          </a>
+          <a className={flCss.flashy__link} href={customFields.slackUrl}>
+            Join Slack&nbsp;&nbsp;&gt;
+          </a>
+        </ActionCard>
 
-        <div className={flCss.flashy}>
-          <SvgImage image={<FossIcon />} title="Antenna" />
-          <h3 className={flCss.flashy__title}>Open source</h3>
-          <p className={flCss.flashy__content}>
-            QuestDB is open source. Follow us on GitHub. Watch the repo to get
-            notified of further releases and new features!
-          </p>
-
-          <div className={flCss.flashy__links}>
-            <a
-              className={flCss.flashy__link}
-              href={customFields.githubUrl}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Go to GitHub&nbsp;&nbsp;&gt;
-            </a>
-            <a className={flCss.flashy__link} href={customFields.slackUrl}>
-              Join Slack&nbsp;&nbsp;&gt;
-            </a>
-          </div>
-        </div>
+        <ActionCard
+          title="Subscribe to our newsletter"
+          description="Stay up to date with all things QuestDB"
+          icon={<SubscribeIcon />}
+          skin="primary"
+        >
+          <Subscribe
+            placeholder="Email address"
+            submitButtonVariant="tertiary"
+            provider="newsletter"
+          />
+        </ActionCard>
       </div>
     </section>
   )
@@ -723,26 +720,22 @@ const QueryScroller = () => {
   )
 }
 
-const Home = () => {
-  const title = "QuestDB | Time series data, faster"
-
-  return (
-    <Layout
-      canonical=""
-      description={customFields.description}
-      title={title}
-      replaceTitle
-    >
-      <Top />
-      <Customers nbElements={6} />
-      <Usp />
-      <Integration />
-      <FeatureTabs />
-      <QueryScroller />
-      <Cards />
-      <Console />
-    </Layout>
-  )
-}
+const Home = () => (
+  <Layout
+    canonical=""
+    description={customFields.description}
+    title="QuestDB | Time series data, faster"
+    replaceTitle
+  >
+    <Top />
+    <Customers nbElements={6} />
+    <Usp />
+    <Integration />
+    <FeatureTabs />
+    <QueryScroller />
+    <Cards />
+    <Console />
+  </Layout>
+)
 
 export default Home

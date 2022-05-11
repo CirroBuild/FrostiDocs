@@ -4,6 +4,8 @@ import React from "react"
 import styles from "./styles.module.css"
 
 type Props = Readonly<{
+  value?: string
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   className?: string
   name: string
   pattern?: string
@@ -14,6 +16,8 @@ type Props = Readonly<{
 }>
 
 const Input = ({
+  value,
+  onChange,
   className,
   name,
   pattern,
@@ -26,6 +30,8 @@ const Input = ({
 
   return (
     <input
+      value={value}
+      onChange={onChange}
       className={classes}
       name={name}
       required={required}

@@ -1,11 +1,10 @@
-import React, { FormEvent, ReactElement, useState } from "react"
-import { CSSTransition, TransitionGroup } from "react-transition-group"
+import React, { ReactElement } from "react"
 import clsx from "clsx"
 
 import Layout from "../theme/Layout"
 import Button from "@theme/Button"
-import Input from "@theme/Input"
 import SvgImage from "../components/SvgImage"
+import Subscribe from "../components/Subscribe"
 
 import ElasticSolutionIcon from "../assets/img/pages/cloud/elastic-solution.svg"
 import HighAvailabilityIcon from "../assets/img/pages/cloud/high-availability.svg"
@@ -15,7 +14,6 @@ import ManagedQuestdbIcon from "../assets/img/pages/cloud/managed-questdb.svg"
 import AwsLogo from "../assets/img/aws.svg"
 
 import seCss from "../css/section.module.css"
-import foCss from "../css/enterprise/form.module.css"
 import ilCss from "../css/cloud/illustration.module.css"
 import hlCss from "../css/cloud/highlights.module.css"
 import flCss from "../css/cloud/flashy.module.css"
@@ -32,32 +30,6 @@ type HighlightItem = {
 }
 
 const Top = () => {
-  const [loading, setLoading] = useState(false)
-  const [sent, setSent] = useState(false)
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
-    setLoading(true)
-
-    const target = event.target as HTMLFormElement
-    const body = {}
-
-    for (const [key, value] of new FormData(target).entries()) {
-      body[key] = value
-    }
-
-    try {
-      await fetch("https://crast.questdb.io/contact/cloud", {
-        body: JSON.stringify(body),
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-      })
-    } catch (e) {}
-
-    setSent(true)
-  }
-
   return (
     <section className={seCss["section--inner"]}>
       <div className={seCss.section__header}>
@@ -70,50 +42,7 @@ const Top = () => {
           QuestDB Cloud
         </h1>
 
-        <form className={foCss.form} onSubmit={handleSubmit}>
-          <TransitionGroup component={null}>
-            <CSSTransition
-              key={sent.toString()}
-              timeout={200}
-              classNames="item"
-            >
-              <div className={foCss.form__wrapper}>
-                {!sent && (
-                  <>
-                    <Input
-                      className={foCss.form__input}
-                      name="email"
-                      pattern={
-                        "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$"
-                      }
-                      placeholder="Work Email"
-                      required
-                      title="Email address should be valid"
-                      type="email"
-                    />
-                    <Button type="submit">
-                      {loading && <span className={foCss.form__loader} />}
-                      <span
-                        className={clsx({
-                          [foCss["form__button--hidden"]]: loading,
-                        })}
-                      >
-                        Early&nbsp;access
-                      </span>
-                    </Button>
-                  </>
-                )}
-                {sent && (
-                  <>
-                    <p className={foCss.form__success}>
-                      Thank you, we will be in touch soon!
-                    </p>
-                  </>
-                )}
-              </div>
-            </CSSTransition>
-          </TransitionGroup>
-        </form>
+        <Subscribe submitButtonText="Early Access" provider="cloud" />
 
         <img
           alt="Artistic view of the console with sub-queries"

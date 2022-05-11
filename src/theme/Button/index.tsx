@@ -3,7 +3,7 @@ import React, { ReactNode } from "react"
 
 import styles from "./styles.module.css"
 
-type Props = Readonly<{
+export type Props = Readonly<{
   children: ReactNode
   className?: string
   icon?: ReactNode

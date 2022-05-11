@@ -1,52 +1,10 @@
 import React from "react"
 import clsx from "clsx"
 import Layout from "../theme/Layout"
-import Button from "@theme/Button"
+import Subscribe from "../components/Subscribe"
 import seCss from "../css/section.module.css"
 import paCss from "../css/community/page.module.css"
-import MailchimpSubscribe from "react-mailchimp-subscribe"
 import customFields from "../config/customFields"
-
-type FormProps = {
-  status: string
-  message: string
-  onValidated: Function
-}
-
-const CustomForm: React.FC<FormProps> = ({
-  status,
-  message,
-  onValidated,
-}: FormProps) => {
-  let email
-  const submit = () =>
-    email != null &&
-    email.value.indexOf("@") > -1 &&
-    onValidated({
-      EMAIL: email.value,
-    })
-
-  return (
-    <div>
-      <input
-        className={paCss.custom_input}
-        ref={(node) => (email = node)}
-        type="email"
-        placeholder="Email address"
-      />
-      <Button onClick={submit} className={paCss.signup_button}>
-        Sign Up
-      </Button>
-      {status === "sending" && <div>sending...</div>}
-      {status === "error" && (
-        <div dangerouslySetInnerHTML={{ __html: message }} />
-      )}
-      {status === "success" && (
-        <div dangerouslySetInnerHTML={{ __html: message }} />
-      )}
-    </div>
-  )
-}
 
 type Contribute = {
   alt: string
@@ -77,8 +35,6 @@ const contribution: Contribute[] = [
 ]
 
 const Community = () => {
-  const newsletterUrl =
-    "https://questdb.us7.list-manage.com/subscribe/post?u=f692ae4038a31e8ae997a0f29&amp;id=bdd4ec2744"
   const title = "QuestDB developer community"
   const description =
     "Get involved with the developer community that's building the fastest open-source time series database."
@@ -118,18 +74,8 @@ const Community = () => {
               <p className={paCss.default_text}>
                 Stay up to date with all things QuestDB
               </p>
-              <div>
-                <MailchimpSubscribe
-                  url={newsletterUrl}
-                  render={({ subscribe, status, message }) => (
-                    <CustomForm
-                      status={status}
-                      message={message}
-                      onValidated={(formData) => subscribe(formData)}
-                    />
-                  )}
-                />
-              </div>
+
+              <Subscribe submitButtonVariant="primary" provider="newsletter" />
             </div>
             <div className={paCss.join_slack}>
               <p

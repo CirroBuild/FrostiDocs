@@ -1,0 +1,33 @@
+.root {
+  padding: 4rem;
+  border-radius: 16px;
+  background: var(--theme-attention-card-bg-color);
+  min-width: 380px;
+}
+
+.title {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: var(--font-size-big-2);
+  font-weight: var(--ifm-font-weight-bold);
+}
+
+.description {
+  font-size: var(--font-size-large);
+}
+
+.content {
+  display: flex;
+  padding-top: 2rem;
+}
+
+
+.skinPrimary {
+  background: var(--palette-pink);
+}
+
+.skinPrimary .title,
+.skinPrimary .description {
+  color: var(--theme-attention-card-text-color)
+}
+

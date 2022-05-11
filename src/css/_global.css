@@ -96,6 +96,9 @@
   --theme-card-secondary-bg-color: #21222c;
   --theme-card-illustration-bg-color: var(--palette-midnight);
 
+  --theme-attention-card-bg-color: var(--palette-gray);
+  --theme-attention-card-text-color: var(--palette-white);
+
   --theme-team-article-title-color: var(--palette-white);
 
   --theme-community-border: 1px solid var(--palette-white);
@@ -180,6 +183,8 @@ html[data-theme="light"] {
 
   --theme-card-secondary-bg-color: #dde0e9;
   --theme-card-secondary-text-color: #21222C;
+
+  --theme-attention-card-bg-color: #F0F1F5;
 
   --theme-card-illustration-bg-color: transparent;
 
