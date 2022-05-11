@@ -14,6 +14,7 @@ keywords:
   - cpu
   - questdb
 tags: [performance, simd, benchmark, release]
+image: /img/blog/2020-04-02/banner.png
 ---
 
 import Banner from "@theme/Banner"

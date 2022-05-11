@@ -17,6 +17,7 @@ keywords:
   - simd
   - clickhouse
 tags: [performance, engineering, architecture, algorithms]
+image: /img/blog/2020-05-12/banner.png
 ---
 
 import Banner from "@theme/Banner"

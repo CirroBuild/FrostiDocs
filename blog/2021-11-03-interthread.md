@@ -15,6 +15,7 @@ keywords:
   - database
   - architecture
 tags: [multithreading, engineering, architecture]
+image: /img/blog/2020-03-15/header.png
 ---
 
 import Banner from "@theme/Banner"
