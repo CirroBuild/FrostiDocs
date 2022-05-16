@@ -322,6 +322,30 @@ FROM (SELECT rnd_double() a FROM long_sequence(100));
 |:---------------|
 |49.5442334742831|
 
+## stddev_samp
+
+`stddev_samp(value)` - calculates the sample standard deviation of values ignoring missing data (e.g
+`null` values).
+
+**Arguments:**
+
+- `value` is any numeric value.
+
+**Return value:**
+
+Return value type is `double`.
+
+**Examples:**
+
+```questdb-sql
+SELECT stddev_samp(x)
+FROM (SELECT x FROM long_sequence(100));
+```
+
+|stddev_samp     |
+|:---------------|
+|29.011491975882|
+
 ## sum
 
 `sum(value)` - adds values ignoring missing data (e.g `null` values).
