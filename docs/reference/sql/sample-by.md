@@ -39,7 +39,8 @@ SAMPLE BY n{units}
 Where the unit for sampled groups may be one of the following:
 
 | unit | description |
-| ---- | ----------- |
+|------|-------------|
+| `U`  | microsecond |
 | `T`  | millisecond |
 | `s`  | second      |
 | `m`  | minute      |
