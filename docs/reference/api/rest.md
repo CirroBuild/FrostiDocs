@@ -353,14 +353,15 @@ closed.
 
 `/exec` is expecting an HTTP GET request with following query parameters:
 
-| Parameter | Required | Default | Description                                                                                                                                                                            |
-| --------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `count`   | No       | `false` | `true` or `false`. Counts the number of rows and returns this value.                                                                                                                   |
-| `limit`   | No       |         | Allows limiting the number of rows to return. `limit=10` will return the first 10 rows (equivalent to `limit=1,10`), `limit=10,20` will return row numbers 10 through to 20 inclusive. |
-| `nm`      | No       | `false` | `true` or `false`. Skips the metadata section of the response when set to `true`.                                                                                                      |
-| `query`   | Yes      |         | URL encoded query text. It can be multi-line.                                                                                                                                          |
-| `timings` | No       | `false` | `true` or `false`. When set to `true`, QuestDB will also include a `timings` property in the response which gives details about the execution times.                                   |
-| `explain` | No       | `false` | `true` or `false`. When set to `true`, QuestDB will also include an `explain` property in the response which gives details about the execution plan.                                   |
+| Parameter       | Required | Default | Description                                                                                                                                                                            |
+| --------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `count`         | No       | `false` | `true` or `false`. Counts the number of rows and returns this value.                                                                                                                   |
+| `limit`         | No       |         | Allows limiting the number of rows to return. `limit=10` will return the first 10 rows (equivalent to `limit=1,10`), `limit=10,20` will return row numbers 10 through to 20 inclusive. |
+| `nm`            | No       | `false` | `true` or `false`. Skips the metadata section of the response when set to `true`.                                                                                                      |
+| `query`         | Yes      |         | URL encoded query text. It can be multi-line.                                                                                                                                          |
+| `timings`       | No       | `false` | `true` or `false`. When set to `true`, QuestDB will also include a `timings` property in the response which gives details about the execution times.                                   |
+| `explain`       | No       | `false` | `true` or `false`. When set to `true`, QuestDB will also include an `explain` property in the response which gives details about the execution plan.                                   |
+| `quoteLargeNum` | No       | `false` | `true` or `false`. When set to `true`, QuestDB will surround `LONG` type numbers with double quotation marks that will make them parsed as strings.                                    |
 
 The parameters must be URL encoded.
 
