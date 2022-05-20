@@ -146,17 +146,17 @@ function Navbar(): JSX.Element {
             isSearchBarExpanded={isSearchBarExpanded}
           />
           <Button
-            className={styles.getQuestdb}
+            className={clsx(styles.ctaButton, styles.getQuestdb)}
             size="xsmall"
             to="/get-questdb/"
+            variant="secondary"
           >
             Get QuestDB
           </Button>
           <Button
-            className={styles.benchmarkButton}
+            className={clsx(styles.ctaButton, styles.benchmarkButton)}
             size="xsmall"
             to="/time-series-benchmark-suite/"
-            variant="secondary"
           >
             Benchmark
           </Button>

@@ -103,7 +103,15 @@ const config = {
     prism: {
       defaultLanguage: "questdb-sql",
       additionalLanguages: [
-        "rust", "csharp", "julia", "cpp", "java", "ebnf", "ini", "toml"],
+        "rust",
+        "csharp",
+        "julia",
+        "cpp",
+        "java",
+        "ebnf",
+        "ini",
+        "toml",
+      ],
       theme: require("./src/internals/prism-github"),
       darkTheme: require("./src/internals/prism-dracula"),
     },
@@ -119,43 +127,31 @@ const config = {
       },
       items: [
         {
-          label: "Get Started",
+          label: "Products",
           position: "left",
           items: [
             {
-              label: "Docker",
-              to: "/docs/get-started/docker",
+              label: "QuestDB Cloud",
+              to: "/cloud",
             },
             {
-              label: "Binaries",
-              to: "/docs/get-started/binaries",
+              label: "QuestDB Enterprise",
+              to: "/enterprise",
             },
-            {
-              label: "Homebrew",
-              to: "/docs/get-started/homebrew",
-            },
-            {
-              label: "Create my first dataset",
-              to: "/docs/get-started/first-database"
-            }
-          ],
-        },
-        {
-          label: "Resources",
-          position: "left",
-          items: [
             {
               label: "Customers",
               to: "/customers",
             },
             {
-              label: "Enterprise",
-              to: "/enterprise",
+              label: "Roadmap",
+              href: `https://github.com/orgs/questdb/projects/1/views/5`,
             },
-            {
-              label: "Cloud",
-              to: "/cloud",
-            },
+          ],
+        },
+        {
+          label: "Learn",
+          position: "left",
+          items: [
             {
               label: "Blog",
               to: "/blog",
@@ -165,45 +161,32 @@ const config = {
               to: "/tutorial",
             },
             {
-              label: "Careers",
-              to: "/careers",
-            },
-            {
-              label: "About us",
-              to: "/about-us",
-            },
-          ],
-        },
-        {
-          label: "Community",
-          position: "left",
-          items: [
-            {
               label: "QuestDB Swag",
               to: "/community",
             },
             {
-              label: "GitHub",
-              to: customFields.githubUrl,
-            },
-            {
-              label: "Slack",
+              label: "Slack Community",
               to: customFields.slackUrl,
-            },
-            {
-              label: "Stack Overflow",
-              to: customFields.stackoverflowUrl,
-            },
-            {
-              label: "Twitter",
-              to: customFields.twitterUrl,
             },
           ],
         },
         {
-          label: "Documentation",
+          label: "Docs",
           to: "/docs/introduction",
           position: "left",
+        },
+        {
+          label: "We're Hiring",
+          to: "/careers",
+          position: "left",
+          className: "careers-link",
+        },
+        {
+          label: "Star us",
+          href: "https://github.com/questdb/questdb",
+          position: "right",
+          className: "header-github-link",
+          "aria-label": "GitHub repository",
         },
       ],
     },
@@ -270,10 +253,7 @@ const config = {
               label: "Blog",
               to: "/blog",
             },
-            {
-              label: "Roadmap",
-              href: `https://github.com/orgs/questdb/projects/1/views/5`,
-            },
+
             {
               label: "Videos",
               to: customFields.videosUrl,
