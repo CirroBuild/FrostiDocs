@@ -1,89 +1,143 @@
 import { CustomerLogo } from "./types"
 
-export const logos: CustomerLogo[] = [
-  {
+export const logos: Record<string, CustomerLogo> = {
+  yahoo:{
     src: "/img/pages/customers/logos/yahoo.svg",
     alt: "Yahoo logo",
     width: 140,
     height: 56,
   },
-  {
+  kepler: {
     src: "/img/pages/customers/logos/kepler.svg",
     alt: "Kepler logo",
     width: 140,
     height: 56,
   },
-  {
+  airbus: {
     src: "/img/pages/customers/logos/airbus.svg",
     alt: "Airbus logo",
     width: 140,
     height: 56,
   },
-  {
+  yc: {
     src: "/img/pages/customers/logos/yc.svg",
     alt: "Y Combinator logo",
     width: 140,
     height: 56,
   },
-  {
+  "aquis-exchange": {
     src: "/img/pages/customers/cards/aquis.svg",
     alt: "Aquis Exchange logo",
     width: 130,
     height: 30,
     offset: 5,
   },
-  {
+  "sapient-industries": {
     src: "/img/pages/customers/cards/sapient.svg",
     alt: "Sapient Industries logo",
     width: 140,
     height: 56,
   },
-  {
+  "tqs-integration": {
     src: "/img/pages/customers/logos/tqs-integration.svg",
     alt: "TQS Integration logo",
     width: 140,
     height: 56,
   },
-  {
+  syndica: {
     src: "/img/pages/customers/cards/syndica.svg",
     alt: "Syndica",
     height: 30,
     width: 113,
   },
-  {
+  "copenhagen-atomics": {
     src: "/img/pages/customers/logos/ca.svg",
     alt: "Copenhagen Atomics logo",
     width: 140,
     height: 56,
   },
-  {
+  "turk-telekom": {
     src: "/img/pages/customers/logos/turk_telekom.svg",
     alt: "Turk Telekom logo",
     width: 140,
     height: 56,
   },
-  {
+  liveaction: {
     src: "/img/pages/customers/logos/liveaction.svg",
     alt: "LiveAction logo",
     width: 140,
     height: 56,
   },
-  {
+  toggle: {
     src: "/img/pages/customers/logos/toggle.svg",
     alt: "Toggle",
     width: 140,
     height: 56,
   },
-  {
+  tymlez: {
     src: "/img/pages/customers/logos/tymlez.svg",
     alt: "Tymlez",
     width: 140,
     height: 56,
   },
-  {
+  syntropy: {
     src: "/img/pages/customers/logos/syntropy.svg",
     alt: "Syntropy",
     width: 140,
     height: 56,
   },
-]
+  "central-group": {
+    src: "/img/pages/customers/logos/central_group.svg",
+    alt: "Central Group",
+    width: 140,
+    height: 56,
+  },
+  coinhall: {
+    src: "/img/pages/customers/logos/coinhall.svg",
+    alt: "Coinhall",
+    width: 118,
+    height: 25,
+  },
+  samtec: {
+    alt: "Samtec",
+    src: "/img/pages/customers/logos/samtec.svg",
+    height: 56,
+    width: 140,
+  },
+  "electric-era": {
+    alt: "Electric Era",
+    src: "/img/pages/customers/logos/electric-era.svg",
+    height: 15,
+    width: 145,
+  },
+  "second-foundation": {
+    alt: "Second Foundation",
+    src: "/img/pages/customers/logos/second_foundation.svg",
+    height: 29,
+    width: 234,
+  },
+  "razor-secure": {
+    alt: "Razor Secure",
+    src: "/img/pages/customers/logos/razor_secure.svg",
+    height: 29,
+    width: 234,
+  },
+  prediko: {
+    alt: "Prediko",
+    src: "/img/pages/customers/logos/prediko.svg",
+    height: 44,
+    width: 145,
+  },
+  synology: {
+    alt: "Synology",
+    src: "/img/pages/customers/logos/synology.svg",
+    height: 36,
+    width: 140,
+  },
+  magicpixel: {
+    alt: "MagicPixel",
+    src: "/img/pages/customers/logos/magicpixel.svg",
+    height: 19,
+    width: 126,
+  },
+}

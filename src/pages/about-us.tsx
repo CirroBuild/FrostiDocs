@@ -13,7 +13,8 @@ import Button from "@theme/Button"
 
 import SvgImage from "../components/SvgImage"
 
-import { CustomerLogo } from "src/components/Customers/types"
+import { logos } from "../assets/logos"
+import { CustomerLogo } from "src/assets/types"
 import ProductMetrics from "../components/ProductMetrics"
 
 import Logo468Capital from "../assets/img/pages/about-us/468capital.svg"
@@ -32,26 +33,22 @@ type PressItemProps = {
 
 const usedByLogos: CustomerLogo[] = [
   {
-    src: "/img/pages/customers/logos/airbus.svg",
-    alt: "Airbus logo",
+    ...logos.airbus,
     width: 140,
     height: 56,
   },
   {
-    src: "/img/pages/customers/logos/kepler.svg",
-    alt: "Kepler logo",
+    ...logos.kepler,
     width: 140,
     height: 56,
   },
   {
-    src: "/img/pages/customers/logos/ca.svg",
-    alt: "Copenhagen Atomics logo",
+    ...logos["copenhagen-atomics"],
     width: 140,
     height: 56,
   },
   {
-    src: "/img/pages/customers/logos/yahoo.svg",
-    alt: "Yahoo!",
+    ...logos.yahoo,
     width: 140,
     height: 56,
   },
