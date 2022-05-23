@@ -6,6 +6,7 @@ import Input from "../../theme/Input"
 import Button from "../../theme/Button"
 import type { Props as ButtonProps } from "../../theme/Button"
 import style from "./style.module.css"
+import clsx from "clsx"
 
 type Provider = "enterprise" | "cloud" | "newsletter"
 
@@ -14,6 +15,7 @@ type Props = {
   placeholder?: string
   submitButtonText?: string
   submitButtonVariant?: ButtonProps["variant"]
+  className?: string
 }
 
 const emailPattern =
@@ -31,11 +33,12 @@ const Subscribe: React.FunctionComponent<Props> = ({
   provider = "enterprise",
   submitButtonText = "SUBMIT",
   submitButtonVariant,
+  className,
 }) => {
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     setLoading(true)
@@ -62,40 +65,34 @@ const Subscribe: React.FunctionComponent<Props> = ({
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={clsx(style.root, className)} onSubmit={onSubmit}>
       <TransitionGroup>
         <CSSTransition key={sent.toString()} timeout={200} classNames="item">
-          <div className={style.wrapper}>
-            {sent ? (
-              <p className={style.success}>
-                Thank you, we will be in touch soon!
-              </p>
-            ) : (
-              <>
-                <Input
-                  className={style.input}
-                  name="email"
-                  type="email"
-                  title="Email address should be valid"
-                  placeholder={placeholder}
-                  required
-                  pattern={emailPattern}
-                />
+          {sent ? (
+            <p className={style.success}>
+              Thank you, we will be in touch soon!
+            </p>
+          ) : (
+            <div className={style.inputs}>
+              <Input
+                className={style.input}
+                name="email"
+                type="email"
+                title="Email address should be valid"
+                placeholder={placeholder}
+                required
+                pattern={emailPattern}
+              />
 
-                <Button
-                  className={style.submit}
-                  variant={submitButtonVariant}
-                  type="submit"
-                >
-                  {loading ? (
-                    <span className={style.loader} />
-                  ) : (
-                    submitButtonText
-                  )}
-                </Button>
-              </>
-            )}
-          </div>
+              <Button
+                className={style.submit}
+                variant={submitButtonVariant}
+                type="submit"
+              >
+                {loading ? <span className={style.loader} /> : submitButtonText}
+              </Button>
+            </div>
+          )}
         </CSSTransition>
       </TransitionGroup>
     </form>

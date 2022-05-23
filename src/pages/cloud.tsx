@@ -18,6 +18,7 @@ import ilCss from "../css/cloud/illustration.module.css"
 import hlCss from "../css/cloud/highlights.module.css"
 import flCss from "../css/cloud/flashy.module.css"
 import slCss from "../css/cloud/slack.module.css"
+import style from "../css/cloud/style.module.css"
 
 import SlackLogo from "../assets/img/slack.svg"
 import customFields from "../config/customFields"
@@ -42,7 +43,11 @@ const Top = () => {
           QuestDB Cloud
         </h1>
 
-        <Subscribe submitButtonText="Early Access" provider="cloud" />
+        <Subscribe
+          className={style.subscribe}
+          submitButtonText="Early Access"
+          provider="cloud"
+        />
 
         <img
           alt="Artistic view of the console with sub-queries"

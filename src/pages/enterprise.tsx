@@ -15,6 +15,7 @@ import peCss from "../css/enterprise/performance.module.css"
 import quCss from "../css/enterprise/quote.module.css"
 import prCss from "../css/property.module.css"
 import seCss from "../css/section.module.css"
+import style from "../css/enterprise/style.module.css"
 import _quotes from "../assets/quotes"
 
 import SvgImage from "../components/SvgImage"
@@ -134,6 +135,7 @@ const Enterprise = () => {
             placeholder="Work Email"
             submitButtonText="Contact Us"
             provider="enterprise"
+            className={style.subscribe}
           />
 
           <img

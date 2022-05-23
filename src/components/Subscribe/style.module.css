@@ -1,12 +1,24 @@
-.wrapper {
-  position: relative;
-  display: flex;
+.root {
+  width: 100%;
+}
+
+.inputs {
+  display: grid;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 600px) {
+  .inputs {
+    grid-template-columns: 4fr 2fr;
+  }
 }
 
 .input {
-  margin-right: 1rem;
   color: var(--theme-input-text-color);
   background-color: var(--theme-input-bg-color);
+  padding: 1rem;
+  font-size: var(--font-size-small);
+  width: 100%;
 }
 
 .input::placeholder {
@@ -33,9 +45,8 @@
 }
 
 .success {
+  position: absolute;
   --ifm-paragraph-margin-bottom: 0;
-  display: flex;
-  align-items: center;
   font-size: var(--font-size-large);
   font-weight: var(--ifm-font-weight-bold);
 }
