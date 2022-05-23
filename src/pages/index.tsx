@@ -25,7 +25,7 @@ import footerCss from "../css/index/footer.module.css"
 import prCss from "../css/property.module.css"
 import seCss from "../css/section.module.css"
 
-import GithubLogo from "../assets/img/github.svg"
+import QuestDBLogo from "../assets/img/questdb.svg"
 import PgLogo from "../assets/img/pages/index/integrations/pg.svg"
 import GrafanaLogo from "../assets/img/pages/index/integrations/grafana.svg"
 import KafkaLogo from "../assets/img/pages/index/integrations/kafka.svg"
@@ -242,11 +242,16 @@ const Top = () => {
               juCss.jumbotron__link,
               juCss["jumbotron__cta--github"],
             )}
-            href={customFields.githubUrl}
-            icon={<SvgImage image={<GithubLogo />} title="GitHub" />}
+            href="/cloud"
+            icon={
+              <SvgImage
+                image={<QuestDBLogo width="32" height="32" />}
+                title="QuestDB Cloud"
+              />
+            }
             variant="secondary"
           >
-            GitHub
+            CLOUD
           </Button>
         </div>
         <p className={juCss.jumbotron__description}>
