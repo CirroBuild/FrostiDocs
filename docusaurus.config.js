@@ -193,56 +193,31 @@ const config = {
     footer: {
       links: [
         {
-          title: "QuestDB",
+          title: "Product",
           items: [
-            {
-              label: "Enterprise",
-              to: "/enterprise",
-            },
             {
               label: "Cloud",
               to: "/cloud",
+            },
+            {
+              label: "Enterprise",
+              to: "/enterprise",
             },
             {
               label: "Customers",
               to: "/customers",
             },
             {
-              label: "Careers",
-              to: "/careers",
-            },
-            {
-              label: "About us",
-              to: "/about-us",
+              label: "Roadmap",
+              href: "https://github.com/orgs/questdb/projects/1/views/5",
             },
           ],
         },
         {
-          title: "Community",
+          title: "Developers",
           items: [
             {
-              label: "GitHub",
-              href: customFields.githubUrl,
-            },
-            {
-              label: "Slack",
-              href: customFields.slackUrl,
-            },
-            {
-              label: "Stack Overflow",
-              to: customFields.stackoverflowUrl,
-            },
-            {
-              label: "Twitter",
-              href: customFields.twitterUrl,
-            },
-          ],
-        },
-        {
-          title: "More",
-          items: [
-            {
-              label: "Documentation",
+              label: "Docs",
               to: "/docs/introduction",
             },
             {
@@ -253,10 +228,59 @@ const config = {
               label: "Blog",
               to: "/blog",
             },
-
             {
-              label: "Videos",
+              label: "Discussions",
+              to: customFields.linenUrl,
+            },
+            {
+              label: "Join Slack",
+              to: customFields.slackUrl,
+            },
+            {
+              label: "Swag",
+              to: "/community",
+            },
+          ],
+        },
+        {
+          title: "Company",
+          items: [
+            {
+              label: "About us",
+              to: "/about-us",
+            },
+            {
+              label: "Careers",
+              to: "/careers",
+            },
+          ],
+        },
+        {
+          title: "Social",
+          items: [
+            {
+              label: "Twitter",
+              href: customFields.twitterUrl,
+            },
+            {
+              label: "GitHub",
+              href: customFields.githubUrl,
+            },
+            {
+              label: "StackOverflow",
+              to: customFields.stackoverflowUrl,
+            },
+            {
+              label: "Linkedin",
+              href: customFields.linkedInUrl,
+            },
+            {
+              label: "YouTube",
               to: customFields.videosUrl,
+            },
+            {
+              label: "Reddit",
+              href: customFields.redditUrl,
             },
           ],
         },

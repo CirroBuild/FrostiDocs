@@ -5,7 +5,6 @@ import React from "react"
 import customFields from "../../config/customFields"
 
 import Button from "@theme/Button"
-import useMetadataContext from "@theme/useMetadataContext"
 
 import sectionCss from "../../css/section.module.css"
 import footerStyles from "./styles.module.css"
@@ -39,7 +38,6 @@ const FooterLink = ({ to, href, label, ...props }: Props) => {
 
 const Footer = () => {
   const { siteConfig } = useDocusaurusContext()
-  const metadataContext = useMetadataContext()
   const {
     themeConfig: {
       footer: { links },
@@ -47,11 +45,7 @@ const Footer = () => {
   } = siteConfig
 
   return (
-    <footer
-      className={clsx(footerStyles.footer, sectionCss.section, {
-        [footerStyles["footer--alt"]]: metadataContext.altFooter,
-      })}
-    >
+    <footer className={clsx(footerStyles.footer, sectionCss.section)}>
       <div
         className={clsx(
           footerStyles.footer__inner,

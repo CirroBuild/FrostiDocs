@@ -17,5 +17,7 @@ module.exports = {
   slackUrl: `https://slack.${consts.domain}`,
   stackoverflowUrl: "https://stackoverflow.com/questions/tagged/questdb",
   twitterUrl: "https://twitter.com/questdb",
-  videosUrl: "https://www.youtube.com/channel/UChqKEmOyiD9c6QFx2mjKwiA",
+  videosUrl: "https://www.youtube.com/c/QuestDB",
+  redditUrl: "https://www.reddit.com/r/questdb",
+  linenUrl: "https://community-chat.questdb.io",
 }

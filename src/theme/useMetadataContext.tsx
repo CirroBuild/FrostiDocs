@@ -1,7 +1,6 @@
 import React, { createContext, ReactNode, useContext } from "react"
 
 type Metadata = {
-  altFooter: boolean
   isBlogPost: boolean
 }
 
@@ -11,7 +10,6 @@ type Props = Readonly<{
 }>
 
 const metadata: Metadata = {
-  altFooter: false,
   isBlogPost: false,
 }
 

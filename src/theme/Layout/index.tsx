@@ -13,13 +13,11 @@ import { MetadataContextProvider } from "@theme/useMetadataContext"
 import styles from "./styles.module.css"
 
 export type Props = {
-  altFooter: boolean
   canonical?: string
   flex: boolean
   replaceTitle?: boolean
   children: ReactNode
   title?: string
-  noFooter?: boolean
   description?: string
   image?: string
   keywords?: string | string[]
@@ -33,14 +31,12 @@ export type Props = {
 }
 
 const Layout = ({
-  altFooter,
   canonical,
   children,
   description,
   flex,
   image,
   keywords,
-  noFooter,
   permalink,
   title,
   replaceTitle = false,
@@ -65,7 +61,7 @@ const Layout = ({
     description?.match(/^Blog/g) == null && wrapperClassName === "blog-wrapper"
 
   return (
-    <MetadataContextProvider value={{ altFooter, isBlogPost }}>
+    <MetadataContextProvider value={{ isBlogPost }}>
       <LayoutProviders>
         <Head>
           <title>{metaTitle}</title>
@@ -116,12 +112,12 @@ const Layout = ({
         >
           {children}
         </div>
-        {noFooter !== true && <Footer />}
+        <Footer />
       </LayoutProviders>
     </MetadataContextProvider>
   )
 }
 
-Layout.defaultProps = { altFooter: false, flex: false }
+Layout.defaultProps = { flex: false }
 
 export default Layout
