@@ -75,9 +75,12 @@ const CareersPage = () => {
               them started in just a few minutes with the fastest and most
               accessible time series database.
             </p>
-            <Button className={caCss.card__cta} onClick={handleClick}>
-              Current openings
-            </Button>
+            <div className={caCss.careers_cta}>
+              <Button onClick={handleClick}>Openings</Button>
+              <Button variant="secondary" href="/about-us" newTab={false}>
+                Our Team
+              </Button>
+            </div>
           </div>
           <div
             className={clsx(

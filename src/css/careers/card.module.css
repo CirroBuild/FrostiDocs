@@ -40,8 +40,10 @@
   justify-content: center;
 }
 
-.card__cta {
-  align-self: baseline;
+.careers_cta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .card__content {
