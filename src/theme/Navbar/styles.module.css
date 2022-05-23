@@ -35,6 +35,12 @@
   background: var(--theme-navbar-background-color);
 }
 
+@media screen and (max-width: 550px) {
+  .inner {
+    padding: 0 calc(var(--theme-navbar-inner-padding) - 1.2rem);
+  }
+}
+
 .navbar {
   --ifm-navbar-padding-vertical: 0;
   --ifm-navbar-padding-horizontal: 0;

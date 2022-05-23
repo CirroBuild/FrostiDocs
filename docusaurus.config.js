@@ -127,7 +127,7 @@ const config = {
       },
       items: [
         {
-          label: "Products",
+          label: "Product",
           position: "left",
           items: [
             {
