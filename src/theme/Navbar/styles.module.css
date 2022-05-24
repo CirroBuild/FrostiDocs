@@ -105,6 +105,10 @@
   transform: translate(50%, -70%) rotateZ(45deg);
 }
 
+:global(html[data-theme="light"] .navbar__item.dropdown .navbar__link):after {
+  border-color: #000;
+}
+
 :global(.navbar__item.careers-link) {
   background: #313442;
   color: #fff;

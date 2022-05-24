@@ -6,6 +6,26 @@ import seCss from "../../css/section.module.css"
 import { logos } from "../../assets/logos"
 import { CustomerLogo } from "../../assets/types"
 
+const customerLogos = [
+  "yahoo",
+  "kepler",
+  "airbus",
+  "yc",
+  "aquis-exchange",
+  "sapient-industries",
+  "tqs-integration",
+  "syndica",
+  "copenhagen-atomics",
+  "turk-telekom",
+  "liveaction",
+  "toggle",
+  "apacheNifi",
+  "syntropy",
+].reduce((result, key) => {
+  result[key] = logos[key]
+  return result
+}, {}) as Record<string, CustomerLogo>
+
 type Props = {
   nbElements: number
 }
@@ -19,26 +39,6 @@ const Slideshow = ({ nbElements }: Props) => {
   const handleClickControl = (index: number) => {
     setIndex(index)
   }
-
-  const customerLogos = [
-    "yahoo",
-    "kepler",
-    "airbus",
-    "yc",
-    "aquis-exchange",
-    "sapient-industries",
-    "tqs-integration",
-    "syndica",
-    "copenhagen-atomics",
-    "turk-telekom",
-    "liveaction",
-    "toggle",
-    "tymlez",
-    "syntropy",
-  ].reduce((result, key) => {
-    result[key] = logos[key]
-    return result
-  }, {}) as Record<string, CustomerLogo>
 
   return (
     <section className={clsx(seCss["section--slim"])}>

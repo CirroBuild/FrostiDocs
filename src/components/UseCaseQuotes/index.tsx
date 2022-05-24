@@ -34,12 +34,9 @@ const UseCaseCustomers = ({
   return (
     <div className={ucCss["use-case-customers"]}>
       <div
-        className={clsx(
-          ucCss["use-case-customers__active"],
-          columnLayout !== undefined
-            ? ucCss["use-case-customers__active--column"]
-            : "",
-        )}
+        className={clsx(ucCss["use-case-customers__active"], {
+          [ucCss["use-case-customers__active--column"]]: columnLayout,
+        })}
       >
         <div>
           <img

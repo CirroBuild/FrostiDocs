@@ -3,7 +3,7 @@
   list-style: none;
 }
 
-.list__item {
+.item {
   position: relative;
   margin-bottom: 1.25rem;
   font-size: var(--font-size-big-1);
@@ -11,7 +11,7 @@
   padding-left: 2rem;
 }
 
-.list__item::before {
+.item::before {
   position: absolute;
   top: 0;
   left: 0;

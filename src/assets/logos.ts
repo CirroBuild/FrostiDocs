@@ -1,7 +1,7 @@
 import { CustomerLogo } from "./types"
 
 export const logos: Record<string, CustomerLogo> = {
-  yahoo:{
+  yahoo: {
     src: "/img/pages/customers/logos/yahoo.svg",
     alt: "Yahoo logo",
     width: 140,
@@ -139,5 +139,11 @@ export const logos: Record<string, CustomerLogo> = {
     src: "/img/pages/customers/logos/magicpixel.svg",
     height: 19,
     width: 126,
+  },
+  apacheNifi: {
+    src: "/img/pages/customers/logos/apache-nifi.svg",
+    alt: "Apache NiFi",
+    width: 120,
+    height: 50,
   },
 }
