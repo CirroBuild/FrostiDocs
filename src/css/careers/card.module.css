@@ -5,6 +5,10 @@
   justify-content: space-between;
 }
 
+.card--no-gap {
+  margin-bottom: 0;
+}
+
 .card__title {
   font-size: var(--font-size-big-3);
 }
@@ -48,6 +52,10 @@
 
 .card__content {
   font-size: var(--font-size-large);
+}
+
+.scrollAnchor {
+  margin-bottom: 6rem;
 }
 
 @media (max-width: 996px) {

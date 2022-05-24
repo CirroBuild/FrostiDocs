@@ -57,10 +57,10 @@ const CareersPage = () => {
   const title = "Careers at QuestDB"
   const description =
     "Join us at QuestDB to build breakthrough technology that will power the infrastructure of tomorrow."
-  const titleRef = useRef<HTMLHeadingElement | null>(null)
-  const handleClick = useCallback(() => {
-    titleRef.current?.scrollIntoView({ behavior: "smooth" })
-  }, [titleRef])
+  const scrollAnchorRef = useRef<HTMLDivElement | null>(null)
+  const onOpeningsClick = useCallback(() => {
+    scrollAnchorRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, [scrollAnchorRef])
 
   return (
     <Layout canonical="/careers" description={description} title={title}>
@@ -76,7 +76,7 @@ const CareersPage = () => {
               accessible time series database.
             </p>
             <div className={caCss.careers_cta}>
-              <Button onClick={handleClick}>Openings</Button>
+              <Button onClick={onOpeningsClick}>Openings</Button>
               <Button variant="secondary" href="/about-us" newTab={false}>
                 Our Team
               </Button>
@@ -97,7 +97,13 @@ const CareersPage = () => {
           </div>
         </div>
 
-        <div className={clsx(caCss.card, caCss["card--reverse"])}>
+        <div
+          className={clsx(
+            caCss.card,
+            caCss["card--reverse"],
+            caCss["card--no-gap"],
+          )}
+        >
           <div
             className={clsx(
               caCss.card__side,
@@ -141,11 +147,11 @@ const CareersPage = () => {
           </div>
         </div>
 
+        <div className={caCss.scrollAnchor} ref={scrollAnchorRef} />
+
         <div className={caCss.card}>
           <div className={caCss.card__side}>
-            <h2 className={caCss.card__title} ref={titleRef}>
-              Current openings
-            </h2>
+            <h2 className={caCss.card__title}>Current openings</h2>
           </div>
 
           <div className={clsx(caCss.card__side, caCss["card__side--center"])}>
