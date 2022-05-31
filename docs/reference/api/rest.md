@@ -55,20 +55,20 @@ documentation.
 `/imp` is expecting an HTTP POST request using the `multipart/form-data`
 Content-Type with following optional URL parameters which must be URL encoded:
 
-| Parameter            | Required | Default          | Description                                                                                                                                                                                                                                                     |
-| -------------------- | -------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `atomicity`          | No       | `2`              | `0`, `1` or `2`. Behaviour when an error is detected in the data. `0`: the entire file will be skipped. `1`: the row is skipped. `2`: the column is skipped.                                                                                                    |
-| `commitLag`          | No       | `0`              | commit lag of the import in microsecond precision (e.g. 2 minutes is expressed as 120000000, 120 followed by 6 zeros). For context, see [the commit lag guide](/docs/guides/out-of-order-commit-lag).                                                          |
+| Parameter            | Required | Default          | Description                                                                                                                                                                                                                                                      |
+| -------------------- | -------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `atomicity`          | No       | `2`              | `0`, `1` or `2`. Behaviour when an error is detected in the data. `0`: the entire file will be skipped. `1`: the row is skipped. `2`: the column is skipped.                                                                                                     |
+| `commitLag`          | No       | `0`              | commit lag of the import in microsecond precision (e.g. 2 minutes is expressed as 120000000, 120 followed by 6 zeros). For context, see [the commit lag guide](/docs/guides/out-of-order-commit-lag).                                                            |
 | `delimiter`          | No       |                  | URL encoded delimiter character. When set, import will try to detect the delimiter automatically. Since automatic delimiter detection requires at least two lines (rows) to be present in the file, this parameter may be used to allow single line file import. |
-| `durable`            | No       | `false`          | `true` or `false`. When set to `true`, import will be resilient against OS errors or power losses by forcing the data to be fully persisted before sending a response back to the user.                                                                         |
-| `fmt`                | No       | `tabular`        | Can be set to `json` to get the response formatted as such.                                                                                                                                                                                                     |
-| `forceHeader`        | No       | `false`          | `true` or `false`. When `false`, QuestDB will try to infer if the first line of the file is the header line. When set to `true`, QuestDB will expect that line to be the header line.                                                                           |
-| `maxUncommittedRows` | No       | 0                | The maximum number of uncommitted rows to keep in memory before triggering a sort and commit operation. For context, see [the commit lag guide](/docs/guides/out-of-order-commit-lag).                                                                         |
-| `name`               | No       | Name of the file | Name of the table to create, [see below](/docs/reference/api/rest#names).                                                                                                                                                                                      |
-| `overwrite`          | No       | `false`          | `true` or `false`. When set to true, any existing data or structure will be overwritten.                                                                                                                                                                        |
-| `partitionBy`        | No       | `NONE`           | See [partitions](/docs/concept/partitions#properties).                                                                                                                                                                                                         |
-| `skipLev`            | No       | `false`          | `true` or `false`. Skip “Line Extra Values”, when set to true, the parser will ignore those extra values rather than ignoring entire line. An extra value is something in addition to what is defined by the header.                                            |
-| `timestamp`          | No       |                  | Name of the column that will be used as a [designated timestamp](/docs/concept/designated-timestamp).                                                                                                                                                          |
+| `durable`            | No       | `false`          | `true` or `false`. When set to `true`, import will be resilient against OS errors or power losses by forcing the data to be fully persisted before sending a response back to the user.                                                                          |
+| `fmt`                | No       | `tabular`        | Can be set to `json` to get the response formatted as such.                                                                                                                                                                                                      |
+| `forceHeader`        | No       | `false`          | `true` or `false`. When `false`, QuestDB will try to infer if the first line of the file is the header line. When set to `true`, QuestDB will expect that line to be the header line.                                                                            |
+| `maxUncommittedRows` | No       | 0                | The maximum number of uncommitted rows to keep in memory before triggering a sort and commit operation. For context, see [the commit lag guide](/docs/guides/out-of-order-commit-lag).                                                                           |
+| `name`               | No       | Name of the file | Name of the table to create, [see below](/docs/reference/api/rest#names).                                                                                                                                                                                        |
+| `overwrite`          | No       | `false`          | `true` or `false`. When set to true, any existing data or structure will be overwritten.                                                                                                                                                                         |
+| `partitionBy`        | No       | `NONE`           | See [partitions](/docs/concept/partitions#properties).                                                                                                                                                                                                           |
+| `skipLev`            | No       | `false`          | `true` or `false`. Skip “Line Extra Values”, when set to true, the parser will ignore those extra values rather than ignoring entire line. An extra value is something in addition to what is defined by the header.                                             |
+| `timestamp`          | No       |                  | Name of the column that will be used as a [designated timestamp](/docs/concept/designated-timestamp).                                                                                                                                                            |
 
 ```shell title="Example usage"
 curl -F data=@weather.csv \
@@ -351,6 +351,8 @@ closed.
 
 ### Overview
 
+#### Parameters
+
 `/exec` is expecting an HTTP GET request with following query parameters:
 
 | Parameter       | Required | Default | Description                                                                                                                                                                            |
@@ -365,25 +367,17 @@ closed.
 
 The parameters must be URL encoded.
 
+#### Headers
+
+Supported HTTP headers:
+
+| Header              | Required | Description                                                               |
+| ------------------- | -------- | ------------------------------------------------------------------------- |
+| `Statement-Timeout` | No       | Query timeout in milliseconds, overrides default timeout from server.conf |
+
 ### Examples
 
-This endpoint returns responses in the following format:
-
-```json
-{
-  "query": string,
-  "columns": Array<{ "name": string, "type": string }>
-  "dataset": Array<Array<Value for Column1, Value for Column2>>,
-  "count": Optional<number>,
-  "timings": Optional<{ compiler: number, count: number, execute: number }>,
-  "explain": Optional<{ jitCompiled: boolean }>
-}
-```
-
-You can find the exact list of types in the
-[dedicated page](/docs/reference/sql/datatypes).
-
-Considering the query:
+#### SELECT query example:
 
 ```shell
 curl -G \
@@ -415,6 +409,43 @@ A HTTP status code of `200` is returned with the following response body:
 }
 ```
 
+SELECT query returns response in the following format:
+
+```json
+{
+  "query": string,
+  "columns": Array<{ "name": string, "type": string }>
+  "dataset": Array<Array<Value for Column1, Value for Column2>>,
+  "count": Optional<number>,
+  "timings": Optional<{ compiler: number, count: number, execute: number }>,
+  "explain": Optional<{ jitCompiled: boolean }>
+}
+```
+
+You can find the exact list of types in the
+[dedicated page](/docs/reference/sql/datatypes).
+
+
+#### UPDATE query example:
+
+This request executes an update of table `weather` setting 2 minutes query timeout
+
+```shell
+curl -G \
+  -H "Statement-Timeout: 120000" \
+  --data-urlencode "query=UPDATE weather SET tempF = tempF + 0.12 WHERE tempF > 60" \
+  http://localhost:9000/exec
+```
+
+A HTTP status code of `200` is returned with the following response body:
+
+```json
+{
+  "ddl": "OK",
+  "updated": 34
+}
+```
+
 ## /exp - Export data
 
 This endpoint allows you to pass url-encoded queries but the request body is
@@ -424,10 +455,10 @@ returned in a tabular form to be saved and reused as opposed to JSON.
 
 `/exp` is expecting an HTTP GET request with following parameters:
 
-|Parameter|Required|Description                                                                                                                                                                                                                 |
-|:--------|:-------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|`limit`  |No      |Paging opp parameter. For example, `limit=10,20` will return row numbers 10 through to 20 inclusive and `limit=20` will return first 20 rows, which is equivalent to `limit=0,20`. `limit=-20` will return the last 20 rows.|
-|`query`  |Yes     |URL encoded query text. It can be multi-line.                                                                                                                                                                               |
+| Parameter | Required | Description                                                                                                                                                                                                                  |
+| :-------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `limit`   | No       | Paging opp parameter. For example, `limit=10,20` will return row numbers 10 through to 20 inclusive and `limit=20` will return first 20 rows, which is equivalent to `limit=0,20`. `limit=-20` will return the last 20 rows. |
+| `query`   | Yes      | URL encoded query text. It can be multi-line.                                                                                                                                                                                |
 
 The parameters must be URL encoded.
 

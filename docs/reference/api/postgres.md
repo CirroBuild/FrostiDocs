@@ -17,6 +17,7 @@ See our "develop" docs for:
 
 * [Inserting](/docs/develop/insert-data#postgresql-wire-protocol)
 * [Querying](/docs/develop/query-data#postgresql-wire-protocol)
+* [Updating](/docs/develop/update-data#postgres-compatibility)
 
 ## Compatibility
 
@@ -25,7 +26,8 @@ See our "develop" docs for:
 - Querying (all types expect `BLOB`)
 - Prepared statements with bind parameters (check for specific libraries
   [below](/docs/reference/api/postgres#libraries--programmatic-clients))
-- `INSERT` statements with bind parameters (same)
+- `INSERT` statements with bind parameters
+- `UPDATE` statements with bind parameters
 - DDL execution
 - Batch inserts with `JDBC`
 - Plain authentication
@@ -38,12 +40,23 @@ languages can be found on the following pages:
   insert data.
 - [Query data](/docs/develop/query-data#postgresql-wire-protocol) shows how to
   run queries against tables.
+- [Update data](/docs/develop/update-data#postgres-compatibility) shows how to
+  update tables.  
+
+### List of supported connection properties
+
+| Name       | Example                    | Description                                                                                                                          |
+| ---------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `database` | qdb                        | Should be set to any value for example `qdb`, database name is ignored, QuestDB does not have database instance name                 |
+| `user`     | admin                      | User name configured in `pg.user` property in `server.conf`. Default value is `admin`                                                |
+| `password` | quest                      | Password from `pg.password` property in `server.conf`. Default value is `quest`                                                      |
+| `options`  | -c statement_timeout=60000 | The only supported option is `statement_timeout`. It specifies maximum execution time in milliseconds for SELECT or UPDATE statement |
 
 ### List of unsupported features
 
 - SSL
 - Remote file upload (`COPY` from `stdin`)
-- `UPDATE` and `DELETE` statements
+- `DELETE` statements
 - `BLOB` transfer
 
 ## Recommended third party tools
@@ -60,7 +73,7 @@ you think we are missing something important for your workflow.
 
 #### [PSQL](https://www.postgresql.org/docs/current/app-psql.html) `12`
 
-Support for `SELECT`, `INSERT`, `CREATE`, `DROP`, `TRUNCATE`.
+Support for `SELECT`, `INSERT`, `UPDATE`, `CREATE`, `DROP`, `TRUNCATE`.
 
 ### Libraries / Programmatic clients
 

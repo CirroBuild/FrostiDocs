@@ -802,8 +802,7 @@ use of this package can be found on the
 
 This example uses naive `Date.now() * 1000` inserts for Timestamp types in
 microsecond resolution. For accurate microsecond timestamps, the
-[node-microtime](https://github.com/wadey/node-microtime) package can be used
-which makes system calls to `tv_usec` from C++.
+[process.hrtime.bigint()](https://nodejs.org/api/process.html#processhrtimebigint) call can be used.
 
 ```javascript
 "use strict"

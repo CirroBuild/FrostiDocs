@@ -17,8 +17,8 @@ partitions can be found in the [examples section below](#examples).
 
 :::caution
 
-This operation is only supported on tables which **do not contain** `SYMBOL`
-types
+This operation is only supported on the partiton was copied from the same table at some point in the past.
+Moving partitions between tables or database instances is not supported.
 
 :::
 

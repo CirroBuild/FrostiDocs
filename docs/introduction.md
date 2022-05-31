@@ -184,7 +184,7 @@ can be used in QuestDB.
 - [SNAPSHOT](/docs/reference/sql/snapshot)
 - [TRUNCATE TABLE](/docs/reference/sql/truncate)
 - [UNION](/docs/reference/sql/union)
-- [VACUUM PARTITIONS](/docs/reference/sql/vacuum-partitions)
+- [VACUUM TABLE](/docs/reference/sql/vacuum-table)
 - [WHERE](/docs/reference/sql/where)
 - [WITH](/docs/reference/sql/with)
 

@@ -137,7 +137,7 @@ information on setting this parameter, see the
 
 ```ini title="/path/to/server.conf"
 # Default is 60 sec
-query.timeout.sec=10
+query.timeout.sec=60
 ```
 
 ## Next up

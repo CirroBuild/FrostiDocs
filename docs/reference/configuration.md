@@ -452,7 +452,7 @@ setting deprecation warnings.
 Configuration errors can optionally cause the database to fail its startup.
 
 | Property                 | Default | Description                                                    |
-|--------------------------|---------|----------------------------------------------------------------|
+| ------------------------ | ------- | -------------------------------------------------------------- |
 | config.validation.strict | false   | When enabled, startup fails if there are configuration errors. |
 
 *We recommended enabling strict validation.*

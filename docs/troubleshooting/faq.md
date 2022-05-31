@@ -15,7 +15,7 @@ immediately after being received. Refer to
 [InfluxDB line protocol](/docs/reference/api/ilp/tcp-receiver#commit-strategy)
 guide to understand these rules.
 
-## How do I update or delete a row?
+## How do I delete a row?
 
 See our guide on [modifying data](/docs/guides/modifying-data).
 
