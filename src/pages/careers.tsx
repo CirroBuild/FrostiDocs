@@ -51,6 +51,11 @@ const currentOpenings: Opening[] = [
     title: "Solution Engineer",
     location: "Remote",
   },
+  {
+    href: "/careers/ux-designer/",
+    title: "UX Designer",
+    location: "Remote",
+  },
 ]
 
 const CareersPage = () => {
