@@ -146,6 +146,10 @@
   from = "/docs/faq/troubleshooting"
   to = "/docs/troubleshooting/faq"
 
+[[redirects]]
+  from = "/blog/2022/05/26/multi-threaded-sql-filters"
+  to = "/blog/2022/05/26/performance-questdb-versus-clickhouse-timescale"
+
 # Deleted pages, redirected to closest equivalent.
 [[redirects]]
     from = "/docs/guides/aws-packer"

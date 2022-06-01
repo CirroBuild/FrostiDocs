@@ -1,6 +1,6 @@
 ---
 title:
-  QuestDB's multi-threaded SQL filters compared to Clickhouse and TimescaleDB
+  1.2 billion records in 308 milliseconds. QuestDB vs Clickhouse vs TimescaleDB
 author: Andrey Pechkurov
 author_title: QuestDB Engineering
 author_url: https://github.com/puzpuzpuz
