@@ -148,7 +148,7 @@
 
 [[redirects]]
   from = "/blog/2022/05/26/multi-threaded-sql-filters"
-  to = "/blog/2022/05/26/performance-questdb-versus-clickhouse-timescale"
+  to = "/blog/2022/05/26/query-benchmark-questdb-versus-clickhouse-timescale"
 
 # Deleted pages, redirected to closest equivalent.
 [[redirects]]

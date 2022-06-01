@@ -1,6 +1,6 @@
 ---
 title:
-  1.2 billion records in 308 milliseconds. QuestDB vs Clickhouse vs TimescaleDB
+  '4Bn rows/sec query benchmark: Clickhouse vs QuestDB vs Timescale'
 author: Andrey Pechkurov
 author_title: QuestDB Engineering
 author_url: https://github.com/puzpuzpuz
@@ -71,9 +71,9 @@ Loading the data is as simple as:
 ```
 
 Now, when we have the data in the database, we're going to execute the following
-query on the `readings` table:
+query on the `readings` table<a name="filter-query"></a>:
 
-```questdb-sql
+```questdb-sql title="Query 1"
 SELECT *
 FROM readings WHERE velocity > 90.0
  AND latitude >= 7.75 AND latitude <= 7.80
@@ -113,7 +113,7 @@ Be prepared to wait for quite a while for the data to get in this time. We
 observed 5-8x ingestion rate difference between QuestDB and two other databases
 in this particular environment. Yet, that's nothing more but a note for anyone
 who wants to repeat the benchmark. If you'd like learn more on the ingestion
-perfomance topic, check out this
+performance topic, check out this
 [blog post](https://questdb.io/time-series-benchmark-suite/).
 
 Finally, we're able to run the first query and measure the hot execution time.
@@ -142,14 +142,15 @@ We're ready to do the benchmark run.
 import Screenshot from "@theme/Screenshot"
 
 <Screenshot
-  alt="A chart comparing hot query execution times of QuestDB, ClickHouse and TimescaleDB"
+  alt="A chart comparing hot query execution times of QuestDB, ClickHouse and TimescaleDB - Query 1"
+  title="Hot query execution times of QuestDB, ClickHouse and TimescaleDB - Query 1"
   height={265}
   src="/img/blog/2022-05-26/filter-benchmark.png"
   width={700}
 />
 
 The above chart shows that QuestDB is an order of magnitude faster than both
-TimescaleDB and ClickHouse in this specific exercise.
+TimescaleDB and ClickHouse in this specific [query](#filter-query).
 
 Interestingly, an index-based scan doesn't help TimescaleDB to win the
 competition. This is a nice illustration of the fact that a specialized
@@ -162,7 +163,7 @@ filter. QuestDB supports that elegantly through negative LIMIT clause values. If
 we were to query ten latest measurements sent from fast-moving, yet
 fuel-efficient trucks it would look like the following:
 
-```questdb-sql
+```questdb-sql title="Query 2 (QuestDB)"
 SELECT *
 FROM readings
 WHERE velocity > 75.0 AND fuel_consumption < 10.0
@@ -177,7 +178,7 @@ column, we also didn't have to specify ORDER BY clause.
 
 In TimescaleDB this query would look more verbose:
 
-```questdb-sql
+```questdb-sql title="Query 2 (ClickHouse and TimescaleDB)"
 SELECT *
 FROM readings
 WHERE velocity > 75.0 AND fuel_consumption < 10.0
@@ -192,7 +193,8 @@ another column being used to store timestamps (`created_at` instead of `time`).
 How do databases from our list deal with such query? Let's measure and find out!
 
 <Screenshot
-  alt="A chart comparing hot LIMIT query execution times of QuestDB, ClickHouse and TimescaleDB"
+  alt="A chart comparing hot LIMIT query execution times of QuestDB, ClickHouse and TimescaleDB - Query 2"
+  title="Hot LIMIT query execution times of QuestDB, ClickHouse and TimescaleDB - Query 2"
   height={283}
   src="/img/blog/2022-05-26/filter-with-limit-benchmark.png"
   width={734}
@@ -228,6 +230,7 @@ timestamp.
 
 <Screenshot
   alt="A diagram showing column file partitioning"
+  title="Column file layout example"
   height={301}
   src="/img/blog/2022-05-26/storage-format.png"
   width={757}
@@ -243,6 +246,7 @@ frame utilizing both CPU and disk resources in a much more optimal way.
 
 <Screenshot
   alt="A diagram showing how parallel page frame scanning works"
+  title="Parallel page frame scanning example"
   height={403}
   src="/img/blog/2022-05-26/how-filtering-works.png"
   width={682}
@@ -272,7 +276,7 @@ performance? Let's find out!
 We'll be using the same benchmark environment as above while using a slightly
 different query to keep things simple:
 
-```questdb-sql
+```questdb-sql title="Query 3"
 SELECT count(*)
 FROM readings
 WHERE velocity > 75.0 AND fuel_consumption < 10.0;
@@ -294,7 +298,8 @@ for the types of the queries supported by the JIT compiler.
 The below chart shows the cold execution times.
 
 <Screenshot
-  alt="A chart comparing cold query execution time improvements in QuestDB 6.3"
+  alt="A chart comparing cold query execution time improvements in QuestDB 6.3 - Query 3"
+  title="Cold query execution time improvements in QuestDB 6.3 - Query 3"
   height={273}
   src="/img/blog/2022-05-26/before-and-after-cold-runs.png"
   width={718}
@@ -326,7 +331,8 @@ there we go. In the next and all of the subsequent benchmark runs, we measure
 the average hot execution time for the same query.
 
 <Screenshot
-  alt="A chart comparing cold query execution time improvements in QuestDB 6.3"
+  alt="A chart comparing hot query execution time improvements in QuestDB 6.3 - Query 3"
+  title="Hot query execution time improvements in QuestDB 6.3 - Query 3"
   height={281}
   src="/img/blog/2022-05-26/before-and-after-hot-runs.png"
   width={768}

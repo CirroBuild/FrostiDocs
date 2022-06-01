@@ -64,6 +64,7 @@ import Screenshot from "@theme/Screenshot"
 
 <Screenshot
   alt="A diagram comparing query execution times with JIT enabled and disabled"
+  title="Query execution times with JIT enabled and disabled"
   height={598}
   src="/img/blog/2022-01-12/cold-v-hot-run-two.png"
   width={650}
@@ -176,6 +177,7 @@ tables.
 
 <Screenshot
   alt="Query execution time benchmark"
+  title="Query execution time benchmark"
   height={191}
   src="/img/blog/2022-01-27/table-autocomplete.png"
   width={650}
