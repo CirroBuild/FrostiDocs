@@ -27,13 +27,10 @@
   font-size: var(--font-size-large);
 }
 
-.use-case__list__item {
-  /*font-size: var(--font-size-large);*/
-}
-
 @media (max-width: 997px) {
   .use-case__title {
     font-size: var(--font-size-big-3);
+    line-height: 1.5;
     text-align: center;
   }
 
@@ -46,6 +43,7 @@
   }
 
   .use-case__industries {
+    width: 100%;
     max-width: 100%;
     margin-right: 0;
     margin-bottom: 1.5rem;
@@ -54,5 +52,24 @@
   .use-case__industries--wide {
     max-width: 100%;
     margin-left: 0;
+  }
+
+  .listItem {
+    font-size: var(--font-size-large);
+  }
+
+  .section {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 450px) {
+  .section {
+    padding-bottom: 0rem;
+  }
+
+  .useCaseHighlight {
+    padding: 2rem 1.5rem;
   }
 }

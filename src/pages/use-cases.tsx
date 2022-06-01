@@ -20,7 +20,7 @@ const List = ({
   items: string[]
   itemClassName: string
 }) => (
-  <ul className={liCss.list}>
+  <ul className={clsx(liCss.list, ucCss.list)}>
     {items.map((text, index) => (
       <li key={index} className={itemClassName}>
         {text}
@@ -30,7 +30,13 @@ const List = ({
 )
 
 const Heading = () => (
-  <section className={clsx(seCss["section--inner"], seCss["section--center"])}>
+  <section
+    className={clsx(
+      seCss["section--inner"],
+      seCss["section--center"],
+      ucCss.section,
+    )}
+  >
     <div className={seCss.section__header}>
       <h1
         className={clsx(seCss.section__title, seCss["section__title--accent"])}
@@ -91,11 +97,17 @@ const useCaseHighlights: UseCaseHighlightItem[] = [
 ]
 
 const UseCaseHighlights = () => (
-  <section className={clsx(seCss["section--inner"], seCss["section--center"])}>
+  <section
+    className={clsx(
+      seCss["section--inner"],
+      seCss["section--center"],
+      ucCss.section,
+    )}
+  >
     <div className={hlCss.highlights}>
       {useCaseHighlights.map((highlight) => (
         <div
-          className={flCss.flashy}
+          className={clsx(flCss.flashy, ucCss.useCaseHighlight)}
           key={`${highlight.title}-${highlight.key}`}
         >
           <img
@@ -127,15 +139,20 @@ const monitoringCustomers: Customer[] = [
     logoWidth: 120,
   },
   {
-    key: "central-group",
+    key: "syndica",
+    logoWidth: 100,
   },
   {
     key: "syntropy",
     logoWidth: 120,
   },
   {
-    key: "syndica",
-    logoWidth: 100,
+    key: "apacheNifi",
+    logoWidth: 110,
+    logoHeight: 35,
+  },
+  {
+    key: "central-group",
   },
   {
     key: "prediko",
@@ -145,23 +162,18 @@ const monitoringCustomers: Customer[] = [
     key: "synology",
     logoWidth: 100,
   },
-  {
-    key: "apacheNifi",
-    logoWidth: 110,
-    logoHeight: 40,
-  },
 ]
 
 const Monitoring = () => (
   <section className={seCss.section} id="monitoring-and-real-time-analytics">
-    <div className={seCss["section--inner"]}>
+    <div className={clsx(seCss["section--inner"], ucCss.section)}>
       <div className={ucCss["use-case__half"]}>
         <h2 className={clsx(seCss.section__title, ucCss["use-case__title"])}>
           Monitoring and Real-time analytics
         </h2>
 
         <List
-          itemClassName={clsx(liCss.item, ucCss["use-case__list__item"])}
+          itemClassName={clsx(liCss.item, ucCss.listItem)}
           items={[
             "On the fly aggregations and downsampling for real-time dashboards",
             "DevOps monitoring and alerting",
@@ -176,12 +188,11 @@ const Monitoring = () => (
         src="/img/pages/use-cases/real-time-analytics-jumbo.svg"
         alt="An illustration of real-time analytics and monitoring"
         width="630"
-        height="532"
         className={ucCss["use-case__image"]}
       />
     </div>
 
-    <div className={seCss["section--inner"]}>
+    <div className={clsx(seCss["section--inner"], ucCss.section)}>
       <div className={ucCss["use-case__industries"]}>
         <h4>Applicable industries</h4>
         <List
@@ -215,21 +226,22 @@ const marketDataCustomers: Customer[] = [
   },
   {
     key: "coinhall",
+    logoWidth: 140,
+    logoHeight: 50,
   },
   {
     key: "aquis-exchange",
-    logoOffset: 3,
+    logoWidth: 90,
   },
 ]
 
 const MarketData = () => (
   <section className={seCss.section} id="financial-market-data">
-    <div className={clsx(seCss["section--inner"])}>
+    <div className={clsx(seCss["section--inner"], ucCss.section)}>
       <img
         src="/img/pages/use-cases/financial-market-data-jumbo.svg"
         alt="An illustration of financial market data charts"
         width="565"
-        height="480"
         className={ucCss["use-case__image"]}
       />
       <div className={ucCss["use-case__half"]}>
@@ -238,7 +250,7 @@ const MarketData = () => (
         </h2>
 
         <List
-          itemClassName={clsx(liCss.item, ucCss["use-case__list__item"])}
+          itemClassName={clsx(liCss.item, ucCss.listItem)}
           items={[
             "Real-time market data with dashboard integrations",
             "Fast aggregations for OHLC and candlestick charts",
@@ -250,7 +262,7 @@ const MarketData = () => (
       </div>
     </div>
 
-    <div className={clsx(seCss["section--inner"])}>
+    <div className={clsx(seCss["section--inner"], ucCss.section)}>
       <div className={ucCss["use-case__industries"]}>
         <h4>Applicable industries</h4>
         <List
@@ -314,7 +326,7 @@ const IndustrialTelemetry = () => (
         </h2>
 
         <List
-          itemClassName={clsx(liCss.item, ucCss["use-case__list__item"])}
+          itemClassName={clsx(liCss.item, ucCss.listItem)}
           items={[
             "Store high frequency sensor data with continuous data ingestion",
             "Process metrics in the manufacturing process: vibrations, pressure, temperatures, pH levels",
@@ -328,7 +340,6 @@ const IndustrialTelemetry = () => (
         src="/img/pages/use-cases/industrial-telemetry-jumbo.svg"
         alt="An illustration of industrial analytics charts"
         width="585"
-        height="498"
         className={ucCss["use-case__image"]}
       />
     </div>

@@ -75,3 +75,13 @@
     margin-left: 0;
   }
 }
+
+@media (max-width: 570px) {
+  .use-case-customers { 
+    margin-bottom: 1rem;
+  }
+
+  .use-case-customers__logos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
