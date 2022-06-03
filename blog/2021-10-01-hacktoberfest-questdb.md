@@ -83,7 +83,7 @@ projects; here are the places to get support and hints from our team:
 - GitHub Discussions:
   [https://github.com/questdb/questdb/discussions](https://github.com/questdb/questdb/discussions)
 - QuestDB Documentation:
-  [https://questdb.io/docs/introduction/](/docs/introduction/)
+  [https://questdb.io/docs](/docs/)
 
 Also, don't forget to follow us on social media to receive the latest updates:
 

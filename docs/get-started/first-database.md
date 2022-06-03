@@ -8,7 +8,7 @@ description:
 
 The goal of this guide is to explore QuestDB's features and to interact with
 time series data and assumes you have an instance running. You can find guides
-to setup QuestDB on the [introduction page](/docs/introduction). In this
+to setup QuestDB on the [introduction page](/docs/). In this
 tutorial, you will learn how to:
 
 1. [Create tables](#creating-a-table)
