@@ -92,7 +92,11 @@
 
   --theme-section-odd-bg-color: var(--palette-rock);
 
+  --theme-card-text-color: var(--palette-white);
+  --theme-card-title-color: var(--palette-white);
   --theme-card-bg-color: var(--palette-rock);
+  --theme-card-bg-color-hover: rgb(47, 49, 63);
+  --theme-card-border-color: rgba(var(--palette-rock), 0.5);
   --theme-card-border-radius: 8px;
   --theme-card-secondary-bg-color: #21222c;
   --theme-card-illustration-bg-color: var(--palette-midnight);
@@ -180,7 +184,9 @@ html[data-theme="light"] {
   --theme-input-text-color: #555B88;
 
   --theme-card-bg-color: #F0F1F5;
+  --theme-card-bg-color-hover: rgb(225, 227, 235);
   --theme-card-text-color: #21222C;
+  --theme-card-title-color: #21222C;
 
   --theme-card-secondary-bg-color: #dde0e9;
   --theme-card-secondary-text-color: #21222C;

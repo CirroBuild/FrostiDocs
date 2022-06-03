@@ -1,0 +1,31 @@
+.posts {
+  --cols: 1;
+  --gap: 4rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: var(--gap);
+  margin-bottom: 5rem;
+}
+
+@media screen and (min-width: 550px) {
+  .posts {
+    --cols: 2;
+    --gap: 3rem 1rem;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .root {
+    margin-top: 5rem;
+  }
+
+  .posts {
+    --cols: 3;
+    --gap: 4rem 2rem;
+  }
+}
+
+.tags {
+  margin-bottom: 2rem;
+}
