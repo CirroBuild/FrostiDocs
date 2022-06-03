@@ -1,5 +1,6 @@
 import React from "react"
 import type { Props as BlogPostItemProps } from "@theme/BlogPostItem"
+import { Chip } from "../Chip"
 import styles from "./styles.module.css"
 
 export const ListItem = ({
@@ -20,9 +21,12 @@ export const ListItem = ({
 
       <div className={styles.content}>
         <div className={styles.tags}>
-          <a href={tag.permalink} className={styles.tag}>
-            {tag.label}
-          </a>
+          <Chip
+            label={tag.label}
+            permalink={tag.permalink}
+            skin="secondary"
+            size="small"
+          />
         </div>
 
         <h3 className={styles.title}>

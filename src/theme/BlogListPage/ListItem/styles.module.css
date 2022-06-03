@@ -1,5 +1,4 @@
 .root {
-  --tag-color: var(--palette-pink);
   --author-color: var(--palette-turquoise);
   --content-padding: 1.5rem;
 
@@ -46,24 +45,11 @@
   margin-bottom: 1.5rem;
 }
 
-.tag {
-  margin-right: 0.5rem;
-  color: var(--tag-color);
-}
-
-.tag:hover {
-  color: var(--tag-color);
-}
-
-.tag:last-child {
-  margin-right: 0;
-}
-
 .title {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
-  height: 100px;
+  height: 110px;
   overflow: hidden;
   color: var(--theme-text-color);
   font-size: 1.5rem;
@@ -72,7 +58,7 @@
 }
 
 
-@media screen and (min-width: 500px) and (max-width: 900px) {
+@media screen and (min-width: 500px) and (max-width: 1000px) {
   .title {
     font-size: 1.2rem;
   }

@@ -52,8 +52,9 @@ function BlogListPage(props: Props): JSX.Element {
   }>("docusaurus-plugin-content-blog")
 
   const sortedTags = Object.values(tags)
+    .filter((tag) => categories.every(({ url }) => url !== tag.permalink))
     .sort((a, b) => b.items.length - a.items.length)
-    .slice(0, 6)
+    .slice(0, 7)
   const { blogDescription, blogTitle, permalink } = metadata
   const isBlogOnlyMode = permalink === "/"
   const title = isBlogOnlyMode ? siteTitle : blogTitle
@@ -93,7 +94,10 @@ function BlogListPage(props: Props): JSX.Element {
           activeCategory={((metadata as unknown) as Tag).permalink}
           categories={categories}
         />
-        <Chips items={sortedTags} />
+        <Chips
+          activeChip={((metadata as unknown) as Tag).permalink}
+          items={sortedTags}
+        />
 
         <h2>Blog posts</h2>
         <div className={styles.posts}>

@@ -4,9 +4,10 @@ import styles from "./styles.module.css"
 
 type Props = {
   items: Array<{ name: string; permalink: string }>
+  activeChip?: string
 }
 
-export const Chips = ({ items }: Props) => (
+export const Chips = ({ items, activeChip }: Props) => (
   <div className={styles.root}>
     {items.map(({ name, permalink }) => (
       <Chip
@@ -14,6 +15,7 @@ export const Chips = ({ items }: Props) => (
         className={styles.chip}
         label={name}
         permalink={permalink}
+        active={activeChip === permalink}
       />
     ))}
 
