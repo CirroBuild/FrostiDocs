@@ -13,7 +13,6 @@ import { ListItem } from "./ListItem"
 import { Categories } from "./Categories"
 import type { Props as CategoriesProps } from "./Categories"
 import { Chips } from "./Chips"
-import clsx from "clsx"
 
 const categories: CategoriesProps["categories"] = [
   {
@@ -73,42 +72,38 @@ function BlogListPage(props: Props): JSX.Element {
         tag: "blog_posts_list",
       }}
     >
-      <div className="container margin-vert--lg">
-        <div className="row">
-          <main className={clsx("col", "col--12", styles.root)}>
-            {latestPost !== undefined && (
-              <BlogPostItem
-                key={latestPost.content.metadata.permalink}
-                frontMatter={latestPost.content.frontMatter}
-                metadata={{ ...latestPost.content.metadata, tags: [] }}
-                truncated={latestPost.content.metadata.truncated}
-              >
-                {React.createElement(latestPost.content)}
-              </BlogPostItem>
-            )}
+      <main className={styles.root}>
+        {latestPost !== undefined && (
+          <div className={styles.latestPost}>
+            <BlogPostItem
+              key={latestPost.content.metadata.permalink}
+              frontMatter={latestPost.content.frontMatter}
+              metadata={{ ...latestPost.content.metadata, tags: [] }}
+              truncated={latestPost.content.metadata.truncated}
+            >
+              {React.createElement(latestPost.content)}
+            </BlogPostItem>
+          </div>
+        )}
 
-            <h2>Popular topics</h2>
-            {/* BlogListPage component is used for blog and for tags.
-              When rendered for tags, then `metadata` includes tag, instead of blog data */}
-            <Categories
-              activeCategory={((metadata as unknown) as Tag).permalink}
-              categories={categories}
-            />
+        <h2>Popular topics</h2>
+        {/* BlogListPage component is used for blog and for tags.
+                When rendered for tags, then `metadata` includes tag, instead of blog data */}
+        <Categories
+          activeCategory={((metadata as unknown) as Tag).permalink}
+          categories={categories}
+        />
+        <Chips items={sortedTags} />
 
-            <h2>Other topics</h2>
-            <Chips items={sortedTags} />
-
-            <h2>Blog posts</h2>
-            <div className={styles.posts}>
-              {posts.map(({ content }) => (
-                <ListItem key={content.metadata.permalink} content={content} />
-              ))}
-            </div>
-
-            <BlogListPaginator metadata={metadata} />
-          </main>
+        <h2>Blog posts</h2>
+        <div className={styles.posts}>
+          {posts.map(({ content }) => (
+            <ListItem key={content.metadata.permalink} content={content} />
+          ))}
         </div>
-      </div>
+
+        <BlogListPaginator metadata={metadata} />
+      </main>
     </Layout>
   )
 }

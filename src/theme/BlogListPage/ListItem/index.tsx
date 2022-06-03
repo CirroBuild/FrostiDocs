@@ -28,7 +28,9 @@ export const ListItem = ({
         <h3 className={styles.title}>
           <a href={content.metadata.permalink}>{content.metadata.title}</a>
         </h3>
-        <div className={styles.author}>{content.frontMatter.author}</div>
+        <div className={styles.author}>
+          by {content.frontMatter.author} on {content.metadata.formattedDate}
+        </div>
       </div>
     </a>
   )
