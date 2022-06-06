@@ -152,6 +152,10 @@ const config = {
               to: "/enterprise",
             },
             {
+              label: "Use Cases",
+              to: "/use-cases",
+            },
+            {
               label: "Customers",
               to: "/customers",
             },
@@ -215,6 +219,10 @@ const config = {
             {
               label: "Enterprise",
               to: "/enterprise",
+            },
+            {
+              label: "Use Cases",
+              to: "/use-cases",
             },
             {
               label: "Customers",
