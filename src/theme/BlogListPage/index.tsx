@@ -1,6 +1,5 @@
 import React from "react"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
-import { usePluginData } from "@docusaurus/useGlobalData"
 import Layout from "@theme/Layout"
 import BlogPostItem from "@theme/BlogPostItem"
 import BlogListPaginator from "@theme/BlogListPaginator"
@@ -13,50 +12,58 @@ import { ListItem } from "./ListItem"
 import { Categories } from "./Categories"
 import type { Props as CategoriesProps } from "./Categories"
 import { Chips } from "./Chips"
+import type { Props as ChipProps } from "./Chips"
 
 const categories: CategoriesProps["categories"] = [
   {
-    title: "Tutorials",
+    title: "Benchmarks",
     description:
-      "Step-by-step toturials and guides for developers to build time series applications",
-    url: "/tutorial",
+      "Reproducible benchmarks of QuestDB and other databases using open source benchmarking frameworks",
+    url: "/blog/tags/benchmark",
   },
   {
-    title: "Engineering",
+    title: "Demos",
     description:
-      "Updates about QuestDB releases, introduction of new features, and engineering stories",
-    url: "/blog/tags/engineering",
+      "Demos involving QuestDB and other popular open source tools for a wide range of use cases",
+    url: "/blog/tags/demo",
+  },
+  {
+    title: "Tutorials",
+    description:
+      "Step-by-step tutorials and guides for developers to build applications with QuestDB",
+    url: "/tutorial",
   },
   {
     title: "User Stories",
     description:
-      "How our users from various industries implement QuestDB in thier projects",
+      "How QuestDB powers the core infrastructure of our users for time series data and real-time analytics",
     url: "/customers",
   },
-  {
-    title: "Company",
-    description: "News and annoucements related to the company behind QuestDB",
-    url: "/blog/tags/questdb",
-  },
 ]
+
+const prioritizedTags: ChipProps["items"] = [
+  "release",
+  "company",
+  "engineering",
+  "community",
+  "kafka",
+  "prometheus",
+  "postgres",
+  "data science",
+].map((tag) => ({
+  name: tag,
+  permalink: `/blog/tags/${tag.replace(/ /g, "-")}`,
+}))
 
 function BlogListPage(props: Props): JSX.Element {
   const { metadata, items } = props
   const {
     siteConfig: { title: siteTitle },
   } = useDocusaurusContext()
-  const { tags } = usePluginData<{
-    tags: {
-      [key: string]: { name: string; permalink: string; items: string[] }
-    }
-  }>("docusaurus-plugin-content-blog")
-
-  const sortedTags = Object.values(tags)
-    .filter((tag) => categories.every(({ url }) => url !== tag.permalink))
-    .sort((a, b) => b.items.length - a.items.length)
-    .slice(0, 7)
   const { blogDescription, blogTitle, permalink } = metadata
   const isBlogOnlyMode = permalink === "/"
+  const isTagsPage =
+    typeof ((metadata as unknown) as Tag).allTagsPath !== "undefined"
   const title = isBlogOnlyMode ? siteTitle : blogTitle
 
   const posts = [...items]
@@ -96,13 +103,24 @@ function BlogListPage(props: Props): JSX.Element {
         />
         <Chips
           activeChip={((metadata as unknown) as Tag).permalink}
-          items={sortedTags}
+          items={prioritizedTags}
         />
 
         <h2>Blog posts</h2>
         <div className={styles.posts}>
           {posts.map(({ content }) => (
-            <ListItem key={content.metadata.permalink} content={content} />
+            <ListItem
+              key={content.metadata.permalink}
+              content={content}
+              forcedTag={
+                isTagsPage
+                  ? {
+                      label: ((metadata as unknown) as Tag).name,
+                      permalink: metadata.permalink,
+                    }
+                  : undefined
+              }
+            />
           ))}
         </div>
 

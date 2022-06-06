@@ -3,12 +3,13 @@ import type { Props as BlogPostItemProps } from "@theme/BlogPostItem"
 import { Chip } from "../Chip"
 import styles from "./styles.module.css"
 
-export const ListItem = ({
-  content,
-}: {
+type Props = {
   content: Omit<BlogPostItemProps, "children">
-}) => {
-  const tag = content.metadata.tags[0] ?? {}
+  forcedTag?: { label: string; permalink: string }
+}
+
+export const ListItem = ({ forcedTag, content }: Props) => {
+  const tag = forcedTag ?? content.metadata.tags[0] ?? {}
 
   const imageUrl = content.frontMatter.image ?? "/img/tutorial/placeholder.png"
 

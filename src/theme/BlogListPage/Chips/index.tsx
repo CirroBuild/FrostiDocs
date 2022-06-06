@@ -2,7 +2,7 @@ import React from "react"
 import { Chip } from "../Chip"
 import styles from "./styles.module.css"
 
-type Props = {
+export type Props = {
   items: Array<{ name: string; permalink: string }>
   activeChip?: string
 }

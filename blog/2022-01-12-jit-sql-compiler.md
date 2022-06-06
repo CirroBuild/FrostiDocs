@@ -16,7 +16,7 @@ keywords:
   - database
   - engineering
 image: /img/blog/2022-01-12/banner.png
-tags: [engineering, release, story, benchmark, performance]
+tags: [engineering, story, performance]
 ---
 
 import Banner from "@theme/Banner"

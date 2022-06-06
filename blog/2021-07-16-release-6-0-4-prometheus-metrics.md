@@ -14,7 +14,7 @@ keywords:
   - timeseries
   - database
 image: /img/blog/2021-07-16/banner.png
-tags: [prometheus, postgres, influxdb, telegraf, release]
+tags: [prometheus, influxdb, telegraf, release]
 ---
 
 We've published the latest QuestDB release, and it focuses on community-driven

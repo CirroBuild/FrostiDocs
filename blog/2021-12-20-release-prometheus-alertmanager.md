@@ -16,7 +16,7 @@ keywords:
   - timeseries
   - database
 image: /img/blog/2021-12-20/banner.png
-tags: [engineering, release, team, prometheus]
+tags: [release, team, prometheus]
 ---
 
 import Banner from "@theme/Banner"

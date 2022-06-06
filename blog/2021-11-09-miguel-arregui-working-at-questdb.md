@@ -12,7 +12,7 @@ keywords:
   - remote
   - engineering
 image: /img/blog/2021-11-09/banner.png
-tags: [company, team, engineering]
+tags: [company, team]
 ---
 
 import Banner from "@theme/Banner"
