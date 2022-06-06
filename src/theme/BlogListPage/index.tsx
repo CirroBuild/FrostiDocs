@@ -31,7 +31,7 @@ const categories: CategoriesProps["categories"] = [
     title: "User Stories",
     description:
       "How our users from various industries implement QuestDB in thier projects",
-    url: "/blog/tags/story",
+    url: "/customers",
   },
   {
     title: "Company",
