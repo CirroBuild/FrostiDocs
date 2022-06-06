@@ -6,7 +6,7 @@ author_url: https://github.com/patrickSpaceSurfer
 description:
   QuestDB has added authentication for InfluxDB line protocol over TCP
 image: /img/blog/2020-10-20/banner.jpg
-tags: [influxdb, story, authentication]
+tags: [engineering, authentication, influxdb]
 ---
 
 import Banner from "@theme/Banner"

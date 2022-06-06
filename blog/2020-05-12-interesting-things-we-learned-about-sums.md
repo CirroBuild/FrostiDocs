@@ -16,7 +16,7 @@ keywords:
   - databases
   - simd
   - clickhouse
-tags: [performance, engineering, architecture, algorithms]
+tags: [engineering, benchmark, performance]
 image: /img/blog/2020-05-12/banner.png
 ---
 

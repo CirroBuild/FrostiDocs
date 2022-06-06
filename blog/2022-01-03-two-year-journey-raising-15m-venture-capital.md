@@ -17,7 +17,7 @@ keywords:
   - startup
   - team
 image: /img/blog/2022-01-03/banner.jpg
-tags: [funding, story, news, hackernews]
+tags: [company, entrepreneurship, funding, story]
 ---
 
 import Banner from "@theme/Banner"

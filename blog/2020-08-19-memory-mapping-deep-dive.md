@@ -14,7 +14,7 @@ keywords:
   - database
   - tutorial
 image: /img/blog/2020-08-19/banner.jpg
-tags: [performance, architecture, engineering]
+tags: [engineering, performance, architecture]
 ---
 
 import Banner from "@theme/Banner"

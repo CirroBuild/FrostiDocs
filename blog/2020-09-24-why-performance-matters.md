@@ -7,7 +7,7 @@ author_image_url: https://avatars.githubusercontent.com/tris0laris
 description:
   Thoughts on why speed and performance are crucial to time series database
   ingestion and analytics.
-tags: [story, performance]
+tags: [company, startup, performance]
 ---
 
 Good data from the past helps us make better decisions in the present. Most of

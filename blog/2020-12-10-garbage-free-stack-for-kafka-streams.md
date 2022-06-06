@@ -17,7 +17,7 @@ keywords:
   - timeseries
   - database
 image: /img/blog/2020-12-10/banner.jpg
-tags: [postgres, kafka, architecture, engineering]
+tags: [kafka, postgres, architecture, engineering]
 ---
 
 import Banner from "@theme/Banner"

@@ -14,7 +14,7 @@ keywords:
   - questdb
   - database
   - architecture
-tags: [multithreading, engineering, architecture]
+tags: [engineering, benchmark, multithreading, architecture]
 image: /img/blog/2020-03-15/header.png
 ---
 

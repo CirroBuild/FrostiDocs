@@ -13,7 +13,7 @@ keywords:
   - timeseries
   - database
 image: /img/blog/2021-02-05/og.png
-tags: [postgres, release, grafana]
+tags: [postgres, release, grafana, python, rust, golang]
 ---
 
 We've just released software version 5.0.6 and it comes with plenty of

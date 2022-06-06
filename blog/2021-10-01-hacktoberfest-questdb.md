@@ -15,7 +15,7 @@ keywords:
   - hacktoberfest
   - java
 image: /img/blog/2021-10-01/banner-hacktoberfest.png
-tags: [hacktoberfest, github, swag, opensource, community, digitalocean]
+tags: [community, hacktoberfest, github, swag, opensource, digitalocean]
 ---
 
 Hacktoberfest 2021 is starting today! For the first time, QuestDB is

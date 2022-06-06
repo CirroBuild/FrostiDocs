@@ -17,7 +17,7 @@ keywords:
   - database
   - engineering
 image: /img/blog/2022-05-26/banner.png
-tags: [engineering, release, story, performance]
+tags: [benchmark, engineering, release, story, performance]
 ---
 
 QuestDB 6.2, our previous minor version release,

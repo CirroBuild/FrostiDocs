@@ -15,7 +15,7 @@ keywords:
   - database
   - algotrading
 image: /img/blog/2021-09-17/banner.png
-tags: [julia, fintech, cryptocurrency, postgres, algotrading]
+tags: [Data science, fintech, cryptocurrency, postgres, algotrading, tutorial]
 ---
 
 This post was written by Dean Markwick, who has put together an excellent

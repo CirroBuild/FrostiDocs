@@ -14,7 +14,7 @@ keywords:
   - timeseries
   - database
 image: /img/blog/2021-08-24/banner.png
-tags: [digitalocean, launch, story, telegraf]
+tags: [digitalocean, deployment, telegraf, cloud, infrastructure]
 ---
 
 We're happy to announce that QuestDB is available with an official listing on

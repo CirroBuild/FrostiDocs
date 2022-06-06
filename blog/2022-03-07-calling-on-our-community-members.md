@@ -17,7 +17,7 @@ keywords:
   - support
   - ukraine
 image: /img/blog/2022-03-07/banner.png
-tags: [team, story, community, support]
+tags: [company, team, community, announcement]
 ---
 
 import Banner from "@theme/Banner"

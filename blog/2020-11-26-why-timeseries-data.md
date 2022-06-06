@@ -10,7 +10,7 @@ description:
   A primer on time-series data and time-series databases (TSDB), and why we
   decided to build QuestDB
 image: /img/blog/2020-11-26/banner.jpg
-tags: [story]
+tags: [company, startup, entrepreneurship, story]
 ---
 
 import Banner from "@theme/Banner"

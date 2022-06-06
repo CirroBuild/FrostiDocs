@@ -14,7 +14,7 @@ keywords:
   - timeseries database
   - questdb
   - open source
-tags: [hackernews, retrospective, community, demo]
+tags: [demo, hackernews, retrospective, community]
 ---
 
 If you listen to, well, pretty much anyone rational, they will tell you in no

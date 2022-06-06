@@ -8,11 +8,11 @@ description:
   The story of how Miguel Arregui joined as a software engineer building the
   fastest open source time series database.
 keywords:
-  - performance
-  - opensource
-  - architecture
+  - startup
+  - remote
+  - engineering
 image: /img/blog/2021-11-09/banner.png
-tags: [team, engineering, story]
+tags: [company, team, engineering]
 ---
 
 import Banner from "@theme/Banner"

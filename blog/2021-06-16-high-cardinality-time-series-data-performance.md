@@ -17,7 +17,7 @@ keywords:
   - timeseries
   - database
 image: /img/blog/2021-06-16/banner.png
-tags: [clickhouse, timescaledb, influxdb, benchmark, cardinality, telegraf]
+tags: [benchmark, clickhouse, timescaledb, influxdb, cardinality, telegraf]
 ---
 
 If you're working with large amounts of data, you've likely heard about

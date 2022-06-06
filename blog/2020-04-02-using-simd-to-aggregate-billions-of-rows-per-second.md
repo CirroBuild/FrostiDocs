@@ -13,7 +13,7 @@ keywords:
   - parallelization
   - cpu
   - questdb
-tags: [performance, simd, benchmark, release]
+tags: [benchmark, performance, simd, release]
 image: /img/blog/2020-04-02/banner.png
 ---
 

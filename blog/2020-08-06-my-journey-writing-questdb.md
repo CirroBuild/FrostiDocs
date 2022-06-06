@@ -18,7 +18,7 @@ keywords:
   - ycombinator
   - open source
 image: /img/blog/2020-08-06/banner.jpg
-tags: [hackernews, story]
+tags: [company, entrepreneurship, engineering, hackernews, startup]
 ---
 
 import Banner from "@theme/Banner"
