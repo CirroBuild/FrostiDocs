@@ -14,8 +14,9 @@ export const ListItem = ({ forcedTag, content }: Props) => {
   const imageUrl = content.frontMatter.image ?? "/img/tutorial/placeholder.png"
 
   return (
-    <a href={content.metadata.permalink} className={styles.root}>
-      <div
+    <div className={styles.root}>
+      <a
+        href={content.metadata.permalink}
         className={styles.image}
         style={{ backgroundImage: `url(${imageUrl})` }}
       />
@@ -37,6 +38,6 @@ export const ListItem = ({ forcedTag, content }: Props) => {
           by {content.frontMatter.author} on {content.metadata.formattedDate}
         </div>
       </div>
-    </a>
+    </div>
   )
 }
