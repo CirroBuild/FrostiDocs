@@ -70,7 +70,7 @@
     "node-fetch": "2.6.7",
     "prettier": "2.1.2",
     "rimraf": "3.0.2",
-    "sharp": "0.29.3",
+    "sharp": "0.30.5",
     "url-loader": "4.1.1",
     "webpack": "^5.33.2",
     "webpack-manifest-plugin": "^3.1.1"
