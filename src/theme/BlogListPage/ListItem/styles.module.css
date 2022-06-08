@@ -14,18 +14,27 @@
   background: var(--theme-card-bg-color-hover);
 }
 
-.image {
+.imageBox {
+  position: relative;
   margin-bottom: 1.5rem;
   height: 190px;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
   border-radius: 10px 10px 0 0;
+}
+
+.image {
+  display: block;
+  height: 100%;
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.externalPost {
+  position: absolute;
+  bottom: 5%;
+  right: 2%;
 }
 
 .content {
@@ -38,9 +47,6 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.9rem;
   padding: 0 var(--content-padding);
   margin-bottom: 1.5rem;
 }

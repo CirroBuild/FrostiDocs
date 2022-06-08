@@ -3,6 +3,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import Layout from "@theme/Layout"
 import BlogPostItem from "@theme/BlogPostItem"
 import BlogListPaginator from "@theme/BlogListPaginator"
+import type { FrontMatter as OriginalFrontMatter } from "@theme/BlogPostPage"
 import type { Props } from "@theme/BlogListPage"
 import type { Tag } from "@theme/BlogTagsListPage"
 import { ThemeClassNames } from "@docusaurus/theme-common"
@@ -13,6 +14,8 @@ import { Categories } from "./Categories"
 import type { Props as CategoriesProps } from "./Categories"
 import { Chips } from "./Chips"
 import type { Props as ChipProps } from "./Chips"
+
+export type FrontMatter = OriginalFrontMatter & { permalink?: string }
 
 const categories: CategoriesProps["categories"] = [
   {
@@ -86,7 +89,13 @@ function BlogListPage(props: Props): JSX.Element {
             <BlogPostItem
               key={latestPost.content.metadata.permalink}
               frontMatter={latestPost.content.frontMatter}
-              metadata={{ ...latestPost.content.metadata, tags: [] }}
+              metadata={{
+                ...latestPost.content.metadata,
+                permalink:
+                  (latestPost.content.frontMatter as FrontMatter).permalink ??
+                  latestPost.content.metadata.permalink,
+                tags: [],
+              }}
               truncated={latestPost.content.metadata.truncated}
             >
               {React.createElement(latestPost.content)}
