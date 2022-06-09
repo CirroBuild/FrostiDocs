@@ -417,47 +417,48 @@ run()
 
 
 ```go
-// Raw socket connection with no validation and string quoting logic.
-// Refer to protocol description:
-// http://questdb.io/docs/reference/api/ilp/overview
-
 package main
 
 import (
-  "fmt"
-  "io/ioutil"
-  "net"
-  "time"
+	"context"
+	"fmt"
+	"log"
+	"time"
+
+	qdb "github.com/questdb/go-questdb-client"
 )
 
 func main() {
-  host := "127.0.0.1:9009"
-  tcpAddr, err := net.ResolveTCPAddr("tcp4", host)
-  checkErr(err)
-  rows := [2]string{
-    fmt.Sprintf("trades,name=test_ilp1 value=12.4 %d", time.Now().UnixNano()),
-    fmt.Sprintf("trades,name=test_ilp2 value=11.4 %d", time.Now().UnixNano()),
-  }
-
-  conn, err := net.DialTCP("tcp", nil, tcpAddr)
-  checkErr(err)
-  defer conn.Close()
-
-  for _, s := range rows {
-    _, err = conn.Write([]byte(fmt.Sprintf("%s\n", s)))
-    checkErr(err)
-  }
-
-  result, err := ioutil.ReadAll(conn)
-  checkErr(err)
-
-  fmt.Println(string(result))
-}
-
-func checkErr(err error) {
-  if err != nil {
-    panic(err)
-  }
+	ctx := context.TODO()
+	// Connect to QuestDB running on 127.0.0.1:9009
+	sender, err := qdb.NewLineSender(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// Make sure to close the sender on exit to release resources.
+	defer sender.Close()
+	// Send a few ILP messages.
+	err = sender.
+		Table("trades").
+		Symbol("name", "test_ilp1").
+		Float64Column("value", 12.4).
+		At(ctx, time.Now().UnixNano())
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = sender.
+		Table("trades").
+		Symbol("name", "test_ilp2").
+		Float64Column("value", 11.4).
+		At(ctx, time.Now().UnixNano())
+	if err != nil {
+		log.Fatal(err)
+	}
+	// Make sure that the messages are sent over the network.
+	err = sender.Flush(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 ```
 
