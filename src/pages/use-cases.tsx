@@ -360,7 +360,7 @@ const IndustrialTelemetry = () => (
             "Energy (Power plants, Renewables, Oil & Gas, Utilities)",
             "Space & Defence (Rockets, Satellites, Maritime, Aerospace)",
             "Transportation and Mobility (Autonomous cars, Freight transport, Drones, Logistics)",
-            "Manufacturing & Automation (Digital factories, pre-processing plants, Robotics)",
+            "Manufacturing & Automation (Semiconductors, Digital factories, pre-processing plants, Robotics)",
             "Telco (Network base stations)",
           ]}
         />
