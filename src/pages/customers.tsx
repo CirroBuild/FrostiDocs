@@ -191,6 +191,37 @@ const Customer = () => {
           <div className={caCss.card__illustration}>
             <img
               alt="Yahoo logo"
+              src="/img/pages/case-study/aquis/summary.jpg"
+              width={525}
+            />
+          </div>
+          <p className={caCss.card__summary}>
+            <img
+              alt="Aquis logo"
+              className={caCss.card__logo}
+              height={50}
+              src="/img/pages/customers/cards/aquis.svg"
+              width={140}
+            />
+            “QuestDB is a time series database truly built by developers for
+            developers. We found that QuestDB provides a unicorn solution to
+            handle extreme transactions per second while also offering a
+            simplified SQL programming interface.”
+            <em className={caCss.card__author}>
+              - <strong>Viet Lee</strong>, CTO, Aquis
+            </em>
+            <Button className={caCss.card__cta} to="/case-study/aquis/">
+              View full case study
+            </Button>
+          </p>
+        </div>
+      </section>
+
+      <section className={clsx(seCss.section, seCss["section--inner"])}>
+        <div className={caCss.card}>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="Yahoo logo"
               height={400}
               src="/img/pages/case-study/yahoo/summary.jpg"
               width={525}
@@ -246,41 +277,6 @@ const Customer = () => {
               width={640}
             />
           </div>
-        </div>
-      </section>
-      <section className={clsx(seCss.section, seCss["section--inner"])}>
-        <div className={caCss.card}>
-          <div className={caCss.card__illustration}>
-            <img
-              alt="Logo of Sapient Industries along with an illustration of their analytics dashboard."
-              height={360}
-              src="/img/pages/case-study/sapient-industries/card.png"
-              width={640}
-            />
-          </div>
-          <p className={caCss.card__summary}>
-            <img
-              alt="Sapient Industries logo"
-              className={caCss.card__logo}
-              height={80}
-              src="/img/pages/customers/cards/sapient.svg"
-              width={120}
-            />
-            “Sapient ingests, analyzes and converts billions of data points into
-            meaningful insights through AI and machine learning. We chose
-            QuestDB for the simplicity of SQL, high-throughput ingestion, and
-            PostgreSQL wire compatibility with our tooling.”
-            <em className={caCss.card__author}>
-              - <strong>Dan Worth</strong>, Principal Software Engineer, Sapient
-              Industries
-            </em>
-            <Button
-              className={caCss.card__cta}
-              to="/case-study/sapient-industries/"
-            >
-              View full case study
-            </Button>
-          </p>
         </div>
       </section>
       <section className={clsx(seCss.section, seCss["section--inner"])}>
