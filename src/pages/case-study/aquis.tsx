@@ -20,6 +20,7 @@ const Aquis = () => {
       canonical="/case-study/aquis/"
       description={description}
       title={title}
+      image="/img/pages/case-study/aquis/flow.png"
     >
       <section
         className={clsx(
