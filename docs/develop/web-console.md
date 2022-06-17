@@ -179,6 +179,6 @@ ASSET_PATH=/path/to/questdb/ui
 ```
 
 An
-[example dotenv](https://github.com/questdb/questdb/blob/master/ui/.env.example)
+[example dotenv](https://github.com/questdb/ui/blob/main/packages/web-console/.env.example)
 file is provided which can be renamed to `.env` and placed in QuestDB's UI
 directory.
