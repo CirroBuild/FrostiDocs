@@ -190,7 +190,7 @@ const Customer = () => {
         <div className={caCss.card}>
           <div className={caCss.card__illustration}>
             <img
-              alt="Yahoo logo"
+              alt="Aquis logo"
               src="/img/pages/case-study/aquis/summary.jpg"
               width={525}
             />
@@ -219,14 +219,6 @@ const Customer = () => {
 
       <section className={clsx(seCss.section, seCss["section--inner"])}>
         <div className={caCss.card}>
-          <div className={caCss.card__illustration}>
-            <img
-              alt="Yahoo logo"
-              height={400}
-              src="/img/pages/case-study/yahoo/summary.jpg"
-              width={525}
-            />
-          </div>
           <p className={caCss.card__summary}>
             <img
               alt="Yahoo logo"
@@ -246,10 +238,28 @@ const Customer = () => {
               View full case study
             </Button>
           </p>
+
+          <div className={caCss.card__illustration}>
+            <img
+              alt="Yahoo logo"
+              height={400}
+              src="/img/pages/case-study/yahoo/summary.jpg"
+              width={525}
+            />
+          </div>
         </div>
       </section>
       <section className={clsx(seCss.section, seCss["section--inner"])}>
         <div className={caCss.card}>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="Logo for liveaction AI's network threat detection suite ThreatEye"
+              height={360}
+              src="/img/pages/case-study/liveaction/summary.png"
+              width={640}
+            />
+          </div>
+
           <p className={caCss.card__summary}>
             <img
               alt="LiveAction logo"
@@ -269,14 +279,6 @@ const Customer = () => {
               View full case study
             </Button>
           </p>
-          <div className={caCss.card__illustration}>
-            <img
-              alt="Logo for liveaction AI's network threat detection suite ThreatEye"
-              height={360}
-              src="/img/pages/case-study/liveaction/summary.png"
-              width={640}
-            />
-          </div>
         </div>
       </section>
       <section className={clsx(seCss.section, seCss["section--inner"])}>
