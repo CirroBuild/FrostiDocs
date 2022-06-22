@@ -13,7 +13,7 @@ import chCss from "../../css/case-study/chart.module.css"
 const Aquis = () => {
   const title = "Aquis"
   const description =
-    "QuestDB is used by Aquis exchange to store their infrastructure and business metrics in a single place and analyze them in real-time across multiple dimensions"
+    "QuestDB is used by Aquis Exchange to store their infrastructure and business metrics in a single place and analyze them in real-time across multiple dimensions."
 
   return (
     <Layout
@@ -51,9 +51,9 @@ const Aquis = () => {
               juCss.jumbotron__description,
             )}
           >
-            QuestDB is used by Aquis exchange to store their infrastructure and
+            QuestDB is used by Aquis Exchange to store their infrastructure and
             business metrics in a single place and analyze them in real-time
-            across multiple dimensions
+            across multiple dimensions.
           </p>
         </div>
 
@@ -137,7 +137,7 @@ const Aquis = () => {
           <p className="font-size--large">
             As an exchange, we need to ensure fair and orderly markets, so the
             timing of messages is critical to us. We produce comprehensive
-            latency reports and dashboards per security, per market, and client.
+            latency reports and dashboards per security, per market, and for each client.
             The reports detail the time it takes for an order instructed through
             a FIX or binary port to hit our matching engine and be a
             fully-executed trade on the exchange.
@@ -150,7 +150,7 @@ const Aquis = () => {
             width={1002}
           />
           <p className="font-size--medium text--center">
-            Overall Market Metrics using Grafana dashboards
+            Overall market metrics using Grafana dashboards
           </p>
           <p className="font-size--large">
             We also track all the orders and trades coming through (such as
@@ -166,7 +166,7 @@ const Aquis = () => {
             width={1002}
           />
           <p className="font-size--medium text--center">
-            Timeline of Market Events visualized on Grafana
+            Timeline of market events visualized on Grafana
           </p>
           <h3>Why we chose QuestDB for monitoring our infrastructure</h3>
           <p className="font-size--large">
@@ -237,7 +237,7 @@ const Aquis = () => {
               <span className={caCss.card__quote}>&rdquo;</span>
             </p>
             <p className={caCss.card__title}>
-              <b>Viet Lee, CTO at Aquis</b>
+              <b>Viet Lee, CTO at Aquis Exchange</b>
             </p>
           </div>
         </div>
