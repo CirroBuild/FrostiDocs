@@ -332,20 +332,20 @@ by one month.
 | --------------------------- | ----- |
 | 2018-01-01T00:00:00.000000Z | 123.4 |
 | ...                         | ...   |
-| 2019-01-31T23:59:59.999999Z | 115.8 |
+| 2018-01-31T23:59:59.999999Z | 115.8 |
 
 ```questdb-sql title="Results in a given month excluding the last 3 days"
 SELECT * FROM scores WHERE ts IN '2018-01;-3d';
 ```
 
 The range is Jan 2018. The modifier reduces the upper bound (originally 31
-Dec 2018) by 3 days.
+Jan 2018) by 3 days.
 
 | ts                          | score |
 | --------------------------- | ----- |
 | 2018-01-01T00:00:00.000000Z | 123.4 |
 | ...                         | ...   |
-| 2019-01-28T23:59:59.999999Z | 115.8 |
+| 2018-01-28T23:59:59.999999Z | 113.8 |
 
 ### IN with multiple arguments
 
