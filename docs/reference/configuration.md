@@ -162,7 +162,7 @@ configuration) every other subsystem.
 
 | Property                  | Default | Description                                                                                                                                                  |
 | ------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| shared.worker.count       | 2       | Number of worker threads shared across the application. Increasing this number will increase parallelism in the application at the expense of CPU resources. |
+| shared.worker.count       |         | Number of worker threads shared across the application. Increasing this number will increase parallelism in the application at the expense of CPU resources. |
 | shared.worker.affinity    |         | Comma-delimited list of CPU ids, one per thread specified in `shared.worker.count`. By default, threads have no CPU affinity.                                |
 | shared.worker.haltOnError | false   | Toggle whether worker should stop on error.                                                                                                                  |
 
@@ -180,15 +180,15 @@ the [health monitoring page](/docs/operations/health-monitoring).
 
 :::
 
-| Property                        | Default      | Description                                                                                                                                                                    |
-| ------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| http.min.enabled                | true         | Enable or disable Minimal HTTP server.                                                                                                                                         |
-| http.min.bind.to                | 0.0.0.0:9003 | IPv4 address and port of the server. `0` means it will bind to all network interfaces, otherwise the IP address must be one of the existing network adapters.                  |
-| http.min.net.connection.limit   | 4            | Active connection limit                                                                                                                                                        |
-| http.min.net.connection.timeout | 300000       | Idle connection timout is milliseconds.                                                                                                                                        |
-| http.min.net.connection.hint    | false        | Windows specific flag to overcome OS limitations on TCP backlog size                                                                                                           |
-| http.min.worker.count           | -1           | By default, Minimal HTTP server uses shared thread pool for Core count 16 and below. It will use dedicated thread for Core count above 16. Do not set pool size to more than 1 |
-| http.min.worker.affinity        | -1           | Core number to pin thread to                                                                                                                                                   |
+| Property                        | Default      | Description                                                                                                                                                                                                                          |
+| ------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| http.min.enabled                | true         | Enable or disable Minimal HTTP server.                                                                                                                                                                                               |
+| http.min.bind.to                | 0.0.0.0:9003 | IPv4 address and port of the server. `0` means it will bind to all network interfaces, otherwise the IP address must be one of the existing network adapters.                                                                        |
+| http.min.net.connection.limit   | 4            | Active connection limit.                                                                                                                                                                                                             |
+| http.min.net.connection.timeout | 300000       | Idle connection timout is milliseconds.                                                                                                                                                                                              |
+| http.min.net.connection.hint    | false        | Windows specific flag to overcome OS limitations on TCP backlog size.                                                                                                                                                                |
+| http.min.worker.count           |              | By default, minimal HTTP server uses shared thread pool for CPU core count 16 and below. It will use dedicated thread for core count above 16. When `0`, the server will use the shared pool. Do not set pool size to more than `1`. |
+| http.min.worker.affinity        |              | Core number to pin thread to.                                                                                                                                                                                                        |
 
 ### HTTP server
 
@@ -254,7 +254,7 @@ This section describes configuration settings for the Cairo SQL engine in
 QuestDB.
 
 | Property                                       | Default           | Description                                                                                                                                                                                                              |
-|------------------------------------------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | query.timeout.sec                              | 60                | A global timeout (in seconds) for long-running queries.                                                                                                                                                                  |
 | cairo.max.uncommitted.rows                     | 500000            | Maximum number of uncommitted rows per table, when the number of pending rows exceeds this parameter on a table, a commit will be issued.                                                                                |
 | cairo.commit.lag                               | 300000            | Expected maximum time lag for out-of-order rows in milliseconds.                                                                                                                                                         |
@@ -344,7 +344,7 @@ This section describes settings that can affect parallelism level of SQL
 execution and therefore performance.
 
 | Property                               | Default | Description                                                                                                                                                                |
-|----------------------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | cairo.sql.parallel.filter.enabled      | true    | Enable or disable parallel SQL filter execution. JIT compilation takes place only when this setting is enabled.                                                            |
 | cairo.page.frame.shard.count           | 4       | Number of shards for both dispatch and reduce queues. Shards reduce queue contention between SQL statements that are executed concurrently.                                |
 | cairo.page.frame.reduce.queue.capacity | 64      | Reduce queue is used for data processing and should be large enough to supply tasks for worker threads (shared worked pool).                                               |
@@ -385,8 +385,8 @@ PostgresSQL wire protocol.
 | pg.send.buffer.size              | 1M           | Size of the buffer for sending data.                                                                                                                                                              |
 | pg.date.locale                   | en           | The locale to handle date types.                                                                                                                                                                  |
 | pg.timestamp.locale              | en           | The locale to handle timestamp types.                                                                                                                                                             |
-| pg.worker.count                  | 2            | Number of dedicated worker threads assigned to write data. When `0`, the writer jobs will use the shared pool.                                                                                    |
-| pg.worker.affinity               | -1,-1        | Comma-separated list of thread numbers which should be pinned for Postgres ingestion. Example `line.tcp.worker.affinity=1,2,3`.                                                                   |
+| pg.worker.count                  | 0            | Number of dedicated worker threads assigned to write data. When `0`, the writer jobs will use the shared pool.                                                                                    |
+| pg.worker.affinity               |              | Comma-separated list of thread numbers which should be pinned for Postgres ingestion. Example `pg.worker.affinity=1,2,3`.                                                                         |
 | pg.halt.on.error                 | false        | Whether ingestion should stop upon internal error.                                                                                                                                                |
 
 ### InfluxDB line protocol
@@ -445,17 +445,17 @@ line protocol.
 ### Config Validation
 
 The database startup phase checks for configuration issues, such as invalid or
-deprecated settings. Issues may be classified as advisories or errors.
-Advisory issues are [logged](/docs/concept/root-directory-structure#log-directory)
+deprecated settings. Issues may be classified as advisories or errors. Advisory
+issues are [logged](/docs/concept/root-directory-structure#log-directory)
 without causing the database to stop its startup sequence: These are usually
-setting deprecation warnings.
-Configuration errors can optionally cause the database to fail its startup.
+setting deprecation warnings. Configuration errors can optionally cause the
+database to fail its startup.
 
 | Property                 | Default | Description                                                    |
 | ------------------------ | ------- | -------------------------------------------------------------- |
 | config.validation.strict | false   | When enabled, startup fails if there are configuration errors. |
 
-*We recommended enabling strict validation.*
+_We recommended enabling strict validation._
 
 ### Telemetry
 
@@ -486,12 +486,12 @@ writers=file,stdout
 #w.file.location=questdb-debug.log
 #w.file.level=INFO,ERROR
 
-# rolling file writer 
+# rolling file writer
 #w.file.class=io.questdb.log.LogRollingFileWriter
 #w.file.location=${log.dir}/questdb-rolling.log.${date:yyyyMMdd}
 #w.file.level=INFO,ERROR
 #rollEvery accepts: day, hour, minute, month
-#w.file.rollEvery=day  
+#w.file.rollEvery=day
 #w.file.rollSize=1g
 
 # stdout
