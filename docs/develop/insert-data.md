@@ -20,22 +20,22 @@ parameterized querys which avoid SQL injection issues.
 
 In summary, these are the different options:
 
-* [Web Console](#web-console)
-  * CSV upload.
-  * SQL `INSERT` statements.
-* [InfluxDB Line Protocol](#influxdb-line-protocol)
-  * High performance.
-  * Optional automatic timestamps.
-  * Optional integrated authentication.
-  * Client libraries in various programming languages.
-* [PostgreSQL wire protocol](#postgresql-wire-protocol)
-  * SQL `INSERT` statements, including parameterized queries.
-  * Use `psql` on the command line.
-  * Interoperability with third-party tools and libraries.
-* [HTTP REST API](#http-rest-api)
-  * CSV upload.
-  * SQL `INSERT` statements.
-  * Use `curl` on the command line.
+- [Web Console](#web-console)
+  - CSV upload.
+  - SQL `INSERT` statements.
+- [InfluxDB Line Protocol](#influxdb-line-protocol)
+  - High performance.
+  - Optional automatic timestamps.
+  - Optional integrated authentication.
+  - Client libraries in various programming languages.
+- [PostgreSQL wire protocol](#postgresql-wire-protocol)
+  - SQL `INSERT` statements, including parameterized queries.
+  - Use `psql` on the command line.
+  - Interoperability with third-party tools and libraries.
+- [HTTP REST API](#http-rest-api)
+  - CSV upload.
+  - SQL `INSERT` statements.
+  - Use `curl` on the command line.
 
 ## Web Console
 
@@ -52,25 +52,24 @@ INSERT INTO takeaway_order VALUES (now(), 'order2', 'placed');
 ```
 
 SQL statements can be written in the code editor and executed by clicking the
-**Run** button. Note that the web console runs a single statement at a time.
-You can also use the Web Console to upload CSV.
+**Run** button. Note that the web console runs a single statement at a time. You
+can also use the Web Console to upload CSV.
 
 ## InfluxDB Line Protocol
 
-The InfluxDB Line Protocol (ILP) is a text protocol over TCP or UDP on port
-9009.
+The InfluxDB Line Protocol (ILP) is a text protocol over TCP or UDP on
+port 9009.
 
-It is a one-way protocol to insert data, focusing on simplicity
-and performance.
+It is a one-way protocol to insert data, focusing on simplicity and performance.
 
 Here is a summary table is how it compares with ways to insert data that we
 support:
 
-|Protocol                 |Record Insertion Reporting       |Data Insertion Performance |
-|:------------------------|:--------------------------------|:--------------------------|
-|InfluxDB Line Protocol   |Server logs; Disconnect on error | **Best**                  |
-|CSV upload via HTTP REST |Configurable                     | Very Good                 |
-|SQL `INSERT` statements  |Transaction-level                | Good                      |
+| Protocol                 | Record Insertion Reporting       | Data Insertion Performance |
+| :----------------------- | :------------------------------- | :------------------------- |
+| InfluxDB Line Protocol   | Server logs; Disconnect on error | **Best**                   |
+| CSV upload via HTTP REST | Configurable                     | Very Good                  |
+| SQL `INSERT` statements  | Transaction-level                | Good                       |
 
 This interface is the preferred ingestion method as it provides the following
 benefits:
@@ -83,9 +82,9 @@ benefits:
   settings
 
 With sufficient client-side validation, the lack of errors to the client and
-confirmation isn't necessarily a concern: QuestDB will log out any issues
-and disconnect on error. The database will process any valid lines up to that
-point and insert rows.
+confirmation isn't necessarily a concern: QuestDB will log out any issues and
+disconnect on error. The database will process any valid lines up to that point
+and insert rows.
 
 On the [InfluxDB line protocol](/docs/reference/api/ilp/overview) page, you may
 find additional details on the message format, ports and authentication.
@@ -97,18 +96,25 @@ Telegraf agent to collect and send metrics to QuestDB via ILP.
 
 We have client libraries for a growing number of languages:
 
-* **C and C++**: [https://github.com/questdb/c-questdb-client](https://github.com/questdb/c-questdb-client)
+- **C and C++**:
+  [https://github.com/questdb/c-questdb-client](https://github.com/questdb/c-questdb-client)
 
-* **Java**: [https://search.maven.org/artifact/org.questdb/questdb](https://search.maven.org/artifact/org.questdb/questdb)
+- **Java**:
+  [https://search.maven.org/artifact/org.questdb/questdb](https://search.maven.org/artifact/org.questdb/questdb)
 
-* **C#**: [https://github.com/questdb/net-questdb-client](https://github.com/questdb/net-questdb-client)
+- **C#**:
+  [https://github.com/questdb/net-questdb-client](https://github.com/questdb/net-questdb-client)
 
-* For other languages, we have examples and a [protocol reference](/docs/reference/api/ilp/overview).
+- **Golang**:
+  [https://github.com/questdb/go-questdb-client](https://github.com/questdb/go-questdb-client)
+
+- For other languages, we have examples and a
+  [protocol reference](/docs/reference/api/ilp/overview).
 
 ### Examples
 
 These examples send a few rows of input. These use client libraries for C++, C#,
-Java and C, and raw TCP socket connections for NodeJS, Go and Python.
+Golang, Java, and C, as well as raw TCP socket connections for NodeJS and Python.
 
 <Tabs defaultValue="cpp" values={[
   { label: "C++", value: "cpp" },
@@ -119,7 +125,6 @@ Java and C, and raw TCP socket connections for NodeJS, Go and Python.
   { label: "Go", value: "go" },
   { label: "Python", value: "python" }
 ]}>
-
 
 <TabItem value="cpp">
 
@@ -175,7 +180,6 @@ int main()
 </TabItem>
 
 <TabItem value="java">
-
 
 ```java
 /*
@@ -357,7 +361,6 @@ on_error: ;
 
 <TabItem value="nodejs">
 
-
 ```javascript
 // Raw socket connection with no validation and string quoting logic.
 // Refer to protocol description:
@@ -412,9 +415,7 @@ run()
 
 </TabItem>
 
-
 <TabItem value="go">
-
 
 ```go
 package main
@@ -515,14 +516,15 @@ unless otherwise configured. See `cairo.timestamp.locale` and
 ### ILP Datatypes and Casts
 
 #### Strings vs Symbols
+
 Strings may be recorded as either the `STRING` type or the `SYMBOL` type.
 
-Inspecting a sample ILP we can see how a space `' '` separator splits
-`SYMBOL` columns to the left from the rest of the columns.
+Inspecting a sample ILP we can see how a space `' '` separator splits `SYMBOL`
+columns to the left from the rest of the columns.
 
 ```text
 table_name,col1=symbol_val1,col2=symbol_val2 col3="string val",col4=10.5
-                                            ┬ 
+                                            ┬
                                             ╰───────── separator
 ```
 
@@ -531,21 +533,20 @@ as `SYMBOL`s, whilst `col3` is written out as a `STRING`.
 
 `SYMBOL`s are strings with which are automatically
 [interned](https://en.wikipedia.org/wiki/String_interning) by the database on a
-per-column basis.
-You should use this type if you expect the string to be re-used over and over,
-such as is common with identifiers.
+per-column basis. You should use this type if you expect the string to be
+re-used over and over, such as is common with identifiers.
 
 For one-off strings use `STRING` columns which aren't interned.
 
 #### Casts
 
-QuestDB types are a superset of those supported by ILP.
-This means that when sending data you should be aware of the performed
-conversions.
+QuestDB types are a superset of those supported by ILP. This means that when
+sending data you should be aware of the performed conversions.
 
 See:
-* [QuestDB Types in SQL](/docs/reference/sql/datatypes)
-* [ILP types and cast conversion tables](/docs/reference/api/ilp/columnset-types)
+
+- [QuestDB Types in SQL](/docs/reference/sql/datatypes)
+- [ILP types and cast conversion tables](/docs/reference/api/ilp/columnset-types)
 
 ### Constructing well-formed messages
 
@@ -553,28 +554,27 @@ Different library implementations will perform different degrees content
 validation upfront before sending messages out. To avoid encoutering issues
 follow these guidelines.
 
-* **All strings must be UTF-8 encoded.**
+- **All strings must be UTF-8 encoded.**
 
-* **Columns should only appear once per row.**
+- **Columns should only appear once per row.**
 
-* **Symbol columns must be written out before other columns.**
+- **Symbol columns must be written out before other columns.**
 
-* **Table and column names can't have invalid characters.**
-  These should not contain `?`, `.`,`,`, `'`, `"`, `\`,
-  `/`, `:`, `(`, `)`, `+`, `-`, `*`, `%`, `~`,`' '` (space),
-  `\0` (nul terminator),
+- **Table and column names can't have invalid characters.** These should not
+  contain `?`, `.`,`,`, `'`, `"`, `\`, `/`, `:`, `(`, `)`, `+`, `-`, `*`, `%`,
+  `~`,`' '` (space), `\0` (nul terminator),
   [ZERO WIDTH NO-BREAK SPACE](https://unicode-explorer.com/c/FEFF).
 
-* **Write timestamp column via designated API**, or at the end of the message
-  if you are using raw sockets. If you have multiple timestamp columns
-  write additional ones as column values.
+- **Write timestamp column via designated API**, or at the end of the message if
+  you are using raw sockets. If you have multiple timestamp columns write
+  additional ones as column values.
 
-* **Don't change column type between rows.**
+- **Don't change column type between rows.**
 
-* **Supply timestamps in order.** These need to be at least equal to previous
-  ones in the same table, unless using the out of order feature.
-  This is not necessary if you use the
-  [out-of-order](/docs/guides/out-of-order-commit-lag) feature.
+- **Supply timestamps in order.** These need to be at least equal to previous
+  ones in the same table, unless using the out of order feature. This is not
+  necessary if you use the [out-of-order](/docs/guides/out-of-order-commit-lag)
+  feature.
 
 ### Errors in Server Logs
 
@@ -605,19 +605,19 @@ table1 b=1.25 1647357698714369403
 
 Will insert as:
 
-|a     |b     |timestamp                  |
-|:-----|:-----|---------------------------|
-|10.5  |*NULL*|2022-03-15T15:21:28.714369Z|
-|*NULL*|1.25  |2022-03-15T15:21:38.714369Z|
+| a      | b      | timestamp                   |
+| :----- | :----- | --------------------------- |
+| 10.5   | _NULL_ | 2022-03-15T15:21:28.714369Z |
+| _NULL_ | 1.25   | 2022-03-15T15:21:38.714369Z |
 
 ### If you don't immediately see data
 
 If you don't see your inserted data, this is usually down to one of two things:
 
-* You prepared the messages, but forgot to call `.flush()` or similar in your
+- You prepared the messages, but forgot to call `.flush()` or similar in your
   client library, so no data was sent.
 
-* The internal timers and buffers within QuestDB did not commit the data yet.
+- The internal timers and buffers within QuestDB did not commit the data yet.
   For development (and development only), you may want to tweak configuration
   settings to commit data more frequently.
   ```ini title=server.conf
@@ -630,8 +630,8 @@ If you don't see your inserted data, this is usually down to one of two things:
 
 ### Authentication
 
-ILP can additionally provide authentication. This is an optional feature
-which is documented [here](/docs/reference/api/ilp/authenticate).
+ILP can additionally provide authentication. This is an optional feature which
+is documented [here](/docs/reference/api/ilp/authenticate).
 
 ### Third-party Library Compatibility
 
@@ -689,6 +689,7 @@ psql -h localhost -p 8812 -U admin -d qdb -c "SELECT * FROM t1"
 
 Note that you can also run `psql` from Docker without installing the client
 locally:
+
 ```
 docker run -it --rm --network=host -e PGPASSWORD=quest \
     postgres psql ....
@@ -803,7 +804,8 @@ use of this package can be found on the
 
 This example uses naive `Date.now() * 1000` inserts for Timestamp types in
 microsecond resolution. For accurate microsecond timestamps, the
-[process.hrtime.bigint()](https://nodejs.org/api/process.html#processhrtimebigint) call can be used.
+[process.hrtime.bigint()](https://nodejs.org/api/process.html#processhrtimebigint)
+call can be used.
 
 ```javascript
 "use strict"
@@ -822,8 +824,8 @@ const start = async () => {
 
   const createTable = await client.query(
     "CREATE TABLE IF NOT EXISTS trades (" +
-    "    ts TIMESTAMP, date DATE, name STRING, value INT" +
-    ") timestamp(ts);",
+      "    ts TIMESTAMP, date DATE, name STRING, value INT" +
+      ") timestamp(ts);",
   )
   console.log(createTable)
 
@@ -1001,10 +1003,10 @@ QuestDB exposes a REST API for compatibility with a wide range of libraries and
 tools. The REST API is accessible on port `9000` and has the following
 insert-capable entrypoints:
 
-|Entrypoint                                |HTTP Method|Description                            |API Docs                                                    |
-|:-----------------------------------------|:----------|:--------------------------------------|:-----------------------------------------------------------|
-|[`/imp`](#imp-uploading-tabular-data)     |POST       |Import CSV data                        |[Reference](/docs/reference/api/rest#imp---import-data)     |
-|[`/exec?query=..`](#exec-sql-insert-query)|GET        |Run SQL Query returning JSON result set|[Reference](/docs/reference/api/rest#exec---execute-queries)|
+| Entrypoint                                 | HTTP Method | Description                             | API Docs                                                     |
+| :----------------------------------------- | :---------- | :-------------------------------------- | :----------------------------------------------------------- |
+| [`/imp`](#imp-uploading-tabular-data)      | POST        | Import CSV data                         | [Reference](/docs/reference/api/rest#imp---import-data)      |
+| [`/exec?query=..`](#exec-sql-insert-query) | GET         | Run SQL Query returning JSON result set | [Reference](/docs/reference/api/rest#exec---execute-queries) |
 
 For details such as content type, query parameters and more, refer to the
 [REST API](/docs/reference/api/rest) docs.
@@ -1042,11 +1044,11 @@ c,,True
 
 <TabItem value="table">
 
-|col1|col2  |col3   |
-|:---|:-----|:------|
-|a   |10.5  |*true* |
-|b   |100   |*false*|
-|c   |*NULL*|*true* |
+| col1 | col2   | col3    |
+| :--- | :----- | :------ |
+| a    | 10.5   | _true_  |
+| b    | 100    | _false_ |
+| c    | _NULL_ | _true_  |
 
 </TabItem>
 
@@ -1055,10 +1057,9 @@ c,,True
 You can do so via the command line using `cURL` or programmatically via HTTP
 APIs in your scripts and applications.
 
-By default, the response is designed to be human-readable.
-Use the `fmt=json` query argument to obtain a response in JSON.
-You can also specify the schema explicitly.
-See the second example in Python for these features.
+By default, the response is designed to be human-readable. Use the `fmt=json`
+query argument to obtain a response in JSON. You can also specify the schema
+explicitly. See the second example in Python for these features.
 
 <Tabs defaultValue="curl" values={[
   { label: "cURL", value: "curl" },
@@ -1068,7 +1069,6 @@ See the second example in Python for these features.
 ]}>
 
 <TabItem value="curl">
-
 
 This example imports a CSV file with automatic schema detection.
 
@@ -1088,7 +1088,6 @@ curl \
 ```
 
 </TabItem>
-
 
 <TabItem value="python">
 
@@ -1163,7 +1162,6 @@ if __name__ == '__main__':
 
 <TabItem value="nodejs">
 
-
 ```javascript
 const fetch = require("node-fetch")
 const FormData = require("form-data")
@@ -1199,7 +1197,6 @@ run()
 </TabItem>
 
 <TabItem value="go">
-
 
 ```go
 package main
@@ -1265,8 +1262,8 @@ func checkErr(err error) {
 
 The `/exec` entrypoint takes a SQL query and returns results as JSON.
 
-We can use this for quick SQL inserts too, but note that there's no support
-for parameterized queries that are necessary to avoid SQL injection issues.
+We can use this for quick SQL inserts too, but note that there's no support for
+parameterized queries that are necessary to avoid SQL injection issues.
 
 :::tip
 
@@ -1286,7 +1283,6 @@ Prefer [ILP](#influxdb-line-protocol) if you need high-performance inserts.
 
 <TabItem value="curl">
 
-
 ```shell
 # Create Table
 curl -G \
@@ -1301,9 +1297,7 @@ curl -G \
 
 </TabItem>
 
-
 <TabItem value="python">
-
 
 ```python
 import sys
@@ -1329,9 +1323,7 @@ run_query("INSERT INTO trades VALUES('abc', 123456)")
 
 </TabItem>
 
-
 <TabItem value="nodejs">
-
 
 The `node-fetch` package can be installed using `npm i node-fetch`.
 
@@ -1376,9 +1368,7 @@ createTable().then(insertData)
 
 </TabItem>
 
-
 <TabItem value="go">
-
 
 ```go
 package main

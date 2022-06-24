@@ -22,7 +22,7 @@ QuestDB provides two strategies for creating backups:
 There are some limitations of creating backups that users should note about the
 types of supported filesystems and what data is included in backups:
 
-- QuestDB officially supports **EXT4** or **XTS** or any filesystem that
+- QuestDB officially supports **EXT4** or **XFS** or any filesystem that
   supports [mmap](https://man7.org/linux/man-pages/man2/mmap.2.html) feature.
 
 :::caution
