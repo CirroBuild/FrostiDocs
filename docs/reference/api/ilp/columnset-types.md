@@ -18,7 +18,7 @@ reduce storage for such values it is possible to create a table upfront with
 smaller type, for example:
 
 ```questdb-sql
-create table temps(device symbol, location symbol, value short)
+CREATE TABLE temps (device SYMBOL, location SYMBOL, value SHORT);
 ```
 
 The line above will be accepted and `96i` will be cast to `short`.
@@ -34,9 +34,9 @@ Type casts that cause data loss will cause entire line to be rejected.
 The following `cast` operations are supported when existing table column type is
 not `long`:
 
-|         |`byte`|`short`|`int`|`long`  |`float`|`double`|`date`|`timestamp`|
-|:--------|:-----|:------|:----|:-------|:------|:-------|:-----|:----------|
-|`integer`|cast  |cast   |cast |`native`|cast   |cast    |cast  |cast       |
+|           | `byte` | `short` | `int` | `long`   | `float` | `double` | `date` | `timestamp` |
+| :-------- | :----- | :------ | :---- | :------- | :------ | :------- | :----- | :---------- |
+| `integer` | cast   | cast    | cast  | `native` | cast    | cast     | cast   | cast        |
 
 ## Long256
 
@@ -69,19 +69,19 @@ conventional double value would.
 The following `cast` operations are supported when existing table column type is
 not `double`:
 
-|       |`float`|`double`|
-|:------|:------|:-------|
-|`float`|cast   |`native`|
+|         | `float` | `double` |
+| :------ | :------ | :------- |
+| `float` | cast    | `native` |
 
 ## Boolean
 
 These value correspond to QuestDB type `boolean`. In InfluxDB Line Protocol
 `boolean` values can be represented in any of the following ways:
 
-|Actual value|Single char lowercase|Single char uppercase|Full lowercase|Full camelcase|Full uppercase|
-|:-----------|:--------------------|:--------------------|:-------------|:-------------|:-------------|
-|`true`      |`t`                  |`T`                  |`true`        |`True`        |`TRUE`        |
-|`false`     |`f`                  |`F`                  |`false`       |`False`       |`FALSE`       |
+| Actual value | Single char lowercase | Single char uppercase | Full lowercase | Full camelcase | Full uppercase |
+| :----------- | :-------------------- | :-------------------- | :------------- | :------------- | :------------- |
+| `true`       | `t`                   | `T`                   | `true`         | `True`         | `TRUE`         |
+| `false`      | `f`                   | `F`                   | `false`        | `False`        | `FALSE`        |
 
 Example:
 
@@ -94,16 +94,17 @@ sensors,location=south warning=false\n
 The following `cast` operations are supported when existing table column type is
 not `boolean`:
 
-|         |`boolean`|`byte`|`short`|`int`|`float`|`long`|`double`|
-|:--------|:--------|:-----|:------|:----|:------|:-----|:-------|
-|`boolean`|`native` |cast  |cast   |cast |cast   |cast  |cast    |
+|           | `boolean` | `byte` | `short` | `int` | `float` | `long` | `double` |
+| :-------- | :-------- | :----- | :------ | :---- | :------ | :----- | :------- |
+| `boolean` | `native`  | cast   | cast    | cast  | cast    | cast   | cast     |
 
 When cast to numeric type, boolean `true` is `1` and `false` is `0`
 
 ## String
 
 These value correspond to QuestDB type `string`. They must be enclosed in
-quotes. Quotation marks `"` in values must be escaped using `\`. For example:
+quotes. The following characters in values must be escaped with a `\`: `"`,
+`\n`, `\r` and `\`. For example:
 
 ```shell
 trade,ticker=BTCUSD description="this is a \"rare\" value",user="John" 1638202821000000000\n
@@ -111,20 +112,24 @@ trade,ticker=BTCUSD description="this is a \"rare\" value",user="John" 163820282
 
 The result:
 
-|timestamp          |ticker|description           |user|
-|:------------------|:-----|:---------------------|:---|
-|1638202821000000000|BTCUSD|this is a "rare" value|John|
+| timestamp           | ticker | description            | user |
+| :------------------ | :----- | :--------------------- | :--- |
+| 1638202821000000000 | BTCUSD | this is a "rare" value | John |
 
-:::note String values must be UTF8 encoded before sending. :::
+:::note
+
+String values must be UTF-8 encoded before sending.
+
+:::
 
 ### Cast table
 
 The following `cast` operations are supported when existing table column type is
 not `string`:
 
-|        |`char`|`string`|`geohash`|`symbol`|
-|:-------|:-----|:-------|:--------|:-------|
-|`string`|cast  |`native`|cast     |no      |
+|          | `char` | `string` | `geohash` | `symbol` |
+| :------- | :----- | :------- | :-------- | :------- |
+| `string` | cast   | `native` | cast      | no       |
 
 ### Cast to CHAR
 
@@ -138,10 +143,10 @@ trade,ticker=BTCUSD status="" 1638202821000000001\n
 
 The result:
 
-|timestamp          |ticker|status|
-|:------------------|:-----|:-----|
-|1638202821000000000|BTCUSD|A     |
-|1638202821000000001|BTCUSD|`null`|
+| timestamp           | ticker | status |
+| :------------------ | :----- | :----- |
+| 1638202821000000000 | BTCUSD | A      |
+| 1638202821000000001 | BTCUSD | `null` |
 
 Casting strings with 2 or more characters to `char` will cause entire line to be
 rejected.
@@ -159,7 +164,10 @@ resolution column. Let's create table before sending ILP message. Our `geohash`
 column has resolution of 4 bits.
 
 ```questdb-sql
-create table tracking (geohash GEOHASH(4b), ts timestamp) timestamp(ts) partition by hour;
+CREATE TABLE tracking (
+    geohash GEOHASH(4b),
+    ts TIMESTAMP
+) TIMESTAMP(ts) PARTITION BY HOUR;
 ```
 
 Send message including `16c` `geohash` value:
@@ -170,9 +178,9 @@ tracking,obj=VLCC\ STEPHANIE gh="9v1s8hm7wpkssv1h" 1000000000\n
 
 The result. `geohash` value has been truncated to size of the column.
 
-|ts                         |gh  |
-|:--------------------------|:---|
-|1970-01-01T00:00:01.000000Z|0100|
+| ts                          | gh   |
+| :-------------------------- | :--- |
+| 1970-01-01T00:00:01.000000Z | 0100 |
 
 Sending empty string value will insert `null` into `geohash` column of any size:
 
@@ -180,9 +188,9 @@ Sending empty string value will insert `null` into `geohash` column of any size:
 tracking,obj=VLCC\ STEPHANIE gh="" 2000000000\n
 ```
 
-|ts                         |gh    |
-|:--------------------------|:-----|
-|1970-01-01T00:00:01.000000Z|`null`|
+| ts                          | gh     |
+| :-------------------------- | :----- |
+| 1970-01-01T00:00:01.000000Z | `null` |
 
 :::info Downcast of `geohash` value, which is inserting of lower resolution
 values into higher resolution column, will cause the entire line to be rejected.
@@ -202,7 +210,7 @@ It is possible to populate _designated_ timestamp using `columnset`, although
 this is not recommended. Let's see how this works in practice. Assuming table:
 
 ```questdb-sql
-CREATE TABLE (loc SYMBOL, ts timestamp) TIMESTAMP(ts) PARTITION BY DAY;
+CREATE TABLE (loc SYMBOL, ts TIMESTAMP) TIMESTAMP(ts) PARTITION BY DAY;
 ```
 
 When we send:
@@ -214,7 +222,7 @@ tracking,loc=south ts=3000000000t\n
 
 The result in `columnset` value always wins:
 
-|loc  |ts        |
-|:----|:---------|
-|north|2000000000|
-|south|3000000000|
+| loc   | ts         |
+| :---- | :--------- |
+| north | 2000000000 |
+| south | 3000000000 |

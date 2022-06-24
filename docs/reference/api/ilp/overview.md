@@ -12,10 +12,9 @@ to ingest data. QuestDB can listen for line protocol packets both over
 
 ## Examples
 
-We provide examples in a number of programming languages.
-See our
-[ILP section](/docs/develop/insert-data#influxdb-line-protocol)
-of the "develop" docs.
+We provide examples in a number of programming languages. See our
+[ILP section](/docs/develop/insert-data#influxdb-line-protocol) of the "develop"
+docs.
 
 ## Usage
 
@@ -25,17 +24,21 @@ of the "develop" docs.
 table_name,symbolset columnset timestamp\n
 ```
 
-|Element     |Definition                                                                                |
-|:-----------|:-----------------------------------------------------------------------------------------|
-|`table_name`|Name of the table where QuestDB will write data.                                          |
-|`symbolset` |A set of `name=value` pairs separated by commas that will be parsed as symbol columns.    |
-|`columnset` |A set of `name=value` pairs separated by commas that will be parsed as non-symbol columns.|
-|`timestamp` |UNIX timestamp. By default in nanoseconds. Can be changed in the configuration.           |
+| Element      | Definition                                                                                 |
+| :----------- | :----------------------------------------------------------------------------------------- |
+| `table_name` | Name of the table where QuestDB will write data.                                           |
+| `symbolset`  | A set of `name=value` pairs separated by commas that will be parsed as symbol columns.     |
+| `columnset`  | A set of `name=value` pairs separated by commas that will be parsed as non-symbol columns. |
+| `timestamp`  | UNIX timestamp. By default in nanoseconds. Can be changed in the configuration.            |
 
 `name` in the `name=value` pair always corresponds to `column name` in the
 table.
 
-:::note Each ILP message has to end with new line `\n` character. :::
+:::note
+
+Each ILP message has to end with new line `\n` character.
+
+:::
 
 ### Behaviour
 
@@ -60,11 +63,11 @@ with QuestDB.
 
 Let's assume the following data:
 
-|timestamp          |city   |temperature|humidity|make     |
-|:------------------|:------|:----------|:-------|:--------|
-|1465839830100400000|London |23.5       |0.343   |Omron    |
-|1465839830100600000|Bristol|23.2       |0.443   |Honeywell|
-|1465839830100700000|London |23.6       |0.358   |Omron    |
+| timestamp           | city    | temperature | humidity | make      |
+| :------------------ | :------ | :---------- | :------- | :-------- |
+| 1465839830100400000 | London  | 23.5        | 0.343    | Omron     |
+| 1465839830100600000 | Bristol | 23.2        | 0.443    | Honeywell |
+| 1465839830100700000 | London  | 23.6        | 0.358    | Omron     |
 
 The line protocol syntax for that table is:
 
@@ -77,7 +80,13 @@ readings,city=London,make=Omron temperature=23.6,humidity=0.348 1465839830100700
 This would create table similar to this SQL statement and populate it.
 
 ```questdb-sql
-create table readings (timestamp timestamp, city symbol, temperature double, humidity double, make symbol) timestamp(timestamp) partition by DAY;
+CREATE TABLE readings (
+  timestamp TIMESTAMP,
+  city SYMBOL,
+  temperature DOUBLE,
+  humidity DOUBLE,
+  make SYMBOL
+) TIMESTAMP(timestamp) PARTITION BY DAY;
 ```
 
 ### Irregularly-structured data
@@ -96,11 +105,11 @@ readings,make=Honeywell temperature=23.2,humidity=0.443 1465839830100800000\n
 
 This would result in the following table:
 
-|timestamp          |city  |temperature|humidity|make     |
-|:------------------|:-----|:----------|:-------|:--------|
-|1465839830100400000|London|23.5       |NULL    |NULL     |
-|1465839830100700000|London|23.6       |NULL    |NULL     |
-|1465839830100800000|NULL  |23.2       |0.358   |Honeywell|
+| timestamp           | city   | temperature | humidity | make      |
+| :------------------ | :----- | :---------- | :------- | :-------- |
+| 1465839830100400000 | London | 23.5        | NULL     | NULL      |
+| 1465839830100700000 | London | 23.6        | NULL     | NULL      |
+| 1465839830100800000 | NULL   | 23.2        | 0.358    | Honeywell |
 
 :::tip
 
@@ -133,8 +142,11 @@ trade\ table,ticker=USD price=30,details="Latest price" 1638202821000000000\n
 trade,symbol\ ticker=USD price=30,details="Latest price" 1638202821000000000\n
 ```
 
-Table name and columns name must not contain any of the forbidden characters:
-`.`, `?`,`,`,`:`,`\`,`/`,`\0`,`)`,`(`,`+`,`*`,`~`,`%` and `-`.
+Table and column names must not contain any of the forbidden characters:
+`\n`,`\r`,`?`,`,`,`:`,`"`,`'`,`\`,`/`,`\0`,`)`,`(`,`+`,`*`,`~` and `%`.
+
+Additionally, table name must not start or end with the `.` character. Column
+name must not contain `.` and `-`.
 
 ### Symbolset
 
@@ -158,7 +170,8 @@ cardinality types such as `9092i` or `1.245667`. This will result in a
 significant performance loss due to large mapping tables.
 
 `symbolset` values are not quoted. They are allowed to have special characters,
-such as ` ` (space), `,` and `\`, which must be escaped. Example:
+such as ` ` (space), `=`, `,`, `\n`, `\r` and `\`, which must be escaped with a
+`\`. Example:
 
 ```shell
 trade,ticker=BTC\\USD\,All,venue=coin\ base price=30 1638202821000000000\n
@@ -201,9 +214,13 @@ and when present, is a timestamp in Epoch nanoseconds. When the timestamp is
 omitted, the server will insert each message using the system clock as the row
 timestamp.
 
-:::warning While `columnset` `timestamp` type units are `microseconds`, the
-designated timestamp units are `nanoseconds`. These are default units, which can
-be overridden via `line.tcp.timestamp` :::
+:::warning
+
+While `columnset` timestamp type units are microseconds, the designated
+timestamp units are nanoseconds. These are default units, which can be
+overridden via the `line.tcp.timestamp` configuration property.
+
+:::
 
 ```shell title="Example of ILP message with desginated timestamp value"
 tracking,loc=north val=200i 1000000000\n
@@ -213,9 +230,11 @@ tracking,loc=north val=200i 1000000000\n
 tracking,loc=north val=200i\n
 ```
 
-:::note We recommend populating designated timestamp via trailing value syntax
-above :::
+:::note
 
-It is also possible to populate designated timestamp via `coulumnset`. Please
-see [mixed timestamp](/docs/reference/api/ilp/columnset-types#timestamp)
-reference.
+We recommend populating designated timestamp via trailing value syntax above.
+
+:::
+
+It is also possible to populate designated timestamp via `columnset`. Please see
+[mixed timestamp](/docs/reference/api/ilp/columnset-types#timestamp) reference.
