@@ -3,12 +3,15 @@
 You can interact with a QuestDB database by connecting to one of its various
 network endpoints.
 
-|Network Endpoint|Port|Inserting data|Querying data|
-|:---------------|:---|:-------------|:------------|
-|[Web Console](#web-console)|9000|SQL `INSERT`, CSV|SQL `SELECT`, charting|
+|Network Endpoint|Port|Inserting & modifying data<sup>*</sup>|Querying data|
+|:---------------|:---|:-------------------------------------|:------------|
+|[Web Console](#web-console)|9000|SQL `INSERT`, `UPDATE`, CSV|SQL `SELECT`, charting|
 |[InfluxDB Line Protocol](#influxdb-line-protocol)|9009|High performance bulk insert|-|
-|[PostgreSQL wire protocol](#postgresql-wire-protocol)|8812|SQL `INSERT`|SQL `SELECT`|
-|[HTTP REST API](#http-rest-api)|9000|SQL `INSERT`, CSV|SQL `SELECT`, CSV|
+|[PostgreSQL wire protocol](#postgresql-wire-protocol)|8812|SQL `INSERT`, `UPDATE`|SQL `SELECT`|
+|[HTTP REST API](#http-rest-api)|9000|SQL `INSERT`, `UPDATE`, CSV|SQL `SELECT`, CSV|
+
+`*` `UPDATE` is available from [QuestDB 6.4](/blog/2022/05/31/questdb-release-6-4/).
+
 
 :::note
 
