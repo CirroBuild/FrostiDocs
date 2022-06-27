@@ -101,7 +101,7 @@ export const ContactFormDialog = ({ trigger, defaultInterest }: Props) => {
                         ? { checked: true }
                         : {})}
                     />
-                    Cloud
+                    QuestDB Cloud demo
                   </label>
 
                   <label className={style.radio}>

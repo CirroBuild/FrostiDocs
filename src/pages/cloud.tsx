@@ -204,6 +204,7 @@ const Top = () => {
           height={626}
           src="/img/pages/cloud/screens.png"
           width={1026}
+          className={style["header-image"]}
         />
 
         <div className={hlCss.highlights}>
@@ -222,6 +223,7 @@ const Top = () => {
               variant="primary"
               href="/get-questdb"
               className={style.card__button}
+              newTab={false}
             >
               Install
             </Button>
