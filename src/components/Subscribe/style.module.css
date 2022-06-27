@@ -25,6 +25,10 @@
   color: var(--theme-input-text-color);
 }
 
+.submit {
+  white-space: nowrap;
+}
+
 .loader {
   position: absolute;
   width: 20px;

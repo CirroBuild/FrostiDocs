@@ -10,7 +10,6 @@
   font-size: var(--font-size-normal);
   transition: background-color var(--transition-fastest)
     var(--transition-bezier);
-  white-space: nowrap;
 }
 
 .button:hover {
