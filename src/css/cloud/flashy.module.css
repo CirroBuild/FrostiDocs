@@ -1,9 +1,10 @@
 .flashy {
-  padding: 2rem 1.25rem;
-  max-width: 355px;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem;
+  width: 355px;
   border-radius: 16px;
   background: var(--theme-card-bg-color);
-  margin-bottom: 1.5rem;
   text-align: center;
 }
 

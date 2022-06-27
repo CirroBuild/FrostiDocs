@@ -10,18 +10,15 @@ import Chevron from "@theme/Chevron"
 import Layout from "../theme/Layout"
 import useWindowWidth from "@theme/useWindowWidth"
 import SvgImage from "../components/SvgImage"
-import ActionCard from "../components/ActionCard"
-import Subscribe from "../components/Subscribe"
+import { ActionFooter } from "../components/ActionFooter"
 
 import doCss from "../css/index/docker.module.css"
 import feCss from "../css/index/feature.module.css"
-import flCss from "../css/index/flashy.module.css"
 import inCss from "../css/index/integration.module.css"
 import juCss from "../css/index/jumbotron.module.css"
 import meCss from "../css/index/menu.module.css"
 import shCss from "../css/index/showcase.module.css"
 import usCss from "../css/index/usp.module.css"
-import footerCss from "../css/index/footer.module.css"
 import prCss from "../css/property.module.css"
 import seCss from "../css/section.module.css"
 
@@ -37,8 +34,6 @@ import PlotlyLogo from "../assets/img/pages/index/integrations/plotly.svg"
 import MindsdbLogo from "../assets/img/pages/index/integrations/mindsdb.svg"
 import CubeLogo from "../assets/img/pages/index/integrations/cube.svg"
 import DockerLogo from "../assets/img/pages/index/docker.svg"
-import FossIcon from "../assets/img/pages/index/foss.svg"
-import SubscribeIcon from "../assets/img/pages/index/subscribeIcon.svg"
 import SearchTimeIcon from "../assets/img/pages/index/searchTime.svg"
 import SliceTimeIcon from "../assets/img/pages/index/sliceTime.svg"
 import NavigateTimeIcon from "../assets/img/pages/index/navigateTime.svg"
@@ -472,38 +467,7 @@ const Console = () => {
         width={600}
       />
 
-      <div className={footerCss.cards}>
-        <ActionCard
-          icon={<FossIcon />}
-          title="Join our developer community"
-          description="QuestDB is open source. Follow us on Twitter, star our GitHub repo, and join our developer community on Slack!"
-        >
-          <a
-            className={flCss.flashy__link}
-            href={customFields.githubUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to GitHub&nbsp;&nbsp;&gt;
-          </a>
-          <a className={flCss.flashy__link} href={customFields.slackUrl}>
-            Join Slack&nbsp;&nbsp;&gt;
-          </a>
-        </ActionCard>
-
-        <ActionCard
-          title="Subscribe to our newsletter"
-          description="Stay up to date with all things QuestDB"
-          icon={<SubscribeIcon />}
-          skin="primary"
-        >
-          <Subscribe
-            placeholder="Email address"
-            submitButtonVariant="tertiary"
-            provider="newsletter"
-          />
-        </ActionCard>
-      </div>
+      <ActionFooter />
     </section>
   )
 }

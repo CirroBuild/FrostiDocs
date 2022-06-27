@@ -1,0 +1,76 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  background: var(--theme-card-secondary-bg-color);
+  border-radius: var(--theme-card-border-radius);
+}
+
+.table-heading {
+  border-bottom: 0.1rem solid var(--ifm-color-primary);
+  padding: 0 0.75rem;
+}
+
+.table-heading > * {
+  font-weight: var(--ifm-font-weight-bold);
+}
+
+.table-heading__category {
+  text-align: center;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  min-height: 3rem;
+  align-items: center;
+}
+
+.table-row__title {
+  font-size: var(--font-size-large);
+}
+
+.table-row__value {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-row > * {
+  flex-shrink: 0;
+}
+
+.table-item {
+  margin: 0 0.75rem;
+}
+
+.table-item:not(:last-child) {
+  border-bottom: 0.05rem solid var(--palette-pale-blue);
+}
+
+.icon {
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  background-repeat: no-repeat;
+  background-position: center 3px;
+}
+
+.icon--check {
+  background-image: url("/img/pages/index/tick.svg?inline");
+}
+
+.icon--close {
+  background-image: url("/img/pages/cloud/close.svg?inline");
+}
+
+.link {
+  color: var(--palette-turquoise);
+  font-weight: var(--ifm-font-weight-bold);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link:hover {
+  cursor: default;
+}

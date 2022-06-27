@@ -480,3 +480,7 @@ html[data-theme='light'] [class^='footer__tagline'] {
 html[data-theme='light'] [class^='footer__github'][href*="github.com"] {
   background-color: var(--palette-white);
 }
+
+iframe {
+  pointer-events: none;
+}

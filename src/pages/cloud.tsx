@@ -1,34 +1,171 @@
-import React, { ReactElement } from "react"
+import React from "react"
 import clsx from "clsx"
 
 import Layout from "../theme/Layout"
-import Button from "@theme/Button"
-import SvgImage from "../components/SvgImage"
 import Subscribe from "../components/Subscribe"
 
-import ElasticSolutionIcon from "../assets/img/pages/cloud/elastic-solution.svg"
-import HighAvailabilityIcon from "../assets/img/pages/cloud/high-availability.svg"
-import HighPerformanceIcon from "../assets/img/pages/cloud/high-performance.svg"
-import SecurityIcon from "../assets/img/pages/cloud/security.svg"
-import ManagedQuestdbIcon from "../assets/img/pages/cloud/managed-questdb.svg"
-import AwsLogo from "../assets/img/aws.svg"
-
 import seCss from "../css/section.module.css"
-import ilCss from "../css/cloud/illustration.module.css"
-import hlCss from "../css/cloud/highlights.module.css"
-import flCss from "../css/cloud/flashy.module.css"
-import slCss from "../css/cloud/slack.module.css"
 import style from "../css/cloud/style.module.css"
+import flCss from "../css/cloud/flashy.module.css"
+import { ActionFooter } from "../components/ActionFooter"
+import {
+  CloudFeatureItem,
+  CloudFeatureTable,
+} from "../components/CloudFeatureTable"
+import hlCss from "../css/cloud/highlights.module.css"
+import prCss from "../css/property.module.css"
+import Button from "@theme/Button"
+import { ContactFormDialog } from "../components/ContactFormDialog"
 
-import SlackLogo from "../assets/img/slack.svg"
-import customFields from "../config/customFields"
+const CoreFeaturesItems: CloudFeatureItem[] = [
+  {
+    title: "High-throughput ingestion",
+    inOpenSource: "available",
+    inCloud: "available",
+  },
+  {
+    title: "Out-of-order ingestion",
+    inOpenSource: "available",
+    inCloud: "available",
+  },
+  {
+    title: "High-performance SQL",
+    inOpenSource: "available",
+    inCloud: "available",
+  },
+  {
+    title: "Time series-native SQL extensions",
+    inOpenSource: "available",
+    inCloud: "available",
+  },
+  {
+    title: "High-performance data migration",
+    inOpenSource: "available",
+    inCloud: "available",
+  },
+  {
+    title: "Geospatial data type",
+    inOpenSource: "available",
+    inCloud: "available",
+  },
+  {
+    title: "Cloud-native backups",
+    inOpenSource: "available",
+    inCloud: "available",
+  },
+  {
+    title: "Built-in web console",
+    inOpenSource: "available",
+    inCloud: "available",
+  },
+  {
+    title: "Data compression",
+    inOpenSource: "unavailable",
+    inCloud: "coming-soon",
+  },
+  {
+    title: "Cold storage support",
+    inOpenSource: "unavailable",
+    inCloud: "coming-soon",
+  },
+]
 
-type HighlightItem = {
-  title: string
-  description: string
-  image: ReactElement
-  imageTitle: string
-}
+const SecurityFeaturesItems: CloudFeatureItem[] = [
+  {
+    title: "Authentication",
+    inOpenSource: "available",
+    inCloud: "available",
+  },
+  {
+    title: "SSO Authentication",
+    inOpenSource: "not-applicable",
+    inCloud: "coming-soon",
+  },
+  {
+    title: "TLS encryption",
+    inOpenSource: "not-applicable",
+    inCloud: "available",
+  },
+  {
+    title: "EBS volume encryption",
+    inOpenSource: "not-applicable",
+    inCloud: "available",
+  },
+  {
+    title: "VPC peering",
+    inOpenSource: "not-applicable",
+    inCloud: "coming-soon",
+  },
+  {
+    title: "Role-based authorization",
+    inOpenSource: "unavailable",
+    inCloud: "coming-soon",
+  },
+  {
+    title: "Bring your own key encryption",
+    inOpenSource: "not-applicable",
+    inCloud: "coming-soon",
+  },
+]
+
+const HighAvailabilityFeaturesItems: CloudFeatureItem[] = [
+  {
+    title: "Cloud-native replication",
+    inOpenSource: "coming-soon",
+    inCloud: "coming-soon",
+  },
+  {
+    title: "High-availability reads",
+    inOpenSource: "coming-soon",
+    inCloud: "coming-soon",
+  },
+  {
+    title: "High-availability writes",
+    inOpenSource: "unavailable",
+    inCloud: "coming-soon",
+  },
+]
+
+const ManagedInfractionFeaturesItems: CloudFeatureItem[] = [
+  {
+    title: "Scheduled backups",
+    inOpenSource: "not-applicable",
+    inCloud: "available",
+  },
+  {
+    title: "Monitoring and alerting",
+    inOpenSource: "not-applicable",
+    inCloud: "available",
+  },
+  {
+    title: "Auto scaling",
+    inOpenSource: "not-applicable",
+    inCloud: "coming-soon",
+  },
+  {
+    title: "Zero-downtime upgrades",
+    inOpenSource: "unavailable",
+    inCloud: "coming-soon",
+  },
+]
+
+const SupportFeaturesItems: CloudFeatureItem[] = [
+  {
+    title: "Community support",
+    inOpenSource: "available",
+    inCloud: "available",
+  },
+  {
+    title: "Standard customer support",
+    inOpenSource: "unavailable",
+    inCloud: "available",
+  },
+  {
+    title: "Customized SLA",
+    inOpenSource: "unavailable",
+    inCloud: "contact-us",
+  },
+]
 
 const Top = () => {
   return (
@@ -43,103 +180,122 @@ const Top = () => {
           QuestDB Cloud
         </h1>
 
+        <p
+          className={clsx(
+            seCss.section__subtitle,
+            seCss["section__subtitle--jumbotron"],
+            seCss["section__subtitle--accent"],
+            "text--center",
+          )}
+        >
+          The fastest open source time series database fully managed on the
+          cloud, now available on AWS
+        </p>
+
         <Subscribe
+          placeholder="E-mail"
           className={style.subscribe}
-          submitButtonText="Early Access"
+          submitButtonText="Get access"
           provider="cloud"
         />
 
         <img
-          alt="Artistic view of the console with sub-queries"
-          className={ilCss.illustration}
-          height={394}
-          src="/img/pages/enterprise/banner.svg"
-          width={900}
+          alt="Screenshot of instance creation form and instance details pages in QuestDB Cloud"
+          height={626}
+          src="/img/pages/cloud/screens.png"
+          width={1026}
         />
-      </div>
-    </section>
-  )
-}
 
-const Highlights = () => {
-  const items: HighlightItem[] = [
-    {
-      title: "Managed QuestDB",
-      description: "Hosted, managed and monitored by us",
-      image: <ManagedQuestdbIcon width="90" height="90" />,
-      imageTitle: "Postgres logo",
-    },
-    {
-      title: "Elastic solution",
-      description: "Scalable QuestDB instances in a few steps",
-      image: <ElasticSolutionIcon width="90" height="90" />,
-      imageTitle: "Postgres logo",
-    },
-    {
-      title: "High availability",
-      description: "Multi-node replicas with automated deployments",
-      image: <HighAvailabilityIcon width="90" height="90" />,
-      imageTitle: "Postgres logo",
-    },
-    {
-      title: "High performance",
-      description: "Real-time SQL analytics optimized for time series",
-      image: <HighPerformanceIcon width="90" height="90" />,
-      imageTitle: "Postgres logo",
-    },
-    {
-      title: "Security",
-      description: "Built with industry-standard security in mind",
-      image: <SecurityIcon width="90" height="90" />,
-      imageTitle: "Postgres logo",
-    },
-  ]
-
-  return (
-    <section
-      className={clsx(seCss["section--inner"], seCss["section--column"])}
-    >
-      <p
-        className={clsx(
-          seCss.section__subtitle,
-          hlCss.highlights__subtitle,
-          "text--center",
-        )}
-      >
-        Enjoy all of QuestDB&apos;s core and enterprise features, first
-        available on{" "}
-        <SvgImage image={<AwsLogo width="50" height="30" />} title="AWS logo" />
-      </p>
-      <div className={hlCss.highlights}>
-        {items.map((item, key) => (
-          <div className={flCss.flashy} key={`${item.title}-${key}`}>
-            <SvgImage image={item.image} title={item.imageTitle} />
-            <h3 className={flCss.flashy__title}>{item.title}</h3>
-            <p className={flCss.flashy__content}>{item.description}</p>
+        <div className={hlCss.highlights}>
+          <div className={flCss.flashy}>
+            <h3 className={flCss.flashy__title}>Open source</h3>
+            <ul className={style.card__list}>
+              <li className={clsx(prCss.property, style.card__item)}>
+                Apache 2.0
+              </li>
+              <li className={clsx(prCss.property, style.card__item)}>
+                Self-hosting
+              </li>
+              <li className={clsx(prCss.property, style.card__item)}>Free</li>
+            </ul>
+            <Button
+              variant="primary"
+              href="/get-questdb"
+              className={style.card__button}
+            >
+              Install
+            </Button>
           </div>
-        ))}
+          <div className={flCss.flashy}>
+            <h3 className={flCss.flashy__title}>Cloud</h3>
+            <ul className={style.card__list}>
+              <li className={clsx(prCss.property, style.card__item)}>
+                Database-as-a-service
+              </li>
+              <li className={clsx(prCss.property, style.card__item)}>
+                Database monitoring
+              </li>
+              <li className={clsx(prCss.property, style.card__item)}>
+                Built-in authentication
+              </li>
+              <li className={clsx(prCss.property, style.card__item)}>
+                Additional database features
+              </li>
+              <li className={clsx(prCss.property, style.card__item)}>
+                Multiple regions
+              </li>
+            </ul>
+            <ContactFormDialog
+              defaultInterest="cloud"
+              trigger={
+                <Button variant="primary" className={style.card__button}>
+                  Book a demo
+                </Button>
+              }
+            />
+          </div>
+        </div>
       </div>
     </section>
   )
 }
 
-const Slack = () => {
+const CompareFeatures = () => {
+  return (
+    <section className={clsx(seCss.section, seCss["section--odd"])}>
+      <section
+        className={clsx(seCss["section--inner"], style["compare-features"])}
+      >
+        <p className={clsx(style["compare-title"], "text--center")}>
+          Compare features
+        </p>
+
+        <div className={style["feature-tables"]}>
+          <CloudFeatureTable title="Core features" items={CoreFeaturesItems} />
+
+          <CloudFeatureTable title="Security" items={SecurityFeaturesItems} />
+
+          <CloudFeatureTable
+            title="High availability"
+            items={HighAvailabilityFeaturesItems}
+          />
+
+          <CloudFeatureTable
+            title="Managed infrastructure"
+            items={ManagedInfractionFeaturesItems}
+          />
+
+          <CloudFeatureTable title="Support" items={SupportFeaturesItems} />
+        </div>
+      </section>
+    </section>
+  )
+}
+
+const Footer = () => {
   return (
     <section className={seCss["section--inner"]}>
-      <div className={slCss.slack}>
-        <div className={slCss.slack__text}>
-          <div className={slCss.slack__logo}>
-            <SvgImage image={<SlackLogo />} title="Slack logo" />
-          </div>
-          Like to get support and ask questions about QuestDB? Join our
-          community with 1000+ developers on Slack!
-        </div>
-        <div className={slCss.slack__cta}>
-          <Button variant="primary" href={customFields.slackUrl}>
-            Go to Slack
-          </Button>
-        </div>
-      </div>
+      <ActionFooter />
     </section>
   )
 }
@@ -149,10 +305,15 @@ const CloudPage = () => {
   const description = ""
 
   return (
-    <Layout canonical="/cloud" description={description} title={title}>
+    <Layout
+      canonical="/cloud"
+      description={description}
+      title={title}
+      image="/img/pages/cloud/screens-thumb.png"
+    >
       <Top />
-      <Highlights />
-      <Slack />
+      <CompareFeatures />
+      <Footer />
     </Layout>
   )
 }

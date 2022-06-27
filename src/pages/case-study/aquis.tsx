@@ -137,10 +137,10 @@ const Aquis = () => {
           <p className="font-size--large">
             As an exchange, we need to ensure fair and orderly markets, so the
             timing of messages is critical to us. We produce comprehensive
-            latency reports and dashboards per security, per market, and for each client.
-            The reports detail the time it takes for an order instructed through
-            a FIX or binary port to hit our matching engine and be a
-            fully-executed trade on the exchange.
+            latency reports and dashboards per security, per market, and for
+            each client. The reports detail the time it takes for an order
+            instructed through a FIX or binary port to hit our matching engine
+            and be a fully-executed trade on the exchange.
           </p>
           <img
             alt="Overall Market Metrics using Grafana dashboards"

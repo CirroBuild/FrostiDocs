@@ -1,3 +1,39 @@
+.feature-tables {
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-tables > *:not(:last-child) {
+  margin-bottom: 2.5rem;
+}
+
+.compare-features {
+  display: flex;
+  flex-direction: column;
+}
+
+.compare-title {
+  font-size: var(--font-size-big-3);
+  font-weight: var(--ifm-font-weight-bold);
+  margin-bottom: 4.5rem;
+}
+
+.card__list {
+  --ifm-list-margin: 0;
+  --ifm-list-left-padding: 0;
+  text-align: left;
+  margin-top: 3.1rem;
+  margin-bottom: 3.1rem;
+}
+
+.card__item {
+  font-size: var(--font-size-large);
+}
+
+.card__button {
+  margin-top: auto;
+}
+
 @media screen and (min-width: 600px) {
   .subscribe {
     max-width: 60%;

@@ -1,0 +1,36 @@
+.heading {
+  font-size: var(--font-size-big-3)
+}
+
+.root {
+  width: 100%;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs__fields > * {
+  margin-bottom: 1rem;
+}
+
+.submit {
+  align-self: center;
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.radio-heading {
+  font-size: var(--font-size-large);
+  margin-bottom: 0.5rem;
+}
+
+.radio {
+  font-size: var(--font-size-large);
+  margin-bottom: 0.5rem;
+}
+
+.radio input {
+  margin-right: 0.5rem;
+}
