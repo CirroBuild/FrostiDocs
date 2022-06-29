@@ -4,6 +4,7 @@ const consts = require("./src/config/consts")
 const customFields = require("./src/config/customFields")
 const math = require("remark-math")
 const katex = require("rehype-katex")
+const admonitions = require("remark-admonitions")
 
 function variable() {
   const RE_VAR = /{@([\w-_]+)@}/g
@@ -54,7 +55,7 @@ const config = {
     [
       require.resolve("./plugins/tutorial/compiled/index"),
       {
-        remarkPlugins: [variable, math],
+        remarkPlugins: [variable, math, admonitions],
         rehypePlugins: [katex],
       },
     ],
