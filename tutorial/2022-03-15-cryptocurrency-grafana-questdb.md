@@ -67,7 +67,7 @@ brew install questdb
 
 Additional settings can be changes in the
 [server configuration](https://questdb.io/docs/reference/configuration/) file
-located at `/usr/local/var/questdb/conf/server.conf` for the homebrew install.
+located at `/opt/homebrew/var/questdb/conf/server.conf` for the homebrew install.
 The interface we'll be using for inserting data is ILP
 ([InfluxDB line protocol](https://questdb.io/docs/reference/api/ilp/overview/))
 over TCP which runs on port 9009 by default. The server configuration for these

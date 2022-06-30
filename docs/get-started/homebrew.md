@@ -35,7 +35,7 @@ On macOS, the root directory of QuestDB including
 following directory:
 
 ```bash
-/usr/local/var/questdb
+/opt/homebrew/var/questdb
 ├── conf
 ├── db
 ├── log

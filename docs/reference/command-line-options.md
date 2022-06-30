@@ -163,7 +163,7 @@ $HOME/.questdb
 
 
 ```shell
-/usr/local/var/questdb
+/opt/homebrew/var/questdb
 ```
 
 </TabItem>
