@@ -1166,7 +1166,6 @@ if __name__ == '__main__':
 const fetch = require("node-fetch")
 const FormData = require("form-data")
 const fs = require("fs")
-const qs = require("querystring")
 
 const HOST = "http://localhost:9000"
 
@@ -1329,17 +1328,14 @@ The `node-fetch` package can be installed using `npm i node-fetch`.
 
 ```javascript
 const fetch = require("node-fetch")
-const qs = require("querystring")
 
 const HOST = "http://localhost:9000"
 
 async function createTable() {
   try {
-    const queryData = {
-      query: "CREATE TABLE IF NOT EXISTS trades (name STRING, value INT)",
-    }
+    const query = "CREATE TABLE IF NOT EXISTS trades (name STRING, value INT)"
 
-    const response = await fetch(`${HOST}/exec?${qs.encode(queryData)}`)
+    const response = await fetch(`${HOST}/exec?query=${encodeURIComponent(query)}`)
     const json = await response.json()
 
     console.log(json)
@@ -1350,11 +1346,9 @@ async function createTable() {
 
 async function insertData() {
   try {
-    const queryData = {
-      query: "INSERT INTO trades VALUES('abc', 123456)",
-    }
+    const query = "INSERT INTO trades VALUES('abc', 123456)"
 
-    const response = await fetch(`${HOST}/exec?${qs.encode(queryData)}`)
+    const response = await fetch(`${HOST}/exec?query=${encodeURIComponent(query)}`)
     const json = await response.json()
 
     console.log(json)
