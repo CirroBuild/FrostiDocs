@@ -20,9 +20,9 @@ is automatic.
 
 ## Options
 
-- `with headers true` - QuestDB will automatically assume the first row is a
+- `with header true` - QuestDB will automatically assume the first row is a
   header.
-- `with headers false` - QuestDB will use schema recognition to determine
+- `with header false` - QuestDB will use schema recognition to determine
   whether the first rows should be used as header.
 
 :::note
@@ -48,6 +48,6 @@ security feature to disallow random file access by QuestDB.
 COPY trades20191223 FROM 'C:\archive\trades\20191223.csv'
 ```
 
-```questdb-sql title="COPY with headers true"
-COPY trades20191223 FROM 'C:\archive\trades\20191223.csv' with headers true
+```questdb-sql title="COPY with header true"
+COPY trades20191223 FROM 'C:\archive\trades\20191223.csv' with header true
 ```
