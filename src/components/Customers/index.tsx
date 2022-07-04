@@ -6,25 +6,36 @@ import seCss from "../../css/section.module.css"
 import { logos } from "../../assets/logos"
 import { CustomerLogo } from "../../assets/types"
 
+const logosOverrides: Record<keyof typeof logos, Partial<CustomerLogo>> = {
+  yahoo: {
+    width: 120,
+  },
+
+  toggle: {
+    width: 120,
+  },
+
+  apacheNifi: {
+    height: 45,
+  },
+}
+
 const customerLogos = [
   "yahoo",
   "kepler",
   "airbus",
   "yc",
   "aquis-exchange",
-  "sapient-industries",
+  "central-group",
   "tqs-integration",
   "syndica",
   "copenhagen-atomics",
   "turk-telekom",
   "liveaction",
-  "toggle",
   "apacheNifi",
+  "toggle",
   "syntropy",
-].reduce((result, key) => {
-  result[key] = logos[key]
-  return result
-}, {}) as Record<string, CustomerLogo>
+].map((key) => ({ ...logos[key], ...logosOverrides[key] }))
 
 type Props = {
   nbElements: number
@@ -43,7 +54,7 @@ const Slideshow = ({ nbElements }: Props) => {
   return (
     <section className={clsx(seCss["section--slim"])}>
       <div className={cuCss.logo__desktop}>
-        {Object.values(customerLogos).map((logo) => (
+        {customerLogos.map((logo) => (
           <div key={logo.alt} className={cuCss.logo__item}>
             <img
               alt={logo.alt}
@@ -57,7 +68,7 @@ const Slideshow = ({ nbElements }: Props) => {
       </div>
       <div className={cuCss.logo__mobile}>
         {panels.map((i: number) => {
-          const panelLogos = Object.values(customerLogos).slice(
+          const panelLogos = customerLogos.slice(
             (i - 1) * nbElements,
             i * nbElements,
           )
