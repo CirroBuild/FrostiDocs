@@ -224,22 +224,18 @@ namespace QuestDBDemo
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            var address = IPAddress.Loopback.ToString();
-            using var sender = new LineTcpSender(address, 9009);
-
-            sender
-                .Table("trades")
+            using var sender = await LineTcpSender.ConnectAsync("localhost", 9009, tlsMode: TlsMode.Disable);
+            sender.Table("trades")
                 .Symbol("name", "test_ilp1")
                 .Column("value", 12.4)
                 .AtNow();
-            sender
-                .Table("trades")
+            sender.Table("trades")
                 .Symbol("name", "test_ilp2")
                 .Column("value", 11.4)
                 .AtNow();
-            sender.flush();
+            await sender.SendAsync();
         }
     }
 }
