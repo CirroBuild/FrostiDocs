@@ -133,10 +133,8 @@ module.exports = {
           ],
         },
         "reference/command-line-options",
-        {
-          id: "reference/configuration",
-          type: "doc",
-        },
+        "reference/configuration",
+        "reference/ilp-client-libraries",
         "reference/sql/datatypes",
         {
           type: "category",
