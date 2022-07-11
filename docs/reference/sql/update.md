@@ -41,12 +41,12 @@ WHERE s.timestamp = p.timestamp AND i.type = 'BOND';
 
 ```questdb-sql title="Update with Common Table Expression"
 WITH up AS (
-    SELECT symbol, spread
+    SELECT symbol, spread, ts
     FROM temp_spreads
     WHERE timestamp between '2022-01-02' and '2022-01-03' 
 )
 UPDATE spreads s 
-SET s.spread = up.spread
+SET spread = up.spread
 FROM up
-WHERE s.timestamp = up.timestamp AND s.symbol = up.symbol;
+WHERE up.ts = s.ts AND s.symbol = up.symbol;
 ```
