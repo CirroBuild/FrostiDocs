@@ -1,8 +1,9 @@
 import { Dialog, DialogTrigger, DialogContent } from "../Dialog"
-import React, { FormEvent, useState } from "react"
+import React, { FormEvent, useEffect, useState } from "react"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import Input from "@theme/Input"
 import Button from "@theme/Button"
+import emailPattern from "../../utils/emailPattern"
 
 import style from "./style.module.css"
 import subscribeStyle from "../Subscribe/style.module.css"
@@ -11,14 +12,36 @@ import clsx from "clsx"
 type Props = {
   trigger: React.ReactNode
   defaultInterest: "cloud" | "sla"
+  defaultName?: string
+  defaultEmail?: string
+  defaultCompany?: string
 }
 
-const emailPattern =
-  "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$"
-
-export const ContactFormDialog = ({ trigger, defaultInterest }: Props) => {
+export const ContactFormDialog = ({
+  trigger,
+  defaultInterest,
+  defaultName = "",
+  defaultEmail = "",
+  defaultCompany = "",
+}: Props) => {
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
+
+  const [name, setName] = useState(defaultName)
+  const [email, setEmail] = useState(defaultEmail)
+  const [company, setCompany] = useState(defaultCompany)
+
+  const handleNameChange = (value: string) => {
+    setName(value)
+  }
+
+  const handleEmailChange = (value: string) => {
+    setEmail(value)
+  }
+
+  const handleCompanyChange = (value: string) => {
+    setCompany(value)
+  }
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -42,6 +65,18 @@ export const ContactFormDialog = ({ trigger, defaultInterest }: Props) => {
     setSent(true)
   }
 
+  useEffect(() => {
+    setName(defaultName)
+  }, [defaultName])
+
+  useEffect(() => {
+    setEmail(defaultEmail)
+  }, [defaultEmail])
+
+  useEffect(() => {
+    setCompany(defaultCompany)
+  }, [defaultCompany])
+
   return (
     <Dialog>
       <DialogTrigger>{trigger}</DialogTrigger>
@@ -64,6 +99,10 @@ export const ContactFormDialog = ({ trigger, defaultInterest }: Props) => {
                     <Input
                       className={subscribeStyle.input}
                       name="name"
+                      value={name}
+                      onChange={(event) =>
+                        handleNameChange(event.currentTarget.value)
+                      }
                       type="text"
                       title="Name can't be blank"
                       placeholder="Name*"
@@ -73,6 +112,10 @@ export const ContactFormDialog = ({ trigger, defaultInterest }: Props) => {
                     <Input
                       className={subscribeStyle.input}
                       name="email"
+                      value={email}
+                      onChange={(event) =>
+                        handleEmailChange(event.currentTarget.value)
+                      }
                       type="email"
                       title="Email address should be valid"
                       placeholder="E-mail*"
@@ -83,6 +126,10 @@ export const ContactFormDialog = ({ trigger, defaultInterest }: Props) => {
                     <Input
                       className={subscribeStyle.input}
                       name="company"
+                      value={company}
+                      onChange={(event) =>
+                        handleCompanyChange(event.currentTarget.value)
+                      }
                       type="text"
                       placeholder="Company"
                     />

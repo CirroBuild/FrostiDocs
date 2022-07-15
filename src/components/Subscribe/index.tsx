@@ -7,6 +7,7 @@ import Button from "../../theme/Button"
 import type { Props as ButtonProps } from "../../theme/Button"
 import style from "./style.module.css"
 import clsx from "clsx"
+import emailPattern from "../../utils/emailPattern"
 
 type Provider = "enterprise" | "cloud" | "newsletter"
 
@@ -17,9 +18,6 @@ type Props = {
   submitButtonVariant?: ButtonProps["variant"]
   className?: string
 }
-
-const emailPattern =
-  "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$"
 
 const providers: { [key in Provider]: string } = {
   cloud: "https://crast.questdb.io/contact/cloud",

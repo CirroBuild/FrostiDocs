@@ -1,7 +1,7 @@
 import React from "react"
 import style from "./styles.module.css"
 import clsx from "clsx"
-import { ContactFormDialog } from "../ContactFormDialog"
+import { ContactFormDialog } from "../../../components/ContactFormDialog"
 
 type Availability =
   | "available"
@@ -10,7 +10,7 @@ type Availability =
   | "coming-soon"
   | "contact-us"
 
-export type CloudFeatureItem = {
+export type FeatureItem = {
   title: string
   inOpenSource: Availability
   inCloud: Availability
@@ -18,7 +18,7 @@ export type CloudFeatureItem = {
 
 type Props = {
   title: string
-  items: CloudFeatureItem[]
+  items: FeatureItem[]
 }
 
 const AvailabilityStatus = ({
@@ -45,7 +45,7 @@ const AvailabilityStatus = ({
   }
 }
 
-export const CloudFeatureTable = ({ title, items }: Props) => (
+export const FeatureTable = ({ title, items }: Props) => (
   <div className={style.root}>
     <div className={clsx(style["table-row"], style["table-heading"])}>
       <span className={style["table-heading__title"]}>
