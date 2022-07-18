@@ -12,6 +12,7 @@ import juCss from "../css/customers/jumbotron.module.css"
 import quCss from "../css/customers/quote.module.css"
 import seCss from "../css/section.module.css"
 import _quotes from "../assets/quotes"
+import { logos } from "../assets/logos"
 
 // temporary duplication across customer and enterprise page for quote module
 
@@ -182,6 +183,32 @@ const Customer = () => {
             onClick={increaseIndex}
           >
             <Chevron className={quCss.controls__chevron} side="right" />
+          </div>
+        </div>
+      </section>
+
+      <section className={clsx(seCss.section, seCss["section--inner"])}>
+        <div className={caCss.card}>
+          <p className={caCss.card__summary}>
+            <img
+              alt="Centralgroup logo"
+              className={caCss.card__logo}
+              src={logos["central-group"].src}
+              width={200}
+              height={20}
+            />
+            QuestDB is the core engine driving real-time analytics data for
+            Central Group, the largest retail company in Asia.
+            <Button className={caCss.card__cta} to="/case-study/central-group/">
+              View full case study
+            </Button>
+          </p>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="Central Group logo"
+              src="/img/pages/case-study/central-group/header.jpg"
+              width={225}
+            />
           </div>
         </div>
       </section>
