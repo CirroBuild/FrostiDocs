@@ -5,10 +5,10 @@ description: SET PARAM SQL keyword reference documentation.
 ---
 
 The following keywords allow for setting table parameters via SQL. This is
-useful for applying configuration for how the system handles out-of-order data
+useful for configuring out-of-order ILP data
 ingestion on a per-table basis. For more information on these values including
 details on why these settings should be applied, see the documentation for
-[out-of-order data commits](/docs/guides/out-of-order-commit-lag).
+[out-of-order data commits](/docs/guides/out-of-order-commit-lag) and [ILP commit strategy](/docs/reference/api/ilp/tcp-receiver#commit-strategy).
 
 :::info
 
@@ -25,7 +25,7 @@ functions which are described in the
 
 The following two sections describe table parameters relating to out-of-order
 ingestion. For context on commit lag and max uncommitted rows, see the guide for
-[configuring commit lag of out-of-order data](/docs/guides/out-of-order-commit-lag).
+[configuring commit lag of out-of-order data](/docs/guides/out-of-order-commit-lag) and [ILP commit strategy](/docs/reference/api/ilp/tcp-receiver#commit-strategy).
 
 ### commitLag
 

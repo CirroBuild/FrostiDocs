@@ -114,7 +114,7 @@ line.tcp.maintenance.job.interval=1000
 
 ### Interval-based commit
 
-A table's commit lag metadata property determines how much uncommitted data will
+A table's [commit lag](/docs/guides/out-of-order-commit-lag) metadata property determines how much uncommitted data will
 need to remain uncommitted for performance reasons. This lag value is measured
 in time units from the table's data. Data older than the lag value will be
 committed and become visible. ILP derives the commit interval as a function of
@@ -135,8 +135,8 @@ interval can be set by the below configuration parameter.
 line.tcp.commit.interval.fraction=0.2
 ```
 
-If there is no commit lag set for a table or the fraction is set to 0, the
-default commit interval of 2 seconds will be used. This can be changed in the
+If the fraction value is set to `0`, the
+default commit interval of `2` seconds will be used. This can be changed in the
 configuration:
 
 ```shell title="Setting the default commit interval in milliseconds"

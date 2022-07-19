@@ -225,8 +225,26 @@ parameters may be applied:
   | h    | hours        |
   | d    | days         |
 
+
+```questdb-sql title="Setting out-of-order table parameters via SQL"
+CREATE TABLE my_table (timestamp TIMESTAMP) timestamp(timestamp)
+PARTITION BY DAY WITH maxUncommittedRows=250000, commitLag=240s;
+```
+
+Checking the values per-table may be done using the `tables()` function:
+
+```questdb-sql title="List all tables"
+SELECT id, name, maxUncommittedRows, commitLag FROM tables();
+```
+
+|id |name       |maxUncommittedRows|commitLag|
+|:--|:----------|:-----------------|:--------|
+|1  |my_table   |250000            |240000000|
+|2  |device_data|10000             |30000000 |
+
+
 For more information on commit lag and the maximum uncommitted rows, see the
-guide for [out-of-order commits](/docs/guides/out-of-order-commit-lag).
+guide for [out-of-order commits](/docs/guides/out-of-order-commit-lag) and [ILP commit strategy](/docs/reference/api/ilp/tcp-receiver#commit-strategy).
 
 ## Examples
 

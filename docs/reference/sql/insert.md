@@ -93,6 +93,8 @@ FROM unordered_trades
 
 :::info
 
+- Using the lag and batch size parameters during `INSERT AS SELECT` statements is a convenient strategy to load and order large datasets from CSV in bulk. This strategy along with an example workflow is described in the [importing data guide](/docs/guides/importing-data).
+
 - More details on ingesting out-of-order data with context on _lag_ and
   uncommitted record count see the guide for
   [configuring commit lag of out-of-order data](/docs/guides/out-of-order-commit-lag)
