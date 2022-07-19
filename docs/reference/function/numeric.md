@@ -21,7 +21,7 @@ calculations.
 
 **Return value:**
 
-Return value type is `double`.
+Return value type is the same as the type of the argument.
 
 **Examples:**
 

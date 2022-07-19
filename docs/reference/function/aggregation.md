@@ -309,7 +309,7 @@ This is only beneficial for floating-point values such as `float` or `double`.
 
 **Return value:**
 
-Return value type is the same as the type of the argument.
+Return value type is `double`.
 
 **Examples:**
 
