@@ -3,12 +3,12 @@ import React from "react"
 
 import Button from "@theme/Button"
 import Layout from "../../theme/Layout"
+import { Image } from "../../components/Image"
 
 import caCss from "../../css/case-study/card.module.css"
 import juCss from "../../css/case-study/jumbotron.module.css"
 import ouCss from "../../css/case-study/outcome.module.css"
 import seCss from "../../css/section.module.css"
-import chCss from "../../css/case-study/chart.module.css"
 
 const Yahoo = () => {
   const title = "Yahoo use QuestDB for big data machine learning engines"
@@ -34,9 +34,8 @@ const Yahoo = () => {
               href="https://yahoo.com/?utm_source=questdb"
               variant="plain"
             >
-              <img
+              <Image
                 alt="Yahoo logo"
-                className={juCss.jumbotron__logo}
                 height={45}
                 src="/img/pages/customers/logos/yahoo.svg"
                 width={100}
@@ -178,13 +177,14 @@ const Yahoo = () => {
             data, organize and aggregate it, and return results in less than 100
             milliseconds while the data corpus is continuously changing.
           </p>
-          <img
+
+          <Image
             alt="Chart showing a continuous integration pipeline for Yahoo's Vespa engine"
-            className={chCss.chart}
             height={433}
             src="/img/pages/case-study/yahoo/graphic.png"
             width={1000}
           />
+
           <h3>How we capture and store application metrics in QuestDB</h3>
           <p className="font-size--large">
             We’re running a large number of deployments on behalf of customers.
@@ -203,9 +203,8 @@ const Yahoo = () => {
             clusters to maintain the optimal allocation required to handle the
             current load at any time.
           </p>
-          <img
+          <Image
             alt="Chart showing resource utilization of nodes within Yahoo's Vespa engine"
-            className={chCss.chart}
             height={433}
             src="/img/pages/case-study/yahoo/resource-utilization.png"
             width={791}

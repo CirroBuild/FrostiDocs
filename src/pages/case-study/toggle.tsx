@@ -3,9 +3,9 @@ import React from "react"
 
 import Button from "@theme/Button"
 import Layout from "../../theme/Layout"
+import { Image } from "../../components/Image"
 
 import caCss from "../../css/case-study/card.module.css"
-import chCss from "../../css/case-study/chart.module.css"
 import juCss from "../../css/case-study/jumbotron.module.css"
 import ouCss from "../../css/case-study/outcome.module.css"
 import seCss from "../../css/section.module.css"
@@ -198,9 +198,8 @@ const Toggle = () => {
               After a few weeks with QuestDB in production (still with a single
               machine), the performance averaged 15 milliseconds, i.e., more
               than 300x faster queries.
-              <img
+              <Image
                 alt="Chart showing the average transaction duration for QuestDB on a given day"
-                className={chCss.chart}
                 height={433}
                 src="/img/pages/case-study/toggle/chart.png"
                 width={791}

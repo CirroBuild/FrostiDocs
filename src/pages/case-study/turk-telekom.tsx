@@ -3,9 +3,9 @@ import React from "react"
 
 import Button from "@theme/Button"
 import Layout from "../../theme/Layout"
+import { Image } from "../../components/Image"
 
 import caCss from "../../css/case-study/card.module.css"
-import chCss from "../../css/case-study/chart.module.css"
 import juCss from "../../css/case-study/jumbotron.module.css"
 import ouCss from "../../css/case-study/outcome.module.css"
 import seCss from "../../css/section.module.css"
@@ -57,7 +57,7 @@ const Innova = () => {
         </div>
 
         <div className={juCss.jumbotron__banner}>
-          <img
+          <Image
             alt="The Türk Telekom logo above an illustration of a network graph"
             height={400}
             src="/img/pages/case-study/turk-telekom/illustration.png"
@@ -172,9 +172,8 @@ const Innova = () => {
             line graphs so they can see the state of their connectivity for the
             last 30 days.
           </p>
-          <img
+          <Image
             alt="Chart showing the average transaction duration for QuestDB on a given day"
-            className={chCss.chart}
             height={519}
             src="/img/pages/case-study/turk-telekom/chart.png"
             width={842}

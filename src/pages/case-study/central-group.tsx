@@ -3,11 +3,11 @@ import React from "react"
 
 import Button from "@theme/Button"
 import Layout from "../../theme/Layout"
+import { Image } from "../../components/Image"
 
 import juCss from "../../css/case-study/jumbotron.module.css"
 import ouCss from "../../css/case-study/outcome.module.css"
 import seCss from "../../css/section.module.css"
-import chCss from "../../css/case-study/chart.module.css"
 import { logos } from "../../assets/logos"
 
 const values = [
@@ -54,20 +54,6 @@ const values = [
     },
   },
 ]
-
-const Image = ({ width, height, src, description }) => (
-  <div style={{ marginBottom: "4rem" }}>
-    <img
-      alt={description}
-      className={chCss.chart}
-      src={src}
-      width={width}
-      height={height}
-    />
-
-    <p className="font-size--medium text--center">{description}</p>
-  </div>
-)
 
 const CentralGroup = () => {
   const title = "Central Group"
@@ -117,6 +103,7 @@ const CentralGroup = () => {
 
         <div className={juCss.jumbotron__banner}>
           <Image
+            alt="Central Group's major footprints in Thailand comprises over 4 million sqm of net leasable area, 60 malls, 2400 retail stores, 1000 food outlets, and 53 hotels."
             description={
               <>
                 Central Group&apos;s major footprints in Thailand comprises over
@@ -129,6 +116,7 @@ const CentralGroup = () => {
                 >
                   Source
                 </a>
+                .
               </>
             }
             src="/img/pages/case-study/central-group/central-of-life.png"
@@ -271,7 +259,7 @@ const CentralGroup = () => {
             src="/img/pages/case-study/central-group/high-level-overview.png"
             width={828}
             height={464}
-            description="High-level overview of the Business Control Tower solution at Central Group"
+            description="High-level overview of the Business Control Tower solution at Central Group."
           />
 
           <Image

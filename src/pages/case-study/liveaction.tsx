@@ -3,12 +3,12 @@ import React from "react"
 
 import Button from "@theme/Button"
 import Layout from "../../theme/Layout"
+import { Image } from "../../components/Image"
 
 import caCss from "../../css/case-study/card.module.css"
 import juCss from "../../css/case-study/jumbotron.module.css"
 import ouCss from "../../css/case-study/outcome.module.css"
 import seCss from "../../css/section.module.css"
-import chCss from "../../css/case-study/chart.module.css"
 
 const Counterflow = () => {
   const title = "LiveAction offer AI-driven network security"
@@ -60,7 +60,7 @@ const Counterflow = () => {
         </div>
 
         <div className={juCss.jumbotron__banner}>
-          <img
+          <Image
             alt="Visualizing data in a Jupyter notebook querying data from QuestDB"
             height={170}
             src="/img/pages/case-study/liveaction/visualization-questdb-jupyter.png"
@@ -147,9 +147,8 @@ const Counterflow = () => {
             seCss["section--column"],
           )}
         >
-          <img
+          <Image
             alt="Encrypted traffic is growing, SSL is nearly obsolete, and malware is hidden within encryption"
-            className={chCss.chart}
             height={433}
             src="/img/pages/case-study/liveaction/traffic-overview.jpg"
             width={791}
@@ -192,9 +191,8 @@ const Counterflow = () => {
             the bottleneck.
           </p>
 
-          <img
+          <Image
             alt="Running ML tooling via Jupyter notebooks to detect outliers"
-            className={chCss.chart}
             height={433}
             src="/img/pages/case-study/liveaction/local-outlier-factor-questdb-jupyter.png"
             width={800}
@@ -254,9 +252,8 @@ const Counterflow = () => {
             Docker Hub.
           </p>
 
-          <img
+          <Image
             alt="A diagram showing six patterns of network traffic highlighted by Deep Packet Dynamics"
-            className={chCss.chart}
             height={433}
             src="/img/pages/case-study/liveaction/console.png"
             width={1000}

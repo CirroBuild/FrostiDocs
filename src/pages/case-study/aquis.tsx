@@ -3,12 +3,12 @@ import React from "react"
 
 import Button from "@theme/Button"
 import Layout from "../../theme/Layout"
+import { Image } from "../../components/Image"
 
 import caCss from "../../css/case-study/card.module.css"
 import juCss from "../../css/case-study/jumbotron.module.css"
 import ouCss from "../../css/case-study/outcome.module.css"
 import seCss from "../../css/section.module.css"
-import chCss from "../../css/case-study/chart.module.css"
 
 const Aquis = () => {
   const title = "Aquis"
@@ -58,7 +58,7 @@ const Aquis = () => {
         </div>
 
         <div className={juCss.jumbotron__banner}>
-          <img
+          <Image
             alt="Logo of Aquis Stock Exchange"
             height={475}
             src="/img/pages/case-study/aquis/header.jpg"
@@ -142,32 +142,27 @@ const Aquis = () => {
             instructed through a FIX or binary port to hit our matching engine
             and be a fully-executed trade on the exchange.
           </p>
-          <img
+          <Image
             alt="Overall Market Metrics using Grafana dashboards"
-            className={chCss.chart}
             height={367}
             src="/img/pages/case-study/aquis/grafana.png"
             width={1002}
+            description="Overall market metrics using Grafana dashboards."
           />
-          <p className="font-size--medium text--center">
-            Overall market metrics using Grafana dashboards
-          </p>
           <p className="font-size--large">
             We also track all the orders and trades coming through (such as
             count, quantity, amount) and aggregate this data to produce a live
             order book, the amount of stock one can buy or sell at a given price
             level.
           </p>
-          <img
+          <Image
             alt="Timeline of Market Events visualized on Grafana"
-            className={chCss.chart}
             height={521}
             src="/img/pages/case-study/aquis/timeline.png"
             width={1002}
+            description="Timeline of market events visualized on Grafana."
           />
-          <p className="font-size--medium text--center">
-            Timeline of market events visualized on Grafana
-          </p>
+
           <h3>Why we chose QuestDB for monitoring our infrastructure</h3>
           <p className="font-size--large">
             We need a high throughput database capable of efficiently ingesting
@@ -187,17 +182,14 @@ const Aquis = () => {
             additions and will help our system stay efficient as our datasets
             grow.
           </p>
-          <img
+          <Image
             alt="Architecture diagram with QuestDB and Grafana to ingest and query market data and latency metrics from Aquis Exchange"
-            className={chCss.chart}
+            description="Architecture diagram with QuestDB and Grafana to ingest and query market data and latency metrics from Aquis Exchange."
             height={446}
             src="/img/pages/case-study/aquis/flow.png"
             width={670}
           />
-          <p className="font-size--medium text--center">
-            Architecture diagram with QuestDB and Grafana to ingest and query
-            market data and latency metrics from Aquis Exchange
-          </p>
+
           <p className="font-size--large">
             In terms of database performance, the QuestDB queries are so fast
             that we adapted our domain model to aggregate order data in

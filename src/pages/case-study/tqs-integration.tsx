@@ -3,12 +3,12 @@ import React from "react"
 
 import Button from "@theme/Button"
 import Layout from "../../theme/Layout"
+import { Image } from "../../components/Image"
 
 import caCss from "../../css/case-study/card.module.css"
 import juCss from "../../css/case-study/jumbotron.module.css"
 import ouCss from "../../css/case-study/outcome.module.css"
 import seCss from "../../css/section.module.css"
-import chCss from "../../css/case-study/chart.module.css"
 
 const Tqs = () => {
   const title = "TQS uses QuestDB for industrial telemetry data"
@@ -171,9 +171,8 @@ const Tqs = () => {
             to leverage their process data through advanced software
             architecture and analytics.
           </p>
-          <img
+          <Image
             alt="A screenshot of TQS Integration software for tracking industrial processes"
-            className={chCss.chart}
             height={433}
             src="/img/pages/case-study/tqs-integration/tqs-software-overview.png"
             width={1000}
@@ -210,9 +209,8 @@ const Tqs = () => {
             for lower resolution cold storage in case we need a historical
             overview of the last 12 months’ sensor data, for instance.
           </p>
-          <img
+          <Image
             alt="A screenshot of TQS Integration software for tracking industrial processes"
-            className={chCss.chart}
             height={433}
             src="/img/pages/case-study/tqs-integration/high-frequency-data.jpg"
             width={700}
@@ -282,9 +280,8 @@ const Tqs = () => {
             detect normal operating conditions and questionable events,
             highlighted in the screenshot below:
           </p>
-          <img
+          <Image
             alt="A screenshot detecting similarity and anomalies in time series data in TQS Integration systems"
-            className={chCss.chart}
             height={433}
             src="/img/pages/case-study/tqs-integration/anomaly-detection.png"
             width={1000}
