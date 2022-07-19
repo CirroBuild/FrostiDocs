@@ -100,8 +100,7 @@ The [ILP client libraries](/docs/reference/ilp-client-libraries) provide more us
 
 ### Examples
 
-These examples send a few rows of input. These use client libraries for C++, C#,
-Golang, Java, and C, as well as raw TCP socket connections for NodeJS and Python.
+These examples send a few rows of input. These use client libraries as well as raw TCP socket connections, when a client library is not available.
 
 <Tabs defaultValue="cpp" values={[
   { label: "C++", value: "cpp" },
@@ -451,9 +450,7 @@ func main() {
 <TabItem value="python">
 
 ```python
-# Raw socket connection with no validation and string quoting logic.
-# Refer to protocol description:
-# http://questdb.io/docs/reference/api/ilp/overview
+# https://github.com/questdb/py-questdb-client
 
 import time
 import socket
