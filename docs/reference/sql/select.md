@@ -233,19 +233,19 @@ For more information, please refer to the
 
 :::
 
-### UNION
+### UNION, EXCEPT & INTERSECT
 
 Combine the results of two or more select statements. Can include or ignore
 duplicates.
 
 #### Syntax
 
-![Flow chart showing the syntax of the UNION keyword](/img/docs/diagrams/union.svg)
+![Flow chart showing the syntax of the UNION, EXCEPT & INTERSECT keyword](/img/docs/diagrams/union-except-intersect.svg)
 
 :::info
 
 For more information, please refer to the
-[UNION reference](/docs/reference/sql/union)
+[UNION, EXCEPT & INTERSECT reference](/docs/reference/sql/union-except-intersect)
 
 :::
 
