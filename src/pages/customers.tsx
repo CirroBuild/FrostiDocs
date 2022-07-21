@@ -75,7 +75,7 @@ const QUOTE_WIDTH = 350
 const Customer = () => {
   const title = "Customers"
   const description =
-    "Discover how QuestDB is powering the core infrastructure of companies dealing with time-series data"
+    "Discover how QuestDB is powering the core infrastructure of companies dealing with time series data and real-time analytics"
 
   const { ref, width } = useResizeObserver<HTMLDivElement>()
   // An "item" is a quote
