@@ -167,6 +167,10 @@
     from = "/blog/2022/04/12/query-live-crypto-trades-with-sql-in-real-time"
     to = "/blog/2022/04/12/demo-live-crypto-data-streamed-with-questdb-and-grafana"
 
+[[redirects]]
+    from = "/docs/reference/ilp-client-libraries"
+    to = "/docs/reference/clients/overview"
+
 [[headers]]
   for = "/*"
   [headers.values]

@@ -94,7 +94,7 @@ Telegraf agent to collect and send metrics to QuestDB via ILP.
 
 :::tip
 
-The [ILP client libraries](/docs/reference/ilp-client-libraries) provide more user-friendly ILP clients for a growing number of languages.
+The [ILP client libraries](/docs/reference/clients/overview) provide more user-friendly ILP clients for a growing number of languages.
 
 :::
 
@@ -175,36 +175,27 @@ int main()
         <dependency>
             <groupId>org.questdb</groupId>
             <artifactId>questdb</artifactId>
-            <version>6.2.1</version>
+            <version>6.4.3</version>
         </dependency>
 
     Gradle:
-        compile group: 'org.questdb', name: 'questdb', version: '6.2.1'
+        compile group: 'org.questdb', name: 'questdb', version: '6.4.3'
 */
 
-import io.questdb.cutlass.line.LineTcpSender;
-import io.questdb.network.Net;
-import io.questdb.std.Os;
+import io.questdb.client.Sender;
 
-public class LineTCPSenderMain {
+public class SenderExample {
     public static void main(String[] args) {
-        int host = Net.parseIPv4("127.0.0.1");
-        int port = 9009;
-        int bufferCapacity = 256 * 1024;
+        try (Sender sender = Sender.builder().address("localhost:9009").build()) {
+            sender.table("trades")
+                    .symbol("name", "test_ilp1")
+                    .doubleColumn("value", 12.4)
+                    .atNow();
 
-        try (LineTcpSender sender = new LineTcpSender(host, port, bufferCapacity)) {
-            sender
-                    .metric("trades")
-                    .tag("name", "test_ilp1")
-                    .field("value", 12.4)
-                    .$(Os.currentTimeNanos());
-            sender
-                    .metric("trades")
-                    .tag("name", "test_ilp2")
-                    .field("value", 11.4)
-                    .$(Os.currentTimeNanos());
-
-            sender.flush();
+            sender.table("trades")
+                    .symbol("name", "test_ilp2")
+                    .doubleColumn("value", 11.4)
+                    .atNow();
         }
     }
 }

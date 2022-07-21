@@ -134,7 +134,14 @@ module.exports = {
         },
         "reference/command-line-options",
         "reference/configuration",
-        "reference/ilp-client-libraries",
+        {
+          type: "category",
+          label: "ILP client libraries",
+          items: [
+            "reference/clients/overview",
+            "reference/clients/java_ilp",
+          ]
+        },
         "reference/sql/datatypes",
         {
           type: "category",
