@@ -17,7 +17,7 @@ Precedence of these operators is as follows:
 ## ~ NOT
 
 `~` is a unary operation that performs logical negation on each bit. Bits that
-are 0 become 1, and those that are 1 become 0. Expects a value of `long` type.
+are 0 become 1, and those that are 1 become 0. Expects a value of `long` or `int` type.
 
 **Examples:**
 
@@ -33,7 +33,7 @@ SELECT ~1024
 
 `&` is a binary operation that takes two equal-length binary representations and
 performs the logical AND operation on each pair of the corresponding bits.
-Expects values of `long` type.
+Expects values of `long` or `int` type.
 
 **Examples:**
 
@@ -49,7 +49,7 @@ SELECT 5 & 3
 
 `^` is a binary operation that takes two bit patterns of equal length and
 performs the logical exclusive OR operation on each pair of corresponding bits.
-Expects a value of `long` type.
+Expects a value of `long` or `int` type.
 
 **Examples:**
 
@@ -65,7 +65,7 @@ SELECT 5 ^ 3
 
 `|` is a binary operation that takes two bit patterns of equal length and
 performs the logical inclusive OR operation on each pair of corresponding bits.
-Expects a value of `long` type.
+Expects a value of `long` or `int` type.
 
 **Examples:**
 
