@@ -1,5 +1,5 @@
 ---
-title: Java ILP Client
+title: Java ILP client
 description: Introducing QuestDB Java ILP Client
 ---
 ## Quickstart

@@ -127,6 +127,11 @@ when starting services:
 The [configuration](/docs/reference/configuration) page shows all the
 properties that can be used to customize QuestDB.
 
+### ILP Client libraries
+
+- [Clients overview](/docs/reference/clients/overview)
+- [Java ILP client](/docs/reference/clients/java_ilp)
+
 ### Data Types
 
 The [data types](/docs/reference/sql/datatypes) page lists the datatypes that
