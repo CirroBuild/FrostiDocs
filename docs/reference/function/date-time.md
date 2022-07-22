@@ -744,8 +744,7 @@ SELECT hour(ts), count() FROM transactions;
 
 ## day
 
-`day(value)` - returns the `day` of month for a given date or timestamp from `0`
-to `23`
+`day(value)` - returns the `day` of month for a given date or timestamp from `1` to `31`.
 
 **Arguments:**
 
