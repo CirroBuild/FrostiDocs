@@ -129,8 +129,10 @@ disconnect and log the failure.
 import Tabs from "@theme/Tabs"
 import TabItem from "@theme/TabItem"
 
-<Tabs defaultValue="nodejs" values={[ { label: "NodeJS", value: "nodejs" }, {
-label: "Go", value: "go" }, ]}>
+<Tabs defaultValue="nodejs" values={[ { label: "NodeJS", value: "nodejs" }, 
+{label: "Go", value: "go" }, 
+{label: "Python", value: "python" }
+]}>
 
 
 <TabItem value="nodejs">
@@ -286,6 +288,39 @@ func main() {
 }
 ```
 
+</TabItem>
+
+<TabItem value="python">
+
+```python
+# https://github.com/questdb/py-questdb-client
+
+from questdb.ingress import Sender, IngressError, TimestampNanos, TimestampMicros
+import datetime
+import sys
+
+HOST = 'localhost'
+PORT = 9009
+
+
+def send_with_auth():
+    try:
+        auth = ("YOUR_KID", "YOUR_D_KEY", "YOUR_X_KEY", "YOUR_Y_KEY")
+        with Sender(HOST, PORT, auth=auth, tls=True) as sender:
+            buffer = sender.new_buffer()
+            buffer.row(
+                'trades',
+                symbols={'name': 'tls_client_timestamp'},
+                columns={'value': 12.4, 'valid_from': TimestampMicros.from_datetime(datetime.datetime.utcnow())},
+                at=TimestampNanos.from_datetime(datetime.datetime.utcnow()))
+            sender.flush(buffer)
+    except IngressError as e:
+        sys.stderr.write(f'Got error: {e}')
+
+
+if __name__ == '__main__':
+    send_with_auth()
+```    
 </TabItem>
 
 

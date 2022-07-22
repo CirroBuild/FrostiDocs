@@ -68,6 +68,8 @@ that QuestDB exposes which is accessible by default via port `8812`.
   { label: "Go", value: "go" },
   { label: "C#", value: "csharp" },
   { label: "C", value: "c" },
+  { label: "Ruby", value: "ruby" },
+  { label: "PHP", value: "php" }
 ]}>
 
 <TabItem value="python">
@@ -301,6 +303,56 @@ await using (var reader = await command.ExecuteReaderAsync()) {
 
 </TabItem>
 
+<TabItem value="ruby">
+
+```ruby
+require 'pg'
+begin
+    conn =PG.connect( host: "127.0.0.1", port: 8812, dbname: 'qdb', 
+                      user: 'admin', password: 'quest' )
+    rows = conn.exec 'SELECT x FROM long_sequence(5);'
+    rows.each do |row|
+        puts row
+    end
+rescue PG::Error => e
+     puts e.message
+ensure
+    conn.close if conn
+end
+```
+
+</TabItem>
+
+<TabItem value="php">
+
+```php
+<?php
+
+function exceptions_error_handler($severity, $message, $filename, $lineno) {
+    throw new ErrorException($message, 0, $severity, $filename, $lineno);
+}
+
+set_error_handler('exceptions_error_handler');
+$db_conn = null;
+
+try {
+        $db_conn = pg_connect(" host = 'localhost' port=8812 dbname = 'qdb' user = 'admin'  password = 'quest' ");
+        $result = pg_query($db_conn, 'SELECT x FROM long_sequence(5);' );
+        while ($row = pg_fetch_assoc($result) ){
+                print_r($row);
+                }
+        pg_free_result($result);
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+} finally {
+        if (!is_null($db_conn)) {
+                pg_close($db_conn);
+        }
+}
+
+?>
+```
+</TabItem>
 
 </Tabs>
 

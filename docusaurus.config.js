@@ -125,6 +125,8 @@ const config = {
         "ebnf",
         "ini",
         "toml",
+        "ruby",
+        "php"
       ],
       theme: require("./src/internals/prism-github"),
       darkTheme: require("./src/internals/prism-dracula"),

@@ -109,7 +109,9 @@ These examples send a few rows of input. These use client libraries as well as r
   { label: "C", value: "c" },
   { label: "NodeJS", value: "nodejs" },
   { label: "Go", value: "go" },
-  { label: "Python", value: "python" }
+  { label: "Python", value: "python" },
+  { label: "Ruby", value: "ruby" },
+  { label: "PHP", value: "php" }
 ]}>
 
 <TabItem value="cpp">
@@ -443,34 +445,132 @@ func main() {
 ```python
 # https://github.com/questdb/py-questdb-client
 
-import time
-import socket
+from questdb.ingress import Sender, Buffer, IngressError, TimestampNanos, TimestampMicros
+import datetime
 import sys
 
 HOST = 'localhost'
 PORT = 9009
-# For UDP, change socket.SOCK_STREAM to socket.SOCK_DGRAM
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-def send_utf8(msg):
-    sock.sendall(msg.encode())
 
-try:
-    sock.connect((HOST, PORT))
-    # Single record insert
-    send_utf8(f'trades,name=client_timestamp value=12.4 {time.time_ns()}\n')
-    # Omitting the timestamp allows the server to assign one
-    send_utf8('trades,name=server_timestamp value=12.4\n')
-    # Streams of readings must be newline-delimited
-    send_utf8('trades,name=ilp_stream_1 value=12.4\n' +
-              'trades,name=ilp_stream_2 value=11.4\n')
+def send():
+    try:
+        with Sender(HOST, PORT) as sender:            
+            # Record with provided designated timestamp (using the 'at' param)
+            # Notice the designated timestamp is expected in Nanoseconds,
+            # but timestamps in other columns are expected in Microseconds. 
+            # The API provides convenient functions
+            sender.row(
+                'trades',
+                symbols={'name': 'client_timestamp'},
+                columns={'value': 12.4, 'valid_from': TimestampMicros.from_datetime(datetime.datetime.utcnow())},
+                at=TimestampNanos.from_datetime(datetime.datetime.utcnow()))
+            # If no 'at' param is passed, the server will use its own timestamp
+            sender.row(
+                'trades',
+                symbols={'name': 'server_timestamp'},
+                columns={'value': 11.4})
+            sender.flush()
+    except IngressError as e:
+        sys.stderr.write(f'Got error: {e}')
 
-except socket.error as e:
-    sys.stderr.write(f'Got error: {e}')
 
-sock.close()
+# See the docs at https://py-questdb-client.readthedocs.io/en/latest/examples.html#explicit-buffers
+def send_with_buffer():
+    try:
+        sender = Sender(HOST, PORT)
+        sender.connect()
+        buffer = Buffer()
+        buffer.row(
+            'trades',
+            symbols={'name': 'with_buffer_client_timestamp'},
+            columns={'value': 12.4},
+            at=TimestampNanos.from_datetime(datetime.datetime.utcnow()))
+        buffer.row(
+            'trades',
+            symbols={'name': 'with_buffer_server_timestamp'},
+            columns={'value': 11.4})
+        sender.flush(buffer)
+        sender.close()
+    except IngressError as e:
+        sys.stderr.write(f'Got error: {e}')
+
+
+if __name__ == '__main__':
+    send()
+    # If you want to send the same rows to multiple servers, 
+    # or to decouple serialization and sending,
+    # you can use explicit buffers.
+    send_with_buffer()
 ```
+</TabItem>
+<TabItem value="ruby">
 
+```ruby
+require 'socket'
+HOST = 'localhost'
+PORT = 9009
+# Returns the current time in nanoseconds
+def time_in_nsec
+    now = Time.now
+    return now.to_i * (10 ** 9) + now.nsec
+end
+begin
+    s = TCPSocket.new HOST, PORT
+    # Single record insert
+    s.puts "trades,name=client_timestamp value=12.4 #{time_in_nsec}\n"
+    # Omitting the timestamp allows the server to assign one
+    s.puts "trades,name=client_timestamp value=12.4\n"
+    # Streams of readings must be newline-delimited
+    s.puts "trades,name=client_timestamp value=12.4\n" +
+            "trades,name=client_timestamp value=11.4\n"
+rescue SocketError => ex
+    puts ex.inspect
+ensure
+    s.close() if s
+end
+```
+</TabItem>
+<TabItem value="php">
+
+```php
+<?php
+error_reporting(E_ALL);
+
+/* Allow the script to hang around waiting for connections. */
+set_time_limit(0);
+
+/* Turn on implicit output flushing so we see what we're getting
+ * as it comes in. */
+ob_implicit_flush();
+
+$address = 'localhost';
+$port = 9009;
+
+/* Create a TCP/IP socket. */
+$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+if ($socket === false) {
+    echo "socket_create() failed: reason: " . socket_strerror(socket_last_error()) . "\n";
+} else {
+    echo "OK.\n";
+}
+
+echo "Attempting to connect to '$address' on port '$port'...";
+$result = socket_connect($socket, $address, $port);
+if ($result === false) {
+    echo "socket_connect() failed.\nReason: ($result) " . socket_strerror(socket_last_error($socket)) . "\n";
+} else {
+    echo "OK.\n";
+}
+
+$row=utf8_encode("test_readings,city=London,make=Omron temperature=23.5,humidity=0.343 1465839830100400000\n");
+echo "$row";
+socket_write($socket, $row);
+echo "\n";
+socket_close($socket);
+
+?>
+```
 </TabItem>
 
 </Tabs>
