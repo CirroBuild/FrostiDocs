@@ -65,7 +65,7 @@ const CentralGroup = () => {
       canonical="/case-study/case-study/central-group/"
       description={description}
       title={title}
-      image="/img/pages/case-study/case-study/central-group/flow.png"
+      image="/img/pages/case-study/central-group/header.jpg"
     >
       <section
         className={clsx(
