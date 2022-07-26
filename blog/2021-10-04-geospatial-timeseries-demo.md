@@ -15,7 +15,7 @@ keywords:
   - geodata
   - postgis
 image: /img/blog/2021-10-04/banner.png
-tags: [demo, release, engineering, geohash, geospatial, postgis]
+tags: [demo, release, engineering, geospatial, postgis]
 ---
 
 The last significant features we shipped dealt with out-of-order data ingestion,

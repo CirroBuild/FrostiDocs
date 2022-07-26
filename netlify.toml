@@ -59,24 +59,24 @@
   to = "/blog/2020/12/10/non-blocking-io-without-garbage-collection"
 
 [[redirects]]
-  from = "/blog/2020/10/19/grafana-tutorial"
-  to = "/tutorial/2020/10/19/grafana"
+  from = "/tutorial/2020/10/19/grafana"
+  to = "/blog/2020/10/19/grafana-tutorial"
 
 [[redirects]]
-  from = "/blog/2020/06/05/iot-on-questdb"
-  to = "/tutorial/2020/06/05/iot-on-questdb"
+  from = "/tutorial/2020/06/05/iot-on-questdb"
+  to = "/blog/2020/06/05/iot-on-questdb"
 
 [[redirects]]
-  from = "/blog/2020/06/15/python-questdb-tutorial"
-  to = "/tutorial/2020/06/15/python-questdb-tutorial"
+  from = "/tutorial/2020/06/15/python-questdb-tutorial"
+  to = "/blog/2020/06/15/python-questdb-tutorial"
 
 [[redirects]]
-  from = "/blog/2020/07/22/influxdb-lp-on-tcp"
-  to = "/tutorial/2020/07/22/influxdb-lp-on-tcp"
+  from = "/tutorial/2020/07/22/influxdb-lp-on-tcp"
+  to = "/blog/2020/07/22/influxdb-lp-on-tcp"
 
 [[redirects]]
-  from = "/blog/2020/08/25/questitto"
-  to = "/tutorial/2020/08/25/questitto"
+  from = "/tutorial/2020/08/25/questitto"
+  to = "/blog/2020/08/25/fast-iot-stack-with-questdb-mqtt"
 
 [[redirects]]
   from = "/blog/2020/11/26/http-server-contribution"
@@ -85,6 +85,90 @@
 [[redirects]]
   from = "/blog/2020/11/16/why-timeseries-data"
   to = "/blog/2020/11/26/why-timeseries-data"
+
+[[redirects]]
+  from = "/tutorial/2021/01/13/application-uptime-monitoring-with-python-nuxtjs-questdb"
+  to = "/blog/2021/01/13/application-uptime-monitoring-with-python-nuxtjs-questdb"
+
+[[redirects]]
+  from = "/tutorial/2021/01/18/low-code-bitcoin-ticker-workflow-with-time-series-database"
+  to = "/blog/2021/01/18/low-code-bitcoin-ticker-workflow-with-time-series-database"
+
+[[redirects]]
+  from = "/tutorial/2021/02/05/streaming-heart-rate-data-with-iot-core-and-questdb"
+  to = "/blog/2021/02/05/streaming-heart-rate-data-with-iot-core-and-questdb"
+
+[[redirects]]
+  from = "/tutorial/2021/02/18/realtime-crypto-tracker-with-kafka-and-questdb"
+  to = "/blog/2021/02/18/realtime-crypto-tracker-with-kafka-and-questdb"
+
+[[redirects]]
+  from = "/tutorial/2021/03/09/realtime-stock-alerts-python-grafana-questdb"
+  to = "/blog/2021/03/09/realtime-stock-alerts-python-grafana-questdb"
+
+[[redirects]]
+  from = "/tutorial/2021/03/18/questdb-and-prometheus-on-gke-autopilot"
+  to = "/blog/2021/03/18/questdb-and-prometheus-on-gke-autopilot"
+
+[[redirects]]
+  from = "/tutorial/2021/03/31/automating-etl-jobs-on-time-series-data-on-gcp"
+  to = "/blog/2021/03/31/automating-etl-jobs-on-time-series-data-on-gcp"
+
+[[redirects]]
+  from = "/tutorial/2021/04/12/ethereum"
+  to = "/blog/2021/04/12/stream-ethereum-data"
+
+[[redirects]]
+  from = "/tutorial/2021/06/18/tracking-multiple-cryptocurrency-exchanges"
+  to = "/blog/2021/06/18/tracking-multiple-cryptocurrency-exchanges"
+
+[[redirects]]
+  from = "/tutorial/2021/07/09/telegraf-and-questdb-for-storing-metrics-in-a-timeseries-database"
+  to = "/blog/2021/07/09/telegraf-and-questdb-for-storing-metrics-in-a-timeseries-database"
+
+[[redirects]]
+  from = "/tutorial/2021/07/05/comparing-questdb-timescaledb-influxdb/"
+  to = "/blog/2021/07/05/comparing-questdb-timescaledb-influxdb/"
+
+[[redirects]]
+  from = "/tutorial/2021/08/18/questdb-versus-timescaledb"
+  to = "/blog/2021/08/18/questdb-versus-timescaledb"
+
+[[redirects]]
+  from = "/tutorial/2021/09/17/high-frequency-finance-julia-lang"
+  to = "/blog/2021/09/17/high-frequency-finance-julia-lang"
+
+[[redirects]]
+  from = "/tutorial/2021/11/01/plotly-finnhub-realtime-dashboard"
+  to = "/blog/2021/11/01/plotly-finnhub-realtime-dashboard"
+
+[[redirects]]
+  from = "/tutorial/2021/11/29/questdb-versus-influxdb"
+  to = "/blog/2021/11/29/questdb-versus-influxdb"
+
+[[redirects]]
+  from = "/tutorial/2021/11/22/high-frequency-finance-introduction-julia-lang"
+  to = "/blog/2021/11/22/high-frequency-finance-introduction-julia-lang"
+
+[[redirects]]
+  from = "/tutorial/2022/02/10/questdb-google-data-studio/"
+  to = "/blog/2022/02/10/questdb-google-data-studio/"
+
+[[redirects]]
+  from = "/tutorial/2022/03/08/questdb-crypto-pandas/"
+  to = "/blog/2022/03/08/questdb-crypto-pandas/"
+
+[[redirects]]
+  from = "/tutorial/2022/03/14/mock-sql-timeseries-data-questdb/"
+  to = "/blog/2022/03/14/mock-sql-timeseries-data-questdb/"
+
+[[redirects]]
+  from = "/tutorial/2022/03/15/cryptocurrency-grafana-questdb/"
+  to = "/blog/2022/03/15/cryptocurrency-grafana-questdb/"
+
+[[redirects]]
+  from = "/tutorial/2022/03/29/crypto-volumes-julia-questdb/"
+  to = "/blog/2022/03/29/crypto-volumes-julia-questdb/"
 
 [[redirects]]
   from = "/docs/reference/client/cli"
@@ -170,6 +254,10 @@
 [[redirects]]
     from = "/docs/reference/ilp-client-libraries"
     to = "/docs/reference/clients/overview"
+
+[[redirects]]
+    from = "/tutorial"
+    to = "/blog/tags/tutorial"
 
 [[headers]]
   for = "/*"

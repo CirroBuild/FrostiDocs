@@ -15,6 +15,7 @@ keywords:
   - questdb
   - open source
 tags: [demo, hackernews, retrospective, community]
+image: /img/blog/placeholder.png
 ---
 
 If you listen to, well, pretty much anyone rational, they will tell you in no

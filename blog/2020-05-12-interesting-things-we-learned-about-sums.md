@@ -13,7 +13,7 @@ keywords:
   - deep-dive
   - kahan
   - neumaier
-  - databases
+  - database
   - simd
   - clickhouse
 tags: [engineering, benchmark, performance]

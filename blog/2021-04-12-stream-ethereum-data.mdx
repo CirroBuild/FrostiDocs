@@ -1,11 +1,22 @@
 ---
 title: Streaming on-chain Ethereum data to QuestDB
 author: Yitaek Hwang
+author_title: Guest
+author_url: https://github.com/Yitaek
+author_image_url: https://avatars.githubusercontent.com/Yitaek
 description:
   Learn how to use Infura, Blockchain ETL, and QuestDB to stream Ethereum data
   to a time series database for visualization and analysis.
-image: /img/tutorial/shared/og-ethereum.png
-featureType: resource
+keywords:
+  - timeseries
+  - infura
+  - kafka
+  - blockchain
+  - ethereum
+  - crypto
+  - etl
+tags: [tutorial, crypto, blockchain, ethereum, kafka, infura]
+image: /img/blog/shared/og-ethereum.png
 ---
 
 import Banner from "@theme/Banner"
@@ -13,7 +24,7 @@ import Banner from "@theme/Banner"
 <Banner
   alt="Physical coins with Ethereum and Bitcoin logos."
   height={467}
-  src="/img/tutorial/2021-04-12/banner.jpg"
+  src="/img/blog/2021-04-12/banner.jpg"
   width={650}
 >
   Photo by <a href="https://unsplash.com/@thoughtcatalog">Thought Catalog</a>{" "}
@@ -30,7 +41,7 @@ Thanks for another great contribution, Yitaek!
 ## Introduction
 
 Previously, I wrote about using
-[Coinbase API and Kafka Connect](/tutorial/2021/03/18/questdb-and-prometheus-on-gke-autopilot)
+[Coinbase API and Kafka Connect](/blog/2021/03/18/questdb-and-prometheus-on-gke-autopilot)
 to track the price of various cryptocurrencies in real-time. While price is an
 important factor for a potential investor, on-chain data like block information
 (gas used, difficulty), transactions, and smart contracts also provide useful
@@ -57,7 +68,7 @@ import Screenshot from "@theme/Screenshot"
 <Screenshot
   alt="A new account on Infura showing API call quotas remaining"
   height={278}
-  src="/img/tutorial/2021-04-12/infura-account.png"
+  src="/img/blog/2021-04-12/infura-account.png"
   width={650}
 />
 
@@ -143,7 +154,7 @@ better performance on both storage space and query efficiency by using the
 <Screenshot
   alt="A SQL query in the QuestDB web console showing how to create a new table"
   height={251}
-  src="/img/tutorial/2021-04-12/create-table.png"
+  src="/img/blog/2021-04-12/create-table.png"
   width={650}
 />
 
@@ -187,7 +198,7 @@ As the stream starts up, data will be visible in QuestDB:
 <Screenshot
   alt="A SQL query in the QuestDB web console showing how to list all rows from a table"
   height={456}
-  src="/img/tutorial/2021-04-12/select-all-from-blocks.png"
+  src="/img/blog/2021-04-12/select-all-from-blocks.png"
   width={650}
 />
 
@@ -209,7 +220,7 @@ would like to explore how `gas_used` by `miner` looks, you can navigate to
 <Screenshot
   alt="The chart functionality in the QuestDB web console showing a bar chart of blockchain info"
   height={257}
-  src="/img/tutorial/2021-04-12/visualizing-data.png"
+  src="/img/blog/2021-04-12/visualizing-data.png"
   width={650}
 />
 

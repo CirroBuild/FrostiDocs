@@ -1,10 +1,19 @@
 ---
 title: Sending IoT sensor data from Arduino to QuestDB
 author: David G. Simmons
+author_title: QuestDB Team
+author_url: https://github.com/davidgs
+author_image_url: https://avatars.githubusercontent.com/davidgs
 description:
   See how to build an IoT application using Arduino, which sends temperature and
   humidity sensor data to QuestDB.
-image: /img/tutorial/shared/og-arduino.png
+keywords:
+  - arduino
+  - iot
+  - timeseries
+  - questdb
+tags: [tutorial, iot, arduino]
+image: /img/blog/shared/og-arduino.png
 ---
 
 import Banner from "@theme/Banner"
@@ -12,7 +21,7 @@ import Banner from "@theme/Banner"
 <Banner
   alt="A dashboard showing several graphs with operational data"
   height={365}
-  src="/img/tutorial/2020-06-05/banner.jpg"
+  src="/img/blog/2020-06-05/banner.jpg"
   width={650}
 >
   Photo by <a href="https://unsplash.com/@felishks">Félix Girault</a> on{" "}
@@ -42,7 +51,7 @@ I decided to build using maven:
 mvn clean package -DskipTests
 ```
 
-![Terminal showing QuestDB being build from its source code](/img/tutorial/2020-06-05/build.gif)
+![Terminal showing QuestDB being build from its source code](/img/blog/2020-06-05/build.gif)
 
 It builds really quickly due to the lack of external dependencies, so that is
 great! Then all that's left to do is to start the server:
@@ -52,7 +61,7 @@ mkdir qdb
 java -p core/target/questdb-5.0.5-SNAPSHOT.jar -m io.questdb/io.questdb.ServerMain -d qdb
 ```
 
-![Terminal showing how to start QuestDB](/img/tutorial/2020-06-05/start.gif)
+![Terminal showing how to start QuestDB](/img/blog/2020-06-05/start.gif)
 
 That is literally all there is to getting QuestDB built and running. But that's
 just the first part. Now it's time to do something actually useful with it.
@@ -81,7 +90,7 @@ to have a giant pile of them lying around. I buy them in bulk because they are a
 dollar or 2 each, easy to use, and largely disposable if I blow one up (which I
 do with alarming regularity.). The circuit is very simple to put together:
 
-![Electrical schema showing how the sensor is wired](/img/tutorial/2020-06-05/sensor.png)
+![Electrical schema showing how the sensor is wired](/img/blog/2020-06-05/sensor.png)
 
 I used an actual WEMOS Shield with the DHT11 on it, so I didn't have to
 breadboard it, but this schematic gives you an idea of how simple the wiring is.
@@ -269,7 +278,7 @@ it will happily store them for you. Pretty cool stuff.
 Using the QuestDB Console, you can then query the data to make sure you're
 getting what you expect:
 
-![Running a SELECT query on the Web Console. The result is in both a table and a chart](/img/tutorial/2020-06-05/queries.gif)
+![Running a SELECT query on the Web Console. The result is in both a table and a chart](/img/blog/2020-06-05/queries.gif)
 
 That's exactly what I expected!
 

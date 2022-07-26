@@ -227,7 +227,7 @@ module.exports = {
     {
       label: "Tutorials",
       type: 'link',
-      href: '/tutorial',
+      href: '/blog/tags/tutorial',
     },
   ].filter(Boolean),
 }

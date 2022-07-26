@@ -14,7 +14,7 @@ keywords:
   - timeseries
   - database
 image: /img/blog/2021-08-24/banner.png
-tags: [digitalocean, deployment, telegraf, cloud, infrastructure]
+tags: [tutorial, digitalocean, deployment, cloud, infrastructure]
 ---
 
 We're happy to announce that QuestDB is available with an official listing on
@@ -68,7 +68,7 @@ steps:
 <Screenshot
   alt="Choosing the RAM and CPU capacity for a QuestDB DigitalOcean Droplet"
   height={591}
-  src="/img/tutorial/2021-07-09/choosing-droplet.png"
+  src="/img/blog/2021-07-09/choosing-droplet.png"
   width={770}
 />
 
@@ -82,7 +82,7 @@ steps:
 <Screenshot
   alt="Finalizing the creation step of a DigitalOcean Droplet running QuestDB"
   height={591}
-  src="/img/tutorial/2021-07-09/questdb-droplet.png"
+  src="/img/blog/2021-07-09/questdb-droplet.png"
   width={770}
 />
 
@@ -110,13 +110,13 @@ showing how to deploy QuestDB as a 1-Click application. The example stack uses
 Telegraf clients that collect system metrics from multiple DigitalOcean droplets
 and streams this monitoring information to a QuestDB instance for analysis and
 visualization. Check out the
-[QuestDB on DigitalOcean tutorial](/tutorial/2021/07/09/telegraf-and-questdb-for-storing-metrics-in-a-timeseries-database)
+[QuestDB on DigitalOcean tutorial](/blog/2021/07/09/telegraf-and-questdb-for-storing-metrics-in-a-timeseries-database)
 to get started.
 
 <Screenshot
   alt="A diagram showing system metrics collected by multiple Telegraf agents sent to QuestDB as a time series database for storage"
   height={591}
-  src="/img/tutorial/2021-07-09/banner.png"
+  src="/img/blog/2021-07-09/banner.png"
   width={770}
 />
 

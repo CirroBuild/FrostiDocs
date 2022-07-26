@@ -34,7 +34,7 @@ const categories: CategoriesProps["categories"] = [
     title: "Tutorials",
     description:
       "Step-by-step tutorials and guides for developers to build applications with QuestDB",
-    url: "/tutorial",
+    url: "/blog/tags/tutorial",
   },
   {
     title: "User Stories",
@@ -46,13 +46,16 @@ const categories: CategoriesProps["categories"] = [
 
 const prioritizedTags: ChipProps["items"] = [
   "release",
-  "company",
   "engineering",
-  "community",
+  "python",
+  "grafana",
+  "crypto",
+  "sql",
   "kafka",
   "prometheus",
-  "postgres",
-  "data science",
+  "telegraf",
+  "company",
+  "community",
 ].map((tag) => ({
   name: tag,
   permalink: `/blog/tags/${tag.replace(/ /g, "-")}`,

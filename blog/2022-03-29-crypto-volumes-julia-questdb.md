@@ -1,11 +1,18 @@
 ---
 title: Crypto Volume Profiles with QuestDB and Julia
 author: Dean Markwick
+author_url: https://github.com/dm13450
+author_image_url: https://avatars.githubusercontent.com/dm13450
 description:
   Build Bitcoin volume curves using Julia and QuestDB to better understand the
   flow of trading throughout the day.
-featureType: resource
-image: /img/tutorial/2022-03-29/graph.png
+keywords:
+  - timeseries
+  - julialang
+  - trading
+  - marketdata
+tags: [tutorial, julialang, marketdata, trading, bitcoin]
+image: /img/blog/2022-03-29/graph.png
 ---
 
 import Banner from "@theme/Banner"
@@ -13,7 +20,7 @@ import Banner from "@theme/Banner"
 <Banner
   alt="crypto volume profiles with questdb and julia"
   height={467}
-  src="/img/tutorial/2022-03-29/graph.png"
+  src="/img/blog/2022-03-29/graph.png"
   width={650}
 ></Banner>
 
@@ -58,8 +65,8 @@ file with a corresponding database schema.
 As most of us have our data in CSVs, (despite the flaws) this will hopefully
 help you build Bitcoin volume curves using Julia and QuestDB to better
 understand the flow of trading throughout the day. ove to a more practical
-database solution. I spent most of my Ph.D. wrestling with
-flat files and could have saved some time by moving to a database sooner.
+database solution. I spent most of my Ph.D. wrestling with flat files and could
+have saved some time by moving to a database sooner.
 
 In my case, I have a folder of CSV files of BTCUSD trades downloaded from Alpaca
 Markets (using [AlpacaMarkets.jl](https://github.com/dm13450/AlpacaMarkets.jl))
@@ -142,7 +149,7 @@ We iterate through all the different files and receive a message telling us
 whether the file was successfully uploaded. We can go to the web GUI and check
 to make sure everything worked by counting the number of rows.
 
-![QuestDB GUI screenshot](/img/tutorial/2022-03-29/questdb_gui.png "QuestDB GUI screenshot")
+![QuestDB GUI screenshot](/img/blog/2022-03-29/questdb_gui.png "QuestDB GUI screenshot")
 
 Now let's connect to the database in Julia and see if we get the same result.
 
@@ -246,7 +253,7 @@ nPlot = plot(dailyVolume.t, dailyVolume.count, label = "Total Trades", xticks = 
 plot(vPlot, nPlot)
 ```
 
-![Daily Bitcoin trends](/img/tutorial/2022-03-29/output_10_0.svg "Daily Bitcoin trends")
+![Daily Bitcoin trends](/img/blog/2022-03-29/output_10_0.svg "Daily Bitcoin trends")
 
 Both the total notional traded and the total number of daily trades dropped off
 around Christmas time, which is to be expected. We are all too busy feasting on
@@ -260,7 +267,7 @@ indicate it is mainly small participants selling the smaller holdings.
 plot(dailyVolume.t, dailyVolume.sum ./ dailyVolume.count, label = "Average Trade Size")
 ```
 
-![Bitcoin average trade size](/img/tutorial/2022-03-29/output_12_0.svg "Bitcoin average trade size")
+![Bitcoin average trade size](/img/blog/2022-03-29/output_12_0.svg "Bitcoin average trade size")
 
 Dividing the average daily notional by the total number of daily trades shows
 this steady reduction in the average trade size.
@@ -334,7 +341,7 @@ plot(intraVolume.ts, intraVolume.frac,
      xticks = (ticks, tick_labels), seriestype = :scatter, label=:none, ylabel="Fraction of Volume Traded")
 ```
 
-![Intraday Bitcoin profile](/img/tutorial/2022-03-29/output_20_0.svg "Intraday Bitcoin profile")
+![Intraday Bitcoin profile](/img/blog/2022-03-29/output_20_0.svg "Intraday Bitcoin profile")
 
 This looks great, we see trading is at the lowest at 10:00 but peaks at 16:00.
 It is very noisy though.
@@ -349,15 +356,16 @@ plot(intraVolume.ts, 1 .- cumsum(intraVolume.frac),  xticks = (ticks, tick_label
      ylabel = "Fraction of Total Volume Remaining")
 ```
 
-![Bitcoin fraction left to trade over the day](/img/tutorial/2022-03-29/output_22_0.svg "Bitcoin fraction left to trade over the day")
+![Bitcoin fraction left to trade over the day](/img/blog/2022-03-29/output_22_0.svg "Bitcoin fraction left to trade over the day")
 
 So we can see that by 06:00 there is roughly still 75% of the day's volume to
 trade. By 18:00 just over 25% left. So from our earlier analysis of how much
 daily volume is roughly traded, we can start predicting how much volume is left
 to trade over a day when we log into our broker.
 
-As Bitcoin crypto markets are unique as they trade over the weekends. So we should
-split these volume curves up into the day of the week and see how they look.
+As Bitcoin crypto markets are unique as they trade over the weekends. So we
+should split these volume curves up into the day of the week and see how they
+look.
 
 ## Bitcoin volume profiles for each weekday
 
@@ -456,8 +464,7 @@ plot(intraVolume_day.ts,
      ylabel="Fraction of Volume Traded")
 ```
 
-![Weekday volume curves](/img/tutorial/2022-03-29/output_27_0.svg "Weekday
- volume curves")
+![Weekday volume curves](/img/blog/2022-03-29/output_27_0.svg "Weekday volume curves")
 
 Very noisy! We can sort of see the general increase of volume at 16:00 similar
 to the single curve above. Comparing the weekdays becomes a bit easier when we
@@ -474,7 +481,7 @@ plot(intraVolume_day.ts,
      ylabel = "Fraction of Total Volume Remaining")
 ```
 
-![Weekday fraction left to trade](/img/tutorial/2022-03-29/output_28_0.svg "Weekday fraction left to trade")
+![Weekday fraction left to trade](/img/blog/2022-03-29/output_28_0.svg "Weekday fraction left to trade")
 
 Saturday is the day that strays away from all the others. This shows that the
 profile of trading BTCUSD over Saturday is structurally different to the other
@@ -511,7 +518,7 @@ smoothPlot = plot(intraVolume.ts, intraVolume.frac, xticks = (ticks, tick_labels
 plot!(smoothPlot, intraVolume.ts, vs, label = "LOESS - 0.15", linewidth=3)
 ```
 
-![svg](/img/tutorial/2022-03-29/output_31_0.svg)
+![svg](/img/blog/2022-03-29/output_31_0.svg)
 
 This smoothed curve produces a sensible-looking approximation to the raw data
 and removes much of the noise. The curve is a more sensible input into an
@@ -576,7 +583,7 @@ weekendPlot = plot(weekends.ts,
 plot(weekdayPlot, weekendPlot)
 ```
 
-![svg](/img/tutorial/2022-03-29/output_35_0.svg)
+![svg](/img/blog/2022-03-29/output_35_0.svg)
 
 Much more interpretable! The smoothed curves make it easier to see some
 interesting features:

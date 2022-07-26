@@ -1,14 +1,23 @@
 ---
 title: Exploring cryptocurrency prices with QuestDB and Google Data Studio
+author: Yitaek Hwang
+author_title: Guest
+author_url: https://github.com/Yitaek
+author_image_url: https://avatars.githubusercontent.com/Yitaek
 description:
   Visualizing historical prices of Ethereum, Cardano, and Solana by ingesting
   data into QuestDB and graphing price trends on Google Data Studio.
+  records on the fly.
 keywords:
-  - google
-  - cryptocurrency
-  - benchmark
-image: /img/tutorial/shared/og-solana-eth.png
-featureType: resource
+  - timeseries
+  - crypto
+  - ethereum
+  - solana
+  - kaggle
+  - googlecloud
+  - marketdata
+tags: [tutorial, crypto, googlecloud, marketdata, autopilot]
+image: /img/blog/shared/og-solana-eth.png
 ---
 
 import Screenshot from "@theme/Screenshot"
@@ -16,7 +25,7 @@ import Screenshot from "@theme/Screenshot"
 <Screenshot
   alt="A series of logos of popular cryptocurrencies"
   height={385}
-  src="/img/tutorial/2022-02-10/banner.png"
+  src="/img/blog/2022-02-10/banner.png"
   width={850}
 />
 
@@ -40,7 +49,7 @@ can quickly get started in less than 5 minutes of setup.
 
 In this tutorial, we will use the precompiled dataset of cryptocurrency prices
 from Kaggle, but if you would like to build your own dataset, see our
-[Realtime crypto tracker](/tutorial/2021/02/18/realtime-crypto-tracker-with-kafka-and-questdb)
+[Realtime crypto tracker](/blog/2021/02/18/realtime-crypto-tracker-with-kafka-and-questdb)
 tutorial that uses Kafka and QuestDB.
 
 The
@@ -55,7 +64,7 @@ look at Ethereum, Cardano, and Solana datasets.
 
 Although Google Data Studio can connect to any publicly-accessible PostgreSQL
 endpoint, I’ll be using Google Cloud since I’ve written about running
-[QuestDB on GKE Autopilot](/tutorial/2021/03/18/questdb-and-prometheus-on-gke-autopilot)
+[QuestDB on GKE Autopilot](/blog/2021/03/18/questdb-and-prometheus-on-gke-autopilot)
 before. In your Google Cloud account:
 
 - Navigate to
@@ -69,7 +78,7 @@ For this demo, I decided to use the **Standard mode** with one node in
 <Screenshot
   alt="Creating a QuestDB cluster using GKE on Google Cloud"
   height={385}
-  src="/img/tutorial/2022-02-10/create_cluster.png"
+  src="/img/blog/2022-02-10/create_cluster.png"
   width={650}
 />
 
@@ -109,7 +118,7 @@ Wait for the pod to become healthy and provision a load balancer:
 <Screenshot
   alt="Viewing the state of a QuestDB cluster on Google Cloud Platform"
   height={385}
-  src="/img/tutorial/2022-02-10/load_balancer.png"
+  src="/img/blog/2022-02-10/load_balancer.png"
   width={650}
 />
 
@@ -121,7 +130,7 @@ on the left-hand panel and import the CSV data:
 <Screenshot
   alt="Importing cryptocurrency data via CSV upload in QuestDB's web UI"
   height={385}
-  src="/img/tutorial/2022-02-10/import_csv.png"
+  src="/img/blog/2022-02-10/import_csv.png"
   width={1000}
 />
 
@@ -136,7 +145,7 @@ well as the default port and credentials:
 <Screenshot
   alt="Authenticating with QuestDB via Google Data Studio"
   height={385}
-  src="/img/tutorial/2022-02-10/db_auth.png"
+  src="/img/blog/2022-02-10/db_auth.png"
   width={300}
 />
 
@@ -147,7 +156,7 @@ table separately. By default, Data Studio will create a default table with
 <Screenshot
   alt="Mapping table schema in Google Data Studio"
   height={385}
-  src="/img/tutorial/2022-02-10/schema.png"
+  src="/img/blog/2022-02-10/schema.png"
   width={400}
 />
 
@@ -157,7 +166,7 @@ You can modify the Dimension to add the other fields such as `Marketcap`,
 <Screenshot
   alt="A QuestDB table with multiple columns in Google Data Studio"
   height={385}
-  src="/img/tutorial/2022-02-10/dimensions.png"
+  src="/img/blog/2022-02-10/dimensions.png"
   width={600}
 />
 
@@ -171,7 +180,7 @@ coarse timeseries chart of Marketcap over time:
 <Screenshot
   alt="A timeseries chart showing cryptocurrency market cap over time"
   height={385}
-  src="/img/tutorial/2022-02-10/marketcap.png"
+  src="/img/blog/2022-02-10/marketcap.png"
   width={600}
 />
 
@@ -181,7 +190,7 @@ highest price of the day was as opposed to the lowest price:
 <Screenshot
   alt="A timeseries chart showing multiple cryptocurrency market caps over time"
   height={385}
-  src="/img/tutorial/2022-02-10/multiple_dimensions.png"
+  src="/img/blog/2022-02-10/multiple_dimensions.png"
   width={600}
 />
 
@@ -193,7 +202,7 @@ Solana over similar time period:
 <Screenshot
   alt="A timeseries chart showing Cardano versus Solana market caps over time"
   height={385}
-  src="/img/tutorial/2022-02-10/cardano_solana.png"
+  src="/img/blog/2022-02-10/cardano_solana.png"
   width={600}
 />
 

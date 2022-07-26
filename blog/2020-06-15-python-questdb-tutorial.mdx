@@ -1,10 +1,20 @@
 ---
 title: Querying data in a Jupyter Notebook
 author: David G. Simmons
+author_title: QuestDB Team
+author_url: https://github.com/davidgs
+author_image_url: https://avatars.githubusercontent.com/davidgs
 description:
   Use a Jupyter notebook to create a database, insert and query data and graph
   the results using Python.
-image: /img/tutorial/shared/og-python.png
+keywords:
+  - python
+  - pandas
+  - jupiternotebook
+  - timeseries
+  - questdb
+tags: [tutorial, python, pandas, jupyternotebook]
+image: /img/blog/shared/og-python.png
 ---
 
 import Banner from "@theme/Banner"
@@ -12,7 +22,7 @@ import Banner from "@theme/Banner"
 <Banner
   alt="A software developer typing code on a laptop"
   height={365}
-  src="/img/tutorial/2020-06-15/banner.jpg"
+  src="/img/blog/2020-06-15/banner.jpg"
   width={650}
 >
   Photo by{" "}
@@ -212,7 +222,7 @@ rawData.plot("timestamp", ["balance"], subplots=True)
 
 From that query we should get a nice little plot of our data, like this:
 
-![Graph of the balance from the query](/img/tutorial/2020-06-15/graph.png)
+![Graph of the balance from the query](/img/blog/2020-06-15/graph.png)
 
 ## Clean up
 

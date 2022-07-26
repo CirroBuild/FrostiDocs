@@ -1,5 +1,5 @@
 ---
-title: QuestDB release January 2021
+title: QuestDB 5.0.6 Release Highlights, January 2021
 author: Brian Smith
 author_title: QuestDB Team
 author_url: https://github.com/bsmth
@@ -9,11 +9,10 @@ description:
   wire improvements, SQL additions and new functions for troubleshooting
 keywords:
   - postgres
-  - grafana
   - timeseries
   - database
 image: /img/blog/2021-02-05/og.png
-tags: [postgres, release, grafana, python, rust, golang]
+tags: [postgres, release, rust, golang]
 ---
 
 We've just released software version 5.0.6 and it comes with plenty of

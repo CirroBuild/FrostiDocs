@@ -1,12 +1,20 @@
 ---
 title: How to generate time-series data in QuestDB
 author: Gábor Boros
+author_title: Guest
+author_url: https://github.com/gabor-boros
+author_image_url: https://avatars.githubusercontent.com/gabor-boros
 description:
   Learn how to mock timeseries data using built-in SQL functions in QuestDB to
   generate dummy data for testing and rapid prototyping according to your
   schemas.
-image: /img/tutorial/shared/og-sql.png
-featureType: resource
+keywords:
+  - timeseries
+  - questdb
+  - sql
+  - database
+tags: [tutorial, timeseries, sql]
+image: /img/blog/shared/og-sql.png
 ---
 
 import Screenshot from "@theme/Screenshot"
@@ -14,7 +22,7 @@ import Screenshot from "@theme/Screenshot"
 <Screenshot
   alt="The QuestDB logo"
   height={591}
-  src="/img/tutorial/2022-03-14/banner.png"
+  src="/img/blog/2022-03-14/banner.png"
   width={770}
 />
 
@@ -47,14 +55,14 @@ frequency we receive them into two categories: regular and irregular data.
 Regular data is received per a pre-defined period, usually collected by a
 collector node or sent by an agent. Collecting metrics from a server fits into
 this category perfectly, as shown in the tutorial where we
-[connected Telegraf with QuestDB](https://questdb.io/tutorial/2021/07/09/telegraf-and-questdb-for-storing-metrics-in-a-timeseries-database/).
+[connected Telegraf with QuestDB](/blog/2021/07/09/telegraf-and-questdb-for-storing-metrics-in-a-timeseries-database/).
 The Telegraf agent running on the server collects the metrics on a pre-defined
 basis and sends them to the QuestDB instance.
 
 The opposite of regular data is the irregular data which is collected
 dynamically. The main point about irregular data is that we cannot predict how
 often the data will arrive. As of examples,
-[automating ETL jobs](https://questdb.io/tutorial/2021/03/31/automating-etl-jobs-on-time-series-data-on-gcp/)
+[automating ETL jobs](/blog/2021/03/31/automating-etl-jobs-on-time-series-data-on-gcp/)
 could be a great example. The data comes in when automation or the user sends it
 to the pipeline, hence we cannot know beforehand the data arrives.
 
@@ -116,7 +124,7 @@ After starting QuestDB, the web console is available on port `9000`, so
 navigating to `http://127.0.0.1:9000` should show the UI of a locally-running
 instance which looks like the following:
 
-![webui](/img/tutorial/2022-03-14/webui.png)
+![webui](/img/blog/2022-03-14/webui.png)
 
 Mock data generation in QuestDB is surprisingly easy. The DB comes with numerous
 generator functions, all with a different purpose. If you ever used PostgreSQL's
@@ -283,7 +291,7 @@ INSERT INTO 'diagnostics' SELECT * FROM (
 After the query ran successfully, ensure we have the 28 records we expect. Run
 `SELECT * FROM 'diagnostics';`
 
-![generated-rows](/img/tutorial/2022-03-14/generated-rows.png)
+![generated-rows](/img/blog/2022-03-14/generated-rows.png)
 
 Congratulations, we successfully generated twenty eight rows with random data.
 Although the data is in place, the timestamps seem to be odd; we have multiple
@@ -356,7 +364,7 @@ random data we generate `10 * 365 * 24` records, which is 87600 rows. By simply
 changing the `long_sequence` parameters to `87600` and running the query one
 more time, we can generate data for the next ten years in less than a second.
 
-![final-rows](/img/tutorial/2022-03-14/final-rows.png)
+![final-rows](/img/blog/2022-03-14/final-rows.png)
 
 ## Summary
 

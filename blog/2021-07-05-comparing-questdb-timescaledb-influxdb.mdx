@@ -1,11 +1,22 @@
 ---
 title: Comparing InfluxDB, TimescaleDB, and QuestDB timeseries databases
 author: Yitaek Hwang
+author_title: Guest
+author_url: https://github.com/Yitaek
+author_image_url: https://avatars.githubusercontent.com/Yitaek
 description:
   A high-level overview of timeseries databases to compare features,
   functionality, maturity, and performance.
-image: /img/tutorial/shared/og-influxdb-timescaledb.png
-featureType: comparison
+keywords:
+  - timeseries
+  - influxdb
+  - timescale
+  - questdb
+  - comparison
+
+tags: [benchmark, influxdb, timescale, questdb, timeseries]
+image: /img/blog/shared/og-influxdb-timescaledb.png
+
 ---
 
 import Banner from "@theme/Banner"
@@ -13,7 +24,7 @@ import Banner from "@theme/Banner"
 <Banner
   alt="TimescaleDB logo, QuestDB logo, InfluxDB logo"
   height={467}
-  src="/img/tutorial/2021-07-05/banner.png"
+  src="/img/blog/2021-07-05/banner.png"
   width={650}
 ></Banner>
 
@@ -42,7 +53,7 @@ import Screenshot from "@theme/Screenshot"
 <Screenshot
   alt="A chart ranking database type by popularity with timeseries databases shown as a clear leader"
   height={591}
-  src="/img/tutorial/2021-07-05/timeseries-popularity.png"
+  src="/img/blog/2021-07-05/timeseries-popularity.png"
   width={770}
 />
 
@@ -84,7 +95,7 @@ enterprise that provide clustering and other production-ready features.
 <Screenshot
   alt="A table showing the current popularity of timeseries databases as shown by db-engines.com"
   height={591}
-  src="/img/tutorial/2021-07-05/db-engines-ranking.png"
+  src="/img/blog/2021-07-05/db-engines-ranking.png"
   width={770}
   title="Image Credit: DB-engines"
 />
@@ -101,7 +112,7 @@ metrics.
 <Screenshot
   alt="A diagram describing IndluxDB architecture including Telegraf, Chronograf, and Kapacitor."
   height={591}
-  src="/img/tutorial/2021-07-05/influx-architecture.png"
+  src="/img/blog/2021-07-05/influx-architecture.png"
   width={770}
   title="Image Credit: Influxdata"
 />
@@ -124,7 +135,7 @@ To understand how InfluxDB works, we need to grasp the following key concepts:
 <Screenshot
   alt="An example table created from ingesting data in InfluxDB line protocol"
   height={591}
-  src="/img/tutorial/2021-07-05/influx-schema.png"
+  src="/img/blog/2021-07-05/influx-schema.png"
   width={770}
   title="Image Credit: Influxdata"
 />
@@ -190,7 +201,7 @@ when combined with built-in dashboards.
 <Screenshot
   alt="A screenshot showing the InfluxDB data explorer"
   height={591}
-  src="/img/tutorial/2021-07-05/influx-schema-explorer.png"
+  src="/img/blog/2021-07-05/influx-schema-explorer.png"
   width={770}
   title="Image Credit: Influxdata"
 />
@@ -216,7 +227,7 @@ single, large table for interacting with the data.
 <Screenshot
   alt="A diagram showing TimescaleDB and InfluxDB on two ends of the SQL vs NoSQL spectrum."
   height={591}
-  src="/img/tutorial/2021-07-05/sql-v-nosql.jpeg"
+  src="/img/blog/2021-07-05/sql-v-nosql.jpeg"
   width={770}
   title="Image Credit: TimescaleDB"
 />
@@ -236,7 +247,7 @@ mention the myriad of self-managed options on VMs or containers.
 <Screenshot
   alt="A list of the most popular programming languages as reported by the Stack Overflow Developer Survey 2020"
   height={591}
-  src="/img/tutorial/2021-07-05/popular-languages.png"
+  src="/img/blog/2021-07-05/popular-languages.png"
   width={770}
   title="Image Credit: Stack Overflow"
 />
@@ -280,7 +291,7 @@ results show superior performance for TimescaleDB as data cardinality grows
 <Screenshot
   alt="Benchmark results showing TimescaleDB performance versus InfluxDB on ingestion rates."
   height={591}
-  src="/img/tutorial/2021-07-05/influx-versus-timescale.png"
+  src="/img/blog/2021-07-05/influx-versus-timescale.png"
   width={770}
   title="Image Credit: TimescaleDB"
 />
@@ -326,7 +337,7 @@ fast read and writes before data is committed to disk.
 <Screenshot
   alt="A diagram showing how QuestDB ingesting schema-agnostic InfluxDB line protocol and relational data"
   height={591}
-  src="/img/tutorial/2021-07-05/questdb-influxdb-postgres-join.png"
+  src="/img/blog/2021-07-05/questdb-influxdb-postgres-join.png"
   width={770}
 />
 
@@ -361,7 +372,7 @@ QuestDB showed over a million rows/sec ingestion throughput.
 <Screenshot
   alt="A chart showing high-cardinality ingestion performance of InfluxDB, TimescaleDB, and ClickHouse versus QuestDB"
   height={591}
-  src="/img/tutorial/2021-07-05/maximum-throughput.png"
+  src="/img/blog/2021-07-05/maximum-throughput.png"
   width={770}
 />
 

@@ -15,7 +15,7 @@ keywords:
   - database
   - algotrading
 image: /img/blog/2021-09-17/banner.png
-tags: [Data science, fintech, cryptocurrency, algotrading, tutorial]
+tags: [tutorial , finance, crypto, algotrading]
 ---
 
 This post was written by Dean Markwick, who has put together an excellent

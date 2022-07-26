@@ -1,10 +1,19 @@
 ---
 title: A Lightweight, blazing fast stack for your IoT application
 author: Shan Desai
+author_title: Guest
+author_url: https://github.com/shantanoo-desai
+author_image_url: https://avatars.githubusercontent.com/shantanoo-desai
 description:
   How to create a simple IoT stack that uses a Mosquitto MQTT Broker, Telegraf
   and QuestDB.
-image: /img/tutorial/shared/og-mqtt.png
+keywords:
+  - timeseries
+  - mqtt
+  - iot
+  - telegraf
+tags: [tutorial, telegraf, iot, mqtt]
+image: /img/blog/shared/og-mqtt.png
 ---
 
 import Banner from "@theme/Banner"
@@ -12,7 +21,7 @@ import Banner from "@theme/Banner"
 <Banner
   alt="A software developer typing code on a laptop"
   height={365}
-  src="/img/tutorial/2020-08-25/banner.jpg"
+  src="/img/blog/2020-08-25/banner.jpg"
   width={650}
 >
   Photo by <a href="https://unsplash.com/photos/wGqz5YSqsfk">Zan</a> via{" "}
@@ -296,11 +305,11 @@ line Protocol to the following Topic:
 
 with the `pubclient:questitto` credentials and on the QuestDB UI you can see:
 
-![Automatic table creation based on InfluxDB line protocol measurement name](/img/tutorial/2020-08-25/tables.png)
+![Automatic table creation based on InfluxDB line protocol measurement name](/img/blog/2020-08-25/tables.png)
 
 With the `location` and other `tags` from the line protocol inserted:
 
-![Columns created by QuestDB for acceleration Table](/img/tutorial/2020-08-25/schema.png)
+![Columns created by QuestDB for acceleration Table](/img/blog/2020-08-25/schema.png)
 
 A simple query where I would like to know the acceleration value in the
 `kitchen` for the **X-axis** is as simple as:

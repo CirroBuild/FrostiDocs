@@ -1,11 +1,20 @@
 ---
 title: Using Telegraf and QuestDB to store metrics in a time series database
 author: Gábor Boros
+author_title: Guest
+author_url: https://github.com/gabor-boros
+author_image_url: https://avatars.githubusercontent.com/gabor-boros
 description:
   How to use the Telegraf agent to collect system metrics from DigitalOcean
   droplets, store the metrics in QuestDB, and perform basic data visualization
   and SQL queries using a time series database.
-image: /img/tutorial/2021-07-09/banner.png
+keywords:
+  - timeseries
+  - questdb
+  - telegraf
+tags: [tutorial, telegraf, digitalocean]
+image: /img/blog/2021-07-09/banner.png
+
 ---
 
 import Screenshot from "@theme/Screenshot"
@@ -13,7 +22,7 @@ import Screenshot from "@theme/Screenshot"
 <Screenshot
   alt="A diagram showing system metrics collected by multiple Telegraf agents sent to QuestDB as a time series database for storage"
   height={591}
-  src="/img/tutorial/2021-07-09/banner.png"
+  src="/img/blog/2021-07-09/banner.png"
   width={770}
 />
 
@@ -84,7 +93,7 @@ marketplace recently, so the setup takes about 30 seconds:
 <Screenshot
   alt="Choosing the RAM and CPU capacity for a QuestDB DigitalOcean Droplet"
   height={591}
-  src="/img/tutorial/2021-07-09/choosing-droplet.png"
+  src="/img/blog/2021-07-09/choosing-droplet.png"
   width={770}
 />
 
@@ -98,7 +107,7 @@ marketplace recently, so the setup takes about 30 seconds:
 <Screenshot
   alt="Finalizing the creation step of a DigitalOcean Droplet running QuestDB"
   height={591}
-  src="/img/tutorial/2021-07-09/questdb-droplet.png"
+  src="/img/blog/2021-07-09/questdb-droplet.png"
   width={770}
 />
 
@@ -145,7 +154,7 @@ Telegraf agent.
 <Screenshot
   alt="A list of running DigitalOcean Droplets with the QuestDB application running and two demo instances"
   height={591}
-  src="/img/tutorial/2021-07-09/available-droplets.png"
+  src="/img/blog/2021-07-09/available-droplets.png"
   width={770}
 />
 
@@ -320,7 +329,7 @@ The basic in-built charting functionality that QuestDB has can be used like so:
 <Screenshot
   alt="Visualizing the results of a SQL query over system and CPU metrics in QuestDB as a line chart"
   height={591}
-  src="/img/tutorial/2021-07-09/visualizing-sql-questdb.png"
+  src="/img/blog/2021-07-09/visualizing-sql-questdb.png"
   width={770}
 />
 
@@ -334,7 +343,7 @@ database like QuestDB for reports and visualization.
 
 For next steps, we can experiment with some of the additional integrations that
 Telegraf supports to grab insights from other applications and
-[use the Grafana integration that QuestDB offers](/tutorial/2020/10/19/grafana)
+[use the Grafana integration that QuestDB offers](/blog/2020/10/19/grafana-tutorial)
 to set up more detailed dashboards for visualization or even alerting and
 notifications.
 

@@ -175,10 +175,12 @@ const config = {
             {
               label: "Blog",
               to: "/blog",
+              activeBaseRegex: "/blog/?$",
             },
             {
               label: "Tutorials",
-              to: "/tutorial",
+              to: "/blog/tags/tutorial/",
+              activeBaseRegex: "/blog/tags/tutorial/?$",
             },
             {
               label: "QuestDB Swag",

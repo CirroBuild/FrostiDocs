@@ -1,10 +1,20 @@
 ---
 title: Running QuestDB and Prometheus on GKE Autopilot
 author: Yitaek Hwang
+author_title: Guest
+author_url: https://github.com/Yitaek
+author_image_url: https://avatars.githubusercontent.com/Yitaek
 description:
   Learn how Google Kubernetes Engine in Autopilot can run QuestDB and Prometheus
   with automated backups for a production-ready time series database deployment.
-image: /img/tutorial/shared/og-google-kubernetes-engine.png
+keywords:
+  - timeseries
+  - kubernetes
+  - autopilot
+  - prometheus
+  - devops
+tags: [tutorial, prometheus, kubernetes, autopilot, devops]
+image: /img/blog/shared/og-google-kubernetes-engine.png
 ---
 
 import Banner from "@theme/Banner"
@@ -12,7 +22,7 @@ import Banner from "@theme/Banner"
 <Banner
   alt="An aeroplane cockpit showing instruments for displaying system statuses"
   height={433}
-  src="/img/tutorial/2021-03-18/banner.jpg"
+  src="/img/blog/2021-03-18/banner.jpg"
   width={650}
 >
   Photo by <a href="https://unsplash.com/photos/jW8hkB_Qmj8">Kent Pilcher</a>{" "}
@@ -33,8 +43,8 @@ Thanks for another great contribution, Yitaek!
 Recently, I've been experimenting with QuestDB as a primary time series database
 to stream and analyze IoT and financial data:
 
-- [Streaming Heart Rate Data with IoT Core and QuestDB](/tutorial/2021/02/05/streaming-heart-rate-data-with-iot-core-and-questdb)
-- [Real-time Crypto Tracker with Kafka and QuestDB](/tutorial/2021/02/18/realtime-crypto-tracker-with-kafka-and-questdb)
+- [Streaming Heart Rate Data with IoT Core and QuestDB](/blog/2021/02/05/streaming-heart-rate-data-with-iot-core-and-questdb)
+- [Real-time Crypto Tracker with Kafka and QuestDB](/blog/2021/02/18/realtime-crypto-tracker-with-kafka-and-questdb)
 
 While I was able to validate the power of QuestDB in storing massive amounts of
 data and querying them quickly in those two projects, I was mostly running them
@@ -78,7 +88,7 @@ import Screenshot from "@theme/Screenshot"
 <Screenshot
   alt="A screenshot of the Google Cloud console UI for creating a Kubernetes cluster"
   height={320}
-  src="/img/tutorial/2021-03-18/create-cluster.png"
+  src="/img/blog/2021-03-18/create-cluster.png"
   width={400}
 />
 
@@ -113,7 +123,7 @@ autoscaler triggers a scaling up event and schedules the questdb pod.
 <Screenshot
   alt="The status dashboard for Kubernetes services in Google Cloud Console"
   height={88}
-  src="/img/tutorial/2021-03-18/cluster-status-green.png"
+  src="/img/blog/2021-03-18/cluster-status-green.png"
   width={650}
 />
 
@@ -127,7 +137,7 @@ kubectl port-forward questdb-0 9000:9000
 <Screenshot
   alt="The QuestDB web console running on Kubernetes, accessed via port forwarding"
   height={228}
-  src="/img/tutorial/2021-03-18/questdb-console.png"
+  src="/img/blog/2021-03-18/questdb-console.png"
   width={650}
 />
 
@@ -242,7 +252,7 @@ that we're able to scrape `pg_up`:
 <Screenshot
   alt="A screenshot of Prometheus monitoring the uptime of a QuestDB instance"
   height={500}
-  src="/img/tutorial/2021-03-18/prometheus.png"
+  src="/img/blog/2021-03-18/prometheus.png"
   width={650}
 />
 
@@ -357,7 +367,7 @@ Lastly, verify backups are being made in our bucket:
 <Screenshot
   alt="Incremental backups of QuestDB in a storage bucket on Google Cloud"
   height={230}
-  src="/img/tutorial/2021-03-18/velero-backups.png"
+  src="/img/blog/2021-03-18/velero-backups.png"
   width={650}
 />
 

@@ -1,11 +1,20 @@
 ---
 title: Realtime crypto tracker with Kafka and QuestDB
 author: Yitaek Hwang
+author_title: Guest
+author_url: https://github.com/Yitaek
+author_image_url: https://avatars.githubusercontent.com/Yitaek
 description:
   Use Python to send real-time cryptocurrency metrics to Kafka topics, ingest to
   QuestDB, and calculate moving averages with Pandas.
-image: /img/tutorial/shared/og-kafka-bitcoin.png
-featureType: resource
+keywords:
+  - timeseries
+  - crypto
+  - kafka
+  - pandas
+  - python
+tags: [tutorial, python, pandas, kafka, crypto]
+image: /img/blog/shared/og-kafka-bitcoin.png
 ---
 
 import Banner from "@theme/Banner"
@@ -13,7 +22,7 @@ import Banner from "@theme/Banner"
 <Banner
   alt="A photograph of a laptop displaying candle charts of stock market data"
   height={433}
-  src="/img/tutorial/2021-02-18/banner.jpg"
+  src="/img/blog/2021-02-18/banner.jpg"
   width={650}
 >
   Photo by <a href="https://unsplash.com/photos/ZzOa5G8hSPI">M. B. M.</a> via{" "}
@@ -46,7 +55,7 @@ import Screenshot from "@theme/Screenshot"
 <Screenshot
   alt="A chart showing cryptocurrency exchange volumes from 2017 to present"
   height={398}
-  src="/img/tutorial/2021-02-18/cryptocompare.png"
+  src="/img/blog/2021-02-18/cryptocompare.png"
   width={650}
 />
 
@@ -81,7 +90,7 @@ for a quick trend analysis.
 <Screenshot
   alt="A diagram showing the flow of information in this tutorial from Coinbase to Kafka and finally to QuestDB"
   height={92}
-  src="/img/tutorial/2021-02-18/stack.png"
+  src="/img/blog/2021-02-18/stack.png"
   width={650}
 />
 
@@ -226,7 +235,7 @@ topic `topic_BTC` to see price data stream in:
 <Screenshot
   alt="The Web Console in QuestDB showing results from a table of Bitcoin records"
   height={420}
-  src="/img/tutorial/2021-02-18/questdb.png"
+  src="/img/blog/2021-02-18/questdb.png"
   width={650}
 />
 
@@ -248,14 +257,14 @@ The QuestDB console UI also provides the ability to generate basic graphs:
 <Screenshot
   alt="The Web Console in QuestDB showing how to visualize results from a table of Bitcoin records on a graph"
   height={261}
-  src="/img/tutorial/2021-02-18/questdb-chart.png"
+  src="/img/blog/2021-02-18/questdb-chart.png"
   width={650}
 />
 
 The QuestDB native charting capabilities are limited to a few graph types, so
 for more advanced visualization, check out my previous guide on streaming heart
 rate data to QuestDB under the
-[Visualizing data with Grafana](/tutorial/2021/02/05/streaming-heart-rate-data-with-iot-core-and-questdb#visualizing-data-with-grafana)
+[Visualizing data with Grafana](/blog/2021/02/05/streaming-heart-rate-data-with-iot-core-and-questdb#visualizing-data-with-grafana)
 section.
 
 ## Calculate moving average

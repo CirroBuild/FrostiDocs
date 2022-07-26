@@ -1,11 +1,20 @@
 ---
 title: Visualizing cryptocurrency data with Python, Grafana and QuestDB
 author: Tancrede Collard
+author_title: QuestDB Team
+author_url: https://github.com/TheTanc
+author_image_url: https://avatars.githubusercontent.com/TheTanc
 description:
   Learn how to using Python to fetch cryptocurrency data from Coinbase, store it
   in QuestDB, and visualize the data using Grafana.
-image: /img/tutorial/shared/og-bitcoin-grafana.png
-featureType: resource
+keywords:
+  - questdb
+  - python
+  - grafana
+  - crypto
+  - database
+tags: [tutorial, crypto, trading, python, grafana]
+image: /img/blog/shared/og-bitcoin-grafana.png
 ---
 
 import Banner from "@theme/Banner"
@@ -13,7 +22,7 @@ import Banner from "@theme/Banner"
 <Banner
   alt="Grafana logo, QuestDB logo, Bitcoin logo"
   height={467}
-  src="/img/tutorial/2022-03-15/banner.png"
+  src="/img/blog/2022-03-15/banner.png"
   width={650}
 ></Banner>
 
@@ -159,7 +168,7 @@ When you start the script, prices should appear in the web console for QuestDB.
 Running `crypto` (this is shorthand for `SELECT * FROM crypto`) in the SQL
 editor shows the prices flowing in QuestDB:
 
-![QuestDB web console](/img/tutorial/2022-03-15/console.png)
+![QuestDB web console](/img/blog/2022-03-15/console.png)
 
 One important thing to note is that we didn't create a table before sending
 data. QuestDB automatically creates tables using the appropriate columns
@@ -215,7 +224,7 @@ interested in. Start off by creating a new dashboard and click on `new panel`.
 The pencil icon allows you to provide a query to run against QuestDB for Grafana
 to plot:
 
-![The edit icon in Grafana panel](/img/tutorial/2022-03-15/grafana-pencil.png)
+![The edit icon in Grafana panel](/img/blog/2022-03-15/grafana-pencil.png)
 
 Paste the following query to create a time series of the bid-offer and mid
 price:
@@ -248,9 +257,9 @@ experimenting with other parameters such as the colors or the sample frequency
 for each of the series. The Grafana UI can be used to change the chart range and
 resolution:
 
-![Low-resolution Cryptocurrency trade data in Grafana](/img/tutorial/2022-03-15/grafana-low-res.png)
+![Low-resolution Cryptocurrency trade data in Grafana](/img/blog/2022-03-15/grafana-low-res.png)
 
-![High-resolution Cryptocurrency trade data in Grafana](/img/tutorial/2022-03-15/grafana-high-res.png)
+![High-resolution Cryptocurrency trade data in Grafana](/img/blog/2022-03-15/grafana-high-res.png)
 
 Although our data is very simplistic right now (indicative bid an offer from one
 platform on one pair), the nice thing about building this from scratch is that
@@ -266,7 +275,7 @@ and fromCCY='BTC' and toCCY='USD' and exch='CB'
 sample by $__interval
 ```
 
-![Spread prices visualized in Grafana](/img/tutorial/2022-03-15/grafana-spread.png)
+![Spread prices visualized in Grafana](/img/blog/2022-03-15/grafana-spread.png)
 
 ## Next steps
 

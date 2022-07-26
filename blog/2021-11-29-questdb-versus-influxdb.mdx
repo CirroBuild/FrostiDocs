@@ -1,14 +1,20 @@
 ---
 title: Comparing InfluxDB and QuestDB databases
+arthor: Brian Smith
+author_title: QuestDB Team
+author_url: https://github.com/bsmth
+author_image_url: https://avatars.githubusercontent.com/bsmth
 description:
   An overview of InfluxDB versus QuestDB to compare features, functionality,
   performance, and ease of use.
 keywords:
+  - timeseries
   - influxdb
-  - tsbs
-  - benchmark
-image: /img/tutorial/shared/og-influxdb.png
-featureType: comparison
+  - questdb
+  - comparison
+  - database
+tags: [tutorial, benchmark, influxdb, comparison]
+image: /img/blog/shared/og-influxdb.png
 ---
 
 # Comparing QuestDB and InfluxDB time series databases
@@ -18,7 +24,7 @@ import Screenshot from "@theme/Screenshot"
 <Screenshot
   alt="Summary of benchmarking results of InfluxDB compared to QuestDB"
   height={385}
-  src="/img/tutorial/2021-11-29/banner.png"
+  src="/img/blog/2021-11-29/banner.png"
   width={850}
 />
 
@@ -97,7 +103,7 @@ model. Users can leverage both paradigms and perform SQL JOINs to correlate
 <Screenshot
   alt="A combination of schema-agnostic ingestion and relational data stored and queried in QuestDB"
   height={385}
-  src="/img/tutorial/2021-11-29/relational-and-schema-agnostic.png"
+  src="/img/blog/2021-11-29/relational-and-schema-agnostic.png"
   width={850}
 />
 
@@ -126,7 +132,7 @@ retention periods for data (deleting data older than X days, for example):
 <Screenshot
   alt="An illystration of shard groups in InfluxDB"
   height={385}
-  src="/img/tutorial/2021-11-29/shard-groups.png"
+  src="/img/blog/2021-11-29/shard-groups.png"
   width={850}
 />
 
@@ -139,7 +145,7 @@ partition:
 <Screenshot
   alt="A diagram showing the column-based storage model of QuestDB"
   height={385}
-  src="/img/tutorial/2021-11-29/questdb-storage-model.png"
+  src="/img/blog/2021-11-29/questdb-storage-model.png"
   width={850}
 />
 
@@ -236,7 +242,7 @@ ingestion rate (334k rows/sec).
 <Screenshot
   alt="Ingestion results comparing QuestDB and InfluxDB using the time series benchmark suite"
   height={385}
-  src="/img/tutorial/2021-11-29/timeseries-benchmark-suite-results.png"
+  src="/img/blog/2021-11-29/timeseries-benchmark-suite-results.png"
   width={650}
 />
 
@@ -262,7 +268,7 @@ time:
 <Screenshot
   alt="High-cardinality results comparing QuestDB and InfluxDB using the time series benchmark suite"
   height={385}
-  src="/img/tutorial/2021-11-29/timeseries-benchmark-high-cardinality.png"
+  src="/img/blog/2021-11-29/timeseries-benchmark-high-cardinality.png"
   width={850}
   title="TSBS load benchmark maximum throughput results on AWS m5.8xlarge instance (4 threads)"
 />
@@ -282,7 +288,7 @@ stability, however InfluxDB was unable to finish the tests with 10M devices:
 <Screenshot
   alt="High-cardinality results comparing QuestDB and InfluxDB using the time series benchmark suite"
   height={385}
-  src="/img/tutorial/2021-11-29/timeseries-benchmark-suite-throughput.png"
+  src="/img/blog/2021-11-29/timeseries-benchmark-suite-throughput.png"
   width={850}
   title="TSBS load benchmark maximum throughput results on AWS m5.8xlarge instance (16 threads)"
 />

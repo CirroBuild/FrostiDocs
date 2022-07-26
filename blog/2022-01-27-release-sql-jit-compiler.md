@@ -15,7 +15,7 @@ keywords:
   - timeseries
   - database
 image: /img/blog/2022-01-27/banner.png
-tags: [release]
+tags: [release, sql]
 ---
 
 import Banner from "@theme/Banner"

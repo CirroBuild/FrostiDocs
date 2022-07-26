@@ -2,11 +2,19 @@
 title:
   Automating ETL jobs on time series data with QuestDB on Google Cloud Platform
 author: Gábor Boros
+author_title: Guest
+author_url: https://github.com/
+author_image_url: https://avatars.githubusercontent.com/gabor-boros
 description:
   Learn how to build an ETL job using Cloud Functions to extract data, remove
   personally-identifiable information, and load the transformed time series data
-  into QuestDB
-image: /img/tutorial/shared/og-google-cloud-functions.png
+  into QuestDB.
+keywords:
+  - timeseries
+  - etl
+  - googlecloud
+tags: [tutorial, etl, googlecloud]
+image: /img/blog/shared/og-google-cloud-functions.png
 ---
 
 import Banner from "@theme/Banner"
@@ -14,7 +22,7 @@ import Banner from "@theme/Banner"
 <Banner
   alt="A display showing a dashboard with various analytics charts."
   height={467}
-  src="/img/tutorial/2021-03-31/banner.jpg"
+  src="/img/blog/2021-03-31/banner.jpg"
   width={650}
 >
   Photo by <a href="https://unsplash.com/photos/qwtCeJ5cLYs">Stephen Dawson</a>{" "}
@@ -73,7 +81,7 @@ import Screenshot from "@theme/Screenshot"
 <Screenshot
   alt="A diagram showing the flow of information and services used in this tutorial"
   height={118}
-  src="/img/tutorial/2021-03-31/workflow.png"
+  src="/img/blog/2021-03-31/workflow.png"
   width={650}
 />
 
@@ -109,7 +117,7 @@ Make sure you note the "External IP" of the instance as we will need that later.
 <Screenshot
   alt="The Google Cloud console UI showing QuestDB running on a Compute Engine instance"
   height={147}
-  src="/img/tutorial/2021-03-31/compute-engine.png"
+  src="/img/blog/2021-03-31/compute-engine.png"
   width={650}
 />
 
@@ -184,7 +192,7 @@ as you can see below.
 <Screenshot
   alt="A new bucket storage resource on Google Cloud Platform"
   height={120}
-  src="/img/tutorial/2021-03-31/bucket-storage.png"
+  src="/img/blog/2021-03-31/bucket-storage.png"
   width={650}
 />
 
@@ -224,7 +232,7 @@ To create a Cloud Function:
 <Screenshot
   alt="Creating a new Cloud Function on Google Cloud Platform for an ETL job"
   height={586}
-  src="/img/tutorial/2021-03-31/create-cloud-function.png"
+  src="/img/blog/2021-03-31/create-cloud-function.png"
   width={450}
 />
 
@@ -241,7 +249,7 @@ function is in progress.
 <Screenshot
   alt="Deploying a Python3.8 Cloud Function on Google Cloud Platform"
   height={150}
-  src="/img/tutorial/2021-03-31/deploying-cloud-function.png"
+  src="/img/blog/2021-03-31/deploying-cloud-function.png"
   width={550}
 />
 
@@ -546,7 +554,7 @@ imaginary buyers purchased items on the webshop.
 <Screenshot
   alt="Visualizing SQL query results in the QuestDB Web Console"
   height={320}
-  src="/img/tutorial/2021-03-31/visualizing-data.png"
+  src="/img/blog/2021-03-31/visualizing-data.png"
   width={650}
 />
 

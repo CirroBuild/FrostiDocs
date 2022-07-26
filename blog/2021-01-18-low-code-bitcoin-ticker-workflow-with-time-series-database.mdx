@@ -2,10 +2,20 @@
 title: A low-code bitcoin ticker built with QuestDB and n8n.io
 author: Brian Smith
 author_title: QuestDB Team
+author_url: https://github.com/bsmth
+author_image_url: https://avatars.githubusercontent.com/bsmth
 description:
   This tutorial shows how to build a bitcoin ticker for ingesting real-time data
   into QuestDB using n8n.io
-image: /img/tutorial/2021-01-18/og.png
+keywords:
+  - timeseries
+  - bitcoin
+  - streaming
+  - n8n
+  - lowcode
+tags: [tutorial, low code, bitcoin, market data, streaming, n8n, crypto]
+image: /img/blog/2021-01-18/og.png
+
 ---
 
 import Banner from "@theme/Banner"
@@ -13,7 +23,7 @@ import Banner from "@theme/Banner"
 <Banner
   alt="A close-up of a laptop monitor showing a graph of data points over time"
   height={433}
-  src="/img/tutorial/2021-01-18/banner.jpg"
+  src="/img/blog/2021-01-18/banner.jpg"
   width={650}
 >
   Photo by <a href="https://unsplash.com/photos/IrRbSND5EUc">Markus Winkler</a>{" "}
@@ -116,7 +126,7 @@ import Screenshot from "@theme/Screenshot"
 <Screenshot
   alt="Submission form to import an n8n.io workflow from URL"
   height={284}
-  src="/img/tutorial/2021-01-18/imported-workflow.png"
+  src="/img/blog/2021-01-18/imported-workflow.png"
   title="Example QuestDB BTC ticker workflow imported from URL"
   width={650}
 />
@@ -150,7 +160,7 @@ following:
 <Screenshot
   alt="A credentials submission form for connecting n8n.io to QuestDB"
   height={284}
-  src="/img/tutorial/2021-01-18/questdb-credentials.png"
+  src="/img/blog/2021-01-18/questdb-credentials.png"
   title="Adding connection parameters for QuestDB"
   width={650}
 />
@@ -169,7 +179,7 @@ window will display the status of the workflow:
 <Screenshot
   alt="An active n8n.io workflow writing Bitcoin market price to QuestDB"
   height={284}
-  src="/img/tutorial/2021-01-18/active-btc-ticker.png"
+  src="/img/blog/2021-01-18/active-btc-ticker.png"
   title="The active workflow writing data to QuestDB"
   width={650}
 />
@@ -184,7 +194,7 @@ returned as a table by default, but can easily be graphed by selecting the
 <Screenshot
   alt="Time series data returned by QuestDB graphed as a chart"
   height={284}
-  src="/img/tutorial/2021-01-18/create-chart.png"
+  src="/img/blog/2021-01-18/create-chart.png"
   title="Graphing our ticker data in QuestDB"
   width={650}
 />
@@ -202,7 +212,7 @@ SAMPLE BY 5m;
 <Screenshot
   alt="Time series data graphed in QuestDB using five minute aggregates"
   height={284}
-  src="/img/tutorial/2021-01-18/charting-aggregates.png"
+  src="/img/blog/2021-01-18/charting-aggregates.png"
   title="Graphing 5 minute aggregates of our ticker data in QuestDB"
   width={650}
 />

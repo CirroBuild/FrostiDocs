@@ -1,11 +1,20 @@
 ---
 title: Real-time stock price alerts using Python, Grafana and QuestDB
 author: Kovid Rathee
+author_title: Guest
+author_url: https://gist.github.com/kovid-r
+author_image_url: https://avatars.githubusercontent.com/kovid-r
 description:
   Use Python to query stock prices via REST API, stream the results to QuestDB,
   and configure Slack alerts based on changes in time series data using Grafana.
-image: /img/tutorial/shared/og-grafana.png
-featureType: resource
+keywords:
+  - timeseries
+  - marketdata
+  - grafana
+  - python
+tags: [tutorial, python, grafana, marketdata, alerting]
+image: /img/blog/shared/og-grafana.png
+
 ---
 
 import Banner from "@theme/Banner"
@@ -13,7 +22,7 @@ import Banner from "@theme/Banner"
 <Banner
   alt="A laptop showing a graph of financial data over time"
   height={433}
-  src="/img/tutorial/2021-03-09/banner.jpg"
+  src="/img/blog/2021-03-09/banner.jpg"
   width={650}
 >
   Photo by <a href="https://techdaily.ca/robinhood-canada">Tech Daily</a> via{" "}
@@ -148,7 +157,7 @@ import Screenshot from "@theme/Screenshot"
 <Screenshot
   alt="A screenshot of the QuestDB web console displaying rows of a database table"
   height={354}
-  src="/img/tutorial/2021-03-09/all-rows.png"
+  src="/img/blog/2021-03-09/all-rows.png"
   width={650}
 />
 
@@ -165,7 +174,7 @@ To configure IexFinance API authentication:
 <Screenshot
   alt="A screenshot of the IexFinance console with API keys"
   height={285}
-  src="/img/tutorial/2021-03-09/iex-finance-api.png"
+  src="/img/blog/2021-03-09/iex-finance-api.png"
   width={650}
 />
 
@@ -239,7 +248,7 @@ Your Slack workspace should display a test notification coming from Grafana:
 <Screenshot
   alt="A test Slack notification from Grafana with example error information and a chart"
   height={407}
-  src="/img/tutorial/2021-03-09/webhook.png"
+  src="/img/blog/2021-03-09/webhook.png"
   width={450}
 />
 
@@ -266,7 +275,7 @@ We now have a visualization of five-second averages of Tesla's stock price:
 <Screenshot
   alt="A dashboard in Grafana showing Tesla stock price over time"
   height={459}
-  src="/img/tutorial/2021-03-09/graphing-tsla-over-time.png"
+  src="/img/blog/2021-03-09/graphing-tsla-over-time.png"
   width={650}
 />
 
@@ -318,7 +327,7 @@ the time range for alerting to the last thirty seconds. To set up this alert:
 <Screenshot
   alt="Configuration settings for alerting in Grafana based on Tesla stock prices over the last 30 seconds"
   height={666}
-  src="/img/tutorial/2021-03-09/configuring-alert.png"
+  src="/img/blog/2021-03-09/configuring-alert.png"
   width={650}
 />
 
@@ -328,7 +337,7 @@ arriving in the channel that we have configured:
 <Screenshot
   alt="A Slack notification displaying an alert from Grafana that Tesla stock price has exceeded a threshold"
   height={221}
-  src="/img/tutorial/2021-03-09/slack-alert.png"
+  src="/img/blog/2021-03-09/slack-alert.png"
   width={650}
 />
 

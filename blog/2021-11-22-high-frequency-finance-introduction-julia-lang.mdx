@@ -1,12 +1,19 @@
 ---
 title: A tour of high-frequency finance via the Julia language and QuestDB
 author: Dean Markwick
+author_url: https://github.com/dm13450
+author_image_url: https://avatars.githubusercontent.com/dm13450
 description:
   Dean Markwick describes high-frequency finance concepts such as trade prices,
   financial returns, time series autocorrelation, empirical price impact and
   others via the Julia programming language.
-image: /img/tutorial/shared/og-julia.png
-featureType: resource
+keywords:
+  - timeseries
+  - julialang
+  - trading
+  - marketdata
+tags: [tutorial, julialang, market data, crypto, trading]
+image: /img/blog/shared/og-julia.png
 ---
 
 import Banner from "@theme/Banner"
@@ -15,7 +22,7 @@ import Screenshot from "@theme/Screenshot"
 <Banner
   alt="The QuestDB logo, and the Julia programming language logo."
   height={467}
-  src="/img/tutorial/2021-11-22/banner.png"
+  src="/img/blog/2021-11-22/banner.png"
   width={650}
 ></Banner>
 
@@ -115,7 +122,7 @@ examplePlot = plot!(examplePlot, exampleData.timestamp, exampleData.ask,
 <Screenshot
   alt="Apple stock bid and ask prices plotted on a chart"
   height={591}
-  src="/img/tutorial/2021-11-22/example_bidask.png"
+  src="/img/blog/2021-11-22/example_bidask.png"
   width={650}
 />
 
@@ -151,7 +158,7 @@ plot!(examplePlot, exampleData.timestamp, exampleData.mid, label = "Mid",
 <Screenshot
   alt="Apple stock bid, ask, and mid price plotted on a chart"
   height={591}
-  src="/img/tutorial/2021-11-22/example_bidask_mid.png"
+  src="/img/blog/2021-11-22/example_bidask_mid.png"
   width={650}
 />
 
@@ -211,7 +218,7 @@ dropmissing!(bbo);
 <Screenshot
   alt="Plot showing high-frequency mid-price of Apple stock over 18 hours"
   height={591}
-  src="/img/tutorial/2021-11-22/example_mid_all.png"
+  src="/img/blog/2021-11-22/example_mid_all.png"
   width={650}
 />
 
@@ -253,7 +260,7 @@ stable than the mid-price.
 <Screenshot
   alt="Plot showing high-frequency returns of Apple stock"
   height={591}
-  src="/img/tutorial/2021-11-22/returns.png"
+  src="/img/blog/2021-11-22/returns.png"
   width={650}
 />
 
@@ -282,7 +289,7 @@ nice distribution:
 <Screenshot
   alt="Plot showing log-returns returns of Apple stock showing the fat tail phenomemon"
   height={591}
-  src="/img/tutorial/2021-11-22/returnHist.png"
+  src="/img/blog/2021-11-22/returnHist.png"
   width={650}
 />
 
@@ -362,7 +369,7 @@ hline!(return_acf, [-1, 1] .* 1/sqrt(nrow(bbo) - 1),
 <Screenshot
   alt="Plotting time series autocorrelation and confidence over lag."
   height={591}
-  src="/img/tutorial/2021-11-22/return_acf.png"
+  src="/img/blog/2021-11-22/return_acf.png"
   width={650}
 />
 
@@ -392,7 +399,7 @@ acf = autocor(abs.(bbo.logreturns[2:end]))
 <Screenshot
   alt="Plotting absolute time series autocorrelation and confidence over lag."
   height={591}
-  src="/img/tutorial/2021-11-22/return_abs_acf.png"
+  src="/img/blog/2021-11-22/return_abs_acf.png"
   width={650}
 />
 
@@ -407,7 +414,7 @@ When we take logs of both the axis we see the following straight line
 <Screenshot
   alt="Plotting log of correlation and confidence over log of lag."
   height={591}
-  src="/img/tutorial/2021-11-22/return_abs_acf_log.png"
+  src="/img/blog/2021-11-22/return_abs_acf_log.png"
   width={650}
 />
 
@@ -533,7 +540,7 @@ plot(sdata.lag, sdata.value_mean,
 <Screenshot
   alt="Plotting log-return against lag to reveal a power-law."
   height={591}
-  src="/img/tutorial/2021-11-22/impact.png"
+  src="/img/blog/2021-11-22/impact.png"
   width={650}
 />
 
@@ -548,7 +555,7 @@ lags we can see this price impact effect even clearer:
 <Screenshot
   alt="Plotting log-return against lag to reveal a power-law with a standard error."
   height={591}
-  src="/img/tutorial/2021-11-22/impact_sub.png"
+  src="/img/blog/2021-11-22/impact_sub.png"
   width={650}
 />
 

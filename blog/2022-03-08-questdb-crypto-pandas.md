@@ -1,11 +1,22 @@
 ---
 title: Exploring Crypto Prices with QuestDB and Pandas
 author: Yitaek Hwang
+author_title: Guest
+author_url: https://github.com/Yitaek
+author_image_url: https://avatars.githubusercontent.com/Yitaek
 description:
   Visualizing historical prices of cryptocurrencies by ingesting data into
   QuestDB and analyzing trends with pandas, matplotlib, and seaborn.
-image: /img/tutorial/shared/og-pandas.png
-featureType: resource
+  records on the fly.
+keywords:
+  - timeseries
+  - crypto
+  - pandas
+  - matplotlib
+  - seaborn
+  - marketdata
+tags: [tutorial, crypto, python, pandas, marketdata, matplotlib]
+image: /img/blog/shared/og-pandas.png
 ---
 
 # Exploring Crypto Prices with QuestDB and Pandas
@@ -15,7 +26,7 @@ import Banner from "@theme/Banner"
 <Banner
   alt="A photograph of a laptop displaying candle charts of stock market data"
   height={500}
-  src="/img/tutorial/2022-03-08/banner.jpeg"
+  src="/img/blog/2022-03-08/banner.jpeg"
   width={692}
 >
   Photo by <a href="https://unsplash.com/@peiobty">Pierre Borthiry</a> via{" "}
@@ -25,7 +36,7 @@ import Banner from "@theme/Banner"
 _This submission comes from one of our community contributors
 [Yitaek Hwang](https://yitaek.medium.com/)_.
 
-In [Part I of this series](/tutorial/2022/02/10/questdb-google-data-studio), we
+In [Part I of this series](/blog/2022/02/10/questdb-google-data-studio), we
 used Google Data Studio to quickly import multiple data sources and compare the
 price action of various cryptocurrencies over time. Even though Google Data
 Studio provides an easy user-interface and some nice graphing features, it was
@@ -66,7 +77,7 @@ import Screenshot from "@theme/Screenshot"
 <Screenshot
   alt="Import CSV section of QuestDB Web Console"
   height={281}
-  src="/img/tutorial/2022-03-08/import.png"
+  src="/img/blog/2022-03-08/import.png"
   width={692}
 />
 
@@ -94,7 +105,7 @@ install:
 <Screenshot
   alt="A screenshot of Anaconda Navigator"
   height={446}
-  src="/img/tutorial/2022-03-08/anaconda_navigator.png"
+  src="/img/blog/2022-03-08/anaconda_navigator.png"
   width={692}
 />
 
@@ -133,7 +144,7 @@ df.tails()
 <Screenshot
   alt="A screenshot showing head and tail functions in Jupyter Notebook"
   height={305}
-  src="/img/tutorial/2022-03-08/head_and_tail.png"
+  src="/img/blog/2022-03-08/head_and_tail.png"
   width={692}
 />
 
@@ -147,7 +158,7 @@ df.info()
 <Screenshot
   alt="A screenshot showing an info function in Jupyter Notebook"
   height={231}
-  src="/img/tutorial/2022-03-08/info.png"
+  src="/img/blog/2022-03-08/info.png"
   width={692}
 />
 
@@ -158,7 +169,7 @@ df.describe()
 <Screenshot
   alt="A screenshot showing head a describe function in Jupyter Notebook"
   height={206}
-  src="/img/tutorial/2022-03-08/describe.png"
+  src="/img/blog/2022-03-08/describe.png"
   width={692}
 />
 
@@ -190,7 +201,7 @@ df.nsmallest(5, 'High')
 <Screenshot
   alt="A screenshot showing nlargest function in Jupyter Notebook"
   height={165}
-  src="/img/tutorial/2022-03-08/nlargest.png"
+  src="/img/blog/2022-03-08/nlargest.png"
   width={692}
 />
 
@@ -204,7 +215,7 @@ df.query('Open < Close').head()
 <Screenshot
   alt="A screenshot showing query function in Jupyter Notebook"
   height={151}
-  src="/img/tutorial/2022-03-08/query.png"
+  src="/img/blog/2022-03-08/query.png"
   width={692}
 />
 
@@ -221,7 +232,7 @@ df_weekly.head()
 <Screenshot
   alt="A screenshot showing resample function on date in Jupyter Notebook"
   height={196}
-  src="/img/tutorial/2022-03-08/resample_on_date.png"
+  src="/img/blog/2022-03-08/resample_on_date.png"
   width={692}
 />
 
@@ -237,7 +248,7 @@ df_rolling_mean.tail()
 <Screenshot
   alt="A screenshot showing rolling function in Jupyter Notebook"
   height={177}
-  src="/img/tutorial/2022-03-08/rolling.png"
+  src="/img/blog/2022-03-08/rolling.png"
   width={692}
 />
 
@@ -263,7 +274,7 @@ df['Open'].plot(linewidth=0.5);
 <Screenshot
   alt="A screenshot showing price over time plot"
   height={281}
-  src="/img/tutorial/2022-03-08/price_over_time.png"
+  src="/img/blog/2022-03-08/price_over_time.png"
   width={692}
 />
 
@@ -281,7 +292,7 @@ for ax in axes:
 <Screenshot
   alt="A screenshot showing high, low and open price plots"
   height={423}
-  src="/img/tutorial/2022-03-08/high_low_open.png"
+  src="/img/blog/2022-03-08/high_low_open.png"
   width={692}
 />
 
@@ -307,7 +318,7 @@ ax.legend();
 <Screenshot
   alt="A screenshot showing moving window average plot"
   height={259}
-  src="/img/tutorial/2022-03-08/moving_window_average.png"
+  src="/img/blog/2022-03-08/moving_window_average.png"
   width={692}
 />
 

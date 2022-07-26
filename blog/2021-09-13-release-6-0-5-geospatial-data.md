@@ -14,7 +14,7 @@ keywords:
   - timeseries
   - database
 image: /img/blog/2021-09-13/banner.png
-tags: [release, geospatial, influxdb, telegraf]
+tags: [release, geospatial, influxdb]
 ---
 
 The latest QuestDB release introduces support for geospatial data via the

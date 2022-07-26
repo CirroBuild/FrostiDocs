@@ -6,7 +6,7 @@ author: Jorge Torres,
 author_title: CEO of MindsDB
 author_url: https://github.com/torrmal
 author_image_url: https://avatars.githubusercontent.com/torrmal
-tags: [tutorial, community, python, machine learning, mindsdb, data science]
+tags: [tutorial, python, machine learning, mindsdb, data science]
 ---
 
 Combining both MindsDB and QuestDB gives you unbound prediction ability with SQL. [Read more](https://mindsdb.com/blog/tutorial-enabling-machine-learning-in-questdb-with-mindsdb/)
