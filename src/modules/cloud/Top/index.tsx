@@ -114,14 +114,13 @@ export const Top = () => {
                 Multiple regions
               </li>
             </ul>
-            <ContactFormDialog
-              defaultInterest="cloud"
-              trigger={
-                <Button variant="primary" className={style.card__button}>
-                  Book a demo
-                </Button>
-              }
-            />
+            <Button
+              variant="primary"
+              className={style.card__button}
+              to="/cloud/book-a-demo"
+            >
+              Book a demo
+            </Button>
           </div>
         </div>
       </div>

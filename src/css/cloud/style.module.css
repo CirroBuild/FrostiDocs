@@ -38,6 +38,16 @@
   height: auto;
 }
 
+.calendly-inline-widget-wrapper {
+  height: 49.3rem;
+}
+
+@media screen and (max-width: 1074px) {
+  .calendly-inline-widget-wrapper {
+    height: 75.3rem;
+  }
+}
+
 @media screen and (min-width: 600px) {
   .subscribe {
     max-width: 60%;

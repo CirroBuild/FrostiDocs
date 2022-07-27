@@ -34,6 +34,7 @@
     "date-fns": "2.16.1",
     "hast-util-is-element": "1.1.0",
     "react": "16.14.0",
+    "react-calendly": "^4.0.1",
     "react-dom": "16.14.0",
     "react-transition-group": "4.4.1",
     "rehype-katex": "4",
