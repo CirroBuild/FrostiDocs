@@ -3,61 +3,58 @@ type Investor = {
   position: string
 }
 
-export const investorsColumn1: Investor[] = [
+export const investors: Investor[] = [
   {
     name: "Tom Preston-Werner",
     position: "Co-founder Github",
+  },
+  {
+    name: "Florian Leibert",
+    position: "468 Capital / Co-founder Mesosphere",
   },
   {
     name: "Sebastian Pahl",
     position: "Co-founder Docker",
   },
   {
-    name: "Alexis Ohanian",
-    position: "Co-founder Reddit",
-  },
-  {
-    name: "Mirko Novakovic",
-    position: "Co-founder Instana (IBM)",
-  },
-  {
-    name: "Salil Deshpande",
-    position: "Uncorrelated Ventures",
-  },
-  {
-    name: "James Hawkins",
-    position: "CEO PostHog",
-  },
-  {
-    name: "Lenny Rachitsky",
-    position: "Founder of lennysnewsletter.com",
-  },
-]
-
-export const investorsColumn2: Investor[] = [
-  {
-    name: "Florian Leibert",
-    position: "468 Capital / Co-founder Mesosphere",
-  },
-  {
     name: "Tobi Knaup",
     position: "CEO D2iQ",
+  },
+  {
+    name: "Alexis Ohanian",
+    position: "Co-founder Reddit",
   },
   {
     name: "Andrew Alexeev",
     position: "Co-founder NGINX",
   },
   {
+    name: "Mirko Novakovic",
+    position: "Co-founder Instana (IBM)",
+  },
+  {
     name: "Grace Francisco",
     position: "VP DevRel Cisco",
+  },
+  {
+    name: "Salil Deshpande",
+    position: "Uncorrelated Ventures",
   },
   {
     name: "Michael Li",
     position: "VP Data Coinbase",
   },
   {
+    name: "James Hawkins",
+    position: "CEO PostHog",
+  },
+  {
     name: "Paul Copplestone",
     position: "CEO Supabase",
+  },
+  {
+    name: "Lenny Rachitsky",
+    position: "Founder of lennysnewsletter.com",
   },
   {
     name: "Sumedh Pathak",

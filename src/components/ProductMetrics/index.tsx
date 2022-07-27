@@ -1,7 +1,7 @@
 import React from "react"
 import { usePluginData } from "@docusaurus/useGlobalData"
 
-import pmCss from "../../css/product-metrics/product-metrics.module.css"
+import style from "./styles.module.css"
 import SvgImage from "../SvgImage"
 
 import GithubLogo from "../../assets/img/github.svg"
@@ -27,68 +27,57 @@ const ProductMetrics = () => {
   )
 
   return (
-    <div className={pmCss["product-metrics"]}>
-      <div className={pmCss["product-metric"]}>
-        <div className={pmCss["product-metric__content"]}>
+    <div className={style.root}>
+      <div className={style.metric}>
+        <div className={style.content}>
           <SvgImage
             image={<GithubLogo width="60" height="60" />}
             title="Github logo"
           />
-          <div className={pmCss["product-metric__content__text"]}>
-            <h3 className={pmCss["product-metric__content__text__header"]}>
+          <div className={style.text}>
+            <h3 className={style.header}>
               {numberWithCommas(repo.stargazers_count)}+
             </h3>
-            <p className={pmCss["product-metric__content__text__description"]}>
-              stargazers
-            </p>
+            <p className={style.description}>stargazers</p>
           </div>
         </div>
       </div>
-      <div className={pmCss["product-metric"]}>
-        <div className={pmCss["product-metric__content"]}>
+
+      <div className={style.metric}>
+        <div className={style.content}>
           <SvgImage
             image={<SlackLogo width="60" height="60" />}
             title="Slack logo"
           />
-          <div className={pmCss["product-metric__content__text"]}>
-            <h3 className={pmCss["product-metric__content__text__header"]}>
-              {numberWithCommas(1100)}+
-            </h3>
-            <p className={pmCss["product-metric__content__text__description"]}>
-              developers
-            </p>
+          <div className={style.text}>
+            <h3 className={style.header}>{numberWithCommas(1400)}+</h3>
+            <p className={style.description}>developers</p>
           </div>
         </div>
       </div>
-      <div className={pmCss["product-metric"]}>
-        <div className={pmCss["product-metric__content"]}>
+
+      <div className={style.metric}>
+        <div className={style.content}>
           <SvgImage
             image={<QuestDBLogo width="60" height="60" />}
             title="QuestDB logo"
           />
-          <div className={pmCss["product-metric__content__text"]}>
-            <h3 className={pmCss["product-metric__content__text__header"]}>
-              {contributorsCount}
-            </h3>
-            <p className={pmCss["product-metric__content__text__description"]}>
-              contributors
-            </p>
+          <div className={style.text}>
+            <h3 className={style.header}>{contributorsCount}</h3>
+            <p className={style.description}>contributors</p>
           </div>
         </div>
       </div>
-      <div className={pmCss["product-metric"]}>
-        <div className={pmCss["product-metric__content"]}>
+
+      <div className={style.metric}>
+        <div className={style.content}>
           <SvgImage
             image={<DatabaseLogo width="80" height="80" />}
             title="Database logo"
           />
-          <div className={pmCss["product-metric__content__text"]}>
-            <h3 className={pmCss["product-metric__content__text__header"]}>
-              Fastest
-            </h3>
-            <p className={pmCss["product-metric__content__text__description"]}>
-              growing TSDB on DB-Engines
-            </p>
+          <div className={style.text}>
+            <h3 className={style.header}>Fastest</h3>
+            <p className={style.description}>growing TSDB on DB-Engines</p>
           </div>
         </div>
       </div>
