@@ -181,6 +181,48 @@ FROM example_table;
 | apple,pear | apple | pear |
 | cat,dog    | cat   | dog  |
 
+## substring
+
+`substring(string, start, length)` - extracts a substring from the given string.
+
+**Arguments:**
+
+- `string` is a string to extract from.
+- `start` is an integer specifying the position of the first character to be
+  extracted. Positions start from `1`.
+-  `length` is an integer specifying the count of characters to be extracted.
+  Should be non-negative.
+
+**Return value:**
+
+Returns a string with the extracted characters. If any part the arguments is `null`,
+the function returns `null`.
+
+**Examples:**
+
+```questdb-sql title="Example"
+SELECT id, substring(id, 1, 2) country FROM orders LIMIT 3
+```
+
+| id              | country |
+| --------------- | ------- |
+| UK2022072619373 | UK      |
+| UK2022072703162 | UK      |
+| US2022072676246 | US      |
+
+If the `start` argument is negative, the output depends on the value of `start+length`:
+- If `start+length` is greater than 1, the substring stops at position `start+length - 1`.
+- If `start+length` is zero, the output is empty string.
+- If `start+length` is less than zero, the output is `null`.
+
+```questdb-sql title="Example"
+SELECT substring('Lorem ipsum dolor sit amet', -5, 9)
+```
+
+| substring |
+| --------- |
+| Lor       |
+
 ## ~
 
 `string ~ regex` - matches `string` value to regex
