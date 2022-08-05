@@ -48,7 +48,8 @@ case
   ::= 'CASE' ('WHEN' condition 'THEN' value)* ( | 'ELSE' value ) 'END'
 
 Copy
-  ::= 'COPY' tableName 'FROM' fileName  (| 'WITH' 'HEADER' (true|false) ) ';'
+::= 'COPY' (id 'CANCEL' | tableName 'FROM' fileName (| 'WITH' (| 'HEADER' (true|false) |'TIMESTAMP' columnName | 'DELIMITER' delimiter | 'FORMAT' format | |'PARTITION BY' ('NONE'|'YEAR'|'MONTH'|'DAY'|'HOUR') | 'ON ERROR' ('SKIP_ROW'|'SKIP_COLUMN'|'ABORT')) ))
+
 
 CreateTableTimestamp
   ::= 'CREATE' someCreateTableStatement 'timestamp' '(' columnName ')'
