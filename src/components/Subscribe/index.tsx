@@ -17,6 +17,7 @@ type Props = {
   submitButtonText?: string
   submitButtonVariant?: ButtonProps["variant"]
   className?: string
+  classNameInputs?: string
 }
 
 const providers: { [key in Provider]: string } = {
@@ -32,6 +33,7 @@ const Subscribe: React.FunctionComponent<Props> = ({
   submitButtonText = "SUBMIT",
   submitButtonVariant,
   className,
+  classNameInputs,
 }) => {
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
@@ -71,7 +73,7 @@ const Subscribe: React.FunctionComponent<Props> = ({
               Thank you, we will be in touch soon!
             </p>
           ) : (
-            <div className={style.inputs}>
+            <div className={clsx(style.inputs, classNameInputs)}>
               <Input
                 className={style.input}
                 name="email"

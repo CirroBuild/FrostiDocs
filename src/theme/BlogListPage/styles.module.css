@@ -39,3 +39,19 @@
 .tags {
   margin-bottom: 2rem;
 }
+
+.subscribeCard {
+  padding: 2rem !important;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.subscribe {
+  flex: 1;
+}
+
+.subscribeInputs {
+  width: 100%;
+  grid-template-columns: 1fr !important;
+}

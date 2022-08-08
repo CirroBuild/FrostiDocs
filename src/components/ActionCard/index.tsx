@@ -8,6 +8,7 @@ type Props = {
   title: React.ReactNode
   description: React.ReactNode
   icon?: React.ReactNode
+  className?: string
 }
 
 export const ActionCard: React.FunctionComponent<Props> = ({
@@ -16,9 +17,10 @@ export const ActionCard: React.FunctionComponent<Props> = ({
   title,
   description,
   children,
+  className,
 }) => (
   <div
-    className={clsx(style.root, {
+    className={clsx(style.root, className, {
       [style.skinPrimary]: skin === "primary",
     })}
   >

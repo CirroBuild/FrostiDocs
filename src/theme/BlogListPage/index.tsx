@@ -14,6 +14,9 @@ import { Categories } from "./Categories"
 import type { Props as CategoriesProps } from "./Categories"
 import { Chips } from "./Chips"
 import type { Props as ChipProps } from "./Chips"
+import Subscribe from "../../components/Subscribe"
+import ActionCard from "../../components/ActionCard"
+import SubscribeIcon from "../../components/ActionFooter/subscribeIcon.svg"
 
 export type FrontMatter = OriginalFrontMatter & { permalink?: string }
 
@@ -118,7 +121,12 @@ function BlogListPage(props: Props): JSX.Element {
           items={prioritizedTags}
         />
 
-        <h2>Blog posts</h2>
+        <h2>
+          {isTagsPage
+            ? `Articles tagged with "${((metadata as unknown) as Tag).name}"`
+            : "Blog Posts"}
+        </h2>
+
         <div className={styles.posts}>
           {posts.map(({ content }) => (
             <ListItem
@@ -134,6 +142,24 @@ function BlogListPage(props: Props): JSX.Element {
               }
             />
           ))}
+
+          {posts.length === 11 && (
+            <ActionCard
+              title="Subscribe to our newsletter"
+              description="Stay up to date with all things QuestDB"
+              icon={<SubscribeIcon />}
+              skin="default"
+              className={styles.subscribeCard}
+            >
+              <Subscribe
+                placeholder="Email address"
+                submitButtonVariant="tertiary"
+                provider="newsletter"
+                className={styles.subscribe}
+                classNameInputs={styles.subscribeInputs}
+              />
+            </ActionCard>
+          )}
         </div>
 
         <BlogListPaginator metadata={metadata} />
