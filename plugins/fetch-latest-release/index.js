@@ -4,7 +4,7 @@ module.exports = () => ({
   name: "fetch-latest-release",
   async loadContent() {
     const response = await nodeFetch(
-      `https://api.github.com/repos/questdb/questdb/releases/latest`,
+      `https://github-api.questdb.io/github/latest`,
     )
 
     const data = await response.json()
