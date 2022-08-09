@@ -1,4 +1,4 @@
-# Modifying Data
+# Modify data
 
 QuestDB is a timeseries database optimized to append data.
 

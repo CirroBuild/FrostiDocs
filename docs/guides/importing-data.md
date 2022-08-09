@@ -1,228 +1,385 @@
 ---
-title: Importing data in bulk via CSV
-sidebar_label: Bulk CSV imports
+title: CSV import
+sidebar_label: CSV import
 description:
-  This document describes how to load CSV data and specify text loader
-  configuration for timestamp and date parsing
+  This document describes how to load large CSV data using COPY SQL keyword.
 ---
 
-The REST API provides an `/imp` endpoint exposed on port `9000` by default. This
-endpoint streams tabular text data directly into a table, supporting CSV, TAB
-and pipe (`|`) delimited inputs with optional headers. Data types and structures
-are detected automatically, but additional configuration can be provided to
-improve automatic detection.
+The [COPY](/docs/reference/sql/copy/) SQL command is the preferred way to import large CSV files into partitioned
+tables. It should be used to migrate data from another database into QuestDB. This guide describes the method of
+migrating data to QuestDB via CSV files. For the time being this is the only way to migrate data from other databases
+into QuestDB.
 
-## Specifying a schema during CSV import
+:::note
 
-A `schema` JSON object can be provided with POST requests to `/imp` while
-creating tables via CSV import. This allows for more control over user-defined
-patterns for timestamps, or for explicitly setting types during column-creation.
-The the following example demonstrates basic usage, in this case, that the
-`ticker_name` column should be parsed as `SYMBOL` type instead of `STRING`:
-
-```bash
-curl -F schema='[{"name":"ticker_name", "type": "SYMBOL"}]' \
--F data=@trades.csv 'http://localhost:9000/imp'
-```
-
-If a timestamp column (`ts`) in this CSV file has a custom or non-standard
-timestamp format, this may be included with the call as follows:
-
-```bash
-curl -F schema='[
-{"name":"ts", "type": "TIMESTAMP", "pattern": "yyyy-MM-dd - HH:mm:ss"},
-{"name":"ticker_name", "type": "SYMBOL"}
-]' -F data=@trades.csv 'http://localhost:9000/imp'
-```
-
-For **nanosecond-precision** timestamps such as
-`2021-06-22T12:08:41.077338934Z`, a pattern can be provided in the following
-way:
-
-```bash
-curl -F schema='[
-{"name":"ts", "type": "TIMESTAMP", "pattern": "yyyy-MM-ddTHH:mm:ss.SSSUUUNNNZ"}
-]' -F data=@my_file.csv 'http://localhost:9000/imp'
-```
-
-More information on the patterns for timestamps can be found on the
-[date and time functions](/docs/reference/function/date-time#date-and-timestamp-format)
-page.
-
-:::info
-
-The `schema` object must precede the `data` object in calls to this REST
-endpoint. For example:
-
-```bash
-# correct order
-curl -F schema='{my_schema_obj}' -F data=@my_file.csv http://localhost:9000/imp
-# incorrect order
-curl -F data=@my_file.csv -F schema='{my_schema_obj}' http://localhost:9000/imp
-```
+This guide is applicable for QuestDB version 6.5 and higher.
 
 :::
 
-## Text loader configuration
+## Prepare the import
 
-QuestDB uses a `text_loader.json` configuration file which can be placed in the
-server's `conf` directory. This file does not exist by default, but has the
-following implicit settings:
+Preparation is key. Import is a multi-step process, which consists of:
 
-```json title="conf/text_loader.json"
-{
-  "date": [
-    {
-      "format": "dd/MM/y"
-    },
-    {
-      "format": "yyyy-MM-dd HH:mm:ss"
-    },
-    {
-      "format": "yyyy-MM-ddTHH:mm:ss.SSSz",
-      "locale": "en-US",
-      "utf8": false
-    },
-    {
-      "format": "MM/dd/y"
-    }
-  ],
-  "timestamp": [
-    {
-      "format": "yyyy-MM-ddTHH:mm:ss.SSSUUUz",
-      "utf8": false
-    }
-  ]
-}
+- Export the existing database as CSV files
+- Enable and configure `COPY` command to be optimal for the system
+- Prepare target schema in QuestDB
+
+### Export the existing database
+
+Export data using one CSV file per table. Make sure to export a column, which can be used as timestamp. Data in CSV is
+not expected to be in any particular order. If it is not possible to export table as one CSV, export multiple files and
+concatenate these files before importing into QuestDB.
+
+### Things to know about `COPY`
+
+- `COPY` is disabled by default, as a security precaution. Configuration is required.
+
+- `COPY` is more efficient when source and target disks are different.
+
+- `COPY` is parallel when target table is partitioned.
+
+- `COPY` is _serial_ when target table is non-partitioned, out-of-order timestamps will be rejected
+
+- `COPY` cannot import data into non-empty table.
+
+- `COPY` indexes CSV file; reading indexed CSV file benefits hugely from disk IOPS. We recommend using NVME.
+
+- `COPY` imports one file at a time; there is no internal queuing system yet.
+
+- [COPY reference](/docs/reference/sql/copy/)
+
+### Configure `COPY`
+
+Enable `COPY` and [configure](/docs/reference/configuration/#csv-import) `COPY` directories to suite your server.
+
+## Create the target table schema
+
+If you know the target table schema already, you can [skip this section](/docs/guides/importing-data/#import-csv).
+
+QuestDB could analyze the input file and "guess" the schema. This logic is activated when target table does not exist.
+
+To have QuestDB help with determining file schema, it is best to work with a sub-set of CSV. A smaller file allows us
+to iterate faster if iteration is required.
+
+Let's assume we have the following CSV:
+
+```csv "weather.csv"
+"locationId","timestamp","windDir","windSpeed","windGust","cloudCeiling","skyCover","visMiles","tempF","dewpF","rain1H","rain6H","rain24H","snowDepth"
+1,"2010-07-05T00:23:58.981263Z",3050,442,512,,"OBS",11.774906006761,-5,-31,58.228032196984,70.471606345673,77.938252342637,58
+2,"2017-10-10T10:13:55.246046Z",900,63,428,5487,"BKN",4.958601701089,-19,-7,4.328016420894,36.020659549374,97.821114441800,41
+3,"2010-03-12T11:17:13.727137Z",2880,299,889,371,"BKN",10.342717709226,46,81,9.149518425127,20.229637391479,20.074738007931,80
+4,"2018-08-21T15:42:23.107543Z",930,457,695,4540,"OBS",13.359184086767,90,-47,33.346163208862,37.501996055160,58.316836760009,13
+...
 ```
 
-### Example
+1. Extract the first 1000 line to `test_file.csv` (assuming both files are in the `cairo.sql.copy.root` directory):
 
-Given a CSV file which contains timestamps in the format
-`yyyy-MM-dd - HH:mm:ss.SSSUUU`, the following text loader configuration will
-provide the correct timestamp parsing:
+  ```shell
+  head -1000 weather.csv > test_file.csv  
+  ```
 
-```json title="conf/text_loader.json"
-{
-  "date": [
-    {
-      "format": "dd/MM/y"
-    },
-    {
-      "format": "yyyy-MM-dd HH:mm:ss"
-    },
-    {
-      "format": "yyyy-MM-ddTHH:mm:ss.SSSz",
-      "locale": "en-US",
-      "utf8": false
-    },
-    {
-      "format": "MM/dd/y"
-    }
-  ],
-  "timestamp": [
-    {
-      "format": "yyyy-MM-ddTHH:mm:ss.SSSUUUz",
-      "utf8": false
-    },
-    {
-      "format": "yyyy-MM-dd - HH:mm:ss.SSSUUU",
-      "utf8": false
-    }
-  ]
-}
-```
+2. Use a simple `COPY` command to import `test_file.csv` and define the table name:
 
-The CSV data can then be loaded via POST request, for example, using cURL:
+    ```questdb-sql
+    COPY weather from 'test_file.csv' WITH HEADER true;
+    ```
 
-```curl
-curl -F data=@weather.csv 'http://localhost:9000/imp'
-```
+Table `weather` is created and it quickly returns an id of asynchronous import process running in the background:
 
-For more information on the `/imp` entry point, refer to the
-[REST API documentation](/docs/reference/api/rest#imp---import-data).
+| id               |
+|------------------|
+| 5179978a6d7a1772 |
 
-## Large datasets with out-of-order data
 
-Using the `commitLag` and `batch` size parameters during `INSERT AS SELECT`
-statements is a convenient strategy to load and order large datasets from CSV in
-bulk when they contain out-of-order data.
+3. In the Web Console right click table and select `Copy Schema to Clipboard` - this copies the schema generated by the
+   input file analysis.
 
-The batch size specifies how many records to attempt to bulk insert at one time
-and the **lag** allows for specifying the expected lateness of out-of-order
-timestamp values (in microseconds):
+4. Paste the table schema to the code editor:
+
+    ```questdb-sql
+    CREATE TABLE 'weather' (
+      timestamp TIMESTAMP,
+      windDir INT,
+      windSpeed INT,
+      windGust INT,
+      cloudCeiling INT,
+      skyCover STRING,
+      visMiles DOUBLE,
+      tempF INT,
+      dewpF INT,
+      rain1H DOUBLE,
+      rain6H DOUBLE,
+      rain24H DOUBLE,
+      snowDepth INT
+    );
+    ```
+
+5. Identify the correct schema:
+
+   5.1. The generated schema may not be completely correct. Check the log table and log file to resolve common errors
+   using the id (see also [Monitor the log](/docs/guides/importing-data/#monitoring-the-log)
+   and [FAQ](/docs/guides/importing-data/#faq)):
+
+    ```questdb-sql
+    SELECT * FROM sys.text_import_log WHERE id = '5179978a6d7a1772' ORDER BY ts DESC; 
+    ```
+
+| ts                          | id               | table   | file                       | phase | status   | message | rows_handled | rows_imported | errors |
+|-----------------------------|------------------|---------|----------------------------|-------|----------|---------|--------------|---------------|--------|
+| 2022-08-08T16:38:06.262706Z | 5179978a6d7a1772 | weather | test_file.csvtest_file.csv |       | finished |         | 999          | 999           | 0      |
+| 2022-08-08T16:38:06.226162Z | 5179978a6d7a1772 | weather | test_file.csvtest_file.csv |       | started  |         |              |               | 0      |
+
+   Check `rows_handled`, `rows_imported`, and `message` for any errors and amend the schema as required.
+
+   5.2. Drop the table and re-import `test_file.csv` using the updated schema.
+
+6. Repeat the steps to narrow down to a correct schema.
+
+   The process may require either truncating:
+
+    ```questdb-sql
+    TRUNCATE TABLE table_name;
+    ```
+   or dropping the target table:
+
+    ```questdb-sql
+    DROP TABLE table_name;
+    ```
+7. Clean up: Once all the errors are resolved, copy the final schema, drop the small table.
+8. Make sure table is correctly partitioned. The final schema in our example should look like this:
+
+    ```questdb-sql
+    CREATE TABLE 'weather' (
+      timestamp TIMESTAMP,
+      windDir INT,
+      windSpeed INT,
+      windGust INT,
+      cloudCeiling INT,
+      skyCover STRING,
+      visMiles DOUBLE,
+      tempF INT,
+      dewpF INT,
+      rain1H DOUBLE,
+      rain6H DOUBLE,
+      rain24H DOUBLE,
+      snowDepth INT
+    ) TIMESTAMP (timestamp) partitioned by DAY;
+    ```
+9. Ready for import: Create an empty table using the final schema.
+
+## Import CSV
+
+Once an empty table is created in QuestDB using the correct schema, import can be initiated with:
 
 ```questdb-sql
-INSERT batch 100000 commitLag 180s INTO my_table
-SELECT * FROM unordered_table
+COPY weather FROM 'weather.csv' WITH HEADER true TIMESTAMP 'timestamp' FORMAT 'yyyy-MM-ddTHH:mm:ss.SSSUUUZ';
 ```
 
-### Examples
+It quickly returns id of asynchronous import process running in the background:
 
-Given a data set `weather-unordered.csv` which contains out-of-order records, an
-ordered table may be created by setting `commitLag` and `maxUncommittedRows` via
-REST API using the `/imp` endpoint. The following example imports a file which
-contains out-of-order records:
+| id               |
+|:-----------------|
+| 55020329020b446a |
 
-```shell
-curl -F data=@weather-unordered.csv \
-'http://localhost:9000/imp?&timestamp=ts&partitionBy=DAY&commitLag=120000000&maxUncommittedRows=10000'
-```
+## Track import progress
 
-:::info
-
-The `timestamp` and `partitionBy` parameters **must be provided** for commit lag
-and max uncommitted rows to have any effect in the API call above.
-
-:::
-
-Alternatively, it's possible to create an ordered table via `INSERT AS SELECT`.
-Given an existing table 'weather-unordered' which contains out-of-order records:
-
-1. Create a new table with the schema of the existing table and apply a
-   partitioning strategy. Records are not yet inserted due to the use of
-   `WHERE 1 != 1`. The `timestamp` column may be cast as a `timestamp` if the
-   import did not automatically detect the correct format:
-
-   ```questdb-sql
-   CREATE TABLE weather AS (
-   SELECT
-     cast(timestamp AS timestamp) timestamp,
-     windDir,
-     windSpeed,
-     windGust,
-     rain1H,
-     rain6H,
-     rain24H
-   FROM 'weather-unordered' WHERE 1 != 1
-   ) timestamp(timestamp) PARTITION BY DAY;
-   ```
-
-2. Insert the unordered records into the partitioned table and provide a
-   `commitLag` and `batch` size:
-
-   ```questdb-sql
-   INSERT batch 100000 commitLag 180s INTO weather
-   SELECT
-     cast(timestamp AS timestamp) timestamp,
-     windDir,
-     windSpeed,
-     windGust,
-     rain1H,
-     rain6H,
-     rain24H
-   FROM 'weather-unordered';
-   ```
-
-To confirm that the table is ordered, the `isOrdered()` function may be used:
+`COPY` returns an id for querying the log table (`sys.text_import_log`), to monitor progress of ongoing import:
 
 ```questdb-sql
-select isOrdered(timestamp) from weather
+SELECT * FROM sys.text_import_log WHERE id = '55020329020b446a'; 
 ```
 
-|isOrdered|
-|:--------|
-|true     |
+| ts                          | id               | table   | file        | phase                  | status   | message | rows_handled | rows_imported | errors |
+|:----------------------------|------------------|---------|-------------|------------------------|----------|---------|--------------|---------------|--------|
+| 2022-08-03T14:00:40.907224Z | 55020329020b446a | weather | weather.csv | null                   | started  | null    | null         | null          | 0      |
+| 2022-08-03T14:00:40.910709Z | 55020329020b446a | weather | weather.csv | analyze_file_structure | started  | null    | null         | null          | 0      |
+| 2022-08-03T14:00:42.370563Z | 55020329020b446a | weather | weather.csv | analyze_file_structure | finished | null    | null         | null          | 0      |
+| 2022-08-03T14:00:42.370793Z | 55020329020b446a | weather | weather.csv | boundary_check         | started  | null    | null         | null          | 0      |
 
-More information about the use of `isOrdered()` can be found on the
-[boolean functions documentation](/docs/reference/function/boolean).
+Looking at the log from the newest to the oldest might be more convenient:
+
+```questdb-sql
+SELECT * FROM sys.text_import_log WHERE id = '55020329020b446a' ORDER BY ts DESC; 
+``` 
+
+Once import successfully ends the log table should contain row with 'null' phase and 'finished' status :
+
+| ts                           | id               | table   | file        | phase | status   | message | rows_handled | rows_imported | errors |
+|:-----------------------------|------------------|---------|-------------|-------|----------|---------|--------------|---------------|--------|
+| 2022-08-03T14:10:59.198672Z  | 55020329020b446a | weather | weather.csv | null  | finished |         | 300000000    | 300000000     | 0      |
+
+The log table contains only coarse-grained, top-level data. Import phase run times vary a lot (e.g. `partition_import`
+often takes 80% of the whole import execution time), and therefore the server log provides an alternative to follow more
+details of import:
+
+```log title="import log"
+2022-08-03T14:00:40.907224Z I i.q.c.t.ParallelCsvFileImporter started [importId=5502031634e923b2, phase=analyze_file_structure, file=`C:\dev\tmp\weather.csv`, workerCount=10]
+2022-08-03T14:00:40.917224Z I i.q.c.p.WriterPool >> [table=`weather`, thread=43]
+2022-08-03T14:00:41.440049Z I i.q.c.t.ParallelCsvFileImporter finished [importId=5502031634e923b2, phase=analyze_file_structure, file=`C:\dev\tmp\weather.csv`, duration=0s, errors=0]
+2022-08-03T14:00:41.440196Z I i.q.c.t.ParallelCsvFileImporter started [importId=5502031634e923b2, phase=boundary_check, file=`C:\dev\tmp\weather.csv`, workerCount=10]
+2022-08-03T14:01:18.853212Z I i.q.c.t.ParallelCsvFileImporter finished [importId=5502031634e923b2, phase=boundary_check, file=`C:\dev\tmp\weather.csv`, duration=6s, errors=0]
+2022-08-03T14:01:18.853303Z I i.q.c.t.ParallelCsvFileImporter started [importId=5502031634e923b2, phase=indexing, file=`C:\dev\tmp\weather.csv`, workerCount=10]
+2022-08-03T14:01:18.853516Z I i.q.c.t.ParallelCsvFileImporter temporary import directory [path='E:\dev\tmp\weather\]
+2022-08-03T14:01:42.612302Z I i.q.c.t.CsvFileIndexer finished chunk [chunkLo=23099021813, chunkHi=26948858785, lines=29999792, errors=0]
+2022-08-03T14:01:42.791789Z I i.q.c.t.CsvFileIndexer finished chunk [chunkLo=11549510915, chunkHi=15399347885, lines=30000011, errors=0]
+```
+
+Import into non-partitioned tables uses single threaded implementation that reports only start and finish records in
+status table. Given an un-ordered CSV file `weather1mil.csv`, when importing, the log table shows:
+
+| ts                          | id               | table             | file            | phase | status   | message | rows_handled | rows_imported | errors |
+|:----------------------------|------------------|-------------------|-----------------|-------|----------|---------|--------------|---------------|--------|
+| 2022-08-03T15:00:40.907224Z | 42d31603842f771a | weather_unordered | weather1mil.csv | null  | started  | null    | null         | null          | 0      |
+| 2022-08-03T15:01:20.000709Z | 42d31603842f771a | weather_unordered | weather1mil.csv | null  | finished | null    | 999999       | 999999        | 0      |
+
+
+## FAQ
+
+<details>
+  <summary>I'm getting "COPY is disabled ['cairo.sql.copy.root' is not set?]" error message</summary>
+<p>Please set `cairo.sql.copy.root` setting, restart instance and try again.</p>
+</details>
+
+
+<details>
+  <summary>I'm getting "could not create temporary import directory [path='somepath', errno=-1]" error message</summary>
+<p>Please make sure that both `cairo.sql.copy.root` and `cairo.sql.copy.work.root` are valid paths pointing to existing directories.</p>
+</details>
+
+
+<details>
+  <summary>I'm getting "[2] could not open read-only [file=C:\path\to\import.csv]" error message</summary>
+<p>Please check that import file path is valid and accessible to QuestDB instance user.</p>
+</details>
+
+<details>
+  <summary>I'm getting "column count mismatch [textColumnCount=4, tableColumnCount=3, table=someTable]" error message</summary>
+<p>
+There are more columns in input file than in the existing target table. 
+Please remove column(s) from input file or add them to the target table schema.     
+</p>
+</details>
+
+<details>
+  <summary>I'm getting "timestamp column 'ts2' not found in file header" error message</summary>
+<p>
+Either input file is missing header or timestamp column name given in `COPY` command is invalid. Please add file header
+or fix timestamp option.
+</p>
+</details>
+
+<details>
+  <summary>I'm getting "column is not a timestamp [no=0, name='ts']" error message</summary>
+<p>
+Timestamp column given by the user or (if header is missing) assumed based on target table schema is of a different
+type.  
+Please check timestamp column name in input file header or make sure input file column order matches that of target
+table.
+</p>
+</details>
+
+<details>
+  <summary>I'm getting "target table must be empty [table=t]" error message</summary>
+<p>
+`COPY` doesn't yet support importing into partitioned table with existing data.
+
+Please truncate table before re-importing with:
+
+```questdb-sql
+TRUNCATE TABLE table_name;
+```
+
+or import into another empty table and then use `INSERT INTO SELECT`:
+
+```questdb-sql
+INSERT batch 100000 commitLag 180s 
+INTO table_name 
+SELECT * FROM other_table;
+```
+
+to copy data into original target table.
+</p>
+</details>
+
+<details>
+  <summary>I'm getting "io_uring error" error message</summary>
+<p>
+It's possible that you've hit a IO_URING-related kernel error.   
+Please set `cairo.iouring.enabled` setting to false, restart QuestDB instance, and try again.
+</p>
+</details>
+
+<details>
+  <summary>I'm getting "name is reserved" error message</summary>
+<p>
+The table you're trying import into is in bad state (metadata is incomplete).
+
+Please either drop the table with:
+
+```questdb-sql
+DROP TABLE table_name;
+```
+
+and recreate the table or change the table name in the `COPY` command.
+</p>
+</details>
+
+<details>
+  <summary>I'm getting "Unable to process the import request. Another import request may be in progress." error message</summary>
+<p>
+Only one import can be running at a time.
+
+Either cancel running import with:
+
+```questdb-sql
+COPY 'paste_import_id_here' CANCEL;
+```
+
+or wait until the current import is finished.
+</p>
+</details>
+
+<details>
+  <summary>Import finished but table is (almost) empty</summary>
+<p>
+Please check the latest entries in log table:
+
+```questdb-sql
+SELECT * FROM sys.text_import_log LIMIT -10; 
+```
+
+If "errors" column is close to number of records in the input file then it may mean:
+
+- `FORMAT` option of `COPY` command or auto-detected format doesn't match timestamp column data in file
+- Other column(s) can't be parsed and `ON ERROR SKIP_ROW` option was used
+- Input file is unordered and target table has designated timestamp but is not partitioned
+
+If none of the above causes the error, please check the log file for messages like:
+
+```log
+2022-08-08T11:50:24.319675Z E i.q.c.t.CsvFileIndexer could not parse timestamp [line=999986, column=1]
+```
+
+or
+
+```log
+2022-08-08T12:19:56.828792Z E i.q.c.t.TextImportTask type syntax [type=INT, offset=5823, column=0, value='CMP2']
+```
+
+that should explain why rows were rejected. Note that in these examples, the former log message mentions the absolute
+input file line while the latter is referencing the offset as related to the start of the file.
+</p>
+</details>
+
+<details>
+  <summary>Import finished but table column names are `f0`, `f1`, ...</summary>
+<p>
+Input file misses header and target table does not exist, so columns received synthetic names . You can rename them
+with `ALTER TABLE` command:
+
+```questdb-sql
+ALTER TABLE table_name RENAME COLUMN f0 TO ts;
+```
+</p>
+</details>
+

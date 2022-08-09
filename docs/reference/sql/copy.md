@@ -13,9 +13,11 @@ description: COPY SQL keyword reference documentation.
 Copies tables from a delimited text file saved in the defined root directory into QuestDB. `COPY` has the following import modes:
 
 - Parallel import, used for copying partitioned tables:
-
+  
+  - The parallel level is based on partition granularity. It is important to choose the timestamp column and partition type correctly for the data to be imported. The higher the granularity of the partitions, the faster an import operation can be completed. 
   - If the target table exists and is partitioned, the target table must be empty.
   - If the target table does not exist, both `TIMESTAMP` and `PARTITION BY` options must be defined to create a partitioned table. The `PARTITION BY` value should not be `NONE`.
+  - When table does exist and is not empty, import is not supported.
 
 - Serial import, used for copying non-partitioned tables:
 
@@ -38,7 +40,7 @@ Copies tables from a delimited text file saved in the defined root directory int
 - `cairo.sql.copy.root` is used for storing regular files to be imported.
 - `cairo.sql.copy.work.root` is used for storing temporary files like indexes or temporary partitions. Unless otherwise specified, it points to the same directory as defined in `cairo.sql.copy.root`.
 
-Use the [configuration keys](/docs/reference/configuration) to edit these properties in the [server.conf](/docs/concept/root-directory-structure#serverconf) file:
+Use the [configuration keys](/docs/reference/configuration) to edit these properties in [`COPY` configuration settings](/docs/reference/configuration#bulk-csv-import):
 
 ```shell title="Example"
 cairo.sql.copy.root=/Users/UserName/Desktop
@@ -49,7 +51,11 @@ a remote filesystem. QuestDB enforces that the tables are only written from
 files located in a directory relative to the directories. This is a
 security feature preventing random file access by QuestDB.
 
+:::note
 
+For Mac OS users, using a directory under `/Users` may prevent import due to permission problem. It is preferable to save the CSV file in a folder outside of the `/Users` tree and set the root directory accordingly.
+
+:::
 
 ### Log table
 

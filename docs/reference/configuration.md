@@ -258,8 +258,6 @@ QuestDB.
 | query.timeout.sec                              | 60                | A global timeout (in seconds) for long-running queries.                                                                                                                                                                  |
 | cairo.max.uncommitted.rows                     | 500000            | Maximum number of uncommitted rows per table, when the number of pending rows exceeds this parameter on a table, a commit will be issued.                                                                                |
 | cairo.commit.lag                               | 300000            | Expected maximum time lag for out-of-order rows in milliseconds.                                                                                                                                                         |
-| cairo.sql.copy.root                            | null              | Input root directory for CSV imports via `COPY` SQL.                                                                                                                                                                     |
-| cairo.sql.copy.work.root                       | null              | Temporary input root directory for CSV imports via `COPY` SQL. 
 | cairo.sql.backup.root                          | null              | Output root directory for backups.                                                                                                                                                                                       |
 | cairo.sql.backup.dir.datetime.format           | null              | Date format for backup directory.                                                                                                                                                                                        |
 | cairo.sql.backup.dir.tmp.name                  | tmp               | Name of tmp directory used during backup.                                                                                                                                                                                |
@@ -338,6 +336,29 @@ QuestDB.
 | cairo.sql.column.purge.retry.delay.limit       | 60000000          | Delay limit (μs), upon reaching which, the re-try delay remains constant.                                                                                                                                                |
 | cairo.sql.column.purge.retry.limit.days        | 31                | Number of days purge system will continue to re-try deleting stale column files before giving up.                                                                                                                        |
 | cairo.system.table.prefix                      | sys.              | Prefix of the tables used for QuestDB internal data storage. These tables are hidden from QuestDB web console.                                                                                                           |
+
+### CSV import
+
+This section describes configuration settings for using `COPY` to import large CSV files.
+
+Mandatory settings to enable `COPY`:
+
+| Property                            | Default | Description                                                                                                                                                                                           |
+|-------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| cairo.sql.copy.root                 | null    | Input root directory for CSV imports via `COPY` SQL. This path should not overlap with other directory (e.g. db, conf) of running instance, otherwise import may delete or overwrite existing files. |
+| cairo.sql.copy.work.root            | null    | Temporary import file directory. Same as `cairo.sql.copy.root` if not set explicitly.                                                                                                                |
+
+Optional settings for `COPY`:
+
+| Property                            | Default | Description                                                                                                                                                                                           |
+|-------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| cairo.iouring.enabled               | true    | Enable or disable io_uring implementation. Applicable to newer Linux kernels only. Can be used to switch io_uring interface usage off if there's a kernel bug affecting it.                                                                                        |
+| cairo.sql.copy.buffer.size          | 2 MiB   | Size of read buffers used in import.                                                                                                                                                                   |
+| cairo.sql.copy.log.retention.days   | 3       | Number of days to keep import messages in `sys.text_import_log`.                                                                                                                                       |
+| cairo.sql.copy.max.index.chunk.size | 100m  | Maximum size of index chunk file used to limit total memory requirements of import. Indexing phase should use roughly `thread_count * cairo.sql.copy.max.index.chunk.size` of memory.               |
+| cairo.sql.copy.queue.capacity       | 32      | Size of copy task queue. Should be increased if there's more than 32 import workers.                                                                                                                |
+| cairo.sql.copy.max.index.chunk.size | 100m    | Maximum size of index chunk file used to limit total memory requirements of import. Indexing phase should use roughly `thread_count * cairo.sql.copy.max.index.chunk.size`  of memory.               |
+
 
 ### Parallel SQL execution
 
