@@ -55,12 +55,11 @@ module.exports = {
       label: "Guides",
       type: "category",
       items: [
-        "guides/working-with-timestamps-timezones",
         "guides/importing-data",
         "guides/importing-data-rest",
         "guides/modifying-data",
         "guides/out-of-order-commit-lag",
-        "guides/v6-migration",
+        "guides/working-with-timestamps-timezones",
       ],
     },
     {

@@ -1,6 +1,6 @@
 ---
-title: Import data via REST API
-sidebar_label: REST API import
+title: CSV import via REST API
+sidebar_label: Small CSV import (REST API)
 description:
   This document describes how to load CSV data and specify text loader
   configuration for timestamp and date parsing
@@ -14,7 +14,7 @@ improve automatic detection.
 
 :::note
 
-While REST API is convenient for importing small tables, `COPY` is optimized for importing large out-of-order tables. See [COPY command documentation](/docs/reference/sql/copy/) and [Guide on bulk CSV imports](/docs/guides/importing-data) for more details.
+The REST API is better suited for regular uploads of small batches of data via CSV files into the same table. For database migrations with large CSV files of un-ordered data, The `COPY` SQL command is recommended instead. See [COPY command documentation](/docs/reference/sql/copy/) and [Guide on CSV import](/docs/guides/importing-data) for more details.
 
 :::
 
