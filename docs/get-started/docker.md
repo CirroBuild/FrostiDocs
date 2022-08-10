@@ -33,7 +33,7 @@ docker run -p 9000:9000 \
 | Argument | Description                 |
 | -------- | --------------------------- |
 | `-p`     | Port to publish to the host |
-| `-v`     | To bind mount a volume      |
+| `-v`     | To bind mount a volume.     |
 
 #### `-p` parameter
 
@@ -48,7 +48,7 @@ This parameter will publish a port to the host, you can specify:
 
 #### -v volumes
 
-The QuestDB [root_directory](/docs/concept/root-directory-structure) will be in
+The QuestDB [root_directory](/docs/concept/root-directory-structure) is in
 the following location:
 
 <!-- prettier-ignore-start -->
@@ -58,6 +58,7 @@ import TabItem from "@theme/TabItem"
 
 <Tabs defaultValue="linux" values={[
   { label: "Linux", value: "linux" },
+  { label: "macOS", value: "macos" },
   { label: "Windows", value: "windows" },
 ]}>
 
@@ -67,11 +68,19 @@ import TabItem from "@theme/TabItem"
 
 
 ```shell
-/root/.questdb
+/var/lib/questdb
 ```
 
 </TabItem>
 
+<TabItem value="macos">
+
+
+```shell
+/var/lib/questdb
+```
+
+</TabItem>
 
 <TabItem value="windows">
 
@@ -81,7 +90,6 @@ C:\questdb
 ```
 
 </TabItem>
-
 
 </Tabs>
 
@@ -125,7 +133,7 @@ docker run -p 9000:9000 \
  -p 9009:9009 \
  -p 8812:8812 \
  -p 9003:9003 \
- -v "$(pwd):/root/.questdb/" questdb/questdb
+ -v "$(pwd):/var/lib/questdb" questdb/questdb
 ```
 
 The current directory will then have data persisted to disk for convenient
