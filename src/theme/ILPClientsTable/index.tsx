@@ -48,7 +48,7 @@ const clients: Client[] = [
   {
     label: "Rust",
     logoSrc: "/img/logos/rust.svg",
-    docsUrl: "https://docs.rs/crate/questdb/latest",
+    docsUrl: "https://docs.rs/crate/questdb-rs/latest",
     sourceUrl: "https://github.com/questdb/c-questdb-client",
   },
 ]
