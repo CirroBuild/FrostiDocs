@@ -50,11 +50,12 @@ concatenate these files before importing into QuestDB.
 
 ### Configure `COPY`
 
-Enable `COPY` and [configure](/docs/reference/configuration/#csv-import) `COPY` directories to suite your server.
+- Enable `COPY` and [configure](/docs/reference/configuration#csv-import) `COPY` directories to suit your server.
+- `cairo.sql.copy.root` must be set for `COPY` to work.
 
 ## Create the target table schema
 
-If you know the target table schema already, you can [skip this section](/docs/guides/importing-data/#import-csv).
+If you know the target table schema already, you can [skip this section](/docs/guides/importing-data#import-csv).
 
 QuestDB could analyze the input file and "guess" the schema. This logic is activated when target table does not exist.
 
@@ -117,8 +118,8 @@ Table `weather` is created and it quickly returns an id of asynchronous import p
 5. Identify the correct schema:
 
    5.1. The generated schema may not be completely correct. Check the log table and log file to resolve common errors
-   using the id (see also [Monitor the log](/docs/guides/importing-data/#monitoring-the-log)
-   and [FAQ](/docs/guides/importing-data/#faq)):
+   using the id (see also [Track import progress](/docs/guides/importing-data#track-import-progress)
+   and [FAQ](/docs/guides/importing-data#faq)):
 
     ```questdb-sql
     SELECT * FROM sys.text_import_log WHERE id = '5179978a6d7a1772' ORDER BY ts DESC; 
@@ -208,8 +209,18 @@ Once import successfully ends the log table should contain row with 'null' phase
 |:-----------------------------|------------------|---------|-------------|-------|----------|---------|--------------|---------------|--------|
 | 2022-08-03T14:10:59.198672Z  | 55020329020b446a | weather | weather.csv | null  | finished |         | 300000000    | 300000000     | 0      |
 
+
+Import into non-partitioned tables uses single threaded implementation that reports only start and finish records in
+status table. Given an un-ordered CSV file `weather1mil.csv`, when importing, the log table shows:
+
+| ts                          | id               | table             | file            | phase | status   | message | rows_handled | rows_imported | errors |
+|:----------------------------|------------------|-------------------|-----------------|-------|----------|---------|--------------|---------------|--------|
+| 2022-08-03T15:00:40.907224Z | 42d31603842f771a | weather_unordered | weather1mil.csv | null  | started  | null    | null         | null          | 0      |
+| 2022-08-03T15:01:20.000709Z | 42d31603842f771a | weather_unordered | weather1mil.csv | null  | finished | null    | 999999       | 999999        | 0      |
+
+
 The log table contains only coarse-grained, top-level data. Import phase run times vary a lot (e.g. `partition_import`
-often takes 80% of the whole import execution time), and therefore the server log provides an alternative to follow more
+often takes 80% of the whole import execution time), and therefore [the server log]((/docs/reference/configuration#logging) provides an alternative to follow more
 details of import:
 
 ```log title="import log"
@@ -224,37 +235,93 @@ details of import:
 2022-08-03T14:01:42.791789Z I i.q.c.t.CsvFileIndexer finished chunk [chunkLo=11549510915, chunkHi=15399347885, lines=30000011, errors=0]
 ```
 
-Import into non-partitioned tables uses single threaded implementation that reports only start and finish records in
-status table. Given an un-ordered CSV file `weather1mil.csv`, when importing, the log table shows:
+If the [`ON ERROR` option](/docs/reference/sql/copy#options) is set to `ABORT`, import stops on first error and the error is logged. Otherwise, all errors are listed in the log.
 
-| ts                          | id               | table             | file            | phase | status   | message | rows_handled | rows_imported | errors |
-|:----------------------------|------------------|-------------------|-----------------|-------|----------|---------|--------------|---------------|--------|
-| 2022-08-03T15:00:40.907224Z | 42d31603842f771a | weather_unordered | weather1mil.csv | null  | started  | null    | null         | null          | 0      |
-| 2022-08-03T15:01:20.000709Z | 42d31603842f771a | weather_unordered | weather1mil.csv | null  | finished | null    | 999999       | 999999        | 0      |
+The reference to the error varies depending on the phase of an import:
 
+-  In the indexing phase, if an error occurs, the absolute input file line is referenced:
+
+```log
+2022-08-08T11:50:24.319675Z E i.q.c.t.CsvFileIndexer could not parse timestamp [line=999986, column=1]
+```
+
+- In the data import phase, if an error occurs, the log references the offset as related to the start of the file.
+
+```log
+2022-08-08T12:19:56.828792Z E i.q.c.t.TextImportTask type syntax [type=INT, offset=5823, column=0, value='CMP2']
+```
+
+The errored rows can then be extracted for further investigation.
+
+
+<!--
+## Handle errors
+
+
+TBD there is no good way to extract offset due to quote. Commenting this section out until we have a better way to gather errored rows.
+
+### Extract the rows
+
+To extract file line `[line=999986, column=1]`, use the [`sed` command](https://www.gnu.org/software/sed/manual/sed.html#Common-Commands):
+
+```shell
+sed -n -e 1  input_file.csv >> errors.csv
+```
+
+To extract rows from offset, `[type=INT, offset=5823, column=0, value='CMP2']`, use the [`dd` command](https://www.man7.org/linux/man-pages/man1/dd.1.html):
+
+```shell
+dd bs=1 count=1000 skip=56 if=input_file.csv 2>/dev/null | head -1 >> errors.csv
+```
+-->
 
 ## FAQ
 
 <details>
+  <summary>What happens in a database crash or OS reboot?</summary>
+<p>
+
+If reboot/power loss happens while partitions are being attached, then table might be left with incomplete data.
+Please truncate table before re-importing with:
+
+```questdb-sql
+TRUNCATE TABLE table_name;
+```
+
+If reboot/power loss happens prior to any partitions are attached, the import should not be effected.
+</p>
+</details>
+
+<details>
   <summary>I'm getting "COPY is disabled ['cairo.sql.copy.root' is not set?]" error message</summary>
-<p>Please set `cairo.sql.copy.root` setting, restart instance and try again.</p>
+<p>
+
+Please set `cairo.sql.copy.root` setting, restart instance and try again.
+</p>
 </details>
 
 
 <details>
   <summary>I'm getting "could not create temporary import directory [path='somepath', errno=-1]" error message</summary>
-<p>Please make sure that both `cairo.sql.copy.root` and `cairo.sql.copy.work.root` are valid paths pointing to existing directories.</p>
+<p>
+
+Please make sure that both `cairo.sql.copy.root` and `cairo.sql.copy.work.root` are valid paths pointing to existing directories.
+</p>
 </details>
 
 
 <details>
   <summary>I'm getting "[2] could not open read-only [file=C:\path\to\import.csv]" error message</summary>
-<p>Please check that import file path is valid and accessible to QuestDB instance user.</p>
+<p>
+
+Please check that import file path is valid and accessible to QuestDB instance user.
+</p>
 </details>
 
 <details>
   <summary>I'm getting "column count mismatch [textColumnCount=4, tableColumnCount=3, table=someTable]" error message</summary>
 <p>
+
 There are more columns in input file than in the existing target table. 
 Please remove column(s) from input file or add them to the target table schema.     
 </p>
@@ -263,6 +330,7 @@ Please remove column(s) from input file or add them to the target table schema.
 <details>
   <summary>I'm getting "timestamp column 'ts2' not found in file header" error message</summary>
 <p>
+
 Either input file is missing header or timestamp column name given in `COPY` command is invalid. Please add file header
 or fix timestamp option.
 </p>
@@ -271,6 +339,7 @@ or fix timestamp option.
 <details>
   <summary>I'm getting "column is not a timestamp [no=0, name='ts']" error message</summary>
 <p>
+
 Timestamp column given by the user or (if header is missing) assumed based on target table schema is of a different
 type.  
 Please check timestamp column name in input file header or make sure input file column order matches that of target
@@ -281,6 +350,7 @@ table.
 <details>
   <summary>I'm getting "target table must be empty [table=t]" error message</summary>
 <p>
+
 `COPY` doesn't yet support importing into partitioned table with existing data.
 
 Please truncate table before re-importing with:
@@ -304,6 +374,7 @@ to copy data into original target table.
 <details>
   <summary>I'm getting "io_uring error" error message</summary>
 <p>
+
 It's possible that you've hit a IO_URING-related kernel error.   
 Please set `cairo.iouring.enabled` setting to false, restart QuestDB instance, and try again.
 </p>
@@ -312,6 +383,7 @@ Please set `cairo.iouring.enabled` setting to false, restart QuestDB instance, a
 <details>
   <summary>I'm getting "name is reserved" error message</summary>
 <p>
+
 The table you're trying import into is in bad state (metadata is incomplete).
 
 Please either drop the table with:
@@ -327,6 +399,7 @@ and recreate the table or change the table name in the `COPY` command.
 <details>
   <summary>I'm getting "Unable to process the import request. Another import request may be in progress." error message</summary>
 <p>
+
 Only one import can be running at a time.
 
 Either cancel running import with:
@@ -342,6 +415,7 @@ or wait until the current import is finished.
 <details>
   <summary>Import finished but table is (almost) empty</summary>
 <p>
+
 Please check the latest entries in log table:
 
 ```questdb-sql
@@ -374,8 +448,9 @@ input file line while the latter is referencing the offset as related to the sta
 <details>
   <summary>Import finished but table column names are `f0`, `f1`, ...</summary>
 <p>
+
 Input file misses header and target table does not exist, so columns received synthetic names . You can rename them
-with `ALTER TABLE` command:
+with the `ALTER TABLE` command:
 
 ```questdb-sql
 ALTER TABLE table_name RENAME COLUMN f0 TO ts;

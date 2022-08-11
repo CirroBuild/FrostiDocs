@@ -7,7 +7,7 @@ description:
 ---
 
 The REST API provides an `/imp` endpoint exposed on port `9000` by default. This
-endpoint streams tabular text data directly into a table, supporting CSV, TAB
+endpoint allows streaming tabular text data directly into a table, supporting CSV, TAB
 and pipe (`|`) delimited inputs with optional headers. Data types and structures
 are detected automatically, but additional configuration can be provided to
 improve automatic detection.
