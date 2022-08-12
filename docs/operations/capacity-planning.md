@@ -23,8 +23,8 @@ of data and filesystem considerations.
 
 :::caution
 
-- QuestDB officially supports **EXT4** or **XFS** or any filesystem that
-  supports [mmap](https://man7.org/linux/man-pages/man2/mmap.2.html).
+- QuestDB officially supports **EXT4** or any filesystem that supports
+  [mmap](https://man7.org/linux/man-pages/man2/mmap.2.html).
 
 - Users **can't use NFS or a similar distributed filesystem** directly with a
   QuestDB database.
@@ -97,11 +97,11 @@ The storage space that numbers occupy can be optimized by choosing `byte`,
 `short`, and `int` data types appropriately. When values are not expected to
 exceed the limit for that particular type, savings on disk space can be made.
 
-|type |storage per value|numeric range            |
-|:----|:----------------|:------------------------|
-|byte |8 bits           |-128 to 127              |
-|short|16 bits          |-32768 to 32767          |
-|int  |32 bits          |-2147483648 to 2147483647|
+| type  | storage per value | numeric range             |
+| :---- | :---------------- | :------------------------ |
+| byte  | 8 bits            | -128 to 127               |
+| short | 16 bits           | -32768 to 32767           |
+| int   | 32 bits           | -2147483648 to 2147483647 |
 
 ## CPU configuration
 
@@ -111,14 +111,9 @@ forecast behavior of the database.
 
 :::caution
 
-- Multiple workers must not have affinity (pinning) for the same core by ID.
-  Although this is possible through manual configuration settings described
-  below, this must be avoided as it can lead to indeterminate behavior.
-- When configuring the affinity of worker threads to CPUs and setting dedicated
-  worker threads for tasks as described in the following sections,
-  **hyper-threading must be disabled** in the system BIOS. If hyper-threading
-  cannot be disabled, the core IDs should be ascertained and workers should not
-  use adjacent cores to prevent overlapping work.
+In case if you are configuring thread pool sizes manually, the total number of
+threads to be used by QuestDB should not exceed the number of available CPU
+cores.
 
 :::
 
@@ -127,16 +122,11 @@ forecast behavior of the database.
 The number of worker threads shared across the application can be configured as
 well as affinity to pin processes to specific CPUs by ID. Shared worker threads
 service SQL execution subsystems and, in the default configuration, every other
-subsystem. Except for SQL, every other subsystem can be configured to use their
-own worker threads. More information on these settings can be found on the
-[shared worker](/docs/reference/configuration#shared-worker) configuration
-page.
+subsystem. More information on these settings can be found on the
+[shared worker](/docs/reference/configuration#shared-worker) configuration page.
 
 QuestDB will allocate CPU resources differently depending on how many CPU cores
-are available. This behavior is default but can be overridden via configuration.
-By checking the CPU Core count, QuestDB will assume that CPU hyper-threading is
-enabled. If hyper-threading is disabled on your system, you will have to
-configure CPU pools manually. Please refer to [CPU affinity](#cpu-affinity)
+are available. This behavior is the default but can be overridden via
 configuration.
 
 #### 8 CPU Cores or less
@@ -145,31 +135,33 @@ QuestDB will configure a shared worker pool to handle everything except the
 InfluxDB line protocol (ILP) writer which gets a dedicated CPU core. The worker
 count is calculated as follows:
 
-$(cpuAvailable / 2) - 1 - (line.tcp.writer.worker.count)$
+$(cpuAvailable) - (line.tcp.writer.worker.count)$
+
+Minimal size of the shared worker pool is 2, even on a single-core machine.
 
 #### 16 CPU Cores or less
 
 ILP I/O Worker pool is configured to use 2 CPU cores to speed up ingestion and
-the ILP Writer is using 1 core. The shared worker pool is handing everything
+the ILP Writer is using 1 core. The shared worker pool is handling everything
 else and is configured using this formula:
 
-$(cpuAvailable / 2) - 1 - (line.tcp.writer.worker.count) - (line.tcp.io.worker.count)$
+$(cpuAvailable) - 1 - (line.tcp.writer.worker.count) - (line.tcp.io.worker.count)$
 
-For example, with 16 hyper-threaded cores, the shared pool will have 4 threads:
+For example, with 16 cores, the shared pool will have 12 threads:
 
-$16/2-1-2-1$
+$16-1-2-1$
 
 #### 17 CPU Cores and more
 
-The ILP I/O Worker pool is configured to use 6 CPU Cores to speed up ingestion
+The ILP I/O Worker pool is configured to use 6 CPU cores to speed up ingestion
 and the ILP Writer is using 1 core. The shared worker pool is handling
 everything else and is configured using this formula:
 
-$(cpuAvailable / 2) - 1 - (line.tcp.writer.worker.count) - (line.tcp.io.worker.count)$
+$(cpuAvailable) - 2 - (line.tcp.writer.worker.count) - (line.tcp.io.worker.count)$
 
-For example, with 32 hyper-threaded cores, the shared pool will have 8 threads:
+For example, with 32 cores, the shared pool will have 23 threads:
 
-$32/2-1-6-1$
+$32-2-6-1$
 
 ### Writer page size
 
@@ -230,13 +222,13 @@ Where `<protocol>` is one of:
 
 And `<config>` is one of the following settings:
 
-|key      |description                                                                                                                                                                                                               |
-|:--------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|`limit`  |The number of simultaneous connections to the server. This value is intended to control server memory consumption.                                                                                                        |
-|`timeout`|Connection idle timeout in milliseconds. Connections are closed by the server when this timeout lapses.                                                                                                                   |
-|`hint`   |Applicable only for Windows, where TCP backlog limit is hit. For example Windows 10 allows max of 200 connection. Even if limit is set higher, without hint=true it won't be possible to connect more than 200 connection.|
-|`sndbuf` |Maximum send buffer size on each TCP socket. If value is -1 socket send buffer remains unchanged from OS default.                                                                                                         |
-|`rcvbuf` |Maximum receive buffer size on each TCP socket. If value is -1, the socket receive buffer remains unchanged from OS default.                                                                                              |
+| key       | description                                                                                                                                                                                                                |
+| :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `limit`   | The number of simultaneous connections to the server. This value is intended to control server memory consumption.                                                                                                         |
+| `timeout` | Connection idle timeout in milliseconds. Connections are closed by the server when this timeout lapses.                                                                                                                    |
+| `hint`    | Applicable only for Windows, where TCP backlog limit is hit. For example Windows 10 allows max of 200 connection. Even if limit is set higher, without hint=true it won't be possible to connect more than 200 connection. |
+| `sndbuf`  | Maximum send buffer size on each TCP socket. If value is -1 socket send buffer remains unchanged from OS default.                                                                                                          |
+| `rcvbuf`  | Maximum receive buffer size on each TCP socket. If value is -1, the socket receive buffer remains unchanged from OS default.                                                                                               |
 
 For example, this is configuration for Linux with relatively low number of
 concurrent connections:
