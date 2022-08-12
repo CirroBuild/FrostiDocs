@@ -297,6 +297,7 @@ If reboot/power loss happens prior to any partitions are attached, the import sh
 <p>
 
 Please set `cairo.sql.copy.root` setting, restart instance and try again.
+
 </p>
 </details>
 
@@ -311,11 +312,32 @@ Please make sure that both `cairo.sql.copy.root` and `cairo.sql.copy.work.root` 
 
 
 <details>
-  <summary>I'm getting "[2] could not open read-only [file=C:\path\to\import.csv]" error message</summary>
+  <summary>I'm getting "[2] could not open read-only [file=somepath]" error message</summary>
 <p>
 
-Please check that import file path is valid and accessible to QuestDB instance user.
+Please check that import file path is valid and accessible to QuestDB instance users.
+
+If you are running QuestDB using Docker, please check if the directory mounted for storing source CSV files is identical to the one `cairo.sql.copy.root` property or `QDB_CAIRO_SQL_COPY_ROOT` environment variable points to.
+
+For example, the following command can start a QuestDB instance:
+
+```shell
+docker run -p 9000:9000 \
+-v "/tmp/questdb:/var/lib/questdb" \  
+-v "/tmp/questdb/my_input_root:/tmp/questdb_import" \
+-e QDB_CAIRO_SQL_COPY_ROOT=/tmp/questdb_wrong \
+questdb/questdb
+```
+However, running:
+
+```questdb-sql
+COPY weather from 'weather_example.csv' WITH HEADER true;
+```
+
+Results in the "[2] could not open read-only [file=/tmp/questdb_wrong/weather_example.csv]" error message.
+
 </p>
+
 </details>
 
 <details>

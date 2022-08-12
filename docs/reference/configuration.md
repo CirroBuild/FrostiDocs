@@ -65,7 +65,7 @@ export QDB_SHARED_WORKER_COUNT=5
 
 ## Docker
 
-This section describes how configure QuestDB server settings when running
+This section describes how to configure QuestDB server settings when running
 QuestDB in a Docker container. A command to run QuestDB via Docker with default
 interfaces is as follows:
 
@@ -115,7 +115,7 @@ configuration above, HTTP ports for the web console and REST API will be
 available on `localhost:4000`:
 
 ```bash
-docker run -v "$(pwd):/root/.questdb/conf" -p 4000:4000 questdb/questdb
+docker run -v "$(pwd):/var/lib/questdb/conf" -p 4000:4000 questdb/questdb
 ```
 
 To mount the full root directory of QuestDB when running in a Docker container,
@@ -128,7 +128,7 @@ http.bind.to=0.0.0.0:4000
 Mount the current directory using the `-v` flag:
 
 ```bash
-docker run -v "$(pwd):/root/.questdb/" -p 4000:4000 questdb/questdb
+docker run -v "$(pwd):/var/lib/questdb/" -p 4000:4000 questdb/questdb
 ```
 
 The current directory will then have data persisted to disk:
@@ -359,6 +359,32 @@ Optional settings for `COPY`:
 | cairo.sql.copy.queue.capacity       | 32      | Size of copy task queue. Should be increased if there's more than 32 import workers.                                                                                                                |
 | cairo.sql.copy.max.index.chunk.size | 100m    | Maximum size of index chunk file used to limit total memory requirements of import. Indexing phase should use roughly `thread_count * cairo.sql.copy.max.index.chunk.size`  of memory.               |
 
+#### CSV import configuration for Docker
+
+For QuestDB instances using Docker:
+
+- `cairo.sql.copy.root` must be defined using one of the following settings:
+  - The environment variable `QDB_CAIRO_SQL_COPY_ROOT`.
+  - The `cairo.sql.copy.root` in `server.conf`.
+- The path for the source CSV file is mounted.
+- The source CSV file path and the path defined by `QDB_CAIRO_SQL_COPY_ROOT` are identical.
+- It is optional to define `QDB_CAIRO_SQL_COPY_WORK_ROOT`.
+
+The following is an example command to start a QuestDB instance on Docker, in order to import a CSV file:
+
+  ```shell
+  docker run -p 9000:9000 \
+  -v "/tmp/questdb:/var/lib/questdb" \
+  -v "/tmp/questdb/my_input_root:/var/lib/questdb/questdb_import" \
+  -e QDB_CAIRO_SQL_COPY_ROOT=/var/lib/questdb/questdb_import \
+  questdb/questdb
+  ```
+
+  Where:
+  - `-v "/tmp/questdb/my_input_root:/var/lib/questdb/questdb_import"`: Defining a source CSV file location to be `/tmp/questdb/my_input_root` on local machine and mounting it to `/var/lib/questdb/questdb_import` in the container.
+  - `-e QDB_CAIRO_SQL_COPY_ROOT=/var/lib/questdb/questdb_import`: Defining the copy root directory to be `var/lib/questdb/questdb_import`.
+
+  It is important that the two path to be identical (`var/lib/questdb/questdb_import` in the example).
 
 ### Parallel SQL execution
 
@@ -579,7 +605,7 @@ w.http.min.scope=http-min-server
 The current directory can be mounted:
 
 ```shell title="Mount the current directory to a QuestDB container"
-docker run -p 9000:9000 -v "$(pwd):/root/.questdb/" questdb/questdb
+docker run -p 9000:9000 -v "$(pwd):/var/lib/questdb/" questdb/questdb
 ```
 
 The container logs will be written to disk using the logging level and file name
@@ -591,7 +617,6 @@ QuestDB includes a log writer that sends any message logged at critical level
 (logger.critical("may-day")) to Prometheus Alertmanager over a TCP/IP socket.
 Details for configuring this can be found in the
 [Prometheus documentation](/docs/third-party-tools/prometheus).
-
 To configure this writer, add it to the `writers` config alongside other log
 writers.
 
