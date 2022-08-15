@@ -16,7 +16,7 @@ these same actions via the [HTTP REST API](#http-rest-api).
 
 Applications that intend to insert via SQL programmatically should prefer the
 [PostgreSQL wire protocol](#postgresql-wire-protocol) as it provides
-parameterized querys which avoid SQL injection issues.
+parameterized queries which avoid SQL injection issues.
 
 In summary, these are the different options:
 
