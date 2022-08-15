@@ -342,7 +342,7 @@ const Usp = () => (
           <p className={usCss.usp__description}>
             Aggregations and downsampling
           </p>
-          <p className={usCss.usp__description}>Unlimited sub-queries</p>
+          <p className={usCss.usp__description}>Geospatial-native queries</p>
           <p className={usCss.usp__description}>Built-in SQL optimizer</p>
         </div>
       </div>
