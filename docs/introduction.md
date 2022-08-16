@@ -41,11 +41,11 @@ programming languages through our various network endpoints.
 
 ## Guides
 
-- [Timestamps and time zones](/docs/guides/working-with-timestamps-timezones)
-- [Bulk CSV imports](/docs/guides/importing-data)
+- [Large CSV import (COPY SQL)](/docs/guides/importing-data)
+- [Small CSV import (REST API)](/docs/guides/importing-data-rest)
 - [Modifying Data](/docs/guides/modifying-data)
 - [Out-of-order commit lag](/docs/guides/out-of-order-commit-lag)
-- [Version 6.0 migration](/docs/guides/v6-migration)
+- [Timestamps and time zones](/docs/guides/working-with-timestamps-timezones)
 
 ## Deployment
 
