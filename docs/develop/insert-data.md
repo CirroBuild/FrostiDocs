@@ -10,19 +10,14 @@ languages and tools.
 ingestion method in QuestDB and is recommended for high-performance
 applications.
 
-For operational (ad-hoc) data ingestion the [Web Console](#web-console) makes it
-easy to upload CSV files and insert via SQL statements. You can also perform
-these same actions via the [HTTP REST API](#http-rest-api).
+For transactional data inserts, use the [PostgreSQL wire protocol](#postgresql-wire-protocol).
 
-Applications that intend to insert via SQL programmatically should prefer the
-[PostgreSQL wire protocol](#postgresql-wire-protocol) as it provides
-parameterized queries which avoid SQL injection issues.
+For operational (ad-hoc) data ingestion, the [Web Console](#web-console) makes it
+easy to upload CSV files and insert via SQL statements. You can also perform
+these same actions via the [HTTP REST API](#http-rest-api). For [large CSV import](/docs/guides/importing-data) (database migrations), use SQL `COPY`.
 
 In summary, these are the different options:
 
-- [Web Console](#web-console)
-  - CSV upload.
-  - SQL `INSERT` statements.
 - [InfluxDB Line Protocol](#influxdb-line-protocol)
   - High performance.
   - Optional automatic timestamps.
@@ -32,28 +27,14 @@ In summary, these are the different options:
   - SQL `INSERT` statements, including parameterized queries.
   - Use `psql` on the command line.
   - Interoperability with third-party tools and libraries.
+- [Web Console](#web-console)
+  - CSV upload.
+  - SQL `INSERT` statements.
+  - SQL `COPY` for [large CSV import](/docs/guides/importing-data/).
 - [HTTP REST API](#http-rest-api)
   - CSV upload.
   - SQL `INSERT` statements.
   - Use `curl` on the command line.
-
-## Web Console
-
-QuestDB ships with an embedded [Web Console](/docs/develop/web-console) running
-by default on port `9000`.
-
-```questdb-sql title='Creating a table and inserting some data'
-
-CREATE TABLE takeaway_order (ts TIMESTAMP, id SYMBOL, status SYMBOL)
-  TIMESTAMP(ts);
-
-INSERT INTO takeaway_order VALUES (now(), 'order1', 'placed');
-INSERT INTO takeaway_order VALUES (now(), 'order2', 'placed');
-```
-
-SQL statements can be written in the code editor and executed by clicking the
-**Run** button. Note that the web console runs a single statement at a time. You
-can also use the Web Console to upload CSV.
 
 ## InfluxDB Line Protocol
 
@@ -62,7 +43,7 @@ port 9009.
 
 It is a one-way protocol to insert data, focusing on simplicity and performance.
 
-Here is a summary table is how it compares with ways to insert data that we
+Here is a summary table showing how it compares with other ways to insert data that we
 support:
 
 | Protocol                 | Record Insertion Reporting       | Data Insertion Performance |
@@ -70,14 +51,16 @@ support:
 | InfluxDB Line Protocol   | Server logs; Disconnect on error | **Best**                   |
 | CSV upload via HTTP REST | Configurable                     | Very Good                  |
 | SQL `INSERT` statements  | Transaction-level                | Good                       |
+| SQL `COPY` statements    | Transaction-level                | Suitable for one-off data migration|
+
 
 This interface is the preferred ingestion method as it provides the following
 benefits:
 
-- high-throughput ingestion
-- robust ingestion from multiple sources into tables with dedicated systems for
+- High-throughput ingestion
+- Robust ingestion from multiple sources into tables with dedicated systems for
   reducing congestion
-- configurable commit-lag for out-of-order data via
+- Configurable commit-lag for out-of-order data via
   [server configuration](/docs/reference/configuration#influxdb-line-protocol-tcp)
   settings
 
@@ -622,8 +605,8 @@ See:
 ### Constructing well-formed messages
 
 Different library implementations will perform different degrees content
-validation upfront before sending messages out. To avoid encoutering issues
-follow these guidelines.
+validation upfront before sending messages out. To avoid encountering issues,
+follow these guidelines:
 
 - **All strings must be UTF-8 encoded.**
 
@@ -651,9 +634,6 @@ follow these guidelines.
 
 QuestDB will always log any ILP errors in its
 [server logs](/docs/concept/root-directory-structure#log-directory).
-
-From version 6.3, QuestDB will disconnect on the first error encountered on a
-given TCP ILP connection.
 
 Here is an example error from the server logs caused when a line attempted to
 insert a `STRING` into a `SYMBOL` column.
@@ -706,7 +686,7 @@ is documented [here](/docs/reference/api/ilp/authenticate).
 
 ### Third-party Library Compatibility
 
-Use our own client libraries and/or protocol documentation: Clients intended to
+Use our own [client libraries](/docs/reference/clients/overview) and/or protocol documentation: Clients intended to
 work with InfluxDB will not work with QuestDB.
 
 ## PostgreSQL wire protocol
@@ -717,6 +697,8 @@ libraries and tools.
 
 You can connect to TCP port `8812` and use both `INSERT` and `SELECT` SQL
 queries.
+
+PostgreSQL wire protocol is better suited for applications inserting via SQL programmatically as it provides parameterized queries, which avoid SQL injection issues.
 
 :::tip
 
@@ -1067,6 +1049,25 @@ fn main() -> Result<(), Error> {
 </TabItem>
 
 </Tabs>
+
+## Web Console
+
+QuestDB ships with an embedded [Web Console](/docs/develop/web-console) running
+by default on port `9000`.
+
+```questdb-sql title='Creating a table and inserting some data'
+
+CREATE TABLE takeaway_order (ts TIMESTAMP, id SYMBOL, status SYMBOL)
+  TIMESTAMP(ts);
+
+INSERT INTO takeaway_order VALUES (now(), 'order1', 'placed');
+INSERT INTO takeaway_order VALUES (now(), 'order2', 'placed');
+```
+
+SQL statements can be written in the code editor and executed by clicking the
+**Run** button. Note that the web console runs a single statement at a time. 
+
+For inserting bulk data or migrating data from other databases, see [large CSV import](/docs/guides/importing-data).
 
 ## HTTP REST API
 
