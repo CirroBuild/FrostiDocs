@@ -22,6 +22,7 @@ const clients: Client[] = [
     label: "NodeJS",
     logoSrc: "/img/logos/nodejs-light.svg",
     lightThemeLogoSrc: "/img/logos/nodejs-dark.svg",
+    docsUrl: "https://questdb.github.io/nodejs-questdb-client",
     sourceUrl: "https://github.com/questdb/nodejs-questdb-client",
   },
   {
