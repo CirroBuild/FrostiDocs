@@ -22,7 +22,7 @@ In summary, these are the different options:
   - High performance.
   - Optional automatic timestamps.
   - Optional integrated authentication.
-  - Client libraries in various programming languages.
+  - [Client libraries](/docs/reference/clients/overview) in various programming languages.
 - [PostgreSQL wire protocol](#postgresql-wire-protocol)
   - SQL `INSERT` statements, including parameterized queries.
   - Use `psql` on the command line.
