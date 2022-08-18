@@ -26,19 +26,19 @@ Return value type is `double`.
 SELECT avg(amount) FROM transactions;
 ```
 
-|avg |
-|:---|
-|22.4|
+| avg  |
+| :--- |
+| 22.4 |
 
 ```questdb-sql title="Average transaction amount by payment_type"
 SELECT payment_type, avg(amount) FROM transactions;
 ```
 
-|cash_or_card|avg  |
-|:-----------|:----|
-|cash        |22.1 |
-|card        |27.4 |
-|null        |18.02|
+| cash_or_card | avg   |
+| :----------- | :---- |
+| cash         | 22.1  |
+| card         | 27.4  |
+| null         | 18.02 |
 
 ## count
 
@@ -60,9 +60,9 @@ Return value type is `long`.
 SELECT count() FROM transactions;
 ```
 
-|count|
-|:----|
-|100  |
+| count |
+| :---- |
+| 100   |
 
 - Count of rows in the transactions table aggregated by `payment_type` value.
 
@@ -70,11 +70,11 @@ SELECT count() FROM transactions;
 SELECT payment_type, count() FROM transactions;
 ```
 
-|cash_or_card|count|
-|:-----------|:----|
-|cash        |25   |
-|card        |70   |
-|null        |5    |
+| cash_or_card | count |
+| :----------- | :---- |
+| cash         | 25    |
+| card         | 70    |
+| null         | 5     |
 
 :::note
 
@@ -84,8 +84,8 @@ SELECT payment_type, count() FROM transactions;
 
 ## count_distinct
 
-`count_distinct(STRING_COL)` or `count_distinct(SYMBOL_COL)` - counts distinct
-values in `STRING` or `SYMBOL` columns.
+`count_distinct(column_name)` - counts distinct values in `string`, `symbol`,
+`long256`, `long`, or `int` columns.
 
 **Return value:**
 
@@ -100,9 +100,9 @@ Return value type is `long`.
 SELECT count_distinct(side) FROM transactions;
 ```
 
-|count_distinct|
-|:-------------|
-|2             |
+| count_distinct |
+| :------------- |
+| 2              |
 
 - Count of distinct counterparties in the transactions table aggregated by
   `payment_type` value.
@@ -111,27 +111,31 @@ SELECT count_distinct(side) FROM transactions;
 SELECT payment_type, count_distinct(counterparty) FROM transactions;
 ```
 
-|cash_or_card|count_distinct|
-|:-----------|:-------------|
-|cash        |3             |
-|card        |23            |
-|null        |5             |
+| cash_or_card | count_distinct |
+| :----------- | :------------- |
+| cash         | 3              |
+| card         | 23             |
+| null         | 5              |
 
 :::note
 
-`null` values are not counted in `count_distinct` functions.
+`null` values are not counted in the `count_distinct` function.
 
 :::
 
 ## first/last
 
-- `first(column_name)` - returns the first value of a column. 
-- `last(column_name)` - returns the last value of a column. 
+- `first(column_name)` - returns the first value of a column.
+- `last(column_name)` - returns the last value of a column.
 
-Supported column datatype: `double`, `float`, `integer`, `character`, `short`, `byte`, `timestamp`, `date`, `long`, `geohash`.
+Supported column datatype: `double`, `float`, `integer`, `character`, `short`,
+`byte`, `timestamp`, `date`, `long`, `geohash`.
 
-If a table has a [designated timestamp](/docs/concept/designated-timestamp), then the first row is always the row with the lowest timestamp (oldest) and the last row is always the one with the highest (latest) timestamp. 
-For a table without a designated timestamp column, `first` returns the first row and `last` returns the last inserted row, regardless of any timestamp column. 
+If a table has a [designated timestamp](/docs/concept/designated-timestamp),
+then the first row is always the row with the lowest timestamp (oldest) and the
+last row is always the one with the highest (latest) timestamp. For a table
+without a designated timestamp column, `first` returns the first row and `last`
+returns the last inserted row, regardless of any timestamp column.
 
 **Return value:**
 
@@ -141,11 +145,11 @@ Return value type is `string`.
 
 Given a table `sensors`, which has a designated timestamp column:
 
-|device_id |temperature|ts                         |
-|:---------|:----------|:--------------------------|
-|arduino-01|12         |2021-06-02T14:33:19.970258Z|
-|arduino-02|10         |2021-06-02T14:33:21.703934Z|
-|arduino-03|18         |2021-06-02T14:33:23.707013Z|
+| device_id  | temperature | ts                          |
+| :--------- | :---------- | :-------------------------- |
+| arduino-01 | 12          | 2021-06-02T14:33:19.970258Z |
+| arduino-02 | 10          | 2021-06-02T14:33:21.703934Z |
+| arduino-03 | 18          | 2021-06-02T14:33:23.707013Z |
 
 The following query returns oldest value for the `device_id` column:
 
@@ -153,9 +157,9 @@ The following query returns oldest value for the `device_id` column:
 SELECT first(device_id) FROM sensors;
 ```
 
-|first     |
-|:---------|
-|arduino-01|
+| first      |
+| :--------- |
+| arduino-01 |
 
 The following query returns the latest symbol value for the `device_id` column:
 
@@ -163,18 +167,19 @@ The following query returns the latest symbol value for the `device_id` column:
 SELECT last(device_id) FROM sensors;
 ```
 
-|last      |
-|:---------|
-|arduino-03|
+| last       |
+| :--------- |
+| arduino-03 |
 
+Without selecting a designated timestamp column, the table may be unordered and
+the query may return different result. Given an unordered table
+`sensors_unordered`:
 
-Without selecting a designated timestamp column, the table may be unordered and the query may return different result. Given an unordered table `sensors_unordered`:
-
-|device_id |temperature|ts                         |
-|:---------|:----------|:--------------------------|
-|arduino-01|12         |2021-06-02T14:33:19.970258Z|
-|arduino-03|18         |2021-06-02T14:33:23.707013Z|
-|arduino-02|10         |2021-06-02T14:33:21.703934Z|
+| device_id  | temperature | ts                          |
+| :--------- | :---------- | :-------------------------- |
+| arduino-01 | 12          | 2021-06-02T14:33:19.970258Z |
+| arduino-03 | 18          | 2021-06-02T14:33:23.707013Z |
+| arduino-02 | 10          | 2021-06-02T14:33:21.703934Z |
 
 The following query returns the first record for the `device_id` column:
 
@@ -182,10 +187,9 @@ The following query returns the first record for the `device_id` column:
 SELECT first(device_id) FROM sensors_unordered;
 ```
 
-|first     |
-|:---------|
-|arduino-01|
-
+| first      |
+| :--------- |
+| arduino-01 |
 
 The following query returns the last record for the `device_id` column:
 
@@ -193,9 +197,9 @@ The following query returns the last record for the `device_id` column:
 SELECT last(device_id) FROM sensors_unordered;
 ```
 
-|last      |
-|:---------|
-|arduino-02|
+| last       |
+| :--------- |
+| arduino-02 |
 
 ## haversine_dist_deg
 
@@ -242,9 +246,9 @@ SELECT ksum(a)
 FROM (SELECT rnd_double() a FROM long_sequence(100));
 ```
 
-|ksum             |
-|:----------------|
-|52.79143968514029|
+| ksum              |
+| :---------------- |
+| 52.79143968514029 |
 
 ## max
 
@@ -265,19 +269,19 @@ Return value type is the same as the type of the argument.
 SELECT max(amount) FROM transactions;
 ```
 
-|max |
-|:---|
-|55.3|
+| max  |
+| :--- |
+| 55.3 |
 
 ```questdb-sql title="Highest transaction amount by payment_type"
 SELECT payment_type, max(amount) FROM transactions;
 ```
 
-|cash_or_card|amount|
-|:-----------|:-----|
-|cash        |31.5  |
-|card        |55.3  |
-|null        |29.2  |
+| cash_or_card | amount |
+| :----------- | :----- |
+| cash         | 31.5   |
+| card         | 55.3   |
+| null         | 29.2   |
 
 ## min
 
@@ -298,19 +302,19 @@ Return value type is the same as the type of the argument.
 SELECT min(amount) FROM transactions;
 ```
 
-|min |
-|:---|
-|12.5|
+| min  |
+| :--- |
+| 12.5 |
 
 ```questdb-sql title="Lowest transaction amount, by payment_type"
 SELECT payment_type, min(amount) FROM transactions;
 ```
 
-|cash_or_card|min |
-|:-----------|:---|
-|cash        |12.5|
-|card        |15.3|
-|null        |22.2|
+| cash_or_card | min  |
+| :----------- | :--- |
+| cash         | 12.5 |
+| card         | 15.3 |
+| null         | 22.2 |
 
 ## nsum
 
@@ -334,14 +338,14 @@ SELECT nsum(a)
 FROM (SELECT rnd_double() a FROM long_sequence(100));
 ```
 
-|nsum            |
-|:---------------|
-|49.5442334742831|
+| nsum             |
+| :--------------- |
+| 49.5442334742831 |
 
 ## stddev_samp
 
-`stddev_samp(value)` - calculates the sample standard deviation of values ignoring missing data (e.g
-`null` values).
+`stddev_samp(value)` - calculates the sample standard deviation of values
+ignoring missing data (e.g `null` values).
 
 **Arguments:**
 
@@ -358,9 +362,9 @@ SELECT stddev_samp(x)
 FROM (SELECT x FROM long_sequence(100));
 ```
 
-|stddev_samp     |
-|:---------------|
-|29.011491975882|
+| stddev_samp     |
+| :-------------- |
+| 29.011491975882 |
 
 ## sum
 
@@ -380,18 +384,18 @@ Return value type is the same as the type of the argument.
 SELECT sum(quantity) FROM transactions;
 ```
 
-|sum|
-|:--|
-|100|
+| sum |
+| :-- |
+| 100 |
 
 ```questdb-sql title="Sum all quantities in the transactions table, aggregated by item"
 SELECT item, sum(quantity) FROM transactions;
 ```
 
-|item  |count|
-|:-----|:----|
-|apple |53   |
-|orange|47   |
+| item   | count |
+| :----- | :---- |
+| apple  | 53    |
+| orange | 47    |
 
 ### Overflow
 
