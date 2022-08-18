@@ -8,6 +8,7 @@ Add a QuestDB as a dependency to your build project:
 
 import Tabs from "@theme/Tabs"
 import TabItem from "@theme/TabItem"
+import { RemoteRepoExample } from '@theme/RemoteRepoExample'
 
 <Tabs defaultValue="maven" values={[
 { label: "Maven", value: "maven" },
@@ -40,58 +41,14 @@ The code bellow creates an instance of a client, configures it to connect to a Q
 on a TCP port 9009. Then it sends two rows, each with one [symbol](/docs/concept/symbol/), long column and one string column. It instructs the QuestDB 
 server to assign a timestamp by using a local wall-clock.
 
-```java
-package com.example;
-
-import io.questdb.client.Sender;
-
-public class SenderExample {
-    public static void main(String[] args) {
-        try (Sender sender = Sender.builder().address("localhost:9009").build()) {
-            sender.table("inventors")
-                    .symbol("born", "Austrian Empire")
-                    .longColumn("id", 0)
-                    .stringColumn("name", "Nicola Tesla")
-                    .atNow();
-            sender.table("inventors")
-                    .symbol("born", "USA")
-                    .longColumn("id", 1)
-                    .stringColumn("name", "Thomas Alva Edison")
-                    .atNow();
-        }
-    }
-}
-```
+<RemoteRepoExample name="ilp" lang="java" header={false} />
 
 ## Example with TLS and Authentication enabled
 This sample configures a client to use TLS encryption for a connection to a QuestDB server. It also instructs
-the client to authenticate.  
-```java
-package com.example;
+the client to authenticate.
 
-import io.questdb.client.Sender;
+<RemoteRepoExample name="ilp-auth-tls" lang="java" header={false} />
 
-public class SenderExample {
-    public static void main(String[] args) {
-        try (Sender sender = Sender.builder()
-                .address("clever-black-363-c1213c97.ilp.b04c.questdb.net:32074")
-                .enableTls()
-                .enableAuth("admin").authToken("GwBXoGG5c6NoUTLXnzMxw_uNiVa8PKobzx5EiuylMW0")
-                .build()) {
-            sender.table("inventors")
-                    .symbol("born", "Austrian Empire")
-                    .longColumn("id", 0)
-                    .stringColumn("name", "Nicola Tesla")
-                    .atNow();
-            sender.table("inventors")
-                    .symbol("born", "USA")
-                    .longColumn("id", 1)
-                    .stringColumn("name", "Thomas Alva Edison")
-                    .atNow();
-        }
-    }
-}
-```
 This configuration also works with [QuestDB Cloud](https://questdb.io/cloud/). If you are using a self-managed QuestDB
 with [authentication enabled](/docs/reference/api/ilp/authenticate) then `authToken` is the `d` portion of a JWK. 
 

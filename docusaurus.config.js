@@ -47,6 +47,7 @@ const config = {
   plugins: [
     require.resolve("./plugins/fetch-latest-release/index"),
     require.resolve("./plugins/fetch-repo/index"),
+    require.resolve("./plugins/remote-repo-example/index"),
     require.resolve("./plugins/fetch-contributors-count/index"),
     require.resolve("./plugins/webpack-ts/index"),
     require.resolve("./plugins/optimize/index"),

@@ -36,6 +36,8 @@
     "react": "16.14.0",
     "react-calendly": "^4.0.1",
     "react-dom": "16.14.0",
+    "react-markdown": "^8.0.3",
+    "react-remark": "^2.1.0",
     "react-transition-group": "4.4.1",
     "rehype-katex": "4",
     "remark-admonitions": "^1.2.1",
