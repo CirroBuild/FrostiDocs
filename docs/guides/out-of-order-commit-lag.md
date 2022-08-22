@@ -18,7 +18,7 @@ ingestion. The skew and latency of out-of-order data are likely to be relatively
 constant, so users may configure ingestion based on the characteristics of the
 data for optimum throughput. 
 
-This page explains the concept of commit lag and the way to configure it, on both server and table basis.
+This page explains the concept of commit lag and [the way to configure it](#how-to-configure-o3-ingestion).
 
 ## What is a commit lag?
 
@@ -49,7 +49,7 @@ For optimal ingestion performance, the number of O3 data commits should be minim
 
 ## Commit lag and commit timing
 
-Commit lag is a user configurable value. On the server level configuration, the value is defined by `cairo.commit.lag`. Commit lag has an impact on the timing of commit, as the value is combined with other parameters for [ILP commit strategy](/docs/reference/api/ilp/tcp-receiver#commit-strategy).
+Commit lag is a user configurable value. On the server level configuration, the value is defined in milliseconds by `cairo.commit.lag`. Commit lag has an impact on the timing of commit, as the value is combined with other parameters for [ILP commit strategy](/docs/reference/api/ilp/tcp-receiver#commit-strategy).
 
 The `cairo.commit.lag` value is applied each time when a commit happens. As a
 result, data older than the lag value will be committed and become visible.
@@ -63,6 +63,7 @@ is as follows:
 
 ```ini title="Defaults"
 cairo.commit.lag=300000
+# The commit lag value is set in milliseconds.
 cairo.max.uncommitted.rows=500000
 ```
 
@@ -94,27 +95,30 @@ cairo.max.uncommitted.rows=10000
 
 ## How to configure O3 ingestion
 
-QuestDB provides the following O3 data ingestion configuration options:
+QuestDB provides the following O3 data ingestion configuration options; users can choose the most suitable configuration based on their specific case:
 
-* Sever-wide configuration, `cairo.commit.lag`, in [Cairo engine](/docs/reference/configuration/#cairo-engine)
-* Setting table parameters via SQL, [SET PARAM](/docs/reference/sql/alter-table-set-param)
-* Creating table with parameters using [WITH](/docs/reference/sql/create-table/#create-table-with-parameters)
-* INSERT as SELECT with batch size and lag, as explained in [Inserting query results](/docs/reference/sql/insert/#inserting-query-results)
-* [Out-of-order CSV import](/docs/guides/out-of-order-commit-lag/#out-of-order-csv-import)
+- Server-wide configuration:
+  - `cairo.commit.lag` in [Cairo engine](/docs/reference/configuration/#cairo-engine)
 
-Users can choose the most suitable configuration based on their specific case.
+- Table configuration:
 
+  - Setting table parameters via SQL using [SET PARAM](/docs/reference/sql/alter-table-set-param#example)
+  - Creating table with parameters via SQL using [WITH](/docs/reference/sql/create-table/#create-table-with-parameters)
+  - SQL `INSERT AS SELECT` with batch size and lag: [Inserting query results](/docs/reference/sql/insert/#inserting-query-results)
+
+- Import configuration:
+  - [Out-of-order CSV import](/docs/guides/out-of-order-commit-lag/#out-of-order-csv-import)
 
 ### Out-of-order CSV import
 
 It is possible to set `commitLag` and `maxUncommittedRows` via REST API when
-importing data via the `/imp` endpoint. The following example imports a file
-which contains out-of-order records. The `timestamp` and `partitionBy` parameters **must be provided** for commit lag and max uncommitted rows to have
-any effect:
+importing data via the `/imp` endpoint. The `commitLag` unit is microsecond. The following example imports a file which contains out-of-order records. The `timestamp` and `partitionBy` parameters **must be provided** for commit lag and max uncommitted rows to have any effect:
 
 ```shell
 curl -F data=@weather.csv \
 'http://localhost:9000/imp?&timestamp=ts&partitionBy=DAY&commitLag=120000000&maxUncommittedRows=10000'
+
+# The commitLag value is set in microseconds.
 ```
 
 
