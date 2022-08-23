@@ -11,9 +11,9 @@ issues met when running QuestDB, as well as solutions to them.
 InfluxDB line protocol (ILP) does not commit data on single lines or when the
 sender disconnects, but instead uses a number of rules to break incoming data
 into commit batches. This results in data not being visible in `SELECT` queries
-immediately after being received. Refer to
-[InfluxDB line protocol](/docs/reference/api/ilp/tcp-receiver#commit-strategy)
-guide to understand these rules.
+immediately after being received. Refer to our [guide to commit lag](/docs/guides/out-of-order-commit-lag) to understand the concept and 
+[InfluxDB line protocol reference](/docs/reference/api/ilp/tcp-receiver#commit-strategy)
+to understand these rules.
 
 ## How do I delete a row?
 
