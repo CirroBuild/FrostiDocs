@@ -99,7 +99,7 @@ Log table row retention is configurable through `cairo.sql.copy.log.retention.da
 - `HEADER true/false`: When `true`, QuestDB automatically assumes the first row is a
   header. Otherwise, schema recognition is used to determine whether the first row is used as header. The default setting is `false`.
 - `TIMESTAMP`: Define the name of the timestamp column in the file to be imported.
-- `FORMAT`: Timestamp column format when the format is not the default (`yyyy-MM-ddTHH:mm:ss.SSSUUUZ`) or cannot be detected.
+- `FORMAT`: Timestamp column format when the format is not the default (`yyyy-MM-ddTHH:mm:ss.SSSUUUZ`) or cannot be detected. See [Date and Timestamp format](/docs/reference/function/date-time/#date-and-timestamp-format) for more information.
 - `DELIMITER`: Default setting is `,`.
 - `PARTITION BY`: Partition unit.
 - `ON ERROR`: Define responses to data parsing errors. The valid values are:
