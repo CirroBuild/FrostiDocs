@@ -26,9 +26,66 @@ Preparation is key. Import is a multi-step process, which consists of:
 
 ### Export the existing database
 
-Export data using one CSV file per table. Make sure to export a column, which can be used as timestamp. Data in CSV is
-not expected to be in any particular order. If it is not possible to export table as one CSV, export multiple files and
-concatenate these files before importing into QuestDB.
+Export data using one CSV file per table. Make sure to export a column, which can be used as timestamp. Data in CSV is not expected to be in any particular order. If it is not possible to export table as one CSV, export multiple files and concatenate these files before importing into QuestDB.
+
+#### Concatenate multiple CSV files
+
+The way to concatenate files depends on whether the CSV files have headers.
+
+For CSV files without headers, concatenation is straightforward:
+
+<!-- prettier-ignore-start -->
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs defaultValue="linux" values={[
+  { label: "Linux", value: "linux" },
+  { label: "macOS", value: "macos" },
+  { label: "Windows PowerShell", value: "windows" },
+]}>
+
+<!-- prettier-ignore-end -->
+
+<TabItem value="linux">
+
+
+```shell
+ls *.csv | xargs cat > singleFile.csv
+```
+
+</TabItem>
+
+<TabItem value="macos">
+
+
+```shell
+ls *.csv | xargs cat > singleFile.csv
+```
+
+</TabItem>
+
+<TabItem value="windows">
+
+
+```shell
+$TextFiles = Get-Item C:\Users\path\to\csv\*.csv
+# The files are moved to the same folder.
+$TextFiles foreach { Add-Content -Value $(Get-Content $_) -Path C:\Users\path\to\csv\singleFile.csv}
+```
+
+</TabItem>
+
+</Tabs>
+
+For CSV files with headers, concatenation can be tricky. You could manually remove the first line of the files before concatenating, or use some smart command line to concatenate and remove the headers. A good alternative is using the open source tool [csvstack](https://csvkit.readthedocs.io/en/latest/scripts/csvstack.html).
+
+This is how you can concatenate multiple CSV files using _csvstack_:
+
+```shell
+csvstack *.csv > singleFile.csv
+```
+
 
 ### Things to know about `COPY`
 
