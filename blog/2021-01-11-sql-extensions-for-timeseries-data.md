@@ -11,3 +11,5 @@ description:
 tags: [tutorial, sql]
 image: /img/blog/2021-01-11/banner.jpg
 ---
+
+A short hands-on tutorial on how to use SQL extensions built for time-series data in QuestDB. [Read more](https://towardsdatascience.com/sql-extensions-for-time-series-data-in-questdb-f6b53acf3213)

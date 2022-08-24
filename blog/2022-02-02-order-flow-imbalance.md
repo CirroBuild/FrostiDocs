@@ -8,4 +8,4 @@ author_url: https://github.com/dm13450
 author_image_url: https://avatars.githubusercontent.com/dm13450
 ---
 
-Calculate the order flow imbalance and build a high-frequency trading signal with the results.
+Calculate the order flow imbalance and build a high-frequency trading signal with the results. [Read more](https://dm13450.github.io/2022/02/02/Order-Flow-Imbalance.html)

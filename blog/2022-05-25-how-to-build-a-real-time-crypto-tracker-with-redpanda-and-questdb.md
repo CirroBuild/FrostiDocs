@@ -8,4 +8,4 @@ author_url: https://github.com/yitaek
 author_image_url: https://avatars.githubusercontent.com/yitaek
 ---
 
-Analyze cryptocurrency price trends in real-time with Redpanda and store for further investigation in QuestDB.
+Analyze cryptocurrency price trends in real-time with Redpanda and store for further investigation in QuestDB. [Read more](https://redpanda.com/blog/real-time-crypto-tracker-questdb-redpanda/)

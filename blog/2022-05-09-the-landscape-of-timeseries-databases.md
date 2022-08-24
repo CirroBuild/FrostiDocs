@@ -9,3 +9,5 @@ description:
 tags: [community, influxdb, timescaledb]
 image: /img/blog/2022-05-09-2/banner.jpg
 ---
+
+A short survey of the timeseries databases of today. [Read more](https://towardsdatascience.com/the-landscape-of-timeseries-databases-95cd7f7ee64d)
