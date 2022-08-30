@@ -6,24 +6,26 @@ description: VACUUM TABLE SQL keyword reference documentation
 
 The `VACUUM TABLE` command triggers partition and column version cleanup.
 
-When a table is appended Out of Order, a new version of a partition can be
-written to the disk. The old partition version directory is deleted once it is
-not read by SELECT queries. In the event of file system errors, physical deletion of
-old files can be interrupted and an outdated partition version may be left behind
-consuming the disk space.
+When a table is appended in an out-of-order manner, the `VACUUM TABLE` command
+writes a new partition version to the disk. The old partition version directory
+is deleted once it is not read by `SELECT` queries. In the event of file system
+errors, physical deletion of old files may be interrupted and an outdated
+partition version may be left behind consuming the disk space.
 
-In a similar manner executing `UPDATE` SQL statement copies column files. 
-Old column files are automitically deleted but in some limited circumstances can be left behind.
-In this case `VACUUM TABLE` will re-trigger delete process of updated column files.
+When an `UPDATE` SQL statement is run, it copies column files of the selected
+table. The old column files are automatically deleted but in certain
+circumstances, they can be left behind. In this case, `VACUUM TABLE` can be used
+to re-trigger the deletion process of the old column files.
 
-The `VACUUM TABLE` command starts a new scan over table partitions directories and
-and column files. It detects redundant, unused files consuming the disk space and deletes them.
-`VACUUM` executes asynchronously e.g. it may keep scanning and deleting files after their response 
-is returned to the SQL client.
+The `VACUUM TABLE` command starts a new scan over table partition directories
+and and column files. It detects redundant, unused files consuming the disk
+space and deletes them. `VACUUM TABLE` executes asynchronously, i.e. it may keep
+scanning and deleting files after their response is returned to the SQL client.
 
-This command has to be executed rarely and provides a manual mechanism to reclaim the disk space.
-The implementation scans file system catalogs to detect duplicate directories and files and may be
-relatively expensive to run too often.
+This command provides a manual mechanism to reclaim the disk space. The
+implementation scans file system to detect duplicate directories and files and
+frequent usage of the command can be relatively expensive. Thus, `VACUUM TABLE`
+has to be executed sparingly.
 
 ## Syntax
 
