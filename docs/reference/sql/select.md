@@ -13,7 +13,9 @@ and evaluated from a table.
 
 :::tip
 
-The `TABLE` can either be a in your database (in which case you would pass the
+- While ingesting data using ILP, data may not be immediately available to a `SELECT` query, due to the [commit lag](/docs/guides/out-of-order-commit-lag) setting. Please see the [InfluxDB line protocol reference](/docs/reference/api/ilp/tcp-receiver#commit-strategy) for more information.
+
+- The `table` can either be in your database (in which case you would pass the
 table's name), or the result of a sub query.
 
 :::
@@ -118,8 +120,8 @@ FROM ratings;
 
 Whenever possible, it is recommended to perform arithmetic `outside` of
 aggregation functions as this can have a dramatic impact on performance. For
-example, `min(value/2)` is going to execute considerably slower than
-`min(value)/2` although both alternative will return the same result
+example, `min(value/2)` is going to execute considerably more slowly than
+`min(value)/2`, although both return the same result.
 
 :::
 
@@ -135,12 +137,8 @@ Conditional results based on expressions.
 
 ![Flow chart showing the syntax of CASE](/img/docs/diagrams/case.svg)
 
-:::info
-
 For more information, please refer to the
 [CASE reference](/docs/reference/sql/case)
-
-:::
 
 ### CAST
 
@@ -150,12 +148,8 @@ Convert values and expression between types.
 
 ![Flow chart showing the syntax of the CAST keyword](/img/docs/diagrams/cast.svg)
 
-:::info
-
 For more information, please refer to the
 [CAST reference](/docs/reference/sql/cast)
-
-:::
 
 ### DISTINCT
 
@@ -165,12 +159,8 @@ Returns distinct values of the specified column(s).
 
 ![Flow chart showing the syntax of the DISTINCT keyword](/img/docs/diagrams/distinct.svg)
 
-:::info
-
 For more information, please refer to the
 [DISTINCT reference](/docs/reference/sql/distinct).
-
-:::
 
 ### FILL
 
@@ -181,12 +171,8 @@ complements [SAMPLE BY](/docs/reference/sql/sample-by) queries.
 
 ![Flow chart showing the syntax of the FILL keyword](/img/docs/diagrams/fill.svg)
 
-:::info
-
 For more information, please refer to the
 [FILL reference](/docs/reference/sql/fill).
-
-:::
 
 ### JOIN
 
@@ -196,12 +182,8 @@ Join tables based on a key or timestamp.
 
 ![Flow chart showing the syntax of the JOIN keyword](/img/docs/diagrams/join.svg)
 
-:::info
-
 For more information, please refer to the
 [JOIN reference](/docs/reference/sql/join)
-
-:::
 
 ### LIMIT
 
@@ -211,12 +193,8 @@ Specify the number and position of records returned by a query.
 
 ![Flow chart showing the syntax of the LIMIT keyword](/img/docs/diagrams/limit.svg)
 
-:::info
-
 For more information, please refer to the
 [LIMIT reference](/docs/reference/sql/limit).
-
-:::
 
 ### ORDER BY
 
@@ -226,12 +204,9 @@ Orders the results of a query by one or several columns.
 
 ![Flow chart showing the syntax of the ORDER BY keyword](/img/docs/diagrams/orderBy.svg)
 
-:::info
 
 For more information, please refer to the
 [ORDER BY reference](/docs/reference/sql/order-by)
-
-:::
 
 ### UNION, EXCEPT & INTERSECT
 
@@ -242,12 +217,8 @@ duplicates.
 
 ![Flow chart showing the syntax of the UNION, EXCEPT & INTERSECT keyword](/img/docs/diagrams/union-except-intersect.svg)
 
-:::info
-
 For more information, please refer to the
 [UNION, EXCEPT & INTERSECT reference](/docs/reference/sql/union-except-intersect)
-
-:::
 
 ### WHERE
 
@@ -257,16 +228,12 @@ Filters query results
 
 ![Flow chart showing the syntax of the WHERE clause](/img/docs/diagrams/where.svg)
 
-:::info
-
 QuestDB supports complex WHERE clauses along with type-specific searches. For
 more information, please refer to the
 [WHERE reference](/docs/reference/sql/where). There are different syntaxes for
 [text](/docs/reference/sql/where#symbol-and-string),
 [numeric](/docs/reference/sql/where#numeric), or
 [timestamp](/docs/reference/sql/where#timestamp-and-date) filters.
-
-:::
 
 ## Additional time series clauses
 
@@ -282,12 +249,8 @@ This function requires a
 
 ![Flow chart showing the syntax of the LATEST ON keyword](/img/docs/diagrams/latestOn.svg)
 
-:::info
-
 For more information, please refer to the
 [LATEST ON reference](/docs/reference/sql/latest-on).
-
-:::
 
 ### SAMPLE BY
 
@@ -299,12 +262,8 @@ average, monthly maximum etc. This function requires a
 
 ![Flow chart showing the syntax of the SAMPLE BY keyword](/img/docs/diagrams/sampleBy.svg)
 
-:::info
-
 For more information, please refer to the
 [SAMPLE BY reference](/docs/reference/sql/sample-by).
-
-:::
 
 ### TIMESTAMP
 
@@ -325,9 +284,5 @@ and using timestamp functions on unordered data may produce unexpected results.
 
 ![Flow chart showing the syntax of the timestamp function](/img/docs/diagrams/dynamicTimestamp.svg)
 
-:::info
-
 For more information, refer to the
 [TIMESTAMP reference](/docs/reference/function/timestamp)
-
-:::
