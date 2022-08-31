@@ -201,20 +201,6 @@ const CentralGroup = () => {
             marketing campaign triggers.
           </p>
 
-          <Image
-            src="/img/pages/case-study/central-group/dashboard.png"
-            width={828}
-            height={331}
-            description="Real-time performance marketing: This dashboard monitors the effect of marketing campaigns in sales and the corresponding product stock, highlighting products low in stock. Tracking discount and order allows quick analysis of revenue and stock distribution."
-          />
-
-          <Image
-            src="/img/pages/case-study/central-group/dashboard-2.png"
-            width={819}
-            height={308}
-            description="QuestDB powers the marketing performance tracking dashboard, allowing dynamic comparison between various advertisement platforms across a selected time span (6 hours in this example)."
-          />
-
           <p className="font-size--large">
             Since we aggregate data from both online and offline sales, our
             Business Control Tower can correlate online sales with the physical
@@ -224,13 +210,6 @@ const CentralGroup = () => {
             of our footfall, that is, the number of people in a building in real
             time.
           </p>
-
-          <Image
-            src="/img/pages/case-study/central-group/dashboard-3.png"
-            width={990}
-            height={462}
-            description="Offline sales metrics showing sales data correlating to shop opening times."
-          />
 
           <h3>QuestDB deployment on Central Group stack</h3>
 
@@ -260,20 +239,6 @@ const CentralGroup = () => {
             width={828}
             height={464}
             description="High-level overview of the Business Control Tower solution at Central Group."
-          />
-
-          <Image
-            src="/img/pages/case-study/central-group/dashboard-4.png"
-            width={895}
-            height={325}
-            description="Timestamped data is ingested into QuestDB from online marketing APIs, correlating the cost of advertisement with changes in sales. The dashboard also shows trends in revenue growth in real-time."
-          />
-
-          <Image
-            src="/img/pages/case-study/central-group/dashboard-5.png"
-            width={981}
-            height={520}
-            description="Grafana dashboards querying QuestDB database."
           />
 
           <h3>Why QuestDB?</h3>
