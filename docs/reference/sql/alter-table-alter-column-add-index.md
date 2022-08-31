@@ -4,7 +4,7 @@ sidebar_label: ADD INDEX
 description: ADD INDEX SQL keyword reference documentation.
 ---
 
-Adds new index of type `symbol` to an existing column.
+Indexes an existing [`symbol`](/docs/concept/symbol) column.
 
 Adding an index is an atomic, non-blocking and non-waiting operation. Once
 complete, the SQL optimizer will start using the new index for SQL executions.

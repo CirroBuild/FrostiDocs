@@ -7,7 +7,7 @@ createTableDef
   'as' '(' selectSql ')'  (',' castDef)* (',' indexDef)*
   )
   ) (
-  ('timestamp' '(' columnRef ')' ) ('partition' 'by' ('NONE' | 'YEAR' | 'MONTH' | 'DAY' | 'HOUR' ))?
+  ('timestamp' '(' columnRef ')' ) ('PARTITION' 'BY' ('NONE' | 'YEAR' | 'MONTH' | 'DAY' | 'HOUR' ))?
   )?
 
 alterTable 
@@ -17,20 +17,20 @@ castDef
   ::= 'cast' '(' columnRef 'as' typeDef ')'
 
 inlineIndexDef 
-  ::= 'index' (indexCapacityDef)?
+  ::= 'INDEX' (indexCapacityDef)?
 
 typeDef 
   ::= (
   'boolean' | 'byte' | 'short' | 'char' | 'int' | 'float' |
-  ('symbol' (('capacity' distinctValueEstimate) ('CACHE' | 'NOCACHE')?)? inlineIndexDef?) |
+  ('symbol' (('CAPACITY' distinctValueEstimate) ('CACHE' | 'NOCACHE')?)? inlineIndexDef?) |
   'string' | 'long' | 'date' | 'timestamp' | 'double' | 'binary' | 'long256' | 'geohash(<size>)'
   )
 
 indexDef 
-  ::= 'index' '(' columnRef (indexCapacityDef)? ')'
+  ::= 'INDEX' '(' columnRef (indexCapacityDef)? ')'
 
 indexCapacityDef 
-  ::= 'capacity' valueBlockSize
+  ::= 'CAPACITY' valueBlockSize
 
 insertInto
   ::= 'INSERT' ('batch' batchCount 'commitLag' n ( 'us' | 's' | 'm' | 'h' | 'd' ))?

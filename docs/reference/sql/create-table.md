@@ -83,14 +83,11 @@ When `distinctValueEstimate` is not explicitly specified, a default value of
 `cairo.default.symbol.capacity` is used.
 
 `distinctValueEstimate` - the value used to size data structures for
-[symbols](/docs/concept/symbol). These data structures will resize themselves
-when necessary to allow QuestDB to function correctly. Underestimating the
-symbol value count may result in drop of performance whereas over-estimating may
-result in higher disk space and memory consumption.
+[symbols](/docs/concept/symbol). 
 
 ```questdb-sql
-CREATE TABLE my_table(symb SYMBOL capacity 128, price DOUBLE, ts TIMESTAMP),
-  index (symb) timestamp(ts);
+CREATE TABLE my_table(symb SYMBOL CAPACITY 128, price DOUBLE, ts TIMESTAMP),
+  INDEX (symb) timestamp(ts);
 ```
 
 The symbol capacity is not to be confused with **index capacity** described in
@@ -98,25 +95,17 @@ The symbol capacity is not to be confused with **index capacity** described in
 
 ```questdb-sql
 CREATE TABLE my_table
-  (symb SYMBOL capacity 128 nocache index capacity 256, price DOUBLE, ts TIMESTAMP)
+  (symb SYMBOL capacity 128 NOCACHE INDEX capacity 256, price DOUBLE, ts TIMESTAMP)
 timestamp(ts);
 ```
 
 #### Symbol caching
 
-`CACHE | NOCACHE` is used to specify whether a symbol should be cached. `CACHE`
-means that QuestDB will use a Java Heap-based Map to resolve symbol values and
-keys. When a column has a large number of distinct symbol values (over 100,000,
-for example), the heap impact might be significant and may cause OutOfMemory
-errors, depending on the heap size.
-
-To avoid Java Heap impact, `NOCACHE` leverages an off-heap structure which can
-deal with larger value counts but is slower. The default option for `symbol`
-types is `CACHE`.
+`CACHE | NOCACHE` is used to specify whether a symbol should be cached. The default value is `CACHE` unless otherwise specified.
 
 ```questdb-sql
 CREATE TABLE my_table
-  (symb SYMBOL capacity 128 nocache, price DOUBLE, ts TIMESTAMP)
+  (symb SYMBOL CAPACITY 128 NOCACHE, price DOUBLE, ts TIMESTAMP)
 timestamp(ts);
 ```
 
@@ -128,49 +117,39 @@ existing column in the `selectSql`
 ![Flow chart showing the syntax of the cast function](/img/docs/diagrams/castDef.svg)
 
 ```questdb-sql
-CREATE TABLE test AS (SELECT cast(x as DOUBLE) x FROM long_sequence(10));
+CREATE TABLE test AS (SELECT CAST(x as DOUBLE) x FROM long_sequence(10));
 ```
 
 ## Column indexes
 
 Index definitions (`indexDef`) are used to create an
 [index](/docs/concept/indexes) for a table column. The referenced table column
-must be of type `SYMBOL`.
+must be of type [symbol](/docs/concept/symbol).
 
 ![Flow chart showing the syntax of the index function](/img/docs/diagrams/indexDef.svg)
 
 ```questdb-sql
 CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP),
-  index (symb) timestamp(ts);
+  INDEX (symb) TIMESTAMP(ts);
 ```
 
-An index capacity may be provided for the index using and references a
+An index capacity (`indexCapacityDef`) may be provided for the index using and references a
 `valueBlockSize`
 
 ![Flow chart showing the syntax of the CAPACITY keyword](/img/docs/diagrams/indexCapacityDef.svg)
 
 ```questdb-sql
 CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP),
-  index (symb capacity 128) timestamp(ts);
+  INDEX (symb CAPACITY 128) TIMESTAMP(ts);
 -- equivalent to
-CREATE TABLE my_table(symb SYMBOL index capacity 128, price DOUBLE, ts TIMESTAMP),
-  timestamp(ts);
+CREATE TABLE my_table(symb SYMBOL INDEX CAPACITY 128, price DOUBLE, ts TIMESTAMP),
+  TIMESTAMP(ts);
 ```
 
 `valueBlockSize` is an index storage parameter that specifies how many row IDs
 to store in a single storage block on disk. This value is optional and will
 default to the value of the `cairo.index.value.block.size`
-[configuration key](/docs/reference/configuration). Fewer blocks used to store
-row IDs achieves better performance. At the same time over-sizing
-`valueBlockSize` will result in higher than necessary disk space usage.
-
-Consider an example table with 200 unique stock symbols and 1,000,000,000
-records over time. The index will have to store 1,000,000,000 / 200 row IDs for
-each symbol, i.e. 5,000,000 per symbol.
-
-- If `valueBlockSize` is 1,048,576 in this case, QuestDB will use 5 blocks to
-  store the row IDs
-- If `valueBlockSize` is 1,024 in this case, the block count will be 4,883
+[configuration key](/docs/reference/configuration). 
 
 ## Designated timestamp
 
@@ -227,7 +206,7 @@ parameters may be applied:
 
 
 ```questdb-sql title="Setting out-of-order table parameters via SQL"
-CREATE TABLE my_table (timestamp TIMESTAMP) timestamp(timestamp)
+CREATE TABLE my_table (timestamp TIMESTAMP) TIMESTAMP(timestamp)
 PARTITION BY DAY WITH maxUncommittedRows=250000, commitLag=240s;
 ```
 
@@ -273,20 +252,20 @@ of out-of-order records is done via
 
 ```questdb-sql title="Adding a designated timestamp"
 CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP, s STRING)
-  timestamp(ts);
+  TIMESTAMP(ts);
 ```
 
 ```questdb-sql title="Adding a partitioning strategy by DAY"
 CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP, s STRING)
-  timestamp(ts)
+  TIMESTAMP(ts)
 PARTITION BY DAY;
 ```
 
 ```questdb-sql title="Adding parameters for symbol type"
 CREATE TABLE
-  my_table(symb SYMBOL capacity 256 nocache index capacity 1048576,
+  my_table(symb SYMBOL CAPACITY 256 NOCACHE INDEX CAPACITY 1048576,
   price DOUBLE, ts TIMESTAMP, s STRING)
-  timestamp(ts)
+  TIMESTAMP(ts)
 PARTITION BY DAY;
 ```
 
@@ -317,8 +296,8 @@ Notice the `where false` condition.
 
 ```questdb-sql title="Clone an existing wide table and change type of cherry-picked columns"
 CREATE TABLE x AS (SELECT * FROM table WHERE false),
-  cast(price AS LONG),
-  cast(instrument as SYMBOL);
+  CAST(price AS LONG),
+  CAST(instrument as SYMBOL);
 ```
 
 Here we changed type of `price` (assuming it was `INT`) to `LONG` and changed
@@ -334,7 +313,7 @@ now we want to turn this data into time series through ordering trips by
 ```questdb-sql title="Create table as select with data manipulation"
 CREATE TABLE taxi_trips AS(
   SELECT * FROM taxi_trips_unordered ORDER BY pickup_time
-) timestamp(pickup_time)
+) TIMESTAMP(pickup_time)
 PARTITION BY MONTH;
 ```
 
@@ -353,7 +332,7 @@ maximum uncommitted rows so that a commit will occur based on expected row
 count, or the _lag_ boundary is met:
 
 ```questdb-sql
-CREATE TABLE my_table (ts TIMESTAMP) timestamp(ts)
+CREATE TABLE my_table (ts TIMESTAMP) TIMESTAMP(ts)
 PARTITION BY DAY WITH maxUncommittedRows=250000, commitLag = 240s
 ```
 

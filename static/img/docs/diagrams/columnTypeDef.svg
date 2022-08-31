@@ -53,7 +53,7 @@
          <text class="terminal" x="59" y="285">symbol</text>
          <rect x="159" y="299" width="76" height="32" rx="10"/>
          <rect x="157" y="297" width="76" height="32" class="terminal" rx="10"/>
-         <text class="terminal" x="167" y="317">capacity</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#distinctValueEstimate" xlink:title="distinctValueEstimate">
+         <text class="terminal" x="167" y="317">CAPACITY</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#distinctValueEstimate" xlink:title="distinctValueEstimate">
             <rect x="255" y="299" width="156" height="32"/>
             <rect x="253" y="297" width="156" height="32" class="nonterminal"/>
             <text class="nonterminal" x="263" y="317">distinctValueEstimate</text></a><rect x="451" y="331" width="66" height="32" rx="10"/>
