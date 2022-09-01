@@ -32,13 +32,7 @@ partitions**!
 ## Drop partition by name
 
 The partition name must match the name of the directory for the given partition.
-The naming convention for partition directories is as follows:
-
-| Table Partition | Partition format |
-| --------------- | ---------------- |
-| `DAY`           | `YYYY-MM-DD`     |
-| `MONTH`         | `YYYY-MM`        |
-| `YEAR`          | `YYYY`           |
+The naming convention is detailed in [Partitions](docs/concept/partitions).
 
 ### Examples
 

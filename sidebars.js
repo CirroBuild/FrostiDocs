@@ -201,6 +201,7 @@ module.exports = {
             "reference/sql/latest-on",
             "reference/sql/limit",
             "reference/sql/order-by",
+            "reference/sql/reindex",
             "reference/sql/rename",
             "reference/sql/sample-by",
             "reference/sql/select",

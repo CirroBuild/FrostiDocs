@@ -24,6 +24,14 @@ import Screenshot from "@theme/Screenshot"
 - Default behavior is `PARTITION BY NONE`.
 - Partitions are defined at table creation. For more information, refer to
   [CREATE TABLE section](/docs/reference/sql/create-table).
+- The naming convention for partition directories is as follows:
+
+| Table Partition | Partition format |
+| --------------- | ---------------- |
+| `HOUR`          | `YYYY-MM-DD-HH`  |
+| `DAY`           | `YYYY-MM-DD`     |
+| `MONTH`         | `YYYY-MM`        |
+| `YEAR`          | `YYYY`           |
 
 :::info
 

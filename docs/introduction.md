@@ -182,6 +182,7 @@ can be used in QuestDB.
 - [LATEST ON](/docs/reference/sql/latest-on)
 - [LIMIT](/docs/reference/sql/limit)
 - [ORDER BY](/docs/reference/sql/order-by)
+- [REINDEX](/docs/reference/sql/reindex)
 - [RENAME TABLE](/docs/reference/sql/rename)
 - [SAMPLE BY](/docs/reference/sql/sample-by)
 - [SELECT](/docs/reference/sql/select)

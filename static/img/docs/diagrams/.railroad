@@ -156,6 +156,9 @@ addColumn
 dropPartition
  ::= 'DROP' 'PARTITION' 'LIST' partitionName (',' partitionName)*
 
+reindexTable
+  ::= 'REINDEX' 'TABLE' tableName ('COLUMN' columnName)* ('PARTITION' partitionName)* 'LOCK' 'EXCLUSIVE'
+
 renameColumn  
   ::= 'RENAME' columnName 'TO' columnName
 
