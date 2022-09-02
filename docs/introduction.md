@@ -166,6 +166,7 @@ can be used in QuestDB.
 - [ALTER TABLE RENAME COLUMN](/docs/reference/sql/alter-table-rename-column)
 - [ALTER TABLE DROP COLUMN](/docs/reference/sql/alter-table-drop-column)
 - [ALTER TABLE ATTACH PARTITION](/docs/reference/sql/alter-table-attach-partition)
+- [ALTER TABLE DETACH PARTITION](/docs/reference/sql/alter-table-detach-partition)
 - [ALTER TABLE DROP PARTITION](/docs/reference/sql/alter-table-drop-partition)
 - [ALTER TABLE SET PARAM](/docs/reference/sql/alter-table-set-param)
 - [BACKUP](/docs/reference/sql/backup)

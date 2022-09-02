@@ -183,6 +183,7 @@ module.exports = {
                 "reference/sql/alter-table-rename-column",
                 "reference/sql/alter-table-drop-column",
                 "reference/sql/alter-table-attach-partition",
+                "reference/sql/alter-table-detach-partition",
                 "reference/sql/alter-table-drop-partition",
                 "reference/sql/alter-table-set-param",
               ],

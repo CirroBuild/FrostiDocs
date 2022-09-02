@@ -11,9 +11,9 @@ createTableDef
   )?
 
 alterTable 
-  ::= 'ALTER' 'TABLE' tableName ( 'ADD' | 'ATTACH' | 'DROP' | 'RENAME' | 'SET' )
+  ::= 'ALTER' 'TABLE' tableName ( 'ADD' | 'ATTACH' | 'DETACH' | 'DROP' | 'RENAME' | 'SET' )
 
-castDef 
+castDef
   ::= 'cast' '(' columnRef 'as' typeDef ')'
 
 inlineIndexDef 
@@ -48,7 +48,7 @@ case
   ::= 'CASE' ('WHEN' condition 'THEN' value)* ( | 'ELSE' value ) 'END'
 
 Copy
-::= 'COPY' (id 'CANCEL' | tableName 'FROM' fileName (| 'WITH' (| 'HEADER' (true|false) |'TIMESTAMP' columnName | 'DELIMITER' delimiter | 'FORMAT' format | |'PARTITION BY' ('NONE'|'YEAR'|'MONTH'|'DAY'|'HOUR') | 'ON ERROR' ('SKIP_ROW'|'SKIP_COLUMN'|'ABORT')) ))
+  ::= 'COPY' (id 'CANCEL' | tableName 'FROM' fileName (| 'WITH' (| 'HEADER' (true|false) |'TIMESTAMP' columnName | 'DELIMITER' delimiter | 'FORMAT' format | |'PARTITION BY' ('NONE'|'YEAR'|'MONTH'|'DAY'|'HOUR') | 'ON ERROR' ('SKIP_ROW'|'SKIP_COLUMN'|'ABORT')) ))
 
 
 CreateTableTimestamp
@@ -163,7 +163,12 @@ renameColumn
   ::= 'RENAME' columnName 'TO' columnName
 
 attachPartition
- ::= 'ATTACH' 'PARTITION' 'LIST' partitionName (',' partitionName)*
+ ::= 'ALTER' 'TABLE' tableName 'ATTACH' 'PARTITION' 'LIST' partitionName (',' partitionName)*
+
+detachPartition
+ ::= 'ALTER' 'TABLE' tableName 'DETACH' 'PARTITION' 'LIST' partitionName (',' partitionName)*
+   | 'ALTER' 'TABLE' tableName 'DETACH' 'PARTITION' 'WHERE' timestampColumn ( '=' | '>' | '<' | '>=' | '<=' ) "'" timestamp "'"
+   | 'ALTER' 'TABLE' tableName 'DETACH' 'PARTITION' 'WHERE' timestampColumn 'IN' '(' timestamp (',' timestamp)* ')'
 
 setParam
  ::= 'SET' 'PARAM' ( 'maxUncommittedRows' '=' n | 'commitLag' '=' n ( 'us' | 's' | 'm' | 'h' | 'd' ))

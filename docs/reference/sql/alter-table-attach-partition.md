@@ -4,101 +4,44 @@ sidebar_label: ATTACH PARTITION
 description: ATTACH PARTITION SQL keyword reference documentation.
 ---
 
-Attaches one or more partitions to a table. This feature is designed to support
-attaching partitions from a backup or copying and attaching partitions across a
-network between QuestDB instances.
+Restores one or more partitions to the table where they have been detached from by using the SQL [ALTER TABLE DETACH PARTITION](alter-table-detach-partition) keyword. The operation scans the table partition files and rename the selected partition directories, so that these partitions become accessible.
 
-Before running an `ATTACH PARTITION` query, partitions must first be copied in
-the format `<partition_name>.detached` to the storage directory of the table to
-which they will be attached. Given a partition named `2020`, it must be copied
-to the destination table as `2020.detached`. Details of the naming format for
-detached partitions along with example commands for copying and attaching
-partitions can be found in the [examples section below](#examples).
-
-:::caution
-
-This operation is only supported on the partiton was copied from the same table at some point in the past.
-Moving partitions between tables or database instances is not supported.
-
-:::
+This feature is part of the manual S3/cold storage solution, allowing restoring data manually.
 
 ## Syntax
 
-![Flow chart showing the syntax of the ALTER TABLE keyword](/img/docs/diagrams/alterTable.svg)
 ![Flow chart showing the syntax of ALTER TABLE with ATTACH PARTITION keyword](/img/docs/diagrams/alterTableAttachPartition.svg)
 
-## Examples
+## Example
 
-Assuming a backup directory `~/backup/` exists for a table `sensor_data` which
-was partitioned by `YEAR`, the following example demonstrates how to attach the
-2020 partition to a table named `sensor_data`:
+Assuming the QuestDB data directory is `/var/lib/questdb/db`, for a table `x` with AWS S3 for cold storage:
 
-```bash
-cp -r ~/backup/2021-01-01/sensor_data/2020 /path/to/questdb/db/sensor_data/2020.detached
-```
+1. Copy files from S3:
 
-The directory structure of the `sensor_data` table should look like the
-following:
+    ```bash
+    cd /var/lib/questdb/db/x
+    # Table x is the original table where the partition were detached from.
+    
+    mkdir 2019-02-01.attachable && aws s3 cp s3://questdb-internal/blobs/20190201.tar.gz - | tar xvfz - -C 2019-02-01.attachable --strip-components 1
+    mkdir 2019-02-02.attachable && aws s3 cp s3://questdb-internal/blobs/20190202.tar.gz - | tar xvfz - -C 2019-02-01.attachable --strip-components 1
+    ```
 
-```bash
-db
-└── sensor_data
-    ├── 2020.detached
-    │   ├── device_version.d
-    │   ├── driver.d
-    │   └── ...
-    └── 2021
-        ├── device_version.d
-        ├── driver.d
-        └── ...
-```
+2. Execute the SQL `ALTER TABLE ATTACH PARTITION` command:
 
-The following SQL query will attach the `2020` partition to the `sensor_data`
-table:
-
-```questdb-sql
-ALTER TABLE sensor_data ATTACH PARTITION LIST '2020';
-```
-
-The structure of the `sensor_data` table will then reflect that the `2020`
-partition has been successfully attached:
-
-```bash
-db
-└── sensor_data
-    ├── 2020
-    │   └── ...
-    └── 2021
-        └── ...
-```
+    ```questdb-sql
+    ALTER TABLE x ATTACH PARTITION LIST '2019-02-01', '2019-02-02';
+    ```
+3. After the SQL is executed, the partitions will be available to reads.
 
 :::info
 
-Details of creating backups can be found on the
-[BACKUP syntax](/docs/reference/sql/backup) reference page.
+- The SQL reference to the partitions does not include the suffix `.attachable`.
+- The `WHERE` clause is not supported when attaching partitions.
 
 :::
 
-Partitions may be referred to by `YEAR`, `MONTH`, `DAY`, or `HOUR`:
+## Limitation
 
-```questdb-sql title="Attach a partition by name"
---DAY
-ALTER TABLE sensor_data ATTACH PARTITION LIST '2019-05-18';
---MONTH
-ALTER TABLE sensor_data ATTACH PARTITION LIST '2019-05';
---YEAR
-ALTER TABLE sensor_data ATTACH PARTITION LIST '2019';
-```
-
-Multiple partitions may be copied and attached to a table:
-
-```bash title="Copying multiple partitions to the sensor_data table"
-cp -r ~/backup/2021-01-01/sensor_data/2020 /path/to/questdb/db/sensor_data/2020.detached
-cp -r ~/backup/2021-01-01/sensor_data/2019 /path/to/questdb/db/sensor_data/2019.detached
-```
-
-The partitions are attached by providing a comma-separated list of partitions:
-
-```questdb-sql title="Attach multiple partitions"
-ALTER TABLE sensor_data ATTACH PARTITION LIST '2019','2020';
-```
+- S3/Cold storage interaction is manual.
+- Partition can only be attached to the same table it was detached from. The table name must be the same. Moving partitions between tables or database instances is not supported. 
+- The operation will fail if a partition already exists. We are working on a functionality to allow merging data in the same partition for attaching.
