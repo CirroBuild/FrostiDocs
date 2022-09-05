@@ -4,7 +4,7 @@ sidebar_label: ATTACH PARTITION
 description: ATTACH PARTITION SQL keyword reference documentation.
 ---
 
-Restores one or more partitions to the table where they have been detached from by using the SQL [ALTER TABLE DETACH PARTITION](alter-table-detach-partition) keyword. The operation scans the table partition files and rename the selected partition directories, so that these partitions become accessible.
+Restores one or more partitions to the table where they have been detached from by using the SQL [ALTER TABLE DETACH PARTITION](/docs/reference/sql/alter-table-detach-partition) keyword. The operation scans the table partition files and rename the selected partition directories, so that these partitions become accessible.
 
 This feature is part of the manual S3/cold storage solution, allowing restoring data manually.
 
