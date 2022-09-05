@@ -201,6 +201,20 @@ const CentralGroup = () => {
             marketing campaign triggers.
           </p>
 
+          <Image
+            src="/img/pages/case-study/central-group/dashboard.png"
+            width={828}
+            height={331}
+            description="Real-time performance marketing: This dashboard monitors the effect of marketing campaigns in sales and the corresponding product stock, highlighting products low in stock. Tracking discount and order allows quick analysis of revenue and stock distribution (screenshot altered to protect sensitive data)."
+          />
+
+          <Image
+            src="/img/pages/case-study/central-group/dashboard-2.png"
+            width={819}
+            height={308}
+            description="QuestDB powers the marketing performance tracking dashboard, allowing dynamic comparison between various advertisement platforms across a selected time span (screenshot altered to protect sensitive data)."
+          />
+
           <p className="font-size--large">
             Since we aggregate data from both online and offline sales, our
             Business Control Tower can correlate online sales with the physical
@@ -241,6 +255,13 @@ const CentralGroup = () => {
             description="High-level overview of the Business Control Tower solution at Central Group."
           />
 
+          <Image
+            src="/img/pages/case-study/central-group/dashboard-5.png"
+            width={981}
+            height={520}
+            description="Grafana dashboards querying QuestDB database."
+          />
+
           <h3>Why QuestDB?</h3>
 
           <p className="font-size--large">
@@ -258,13 +279,6 @@ const CentralGroup = () => {
             SingleStore did not provide any sensible recovery mechanisms when
             the system crashed, and it was also costly.
           </p>
-
-          <Image
-            src="/img/pages/case-study/central-group/dashboard-6.png"
-            width={933}
-            height={292}
-            description="Managing hardware performance is one of the challenges for real-time analytics."
-          />
 
           <p className="font-size--large">
             In the end, QuestDB stood out for the following reasons:
