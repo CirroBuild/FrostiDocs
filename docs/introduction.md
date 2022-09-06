@@ -163,6 +163,7 @@ can be used in QuestDB.
 - [Data types](/docs/reference/sql/datatypes)
 - [ALTER TABLE ADD COLUMN](/docs/reference/sql/alter-table-add-column)
 - [ALTER TABLE ALTER COLUMN ADD INDEX](/docs/reference/sql/alter-table-alter-column-add-index)
+- [ALTER TABLE ALTER COLUMN DROP INDEX](/docs/reference/sql/alter-table-alter-column-drop-index)
 - [ALTER TABLE RENAME COLUMN](/docs/reference/sql/alter-table-rename-column)
 - [ALTER TABLE DROP COLUMN](/docs/reference/sql/alter-table-drop-column)
 - [ALTER TABLE ATTACH PARTITION](/docs/reference/sql/alter-table-attach-partition)

@@ -147,6 +147,9 @@ with
 addIndex
  ::= 'ALTER' 'COLUMN' columnName 'ADD' 'INDEX'
 
+dropIndex
+    ::= 'ALTER' 'TABLE' tableName 'ALTER' 'COLUMN' columnName 'DROP' 'INDEX'
+
 dropColumn
  ::= 'DROP' 'COLUMN' columnName (',' columnName)*
 
