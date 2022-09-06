@@ -10,6 +10,12 @@ QuestDB offers the option to elect a column as a _designated timestamp_. This
 allows you to specify which column the tables will be indexed by in order to
 leverage time-oriented language features and high-performance functionalities.
 
+A designated timestamp is elected by using the [`timestamp(columnName)`](/docs/reference/function/timestamp) function:
+
+- during a [CREATE TABLE](/docs/reference/sql/create-table#timestamp) operation
+- during a [SELECT](/docs/reference/sql/select#timestamp) operation (`dynamic timestamp`)
+- when ingesting data via ILP, for tables that do not already exist in QuestDB, partitions are applied automatically by day by default with a `timestamp` column
+
 :::info
 
 Checking if tables contain a designated timestamp column can be done via the
@@ -22,10 +28,6 @@ Checking if tables contain a designated timestamp column can be done via the
 
 - Only a column of type `timestamp` can be elected as a designated timestamp.
 - Only one column can be elected for a given table.
-- A designated timestamp is elected either:
-  - during table creation
-  - within a query using a
-    [timestamp function](/docs/reference/function/timestamp)
 
 ## Out-of-order policy
 
