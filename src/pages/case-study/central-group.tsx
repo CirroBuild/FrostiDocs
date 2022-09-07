@@ -62,7 +62,7 @@ const CentralGroup = () => {
 
   return (
     <Layout
-      canonical="/case-study/case-study/central-group/"
+      canonical="/case-study/central-group/"
       description={description}
       title={title}
       image="/img/pages/case-study/central-group/header.jpg"

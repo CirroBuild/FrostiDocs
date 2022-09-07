@@ -189,6 +189,40 @@ const Customer = () => {
 
       <section className={clsx(seCss.section, seCss["section--inner"])}>
         <div className={caCss.card}>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="Copenhagen Atomics"
+              src="/img/pages/case-study/copenhagen-atomics/banner.png"
+            />
+          </div>
+          <p className={caCss.card__summary}>
+            <img
+              alt="Copenhagen Atomics Logo"
+              className={caCss.card__logo}
+              height={50}
+              src="/img/pages/customers/logos/ca.svg"
+              width={150}
+            />
+            “QuestDB was our choice for real time data due to high performance,
+            open source, high flexibility and great support. Performance was
+            significantly better than the competition and we believe that
+            QuestDB will become market leading.”
+            <em className={caCss.card__author}>
+              - <strong>Lasse Tarp</strong>, Software Group Manager, Copenhagen
+              Atomics
+            </em>
+            <Button
+              className={caCss.card__cta}
+              to="/case-study/copenhagen-atomics/"
+            >
+              View full case study
+            </Button>
+          </p>
+        </div>
+      </section>
+
+      <section className={clsx(seCss.section, seCss["section--inner"])}>
+        <div className={caCss.card}>
           <p className={caCss.card__summary}>
             <img
               alt="Centralgroup logo"
