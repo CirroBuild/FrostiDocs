@@ -83,6 +83,13 @@ Support for `SELECT`, `INSERT`, `UPDATE`, `CREATE`, `DROP`, `TRUNCATE`.
 
 #### [pq](https://www.postgresql.org/docs/12/libpq.html) (C) `12`
 
+#### [Psycopg](https://www.psycopg.org) (Python) `2.9.3` and `3.1`
+
+#### [ruby-pg](https://github.com/ged/ruby-pg) (Ruby) `1.4.3`
+
+#### [pg_connect](https://www.php.net/manual/en/function.pg-connect.php) (PHP) `8.1.0`
+ 
+
 ### Drivers
 
 #### [JDBC](https://jdbc.postgresql.org/) `42.2`
