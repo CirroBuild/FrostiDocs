@@ -331,11 +331,9 @@ const config = {
         },
 
         sitemap: {
-          // Removed: https://github.com/ekalinin/sitemap.js/blob/master/CHANGELOG.md#50-breaking-changes
-          // cacheTime: 600 * 1000, // 600 sec - cache purge period
           changefreq: "daily",
           priority: 0.7,
-          trailingSlash: false,
+          trailingSlash: true,
         },
         theme: {
           customCss: [
