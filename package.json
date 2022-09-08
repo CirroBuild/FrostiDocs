@@ -4,12 +4,9 @@
   "private": true,
   "license": "Apache-2.0",
   "scripts": {
-    "prestart": "tsc --project plugins/tsconfig.json",
     "start": "docusaurus start",
-    "pre-build": "cross-env FORCE=true node scripts/optimise-images.js",
-    "prebuild": "docusaurus clear && node scripts/optimise-images.js && npm run prestart",
+    "prebuild": "docusaurus clear && node scripts/optimise-images.js",
     "build": "cross-env USE_SIMPLE_CSS_MINIFIER=true PWA_SW_CUSTOM= docusaurus build",
-    "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
     "prepare": "node ./prepare.js"
@@ -40,7 +37,6 @@
     "react-remark": "^2.1.0",
     "react-transition-group": "4.4.1",
     "rehype-katex": "4",
-    "remark-admonitions": "^1.2.1",
     "remark-math": "3",
     "throttle-debounce": "3.0.1",
     "typescript": "4.0.5",

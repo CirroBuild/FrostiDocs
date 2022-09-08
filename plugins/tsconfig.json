@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "outDir": "tutorial/compiled",
-    "esModuleInterop": true,
-    "skipLibCheck": true
-  },
-  "include": ["tutorial/index.ts", "tutorial/markdownLoader.ts"]
-}
