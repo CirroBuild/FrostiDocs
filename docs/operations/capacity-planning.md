@@ -278,7 +278,7 @@ done in response to such OS errors.
 
 The storage model of QuestDB has the benefit that most data structures relate
 closely to the file system, with columnar data being stored in its own `.d` file
-per partition. In edge cases with extremely large tables, the number of open
+per partition. In edge cases with extremely large tables, frequent out-of-order ingestion, or high number of table partitions, the number of open
 files may hit a user or system-wide maximum limit and can cause unpredictable
 behavior.
 
