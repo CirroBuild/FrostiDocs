@@ -253,13 +253,15 @@ const CopenhagenAtomics = () => {
           />
 
           <p className="font-size--large">
-            At Copenhagen Atomics we also sell loops for {" "}
-            <a href="https://www.copenhagenatomics.com/technology">testing equipment</a>
-            . The plot shown above is a selection of
-            some of the temperature sensors delivered in real time with the
-            loop. Selecting what to see in a plot is done by the end user -
-            properties such as colors and scaling can be configured. All data is
-            fetched from QuestDB and downsampled with the query SAMPLE BY.
+            At Copenhagen Atomics we also sell loops for{" "}
+            <a href="https://www.copenhagenatomics.com/technology">
+              testing equipment
+            </a>
+            . The plot shown above is a selection of some of the temperature
+            sensors delivered in real time with the loop. Selecting what to see
+            in a plot is done by the end user - properties such as colors and
+            scaling can be configured. All data is fetched from QuestDB and
+            downsampled with the query SAMPLE BY.
           </p>
 
           <p className="font-size--large">
