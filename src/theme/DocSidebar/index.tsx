@@ -165,6 +165,9 @@ function DocSidebarItemCategory({
   )
 }
 
+const ensureTrailingSlash = (url: string) =>
+  isInternalUrl(url) && !url.endsWith("/") ? `${url}/` : url
+
 function DocSidebarItemLink({
   item,
   onItemClick,
@@ -181,7 +184,7 @@ function DocSidebarItemLink({
           "menu__link--active": isActive,
           [styles.menuLinkExternal]: !isInternalUrl(href),
         })}
-        to={href}
+        to={ensureTrailingSlash(href)}
         {...(isInternalUrl(href) && {
           isNavLink: true,
           exact: true,

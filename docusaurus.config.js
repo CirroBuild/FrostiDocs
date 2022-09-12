@@ -144,19 +144,19 @@ const config = {
           items: [
             {
               label: "QuestDB Cloud",
-              to: "/cloud",
+              to: "/cloud/",
             },
             {
               label: "QuestDB Enterprise",
-              to: "/enterprise",
+              to: "/enterprise/",
             },
             {
               label: "Use Cases",
-              to: "/use-cases",
+              to: "/use-cases/",
             },
             {
               label: "Customers",
-              to: "/customers",
+              to: "/customers/",
             },
             {
               label: "Roadmap",
@@ -170,7 +170,7 @@ const config = {
           items: [
             {
               label: "Blog",
-              to: "/blog",
+              to: "/blog/",
               activeBaseRegex: "/blog/?$",
             },
             {
@@ -180,7 +180,7 @@ const config = {
             },
             {
               label: "QuestDB Swag",
-              to: "/community",
+              to: "/community/",
             },
             {
               label: "Slack Community",
@@ -190,12 +190,12 @@ const config = {
         },
         {
           label: "Docs",
-          to: "/docs",
+          to: "/docs/",
           position: "left",
         },
         {
           label: "We're Hiring",
-          to: "/careers",
+          to: "/careers/",
           position: "left",
           className: "careers-link",
         },
@@ -215,19 +215,19 @@ const config = {
           items: [
             {
               label: "Cloud",
-              to: "/cloud",
+              to: "/cloud/",
             },
             {
               label: "Enterprise",
-              to: "/enterprise",
+              to: "/enterprise/",
             },
             {
               label: "Use Cases",
-              to: "/use-cases",
+              to: "/use-cases/",
             },
             {
               label: "Customers",
-              to: "/customers",
+              to: "/customers/",
             },
             {
               label: "Roadmap",
@@ -240,15 +240,15 @@ const config = {
           items: [
             {
               label: "Docs",
-              to: "/docs",
+              to: "/docs/",
             },
             {
               label: "Tutorials",
-              to: "/tutorial",
+              to: "/tutorial/",
             },
             {
               label: "Blog",
-              to: "/blog",
+              to: "/blog/",
             },
             {
               label: "Discussions",
@@ -260,7 +260,7 @@ const config = {
             },
             {
               label: "Swag",
-              to: "/community",
+              to: "/community/",
             },
           ],
         },
@@ -269,11 +269,11 @@ const config = {
           items: [
             {
               label: "About us",
-              to: "/about-us",
+              to: "/about-us/",
             },
             {
               label: "Careers",
-              to: "/careers",
+              to: "/careers/",
             },
           ],
         },
