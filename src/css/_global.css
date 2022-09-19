@@ -466,17 +466,3 @@ html[data-theme='light'] .themedDocusaurus [fill='#FFFF50'] {
 html[data-theme='light'] .react-toggle-track {
   background-color: #ebedf0;
 }
-
-html[data-theme='light'] #__docusaurus > footer li,
-html[data-theme='light'] [class^='footer__bottom'] {
-  color: var(--palette-white);
-}
-
-html[data-theme='light'] [class^='footer__tagline'] {
-  color: #979aaf;
-}
-
-/* purposefuly excessive selector to increase specificity */
-html[data-theme='light'] [class^='footer__github'][href*="github.com"] {
-  background-color: var(--palette-white);
-}

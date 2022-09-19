@@ -1,27 +1,24 @@
-import clsx from "clsx"
 import useBaseUrl from "@docusaurus/useBaseUrl"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
+import Button from "@theme/Button"
+import clsx from "clsx"
 import React from "react"
 import customFields from "../../config/customFields"
+import styles from "./styles.module.css"
 
-import Button from "@theme/Button"
-
-import sectionCss from "../../css/section.module.css"
-import footerStyles from "./styles.module.css"
-
-type Props = Readonly<{
+type Props = {
   href?: string
   label: string
   to?: string
-}>
+}
 
-const FooterLink = ({ to, href, label, ...props }: Props) => {
+const Link = ({ to, href, label, ...props }: Props) => {
   const linkHref = useBaseUrl(href ?? "", { forcePrependBaseUrl: undefined })
   const linkTo = useBaseUrl(to ?? "")
 
   return (
     <a
-      className={footerStyles.footer__link}
+      className={styles.link}
       {...(href != null
         ? {
             href: linkHref,
@@ -45,31 +42,22 @@ const Footer = () => {
   } = siteConfig
 
   return (
-    <footer className={clsx(footerStyles.footer, sectionCss.section)}>
-      <div
-        className={clsx(
-          footerStyles.footer__inner,
-          sectionCss["section--inner"],
-        )}
-      >
-        <div
-          className={clsx(
-            footerStyles.footer__column,
-            footerStyles["footer__column--left"],
-          )}
-        >
-          <img
-            alt="QuestDB logo"
-            className={footerStyles.footer__logo}
-            height={27}
-            src="/img/footer/questdb.svg"
-            title="QuestDB - Fastest open source database for time series and analytics"
-            width={108}
-          />
-          <p className={footerStyles.footer__tagline}>{siteConfig.tagline}</p>
+    <footer className={styles.root}>
+      <div className={clsx(styles.content, styles.center)}>
+        <img
+          alt="QuestDB logo"
+          className={styles.logo}
+          src="/img/footer/questdb.svg"
+          title="QuestDB - Fastest open source database for time series and analytics"
+          width={108}
+          height={27}
+        />
+
+        <div className={styles.tagline}>
+          <p>{siteConfig.tagline}</p>
 
           <Button
-            className={footerStyles.footer__github}
+            className={styles.githubButton}
             href={customFields.githubUrl}
             icon={
               <img
@@ -87,53 +75,39 @@ const Footer = () => {
             Star us on GitHub
           </Button>
         </div>
-
-        <div
-          className={clsx(
-            footerStyles.footer__column,
-            footerStyles["footer__column--right"],
-          )}
-        >
+        <div className={styles.links}>
           {links.map((linkItem, i) => (
-            <div key={i} className={footerStyles.footer__links}>
-              <ul className={footerStyles.footer__items}>
-                {linkItem.title != null && (
-                  <li className={footerStyles.footer__title}>
-                    {linkItem.title}
-                  </li>
-                )}
+            <div key={i} className={styles.category}>
+              {Boolean(linkItem.title) && (
+                <span className={styles.title}>{linkItem.title}</span>
+              )}
 
-                {linkItem.items?.map((item) => (
-                  <li
-                    className={footerStyles.footer__item}
-                    key={item.href ?? item.to}
-                  >
-                    <FooterLink {...item} />
-                  </li>
-                ))}
-              </ul>
+              {linkItem.items?.length > 0 && (
+                <ul className={styles.items}>
+                  {linkItem.items.map((item) => (
+                    <li className={styles.item} key={item.href ?? item.to}>
+                      <Link {...item} />
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </div>
       </div>
-      <div className={footerStyles.footer__bottom}>
-        <p className={footerStyles.footer__copyright}>
+
+      <div className={styles.border}>
+        <div className={clsx(styles.bottom, styles.center)}>
           {customFields.copyright}
-          <ul>
-            <li className={footerStyles.footer__item}>
-              <a className={footerStyles.footer__link} href="/privacy-notice/">
-                Privacy
-              </a>
-            </li>
-          </ul>
-          <ul>
-            <li className={footerStyles.footer__item}>
-              <a className={footerStyles.footer__link} href="/terms/">
-                Terms
-              </a>
-            </li>
-          </ul>
-        </p>
+
+          <a className={styles.link} href="/privacy-notice/">
+            Privacy
+          </a>
+
+          <a className={styles.link} href="/terms/">
+            Terms
+          </a>
+        </div>
       </div>
     </footer>
   )
