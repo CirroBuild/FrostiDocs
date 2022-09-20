@@ -244,7 +244,7 @@ const config = {
             },
             {
               label: "Tutorials",
-              to: "/tutorial/",
+              to: "/blog/tags/tutorial/",
             },
             {
               label: "Blog",
