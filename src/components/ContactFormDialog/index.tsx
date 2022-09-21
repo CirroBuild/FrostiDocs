@@ -104,9 +104,7 @@ export const ContactFormDialog = ({
                         handleNameChange(event.currentTarget.value)
                       }
                       type="text"
-                      title="Name can't be blank"
-                      placeholder="Name*"
-                      required
+                      placeholder="Name"
                     />
 
                     <Input
