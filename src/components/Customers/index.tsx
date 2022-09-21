@@ -41,7 +41,7 @@ type Props = {
   nbElements: number
 }
 
-const Slideshow = ({ nbElements }: Props) => {
+const Customers = ({ nbElements }: Props) => {
   const nbPanels = Math.ceil(Object.values(logos).length / nbElements)
   const panels = Array.from({ length: nbPanels }, (_, index) => index + 1)
 
@@ -107,4 +107,4 @@ const Slideshow = ({ nbElements }: Props) => {
   )
 }
 
-export default Slideshow
+export default Customers

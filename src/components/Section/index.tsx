@@ -2,6 +2,9 @@ import React from "react"
 import style from "./styles.module.css"
 import clsx from "clsx"
 
+import { Title } from "./Title"
+import { Subtitle } from "./Subtitle"
+
 type Props = {
   children: React.ReactNode
   odd?: boolean
@@ -9,6 +12,8 @@ type Props = {
   row?: boolean
   fullWidth?: boolean
   noGap?: boolean
+  center?: boolean
+  className?: string
 }
 
 export const Section = ({
@@ -18,49 +23,25 @@ export const Section = ({
   accent,
   row,
   noGap,
+  center,
+  className = "",
 }: Props) => (
   <div
-    className={clsx(style.root, {
-      [style.odd]: odd,
-      [style.accent]: accent,
-      [style.row]: row,
-      [style.fullWidth]: fullWidth,
-      [style.noGap]: noGap,
-    })}
+    className={clsx(
+      style.root,
+      {
+        [style.odd]: odd,
+        [style.accent]: accent,
+        [style.row]: row,
+        [style.fullWidth]: fullWidth,
+        [style.noGap]: noGap,
+        [style.center]: center,
+      },
+      className,
+    )}
   >
     {children}
   </div>
-)
-
-const Title = ({
-  level = 2,
-  children,
-  center,
-}: {
-  level?: 1 | 2 | 3 | 4 | 5 | 6
-  children: React.ReactNode
-  center?: boolean
-}) =>
-  React.createElement(
-    `h${level}`,
-    {
-      className: clsx(style.title, { [style.center]: center }),
-    },
-    children,
-  )
-
-const Subtitle = ({
-  children,
-  center,
-  className = "",
-}: {
-  children: React.ReactNode
-  center?: boolean
-  className?: string
-}) => (
-  <span className={clsx(style.subtitle, { [style.center]: center }, className)}>
-    {children}
-  </span>
 )
 
 Section.Title = Title

@@ -1,23 +1,21 @@
 import clsx from "clsx"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
-import Highlight from "../components/Highlight"
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useState } from "react"
 import Customers from "../components/Customers"
 import customFields from "../config/customFields"
+import { QueryScroller } from "../components/QueryScroller"
 
 import Button from "@theme/Button"
-import Chevron from "@theme/Chevron"
 import Layout from "../theme/Layout"
-import useWindowWidth from "@theme/useWindowWidth"
 import SvgImage from "../components/SvgImage"
 import { ActionFooter } from "../components/ActionFooter"
+import { Section } from "../components/Section"
 
 import doCss from "../css/index/docker.module.css"
 import feCss from "../css/index/feature.module.css"
 import inCss from "../css/index/integration.module.css"
 import juCss from "../css/index/jumbotron.module.css"
 import meCss from "../css/index/menu.module.css"
-import shCss from "../css/index/showcase.module.css"
 import usCss from "../css/index/usp.module.css"
 import prCss from "../css/property.module.css"
 import seCss from "../css/section.module.css"
@@ -34,37 +32,17 @@ import PlotlyLogo from "../assets/img/pages/index/integrations/plotly.svg"
 import MindsdbLogo from "../assets/img/pages/index/integrations/mindsdb.svg"
 import CubeLogo from "../assets/img/pages/index/integrations/cube.svg"
 import DockerLogo from "../assets/img/pages/index/docker.svg"
-import SearchTimeIcon from "../assets/img/pages/index/searchTime.svg"
-import SliceTimeIcon from "../assets/img/pages/index/sliceTime.svg"
-import NavigateTimeIcon from "../assets/img/pages/index/navigateTime.svg"
-import MergeTimeIcon from "../assets/img/pages/index/mergeTime.svg"
 
+type FeatureTab = "digital" | "realtime" | "integration"
 const FeatureTabs = () => {
-  const [opened, setOpened] = useState<"digital" | "realtime" | "integration">(
-    "digital",
-  )
-  const handleClickIs = useCallback(() => {
-    setOpened("digital")
-  }, [])
-  const handleClickGoodFor = useCallback(() => {
-    setOpened("realtime")
-  }, [])
-  const handleClickIsNot = useCallback(() => {
-    setOpened("integration")
-  }, [])
+  const [opened, setOpened] = useState<FeatureTab>("digital")
 
   return (
-    <section className={clsx(seCss.section, seCss["section--odd"])}>
-      <div className={clsx(seCss["section--inner"], seCss["section--center"])}>
-        <h2
-          className={clsx(
-            seCss.section__title,
-            seCss["section__title--wide"],
-            "text--center",
-          )}
-        >
+    <Section fullWidth odd>
+      <Section noGap>
+        <Section.Title size="small" center>
           Why QuestDB?
-        </h2>
+        </Section.Title>
 
         <div
           className={clsx(
@@ -73,30 +51,21 @@ const FeatureTabs = () => {
           )}
         >
           <div className={meCss.menu__list}>
-            <Button
-              className={meCss.menu__button}
-              onClick={handleClickIs}
-              size="small"
-              variant={opened === "digital" ? "primary" : "tertiary"}
-            >
-              Simplicity
-            </Button>
-            <Button
-              className={meCss.menu__button}
-              onClick={handleClickGoodFor}
-              size="small"
-              variant={opened === "realtime" ? "primary" : "tertiary"}
-            >
-              Performance
-            </Button>
-            <Button
-              className={meCss.menu__button}
-              onClick={handleClickIsNot}
-              size="small"
-              variant={opened === "integration" ? "primary" : "tertiary"}
-            >
-              Open Source
-            </Button>
+            {[
+              { label: "Simplicity", id: "digital" },
+              { label: "Performance", id: "realtime" },
+              { label: "Open Source", id: "integration" },
+            ].map((tab) => (
+              <Button
+                key={tab.id}
+                className={meCss.menu__button}
+                onClick={() => setOpened(tab.id as FeatureTab)}
+                size="small"
+                variant={opened === tab.id ? "primary" : "tertiary"}
+              >
+                {tab.label}
+              </Button>
+            ))}
           </div>
 
           <div className={meCss.menu__content}>
@@ -146,8 +115,8 @@ const FeatureTabs = () => {
             </Button>
           </div>
         </div>
-      </div>
-    </section>
+      </Section>
+    </Section>
   )
 }
 
@@ -169,22 +138,10 @@ const integrations: Array<{
 ]
 
 const Integration = () => (
-  <section
-    className={clsx(
-      seCss.section,
-      seCss["section--inner"],
-      seCss["section--center"],
-    )}
-  >
-    <h2
-      className={clsx(
-        seCss.section__title,
-        seCss["section__title--wide"],
-        "text--center",
-      )}
-    >
+  <Section>
+    <Section.Title size="small" center>
       Integration with the tools you love
-    </h2>
+    </Section.Title>
 
     <div className={inCss.integration}>
       {integrations.map(({ label, image, title }, index: number) => {
@@ -197,36 +154,18 @@ const Integration = () => (
         )
       })}
     </div>
-  </section>
+  </Section>
 )
 
 const Top = () => {
   const { siteConfig } = useDocusaurusContext()
 
   return (
-    <section
-      className={clsx(seCss["section--inner"], seCss["section--slim--accent"])}
-    >
+    <Section center className={juCss.top}>
       <div className={juCss.jumbotron}>
-        <h1
-          className={clsx(
-            seCss.section__title,
-            seCss["section__title--jumbotron"],
-            seCss["section__title--accent"],
-          )}
-        >
-          Fast SQL for time series
-        </h1>
+        <Section.Title level={1}>Fast SQL for time series</Section.Title>
 
-        <p
-          className={clsx(
-            seCss.section__subtitle,
-            seCss["section__subtitle--jumbotron"],
-            seCss["section__subtitle--accent"],
-          )}
-        >
-          {siteConfig.tagline}
-        </p>
+        <Section.Subtitle>{siteConfig.tagline}</Section.Subtitle>
 
         <div className={juCss.jumbotron__cta}>
           <Button className={juCss.jumbotron__link} href={customFields.demoUrl}>
@@ -272,96 +211,94 @@ docker run -p 9000:9000 questdb/questdb`}
           </a>
         </pre>
       </div>
-    </section>
+    </Section>
   )
 }
 
-const Usp = () => (
-  <section className={clsx(seCss.section, seCss["section--odd"])}>
-    <div className={seCss["section--inner"]}>
-      <div className={usCss.usp}>
-        <div className={usCss.usp__inner}>
-          <img
-            alt="Speedometer"
-            className={usCss.usp__illustration}
-            height={113}
-            src="/img/pages/index/rawPower.svg"
-            width={176}
-          />
+const useCases = [
+  {
+    logo: {
+      alt: "Speedometer",
+      src: "/img/pages/index/rawPower.svg",
+      width: 176,
+      height: 113,
+    },
+    title: "Built for performance",
+    uses: [
+      "SIMD-optimized analytics",
+      "Row- and column-based access",
+      "Vectorized query execution",
+      "Tiny memory footprint",
+      "C++ and zero-GC Java",
+    ],
+  },
+  {
+    logo: {
+      alt: "A code editor with a chart that shows the result of the query",
+      src: "/img/pages/index/easyToUse.svg",
+      width: 205,
+      height: 113,
+    },
+    title: "Optimized for time series",
+    uses: [
+      "Relational model for time series",
+      "Data stored in chronological order",
+      "Time partitioned",
+      "Immediate consistency",
+      "Fast InfluxDB line protocol",
+    ],
+  },
+  {
+    logo: {
+      alt: "A code editor containing a SQL statement",
+      height: 113,
+      src: "/img/pages/index/featureRich.svg",
+      width: 176,
+    },
+    title: "Implemented with SQL",
+    uses: [
+      "Time series and relational joins",
+      "Postgres compatibility",
+      "Aggregations and downsampling",
+      "Geospatial-native queries",
+      "Built-in SQL optimizer",
+    ],
+  },
+]
+const UseCases = () => (
+  <Section odd fullWidth noGap>
+    <Section row>
+      {useCases.map(({ logo, title, uses }, index) => (
+        <div className={usCss.usp} key={index}>
+          <div className={usCss.usp__inner}>
+            <img
+              alt={logo.alt}
+              className={usCss.usp__illustration}
+              src={logo.src}
+              width={logo.width}
+              height={logo.height}
+            />
 
-          <h2 className={usCss.usp__title}>Built for performance</h2>
+            <h2 className={usCss.usp__title}>{title}</h2>
 
-          <p className={usCss.usp__description}>SIMD-optimized analytics</p>
-          <p className={usCss.usp__description}>Row- and column-based access</p>
-          <p className={usCss.usp__description}>Vectorized query execution</p>
-          <p className={usCss.usp__description}>Tiny memory footprint</p>
-          <p className={usCss.usp__description}>C++ and zero-GC Java</p>
+            {uses.map((use, index) => (
+              <p key={index} className={usCss.usp__description}>
+                {use}
+              </p>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <div className={clsx(usCss.usp, usCss["usp--wide"])}>
-        <div className={usCss.usp__inner}>
-          <img
-            alt="A code editor with a chart that shows the result of the query"
-            className={usCss.usp__illustration}
-            height={113}
-            src="/img/pages/index/easyToUse.svg"
-            width={205}
-          />
-
-          <h2 className={usCss.usp__title}>Optimized for time series</h2>
-
-          <p className={usCss.usp__description}>
-            Relational model for time series
-          </p>
-          <p className={usCss.usp__description}>
-            Data stored in chronological order
-          </p>
-          <p className={usCss.usp__description}>Time partitioned</p>
-          <p className={usCss.usp__description}>Immediate consistency</p>
-          <p className={usCss.usp__description}>Fast InfluxDB line protocol</p>
-        </div>
-      </div>
-
-      <div className={usCss.usp}>
-        <div className={usCss.usp__inner}>
-          <img
-            alt="A code editor containing a SQL statement"
-            className={usCss.usp__illustration}
-            height={113}
-            src="/img/pages/index/featureRich.svg"
-            width={176}
-          />
-
-          <h2 className={usCss.usp__title}>Implemented with SQL</h2>
-
-          <p className={usCss.usp__description}>
-            Time series and relational joins
-          </p>
-          <p className={usCss.usp__description}>Postgres compatibility</p>
-          <p className={usCss.usp__description}>
-            Aggregations and downsampling
-          </p>
-          <p className={usCss.usp__description}>Geospatial-native queries</p>
-          <p className={usCss.usp__description}>Built-in SQL optimizer</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      ))}
+    </Section>
+  </Section>
 )
 
 const Cards = () => (
-  <section className={clsx(seCss.section, seCss["section--odd"])}>
-    <div className={clsx(seCss["section--inner"], seCss["section--center"])}>
-      <h3
-        className={clsx(
-          seCss.section__title,
-          feCss["section__title--wide"],
-          "text--center",
-        )}
-      >
+  <Section fullWidth odd>
+    <Section noGap>
+      <Section.Title level={3} size="small" center>
         Why time series?
-      </h3>
+      </Section.Title>
 
       <div
         className={clsx(
@@ -369,325 +306,80 @@ const Cards = () => (
           seCss["section__footer--feature-cards"],
         )}
       >
-        <div className={feCss.feature}>
-          <h3 className={feCss.feature__header}>
-            DevOps, monitoring and observability
-          </h3>
-          <p className={feCss.feature__content}>
-            Collect CPU, memory and storage metrics from your infrastructure and
-            get real-time visibility into your entire stack.
-          </p>
-        </div>
+        {[
+          {
+            header: "DevOps, monitoring and observability",
+            content:
+              "Collect CPU, memory and storage metrics from your infrastructure and get real-time visibility into your entire stack.",
+          },
 
-        <div className={feCss.feature}>
-          <h3 className={feCss.feature__header}>Financial market data</h3>
-          <p className={feCss.feature__content}>
-            Store market tick data to identify historical trends, find
-            correlations and analyze trades in real-time. Build aggregated views
-            across multiple venues and efficiently compute live order books.
-          </p>
-        </div>
+          {
+            header: "Financial market data",
+            content:
+              "Store market tick data to identify historical trends, find correlations and analyze trades in real-time. Build aggregated views across multiple venues and efficiently compute live order books.",
+          },
 
-        <div className={feCss.feature}>
-          <h3 className={feCss.feature__header}>Network traffic analysis</h3>
-          <p className={feCss.feature__content}>
-            Collect sFlow or other network traffic metadata to run analytics and
-            detect anomalies in real-time.
-          </p>
-        </div>
+          {
+            header: "Network traffic analysis",
+            content:
+              "Collect sFlow or other network traffic metadata to run analytics and detect anomalies in real-time.",
+          },
 
-        <div className={feCss.feature}>
-          <h3 className={feCss.feature__header}>Connected devices</h3>
-          <p className={feCss.feature__content}>
-            Capture, store and respond to sensor data and telemetry at any
-            resolution in industrial or machine-to-machine applications.
-          </p>
-        </div>
+          {
+            header: "Connected devices",
+            content:
+              "Capture, store and respond to sensor data and telemetry at any resolution in industrial or machine-to-machine applications.",
+          },
 
-        <div className={feCss.feature}>
-          <h3 className={feCss.feature__header}>Application metrics</h3>
-          <p className={feCss.feature__content}>
-            Empower application developers and UX teams to track and visualize
-            user behavior data, API calls, data latency, and other application
-            events in real-time.
-          </p>
-        </div>
+          {
+            header: "Application metrics",
+            content:
+              "Empower application developers and UX teams to track and visualize user behavior data, API calls, data latency, and other application events in real-time.",
+          },
 
-        <div className={feCss.feature}>
-          <h3 className={feCss.feature__header}>
-            Machine learning with time-series data
-          </h3>
-          <p className={feCss.feature__content}>
-            Use QuestDB with popular Python frameworks and tools for leveraging
-            anomaly detection algorithms, machine learning libraries,
-            statistical analysis with Pandas, or Jupyter notebooks.
-          </p>
-        </div>
+          {
+            header: "Machine learning with time-series data",
+            content:
+              "Use QuestDB with popular Python frameworks and tools for leveraging anomaly detection algorithms, machine learning libraries, statistical analysis with Pandas, or Jupyter notebooks.",
+          },
+        ].map(({ header, content }, index) => (
+          <div key={index} className={feCss.feature}>
+            <h3 className={feCss.feature__header}>{header}</h3>
+            <p className={feCss.feature__content}>{content}</p>
+          </div>
+        ))}
       </div>
-    </div>
-  </section>
+    </Section>
+  </Section>
 )
 
-const Console = () => {
-  return (
-    <section
-      className={clsx(
-        seCss.section,
-        seCss["section--inner"],
-        seCss["section--center"],
-      )}
-    >
-      <h2
-        className={clsx(
-          seCss.section__title,
-          seCss["section__title--wide"],
-          "text--center",
-        )}
-      >
-        Interactive Console
-      </h2>
-      <p
-        className={clsx(
-          seCss.section__subtitle,
-          seCss["section__subtitle--narrow"],
-          "text--center",
-        )}
-      >
-        Interactive console to import data (drag and drop) and start querying
-        right away. Check our{" "}
-        <a href="/docs/develop/web-console">Web Console documentation</a> to get
-        started.
-      </p>
+const Console = () => (
+  <Section fullWidth>
+    <Section.Title size="small" center>
+      Interactive Console
+    </Section.Title>
 
+    <Section.Subtitle center>
+      Interactive console to import data (drag and drop) and start querying
+      right away.
+    </Section.Subtitle>
+
+    <Section.Subtitle center>
+      Check our{" "}
+      <a href="/docs/develop/web-console">Web Console documentation</a> to get
+      started.
+    </Section.Subtitle>
+
+    <Section center>
       <img
         alt="Artistic view of QuestDB's Web Console split in 3 components: the navigation tree, the SQL code editor and data displayed as a chart"
-        className={seCss.section__illustration}
+        width={600}
         height={467}
         src="/img/pages/index/console.svg"
-        width={600}
       />
-
-      <ActionFooter />
-    </section>
-  )
-}
-
-const S = [3, 1, 6, 10]
-const M = [3, 0, 4, 8]
-const L = [4, 0, 4, 8]
-
-const getTopByIndex = (m: number[], index: 1 | 2 | 3 | 4): number => {
-  const scale = {
-    1: 25 * (m[0] ?? 0),
-    2: -25 * (m[1] ?? 0),
-    3: -25 * (m[2] ?? 0),
-    4: -25 * (m[3] ?? 0),
-  }
-
-  return scale[index] ?? 0
-}
-
-const searchQuery = `SELECT timestamp, tempC
-FROM sensors
-WHERE timestamp IN '2021-05-14;1M';`
-
-const sliceQuery = `SELECT timestamp, avg(tempC)
-FROM sensors
-SAMPLE BY 5m;`
-
-const navigateQuery = `SELECT timestamp, sensorName, tempC
-FROM sensors
-LATEST ON timestamp PARTITION BY sensorName;`
-
-const mergeQuery = `SELECT sensors.timestamp ts, rain1H
-FROM sensors
-ASOF JOIN weather;`
-
-type Index = 1 | 2 | 3 | 4
-
-const QueryScroller = () => {
-  const [top, setTop] = useState(S)
-  const [index, setIndex] = useState<Index>(2)
-  const windowWidth = useWindowWidth()
-  const handleClick1 = useCallback(() => {
-    setIndex(1)
-  }, [])
-  const handleClick2 = useCallback(() => {
-    setIndex(2)
-  }, [])
-  const handleClick3 = useCallback(() => {
-    setIndex(3)
-  }, [])
-  const handleClick4 = useCallback(() => {
-    setIndex(4)
-  }, [])
-  const handleUpClick = useCallback(() => {
-    setIndex(Math.max(index - 1, 1) as Index)
-  }, [index])
-  const handleDownClick = useCallback(() => {
-    setIndex(Math.min(index + 1, 4) as Index)
-  }, [index])
-
-  useEffect(() => {
-    if (windowWidth != null && windowWidth < 622) {
-      setTop(S)
-      return
-    }
-
-    if (windowWidth != null && windowWidth < 800) {
-      setTop(M)
-      return
-    }
-
-    setTop(L)
-  }, [windowWidth])
-
-  return (
-    <section
-      className={clsx(
-        seCss.section,
-        seCss["section--inner"],
-        seCss["section--center"],
-        seCss["section--showcase"],
-      )}
-    >
-      <h2
-        className={clsx(
-          seCss.section__title,
-          seCss["section__title--wide"],
-          "text--center",
-        )}
-      >
-        Augmented SQL for time series
-      </h2>
-
-      <p
-        className={clsx(
-          seCss.section__subtitle,
-          seCss["section__subtitle--narrow"],
-          "text--center",
-        )}
-      >
-        QuestDB enhances ANSI SQL with time series extensions to manipulate time
-        stamped data
-      </p>
-
-      <div className={shCss.showcase}>
-        <div className={shCss.showcase__inner}>
-          <div
-            className={clsx(shCss.showcase__chevron)}
-            onClick={handleUpClick}
-            style={{ visibility: index === 1 ? "hidden" : "visible" }}
-          >
-            <Chevron />
-          </div>
-          <div className={clsx(shCss.showcase__left)}>
-            <div
-              className={clsx(
-                shCss.showcase__offset,
-                shCss[`showcase__${index}`],
-              )}
-              style={{ top: getTopByIndex(top, index) }}
-            >
-              <Highlight code={searchQuery} />
-              <Highlight code={`-- Search time\n${searchQuery}`} />
-              <Highlight code={sliceQuery} />
-              <Highlight code={`-- Slice time\n${sliceQuery}`} />
-              <Highlight code={navigateQuery} />
-              <Highlight code={`-- Navigate time\n${navigateQuery}`} />
-              <Highlight code={mergeQuery} />
-              <Highlight code={`-- Merge time\n${mergeQuery}`} />
-            </div>
-          </div>
-          <div
-            className={clsx(
-              shCss.showcase__chevron,
-              shCss["showcase__chevron--bottom"],
-            )}
-            onClick={handleDownClick}
-            style={{ visibility: index === 4 ? "hidden" : "visible" }}
-          >
-            <Chevron />
-          </div>
-          <div className={shCss.showcase__right}>
-            <div
-              className={clsx(shCss.showcase__button, {
-                [shCss["showcase__button--active"]]: index === 1,
-              })}
-              onClick={handleClick1}
-            >
-              <h3 className={shCss.showcase__header}>
-                <SvgImage
-                  image={<SearchTimeIcon className={shCss.showcase__icon} />}
-                  title="Magnifying glass icon"
-                />
-                Search Time
-              </h3>
-              <p className={shCss.showcase__description}>
-                Filter and search for specific timestamps with “WHERE”
-              </p>
-            </div>
-
-            <div
-              className={clsx(shCss.showcase__button, {
-                [shCss["showcase__button--active"]]: index === 2,
-              })}
-              onClick={handleClick2}
-            >
-              <h3 className={shCss.showcase__header}>
-                <SvgImage
-                  image={<SliceTimeIcon className={shCss.showcase__icon} />}
-                  title="Knife icon"
-                />
-                Slice Time
-              </h3>
-              <p className={shCss.showcase__description}>
-                Create time buckets and aggregate by intervals with “SAMPLE BY”
-              </p>
-            </div>
-
-            <div
-              className={clsx(shCss.showcase__button, {
-                [shCss["showcase__button--active"]]: index === 3,
-              })}
-              onClick={handleClick3}
-            >
-              <h3 className={shCss.showcase__header}>
-                <SvgImage
-                  image={<NavigateTimeIcon className={shCss.showcase__icon} />}
-                  title="Indication arrow icon"
-                />
-                Navigate Time
-              </h3>
-              <p className={shCss.showcase__description}>
-                Search time series from most recent values to oldest with
-                “LATEST BY”
-              </p>
-            </div>
-            <div
-              className={clsx(shCss.showcase__button, {
-                [shCss["showcase__button--active"]]: index === 4,
-              })}
-              onClick={handleClick4}
-            >
-              <h3 className={shCss.showcase__header}>
-                <SvgImage
-                  image={<MergeTimeIcon className={shCss.showcase__icon} />}
-                  title="Two overlapping squares"
-                />
-                Merge Time
-              </h3>
-              <p className={shCss.showcase__description}>
-                Join two tables based on timestamp where timestamps do not
-                exactly match with “ASOF JOIN”
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
+    </Section>
+  </Section>
+)
 
 const Home = () => (
   <Layout
@@ -698,12 +390,16 @@ const Home = () => (
   >
     <Top />
     <Customers nbElements={6} />
-    <Usp />
+    <UseCases />
     <Integration />
     <FeatureTabs />
     <QueryScroller />
     <Cards />
     <Console />
+
+    <Section>
+      <ActionFooter />
+    </Section>
   </Layout>
 )
 

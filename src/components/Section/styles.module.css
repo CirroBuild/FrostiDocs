@@ -36,28 +36,6 @@
   padding: 0;
 }
 
-.title {
-  font-size: var(--font-size-big-3);
-}
-
-@media screen and (min-width: 600px){
-  .title {
-    font-size: var(--font-size-big-4);
-  }
-}
-
-@media screen and (min-width: 1000px){
-  .title {
-    font-size: var(--font-size-big-5);
-  }
-}
-
-.subtitle {
-  font-size: var(--font-size-big-2);
-  font-weight: var(--ifm-font-weight-normal);
-  color: var(--palette-pale-blue);
-}
-
 .center {
-  text-align: center;
+  align-items: center;
 }
