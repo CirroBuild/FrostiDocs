@@ -48,8 +48,26 @@
   }
 }
 
+.subscribe {
+  padding-top: 2rem;
+  width: 100%;
+  align-self: center;
+}
+
+.subtitle {
+  align-self: center;
+}
+
 @media screen and (min-width: 600px) {
-  .subscribe {
+  .subscribe,
+  .subtitle {
+    max-width: 80%;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .subscribe,
+  .subtitle {
     max-width: 60%;
   }
 }

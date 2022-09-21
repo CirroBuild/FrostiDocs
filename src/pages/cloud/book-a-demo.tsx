@@ -6,12 +6,11 @@ import style from "../../css/cloud/style.module.css"
 
 const BookADemo = () => {
   const title = "Book a demo"
-  const description = ""
 
   return (
     <Layout
       canonical="/cloud"
-      description={description}
+      description="Book a demo for the fastest open source time series database fully managed on the cloud"
       title={title}
       image="/img/pages/cloud/screens-thumb.png"
     >

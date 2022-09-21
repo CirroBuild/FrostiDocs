@@ -52,11 +52,13 @@ const Title = ({
 const Subtitle = ({
   children,
   center,
+  className = "",
 }: {
   children: React.ReactNode
   center?: boolean
+  className?: string
 }) => (
-  <span className={clsx(style.subtitle, { [style.center]: center })}>
+  <span className={clsx(style.subtitle, { [style.center]: center }, className)}>
     {children}
   </span>
 )
