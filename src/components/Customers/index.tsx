@@ -37,12 +37,9 @@ const customerLogos = [
   "syntropy",
 ].map((key) => ({ ...logos[key], ...logosOverrides[key] }))
 
-type Props = {
-  nbElements: number
-}
-
-const Customers = ({ nbElements }: Props) => {
-  const nbPanels = Math.ceil(Object.values(logos).length / nbElements)
+const Customers = () => {
+  const nbElements = 6
+  const nbPanels = Math.ceil(customerLogos.length / nbElements)
   const panels = Array.from({ length: nbPanels }, (_, index) => index + 1)
 
   const [index, setIndex] = useState<number>(1)

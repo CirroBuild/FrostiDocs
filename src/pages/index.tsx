@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
-import React, { useState } from "react"
+import React from "react"
 import Customers from "../components/Customers"
 import customFields from "../config/customFields"
 import { QueryScroller } from "../components/QueryScroller"
@@ -10,152 +10,17 @@ import Layout from "../theme/Layout"
 import SvgImage from "../components/SvgImage"
 import { ActionFooter } from "../components/ActionFooter"
 import { Section } from "../components/Section"
+import { UseCases } from "../modules/use-cases"
+import { Integration } from "../modules/integration"
+import { FeatureTabs } from "../modules/feature-tabs"
 
 import doCss from "../css/index/docker.module.css"
 import feCss from "../css/index/feature.module.css"
-import inCss from "../css/index/integration.module.css"
 import juCss from "../css/index/jumbotron.module.css"
-import meCss from "../css/index/menu.module.css"
-import usCss from "../css/index/usp.module.css"
-import prCss from "../css/property.module.css"
 import seCss from "../css/section.module.css"
 
 import QuestDBLogo from "../assets/img/questdb.svg"
-import PgLogo from "../assets/img/pages/index/integrations/pg.svg"
-import GrafanaLogo from "../assets/img/pages/index/integrations/grafana.svg"
-import KafkaLogo from "../assets/img/pages/index/integrations/kafka.svg"
-import PythonLogo from "../assets/img/pages/index/integrations/python.svg"
-import PandasLogo from "../assets/img/pages/index/integrations/pandas.svg"
-import InfluxdataLogo from "../assets/img/pages/index/integrations/influxdata.svg"
-import TableauLogo from "../assets/img/pages/index/integrations/tableau.svg"
-import PlotlyLogo from "../assets/img/pages/index/integrations/plotly.svg"
-import MindsdbLogo from "../assets/img/pages/index/integrations/mindsdb.svg"
-import CubeLogo from "../assets/img/pages/index/integrations/cube.svg"
 import DockerLogo from "../assets/img/pages/index/docker.svg"
-
-type FeatureTab = "digital" | "realtime" | "integration"
-const FeatureTabs = () => {
-  const [opened, setOpened] = useState<FeatureTab>("digital")
-
-  return (
-    <Section fullWidth odd>
-      <Section noGap>
-        <Section.Title size="small" center>
-          Why QuestDB?
-        </Section.Title>
-
-        <div
-          className={clsx(
-            seCss.section__footer,
-            seCss["section__footer--feature-tabs"],
-          )}
-        >
-          <div className={meCss.menu__list}>
-            {[
-              { label: "Simplicity", id: "digital" },
-              { label: "Performance", id: "realtime" },
-              { label: "Open Source", id: "integration" },
-            ].map((tab) => (
-              <Button
-                key={tab.id}
-                className={meCss.menu__button}
-                onClick={() => setOpened(tab.id as FeatureTab)}
-                size="small"
-                variant={opened === tab.id ? "primary" : "tertiary"}
-              >
-                {tab.label}
-              </Button>
-            ))}
-          </div>
-
-          <div className={meCss.menu__content}>
-            <div
-              className={clsx(meCss.menu__panel, {
-                [meCss["menu__panel--active"]]: opened === "digital",
-              })}
-            >
-              <p className={prCss.property}>Query with SQL</p>
-              <p className={prCss.property}>Deploy via Docker or binaries</p>
-              <p className={prCss.property}>Interactive web console</p>
-              <p className={prCss.property}>
-                Postgres and InfluxDB line protocols
-              </p>
-              <p className={prCss.property}>Cloud-native or on-premises</p>
-            </div>
-
-            <div
-              className={clsx(meCss.menu__panel, {
-                [meCss["menu__panel--active"]]: opened === "realtime",
-              })}
-            >
-              <p className={prCss.property}>High-throughput ingestion</p>
-              <p className={prCss.property}>Optimized SQL queries</p>
-              <p className={prCss.property}>Real-time streaming</p>
-              <p className={prCss.property}>Lower infrastructure costs</p>
-              <p className={prCss.property}>Less operational complexity</p>
-            </div>
-
-            <div
-              className={clsx(meCss.menu__panel, {
-                [meCss["menu__panel--active"]]: opened === "integration",
-              })}
-            >
-              <p className={prCss.property}>Apache License 2.0</p>
-              <p className={prCss.property}>Thriving developer community</p>
-              <p className={prCss.property}>Transparent development</p>
-              <p className={prCss.property}>Popular open source integrations</p>
-              <p className={prCss.property}>Embedded in Java applications</p>
-            </div>
-
-            <Button
-              className={meCss.menu__cta}
-              to="https://github.com/questdb/questdb#try-questdb"
-            >
-              Get Started &gt;
-            </Button>
-          </div>
-        </div>
-      </Section>
-    </Section>
-  )
-}
-
-const integrations: Array<{
-  label: string
-  image: React.ElementType
-  title: string
-}> = [
-  { image: PgLogo, title: "Postgres logo", label: "Postgres" },
-  { image: GrafanaLogo, title: "Grafana logo", label: "Grafana" },
-  { image: KafkaLogo, title: "Kafka logo", label: "Kafka" },
-  { image: PythonLogo, title: "Python logo", label: "Python" },
-  { image: PandasLogo, title: "Pandas logo", label: "Pandas" },
-  { image: InfluxdataLogo, title: "Telegraf logo", label: "Telegraf" },
-  { image: TableauLogo, title: "Tableau logo", label: "Tableau" },
-  { image: MindsdbLogo, title: "MindsDB logo", label: "MindsDB" },
-  { image: CubeLogo, title: "Cube logo", label: "Cube" },
-  { image: PlotlyLogo, title: "PlotlyLogo logo", label: "Plotly" },
-]
-
-const Integration = () => (
-  <Section>
-    <Section.Title size="small" center>
-      Integration with the tools you love
-    </Section.Title>
-
-    <div className={inCss.integration}>
-      {integrations.map(({ label, image, title }, index: number) => {
-        const Image = image
-        return (
-          <div key={index} className={inCss.integration__item}>
-            <SvgImage image={<Image />} title={title} />
-            {label}
-          </div>
-        )
-      })}
-    </div>
-  </Section>
-)
 
 const Top = () => {
   const { siteConfig } = useDocusaurusContext()
@@ -183,6 +48,7 @@ const Top = () => {
                 title="QuestDB Cloud"
               />
             }
+            newTab={false}
             variant="secondary"
           >
             CLOUD
@@ -215,86 +81,8 @@ docker run -p 9000:9000 questdb/questdb`}
   )
 }
 
-const useCases = [
-  {
-    logo: {
-      alt: "Speedometer",
-      src: "/img/pages/index/rawPower.svg",
-      width: 176,
-      height: 113,
-    },
-    title: "Built for performance",
-    uses: [
-      "SIMD-optimized analytics",
-      "Row- and column-based access",
-      "Vectorized query execution",
-      "Tiny memory footprint",
-      "C++ and zero-GC Java",
-    ],
-  },
-  {
-    logo: {
-      alt: "A code editor with a chart that shows the result of the query",
-      src: "/img/pages/index/easyToUse.svg",
-      width: 205,
-      height: 113,
-    },
-    title: "Optimized for time series",
-    uses: [
-      "Relational model for time series",
-      "Data stored in chronological order",
-      "Time partitioned",
-      "Immediate consistency",
-      "Fast InfluxDB line protocol",
-    ],
-  },
-  {
-    logo: {
-      alt: "A code editor containing a SQL statement",
-      height: 113,
-      src: "/img/pages/index/featureRich.svg",
-      width: 176,
-    },
-    title: "Implemented with SQL",
-    uses: [
-      "Time series and relational joins",
-      "Postgres compatibility",
-      "Aggregations and downsampling",
-      "Geospatial-native queries",
-      "Built-in SQL optimizer",
-    ],
-  },
-]
-const UseCases = () => (
-  <Section odd fullWidth noGap>
-    <Section row>
-      {useCases.map(({ logo, title, uses }, index) => (
-        <div className={usCss.usp} key={index}>
-          <div className={usCss.usp__inner}>
-            <img
-              alt={logo.alt}
-              className={usCss.usp__illustration}
-              src={logo.src}
-              width={logo.width}
-              height={logo.height}
-            />
-
-            <h2 className={usCss.usp__title}>{title}</h2>
-
-            {uses.map((use, index) => (
-              <p key={index} className={usCss.usp__description}>
-                {use}
-              </p>
-            ))}
-          </div>
-        </div>
-      ))}
-    </Section>
-  </Section>
-)
-
 const Cards = () => (
-  <Section fullWidth odd>
+  <Section odd fullWidth>
     <Section noGap>
       <Section.Title level={3} size="small" center>
         Why time series?
@@ -389,10 +177,22 @@ const Home = () => (
     replaceTitle
   >
     <Top />
-    <Customers nbElements={6} />
-    <UseCases />
-    <Integration />
-    <FeatureTabs />
+    <Customers />
+    <Section fullWidth center>
+      <UseCases />
+    </Section>
+
+    <Section fullWidth odd>
+      <Integration />
+    </Section>
+
+    <Section>
+      <Section.Title size="small" center>
+        Why choose QuestDB?
+      </Section.Title>
+      <FeatureTabs />
+    </Section>
+
     <QueryScroller />
     <Cards />
     <Console />
