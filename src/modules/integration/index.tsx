@@ -41,7 +41,6 @@ const integrations: Array<{
     label: "Telegraf",
     src: "/docs/third-party-tools/telegraf/",
   },
-  { logo: logos.tableau, label: "Tableau" },
   {
     logo: logos.mindsDB,
     label: "MindsDB",
