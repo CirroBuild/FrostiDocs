@@ -223,7 +223,7 @@ SELECT substring('Lorem ipsum dolor sit amet', -5, 9)
 | --------- |
 | Lor       |
 
-## ~
+## ~ (match)
 
 `string ~ regex` - matches `string` value to regex
 
@@ -231,7 +231,7 @@ SELECT substring('Lorem ipsum dolor sit amet', -5, 9)
 
 [java.util.regex](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html)
 
-## !~
+## !~ (does not match)
 
 `string !~ regex` - checks if `string` value does not match regex
 
