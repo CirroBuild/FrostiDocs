@@ -11,13 +11,26 @@ const logosOverrides: Record<keyof typeof logos, Partial<CustomerLogo>> = {
   yahoo: {
     width: 120,
   },
-
   toggle: {
     width: 120,
   },
-
   apacheNifi: {
     height: 45,
+  },
+  synology: {
+    width: 120,
+    height: 30,
+  },
+  prediko: {
+    width: 120,
+    height: 30,
+  },
+  "razor-secure": {
+    width: 140,
+    height: 40,
+  },
+  "electric-era": {
+    width: 120,
   },
 }
 
@@ -36,6 +49,10 @@ const customerLogos = [
   "apacheNifi",
   "toggle",
   "syntropy",
+  "synology",
+  "prediko",
+  "electric-era",
+  "razor-secure",
 ].map((key) => ({ ...logos[key], ...logosOverrides[key] }))
 
 const Customers = () => {

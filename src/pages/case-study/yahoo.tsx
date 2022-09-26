@@ -34,8 +34,9 @@ const Yahoo = () => {
               href="https://yahoo.com/?utm_source=questdb"
               variant="plain"
             >
-              <Image
+              <img
                 alt="Yahoo logo"
+                className={juCss.jumbotron__logo}
                 height={45}
                 src="/img/pages/customers/logos/yahoo.svg"
                 width={100}

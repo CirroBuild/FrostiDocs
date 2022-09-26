@@ -52,9 +52,15 @@ const integrations: Array<{
     src: "/blog/2022/04/26/time-series-data-analytics-with-questdb-and-cube/",
   },
   {
+    logo: logos.redpanda,
+    label: "Redpanda",
+    src:
+      "/blog/2022/05/25/how-to-build-a-real-time-crypto-tracker-with-redpanda-and-questdb/",
+  },
+  {
     logo: logos.plotly,
     label: "Plotly",
-    src: "/blog/2021/11/01/plotly-finnhub-realtime-dashboard",
+    src: "/blog/2021/11/01/plotly-finnhub-realtime-dashboard/",
   },
 ]
 
@@ -81,7 +87,7 @@ export const Integration = () => (
           <>
             <img
               className={styles.logo}
-              src={logo.src}
+              src={logo.srcGrayscale ?? logo.src}
               alt={logo.alt}
               width={logo.width}
               height={logo.height}

@@ -160,7 +160,8 @@ export const logos: Record<string, CustomerLogo> = {
     alt: "Kafka logo",
   },
   python: {
-    src: "/img/logos/python_grayscale.svg",
+    src: "/img/logos/python.svg",
+    srcGrayscale: "/img/logos/python_grayscale.svg",
     alt: "Python logo",
   },
   pandas: {
@@ -186,5 +187,12 @@ export const logos: Record<string, CustomerLogo> = {
   plotly: {
     src: "/img/logos/plotly.svg",
     alt: "PlotlyLogo logo",
+  },
+  redpanda: {
+    src: "/img/logos/redpanda.svg",
+    srcGrayscale: "/img/logos/redpanda_grayscale.svg",
+    alt: "Redpanda logo",
+    width: 100,
+    height: 30,
   },
 }
