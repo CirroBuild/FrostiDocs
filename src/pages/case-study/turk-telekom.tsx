@@ -9,6 +9,7 @@ import caCss from "../../css/case-study/card.module.css"
 import juCss from "../../css/case-study/jumbotron.module.css"
 import ouCss from "../../css/case-study/outcome.module.css"
 import seCss from "../../css/section.module.css"
+import { logos } from "../../assets/logos"
 
 const Innova = () => {
   const title = "Innova use QuestDB for Türk Telekom's big data requirements"
@@ -35,7 +36,7 @@ const Innova = () => {
                 alt="Türk Telekom logo"
                 className={juCss.jumbotron__logo}
                 height={56}
-                src="/img/pages/customers/logos/turk_telekom.svg"
+                src={logos["turk-telekom"].src}
                 width={140}
               />
             </Button>

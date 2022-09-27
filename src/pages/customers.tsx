@@ -200,7 +200,7 @@ const Customer = () => {
               alt="Copenhagen Atomics Logo"
               className={caCss.card__logo}
               height={50}
-              src="/img/pages/customers/logos/ca.svg"
+              src={logos["copenhagen-atomics"].src}
               width={150}
             />
             “QuestDB was our choice for real time data due to high performance,
@@ -261,7 +261,7 @@ const Customer = () => {
               alt="Aquis logo"
               className={caCss.card__logo}
               height={50}
-              src="/img/pages/customers/cards/aquis.svg"
+              src={logos["aquis-exchange"].src}
               width={140}
             />
             “QuestDB is a time series database truly built by developers for
@@ -285,7 +285,7 @@ const Customer = () => {
               alt="Yahoo logo"
               className={caCss.card__logo}
               height={50}
-              src="/img/pages/customers/cards/yahoo.svg"
+              src={logos.yahoo.src}
               width={140}
             />
             “We use QuestDB to monitor metrics for autoscaling decisions within
@@ -326,7 +326,7 @@ const Customer = () => {
               alt="LiveAction logo"
               className={caCss.card__logo}
               height={80}
-              src="/img/pages/customers/logos/liveaction.svg"
+              src={logos.liveaction.src}
               width={120}
             />
             “QuestDB is impressive and stands out as a superior option. We use
@@ -349,7 +349,7 @@ const Customer = () => {
               alt="TQS Integration logo"
               className={caCss.card__logo}
               height={40}
-              src="/img/pages/customers/cards/tqs-integration.svg"
+              src={logos["tqs-integration"].src}
               width={140}
             />
             “TQS Integration uses QuestDB in data architecture solutions for
@@ -391,7 +391,7 @@ const Customer = () => {
               alt="Türk Telekom logo"
               className={caCss.card__logo}
               height={50}
-              src="/img/pages/customers/logos/turk_telekom.svg"
+              src={logos["turk-telekom"].src}
               width={140}
             />
             “QuestDB allows us to query data while writing millions of records.

@@ -1,3 +1,5 @@
+import { logos } from "./logos"
+
 type Quote = {
   website: string
   logo: {
@@ -60,7 +62,7 @@ const quotes: Quote[] = [
     website: "https://aquis.eu/",
     logo: {
       alt: "Aquis Exchange logo",
-      src: "/img/pages/customers/cards/aquis.svg",
+      src: logos["aquis-exchange"].src,
       height: 30,
       width: 100,
       offset: 5,
@@ -75,7 +77,7 @@ const quotes: Quote[] = [
     website: "https://syndica.io",
     logo: {
       alt: "Syndica logo",
-      src: "/img/pages/customers/cards/syndica.svg",
+      src: logos.syndica.src,
       height: 30,
       width: 113,
     },
@@ -89,7 +91,7 @@ const quotes: Quote[] = [
     website: "https://www.copenhagenatomics.com/",
     logo: {
       alt: "Copenhagen Atomics logo",
-      src: "/img/pages/customers/logos/ca.svg",
+      src: logos["copenhagen-atomics"].src,
       height: 30,
       width: 113,
     },
@@ -103,7 +105,7 @@ const quotes: Quote[] = [
     website: "https://www.liveaction.com/",
     logo: {
       alt: "LiveAction logo",
-      src: "/img/pages/customers/logos/liveaction.svg",
+      src: logos.liveaction.src,
       height: 56,
       width: 140,
     },
@@ -159,7 +161,7 @@ const quotes: Quote[] = [
     website: "https://www.publicissapient.com/",
     logo: {
       alt: "Sapient logo",
-      src: "/img/pages/customers/cards/sapient.svg",
+      src: logos["sapient-industries"].src,
       height: 28,
       width: 140,
     },
@@ -173,7 +175,7 @@ const quotes: Quote[] = [
     website: "https://www.turktelekom.com.tr/en",
     logo: {
       alt: "Türk Telekom logo",
-      src: "/img/pages/customers/logos/turk_telekom.svg",
+      src: logos["turk-telekom"].src,
       height: 56,
       width: 140,
     },

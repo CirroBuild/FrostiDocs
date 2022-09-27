@@ -9,6 +9,7 @@ import caCss from "../../css/case-study/card.module.css"
 import juCss from "../../css/case-study/jumbotron.module.css"
 import ouCss from "../../css/case-study/outcome.module.css"
 import seCss from "../../css/section.module.css"
+import { logos } from "../../assets/logos"
 
 const Toggle = () => {
   const title = "Toggle AI - time series data for machine learning in FinTech"
@@ -38,7 +39,7 @@ const Toggle = () => {
                 alt="Toggle.global logo"
                 className={juCss.jumbotron__logo}
                 height={56}
-                src="/img/pages/customers/logos/toggle.svg"
+                src={logos.toggle.src}
                 width={140}
               />
             </Button>

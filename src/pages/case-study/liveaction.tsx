@@ -9,6 +9,7 @@ import caCss from "../../css/case-study/card.module.css"
 import juCss from "../../css/case-study/jumbotron.module.css"
 import ouCss from "../../css/case-study/outcome.module.css"
 import seCss from "../../css/section.module.css"
+import { logos } from "../../assets/logos"
 
 const Counterflow = () => {
   const title = "LiveAction offer AI-driven network security"
@@ -38,7 +39,7 @@ const Counterflow = () => {
                 alt="LiveAction logo"
                 className={juCss.jumbotron__logo}
                 height={65}
-                src="/img/pages/customers/logos/liveaction.svg"
+                src={logos.liveaction.src}
                 width={150}
               />
             </Button>

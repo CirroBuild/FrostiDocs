@@ -9,6 +9,7 @@ import caCss from "../../css/case-study/card.module.css"
 import juCss from "../../css/case-study/jumbotron.module.css"
 import ouCss from "../../css/case-study/outcome.module.css"
 import seCss from "../../css/section.module.css"
+import { logos } from "../../assets/logos"
 
 const Tqs = () => {
   const title = "TQS uses QuestDB for industrial telemetry data"
@@ -38,7 +39,7 @@ const Tqs = () => {
                 alt="TQS Integration leader in manufacturing data solutions"
                 className={juCss.jumbotron__logo}
                 height={45}
-                src="/img/pages/customers/logos/tqs-integration.svg"
+                src={logos["tqs-integration"].src}
                 width={100}
               />
             </Button>
