@@ -183,6 +183,13 @@ dedicated to capacity planning for ILP ingestion.
 
 ### InfluxDB over UDP
 
+:::note
+
+The UDP receiver is deprecated since QuestDB version 6.5.2.
+We recommend the [TCP receiver](/docs/reference/api/ilp/tcp-receiver/) instead.
+
+:::
+
 Given a single client sending data to QuestDB via InfluxDB line protocol over
 UDP, the following configuration can be applied which dedicates a thread for a
 UDP writer and specifies a CPU core by ID:

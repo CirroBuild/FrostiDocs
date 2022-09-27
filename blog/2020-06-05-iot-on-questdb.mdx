@@ -36,16 +36,23 @@ over to QuestDB.
 
 <!--truncate-->
 
+:::note
+
+This tutorial uses the UDP receiver, which is deprecated since QuestDB version
+6.5.2. We recommend the [TCP receiver](/docs/reference/api/ilp/tcp-receiver/)
+instead.
+
+:::
+
 ## The Database Part
 
 The first thing I had to do was to get QuestDB up and running. Luckily, this is
 very straightforward. There are a few options, the
 [Docker](/docs/get-started/docker) image for those who want to run without
 installing any dependencies, a [Homebrew](/docs/get-started/homebrew) install
-with `brew install questdb`, grabbing the
-[binaries](/docs/get-started/binaries) directly, and building from source.
-Since I work here, and I wanted to test out the latest and greatest Web Console,
-I decided to build using maven:
+with `brew install questdb`, grabbing the [binaries](/docs/get-started/binaries)
+directly, and building from source. Since I work here, and I wanted to test out
+the latest and greatest Web Console, I decided to build using maven:
 
 ```shell
 mvn clean package -DskipTests

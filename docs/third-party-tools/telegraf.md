@@ -11,10 +11,9 @@ outputs. It is plugin-driven for the collection and delivery of data, so it is
 easily configurable and customizable. Telegraf is compiled as a standalone
 binary, which means there are no external dependencies required to manage.
 
-QuestDB supports ingesting from Telegraf over both TCP and UDP. This page
-provides examples for collecting CPU and memory usage metrics using Telegraf and
-sends these metrics to a locally-running QuestDB instance for querying and
-visualization.
+QuestDB supports ingesting from Telegraf over TCP. This page provides examples
+for collecting CPU and memory usage metrics using Telegraf and sends these metrics
+to a locally-running QuestDB instance for querying and visualization.
 
 ## Prerequisites
 
@@ -42,7 +41,7 @@ default configuration files are in the following locations:
 - Homebrew install: `/usr/local/etc/telegraf.conf`
 - Linux, Deb and RPM: `/etc/telegraf/telegraf.conf`
 
-Full configuration files for writing over TCP and UDP are provided below and can
+Full configuration files for writing over TCP are provided below and can
 be placed in these directories and picked up by Telegraf. To view a
 comprehensive configuration file with example inputs and outputs, the following
 command can generate an example:
@@ -123,54 +122,6 @@ Telegraf should report the following if configured correctly:
 2021-01-29T12:11:32Z I! Loaded processors:
 2021-01-29T12:11:32Z I! Loaded outputs: socket_writer
 ...
-```
-
-## Writing to QuestDB over UDP
-
-By default, QuestDB listens for multicast line protocol packets over UDP on
-`232.1.2.3:9009`. To change the default ports that QuestDB is listening on, see
-the
-[InfluxDB line protocol (UDP)](/docs/reference/configuration#influxdb-line-protocol-udp)
-section of the server configuration page.
-
-Create a new file named `questdb_udp.conf` in one of the locations Telegraf can
-load configuration files from and paste the following example:
-
-```toml title="/path/to/telegraf/config/questdb_udp.conf"
-# Configuration for Telegraf agent
-[agent]
-  ## Default data collection interval for all inputs
-  interval = "5s"
-  hostname = "qdb"
-
-# -- OUTPUT PLUGINS -- #
-[[outputs.influxdb]]
-  # Write metrics to a local QuestDB instance over UDP
-  urls = ["udp://232.1.2.3:9009"]
-
-# -- INPUT PLUGINS -- #
-[[inputs.cpu]]
-  percpu = true
-  totalcpu = true
-  collect_cpu_time = false
-  report_active = false
-[[inputs.mem]]
-  # no customisation
-```
-
-Run Telegraf and specify this config file with UDP writer settings:
-
-```shell
-telegraf --config questdb_udp.conf
-```
-
-Telegraf should report the following
-
-```
-2021-01-29T13:36:28Z I! Loaded inputs: cpu mem
-2021-01-29T13:36:28Z I! Loaded aggregators:
-2021-01-29T13:36:28Z I! Loaded processors:
-2021-01-29T13:36:28Z I! Loaded outputs: influxdb
 ```
 
 ## Verifying the integration

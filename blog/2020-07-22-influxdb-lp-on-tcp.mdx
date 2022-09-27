@@ -28,6 +28,13 @@ import Banner from "@theme/Banner"
   via <a href="https://unsplash.com">Unsplash</a>
 </Banner>
 
+:::note
+
+The UDP receiver is deprecated since QuestDB version 6.5.2.
+We recommend the [TCP receiver](/docs/reference/api/ilp/tcp-receiver/) introduced by this article.
+
+:::
+
 We've had a UDP version of the InfluxDB Line Protocol (ILP) reader in QuestDB
 for quite some time, but we've had customers ask for a TCP version of it, so we
 delivered!

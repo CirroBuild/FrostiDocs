@@ -4,6 +4,13 @@ sidebar_label: UDP Receiver
 description: InfluxDB line protocol UDP receiver reference documentation.
 ---
 
+:::note
+
+The UDP receiver is deprecated since QuestDB version 6.5.2.
+We recommend the [TCP receiver](/docs/reference/api/ilp/tcp-receiver/) instead.
+
+:::
+
 The UDP receiver can handle both single and multi row write requests. It is
 currently single-threaded, and performs both network I/O and write jobs out of
 one thread. The UDP worker thread can work either on its own thread or use the

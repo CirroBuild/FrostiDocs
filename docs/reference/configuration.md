@@ -268,7 +268,7 @@ QuestDB.
 | cairo.commit.mode                              | nosync            | How changes to table are flushed to disk upon commit. Choices: `nosync`, `async` (flush call schedules update, returns immediately), `sync` (waits for flush on the appended column files to complete).                  |
 | cairo.create.as.select.retry.count             | 5                 | Number of types table creation or insertion will be attempted.                                                                                                                                                           |
 | cairo.default.map.type                         | fast              | Type of map used. Options: `fast` (speed at the expense of storage), `compact`.                                                                                                                                          |
-| cairo.default.symbol.cache.flag                | true              | When `true`, symbol values will be cached on Java heap instead of being looked up in the database files.                                                                                                                                                                  |
+| cairo.default.symbol.cache.flag                | true              | When `true`, symbol values will be cached on Java heap instead of being looked up in the database files.                                                                                                                 |
 | cairo.default.symbol.capacity                  | 256               | Specifies approximate capacity for `SYMBOL` columns. It should be equal to number of unique symbol values stored in the table and getting this value badly wrong will cause performance degradation. Must be power of 2. |
 | cairo.file.operation.retry.count               | 30                | Number of attempts to open files.                                                                                                                                                                                        |
 | cairo.idle.check.interval                      | 300000            | Frequency of writer maintenance job in milliseconds.                                                                                                                                                                     |
@@ -368,24 +368,31 @@ For QuestDB instances using Docker:
   - The environment variable `QDB_CAIRO_SQL_COPY_ROOT`.
   - The `cairo.sql.copy.root` in `server.conf`.
 - The path for the source CSV file is mounted.
-- The source CSV file path and the path defined by `QDB_CAIRO_SQL_COPY_ROOT` are identical.
+- The source CSV file path and the path defined by `QDB_CAIRO_SQL_COPY_ROOT` are
+  identical.
 - It is optional to define `QDB_CAIRO_SQL_COPY_WORK_ROOT`.
 
-The following is an example command to start a QuestDB instance on Docker, in order to import a CSV file:
+The following is an example command to start a QuestDB instance on Docker, in
+order to import a CSV file:
 
-  ```shell
-  docker run -p 9000:9000 \
-  -v "/tmp/questdb:/var/lib/questdb" \
-  -v "/tmp/questdb/my_input_root:/var/lib/questdb/questdb_import" \
-  -e QDB_CAIRO_SQL_COPY_ROOT=/var/lib/questdb/questdb_import \
-  questdb/questdb
-  ```
+```shell
+docker run -p 9000:9000 \
+-v "/tmp/questdb:/var/lib/questdb" \
+-v "/tmp/questdb/my_input_root:/var/lib/questdb/questdb_import" \
+-e QDB_CAIRO_SQL_COPY_ROOT=/var/lib/questdb/questdb_import \
+questdb/questdb
+```
 
-  Where:
-  - `-v "/tmp/questdb/my_input_root:/var/lib/questdb/questdb_import"`: Defining a source CSV file location to be `/tmp/questdb/my_input_root` on local machine and mounting it to `/var/lib/questdb/questdb_import` in the container.
-  - `-e QDB_CAIRO_SQL_COPY_ROOT=/var/lib/questdb/questdb_import`: Defining the copy root directory to be `var/lib/questdb/questdb_import`.
+Where:
 
-  It is important that the two path to be identical (`var/lib/questdb/questdb_import` in the example).
+- `-v "/tmp/questdb/my_input_root:/var/lib/questdb/questdb_import"`: Defining a
+  source CSV file location to be `/tmp/questdb/my_input_root` on local machine
+  and mounting it to `/var/lib/questdb/questdb_import` in the container.
+- `-e QDB_CAIRO_SQL_COPY_ROOT=/var/lib/questdb/questdb_import`: Defining the
+  copy root directory to be `/var/lib/questdb/questdb_import`.
+
+It is important that the two path are identical
+(`/var/lib/questdb/questdb_import` in the example).
 
 ### Parallel SQL execution
 
@@ -476,6 +483,13 @@ line protocol.
 | line.tcp.disconnect.on.error               | true         | Disconnect TCP socket that sends malformed messages.                                                                                                                                                                                                  |
 
 #### UDP specific settings
+
+:::note
+
+The UDP receiver is deprecated since QuestDB version 6.5.2. We recommend the
+[TCP receiver](/docs/reference/api/ilp/tcp-receiver/) instead.
+
+:::
 
 | Property                     | Default      | Description                                                                                                                                                                                                                      |
 | ---------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -618,9 +632,8 @@ provided in the `./conf/log.conf` file, in this case in `./questdb-docker.log`.
 QuestDB includes a log writer that sends any message logged at critical level
 (logger.critical("may-day")) to Prometheus Alertmanager over a TCP/IP socket.
 Details for configuring this can be found in the
-[Prometheus documentation](/docs/third-party-tools/prometheus).
-To configure this writer, add it to the `writers` config alongside other log
-writers.
+[Prometheus documentation](/docs/third-party-tools/prometheus). To configure
+this writer, add it to the `writers` config alongside other log writers.
 
 ```ini title="log.conf"
 # Which writers to enable

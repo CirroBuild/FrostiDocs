@@ -2,7 +2,7 @@
 
 import Tabs from "@theme/Tabs"
 import TabItem from "@theme/TabItem"
-import { RemoteRepoExample } from '@theme/RemoteRepoExample'
+import { RemoteRepoExample } from "@theme/RemoteRepoExample"
 
 This page shows how to insert data into QuestDB using different programming
 languages and tools.
@@ -11,11 +11,14 @@ languages and tools.
 ingestion method in QuestDB and is recommended for high-performance
 applications.
 
-For transactional data inserts, use the [PostgreSQL wire protocol](#postgresql-wire-protocol).
+For transactional data inserts, use the
+[PostgreSQL wire protocol](#postgresql-wire-protocol).
 
-For operational (ad-hoc) data ingestion, the [Web Console](#web-console) makes it
-easy to upload CSV files and insert via SQL statements. You can also perform
-these same actions via the [HTTP REST API](#http-rest-api). For [large CSV import](/docs/guides/importing-data) (database migrations), use SQL `COPY`.
+For operational (ad-hoc) data ingestion, the [Web Console](#web-console) makes
+it easy to upload CSV files and insert via SQL statements. You can also perform
+these same actions via the [HTTP REST API](#http-rest-api). For
+[large CSV import](/docs/guides/importing-data) (database migrations), use SQL
+`COPY`.
 
 In summary, these are the different options:
 
@@ -23,7 +26,8 @@ In summary, these are the different options:
   - High performance.
   - Optional automatic timestamps.
   - Optional integrated authentication.
-  - [Client libraries](/docs/reference/clients/overview) in various programming languages.
+  - [Client libraries](/docs/reference/clients/overview) in various programming
+    languages.
 - [PostgreSQL wire protocol](#postgresql-wire-protocol)
   - SQL `INSERT` statements, including parameterized queries.
   - Use `psql` on the command line.
@@ -39,21 +43,19 @@ In summary, these are the different options:
 
 ## InfluxDB Line Protocol
 
-The InfluxDB Line Protocol (ILP) is a text protocol over TCP or UDP on
-port 9009.
+The InfluxDB Line Protocol (ILP) is a text protocol over TCP on port 9009.
 
 It is a one-way protocol to insert data, focusing on simplicity and performance.
 
-Here is a summary table showing how it compares with other ways to insert data that we
-support:
+Here is a summary table showing how it compares with other ways to insert data
+that we support:
 
-| Protocol                 | Record Insertion Reporting       | Data Insertion Performance |
-| :----------------------- | :------------------------------- | :------------------------- |
-| InfluxDB Line Protocol   | Server logs; Disconnect on error | **Best**                   |
-| CSV upload via HTTP REST | Configurable                     | Very Good                  |
-| SQL `INSERT` statements  | Transaction-level                | Good                       |
-| SQL `COPY` statements    | Transaction-level                | Suitable for one-off data migration|
-
+| Protocol                 | Record Insertion Reporting       | Data Insertion Performance          |
+| :----------------------- | :------------------------------- | :---------------------------------- |
+| InfluxDB Line Protocol   | Server logs; Disconnect on error | **Best**                            |
+| CSV upload via HTTP REST | Configurable                     | Very Good                           |
+| SQL `INSERT` statements  | Transaction-level                | Good                                |
+| SQL `COPY` statements    | Transaction-level                | Suitable for one-off data migration |
 
 This interface is the preferred ingestion method as it provides the following
 benefits:
@@ -78,13 +80,15 @@ Telegraf agent to collect and send metrics to QuestDB via ILP.
 
 :::tip
 
-The [ILP client libraries](/docs/reference/clients/overview) provide more user-friendly ILP clients for a growing number of languages.
+The [ILP client libraries](/docs/reference/clients/overview) provide more
+user-friendly ILP clients for a growing number of languages.
 
 :::
 
 ### Examples
 
-These examples send a few rows of input. These use client libraries as well as raw TCP socket connections, when a client library is not available.
+These examples send a few rows of input. These use client libraries as well as
+raw TCP socket connections, when a client library is not available.
 
 <Tabs defaultValue="python" values={[
   { label: "Python", value: "python" },
@@ -98,6 +102,7 @@ These examples send a few rows of input. These use client libraries as well as r
   { label: "Ruby", value: "ruby" },
   { label: "PHP", value: "php" },
 ]}>
+
 
 <TabItem value="python">
   <RemoteRepoExample name="ilp" lang="python" />
@@ -133,6 +138,7 @@ These examples send a few rows of input. These use client libraries as well as r
 
 <TabItem value="ruby">
 
+
 ```ruby
 require 'socket'
 HOST = 'localhost'
@@ -157,9 +163,12 @@ ensure
     s.close() if s
 end
 ```
+
 </TabItem>
 
+
 <TabItem value="php">
+
 
 ```php
 <?php
@@ -199,9 +208,12 @@ socket_close($socket);
 
 ?>
 ```
+
 </TabItem>
 
+
 </Tabs>
+
 
 ### Timestamps
 
@@ -331,8 +343,9 @@ is documented [here](/docs/reference/api/ilp/authenticate).
 
 ### Third-party Library Compatibility
 
-Use our own [client libraries](/docs/reference/clients/overview) and/or protocol documentation: Clients intended to
-work with InfluxDB will not work with QuestDB.
+Use our own [client libraries](/docs/reference/clients/overview) and/or protocol
+documentation: Clients intended to work with InfluxDB will not work with
+QuestDB.
 
 ## PostgreSQL wire protocol
 
@@ -343,7 +356,9 @@ libraries and tools.
 You can connect to TCP port `8812` and use both `INSERT` and `SELECT` SQL
 queries.
 
-PostgreSQL wire protocol is better suited for applications inserting via SQL programmatically as it provides parameterized queries, which avoid SQL injection issues.
+PostgreSQL wire protocol is better suited for applications inserting via SQL
+programmatically as it provides parameterized queries, which avoid SQL injection
+issues.
 
 :::tip
 
@@ -364,7 +379,9 @@ Here are a few examples demonstrating SQL `INSERT` queries:
   { label: "Rust", value: "rust" },
 ]}>
 
+
 <TabItem value="psql">
+
 
 Create the table:
 
@@ -395,7 +412,9 @@ docker run -it --rm --network=host -e PGPASSWORD=quest \
 
 </TabItem>
 
+
 <TabItem value="python">
+
 
 This example uses the [psycopg2](https://github.com/psycopg/psycopg2) database
 adapter, which does not support prepared statements (bind variables). This
@@ -450,7 +469,9 @@ finally:
 
 </TabItem>
 
+
 <TabItem value="java">
+
 
 ```java
 package com.myco;
@@ -493,7 +514,9 @@ class App {
 
 </TabItem>
 
+
 <TabItem value="nodejs">
+
 
 This example uses the [`pg` package](https://www.npmjs.com/package/pg) which
 allows for quickly building queries using Postgres wire protocol. Details on the
@@ -561,7 +584,9 @@ start()
 
 </TabItem>
 
+
 <TabItem value="go">
+
 
 This example uses the [pgx](https://github.com/jackc/pgx) driver and toolkit for
 PostgreSQL in Go. More details on the use of this toolkit can be found on the
@@ -646,7 +671,9 @@ func main() {
 
 </TabItem>
 
+
 <TabItem value="rust">
+
 
 The following example shows how to use parameterized queries and prepared
 statements using the [rust-postgres](https://docs.rs/postgres/0.19.0/postgres/)
@@ -693,7 +720,9 @@ fn main() -> Result<(), Error> {
 
 </TabItem>
 
+
 </Tabs>
+
 
 ## Web Console
 
@@ -710,9 +739,10 @@ INSERT INTO takeaway_order VALUES (now(), 'order2', 'placed');
 ```
 
 SQL statements can be written in the code editor and executed by clicking the
-**Run** button. Note that the web console runs a single statement at a time. 
+**Run** button. Note that the web console runs a single statement at a time.
 
-For inserting bulk data or migrating data from other databases, see [large CSV import](/docs/guides/importing-data).
+For inserting bulk data or migrating data from other databases, see
+[large CSV import](/docs/guides/importing-data).
 
 ## HTTP REST API
 
@@ -748,7 +778,9 @@ Let's assume you want to upload the following data via the `/imp` entrypoint:
   { label: "Table", value: "table" },
 ]}>
 
+
 <TabItem value="csv">
+
 
 ```csv title=data.csv
 col1,col2,col3
@@ -759,7 +791,9 @@ c,,True
 
 </TabItem>
 
+
 <TabItem value="table">
+
 
 | col1 | col2   | col3    |
 | :--- | :----- | :------ |
@@ -769,7 +803,9 @@ c,,True
 
 </TabItem>
 
+
 </Tabs>
+
 
 You can do so via the command line using `cURL` or programmatically via HTTP
 APIs in your scripts and applications.
@@ -785,7 +821,9 @@ explicitly. See the second example in Python for these features.
   { label: "Go", value: "go" },
 ]}>
 
+
 <TabItem value="curl">
+
 
 This example imports a CSV file with automatic schema detection.
 
@@ -806,7 +844,9 @@ curl \
 
 </TabItem>
 
+
 <TabItem value="python">
+
 
 This first example shows uploading the `data.csv` file with automatic schema
 detection.
@@ -877,7 +917,9 @@ if __name__ == '__main__':
 
 </TabItem>
 
+
 <TabItem value="nodejs">
+
 
 ```javascript
 const fetch = require("node-fetch")
@@ -912,7 +954,9 @@ run()
 
 </TabItem>
 
+
 <TabItem value="go">
+
 
 ```go
 package main
@@ -972,7 +1016,9 @@ func checkErr(err error) {
 
 </TabItem>
 
+
 </Tabs>
+
 
 ### `/exec`: SQL `INSERT` Query
 
@@ -997,7 +1043,9 @@ Prefer [ILP](#influxdb-line-protocol) if you need high-performance inserts.
   { label: "Go", value: "go" },
 ]}>
 
+
 <TabItem value="curl">
+
 
 ```shell
 # Create Table
@@ -1013,7 +1061,9 @@ curl -G \
 
 </TabItem>
 
+
 <TabItem value="python">
+
 
 ```python
 import sys
@@ -1039,7 +1089,9 @@ run_query("INSERT INTO trades VALUES('abc', 123456)")
 
 </TabItem>
 
+
 <TabItem value="nodejs">
+
 
 The `node-fetch` package can be installed using `npm i node-fetch`.
 
@@ -1052,7 +1104,9 @@ async function createTable() {
   try {
     const query = "CREATE TABLE IF NOT EXISTS trades (name STRING, value INT)"
 
-    const response = await fetch(`${HOST}/exec?query=${encodeURIComponent(query)}`)
+    const response = await fetch(
+      `${HOST}/exec?query=${encodeURIComponent(query)}`,
+    )
     const json = await response.json()
 
     console.log(json)
@@ -1065,7 +1119,9 @@ async function insertData() {
   try {
     const query = "INSERT INTO trades VALUES('abc', 123456)"
 
-    const response = await fetch(`${HOST}/exec?query=${encodeURIComponent(query)}`)
+    const response = await fetch(
+      `${HOST}/exec?query=${encodeURIComponent(query)}`,
+    )
     const json = await response.json()
 
     console.log(json)
@@ -1079,7 +1135,9 @@ createTable().then(insertData)
 
 </TabItem>
 
+
 <TabItem value="go">
+
 
 ```go
 package main
@@ -1131,4 +1189,6 @@ func checkErr(err error) {
 
 </TabItem>
 
+
 </Tabs>
+
