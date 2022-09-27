@@ -330,7 +330,6 @@ If you don't see your inserted data, this is usually down to one of two things:
   settings to commit data more frequently.
   ```ini title=server.conf
   cairo.max.uncommitted.rows=1
-  line.tcp.maintenance.job.interval=100
   ```
   Refer to
   [ILP's commit strategy](/docs/reference/api/ilp/tcp-receiver/#commit-strategy)

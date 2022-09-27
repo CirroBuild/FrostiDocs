@@ -102,7 +102,7 @@ timeout value is server-global and can be set via the following server
 configuration property:
 
 ```shell title="Minimum amount of idle time (millis) before table writer is released"
-line.tcp.min.idle.ms.before.writer.release=30000
+line.tcp.min.idle.ms.before.writer.release=500
 ```
 
 The following server configuration property controls the interval to run idle
@@ -135,7 +135,7 @@ interval can be set by the below configuration parameter.
 line.tcp.commit.interval.fraction=0.2
 ```
 
-If the fraction value is set to `0`, the
+If the result of commit interval is `0`, the
 default commit interval of `2` seconds will be used. This can be changed in the
 configuration:
 
