@@ -402,6 +402,7 @@ execution and therefore performance.
 | Property                               | Default | Description                                                                                                                                                                |
 | -------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | cairo.sql.parallel.filter.enabled      | true    | Enable or disable parallel SQL filter execution. JIT compilation takes place only when this setting is enabled.                                                            |
+| cairo.sql.parallel.filter.pretouch.enabled| true | Enable column pre-touch as part of the parallel SQL filter execution, to improve query performance for large tables. |
 | cairo.page.frame.shard.count           | 4       | Number of shards for both dispatch and reduce queues. Shards reduce queue contention between SQL statements that are executed concurrently.                                |
 | cairo.page.frame.reduce.queue.capacity | 64      | Reduce queue is used for data processing and should be large enough to supply tasks for worker threads (shared worked pool).                                               |
 | cairo.page.frame.rowid.list.capacity   | 256     | Row ID list initial capacity for each slot of the reduce queue. Larger values reduce memory allocation rate, but increase minimal RSS size.                                |
