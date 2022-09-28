@@ -215,6 +215,53 @@ runtime is packaged directly with QuestDB.
 </Tabs>
 
 
+### Upgrade QuestDB version
+
+:::note
+
+Check the [release note](https://github.com/questdb/questdb/releases) and ensure
+that necessary [backup](/docs/operations/backup/) is completed.
+
+:::
+
+To upgrade QuestDB version, overwrite the binaries folder with new binaries and
+then restart the instance:
+
+<!-- prettier-ignore-start -->
+
+<Tabs defaultValue="nix" 
+values={[ 
+  { label: "Linux/FreeBSD", value: "nix" }, 
+  { label: "Windows", value: "windows" }
+]}>
+
+<!-- prettier-ignore-end -->
+
+<TabItem value="nix">
+
+
+```shell
+./questdb.sh stop
+./questdb.sh start
+```
+
+</TabItem>
+
+
+<TabItem value="windows">
+
+
+```shell
+questdb.exe stop
+questdb.exe start
+```
+
+</TabItem>
+
+
+</Tabs>
+
+
 ## Next steps
 
 Once you extracted the tarball, you are ready to use QuestDB. Navigate to our

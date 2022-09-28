@@ -67,6 +67,23 @@ with a non-zero status if any potential problems are found:
 brew doctor
 ```
 
+## Upgrade QuestDB version
+
+:::note
+
+Check the [release note](https://github.com/questdb/questdb/releases) and ensure
+that necessary [backup](/docs/operations/backup/) is completed.
+
+:::
+
+Once the latest QuestDB version is published on
+[Homebrew](https://github.com/homebrew/homebrew-core/blob/master/Formula/questdb.rb),
+the command to upgrade QuestDB version is:
+
+```shell
+brew upgrade questdb
+```
+
 ## Next steps
 
 Once you installed the QuestDB with Homebrew, you can navigate to our

@@ -6,6 +6,9 @@ description:
   data as well as persistence.
 ---
 
+import InterpolateReleaseData from "../../src/components/InterpolateReleaseData"
+import CodeBlock from "@theme/CodeBlock"
+
 QuestDB has images for both Linux/macOS and Windows on
 [Docker Hub]({@dockerUrl@}).
 
@@ -20,13 +23,19 @@ Once Docker is installed, you will need to pull QuestDB's image from
 [Docker Hub]({@dockerUrl@}) and create a container. You can do both in one
 command using `docker run`:
 
-```shell
-docker run -p 9000:9000 \
- -p 9009:9009 \
- -p 8812:8812 \
- -p 9003:9003 \
- questdb/questdb
-```
+<InterpolateReleaseData
+  renderText={(release) => (
+    <CodeBlock className="language-shell" title={"Docker"}>
+      {`docker run -p 9000:9000 \\
+-p 9009:9009 \\
+-p 8812:8812 \\
+-p 9003:9003 \\
+-v "$(pwd):/var/lib/questdb" \\
+questdb/questdb:${release.name}`}
+    </CodeBlock>
+  )
+}
+/>
 
 ### Options
 
@@ -48,8 +57,8 @@ This parameter will publish a port to the host, you can specify:
 
 #### -v volumes
 
-The QuestDB [root_directory](/docs/concept/root-directory-structure) is in
-the following location:
+The QuestDB [root_directory](/docs/concept/root-directory-structure) is in the
+following location:
 
 <!-- prettier-ignore-start -->
 
@@ -73,6 +82,7 @@ import TabItem from "@theme/TabItem"
 
 </TabItem>
 
+
 <TabItem value="macos">
 
 
@@ -81,6 +91,7 @@ import TabItem from "@theme/TabItem"
 ```
 
 </TabItem>
+
 
 <TabItem value="windows">
 
@@ -91,8 +102,20 @@ C:\questdb
 
 </TabItem>
 
+
 </Tabs>
 
+
+#### Docker image
+
+By default, `questdb/questdb` points to the latest QuestDB version available on
+Docker. However, it is recommended to define the version used.
+
+<InterpolateReleaseData renderText={(release) => (
+  <CodeBlock className="language-shell">
+    {`questdb/questdb:${release.name}`}
+  </CodeBlock>
+)} />
 
 ## Container status
 
@@ -128,13 +151,19 @@ persisted or server configuration settings may be passed to an instance. The
 following example demonstrated how to mount the current directory to a QuestDB
 container using the `-v` flag in a Docker `run` command:
 
-```bash
-docker run -p 9000:9000 \
- -p 9009:9009 \
- -p 8812:8812 \
- -p 9003:9003 \
- -v "$(pwd):/var/lib/questdb" questdb/questdb
-```
+<InterpolateReleaseData
+  renderText={(release) => (
+    <CodeBlock className="language-shell" title={"Mounting a volume"}>
+      {`docker run -p 9000:9000 \\
+-p 9009:9009 \\
+-p 8812:8812 \\
+-p 9003:9003 \\
+-v "$(pwd):/var/lib/questdb" \\
+questdb/questdb:${release.name}`}
+    </CodeBlock>
+  )
+}
+/>
 
 The current directory will then have data persisted to disk for convenient
 migration or backups:
@@ -149,6 +178,53 @@ migration or backups:
 For details on passing QuestDB server settings to a Docker container, see the
 [Docker section](/docs/reference/configuration#docker) of the server
 configuration documentation.
+
+### Upgrade QuestDB version
+
+It is possible to upgrade your QuestDB instance on Docker when a volume is
+mounted to maintain data persistence.
+
+:::note
+
+* Check the [release note](https://github.com/questdb/questdb/releases) and ensure
+that necessary [backup](/docs/operations/backup/) is completed.
+* Upgrading an instance is possible only when the original instance has a volume mounted. Without mounting a volume for the original instance, the following steps create a new instance and data in the old instance cannot be retrieved.
+
+:::
+
+1. Run `docker ps` to copy the container name or ID:
+
+```shell title="Container status"
+
+# The existing QuestDB version is 6.5.2:
+
+CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS              PORTS                NAMES
+dd363939f261        questdb/questdb:6.5.2     "/app/bin/java -m io…"   3 seconds ago       Up 2 seconds        8812/tcp, 9000/tcp   frosty_gauss
+```
+
+2. Stop the instance and then remove the container:
+
+```shell
+docker stop dd363939f261
+docker rm dd363939f261
+```
+
+3. Download the latest QuestDB image:
+
+<InterpolateReleaseData renderText={(release) => (
+  <CodeBlock className="language-shell">
+    {`docker pull questdb/questdb:${release.name}`} 
+  </CodeBlock>
+)} />
+
+
+4. Start a new container with the new version and the same volume mounted:
+
+<InterpolateReleaseData renderText={(release) => (
+  <CodeBlock className="language-shell">
+    {`docker run -p 8812:8812 -p 9000:9000 -v "$(pwd):/var/lib/questdb" questdb/questdb:${release.name}`} 
+  </CodeBlock>
+)} />
 
 ### Writing logs to disk
 
