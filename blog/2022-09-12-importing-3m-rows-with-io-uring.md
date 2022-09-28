@@ -39,7 +39,7 @@ this blog post, we discuss what parallel import means for our users and how it's
 implemented internally. As a bonus, we also share how recent ClickHouse team's
 benchmark helped us to improve both QuestDB and its demonstrated results.
 
-## How ClickBench helped us to improve
+## How ClickBench helped us improve
 
 Recently ClickHouse conducted a
 [benchmark](https://github.com/ClickHouse/ClickBench) for their own database and
