@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useState, useEffect } from "react"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import Button from "@theme/Button"
 import TypeIt from "typeit-react"
@@ -23,9 +23,15 @@ const exampleQueries = exampleQueriesRaw.map(({ comment, query }) => ({
 
 export const Header = () => {
   const { siteConfig } = useDocusaurusContext()
-  const { current: demoQuery } = useRef(
-    Math.floor(Math.random() * exampleQueries.length),
-  )
+  const [query, setQuery] = useState<null | number>(null)
+
+  useEffect(() => {
+    const isClient = typeof window !== "undefined"
+
+    if (isClient) {
+      setQuery(Math.floor(Math.random() * exampleQueries.length))
+    }
+  }, [])
 
   return (
     <Section className={styles.root}>
@@ -67,36 +73,41 @@ export const Header = () => {
 
         <div className={styles.editor}>
           <div className={styles.code}>
-            <TypeIt
-              options={{
-                speed: 2,
-                waitUntilVisible: true,
-                cursor: false,
-              }}
-            >
-              {exampleQueries[demoQuery].view()}
-            </TypeIt>
+            {typeof query === "number" && (
+              <TypeIt
+                options={{
+                  startDelay: 1000,
+                  speed: 2,
+                  waitUntilVisible: true,
+                  cursor: false,
+                }}
+              >
+                {exampleQueries[query].view()}
+              </TypeIt>
+            )}
           </div>
         </div>
 
-        <div className={styles.previewTagline}>
-          <LightningChargeFill
-            className={styles.previewTaglineIcon}
-            size="15px"
-          />
-          <Button
-            className={styles.runQueryButton}
-            href={exampleQueries[demoQuery].url}
-            uppercase={false}
-            variant="plain"
-            size="xxsmall"
-          >
-            Run this query
-          </Button>
-          <span>
-            in milliseconds on our demo dataset with 1.6 billion rows!
-          </span>
-        </div>
+        {typeof query === "number" && (
+          <div className={styles.previewTagline}>
+            <LightningChargeFill
+              className={styles.previewTaglineIcon}
+              size="15px"
+            />
+            <Button
+              className={styles.runQueryButton}
+              href={exampleQueries[query].url}
+              uppercase={false}
+              variant="plain"
+              size="xxsmall"
+            >
+              Run this query
+            </Button>
+            <span>
+              in milliseconds on our demo dataset with 1.6 billion rows!
+            </span>
+          </div>
+        )}
       </div>
     </Section>
   )
