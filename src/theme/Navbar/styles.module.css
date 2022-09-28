@@ -194,7 +194,7 @@
   }
 }
 
-@media (min-width: 1740px) {
+@media (min-width: 1300px) {
   .inner {
     max-width: calc(var(--ifm-container-width) + 100px);
   }

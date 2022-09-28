@@ -1,85 +1,19 @@
 import clsx from "clsx"
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import React from "react"
 import Customers from "../components/Customers"
 import customFields from "../config/customFields"
 import { QueryScroller } from "../components/QueryScroller"
 
-import Button from "@theme/Button"
 import Layout from "../theme/Layout"
-import SvgImage from "../components/SvgImage"
+import { Header } from "../modules/index-header"
 import { ActionFooter } from "../components/ActionFooter"
 import { Section } from "../components/Section"
 import { UseCases } from "../modules/use-cases"
 import { Integration } from "../modules/integration"
 import { FeatureTabs } from "../modules/feature-tabs"
 
-import doCss from "../css/index/docker.module.css"
 import feCss from "../css/index/feature.module.css"
-import juCss from "../css/index/jumbotron.module.css"
 import seCss from "../css/section.module.css"
-
-import QuestDBLogo from "../assets/img/questdb.svg"
-import DockerLogo from "../assets/img/pages/index/docker.svg"
-
-const Top = () => {
-  const { siteConfig } = useDocusaurusContext()
-
-  return (
-    <Section center className={juCss.top}>
-      <div className={juCss.jumbotron}>
-        <Section.Title level={1}>Fast SQL for time series</Section.Title>
-
-        <Section.Subtitle>{siteConfig.tagline}</Section.Subtitle>
-
-        <div className={juCss.jumbotron__cta}>
-          <Button className={juCss.jumbotron__link} href={customFields.demoUrl}>
-            Live Demo
-          </Button>
-          <Button
-            className={clsx(
-              juCss.jumbotron__link,
-              juCss["jumbotron__cta--github"],
-            )}
-            href="/cloud"
-            icon={
-              <SvgImage
-                image={<QuestDBLogo width="32" height="32" />}
-                title="QuestDB Cloud"
-              />
-            }
-            newTab={false}
-            variant="secondary"
-          >
-            CLOUD
-          </Button>
-        </div>
-        <p className={juCss.jumbotron__description}>
-          Query our demo dataset with 1.6 billion rows in milliseconds
-        </p>
-      </div>
-
-      <div className={doCss.docker}>
-        <pre className={doCss.docker__inner}>
-          <code className={doCss.docker__code}>
-            {`docker pull questdb/questdb
-docker run -p 9000:9000 questdb/questdb`}
-          </code>
-          <a
-            href={customFields.dockerUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <SvgImage
-              image={<DockerLogo className={doCss.docker__icon} />}
-              title="Docker"
-            />
-          </a>
-        </pre>
-      </div>
-    </Section>
-  )
-}
 
 const Cards = () => (
   <Section odd fullWidth>
@@ -154,7 +88,7 @@ const Console = () => (
 
     <Section.Subtitle center>
       Check our{" "}
-      <a href="/docs/develop/web-console">Web Console documentation</a> to get
+      <a href="/docs/develop/web-console/">Web Console documentation</a> to get
       started.
     </Section.Subtitle>
 
@@ -176,7 +110,7 @@ const Home = () => (
     title="QuestDB | Time series data, faster"
     replaceTitle
   >
-    <Top />
+    <Header />
     <Customers />
     <Section fullWidth center>
       <UseCases />

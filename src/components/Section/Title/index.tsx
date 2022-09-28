@@ -7,11 +7,13 @@ export const Title = ({
   children,
   center,
   size = "medium",
+  className,
 }: {
   level?: 1 | 2 | 3 | 4 | 5 | 6
   children: React.ReactNode
   center?: boolean
   size?: "small" | "medium"
+  className?: string
 }) =>
   React.createElement(
     `h${level}`,
@@ -20,6 +22,7 @@ export const Title = ({
         style.root,
         { [style.center]: center },
         style[`size-${size}`],
+        className,
       ),
     },
     children,

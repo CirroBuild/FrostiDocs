@@ -48,7 +48,6 @@ const customerLogos = [
   "liveaction",
   "apacheNifi",
   "toggle",
-  "syntropy",
   "synology",
   "prediko",
   "electric-era",

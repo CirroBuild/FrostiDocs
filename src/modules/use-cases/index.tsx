@@ -21,7 +21,7 @@ const useCases = [
     ],
     cta: {
       label: "See Benchmarks",
-      url: "/blog/tags/benchmark",
+      url: "/blog/tags/benchmark/",
     },
   },
   {
@@ -42,7 +42,7 @@ const useCases = [
     ],
     cta: {
       label: "View Tutorials",
-      url: "/blog/tags/tutorial",
+      url: "/blog/tags/tutorial/",
     },
   },
   {
@@ -63,7 +63,7 @@ const useCases = [
 
     cta: {
       label: "Browse Docs",
-      url: "/docs",
+      url: "/docs/",
     },
   },
 ]
