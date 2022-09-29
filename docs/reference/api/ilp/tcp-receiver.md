@@ -30,7 +30,7 @@ Although the original protocol does not support it, we have added authentication
 over TCP. This works by using an
 [elliptic curve P-256](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography)
 JSON Web Token (JWT) to sign a server challenge. Details of authentication over
-ILP can be found in the [authentication documentation](authenticate)
+ILP can be found in the [authentication documentation](/docs/reference/api/ilp/authenticate/).
 
 ## Insert data
 
