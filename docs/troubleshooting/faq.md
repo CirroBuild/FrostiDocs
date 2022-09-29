@@ -11,13 +11,45 @@ issues met when running QuestDB, as well as solutions to them.
 InfluxDB line protocol (ILP) does not commit data on single lines or when the
 sender disconnects, but instead uses a number of rules to break incoming data
 into commit batches. This results in data not being visible in `SELECT` queries
-immediately after being received. Refer to our [guide to commit lag](/docs/guides/out-of-order-commit-lag) to understand the concept and 
+immediately after being received. Refer to our
+[guide to commit lag](/docs/guides/out-of-order-commit-lag) to understand the
+concept and
 [InfluxDB line protocol reference](/docs/reference/api/ilp/tcp-receiver#commit-strategy)
 to understand these rules.
 
 ## How do I delete a row?
 
 See our guide on [modifying data](/docs/guides/modifying-data).
+
+## How do I convert a `STRING` column to a `SYMBOL` or vice versa?
+
+The SQL `UPDATE` keyword can be used to change the data type of a column. The
+same approach can also be used to increase the
+[capacity of a `SYMBOL` column](/docs/concept/symbol#symbol-columns) that is
+undersized.
+
+The steps are as follows:
+
+1. Add a new column to the table and define the desired data type.
+1. Stop data ingestion and increase
+   [SQL query timeout](/docs/reference/configuration/#cairo-engine/),
+   `query.timeout.sec`, as `UPDATE` may take a while to complete. Depending on
+   the size of the column, we recommend to increase the value significantly: the
+   default is 60 seconds and it may be reasonable to increase it to one hour.
+   Restart the instance after changing the configuration, to activate the
+   change.
+1. Use `UPDATE` to copy the existing column content to the new column. Now, the
+   column has the correct content with the new data type.
+1. Delete the old column.
+1. Rename the new column accordingly.
+For example, to change `old_col` from `STRING` to `SYMBOL` for table `my_table`:
+
+```questdb-sql
+ALTER TABLE my_table ADD COLUMN new_col SYMBOL;
+UPDATE my_table SET new_col = old_col;
+ALTER TABLE my_table DROP COLUMN old_col;
+ALTER TABLE my_table RENAME COLUMN new_col TO old_col;
+```
 
 ## Why do I get `table busy` error messages when inserting data over PostgreSQL wire protocol?
 
