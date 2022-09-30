@@ -24,7 +24,6 @@ const quotes = _quotes.map(({ author, company, logo, role, text }) => {
       <div className={quCss.quote__logo}>
         <img
           alt={logo.alt}
-          className="responsive-image"
           height={logo.height}
           src={logo.src}
           width={logo.width}

@@ -337,10 +337,6 @@ body {
   font-size: var(--font-size-large);
 }
 
-.responsive-image {
-  height: auto;
-}
-
 /**
  *
  * Blog
@@ -402,7 +398,6 @@ html[data-theme='light'] .pagination-nav__item--next .pagination-nav__sublabel {
   color: var(--palette-white);
 }
 
-
 html[data-theme='light'] .pagination-nav__link {
   background: var(--palette-dark-10);
   color: var(--palette-dark-80);
@@ -410,31 +405,6 @@ html[data-theme='light'] .pagination-nav__link {
 
 html[data-theme='light'] .pagination-nav__sublabel {
   color: var(--palette-dark-80);
-}
-
-
-/**
- *
- * Transitions
- *
- **/
-
-.item-enter {
-  opacity: 0;
-}
-
-.item-enter-active {
-  opacity: 1;
-  transition: opacity 200ms ease-in;
-}
-
-.item-exit {
-  opacity: 1;
-}
-
-.item-exit-active {
-  opacity: 0;
-  transition: opacity 200ms ease-in;
 }
 
 .katex { font-size: 1.2em; }
@@ -451,8 +421,6 @@ html[data-theme='light'] .pagination-nav__sublabel {
 .DocSearch-Dropdown-Container {
   padding-bottom: var(--docsearch-spacing);
 }
-
-
 
 /**
  *

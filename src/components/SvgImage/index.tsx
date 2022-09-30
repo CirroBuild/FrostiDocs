@@ -5,11 +5,10 @@ type Props = {
   title?: string
 }
 
-const SvgImage = ({ image, title = "" }: Props) => {
-  return cloneElement(image, {
+const SvgImage = ({ image, title = "" }: Props) =>
+  cloneElement(image, {
     ...image.props,
     title,
   })
-}
 
 export default SvgImage
