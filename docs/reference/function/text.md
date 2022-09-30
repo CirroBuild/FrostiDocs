@@ -5,8 +5,8 @@ description: Text function reference documentation.
 ---
 
 This page describes the available functions to assist with performing text
-manipulation such as concatenation, case conversion, string length calculation,
-and pattern matching via regular expressions.
+manipulation such as concatenation, case conversion, and string length
+calculation.
 
 ## concat
 
@@ -190,13 +190,13 @@ FROM example_table;
 - `string` is a string to extract from.
 - `start` is an integer specifying the position of the first character to be
   extracted. Positions start from `1`.
--  `length` is an integer specifying the count of characters to be extracted.
+- `length` is an integer specifying the count of characters to be extracted.
   Should be non-negative.
 
 **Return value:**
 
-Returns a string with the extracted characters. If any part the arguments is `null`,
-the function returns `null`.
+Returns a string with the extracted characters. If any part the arguments is
+`null`, the function returns `null`.
 
 **Examples:**
 
@@ -210,8 +210,11 @@ SELECT id, substring(id, 1, 2) country FROM orders LIMIT 3
 | UK2022072703162 | UK      |
 | US2022072676246 | US      |
 
-If the `start` argument is negative, the output depends on the value of `start+length`:
-- If `start+length` is greater than 1, the substring stops at position `start+length - 1`.
+If the `start` argument is negative, the output depends on the value of
+`start+length`:
+
+- If `start+length` is greater than 1, the substring stops at position
+  `start+length - 1`.
 - If `start+length` is zero, the output is empty string.
 - If `start+length` is less than zero, the output is `null`.
 
@@ -222,20 +225,6 @@ SELECT substring('Lorem ipsum dolor sit amet', -5, 9)
 | substring |
 | --------- |
 | Lor       |
-
-## ~ (match)
-
-`string ~ regex` - matches `string` value to regex
-
-`symbol ~ regex` - matches `symbol` value to regex
-
-[java.util.regex](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html)
-
-## !~ (does not match)
-
-`string !~ regex` - checks if `string` value does not match regex
-
-`symbol !~ regex` - checks if `symbol` value does not match regex
 
 ## to_lowercase
 
