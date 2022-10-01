@@ -70,9 +70,9 @@ Hacktoberfest:
 2. [**Documentation**](https://github.com/questdb/questdb.io): QuestDB's website
    for documentation, suitable for technical writers who're experienced in
    Docusaurus and Markdown. Read
-   [our guidelinesm for docs contributors](https://github.com/questdb/questdb.io#contributing).
-3. [**Web console**](https://github.com/questdb/ui/tree/main/packages/web-console): Monorepo that contains web
-   console components.
+   [our guidelines for docs contributors](https://github.com/questdb/questdb.io#contributing).
+3. [**Web console**](https://github.com/questdb/ui/tree/main/packages/web-console):
+   Monorepo that contains web console components.
 
 ## 🚀 Contribute to QuestDB
 
@@ -84,15 +84,15 @@ guidelines about
 
 To maintain a friendly environment for both maintainers and contributors, we put
 together extra recommendations to increase the chance that your pull requests
-get accepted:
+get merged:
 
 - Pay attention to `CONTRIBUTING.md` or any contribution guidelines available.
-- Start with existing issues instead of inventing new ones. While new ideas are
+- Start with existing issues rather than creating new ones. While new ideas are
   generally welcomed, they don't always fit the project roadmap.
 - Filter issues with `good first issues` or `help wanted` tags if you're new to
   the projects.
 - Avoid commenting on all the available issues but those you really plan to work
-  on, so you can leave some opportunities to other contributors.
+  on, to leave some opportunities to other contributors.
 - Our maintainers will review your pull requests, please make sure you address
   all the comments before asking for another review.
 
