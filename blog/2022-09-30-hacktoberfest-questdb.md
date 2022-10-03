@@ -57,8 +57,10 @@ of the most popular time series databases according to the independent reviewer
 [DBEngines](https://db-engines.com/en/ranking/time+series+dbms).
 
 Developers can use QuestDB as a library for java applications.
-[Official clients](/docs/reference/clients/overview/) for Python, Go, C, C++,
-Node.js, Rust, and .NET. are also available for the wider developer community.
+[Official clients](/docs/reference/clients/overview/) for 
+[Python](https://github.com/questdb/py-questdb-client), [Go](https://github.com/questdb/go-questdb-client), 
+[C, C++, Rust](https://github.com/questdb/c-questdb-client), [Node.js](https://github.com/questdb/nodejs-questdb-client) and [.NET](https://github.com/questdb/net-questdb-client)
+are also available for the wider developer community.
 
 This year, there are three QuestDB open source projects opted in for
 Hacktoberfest:
