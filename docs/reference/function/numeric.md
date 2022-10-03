@@ -60,6 +60,30 @@ SELECT log(4.123)
 | ------------ |
 | 1.4165810537 |
 
+## power
+
+`power(base, exponent)` returns the value of a number `base` raised to the
+power defined by `exponent`.
+
+**Arguments:**
+
+- `base` is any numeric value.
+- `exponent` is any numeric value.
+
+**Return value:**
+
+Return value type is `double`.
+
+**Examples:**
+
+```questdb-sql
+SELECT power(2, 3);
+```
+
+| power |
+| ----- |
+| 8     |
+
 ## round
 
 `round(value, scale)` returns the **closest** value in the specified scale. It
