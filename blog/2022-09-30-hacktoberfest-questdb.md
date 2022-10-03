@@ -19,12 +19,12 @@ image: /img/blog/2022-09-30/banner-hacktoberfest.png
 tags: [community, event, hacktoberfest, github, swag, opensource]
 ---
 
+import Screenshot from "@theme/Screenshot"
+
 Hacktoberfest 2022 is starting soon! We're super excited about joining
-Hackberfest again and meeting new or returning open-source contributors! 🤝
+Hacktoberfest again and meeting new or returning open-source contributors! 🤝
 
 <!--truncate-->
-
-import Screenshot from "@theme/Screenshot"
 
 <Screenshot
   alt="QuestDB at Hacktoberfest 2022"
@@ -67,12 +67,12 @@ Hacktoberfest:
    mainly written in Java and C++. Check
    [CONTRIBUTING.md](https://github.com/questdb/questdb/blob/master/CONTRIBUTING.md)
    to get started.
-2. [**Documentation**](https://github.com/questdb/questdb.io): QuestDB's website
-   for documentation, suitable for technical writers who're experienced in
-   Docusaurus and Markdown. Read
-   [our guidelines for docs contributors](https://github.com/questdb/questdb.io#contributing).
+2. [**Documentation**](https://github.com/questdb/questdb.io): QuestDB's website for
+   documentation, suitable for technical writers who have experience with Markdown and
+   Docusaurus. Read [our guidelines for docs contributors](https://github.com/questdb/questdb.io#contributing).
 3. [**Web console**](https://github.com/questdb/ui/tree/main/packages/web-console):
-   Monorepo that contains web console components.
+   Monorepo that contains the code of QuestDB GUI. It is a web application written
+   with Typesript and React.
 
 ## 🚀 Contribute to QuestDB
 
@@ -82,7 +82,7 @@ guidelines about
 [pull requests](https://hacktoberfest.com/participation/#pr-mr-details), and
 [spam](https://hacktoberfest.com/participation/#spam).
 
-To maintain a friendly environment for both maintainers and contributors, we put
+To keep a friendly environment for both maintainers and contributors, we put
 together extra recommendations to increase the chance that your pull requests
 get merged:
 
@@ -111,8 +111,7 @@ QuestDB T-shirt for you through our [swag program](/community/). 🚀
 
 ## ℹ️ Get help
 
-If you have any questions when you're trying to contribute to QuestDB projects;
-here are the places to get help from our team:
+Here are the places to get help from our team:
 
 - [Community Slack](https://slack.questdb.io); join #contributors channel.
 - [Documentation](/docs/)
