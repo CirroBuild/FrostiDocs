@@ -140,6 +140,7 @@ can be used in QuestDB.
 ### Functions
 
 - [Aggregate](/docs/reference/function/aggregation)
+- [Binary](/docs/reference/function/binary)
 - [Boolean](/docs/reference/function/boolean)
 - [Conditional](/docs/reference/function/conditional)
 - [Date and time](/docs/reference/function/date-time)
