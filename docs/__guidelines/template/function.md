@@ -6,27 +6,23 @@ sidebar_label: Function
 Function reference pages list one or several (when closely related to each
 other) functions. For this reason, it the section should start with a short
 paragraph describing the class of functions described in this page and what they
-are used for. They should also be listed at the top so users can find them
-easily.
-
-| Function                            | One liner description                      |
-| ----------------------------------- | ------------------------------------------ |
-| [function_name](#function_name)     | This function only has one syntax.         |
-| [function_name_2](#function_name_2) | This function has various possible syntax. |
-| ...                                 | ...                                        |
+are used for. 
 
 ## function_name
 
-| Syntax                       | Return value | Description            |
-| ---------------------------- | ------------ | ---------------------- |
-| function_name(`arg1`,`arg2`) | `BOOLEAN`    | What the function does |
+<!--Short description with syntax -->
+function_name(`arg1`,`arg2`) - does this and that. 
+
 
 ### Arguments
+<!--Additional information on the input value(s)-->
+`arg1` is [data_type].
+`arg2` is is [data_type].
 
-| Argument | Type     | Description                                                                                                |
-| -------- | -------- | ---------------------------------------------------------------------------------------------------------- |
-| `arg1`   | `DOUBLE` | Sets the argument for the function.                                                                        |
-| `arg1`   | `STRING` | Sets the other argument for the function. Possible values are `value1` to do this, and `value2` to do that |
+
+### Return value
+
+Return value type is [data_type].
 
 ### Description
 
@@ -75,17 +71,17 @@ SELECT function_name(arg1,arg2) FROM table;
 
 ## function_name_2
 
-| Syntax                       | Return value | Description                                                                                                                                                                                       |
-| ---------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| function_name()              | `INT`        | What the function does                                                                                                                                                                            |
-| function_name(`arg1`,`arg2`) | `LONG`       | A much longer description of what the function does because in this case it turns out that this particular function is slightly more complicated than other functions which are less complicated. |
+<!--Short description with syntax -->
+function_name(`arg1`,`arg2`) - does this and that. 
 
 ### Arguments
+<!--Additional information on the input value(s)-->
+`arg1` is [data_type].
+`arg2` is is [data_type].
 
-| Argument | Type     | Description                                                                                                |
-| -------- | -------- | ---------------------------------------------------------------------------------------------------------- |
-| `arg1`   | `DOUBLE` | Sets the argument for the function.                                                                        |
-| `arg1`   | `STRING` | Sets the other argument for the function. Possible values are `value1` to do this, and `value2` to do that |
+### Return value
+
+Return value type is [data_type].
 
 ### Description
 
