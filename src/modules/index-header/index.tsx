@@ -45,8 +45,8 @@ export const Header = () => {
         </Section.Subtitle>
 
         <div className={styles.getStartedButtons}>
-          <Button to="/get-questdb/" uppercase={false}>
-            Get Started
+          <Button href={customFields.demoUrl} uppercase={false}>
+            Live Demo
           </Button>
 
           <Button
