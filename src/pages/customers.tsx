@@ -281,6 +281,40 @@ const Customer = () => {
         <div className={caCss.card}>
           <p className={caCss.card__summary}>
             <img
+              alt={logos.invezo.alt}
+              className={caCss.card__logo}
+              src={logos.invezo.src}
+              width={125}
+              height={22}
+            />
+            “Our customers value a low-latency API, so speed is extremely
+            important to us. With QuestDB, our ingestion rate is 5x faster and
+            query execution time went from minutes to milliseconds“
+            <em className={caCss.card__author}>
+              - <strong>Emmett Miller</strong>, Co-founder, Invezo
+            </em>
+            <Button className={caCss.card__cta} to="/case-study/invezo/">
+              View full case study
+            </Button>
+          </p>
+          <div className={caCss.card__illustration}>
+            <img alt="Invezo" src="/img/pages/case-study/invezo/preview.png" />
+          </div>
+        </div>
+      </section>
+
+      <section className={clsx(seCss.section, seCss["section--inner"])}>
+        <div className={caCss.card}>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="Yahoo logo"
+              height={400}
+              src="/img/pages/case-study/yahoo/summary.jpg"
+              width={525}
+            />
+          </div>
+          <p className={caCss.card__summary}>
+            <img
               alt="Yahoo logo"
               className={caCss.card__logo}
               height={50}
@@ -298,28 +332,10 @@ const Customer = () => {
               View full case study
             </Button>
           </p>
-
-          <div className={caCss.card__illustration}>
-            <img
-              alt="Yahoo logo"
-              height={400}
-              src="/img/pages/case-study/yahoo/summary.jpg"
-              width={525}
-            />
-          </div>
         </div>
       </section>
       <section className={clsx(seCss.section, seCss["section--inner"])}>
         <div className={caCss.card}>
-          <div className={caCss.card__illustration}>
-            <img
-              alt="Logo for liveaction AI's network threat detection suite ThreatEye"
-              height={360}
-              src="/img/pages/case-study/liveaction/summary.png"
-              width={640}
-            />
-          </div>
-
           <p className={caCss.card__summary}>
             <img
               alt="LiveAction logo"
@@ -339,10 +355,26 @@ const Customer = () => {
               View full case study
             </Button>
           </p>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="Logo for liveaction AI's network threat detection suite ThreatEye"
+              height={360}
+              src="/img/pages/case-study/liveaction/summary.png"
+              width={640}
+            />
+          </div>
         </div>
       </section>
       <section className={clsx(seCss.section, seCss["section--inner"])}>
         <div className={caCss.card}>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="A graphic with the logo of TQS Integration"
+              height={360}
+              src="/img/pages/case-study/tqs-integration/card.png"
+              width={640}
+            />
+          </div>
           <p className={caCss.card__summary}>
             <img
               alt="TQS Integration logo"
@@ -364,43 +396,6 @@ const Customer = () => {
               className={caCss.card__cta}
               to="/case-study/tqs-integration/"
             >
-              View full case study
-            </Button>
-          </p>
-          <div className={caCss.card__illustration}>
-            <img
-              alt="A graphic with the logo of TQS Integration"
-              height={360}
-              src="/img/pages/case-study/tqs-integration/card.png"
-              width={640}
-            />
-          </div>
-        </div>
-      </section>
-      <section className={clsx(seCss.section, seCss["section--inner"])}>
-        <div className={caCss.card}>
-          <div className={caCss.card__illustration}>
-            <img
-              alt="An photo of a cellphone with the Turk Telekom logo"
-              src="/img/pages/case-study/turk-telekom/card.png"
-            />
-          </div>
-          <p className={caCss.card__summary}>
-            <img
-              alt="Türk Telekom logo"
-              className={caCss.card__logo}
-              height={50}
-              src={logos["turk-telekom"].src}
-              width={140}
-            />
-            “QuestDB allows us to query data while writing millions of records.
-            It is an excellent database for time series analysis, calculation of
-            aggregates and can efficiently store our data.”
-            <em className={caCss.card__author}>
-              - <strong>Erdem Aydemir</strong>, Software Engineer, Innova (Türk
-              Telekom)
-            </em>
-            <Button className={caCss.card__cta} to="/case-study/turk-telekom/">
               View full case study
             </Button>
           </p>
@@ -434,6 +429,36 @@ const Customer = () => {
               width={600}
             />
           </div>
+        </div>
+      </section>
+
+      <section className={clsx(seCss.section, seCss["section--inner"])}>
+        <div className={caCss.card}>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="An photo of a cellphone with the Turk Telekom logo"
+              src="/img/pages/case-study/turk-telekom/card.png"
+            />
+          </div>
+          <p className={caCss.card__summary}>
+            <img
+              alt="Türk Telekom logo"
+              className={caCss.card__logo}
+              height={50}
+              src={logos["turk-telekom"].src}
+              width={140}
+            />
+            “QuestDB allows us to query data while writing millions of records.
+            It is an excellent database for time series analysis, calculation of
+            aggregates and can efficiently store our data.”
+            <em className={caCss.card__author}>
+              - <strong>Erdem Aydemir</strong>, Software Engineer, Innova (Türk
+              Telekom)
+            </em>
+            <Button className={caCss.card__cta} to="/case-study/turk-telekom/">
+              View full case study
+            </Button>
+          </p>
         </div>
       </section>
     </Layout>

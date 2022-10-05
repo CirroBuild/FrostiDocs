@@ -26,10 +26,6 @@ html[data-theme="light"] .jumbotron__logo {
   filter: invert(1) brightness(0) opacity(0.8);
 }
 
-.jumbotron__logo:hover {
-  filter: none;
-}
-
 .jumbotron__name {
   font-size: var(--font-size-large);
 }

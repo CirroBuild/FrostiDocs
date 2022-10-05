@@ -195,4 +195,10 @@ export const logos: Record<string, CustomerLogo> = {
     width: 100,
     height: 30,
   },
+  invezo: {
+    src: "/img/logos/invezo.svg",
+    alt: "Invezo logo",
+    width: 100,
+    height: 30,
+  },
 }
