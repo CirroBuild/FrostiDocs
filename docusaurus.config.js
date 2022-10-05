@@ -95,8 +95,16 @@ const config = {
         ),
       },
     ],
-  ],
+    ...[
+      process.env.POSTHOG_API_KEY  && !process.env.CI
+        ? require.resolve("posthog-docusaurus/src/index.js")
+        : null,
+    ],
+  ].filter(Boolean),
   themeConfig: {
+    posthog: {
+      apiKey: process.env.POSTHOG_API_KEY,
+    },
     announcementBar: {
       id: "github-star",
     },
