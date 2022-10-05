@@ -96,7 +96,7 @@ const config = {
       },
     ],
     ...[
-      process.env.POSTHOG_API_KEY  && !process.env.CI
+      process.env.POSTHOG_API_KEY
         ? require.resolve("posthog-docusaurus/src/index.js")
         : null,
     ],
