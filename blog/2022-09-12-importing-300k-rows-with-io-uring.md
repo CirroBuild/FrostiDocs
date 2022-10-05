@@ -1,5 +1,5 @@
 ---
-title: Importing 3m rows/sec with io_uring
+title: Importing 300k rows/sec with io_uring
 author: Andrey Pechkurov
 author_title: QuestDB Engineering
 author_url: https://github.com/puzpuzpuz
@@ -125,7 +125,7 @@ Let's start with the most powerful AWS EC2 instance from the original benchmark:
 
 The above benchmark compares the import speed of several well-known OLAP and
 time-series databases: Apache Pinot, Apache Druid, ClickHouse, DuckDB,
-TimescaleDB, and QuestDB. Here, our new optimized `COPY` imports almost 1Bln
+TimescaleDB, and QuestDB. Here, our new optimized `COPY` imports almost 100M
 rows from the `hits.csv` file in 335 seconds, leaving a higher place in the
 competition only to ClickHouse.
 
@@ -177,7 +177,7 @@ the disk speed to the performance.
 In the middle of the chart, the-gp3-volume-only result doesn't use the local
 SSD, but manages to ingest the data into a partitioned table a lot faster than
 the gp2 run, thanks to the faster EBS volume. Finally, in the NVMe SSD run, the
-import takes less than 7 minutes - an impressive ingestion rate of 2.5Bln row/s
+import takes less than 7 minutes - an impressive ingestion rate of 248,000 row/s
 (or 193MB/s) without having the whole input file in the OS page cache. Here, the
 SSD is used as a read-only storage for the CSV file, while the database files
 are placed on the EBS volume. This is a convenient approach for a single-time
