@@ -11,7 +11,7 @@ keywords:
   - julialang
   - trading
   - marketdata
-tags: [tutorial, julialang, marketdata, trading, bitcoin]
+tags: [tutorial, julialang, market data, trading, bitcoin]
 image: /img/blog/2022-03-29/graph.png
 ---
 

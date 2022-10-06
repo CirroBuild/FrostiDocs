@@ -15,6 +15,7 @@ keywords:
   - hacktoberfest
   - java
   - react
+  - typescript
 image: /img/blog/2022-09-30/banner-hacktoberfest.png
 tags: [community, event, hacktoberfest, github, swag, opensource]
 ---
@@ -57,10 +58,13 @@ of the most popular time series databases according to the independent reviewer
 [DBEngines](https://db-engines.com/en/ranking/time+series+dbms).
 
 Developers can use QuestDB as a library for java applications.
-[Official clients](/docs/reference/clients/overview/) for 
-[Python](https://github.com/questdb/py-questdb-client), [Go](https://github.com/questdb/go-questdb-client), 
-[C, C++, Rust](https://github.com/questdb/c-questdb-client), [Node.js](https://github.com/questdb/nodejs-questdb-client) and [.NET](https://github.com/questdb/net-questdb-client)
-are also available for the wider developer community.
+[Official clients](/docs/reference/clients/overview/) for
+[Python](https://github.com/questdb/py-questdb-client),
+[Go](https://github.com/questdb/go-questdb-client),
+[C, C++, Rust](https://github.com/questdb/c-questdb-client),
+[Node.js](https://github.com/questdb/nodejs-questdb-client) and
+[.NET](https://github.com/questdb/net-questdb-client) are also available for the
+wider developer community.
 
 This year, there are three QuestDB open source projects opted in for
 Hacktoberfest:
@@ -69,12 +73,13 @@ Hacktoberfest:
    mainly written in Java and C++. Check
    [CONTRIBUTING.md](https://github.com/questdb/questdb/blob/master/CONTRIBUTING.md)
    to get started.
-2. [**Documentation**](https://github.com/questdb/questdb.io): QuestDB's website for
-   documentation, suitable for technical writers who have experience with Markdown and
-   Docusaurus. Read [our guidelines for docs contributors](https://github.com/questdb/questdb.io#contributing).
+2. [**Documentation**](https://github.com/questdb/questdb.io): QuestDB's website
+   for documentation, suitable for technical writers who have experience with
+   Markdown and Docusaurus. Read
+   [our guidelines for docs contributors](https://github.com/questdb/questdb.io#contributing).
 3. [**Web console**](https://github.com/questdb/ui/tree/main/packages/web-console):
-   Monorepo that contains the code of QuestDB GUI. It is a web application written
-   with Typesript and React.
+   Monorepo that contains the code of QuestDB GUI. It is a web application
+   written with Typescript and React.
 
 ## 🚀 Contribute to QuestDB
 
