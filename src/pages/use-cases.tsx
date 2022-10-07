@@ -214,24 +214,24 @@ const Monitoring = () => (
 
 const marketDataCustomers: Customer[] = [
   {
-    key: "toggle",
+    key: "aquis-exchange",
+    logoWidth: 90,
     quote:
-      "See how Toggle migrated from InfluxDB to QuestDB with queries that are 300x faster, utilizing 1/4 of the hardware\n",
-    caseStudyLink: "/case-study/toggle",
-    logoWidth: 100,
+      "QuestDB is used by Aquis Exchange to store their infrastructure and business metrics in a single place and analyze them in real-time across multiple dimensions.",
+    caseStudyLink: "/case-study/aquis/",
   },
   {
     key: "kepler",
     logoWidth: 120,
   },
   {
-    key: "coinhall",
-    logoWidth: 140,
+    key: "invezo",
+    logoWidth: 110,
     logoHeight: 50,
   },
   {
-    key: "aquis-exchange",
-    logoWidth: 90,
+    key: "toggle",
+    logoWidth: 100,
   },
 ]
 
