@@ -21,7 +21,76 @@ matching via regular expressions.
 
 `symbol !~ regex` - checks if `symbol` value does not match regex
 
+## LIKE / ILIKE
 
+`(string) LIKE (pattern)` - returns true if the `string` value matches `pattern`, otherwise returns false (case sensitive match).
+
+`(string) ILIKE (pattern)` - returns true if the `string` value matches `pattern`, otherwise returns false (case-insensitive match).
+
+### Arguments
+
+`string` is an expression that evaluates to the `string` data type.
+
+`pattern` is a pattern which can contain wildcards like `_` and `%`.
+
+### Return value
+
+Return value type is `boolean`.
+
+### Description
+
+If the pattern doesn't contain wildcards, then the pattern represents the string itself.
+
+The wildcards which can be used in pattern are interpreted as follows:
+- `_` - matches any single character.
+- `%` - matches any sequence of zero or more characters.
+
+Wildcards can be used as follows:
+
+|            query              | result  |
+| ----------------------------- | ------- |
+| SELECT 'quest' LIKE 'quest'   |  true   |
+| SELECT 'quest' LIKE 'ques_'   |  true   |
+| SELECT 'quest' LIKE 'que%'    |  true   |
+| SELECT 'quest' LIKE '\_ues_'  |  true   |
+| SELECT 'quest' LIKE 'q_'      |  false  |
+
+`ILIKE` performs a case-insensitive match as follows:
+
+|            query              | result  |
+| ----------------------------- | ------- |
+| SELECT 'quest' ILIKE 'QUEST'  |  true   |
+| SELECT 'qUeSt' ILIKE 'QUEST'  |  true   |
+| SELECT 'quest' ILIKE 'QUE%'   |  true   |
+| SELECT 'QUEST' ILIKE '\_ues_' |  true   |
+
+### Examples
+
+#### LIKE
+
+```questdb-sql 
+SELECT * FROM trades
+WHERE symbol LIKE '%-USD'
+LATEST ON timestamp PARTITION BY symbol;
+```
+
+| symbol | side | price | amount | timestamp |
+| --- | --- | --- | --- | --- |
+| ETH-USD | sell | 1348.13 | 3.22455108 | 2022-10-04T15:25:58.834362Z |
+| BTC-USD | sell | 20082.08 | 0.16591219 | 2022-10-04T15:25:59.742552Z |
+
+#### ILIKE
+
+```questdb-sql 
+SELECT * FROM trades
+WHERE symbol ILIKE '%-usd'
+LATEST ON timestamp PARTITION BY symbol;
+```
+
+| symbol | side | price | amount | timestamp |
+| --- | --- | --- | --- | --- |
+| ETH-USD | sell | 1348.13 | 3.22455108 | 2022-10-04T15:25:58.834362Z |
+| BTC-USD | sell | 20082.08 | 0.16591219 | 2022-10-04T15:25:59.742552Z |
 
 ## regexp_replace
 
