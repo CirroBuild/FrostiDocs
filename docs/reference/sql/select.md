@@ -13,10 +13,14 @@ and evaluated from a table.
 
 :::tip
 
-- While ingesting data using ILP, data may not be immediately available to a `SELECT` query, due to the [commit lag](/docs/guides/out-of-order-commit-lag) setting. Please see the [InfluxDB line protocol reference](/docs/reference/api/ilp/tcp-receiver#commit-strategy) for more information.
+- While ingesting data using ILP, data may not be immediately available to a
+  `SELECT` query, due to the [commit lag](/docs/guides/out-of-order-commit-lag)
+  setting. Please see the
+  [InfluxDB line protocol reference](/docs/reference/api/ilp/tcp-receiver#commit-strategy)
+  for more information.
 
 - The `table` can either be in your database (in which case you would pass the
-table's name), or the result of a sub query.
+  table's name), or the result of a sub query.
 
 :::
 
@@ -204,7 +208,6 @@ Orders the results of a query by one or several columns.
 
 ![Flow chart showing the syntax of the ORDER BY keyword](/img/docs/diagrams/orderBy.svg)
 
-
 For more information, please refer to the
 [ORDER BY reference](/docs/reference/sql/order-by)
 
@@ -239,7 +242,7 @@ more information, please refer to the
 
 QuestDB augments SQL with the following clauses.
 
-### LATEST BY
+### LATEST ON
 
 Retrieves the latest entry by timestamp for a given key or combination of keys
 This function requires a
@@ -267,11 +270,10 @@ For more information, please refer to the
 
 ### TIMESTAMP
 
-Dynamically creates a
-[designated timestamp](/docs/concept/designated-timestamp) on the output of a
-query. This allows to perform timestamp operations like [SAMPLE BY](#sample-by)
-or [LATEST ON](#latest-on) on tables which originally do not have a designated
-timestamp.
+Dynamically creates a [designated timestamp](/docs/concept/designated-timestamp)
+on the output of a query. This allows to perform timestamp operations like
+[SAMPLE BY](#sample-by) or [LATEST ON](#latest-on) on tables which originally do
+not have a designated timestamp.
 
 :::caution
 
