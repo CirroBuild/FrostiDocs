@@ -4,7 +4,7 @@ sidebar_label: TRUNCATE TABLE
 description: TRUNCATE SQL keyword reference documentation.
 ---
 
-`TRUNCATE TABLE` is used to permanently delete the contents of a table without
+`TRUNCATE TABLE` permanently deletes the contents of a table without
 deleting the table itself.
 
 :::caution
@@ -16,9 +16,7 @@ sure you have created [backups](/docs/reference/sql/backup) of your data.
 
 ## Syntax
 
-```questdb-sql
-TRUNCATE TABLE 'table_name';
-```
+![Flow chart showing the syntax of the TRUNCATE TABLE keyword](/img/docs/diagrams/truncate-table.svg)
 
 ## Examples
 
