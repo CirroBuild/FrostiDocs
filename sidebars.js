@@ -167,7 +167,7 @@ module.exports = {
           label: "Operators",
           items: [
             "reference/operators/bitwise",
-            "reference/operators/regex",
+            "reference/operators/pattern-matching",
             "reference/operators/spatial",
           ],
         },

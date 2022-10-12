@@ -156,7 +156,7 @@ can be used in QuestDB.
 ### Operators
 
 - [Bitwise](/docs/reference/operators/bitwise)
-- [Regex](/docs/reference/operators/regex)
+- [Pattern matching](/docs/reference/operators/pattern-matching)
 - [Spatial](/docs/reference/operators/spatial)
 
 
