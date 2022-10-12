@@ -398,10 +398,10 @@ Please set `cairo.sql.copy.root` setting, restart instance and try again.
 </details>
 
 <details>
-  <summary>I'm getting "could not create temporary import directory [path='somepath', errno=-1]" error message</summary>
+  <summary>I'm getting "could not create temporary import work directory [path='somepath', errno=-1]" error message</summary>
 <p>
 
-Please make sure that both `cairo.sql.copy.root` and `cairo.sql.copy.work.root`
+Please make sure that the `cairo.sql.copy.root` and `cairo.sql.copy.work.root`
 are valid paths pointing to existing directories.
 
 </p>

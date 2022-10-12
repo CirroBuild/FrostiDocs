@@ -64,8 +64,8 @@ operation. There are two root directories to be defined:
 
 - `cairo.sql.copy.root` is used for storing regular files to be imported.
 - `cairo.sql.copy.work.root` is used for storing temporary files like indexes or
-  temporary partitions. Unless otherwise specified, it points to the same
-  directory as defined in `cairo.sql.copy.root`.
+  temporary partitions. Unless otherwise specified, it points to the
+  `root_directory/tmp` directory.
 
 Use the [configuration keys](/docs/reference/configuration) to edit these
 properties in

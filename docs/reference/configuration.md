@@ -346,7 +346,7 @@ Mandatory settings to enable `COPY`:
 | Property                 | Default | Description                                                                                                                                                                                          |
 | ------------------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | cairo.sql.copy.root      | null    | Input root directory for CSV imports via `COPY` SQL. This path should not overlap with other directory (e.g. db, conf) of running instance, otherwise import may delete or overwrite existing files. |
-| cairo.sql.copy.work.root | null    | Temporary import file directory. Same as `cairo.sql.copy.root` if not set explicitly.                                                                                                                |
+| cairo.sql.copy.work.root | null    | Temporary import file directory. Defaults to `root_directory/tmp` if not set explicitly.                                                                                                             |
 
 Optional settings for `COPY`:
 

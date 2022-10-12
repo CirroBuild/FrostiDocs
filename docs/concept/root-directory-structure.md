@@ -29,16 +29,13 @@ By default, QuestDB's root directory will be the following:
 
 <TabItem value="nix">
 
-
 ```shell
 $HOME/.questdb
 ```
 
 </TabItem>
 
-
 <TabItem value="macos">
-
 
 ```shell
 /opt/homebrew/var/questdb
@@ -46,9 +43,7 @@ $HOME/.questdb
 
 </TabItem>
 
-
 <TabItem value="windows">
-
 
 ```shell
 C:\Windows\System32\questdb
@@ -56,9 +51,7 @@ C:\Windows\System32\questdb
 
 </TabItem>
 
-
 </Tabs>
-
 
 ## `conf` directory
 
@@ -71,10 +64,10 @@ Contains configuration files for QuestDB:
 │   └── server.conf
 ```
 
-| file           | description                                                                                                     |
-| -------------- | --------------------------------------------------------------------------------------------------------------- |
-| `date.formats` | A list of date formats in plain text.                                                                           |
-| `mime.types`   | Mapping file used by the HTTP server to map file extension to response type when an user downloads a file.      |
+| file           | description                                                                                                    |
+| -------------- | -------------------------------------------------------------------------------------------------------------- |
+| `date.formats` | A list of date formats in plain text.                                                                          |
+| `mime.types`   | Mapping file used by the HTTP server to map file extension to response type when an user downloads a file.     |
 | `server.conf`  | Server configuration file. Find out more in the [server configuration](/docs/reference/configuration) section. |
 
 ## `db` directory
@@ -83,8 +76,8 @@ This directory contains all the files related to database tables. It is
 organised as follows:
 
 - Each table has its own `table_directory` under `root_directory/db/table_name`
-- Within a `table_directory`, each [partition](/docs/concept/partitions) has
-  its own `partition_directory`.
+- Within a `table_directory`, each [partition](/docs/concept/partitions) has its
+  own `partition_directory`.
 - Within each `partition directory`, each column has its own `column_file`, for
   example `mycolumn.d`
 - If a given column has an [index](/docs/concept/indexes), then there will also
@@ -137,8 +130,8 @@ As tempting as it may be to delete partitions by manually removing the
 directories from the file system, we really discourage this. The partitions are
 organised with metadata and deleting them directly could corrupt the table. We
 recommend you use
-[ALTER TABLE DROP PARTITION](/docs/reference/sql/alter-table-drop-partition)
-for this effect.
+[ALTER TABLE DROP PARTITION](/docs/reference/sql/alter-table-drop-partition) for
+this effect.
 
 :::
 
@@ -200,3 +193,10 @@ Contains the web files for the Web Console:
 
 Created when a filesystem (disk) [snapshot](/docs/reference/sql/snapshot) is
 collected. Contains table metadata file copies.
+
+## `tmp` directory
+
+Created when a [`COPY`](/docs/reference/sql/copy) SQL command is run for a
+partitioned table and no value is set for the `cairo.sql.copy.work.root`
+configuration setting. Contains temporary import files like indexes or temporary
+partitions.
