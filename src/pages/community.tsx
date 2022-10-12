@@ -150,7 +150,7 @@ const Community = () => {
                   joined our Community Slack
                 </a>
               </p>
-              <div className={paCss.custom_box}>
+              <div className={clsx(paCss.custom_box, paCss.text_center)}>
                 <p className={`${paCss.default_text} ${paCss.mb5}`}>
                   What you get:
                 </p>
@@ -260,20 +260,13 @@ const Community = () => {
                 tutorial or guide using QuestDB
               </a>
             </p>
-            <div className={paCss.card}>
-              <p className={`${paCss.default_text} ${paCss.mb5}`}>
-                How can you claim swag?
+
+            <div className={clsx(paCss.custom_box, paCss.text_center)}>
+              <p className={clsx(paCss.default_text, paCss.mb5)}>
+                What you get:
               </p>
-              <p className={`${paCss.default_text} ${paCss.mb5}`}>
-                Fill out the{" "}
-                <a
-                  className={paCss.link_item}
-                  href="https://forms.gle/X6ze4mJqaUC6odaEA"
-                >
-                  swag request form
-                </a>{" "}
-                with required information. Our team will review and validate
-                your requests.
+              <p className={paCss.second_text}>
+                For this level, we have even more cool swag!
               </p>
             </div>
           </div>
@@ -285,15 +278,23 @@ const Community = () => {
               width={500}
               height={561}
             />
-            <div className={`${paCss.custom_box} ${paCss.text_center}`}>
-              <p className={`${paCss.default_text} ${paCss.mb5}`}>
-                What you get:
-              </p>
-              <p className={paCss.second_text}>
-                For this level, we have even more cool swag!
-              </p>
-            </div>
           </div>
+        </div>
+        <div className={paCss.card} style={{ margin: "auto" }}>
+          <p className={clsx(paCss.default_text, paCss.mb5, paCss.text_center)}>
+            How can you claim swag?
+          </p>
+          <p className={clsx(paCss.default_text, paCss.mb5)}>
+            Fill out the{" "}
+            <a
+              className={paCss.link_item}
+              href="https://forms.gle/X6ze4mJqaUC6odaEA"
+            >
+              swag request form
+            </a>{" "}
+            with required information. Our team will review and validate your
+            requests.
+          </p>
         </div>
       </section>
     </Layout>
