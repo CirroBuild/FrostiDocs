@@ -11,12 +11,6 @@ non-waiting operation. While atomic for single partitions, dropping multiple
 partitions is in itself non-atomic. The operation will exit on the first failure
 and will not continue through a list of partitions if one fails to be dropped.
 
-:::info
-
-The most recent (i.e. currently active) partition cannot be removed
-
-:::
-
 :::caution
 
 Use `DROP PARTITION` with care as QuestDB **cannot recover data from dropped
