@@ -48,6 +48,7 @@ module.exports = {
         "develop/insert-data",
         "develop/query-data",
         "develop/update-data",
+        "develop/design-for-performance",
         "develop/web-console",
       ],
     },

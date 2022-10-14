@@ -96,7 +96,7 @@ HTTP 200 status code.
 ## Avoiding CPU starvation
 
 On systems with
-[8 Cores and less](/docs/operations/capacity-planning#cpu-configuration),
+[8 Cores and less](/docs/operations/capacity-planning#cpu-cores),
 contention for threads might increase the latency of health check service
 responses. If you are in a situation where a load balancer thinks QuestDB
 service is dead with nothing apparent in QuestDB logs, you may need to configure

@@ -31,13 +31,15 @@ This section describes how to connect to QuestDB using a variety of tools and
 programming languages through our various network endpoints.
 
 - [Connect](/docs/develop/connect) to the database through our various
-  endpoints. Learn which protocol is best for different use cases.
+  endpoints. Learn which protocol is best for different use cases
 - [Insert data](/docs/develop/insert-data) using the InfluxDB Line Protocol,
-  PostgreSQL wire protocol or our HTTP REST API.
+  PostgreSQL wire protocol or our HTTP REST API
 - [Query data](/docs/develop/query-data) with SQL queries via the PostgreSQL
-  Wire Protocol or exported to JSON or CSV via our HTTP REST API.
+  Wire Protocol or exported to JSON or CSV via our HTTP REST API
+- [Design for performance](/docs/develop/design-for-performance) for configuring
+  table settings to improve performance
 - [Web Console](/docs/develop/web-console) for quick SQL queries, charting and
-  CSV upload/export functionality.
+  CSV upload/export functionality
 
 ## Guides
 
@@ -60,7 +62,7 @@ This section contains resources for managing QuestDB instances and has dedicated
 pages for the following topics:
 
 - [Capacity planning](/docs/operations/capacity-planning) for configuring
-  server settings and system resources for common scenarios and edge cases
+  server settings and system resources
 - [Data retention](/docs/operations/data-retention) strategy to delete old data
   and save disk space
 - [Health monitoring](/docs/operations/health-monitoring) endpoint for

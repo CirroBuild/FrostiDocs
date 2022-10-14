@@ -1,8 +1,9 @@
 ---
 title: Capacity planning
 description:
-  How to plan and configure system resources available to QuestDB to ensure that
-  server operation continues uninterrupted.
+  How to plan and configure system resources, database configuration, and client
+  application code available to QuestDB to ensure that server operation
+  continues uninterrupted.
 ---
 
 Capacity planning should be considered as part of the requirements of deploying
@@ -11,103 +12,97 @@ elements, depending on the expected demands of the system. This page describes
 configuring these system resources with example scenarios that align with both
 edge cases and common setup configurations.
 
-All the configuration settings referred to below except for OS settings are
+Most of the configuration settings referred to below except for OS settings are
 configured in QuestDB by either a `server.conf` configuration file or as
 environment variables. For more details on applying configuration settings in
 QuestDB, refer to the [configuration](/docs/reference/configuration) page.
 
+To monitor various metrics of the QuestDB instances, refer to the
+[Prometheus monitoring page](/docs/third-party-tools/prometheus/) or the
+[Health monitoring page](/docs/operations/health-monitoring/).
+
 ## Storage and filesystem
 
-The following sections describe aspects to be considered regarding the storage
-of data and filesystem considerations.
+The following sections describe aspects to consider regarding the storage of
+data and filesystem.
+
+### Supported filesystem
+
+QuestDB officially supports **EXT4** or any filesystem that supports
+[mmap](https://man7.org/linux/man-pages/man2/mmap.2.html). 
 
 :::caution
 
-- QuestDB officially supports **EXT4** or any filesystem that supports
-  [mmap](https://man7.org/linux/man-pages/man2/mmap.2.html).
-
-- Users **can't use NFS or a similar distributed filesystem** directly with a
-  QuestDB database.
+Users **can't use NFS
+or a similar distributed filesystem** directly with a QuestDB database.
 
 :::
 
-### Partitioning
+### Write amplification
 
-When creating tables, a partitioning strategy is recommended in order to be able
-to enforce a data retention policy to save disk space, and for optimizations on
-the number of concurrent file reads performed by the system. For more
-information on this topic, see the following resources:
+When ingesting out-of-order data, high disk write rate combined with high write
+amplification may slow down the performance.
 
-- [partitions](/docs/concept/partitions) page which provides a general overview
-  of this concept
-- [data retention](/docs/operations/data-retention) guide provides further
-  details on partitioning tables with examples on how to drop partitions by time
-  range
+For data ingestion over InfluxDB Line Protocol (ILP), the first step to resolve
+this start from adjusting the
+[commit lag](/docs/guides/out-of-order-commit-lag/) value and the
+`cairo.max.uncommitted.rows` value.
 
-**Records per partition**
+For data ingestion over PGWire, or as a further step for ILP ingestion, smaller
+table [partitions](/docs/concept/partitions/) maybe reduce the write
+amplification. This applies to tables with partition directories exceeding a few
+hundred MBs on disk. For example, partition by day can be reduced to by hour,
+partition by month to by day, and so on.
 
-The number of records per partition should factor into the partitioning strategy
-(`YEAR`, `MONTH`, `DAY`, `HOUR`). Having too many records per partition or
-having too few records per partition and having query operations across too many
-partitions has the result of slower query times. A general guideline is that
-roughly between 1 million and 100 million records is optimal per partition.
+:::note
 
-### Choosing a schema
-
-This section provides some hints for choosing the right schema for a dataset
-based on the storage space that types occupy in QuestDB.
-
-#### Symbols
-
-[Symbols](/docs/concept/symbol) are a data type that is recommended to be used
-for strings that are repeated often in a dataset. The benefit of using this data
-type is lower storage requirements than regular strings and faster performance
-on queries as symbols are internally stored as `int` values.
-
-:::info
-
-Only symbols can be indexed in QuestDB. Although multiple indexes can be
-specified for a table, there would be a performance impact on the rate of
-ingestion.
+- For more information on commit lag, please refer to the
+  [ILP commit strategy page](/docs/reference/api/ilp/tcp-receiver/#commit-strategy).
+- In QuestDB the write amplification is calculated by the
+  [metrics](/docs/third-party-tools/prometheus#scraping-prometheus-metrics-from-questdb):
+  `questdb_physically_written_rows_total` / `questdb_committed_rows_total`.
+- Partitions are defined when a table is created. Refer to
+  [CREATE TABLE](/docs/reference/sql/create-table/) for more information.
 
 :::
 
-The following example shows the creation of a table with a `symbol` type that
-has multiple options passed for performance optimization.
+## CPU and RAM configuration
 
-```questdb-sql
-CREATE TABLE my_table(
-    symb SYMBOL capacity 256 nocache index capacity 1048576,
-    ts TIMESTAMP, s STRING
-) timestamp(ts)  PARTITION BY DAY;
-```
+This section describes configuration strategies based on the forecast behavior
+of the database.
 
-This example adds a `symbol` type with:
+### RAM size
 
-- **capacity** specified to estimate how many unique symbols values to expect
-- **caching** disabled which allows dealing with larger value counts
-- **index** for the symbol column with a storage block value
+We recommend having at least 8GB of RAM for basic workloads and 32GB for more
+advanced ones.
 
-A full description of the options used above for `symbol` types can be found in
-the [CREATE TABLE](/docs/reference/sql/create-table#symbol) page.
+For relatively small datasets, typically a few to a few dozen GB, if the need
+for reads is high, performance can benefit from maximizing the use of the OS
+page cache. Users may consider increasing available RAM to improve the speed of
+read operations.
 
-#### Numbers
+### Memory page size configuration
 
-The storage space that numbers occupy can be optimized by choosing `byte`,
-`short`, and `int` data types appropriately. When values are not expected to
-exceed the limit for that particular type, savings on disk space can be made.
+For frequent out-of-order (O3) writes over high number of columns/tables, the
+performance may be impacted by the size of the memory page being too big as this
+increases the demand for RAM. The memory page, `cairo.o3.column.memory.size`, is
+set to 8M by default. This means that the table writer uses 16MB (2x8MB) RAM per
+each column when it receives O3 writes. Decreasing the value in the interval of
+[128K, 8M] based on the number of columns used may improve O3 write performance.
 
-| type  | storage per value | numeric range             |
-| :---- | :---------------- | :------------------------ |
-| byte  | 8 bits            | -128 to 127               |
-| short | 16 bits           | -32768 to 32767           |
-| int   | 32 bits           | -2147483648 to 2147483647 |
+### CPU cores
 
-## CPU configuration
+By default, QuestDB attempts to use all available CPU cores.
+[The guide on shared worker configuration](#shared-workers) details how to
+change the default setting. Assuming that the disk does not have bottleneck for
+operations, the throughput of read-only queries scales proportionally with the
+number of available cores. As a result, a machine with more cores will provide
+better query performance.
+
+### Shared workers
 
 In QuestDB, there are worker pools which can help separate CPU-load between
-sub-systems. This section describes configuration strategies based on the
-forecast behavior of the database.
+sub-systems.
 
 :::caution
 
@@ -117,8 +112,6 @@ cores.
 
 :::
 
-### Shared workers
-
 The number of worker threads shared across the application can be configured as
 well as affinity to pin processes to specific CPUs by ID. Shared worker threads
 service SQL execution subsystems and, in the default configuration, every other
@@ -126,10 +119,10 @@ subsystem. More information on these settings can be found on the
 [shared worker](/docs/reference/configuration#shared-worker) configuration page.
 
 QuestDB will allocate CPU resources differently depending on how many CPU cores
-are available. This behavior is the default but can be overridden via
-configuration.
+are available. This default can be overridden via configuration. We recommend at
+least 4 cores for basic workloads and 16 for advanced ones.
 
-#### 8 CPU Cores or less
+#### 8 CPU cores or less
 
 QuestDB will configure a shared worker pool to handle everything except the
 InfluxDB line protocol (ILP) writer which gets a dedicated CPU core. The worker
@@ -139,7 +132,7 @@ $(cpuAvailable) - (line.tcp.writer.worker.count)$
 
 Minimal size of the shared worker pool is 2, even on a single-core machine.
 
-#### 16 CPU Cores or less
+#### 16 CPU cores or less
 
 ILP I/O Worker pool is configured to use 2 CPU cores to speed up ingestion and
 the ILP Writer is using 1 core. The shared worker pool is handling everything
@@ -151,7 +144,7 @@ For example, with 16 cores, the shared pool will have 12 threads:
 
 $16-1-2-1$
 
-#### 17 CPU Cores and more
+#### 17 CPU cores and more
 
 The ILP I/O Worker pool is configured to use 6 CPU cores to speed up ingestion
 and the ILP Writer is using 1 core. The shared worker pool is handling
@@ -166,13 +159,12 @@ $32-2-6-1$
 ### Writer page size
 
 The default page size for writers is 16MB. In cases where there are a large
-number of small tables, using 16MB to write a maximum of 1Mb of data, for
+number of small tables, using 16MB to write a maximum of 1MB of data, for
 example, is a waste of OS resources. To changes the default value, set the
-`append.page.size` value in `server.conf` which is a rounded (ceiling) of the
-multiple of OS page sizes:
+`cairo.writer.data.append.page.size` value in `server.conf`:
 
 ```ini title="server.conf"
-cairo.sql.append.page.size=1
+cairo.writer.data.append.page.size=1M
 ```
 
 ### InfluxDB over TCP
@@ -185,8 +177,8 @@ dedicated to capacity planning for ILP ingestion.
 
 :::note
 
-The UDP receiver is deprecated since QuestDB version 6.5.2.
-We recommend the [TCP receiver](/docs/reference/api/ilp/tcp-receiver/) instead.
+The UDP receiver is deprecated since QuestDB version 6.5.2. We recommend the
+[TCP receiver](/docs/reference/api/ilp/tcp-receiver/) instead.
 
 :::
 
@@ -212,10 +204,10 @@ pg.worker.affinity=1,2,3,4
 
 ## Network Configuration
 
-For InfluxDB line, Postgres wire and HTTP protocols, there are a set of
-configuration settings relating to the number of clients that may connect, the
-internal I/O capacity and connection timeout settings. These settings are
-configured in the `server.conf` file in the format:
+For InfluxDB line, PGWire and HTTP protocols, there are a set of configuration
+settings relating to the number of clients that may connect, the internal I/O
+capacity and connection timeout settings. These settings are configured in the
+`server.conf` file in the format:
 
 ```ini
 <protocol>.net.connection.<config>
@@ -224,7 +216,7 @@ configured in the `server.conf` file in the format:
 Where `<protocol>` is one of:
 
 - `http` - HTTP connections
-- `pg` - Postgres wire protocol
+- `pg` - PGWire protocol
 - `line.tcp` - InfluxDB line protocol over TCP
 
 And `<config>` is one of the following settings:
@@ -271,7 +263,18 @@ line.tcp.net.rcvbuf=1m
 ```
 
 For reference on the defaults of the `http` and `pg` protocols, refer to the
-[server configuration page](/docs/reference/configuration)
+[server configuration page](/docs/reference/configuration).
+
+### Pooled connection
+
+Connection pooling should be used for any production-ready use of PGWire or ILP
+over TCP.
+
+The maximum number of pooled connections is configurable,
+(`pg.connection.pool.capacity` for PGWire and
+(`line.tcp.connection.pool.capacity` for ILP over TCP. The default number of
+connections for both interfaces is 64. Users should avoid using too many
+connections.
 
 ## OS configuration
 
@@ -285,9 +288,9 @@ done in response to such OS errors.
 
 The storage model of QuestDB has the benefit that most data structures relate
 closely to the file system, with columnar data being stored in its own `.d` file
-per partition. In edge cases with extremely large tables, frequent out-of-order ingestion, or high number of table partitions, the number of open
-files may hit a user or system-wide maximum limit and can cause unpredictable
-behavior.
+per partition. In edge cases with extremely large tables, frequent out-of-order
+ingestion, or high number of table partitions, the number of open files may hit
+a user or system-wide maximum limit and can cause unpredictable behavior.
 
 The following commands allow for checking current user and system limits for
 maximum number of open files:
