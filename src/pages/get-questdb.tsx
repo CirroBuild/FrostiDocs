@@ -2,6 +2,7 @@ import clsx from "clsx"
 import { differenceInDays, format, formatDistanceToNowStrict } from "date-fns"
 import { usePluginData } from "@docusaurus/useGlobalData"
 import React, { ReactNode, useEffect, useState } from "react"
+import Link from "@docusaurus/Link"
 
 import Button from "@theme/Button"
 import CodeBlock from "@theme/CodeBlock"
@@ -10,10 +11,11 @@ import Layout from "../theme/Layout"
 import biCss from "../css/get-questdb/binary.module.css"
 import chCss from "../css/get-questdb/changelog.module.css"
 import ctCss from "../css/get-questdb/cta.module.css"
-import heCss from "../css/get-questdb/help.module.css"
 import ilCss from "../css/get-questdb/illustration.module.css"
 import seCss from "../css/section.module.css"
 import { getAssets, getOs, Os, Release } from "../utils"
+import { Section } from "../components/Section"
+import { GetQuestdbHelp } from "../modules/get-questdb-help"
 
 import customFields from "../config/customFields"
 
@@ -45,7 +47,7 @@ const Binary = ({
   const hasDetails = Boolean(architecture || rt || size)
 
   return (
-    <section className={clsx(biCss.binary)}>
+    <section className={biCss.binary}>
       <div className={biCss.binary__expand} style={{ flexBasis: basis }} />
 
       {logo}
@@ -116,6 +118,16 @@ const GetQuestdbPage = () => {
       return
     }
 
+    setOs(getOs())
+  }, [])
+
+  useEffect(() => {
+    const isClient = typeof window !== "undefined"
+
+    if (!isClient) {
+      return
+    }
+
     if (differenceInDays(new Date(), new Date(release.published_at)) < 31) {
       setReleaseDate(
         `${formatDistanceToNowStrict(new Date(release.published_at))} ago`,
@@ -143,9 +155,9 @@ const GetQuestdbPage = () => {
         title="Linux"
       >
         <p className={biCss.binary__docs}>
-          <a href="/docs/get-started/binaries#your-operating-system-version">
+          <Link to="/docs/get-started/binaries#your-operating-system-version">
             Docs
-          </a>
+          </Link>
         </p>
       </Binary>
     ),
@@ -172,7 +184,7 @@ brew install questdb`}
         </CodeBlock>
 
         <p className={biCss.binary__docs}>
-          <a href="/docs/get-started/homebrew">Docs</a>
+          <Link to="/docs/get-started/homebrew">Docs</Link>
         </p>
       </Binary>
     ),
@@ -194,52 +206,29 @@ brew install questdb`}
         title="Windows"
       >
         <p className={biCss.binary__docs}>
-          <a href="/docs/get-started/binaries#your-operating-system-version">
+          <Link to="/docs/get-started/binaries#your-operating-system-version">
             Docs
-          </a>
+          </Link>
         </p>
       </Binary>
     ),
   }
 
-  useEffect(() => {
-    const isClient = typeof window !== "undefined"
-
-    if (!isClient) {
-      return
-    }
-
-    setOs(getOs())
-  }, [])
-
   return (
     <Layout canonical="/get-questdb" description={description} title={title}>
-      <section
-        className={clsx(seCss["section--inner"], seCss["section--accent"])}
-      >
+      <Section>
         <div className={seCss.section__header}>
-          <h1
-            className={clsx(
-              seCss.section__title,
-              seCss["section__title--accent"],
-            )}
-          >
-            Download QuestDB
-          </h1>
+          <Section.Title>Get QuestDB</Section.Title>
 
-          <p
-            className={clsx(
-              seCss.section__subtitle,
-              seCss["section__subtitle--accent"],
-              "text--center",
-            )}
-          >
-            You can find below download links for the latest version of QuestDB
-            ({release.name}). Once your download is finished, you can check our
-            documentation for <a href="/docs/get-started/docker/">Docker</a>,
-            the <a href="/docs/get-started/binaries/">binaries</a> or{" "}
-            <a href="/docs/get-started/homebrew/">Homebrew</a> to get started.
-          </p>
+          <Section.Subtitle center>
+            Find links below to download the latest version of QuestDB{" "}
+            {release.name}
+          </Section.Subtitle>
+
+          <Section.Subtitle center>
+            Or check <Link to="/cloud/">QuestDB Cloud</Link> for a managed
+            solution.
+          </Section.Subtitle>
 
           <img
             alt="Screenshot of the Web Console showing various SQL statements and the result of one as a chart"
@@ -285,7 +274,7 @@ brew install questdb`}
             </a>
           </div>
         </div>
-      </section>
+      </Section>
 
       <div className={seCss["section--flex-wrap"]}>
         <Binary
@@ -306,7 +295,7 @@ brew install questdb`}
             docker run -p 9000:9000 questdb/questdb
           </CodeBlock>
           <p className={biCss.binary__docs}>
-            <a href="/docs/get-started/docker">Docs</a>
+            <Link to="/docs/get-started/docker">Docs</Link>
           </p>
         </Binary>
         <Binary
@@ -367,7 +356,7 @@ helm install my-questdb questdb/questdb --version ${customFields.helmVersion}`}
           title="Any (no JVM)"
         >
           <p className={biCss.binary__docs}>
-            <a href="/docs/get-started/binaries#any-no-jvm-version">Docs</a>
+            <Link to="/docs/get-started/binaries#any-no-jvm-version">Docs</Link>
           </p>
         </Binary>
         <Binary
@@ -391,7 +380,7 @@ helm install my-questdb questdb/questdb --version ${customFields.helmVersion}`}
 </dependency>`}
           </CodeBlock>
           <p className={biCss.binary__docs}>
-            <a href="/docs/reference/api/java-embedded">Docs</a>
+            <Link to="/docs/reference/api/java-embedded">Docs</Link>
           </p>
         </Binary>
         <Binary
@@ -412,54 +401,12 @@ helm install my-questdb questdb/questdb --version ${customFields.helmVersion}`}
           </CodeBlock>
           <div style={{ height: "2.75rem" }} />
           <p className={biCss.binary__docs}>
-            <a href="/docs/reference/api/java-embedded">Docs</a>
+            <Link to="/docs/reference/api/java-embedded">Docs</Link>
           </p>
         </Binary>
       </div>
 
-      <div className={heCss.help}>
-        <img
-          alt="SQL statement in a code editor with an artistic view of the query result shown as a chart and a table"
-          className={heCss.help__illustration}
-          height={468}
-          src="/img/pages/getQuestdb/query.svg"
-          width={500}
-        />
-
-        <div className={heCss.help__text}>
-          <h2 className={heCss.help__title}>How does it work</h2>
-          <p>
-            QuestDB is distributed as a single binary. You can download either:
-          </p>
-          <ul className={heCss.help__list}>
-            <li className={heCss.help__bullet}>
-              The &quot;rt&quot; version, this includes a trimmed JVM so you do
-              not need anything else (~ {assets.linux.size})
-            </li>
-            <li className={heCss.help__bullet}>
-              The binary itself (~ {assets.noJre.size}), without the JVM. In
-              this case, you need Java 11 installed locally
-            </li>
-          </ul>
-          <p>
-            To find out more about how to use the binaries, please check
-            the&nbsp;
-            <a href="/docs/get-started/binaries/">dedicated page</a> in our
-            documentation.
-          </p>
-          <p>
-            Check out the{" "}
-            <a
-              href={release.html_url}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              v{release.name} CHANGELOG
-            </a>{" "}
-            for information on the latest release.
-          </p>
-        </div>
-      </div>
+      <GetQuestdbHelp assets={assets} release={release} />
     </Layout>
   )
 }
