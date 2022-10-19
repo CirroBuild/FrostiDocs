@@ -308,7 +308,7 @@ To increase this setting and have the configuration persistent, the limit on the
 number of concurrently open files can be changed in `/etc/sysctl.conf`:
 
 ```ini title="/etc/sysctl.conf"
-fs.file-max=100000
+fs.file-max=262144
 ```
 
 To confirm that this value has been correctly configured, reload `sysctl` and
