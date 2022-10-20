@@ -45,7 +45,14 @@ export const Header = () => {
         </Section.Subtitle>
 
         <div className={styles.getStartedButtons}>
-          <Button href={customFields.demoUrl} uppercase={false}>
+          <Button
+            href={
+              typeof query === "number"
+                ? exampleQueries[query].url
+                : customFields.demoUrl
+            }
+            uppercase={false}
+          >
             Live Demo
           </Button>
 
