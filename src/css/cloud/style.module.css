@@ -1,12 +1,3 @@
-.feature-tables {
-  display: flex;
-  flex-direction: column;
-}
-
-.feature-tables > *:not(:last-child) {
-  margin-bottom: 2.5rem;
-}
-
 .compare-features {
   display: flex;
   flex-direction: column;

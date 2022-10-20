@@ -1,10 +1,9 @@
-import clsx from "clsx"
-import seCss from "../../../css/section.module.css"
-import style from "../../../css/cloud/style.module.css"
-import { FeatureItem, FeatureTable } from "../FeatureTable"
 import React from "react"
+import style from "./styles.module.css"
+import { Feature, FeatureTable } from "../FeatureTable"
+import { Section } from "../../../components/Section"
 
-const CoreFeaturesItems: FeatureItem[] = [
+const CoreFeaturesItems: Feature[] = [
   {
     title: "High-throughput ingestion",
     inOpenSource: "available",
@@ -46,18 +45,18 @@ const CoreFeaturesItems: FeatureItem[] = [
     inCloud: "available",
   },
   {
-    title: "Data compression",
+    title: "Cold storage support",
     inOpenSource: "unavailable",
     inCloud: "coming-soon",
   },
   {
-    title: "Cold storage support",
+    title: "Data compression",
     inOpenSource: "unavailable",
     inCloud: "coming-soon",
   },
 ]
 
-const SecurityFeaturesItems: FeatureItem[] = [
+const SecurityFeaturesItems: Feature[] = [
   {
     title: "Authentication",
     inOpenSource: "available",
@@ -95,7 +94,7 @@ const SecurityFeaturesItems: FeatureItem[] = [
   },
 ]
 
-const HighAvailabilityFeaturesItems: FeatureItem[] = [
+const HighAvailabilityFeaturesItems: Feature[] = [
   {
     title: "Cloud-native replication",
     inOpenSource: "coming-soon",
@@ -113,7 +112,7 @@ const HighAvailabilityFeaturesItems: FeatureItem[] = [
   },
 ]
 
-const ManagedInfractionFeaturesItems: FeatureItem[] = [
+const ManagedInfractionFeaturesItems: Feature[] = [
   {
     title: "Scheduled backups",
     inOpenSource: "not-applicable",
@@ -123,6 +122,11 @@ const ManagedInfractionFeaturesItems: FeatureItem[] = [
     title: "Monitoring and alerting",
     inOpenSource: "not-applicable",
     inCloud: "available",
+  },
+  {
+    title: "Start / Stop instance",
+    inOpenSource: "not-applicable",
+    inCloud: "available-new",
   },
   {
     title: "Auto scaling",
@@ -136,7 +140,7 @@ const ManagedInfractionFeaturesItems: FeatureItem[] = [
   },
 ]
 
-const SupportFeaturesItems: FeatureItem[] = [
+const SupportFeaturesItems: Feature[] = [
   {
     title: "Community support",
     inOpenSource: "available",
@@ -156,16 +160,19 @@ const SupportFeaturesItems: FeatureItem[] = [
 
 export const CompareFeatures = () => {
   return (
-    <section className={clsx(seCss.section, seCss["section--odd"])}>
-      <section
-        className={clsx(seCss["section--inner"], style["compare-features"])}
-      >
-        <p className={clsx(style["compare-title"], "text--center")}>
+    <Section odd fullWidth noGap>
+      <Section>
+        <Section.Title center size="small">
           Compare features
-        </p>
+        </Section.Title>
 
-        <div className={style["feature-tables"]}>
+        <div className={style.tables}>
           <FeatureTable title="Core features" items={CoreFeaturesItems} />
+
+          <FeatureTable
+            title="Managed infrastructure"
+            items={ManagedInfractionFeaturesItems}
+          />
 
           <FeatureTable title="Security" items={SecurityFeaturesItems} />
 
@@ -174,14 +181,9 @@ export const CompareFeatures = () => {
             items={HighAvailabilityFeaturesItems}
           />
 
-          <FeatureTable
-            title="Managed infrastructure"
-            items={ManagedInfractionFeaturesItems}
-          />
-
           <FeatureTable title="Support" items={SupportFeaturesItems} />
         </div>
-      </section>
-    </section>
+      </Section>
+    </Section>
   )
 }

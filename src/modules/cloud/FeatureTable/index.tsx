@@ -3,34 +3,39 @@ import style from "./styles.module.css"
 import clsx from "clsx"
 import { ContactFormDialog } from "../../../components/ContactFormDialog"
 
-type Availability =
+type Status =
   | "available"
+  | "available-new"
   | "unavailable"
   | "not-applicable"
   | "coming-soon"
   | "contact-us"
 
-export type FeatureItem = {
+export type Feature = {
   title: string
-  inOpenSource: Availability
-  inCloud: Availability
+  inOpenSource: Status
+  inCloud: Status
+  isNew?: boolean
 }
 
 type Props = {
   title: string
-  items: FeatureItem[]
+  items: Feature[]
 }
 
-const AvailabilityStatus = ({
-  availability,
-}: {
-  availability: Availability
-}) => {
-  switch (availability) {
+const Availability = ({ status }: { status: Status }) => {
+  switch (status) {
     case "available":
-      return <span className={clsx(style.icon, style["icon--check"])} />
+      return <span className={clsx(style.icon, style.iconCheck)} />
+    case "available-new":
+      return (
+        <span className={style.availableNew}>
+          <span className={clsx(style.icon, style.iconCheck)} />
+          <span className={style.availableNewLabel}>New!</span>
+        </span>
+      )
     case "unavailable":
-      return <span className={clsx(style.icon, style["icon--close"])} />
+      return <span className={clsx(style.icon, style.iconClose)} />
     case "not-applicable":
       return <span>-</span>
     case "coming-soon":
@@ -46,27 +51,27 @@ const AvailabilityStatus = ({
 }
 
 export const FeatureTable = ({ title, items }: Props) => (
-  <div className={style.root}>
-    <div className={clsx(style["table-row"], style["table-heading"])}>
-      <span className={style["table-heading__title"]}>
-        {title.toUpperCase()}
-      </span>
-      <span className={style["table-heading__category"]}>Open Source</span>
-      <span className={style["table-heading__category"]}>QuestDB Cloud</span>
-    </div>
-    {items.map(({ title, inOpenSource, inCloud }) => (
-      <div
-        className={clsx(style["table-row"], style["table-item"])}
-        key={title}
-      >
-        <span className={style["table-row__title"]}>{title}</span>
-        <span className={style["table-row__value"]}>
-          <AvailabilityStatus availability={inOpenSource} />
-        </span>
-        <span className={style["table-row__value"]}>
-          <AvailabilityStatus availability={inCloud} />
-        </span>
-      </div>
-    ))}
-  </div>
+  <table className={style.root}>
+    <thead>
+      <tr>
+        <th>{title.toUpperCase()}</th>
+        <th>Open Source</th>
+        <th>QuestDB Cloud</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {items.map(({ title, inOpenSource, inCloud }) => (
+        <tr key={title}>
+          <td>{title}</td>
+          <td>
+            <Availability status={inOpenSource} />
+          </td>
+          <td>
+            <Availability status={inCloud} />
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
 )
