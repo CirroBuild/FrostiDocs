@@ -11,7 +11,7 @@ createTableDef
   )?
 
 alterTable 
-  ::= 'ALTER' 'TABLE' tableName ( 'ADD' | 'ATTACH' | 'DETACH' | 'DROP' | 'RENAME' | 'SET' )
+  ::= 'ALTER' 'TABLE' tableName
 
 castDef
   ::= 'cast' '(' columnRef 'as' typeDef ')'
@@ -149,6 +149,9 @@ addIndex
 
 dropIndex
     ::= 'ALTER' 'TABLE' tableName 'ALTER' 'COLUMN' columnName 'DROP' 'INDEX'
+
+(no)cachColumn
+ ::= 'ALTER' 'TABLE' tableName 'ALTER' 'COLUMN' columnName ( 'NOCACHE' | 'CACHE' )
 
 dropColumn
  ::= 'DROP' 'COLUMN' columnName (',' columnName)*

@@ -17,7 +17,11 @@ There are two ways to create an index:
 
 - At table creation time using
   [CREATE TABLE](/docs/reference/sql/create-table#index)
-- Using [ALTER TABLE](/docs/reference/sql/alter-table-alter-column-add-index)
+- Using [ALTER TABLE COLUMN ADD INDEX](/docs/reference/sql/alter-table-alter-column-add-index)
+
+To delete an index:
+
+- Using [ALTER TABLE COLUMN DROP INDEX](/docs/reference/sql/alter-table-alter-column-drop-index)
 
 ## How indexes work
 
