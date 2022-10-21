@@ -27,10 +27,7 @@ typeDef
   )
 
 indexDef 
-  ::= 'INDEX' '(' columnRef (indexCapacityDef)? ')'
-
-indexCapacityDef 
-  ::= 'CAPACITY' valueBlockSize
+  ::='INDEX' '(' columnRef ('CAPACITY' valueBlockSize)?')'
 
 insertInto
   ::= 'INSERT' ('batch' batchCount 'commitLag' n ( 'us' | 's' | 'm' | 'h' | 'd' ))?

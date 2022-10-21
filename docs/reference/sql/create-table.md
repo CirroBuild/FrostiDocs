@@ -83,7 +83,7 @@ When `distinctValueEstimate` is not explicitly specified, a default value of
 `cairo.default.symbol.capacity` is used.
 
 `distinctValueEstimate` - the value used to size data structures for
-[symbols](/docs/concept/symbol). 
+[symbols](/docs/concept/symbol).
 
 ```questdb-sql
 CREATE TABLE my_table(symb SYMBOL CAPACITY 128, price DOUBLE, ts TIMESTAMP),
@@ -101,7 +101,8 @@ timestamp(ts);
 
 #### Symbol caching
 
-`CACHE | NOCACHE` is used to specify whether a symbol should be cached. The default value is `CACHE` unless otherwise specified.
+`CACHE | NOCACHE` is used to specify whether a symbol should be cached. The
+default value is `CACHE` unless otherwise specified.
 
 ```questdb-sql
 CREATE TABLE my_table
@@ -133,10 +134,8 @@ CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP),
   INDEX (symb) TIMESTAMP(ts);
 ```
 
-An index capacity (`indexCapacityDef`) may be provided for the index using and references a
-`valueBlockSize`
-
-![Flow chart showing the syntax of the CAPACITY keyword](/img/docs/diagrams/indexCapacityDef.svg)
+An index capacity may be provided for the index by defining the index storage
+parameter, `valueBlockSize`:
 
 ```questdb-sql
 CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP),
@@ -146,10 +145,8 @@ CREATE TABLE my_table(symb SYMBOL INDEX CAPACITY 128, price DOUBLE, ts TIMESTAMP
   TIMESTAMP(ts);
 ```
 
-`valueBlockSize` is an index storage parameter that specifies how many row IDs
-to store in a single storage block on disk. This value is optional and will
-default to the value of the `cairo.index.value.block.size`
-[configuration key](/docs/reference/configuration). 
+See [Index](/docs/concept/indexes#how-indexes-work) for more information about
+index capacity.
 
 ## Designated timestamp
 
@@ -204,7 +201,6 @@ parameters may be applied:
   | h    | hours        |
   | d    | days         |
 
-
 ```questdb-sql title="Setting out-of-order table parameters via SQL"
 CREATE TABLE my_table (timestamp TIMESTAMP) TIMESTAMP(timestamp)
 PARTITION BY DAY WITH maxUncommittedRows=250000, commitLag=240s;
@@ -216,14 +212,14 @@ Checking the values per-table may be done using the `tables()` function:
 SELECT id, name, maxUncommittedRows, commitLag FROM tables();
 ```
 
-|id |name       |maxUncommittedRows|commitLag|
-|:--|:----------|:-----------------|:--------|
-|1  |my_table   |250000            |240000000|
-|2  |device_data|10000             |30000000 |
-
+| id  | name        | maxUncommittedRows | commitLag |
+| :-- | :---------- | :----------------- | :-------- |
+| 1   | my_table    | 250000             | 240000000 |
+| 2   | device_data | 10000              | 30000000  |
 
 For more information on commit lag and the maximum uncommitted rows, see the
-guide for [out-of-order commits](/docs/guides/out-of-order-commit-lag) and [ILP commit strategy](/docs/reference/api/ilp/tcp-receiver#commit-strategy).
+guide for [out-of-order commits](/docs/guides/out-of-order-commit-lag) and
+[ILP commit strategy](/docs/reference/api/ilp/tcp-receiver#commit-strategy).
 
 ## Examples
 

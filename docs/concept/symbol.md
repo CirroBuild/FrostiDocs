@@ -14,10 +14,6 @@ and their corresponding string values.
 This page presents the concept, optional setting, and their indication for
 `symbol` types.
 
-The [CREATE TABLE](/docs/reference/sql/create-table) documentation specifies the
-correct syntax to use. Further details on indexes are described on the
-[index documentation](/docs/concept/indexes).
-
 ## Advantages of `symbol` types
 
 - Greatly improved query performance as string operations compare and write
@@ -41,8 +37,8 @@ correct syntax to use. Further details on indexes are described on the
 
 ### `Symbol` columns
 
-Columns can be specified as `SYMBOL` during table creation similar to other
-types:
+Columns can be specified as `SYMBOL` using
+[CREATE TABLE](/docs/reference/sql/create-table), similar to other types:
 
 ```questdb-sql title="Create table with a SYMBOL type"
 CREATE TABLE my_table
@@ -80,64 +76,8 @@ table is created:
   - Column-wide setting when a table is created: The
     [`CACHE | NOCACHE` keyword](/docs/reference/sql/create-table/#symbol-caching)
     for `CREATE TABLE`
-  - Column-wide setting to change existing table setting: The
-    [`ALTER COLUMN CACHE | NOCACHE` keyword](/docs/reference/sql/alter-table-alter-column-cache/)
 
 ### Symbols for column indexing
 
-`Symbols` may also be [indexed](/docs/concept/indexes) for faster query
-execution in the following ways:
-
-- When creating a table,
-  [CREATE TABLE](/docs/reference/sql/create-table/#column-indexes):
-
-```questdb-sql
-CREATE TABLE my_table(symb SYMBOL INDEX, price DOUBLE, ts TIMESTAMP)
-  timestamp(ts);
-```
-
-- Altering an existing `symbol` column in a table,
-  [ALTER TABLE COLUMN ADD INDEX](/docs/reference/sql/alter-table-alter-column-add-index):
-
-```questdb-sql title="Adding an index"
-ALTER TABLE trades ALTER COLUMN instrument ADD INDEX;
-```
-
-When a symbol column is indexed, an additional **index capacity** can be defined
-to specify how many row IDs to store in a single storage block on disk:
-
-- Server-wide setting: `cairo.index.value.block.size` with a default of `256`
-- Column-wide setting: The
-  [`index` option](/docs/reference/sql/create-table/#column-indexes) for
-  `CREATE TABLE`.
-
-An example of `CREATE TABLE` command creating a table with an index capacity of
-128:
-
-```questdb-sql
-CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP),
-  INDEX (symb CAPACITY 128) timestamp(ts);
--- equivalent to
-CREATE TABLE my_table(symb SYMBOL INDEX CAPACITY 128, price DOUBLE, ts TIMESTAMP),
-  timestamp(ts);
-```
-
-:::note
-
-- The **index capacity** and **symbol capacity** are different settings.
-- The index capacity value should not be changed, unless an user is aware of all
-  the implications.
-
-:::
-
-Fewer blocks used to store row IDs achieves better performance. At the same time
-over-sizing the setting will result in higher than necessary disk space usage.
-
-Consider an example table with 200 unique stock symbols and 1,000,000,000
-records over time. The index will have to store 1,000,000,000 / 200 row IDs for
-each symbol, i.e. 5,000,000 per symbol.
-
-- If the index capacity is set to 1,048,576 in this case, QuestDB will use 5
-  blocks to store the row IDs
-- If the index capacity is set to 1,024 in this case, the block count will be
-  4,883
+`Symbols` may also be indexed for faster query execution. See
+[Index](/docs/concept/indexes) for more information.
