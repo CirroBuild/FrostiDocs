@@ -160,12 +160,12 @@ const SupportFeaturesItems: Feature[] = [
 
 export const CompareFeatures = () => {
   return (
-    <Section odd fullWidth noGap>
-      <Section>
-        <Section.Title center size="small">
-          Compare features
-        </Section.Title>
+    <Section odd fullWidth>
+      <Section.Title center size="small">
+        Features
+      </Section.Title>
 
+      <Section>
         <div className={style.tables}>
           <FeatureTable title="Core features" items={CoreFeaturesItems} />
 

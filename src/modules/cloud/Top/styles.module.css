@@ -1,16 +1,31 @@
-.bookingCards {
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: stretch;
-  gap: 2rem;
+.getAccess {
+  margin-bottom: 2rem;
 }
 
-.bookingCards > div {
-  margin-bottom: 0 !important; /* override .flashy in ../../../css/cloud/flashy.module.css :( */
+.topScreens {
+  position: relative;
+  width: 100%;
+  height: 550px;
 }
 
-@media screen and (min-width: 750px) {
-  .bookingCards {
-    grid-template-columns: 1fr 1fr;
+@media screen and (min-width: 462px) {
+  .topScreens {
+    height: 600px;
   }
+}
+
+@media screen and (min-width: 572px) {
+  .topScreens {
+    height: 700px;
+  }
+}
+
+@media screen and (min-width: 722px) {
+  .topScreens {
+    height: 800px;
+  }
+}
+
+.screenshot {
+  position: absolute;
 }

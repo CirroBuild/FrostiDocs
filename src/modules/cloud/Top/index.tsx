@@ -1,23 +1,43 @@
-import React, { useState } from "react"
+import React from "react"
 import clsx from "clsx"
-import subscribeStyle from "../../../components/Subscribe/style.module.css"
 import style from "../../../css/cloud/style.module.css"
-import Input from "@theme/Input"
-import emailPattern from "../../../utils/emailPattern"
-import { ContactFormDialog } from "../../../components/ContactFormDialog"
 import Button from "@theme/Button"
 import flCss from "../../../css/cloud/flashy.module.css"
 import prCss from "../../../css/property.module.css"
 import { Section } from "../../../components/Section"
+import { Screenshot } from "./screenshot"
+import styled from "styled-components"
+import { GetAccess } from "../get-access"
 import localStyle from "./styles.module.css"
 
-export const Top = () => {
-  const [email, setEmail] = useState("")
+const screenPath = (screen: string) => `/img/pages/cloud/screens/${screen}.png`
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.currentTarget.value)
+const screenshots = [
+  { src: screenPath("instances"), position: { top: 50, left: 0 } },
+  { src: screenPath("snapshots"), position: { top: 280, left: 50 } },
+  { src: screenPath("connect-go"), position: { top: 170, right: -100 } },
+]
+
+const Cards = styled.div`
+  --cols: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  align-items: stretch;
+  gap: 2rem;
+
+  & > div {
+    /* override .flashy in ../../../css/cloud/flashy.module.css :( */
+    margin-bottom: 0 !important;
   }
 
+  @media screen and (min-width: 750px) {
+    & {
+      --cols: 2;
+    }
+  }
+`
+
+export const Top = () => {
   return (
     <Section>
       <Section.Title center>QuestDB Cloud</Section.Title>
@@ -26,49 +46,36 @@ export const Top = () => {
         The fastest open source time series database fully managed on the cloud.
       </Section.Subtitle>
 
-      <div className={clsx(style.subscribe, subscribeStyle.inputs)}>
-        <Input
-          className={subscribeStyle.input}
-          name="email"
-          type="email"
-          title="Email address should be valid"
-          placeholder="E-mail"
-          required
-          pattern={emailPattern}
-          onChange={handleChange}
-        />
-        <ContactFormDialog
-          defaultInterest="cloud"
-          defaultEmail={email}
-          trigger={
-            <Button variant="primary" className={subscribeStyle.submit}>
-              Get Access
-            </Button>
-          }
-        />
-      </div>
-
-      <img
-        alt="Screenshot of instance creation form and instance details pages in QuestDB Cloud"
-        height={626}
-        src="/img/pages/cloud/screens.png"
-        width={1026}
-        className={style["header-image"]}
-      />
+      <GetAccess className={localStyle.getAccess} />
 
       <Section noGap center>
-        <div className={localStyle.bookingCards}>
+        <div className={localStyle.topScreens}>
+          {screenshots.map(({ src, position }) => (
+            <Screenshot
+              className={localStyle.screenshot}
+              key={src}
+              width={679}
+              height={439}
+              src={src}
+              style={position}
+            />
+          ))}
+        </div>
+
+        <Cards>
           <div className={flCss.flashy}>
             <h3 className={flCss.flashy__title}>Open source</h3>
             <ul className={style.card__list}>
-              <li className={clsx(prCss.property, style.card__item)}>
-                Apache 2.0
-              </li>
-              <li className={clsx(prCss.property, style.card__item)}>
-                Self-hosting
-              </li>
-              <li className={clsx(prCss.property, style.card__item)}>Free</li>
+              {["Free", "Apache 2.0 License", "Self-hosting"].map((item) => (
+                <li
+                  key={item}
+                  className={clsx(prCss.property, style.card__item)}
+                >
+                  {item}
+                </li>
+              ))}
             </ul>
+
             <Button
               variant="primary"
               href="/get-questdb"
@@ -82,22 +89,22 @@ export const Top = () => {
           <div className={flCss.flashy}>
             <h3 className={flCss.flashy__title}>Cloud</h3>
             <ul className={style.card__list}>
-              <li className={clsx(prCss.property, style.card__item)}>
-                Database-as-a-service
-              </li>
-              <li className={clsx(prCss.property, style.card__item)}>
-                Database monitoring
-              </li>
-              <li className={clsx(prCss.property, style.card__item)}>
-                Built-in authentication
-              </li>
-              <li className={clsx(prCss.property, style.card__item)}>
-                Additional database features
-              </li>
-              <li className={clsx(prCss.property, style.card__item)}>
-                Multiple regions
-              </li>
+              {[
+                "Database-as-a-service",
+                "Database monitoring",
+                "Built-in authentication",
+                "Additional database features",
+                "Multiple regions",
+              ].map((item) => (
+                <li
+                  key={item}
+                  className={clsx(prCss.property, style.card__item)}
+                >
+                  {item}
+                </li>
+              ))}
             </ul>
+
             <Button
               variant="primary"
               className={style.card__button}
@@ -106,7 +113,7 @@ export const Top = () => {
               Schedule a call
             </Button>
           </div>
-        </div>
+        </Cards>
       </Section>
     </Section>
   )
