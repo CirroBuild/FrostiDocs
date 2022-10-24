@@ -46,8 +46,8 @@ import TabItem from "@theme/TabItem"
         {`
 <dependency>
   <groupId>org.questdb</groupId>
-  <artifactId>questdb-jdk8</artifactId>
-  <version>${release.name}</version>
+  <artifactId>questdb</artifactId>
+  <version>${release.name}-jdk8</version>
 </dependency>
       `}
       </CodeBlock>
@@ -64,8 +64,18 @@ import TabItem from "@theme/TabItem"
 <InterpolateReleaseData
   renderText={(release) => {
     return (
-      <CodeBlock className="language-shell">
+      <CodeBlock className="language-shell" title={"JDK11"}>
         implementation 'org.questdb:questdb:{release.name}'
+      </CodeBlock>
+    )
+  }}
+/>
+
+<InterpolateReleaseData
+  renderText={(release) => {
+    return (
+      <CodeBlock className="language-shell" title={"JDK8"}>
+        implementation 'org.questdb:questdb:{release.name}-jdk8'
       </CodeBlock>
     )
   }}
