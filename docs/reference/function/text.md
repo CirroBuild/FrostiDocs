@@ -226,10 +226,52 @@ SELECT substring('Lorem ipsum dolor sit amet', -5, 9)
 | --------- |
 | Lor       |
 
-## to_lowercase
+## to_lowercase / lower
 
-`to_lowercase(string)` - converts all string characters to lowercase
+- `to_lowercase(string)` or `lower(string)` - converts all upper case string
+  characters to lowercase
 
-## to_uppercase
+### Arguments
 
-`to_uppercase(string)` - converts all string characters to uppercase
+`string` is the input strong to be converted.
+
+### Return value
+
+Return value type is `string`.
+
+### Examples
+
+```questdb-sql
+SELECT lower('questDB');
+-- This is equal to:
+SELECT to_lowercase('questDB');
+```
+
+| to_lowercase |
+| ------------ |
+| questdb      |
+
+## to_uppercase / upper
+
+- `to_uppercase(string)` or `upper(string)` - converts all lower case string
+  characters to uppercase
+
+### Arguments
+
+`string` is the input strong to be converted.
+
+### Return value
+
+Return value type is `string`.
+
+### Examples
+
+```questdb-sql
+SELECT upper('questDB');
+-- This is equal to:
+SELECT to_uppercase('questDB');
+```
+
+| to_uppercase |
+| ------------ |
+| QUESTDB      |
