@@ -283,7 +283,7 @@ parsing the timestamp column:
 
 #### JSON response
 
-If you intend to upload CSV programmatically, it's easier parse the reponse
+If you intend to upload CSV programmatically, it's easier to parse the response
 as JSON. Set `fmt=json` query argument on the request.
 
 Here's an example of a successful response:

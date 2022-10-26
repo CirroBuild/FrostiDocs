@@ -2,7 +2,7 @@
 title: Lexicon
 ---
 
-Please refers to these terms using the **exact** same casing.
+Please refer to these terms using the **exact** same casing.
 
 ## List
 

@@ -26,7 +26,7 @@ Returns a `table` with the following columns:
 - `indexed` - if indexing is applied to this column
 - `indexBlockCapacity` - how many row IDs to store in a single storage block on
   disk
-- `symbolCached` - whether or not this `symbol` column is cached
+- `symbolCached` - whether this `symbol` column is cached
 - `symbolCapacity` - how many distinct values this column of `symbol` type is
   expected to have
 - `designated` - if this is set as the designated timestamp column for this

@@ -61,7 +61,7 @@ the console, see the [Web Console](/docs/develop/web-console) page.
 You can query data using the Postgres endpoint
 that QuestDB exposes which is accessible by default via port `8812`. Examples in
 multiple languages are shown below. To learn more, check out our docs about 
-[Postgres compatibilty and tools](/docs/reference/api/postgres).
+[Postgres compatibility and tools](/docs/reference/api/postgres).
 
 <Tabs defaultValue="python" values={[
   { label: "Python", value: "python" },

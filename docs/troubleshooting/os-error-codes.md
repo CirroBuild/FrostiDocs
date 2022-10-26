@@ -19,7 +19,7 @@ io.questdb.cairo.CairoException: [24] could not open read-only [file=/root/.ques
 
 The above message reports error code 24 which is "Too many open files" on Linux.
 
-Some of the error log messages may also include `errno=<code>` key/value pair:
+Some error log messages may also include `errno=<code>` key/value pair:
 
 ```
 2022-02-01T13:40:10.636014Z E i.q.c.l.t.LineTcpConnectionContext [8655] could not process line data [table=test_table, msg=could not mmap  [size=248, offset=0, fd=1766, memUsed=314809894008, fileLen=8192], errno=12]

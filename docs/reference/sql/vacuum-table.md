@@ -18,7 +18,7 @@ circumstances, they can be left behind. In this case, `VACUUM TABLE` can be used
 to re-trigger the deletion process of the old column files.
 
 The `VACUUM TABLE` command starts a new scan over table partition directories
-and and column files. It detects redundant, unused files consuming the disk
+and column files. It detects redundant, unused files consuming the disk
 space and deletes them. `VACUUM TABLE` executes asynchronously, i.e. it may keep
 scanning and deleting files after their response is returned to the SQL client.
 

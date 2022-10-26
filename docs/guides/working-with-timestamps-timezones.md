@@ -66,7 +66,7 @@ time zones for the following reason:
 > "CST" could be U.S. "Central Standard Time" and "China Standard Time"), and
 > the Java platform can then only recognize one of them
 
-Therefore choosing a geographic region which observes a time zone
+Therefore, choosing a geographic region which observes a time zone
 (`"America/New_York"`, `"Europe/Prague"`) or a UTC offset value (`"+02:00"`) is
 more reliable when referring to time zones. Instructions for converting to and
 from time zones are described in the

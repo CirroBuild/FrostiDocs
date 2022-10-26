@@ -867,7 +867,7 @@ except requests.exceptions.RequestException as e:
 The second example creates a CSV buffer from Python objects and uploads them
 with a custom schema. Note UTF-8 encoding.
 
-The `fmt=json` parameter allows us to obtain a parseable response, rather than a
+The `fmt=json` parameter allows us to obtain a parsable response, rather than a
 tabular response designed for human consumption.
 
 ```python
