@@ -38,6 +38,7 @@ module.exports = {
         "get-started/binaries",
         "get-started/homebrew",
         "get-started/first-database",
+        "get-started/learn-more",
       ],
     },
     {
@@ -48,7 +49,6 @@ module.exports = {
         "develop/insert-data",
         "develop/query-data",
         "develop/update-data",
-        "develop/design-for-performance",
         "develop/web-console",
       ],
     },
@@ -77,6 +77,7 @@ module.exports = {
       label: "Operations",
       type: "category",
       items: [
+        "operations/design-for-performance",
         "operations/capacity-planning",
         "operations/data-retention",
         "operations/health-monitoring",
