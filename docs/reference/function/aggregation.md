@@ -366,6 +366,42 @@ FROM (SELECT x FROM long_sequence(100));
 | :-------------- |
 | 29.011491975882 |
 
+## row_number
+
+`row_number()` - returns a unique row number for each row in the result. It is a sequence of temporary values which is dynamically calculated when then the query is executed. Hence, it has a non-deterministic nature. 
+
+**Arguments:**
+
+- `row_number` does not require arguments.
+
+**Return value:**
+
+Return value type is `long`.
+
+**Description**
+
+`row_number() OVER(PARTITION BY [partition_expression1, partition_expression2], ORDER BY sort_expression1 [ASC | DESC]) as [row_num]` - returns the sequential number of a row within a partition of a result set, starting at number 1 for the first row in each partition.
+
+- Since the rows are returned dynamically, there is no guarantee that the rows returned will be ordered exactly the same with each execution of the query. Hence SQL keywords such as `OVER` and `PARTITION BY` are specified to set unique parameters and organise the row indexing.
+- `OVER()` function is used to specify the set of rows upon which the window function operates depending on the parameters input to arrange the table in a logical manner basis the parameters set.
+
+**Examples:**
+
+Using `row_number() OVER(PARTITION BY[], ORDER BY [])` for "trades" to partition the list on basis of trade symbols and arrange transactions in a sequential order according to lowest to highest price for trading of each symbol for a specific period of time/day through `dateadd` function.
+
+```questdb-sql
+SELECT symbol,side,price,amount, row_number() OVER(PARTITION BY symbol ORDER BY price) AS row_num
+FROM trades
+where timestamp > dateadd('d', -1, now())
+ORDER BY row_num ASC;
+```
+| symbol    | side   | price    | amount     | row_num |
+| :-------- | :----- | :------- | :--------- | :------ |
+| BTC-USD   | Sell   |    18659 | 0.10904633 | 0       |
+| ETH-USD   | Sell   |     1254 | 0.318      | 0       |
+| BTC-USD   | Sell   |    18659 | 0.13572085 | 1       |
+| ETH-USD   | Sell   |     1254 | 3.56037485 | 1       |
+
 ## sum
 
 `sum(value)` - adds values ignoring missing data (e.g `null` values).
