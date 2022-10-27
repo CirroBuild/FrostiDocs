@@ -14,6 +14,8 @@ CREATE TABLE my_table(symb SYMBOL, price DOUBLE, ts TIMESTAMP, s STRING)
 
 ## Syntax
 
+To create a table by manually entering parameters and settings:
+
 ![Flow chart showing the syntax of the CREATE TABLE keyword](/img/docs/diagrams/createTable.svg)
 
 :::info
@@ -23,6 +25,10 @@ functions which are described in the
 [meta functions](/docs/reference/function/meta) documentation page.
 
 :::
+
+To create a table by cloning the metadata of an existing table:
+
+![Flow chart showing the syntax of the CREATE TABLE LIKE keyword](/img/docs/diagrams/createTableLike.svg)
 
 ## IF NOT EXISTS
 
@@ -148,6 +154,35 @@ CREATE TABLE my_table(symb SYMBOL INDEX CAPACITY 128, price DOUBLE, ts TIMESTAMP
 See [Index](/docs/concept/indexes#how-indexes-work) for more information about
 index capacity.
 
+## CREATE TABLE AS
+
+When SQL (`selectSQL`) is `SELECT * FROM tab` or any arbitrary SQL result, the
+selected column names and their data type will be cloned to the new table.
+
+```questdb-sql title="Create table as select"
+CREATE TABLE new_table AS(
+  SELECT
+    rnd_int() a,
+    rnd_double() b,
+    rnd_symbol('ABB', 'CDD') c
+  FROM
+    long_sequence(100)
+  WHERE false
+);
+```
+
+The data type of a column can be changed:
+
+```questdb-sql title="Clone an existing wide table and change type of cherry-picked columns"
+CREATE TABLE new_table AS (SELECT * FROM source_table WHERE false),
+  CAST(price AS LONG),
+  CAST(instrument as SYMBOL);
+```
+
+Here we changed type of `price` (assuming it was `INT`) to `LONG` and changed
+type of `sym` to [symbol](/docs/concept/symbol) and created an
+[index](/docs/concept/indexes).
+
 ## Designated timestamp
 
 The timestamp function allows for specifying which column (which must be of
@@ -221,6 +256,16 @@ For more information on commit lag and the maximum uncommitted rows, see the
 guide for [out-of-order commits](/docs/guides/out-of-order-commit-lag) and
 [ILP commit strategy](/docs/reference/api/ilp/tcp-receiver#commit-strategy).
 
+## CREATE TABLE LIKE
+
+The `LIKE` keyword clones the table schema of an existing table without copying the data. Table settings
+and parameters such as designated timestamp, symbol column indexes, commit lag,
+and index capacity will be cloned, too.
+
+```questdb-sql title="Create table like"
+CREATE TABLE new_table (LIKE my_table);
+```
+
 ## Examples
 
 The following examples demonstrate creating tables from basic statements, and
@@ -265,43 +310,6 @@ CREATE TABLE
 PARTITION BY DAY;
 ```
 
-### CREATE TABLE AS
-
-#### Cloning existing SQL structure
-
-When SQL is `SELECT * FROM tab` or any arbitrary SQL result, the table data will
-be copied with the corresponding structure.
-
-```questdb-sql title="Create table as select"
-CREATE TABLE x AS(
-  SELECT
-    rnd_int() a,
-    rnd_double() b,
-    rnd_symbol('ABB', 'CDD') c
-  FROM
-    long_sequence(100)
-  WHERE false;
-)
-```
-
-:::note
-
-Notice the `where false` condition.
-
-:::
-
-```questdb-sql title="Clone an existing wide table and change type of cherry-picked columns"
-CREATE TABLE x AS (SELECT * FROM table WHERE false),
-  CAST(price AS LONG),
-  CAST(instrument as SYMBOL);
-```
-
-Here we changed type of `price` (assuming it was `INT`) to `LONG` and changed
-type of `sym` to [symbol](/docs/concept/symbol) and created an
-[index](/docs/concept/indexes).
-
-#### Create a new table using SQL structure and data
-
 Let's assume we imported a text file into the table `taxi_trips_unordered` and
 now we want to turn this data into time series through ordering trips by
 `pickup_time`, assign dedicated timestamp and partition by month:
@@ -312,26 +320,3 @@ CREATE TABLE taxi_trips AS(
 ) TIMESTAMP(pickup_time)
 PARTITION BY MONTH;
 ```
-
-### CREATE TABLE WITH parameters
-
-Adding `WITH` to a create table statement allows for providing table-specific
-configuration.
-
-#### Specifying commit lag and maximum uncommitted rows
-
-Let's assume we have out-of-order records arriving at a table `my_table`. If we
-know beforehand that the maximum _lag_ of later records is likely to be 240
-seconds, we can schedule sorting and commits of out-of-order data to occur
-within this time boundary. The _lag_ configuration can be combined with the
-maximum uncommitted rows so that a commit will occur based on expected row
-count, or the _lag_ boundary is met:
-
-```questdb-sql
-CREATE TABLE my_table (ts TIMESTAMP) TIMESTAMP(ts)
-PARTITION BY DAY WITH maxUncommittedRows=250000, commitLag = 240s
-```
-
-For more information on out-of-order lag and uncommitted rows, see the
-documentation for
-[out-of-order data commits](/docs/guides/out-of-order-commit-lag).

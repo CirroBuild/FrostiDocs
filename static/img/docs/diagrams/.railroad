@@ -1,14 +1,19 @@
+https://www.bottlecaps.de/rr/ui
+
 createTableDef
-  ::= 'CREATE' 'TABLE' ('IF' 'NOT' 'EXISTS')? tableName
+::= 'CREATE' 'TABLE' ('IF' 'NOT' 'EXISTS')? tableName
   (
   (
   '(' columnName typeDef (',' columnName typeDef)* ')'
   ) | (
-  'as' '(' selectSql ')'  (',' castDef)* (',' indexDef)*
+  'AS' '(' selectSql ')'  (',' castDef)* (',' indexDef)*
   )
   ) (
   ('timestamp' '(' columnRef ')' ) ('PARTITION' 'BY' ('NONE' | 'YEAR' | 'MONTH' | 'DAY' | 'HOUR' ))?
   )?
+
+createTableLike
+::= 'CREATE' 'TABLE' ('(' 'LIKE' sourceTableName ')')? 
 
 alterTable 
   ::= 'ALTER' 'TABLE' tableName
