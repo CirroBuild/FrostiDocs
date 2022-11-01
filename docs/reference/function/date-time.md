@@ -973,7 +973,7 @@ text. These letters are case-sensitive and are used as they are, without any pre
 | `yyyy` | Four-digit year                                                       | Year               | 1996                                  |
 | `M`    | Month in year                                                         | Month              | July; Jul; 07                         |
 | `w`    | Week in year                                                          | Number             | 27                                    |
-| `W`    | Week in month                                                         | Number             | 2                                     |
+| `ww`   | ISO week of year                                                         | Number             | 2                                     |
 | `D`    | Day in year                                                           | Number             | 189                                   |
 | `d`    | Day in month                                                          | Number             | 10                                    |
 | `F`    | Day of week in month                                                  | Number             | 2                                     |
