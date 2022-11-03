@@ -142,6 +142,7 @@ can be used in QuestDB.
 ### Functions
 
 - [Aggregate](/docs/reference/function/aggregation)
+- [Analytic](/docs/reference/function/analytic)
 - [Binary](/docs/reference/function/binary)
 - [Boolean](/docs/reference/function/boolean)
 - [Conditional](/docs/reference/function/conditional)

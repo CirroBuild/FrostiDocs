@@ -84,7 +84,7 @@ fill
   ::= someSampleBySelectQuery 'FILL' ( ( 'NONE' | 'NULL' | 'PREV' | 'LINEAR' | 'x' ) ',' )*
 
 orderBy
-  ::= someSelectQuery 'ORDER' 'BY' ( columnName (asc | desc) ? (',' columnName (asc | desc) ?)* )
+  ::= someSelectQuery 'ORDER' 'BY' ( columnName (ASC | DESC) ? (',' columnName (asc | desc) ?)* )
 
 timestampSearch
   ::= 'WHERE' timestampColumn ( '=' | '>' | '<' | '>=' | '<=' ) "'" timestamp "'"
@@ -190,3 +190,6 @@ Update
 
 TruncateTable
 ::= 'TRUNCATE TABLE' tableName
+
+analyticFunction
+::= functionName 'OVER' '(' ( 'PARTITION' 'BY' ( columnName? (',' columnName?)* ))?  ('ORDER' 'BY' ( columnName (ASC | DESC) ? (',' columnName (ASC | DESC) ?)* ))? ')'

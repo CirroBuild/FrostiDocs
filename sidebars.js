@@ -150,6 +150,7 @@ module.exports = {
           label: "Functions",
           items: [
             "reference/function/aggregation",
+            "reference/function/analytic",
             "reference/function/binary",
             "reference/function/boolean",
             "reference/function/conditional",
@@ -161,7 +162,7 @@ module.exports = {
             "reference/function/spatial",
             "reference/function/text",
             "reference/function/timestamp-generator",
-            "reference/function/timestamp",
+            "reference/function/timestamp"
           ],
         },
         {

@@ -43,10 +43,10 @@
     <text class="nonterminal" x="355" y="65">columnName</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#asc" xlink:title="asc">
     <rect x="489" y="79" width="40" height="32"/>
     <rect x="487" y="77" width="40" height="32" class="nonterminal"/>
-    <text class="nonterminal" x="497" y="97">asc</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#desc" xlink:title="desc">
+    <text class="nonterminal" x="497" y="97">ASC</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#desc" xlink:title="desc">
     <rect x="489" y="123" width="48" height="32"/>
     <rect x="487" y="121" width="48" height="32" class="nonterminal"/>
-    <text class="nonterminal" x="497" y="141">desc</text></a><rect x="347" y="3" width="24" height="32" rx="10"/>
+    <text class="nonterminal" x="497" y="141">DESC</text></a><rect x="347" y="3" width="24" height="32" rx="10"/>
     <rect x="345" y="1" width="24" height="32" class="terminal" rx="10"/>
     <text class="terminal" x="355" y="21">,</text>
     <path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 61 h2 m0 0 h10 m130 0 h10 m0 0 h10 m68 0 h10 m0 0 h10 m38 0 h10 m20 0 h10 m102 0 h10 m20 0 h10 m0 0 h58 m-88 0 h20 m68 0 h20 m-108 0 q10 0 10 10 m88 0 q0 -10 10 -10 m-98 10 v12 m88 0 v-12 m-88 12 q0 10 10 10 m68 0 q10 0 10 -10 m-78 10 h10 m40 0 h10 m0 0 h8 m-78 -10 v20 m88 0 v-20 m-88 20 v24 m88 0 v-24 m-88 24 q0 10 10 10 m68 0 q10 0 10 -10 m-78 10 h10 m48 0 h10 m-230 -76 l20 0 m-1 0 q-9 0 -9 -10 l0 -24 q0 -10 10 -10 m230 44 l20 0 m-20 0 q10 0 10 -10 l0 -24 q0 -10 -10 -10 m-230 0 h10 m24 0 h10 m0 0 h186 m23 44 h-3"/>
