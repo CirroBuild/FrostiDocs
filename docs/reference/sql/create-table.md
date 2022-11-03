@@ -200,9 +200,9 @@ created.
 ## Partitioning
 
 `PARTITION BY` allows for specifying the
-[partitioning strategy](/docs/concept/partitions) for the table. The default
-partitioning strategy is `NONE` and tables can be partitioned by one of the
-following:
+[partitioning strategy](/docs/concept/partitions) for the table. Tables created
+via SQL are not partitioned by default and tables can be partitioned by one of
+the following:
 
 - `YEAR`
 - `MONTH`
@@ -258,9 +258,9 @@ guide for [out-of-order commits](/docs/guides/out-of-order-commit-lag) and
 
 ## CREATE TABLE LIKE
 
-The `LIKE` keyword clones the table schema of an existing table without copying the data. Table settings
-and parameters such as designated timestamp, symbol column indexes, commit lag,
-and index capacity will be cloned, too.
+The `LIKE` keyword clones the table schema of an existing table without copying
+the data. Table settings and parameters such as designated timestamp, symbol
+column indexes, commit lag, and index capacity will be cloned, too.
 
 ```questdb-sql title="Create table like"
 CREATE TABLE new_table (LIKE my_table);

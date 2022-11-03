@@ -9,11 +9,14 @@ QuestDB implements the
 to ingest data. QuestDB can listen for line protocol packets over
 [TCP](/docs/reference/api/ilp/tcp-receiver).
 
-This page aims to provide examples for QuestDB experts setting up TCP without any client libraries, or those looking to implement a new client library yourself.
+This page aims to provide examples for QuestDB experts setting up TCP without
+any client libraries, or those looking to implement a new client library
+yourself.
 
 :::tip
 
-For general QuestDB users, client libraries are available for a number of languages: [ILP client libraries](/docs/reference/clients/overview).
+For general QuestDB users, client libraries are available for a number of
+languages: [ILP client libraries](/docs/reference/clients/overview).
 
 :::
 
@@ -54,9 +57,9 @@ Each ILP message has to end with new line `\n` character.
   automatically recognized and assigned based on the data.
 - The `timestamp` column is automatically created as
   [designated timestamp](/docs/concept/designated-timestamp) with the
-  [partition strategy](/docs/concept/partitions) set to `NONE`. If you would
-  like to define a partition strategy, you should
-  [CREATE](/docs/reference/sql/create-table) the table beforehand.
+  [partition strategy](/docs/concept/partitions) set to `DAY`. Alternatively,
+  use [CREATE TABLE](/docs/reference/sql/create-table) to create the table with
+  a different partition strategy before ingestion.
 - When the timestamp is empty, QuestDB will use the server timestamp.
 
 ### Difference from InfluxDB
