@@ -14,7 +14,7 @@ improve automatic detection.
 
 :::note
 
-The REST API is better suited for regular uploads of small batches of data via CSV files into the same table. For database migrations with large CSV files of un-ordered data, The `COPY` SQL command is recommended instead. See [COPY command documentation](/docs/reference/sql/copy/) and [Guide on CSV import](/docs/guides/importing-data) for more details.
+The REST API is better suited for regular uploads of small batches of data via CSV files into the same table. For database migrations, or uploading one large CSV file into QuestDB, users may consider using the `COPY` SQL command. See [COPY command documentation](/docs/reference/sql/copy/) and [Guide on CSV import](/docs/guides/importing-data) for more details.
 
 :::
 
@@ -23,7 +23,7 @@ The REST API is better suited for regular uploads of small batches of data via C
 A `schema` JSON object can be provided with POST requests to `/imp` while
 creating tables via CSV import. This allows for more control over user-defined
 patterns for timestamps, or for explicitly setting types during column-creation.
-The the following example demonstrates basic usage, in this case, that the
+The following example demonstrates basic usage, in this case, that the
 `ticker_name` column should be parsed as `SYMBOL` type instead of `STRING`:
 
 ```bash
