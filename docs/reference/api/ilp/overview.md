@@ -34,19 +34,19 @@ docs.
 table_name,symbolset columnset timestamp\n
 ```
 
-| Element      | Definition                                                                                 |
-| :----------- | :----------------------------------------------------------------------------------------- |
-| `table_name` | Name of the table where QuestDB will write data.                                           |
-| `symbolset`  | A set of `name=value` pairs separated by commas that will be parsed as symbol columns.     |
-| `columnset`  | A set of `name=value` pairs separated by commas that will be parsed as non-symbol columns. |
-| `timestamp`  | UNIX timestamp. By default in nanoseconds. Can be changed in the configuration.            |
+| Element      | Definition                                                                                                                                                                 |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `table_name` | Name of the table where QuestDB will write data.                                                                                                                           |
+| `symbolset`  | A set of comma-separated `name=value` pairs that will be parsed as symbol columns.                                                                                         |
+| `columnset`  | A set of comma-separated `name=value` pairs that will be parsed as non-symbol columns.                                                                                     |
+| `timestamp`  | UNIX timestamp. The default unit is nanosecond and is configurable via `line.tcp.timestamp`. The value will be truncated to microsecond resolution when parsed by QuestDB. |
 
 `name` in the `name=value` pair always corresponds to `column name` in the
 table.
 
 :::note
 
-Each ILP message has to end with new line `\n` character.
+Each ILP message has to end with a new line `\n` character.
 
 :::
 
