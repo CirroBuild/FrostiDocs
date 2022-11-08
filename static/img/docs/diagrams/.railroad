@@ -90,7 +90,7 @@ timestampSearch
   ::= 'WHERE' timestampColumn ( '=' | '>' | '<' | '>=' | '<=' ) "'" timestamp "'"
 
 timestampIntervalSearch
-  ::= 'WHERE' timestampColumn 'IN' "'" timestamp ';' interval (s | m | h | d | M | y) "'"
+  ::= 'WHERE' timestampColumn 'IN' "'" timestamp ';' multiplier ( s | m | h | d | M | y ) ';' ( occurrence ( s | m | h | d | M | y ) ';' repetition )? "'"
 
 timestampInSearch
   ::= 'WHERE' timestampColumn 'IN' '(' "'timestamp1'" ';' "'timestamp2'" ')'

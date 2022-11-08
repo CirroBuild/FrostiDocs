@@ -310,16 +310,25 @@ SELECT * FROM scores WHERE ts IN '2018-05-23T12:15';
 
 You can apply a modifier to further customize the range. The algorithm will
 calculate the resulting range by modifying the upper bound of the original range
-by the modifier parameter.
+by the modifier parameter. An optional occurrence can be set to apply the time
+range repeatedly for a set number of times.
 
 #### Syntax
 
-![Flow chart showing the syntax of the WHERE clause with a timestamp/modifier comparison](/img/docs/diagrams/whereTimestampPartialModifier.svg)
+![Flow chart showing the syntax of the WHERE clause with a timestamp/modifier comparison](/img/docs/diagrams/whereTimestampIntervalSearch.svg)
 
-`multiplier` is a signed integer.
+- `period` is an unsigned integer.
+<!--change to signed when this is merged: https://github.com/questdb/questdb/issues/2509
 
-- A `positive` value extends the interval.
-- A `negative` value reduces the interval.
+  - A `positive` value extends the selected period.
+  - A `negative` value reduces the selected period.
+-->
+- `interval` is an unsigned integer.
+- `repetition` is an unsigned integer.
+
+#### Examples
+
+Modifying the range:
 
 ```questdb-sql title="Results in a given year and the first month of the next year"
 SELECT * FROM scores WHERE ts IN '2018;1M';
@@ -332,8 +341,10 @@ by one month.
 | --------------------------- | ----- |
 | 2018-01-01T00:00:00.000000Z | 123.4 |
 | ...                         | ...   |
-| 2018-01-31T23:59:59.999999Z | 115.8 |
+| 2019-01-31T23:59:59.999999Z | 115.8 |
 
+<!--
+https://github.com/questdb/questdb/issues/2509
 ```questdb-sql title="Results in a given month excluding the last 3 days"
 SELECT * FROM scores WHERE ts IN '2018-01;-3d';
 ```
@@ -346,6 +357,25 @@ Jan 2018) by 3 days.
 | 2018-01-01T00:00:00.000000Z | 123.4 |
 | ...                         | ...   |
 | 2018-01-28T23:59:59.999999Z | 113.8 |
+-->
+
+
+Modifying the interval:
+
+```questdb-sql title="Results on a given date with an interval"
+SELECT * FROM scores WHERE ts IN '2018-01-01;1d;1y;2';
+
+```
+The range is Jan 1 2018 with a one-year interval and the total occurrence is two.
+
+| ts                          | score |
+| --------------------------- | ----- |
+| 2018-01-01T00:00:00.000000Z | 123.4 |
+| ...                         | ...   |
+| 2018-01-01T23:59:59.999999Z | 113.8 |
+| 2019-01-01T00:00:00.000000Z | 125.7 |
+| ...                         | ...   |
+| 2019-01-01T23:59:59.999999Z | 103.9 |
 
 ### IN with multiple arguments
 
