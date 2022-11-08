@@ -78,8 +78,8 @@ utilities for collecting metrics and visualizing data:
 - [Prometheus](/docs/third-party-tools/prometheus) monitoring and alerting.
 - [Grafana](/docs/third-party-tools/grafana) instructions for connecting
   QuestDB as a datasource for building visualizations and dashboards
-- [Kafka](/docs/third-party-tools/kafka) guide for ingesting data from topics
-  into QuestDB by means of Kafka Connect
+- [Kafka](/docs/third-party-tools/kafka/overview) guide for ingesting data from topics
+  into QuestDB
 - [Telegraf](/docs/third-party-tools/telegraf) guide for collecting system
   metrics, specifying QuestDB as an output and visualizing the results
 

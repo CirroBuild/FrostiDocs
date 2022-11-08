@@ -36,7 +36,7 @@ const integrations: Array<{
   {
     logo: { ...logos.kafka, svg: KafkaLogo },
     label: "Kafka",
-    src: "/docs/third-party-tools/kafka/",
+    src: "/docs/third-party-tools/kafka/overview/",
   },
   {
     logo: { ...logos.python, svg: PythonLogo },

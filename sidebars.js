@@ -91,7 +91,15 @@ module.exports = {
       items: [
         "third-party-tools/prometheus",
         "third-party-tools/grafana",
-        "third-party-tools/kafka",
+        {
+          label: "Kafka",
+          type: "category",
+          items: [
+            "third-party-tools/kafka/overview",
+            "third-party-tools/kafka/questdb-kafka",
+            "third-party-tools/kafka/jdbc",
+          ],
+        },
         "third-party-tools/telegraf",
       ],
     },

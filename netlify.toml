@@ -263,6 +263,10 @@
   from = "/blog/2022/09/12/importing-3m-rows-with-io-uring"
   to = "/blog/2022/09/12/importing-300k-rows-with-io-uring/"
 
+[[redirects]]
+  from = "/docs/third-party-tools/kafka/"
+  to = "/docs/third-party-tools/kafka/overview/"
+
 [[headers]]
   for = "/*"
   [headers.values]

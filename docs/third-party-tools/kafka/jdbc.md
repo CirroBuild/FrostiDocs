@@ -1,5 +1,5 @@
 ---
-title: Kafka Connect
+title: JDBC connector
 description:
   JDBC driver support in QuestDB allows for ingesting messages from a Kafka
   topic via Kafka Connect.
