@@ -55,8 +55,8 @@ You can automate downloading the latest connector package by running this
 command:
 
 ```shell
-curl -s https://api.github.com/repos/questdb/kafka-questdb-connector/releases/latest | /
-jq -r '.assets[]|select(.content_type == "application/zip")|.browser_download_url'| /
+curl -s https://api.github.com/repos/questdb/kafka-questdb-connector/releases/latest |
+jq -r '.assets[]|select(.content_type == "application/zip")|.browser_download_url'|
 wget -qi -
 ```
 
@@ -255,22 +255,42 @@ partitioning, creating indexes, etc.
 
 ## FAQ
 
-**Q**: Does this connector work with Schema Registry?  
-**A**: The Connector works independently of the serialization strategy used. It
-relies on Kafka Connect converters to deserialize data. Converters can be
-configured using `key.converter` and `value.converter` options, see the
-configuration section above.
+<details>
+  <summary>Does this connector work with Schema Registry? </summary>
+<p>
 
-**Q**: I'm getting this error:
-`org.apache.kafka.connect.errors.DataException: JsonConverter with schemas.enable requires "schema" and "payload" fields and may not contain additional fields. If you are trying to deserialize plain JSON data, set schemas.enable=false in your converter configuration.`
-**A**: This error means that the connector is trying to deserialize data using a
+
+The Connector works independently of the serialization strategy used. It relies
+on Kafka Connect converters to deserialize data. Converters can be configured
+using `key.converter` and `value.converter` options, see the configuration
+section above.
+
+</p>
+</details>
+
+
+<details>
+  <summary>I'm getting this error:
+"org.apache.kafka.connect.errors.DataException: JsonConverter with schemas.enable requires 'schema' and 'payload' fields and may not contain additional fields. If you are trying to deserialize plain JSON data, set schemas.enable=false in your converter configuration."</summary>
+<p>
+
+
+This error means that the connector is trying to deserialize data using a
 converter that expects a schema. The connector does not require schemas, so you
 need to configure the converter to not expect a schema. For example, if you are
 using a JSON converter, you need to set `value.converter.schemas.enable=false`
 or `key.converter.schemas.enable=false` in the connector configuration.
 
-**Q**: Does this connector work with Debezium?  
-**A**: Yes, it's been tested with Debezium as a source and a
+</p>
+</details>
+
+
+<details>
+  <summary>Does this connector work with Debezium?</summary>
+<p>
+
+
+Yes, it's been tested with Debezium as a source and a
 [sample project](https://github.com/questdb/kafka-questdb-connector/tree/main/kafka-questdb-connector-samples/stocks)
 is available. Bear in mind that QuestDB is meant to be used as an append-only
 database; hence, updates should be translated as new inserts. The connector
@@ -278,9 +298,17 @@ supports Debezium's `ExtractNewRecordState` transformation to extract the new
 state of the record. The transformation by default drops DELETE events, so there
 is no need to handle them explicitly.
 
-**Q**: QuestDB is a time series database, how does it fit into Change Data
-Capture via Debezium?  
-**A**: QuestDB works with Debezium just great! This is the recommended pattern:
+</p>
+</details>
+
+
+<details>
+  <summary>QuestDB is a time series database, how does it fit into Change Data
+Capture via Debezium?</summary>
+<p>
+
+
+QuestDB works with Debezium just great! This is the recommended pattern:
 Transactional applications use a relational database to store the current state
 of the data. QuestDB is used to store the history of changes. Example: Imagine
 you have a PostgreSQL table with the most recent stock prices. Whenever a stock
@@ -291,9 +319,17 @@ PostgreSQL will have the most recent stock prices and QuestDB will have the
 history of changes. You can use QuestDB to build a dashboard with the most
 recent stock prices and a chart with the history of changes.
 
-**Q**: How I can select which fields to include in the target table? **A**: Use
-the ReplaceField transformation to remove unwanted fields. For example, if you
-want to remove the `address` field, you can use the following configuration:
+</p>
+</details>
+
+
+<details>
+  <summary>How I can select which fields to include in the target table?</summary>
+<p>
+
+
+Use the ReplaceField transformation to remove unwanted fields. For example, if
+you want to remove the `address` field, you can use the following configuration:
 
 ```json
 {
@@ -316,9 +352,17 @@ See
 [ReplaceField documentation](https://docs.confluent.io/platform/current/connect/transforms/replacefield.html#replacefield)
 for more details.
 
-**Q**: I need to run Kafka Connect on Java 8, but the connector says it requires
-Java 11. What should I do?  
-**A**: The Kafka Connect-specific part of the connectors works with Java 8. The
+</p>
+</details>
+
+
+<details>
+  <summary>I need to run Kafka Connect on Java 8, but the connector says it requires
+Java 11. What should I do? </summary>
+<p>
+
+
+The Kafka Connect-specific part of the connectors works with Java 8. The
 requirement for Java 11 is coming from QuestDB client itself. The zip archive
 contains 2 JARs: `questdb-kafka-connector-VERSION.jar` and
 `questdb-VERSION.jar`. You can replace the latter with
@@ -326,3 +370,7 @@ contains 2 JARs: `questdb-kafka-connector-VERSION.jar` and
 [Maven central](https://mvnrepository.com/artifact/org.questdb/questdb/6.5.4-jdk8).
 Please note that this setup is not officially supported, and you may encounter
 issues. If you do, please report them to us.
+
+</p>
+</details>
+
