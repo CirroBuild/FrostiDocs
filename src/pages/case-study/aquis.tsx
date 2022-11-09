@@ -129,6 +129,26 @@ const Aquis = () => {
             seCss["section--column"],
           )}
         >
+          <h3>About the team</h3>
+          <p className="font-size--large">
+            {" "}
+            <a href="https://www.aquis.eu/">Aquis Exchange</a> is a financial
+            exchange that operates pan-European cash equities trading
+            businesses, provides primary and secondary markets for equity and
+            debt products, and develops exchange software for third parties.
+          </p>
+          <p className="font-size--large">
+            The group is authorized and regulated by the UK Financial Conduct
+            Authority and France&#39;s Autorité des marchés financiers to
+            operate Multilateral Trading Facilitynbusinesses in the UK and in
+            EU27 respectively. Aquis Exchange is the only European trading venue
+            to operate on a subscription pricing model.
+          </p>
+          <p className="font-size--large">
+            Viet Lee, CTO at Aquis Exchange, shares how QuestDB powers the
+            financial exchange by processing infrastructure metrics and market
+            data.
+          </p>
           <h3>The need for a time-series database to monitor metrics</h3>
           <p className="font-size--large">
             We started to build the foundations of a system that would
