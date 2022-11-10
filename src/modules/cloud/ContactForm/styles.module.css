@@ -1,0 +1,18 @@
+.root h4 {
+  margin: 0;
+}
+
+.inputs {
+  display: grid;
+  gap: 1rem;
+}
+
+.radios {
+  display: grid;
+  gap: 1rem;
+}
+
+.submit {
+  justify-self: center;
+  padding: 0 4rem;
+}

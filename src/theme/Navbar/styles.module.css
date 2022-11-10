@@ -42,6 +42,9 @@
 }
 
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-navbar);
   --ifm-navbar-padding-vertical: 0;
   --ifm-navbar-padding-horizontal: 0;
   --ukraine-yellow: rgba(255, 215, 0, 1);

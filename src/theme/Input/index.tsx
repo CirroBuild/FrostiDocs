@@ -5,6 +5,7 @@ import styles from "./styles.module.css"
 
 type Props = Readonly<{
   value?: string
+  defaultValue?: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   className?: string
   name: string
@@ -17,6 +18,7 @@ type Props = Readonly<{
 
 const Input = ({
   value,
+  defaultValue,
   onChange,
   className,
   name,
@@ -30,6 +32,7 @@ const Input = ({
 
   return (
     <input
+      defaultValue={defaultValue}
       value={value}
       onChange={onChange}
       className={classes}

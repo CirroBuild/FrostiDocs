@@ -67,7 +67,11 @@ const Subscribe: React.FunctionComponent<Props> = ({
   return (
     <form className={clsx(style.root, className)} onSubmit={onSubmit}>
       <TransitionGroup>
-        <CSSTransition key={sent.toString()} timeout={200} classNames="item">
+        <CSSTransition
+          key={sent.toString()}
+          timeout={200}
+          classNames="transition-node"
+        >
           {sent ? (
             <p className={style.success}>
               Thank you, we will be in touch soon!

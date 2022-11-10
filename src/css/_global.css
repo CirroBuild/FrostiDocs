@@ -131,6 +131,9 @@
   --theme-tutorial-post-card-hover-border: 1px solid var(--palette-white);
 
   --theme-screenshot-background-color: var(--palette-charade);
+
+  --z-index-navbar: 100;
+  --z-index-dialog: 101;
 }
 
 html[data-theme="dark"] {
@@ -434,3 +437,9 @@ html[data-theme='light'] .themedDocusaurus [fill='#FFFF50'] {
 html[data-theme='light'] .react-toggle-track {
   background-color: #ebedf0;
 }
+
+/* animation style for react-transition-group elements */
+.transition-node-enter { opacity: 0; }
+.transition-node-enter-active { opacity: 1; transition: opacity 200ms; }
+.transition-node-exit { opacity: 1; }
+.transition-node-exit-active { opacity: 0; transition: opacity 200ms; }

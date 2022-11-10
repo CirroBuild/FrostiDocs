@@ -1,35 +1,37 @@
-import React, { useRef } from "react"
+import React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
-import styles from "./styles.module.css"
+import style from "./styles.module.css"
 
 type Props = {
+  title?: React.ReactNode
   children: React.ReactNode
-  maxwidth?: string
+  maxWidth?: string | number
 }
 
-export const DialogContent = ({ children, maxwidth, ...props }: Props) => {
-  const node = useRef<HTMLDivElement>(null)
-
-  return (
-    <DialogPrimitive.Portal>
-      <DialogPrimitive.Overlay className={styles["dialog-overlay"]} />
-      <DialogPrimitive.Content
-        {...props}
-        ref={node}
-        className={styles["dialog-content"]}
-        {...(maxwidth !== null ? { style: { maxWidth: maxwidth } } : {})}
-      >
+const Content = ({ title, children, maxWidth = "35rem" }: Props) => (
+  <DialogPrimitive.Portal>
+    <DialogPrimitive.Overlay className={style.overlay} />
+    <DialogPrimitive.Content className={style.position}>
+      <div className={style.content} style={{ maxWidth }}>
+        {typeof title !== "undefined" && (
+          <h2 className={style.heading}>{title}</h2>
+        )}
         {children}
-        <DialogPrimitive.Close
-          aria-label="Close"
-          className={styles["dialog-close"]}
-        />
-      </DialogPrimitive.Content>
-    </DialogPrimitive.Portal>
-  )
-}
+        <DialogPrimitive.Close aria-label="Close" className={style.close} />
+      </div>
+    </DialogPrimitive.Content>
+  </DialogPrimitive.Portal>
+)
 
-export const Dialog = DialogPrimitive.Root
-export const DialogTrigger = ({ children }) => (
+const Trigger = ({ children }) => (
   <DialogPrimitive.Trigger asChild>{children}</DialogPrimitive.Trigger>
 )
+
+type DialogType = React.FC & {
+  Content: typeof Content
+  Trigger: typeof Trigger
+}
+
+export const Dialog = DialogPrimitive.Root as DialogType
+Dialog.Content = Content
+Dialog.Trigger = Trigger

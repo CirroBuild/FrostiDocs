@@ -6,7 +6,8 @@ import style from "../../css/cloud/style.module.css"
 import Input from "@theme/Input"
 import Button from "@theme/Button"
 import emailPattern from "../../utils/emailPattern"
-import { ContactFormDialog } from "../../components/ContactFormDialog"
+import { Dialog } from "../../components/Dialog"
+import { ContactForm } from "./ContactForm"
 
 type Props = {
   className?: string
@@ -31,15 +32,16 @@ export const GetAccess = ({ className }: Props) => {
         pattern={emailPattern}
         onChange={handleChange}
       />
-      <ContactFormDialog
-        defaultInterest="cloud"
-        defaultEmail={email}
-        trigger={
+      <Dialog>
+        <Dialog.Trigger>
           <Button variant="primary" className={subscribeStyle.submit}>
             Get Access
           </Button>
-        }
-      />
+        </Dialog.Trigger>
+        <Dialog.Content title="Contact Us">
+          <ContactForm defaultOption="cloud" defaultEmail={email} />
+        </Dialog.Content>
+      </Dialog>
     </div>
   )
 }
