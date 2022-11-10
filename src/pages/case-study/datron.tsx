@@ -38,7 +38,7 @@ const DATRON = () => {
                 alt="DATRON logo"
                 className={juCss.jumbotron__logo}
                 height={56}
-                src="/img/pages/customers/logos/datron.svg"
+                src="/img/pages/customers/cards/datron.svg"
                 width={140}
               />
             </Button>

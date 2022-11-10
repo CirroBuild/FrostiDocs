@@ -309,8 +309,8 @@ const industrialTelemetryCustomers: Customer[] = [
     logoWidth: 120,
   },
   {
-    key: "sapient-industries",
-    logoWidth: 120,
+    key: "datron",
+    logoWidth: 90,
   },
   {
     key: "razor-secure",

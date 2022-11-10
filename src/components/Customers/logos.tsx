@@ -22,6 +22,7 @@ import synology from "../../../static/img/pages/customers/logos/synology.svg"
 import prediko from "../../../static/img/pages/customers/logos/prediko.svg"
 import electric_era from "../../../static/img/pages/customers/logos/electric-era.svg"
 import razor_secure from "../../../static/img/pages/customers/logos/razor_secure.svg"
+import datron from "../../../static/img/pages/customers/cards/datron.svg"
 
 const svgs = [
   {
@@ -111,6 +112,12 @@ const svgs = [
   {
     ...logosManifest.liveaction,
     svg: liveaction,
+  },
+
+  {
+    ...logosManifest.datron,
+    svg: datron,
+    width: 120,
   },
 ]
 

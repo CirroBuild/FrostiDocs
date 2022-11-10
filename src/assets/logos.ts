@@ -201,4 +201,10 @@ export const logos: Record<string, CustomerLogo> = {
     width: 100,
     height: 30,
   },
+  datron: {
+    src: "/img/pages/customers/cards/datron.svg",
+    alt: "Datron logo",
+    width: 144,
+    height: 56,
+  }
 }
