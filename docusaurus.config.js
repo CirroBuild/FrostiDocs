@@ -203,10 +203,9 @@ const config = {
           position: "left",
         },
         {
-          label: "We're Hiring",
-          to: "/careers/",
+          label: "Pricing",
+          to: "/pricing/",
           position: "left",
-          className: "careers-link",
         },
         {
           label: "Star us",
@@ -229,6 +228,10 @@ const config = {
             {
               label: "Enterprise",
               to: "/enterprise/",
+            },
+            {
+              label: "Pricing",
+              to: "/pricing/",
             },
             {
               label: "Use Cases",

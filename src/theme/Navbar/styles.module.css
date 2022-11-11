@@ -112,20 +112,8 @@
   border-color: #000;
 }
 
-:global(.navbar__item.careers-link) {
-  background: #313442;
-  color: #fff;
-  border-radius: 25px;
-  margin-left: 1.2rem;
-}
-
 :global(.dropdown__link) {
   font-size: 1rem;
-}
-
-:global(html[data-theme="light"] .navbar__link.careers-link) {
-  background: #fff;
-  color: #000;
 }
 
 .themeToggleInSidebar {
