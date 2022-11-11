@@ -15,32 +15,57 @@ working with time zones in QuestDB.
 ## Timestamps in QuestDB
 
 The native timestamp format used by QuestDB is a Unix timestamp in microsecond
-resolution. QuestDB does not store time zone information alongside timestamp
-values and therefore it should be assumed that all timestamps are in UTC. The
-following example shows how a Unix timestamp in microseconds may be passed into
-a timestamp column directly:
+resolution. Although timestamps in nanoseconds will be parsed, the output will
+be truncated to microseconds. QuestDB does not store time zone information
+alongside timestamp values and therefore it should be assumed that all
+timestamps are in UTC.
+
+The following example shows how a Unix timestamp in microseconds may be passed
+into a timestamp column directly:
 
 ```questdb-sql
-CREATE TABLE my_table (ts timestamp, col1 int) timestamp(ts)
-INSERT INTO my_table VALUES(1623167145123456, 12)
-my_table
+CREATE TABLE my_table (ts timestamp, col1 int) timestamp(ts);
+INSERT INTO my_table VALUES(1623167145123456, 12);
+my_table;
 ```
 
-|ts                         |col1|
-|:--------------------------|:---|
-|2021-06-08T15:45:45.123456Z|12  |
+| ts                          | col1 |
+| :-------------------------- | :--- |
+| 2021-06-08T15:45:45.123456Z | 12   |
 
-Timestamps may also inserted as strings in the following way:
+Timestamps may also be inserted as strings in the following way:
 
 ```questdb-sql
-INSERT INTO my_table VALUES('2021-06-08T16:45:45.123456Z', 13)
-my_table
+INSERT INTO my_table VALUES('2021-06-08T16:45:45.123456Z', 13);
+my_table;
 ```
 
-|ts                         |col1|
-|:--------------------------|:---|
-|2021-06-08T15:45:45.123456Z|12  |
-|2021-06-08T16:45:45.123456Z|13  |
+| ts                          | col1 |
+| :-------------------------- | :--- |
+| 2021-06-08T15:45:45.123456Z | 12   |
+| 2021-06-08T16:45:45.123456Z | 13   |
+
+When inserting timestamps into a table, it is also possible to use
+[timestamp units](/docs/reference/function/date-time/#date-and-timestamp-format)
+to define the timestamp format, in order to process trailing zeros in exported
+data sources such as PostgreSQL:
+
+```questdb-sql
+INSERT INTO my_table VALUES(to_timestamp('2021-06-09T16:45:46.123456789', 'yyyy-MM-ddTHH:mm:ss.N+'), 14);
+-- Passing 9-digit nanosecond into QuestDB, this is equal to:
+
+INSERT INTO my_table VALUES(to_timestamp('2021-06-10T16:45:46.123456789', 'yyyy-MM-ddTHH:mm:ss.SSSUUUN'), 14);
+
+my_table;
+```
+
+The output maintains microsecond resolution:
+
+| ts                          | col1 |
+| :-------------------------- | :--- |
+| 2021-06-08T15:45:45.123456Z | 12   |
+| 2021-06-08T16:45:45.123456Z | 13   |
+| 2021-06-09T16:45:46.123456Z | 14   |
 
 ## QuestDB's internal time zone database
 
@@ -53,9 +78,9 @@ from time zones.
 For this reason, a time zone may be referenced by abbreviated name, by full time
 zone name or by UTC offset:
 
-|Abbreviation|Time zone name  |UTC offset|
-|:-----------|:---------------|:---------|
-|EST         |America/New_York|-05:00    |
+| Abbreviation | Time zone name   | UTC offset |
+| :----------- | :--------------- | :--------- |
+| EST          | America/New_York | -05:00     |
 
 ### Referring to time zones
 
@@ -129,17 +154,17 @@ cast to timestamp as follows:
 SELECT to_timezone(1623167145000000, 'Europe/Berlin')
 ```
 
-|to_timezone                |
-|:--------------------------|
-|2021-06-08T17:45:45.000000Z|
+| to_timezone                 |
+| :-------------------------- |
+| 2021-06-08T17:45:45.000000Z |
 
 ```questdb-sql
 SELECT to_utc(1623167145000000, 'Europe/Berlin')
 ```
 
-|to_utc                     |
-|:--------------------------|
-|2021-06-08T13:45:45.000000Z|
+| to_utc                      |
+| :-------------------------- |
+| 2021-06-08T13:45:45.000000Z |
 
 ### Using UTC offset for conversions
 
@@ -154,14 +179,14 @@ converts it to a time zone `+2` hours offset from UTC:
 SELECT to_timezone(1213086329000000, '+02:00')
 ```
 
-|to_timezone                |
-|:--------------------------|
-|2008-06-10T10:25:29.000000Z|
+| to_timezone                 |
+| :-------------------------- |
+| 2008-06-10T10:25:29.000000Z |
 
 ```questdb-sql
 SELECT to_utc('2008-06-10T10:25:29.000000Z', '+02:00')
 ```
 
-|to_timezone                |
-|:--------------------------|
-|2008-06-10T08:25:29.000000Z|
+| to_timezone                 |
+| :-------------------------- |
+| 2008-06-10T08:25:29.000000Z |

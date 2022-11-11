@@ -986,6 +986,10 @@ The date and timestamp format is formed by units and arbitrary text. A unit is a
 combination of letters representing a date or time component, as defined by the
 table below. The letters used to form a unit are case-sensitive.
 
+See
+[Timestamps in QuestDB](/docs/guides/working-with-timestamps-timezones/#timestamps-in-questdb)
+for more examples of how the units are used to parse inputs.
+
 | Unit   | Date or Time Component                                                                                         | Presentation       | Examples                              |
 | ------ | -------------------------------------------------------------------------------------------------------------- | ------------------ | ------------------------------------- |
 | `G`    | Era designator                                                                                                 | Text               | AD                                    |
@@ -1015,7 +1019,9 @@ table below. The letters used to form a unit are case-sensitive.
 | `X`    | Time zone                                                                                                      | ISO 8601 time zone | -08; -0800; -08:00                    |
 | `UUU`  | 3-digit microsecond                                                                                            | Number             | 698                                   |
 | `U`    | Microsecond up to 3 digits: `U` parses 1 digit when followed by another `unit`. Otherwise, it parses 3 digits. | Number             | 600                                   |
-| `N`    | Nanosecond                                                                                                     | Number             | 125                                   |
+| `U+`   | 6-digit microsecond                                                                                            | Number             | 600                                   |
+| `N`    | Nanosecond. QuestDB provides microsecond resolution so the parsed nanosecond will be truncated.                | Number             | N/A (truncated)                       |
+| `N+`   | 9-digit nanosecond. QuestDB provides microsecond resolution so the parsed nanosecond will be truncated.        | Number             | N/A (truncated)                       |
 
 ### Examples for greedy year format `y`
 
@@ -1031,9 +1037,3 @@ The interpretation of `y` depends on the input digit number:
 | `05-03`    | `2005-03-01T00:00:00.000000Z`        | Greedily parsing the number assuming current century |
 | `005-03`   | `0005-03-01T00:00:00.000000Z`        | Greedily parsing the number as it is                 |
 | `0005-03`  | `0005-03-01T00:00:00.000000Z`        | Greedily parsing the number as it is                 |
-
-### See also
-
-- [to_timestamp](#to_timestamp)
-- [to_date](#to_date)
-- [to_str](#to_str)
