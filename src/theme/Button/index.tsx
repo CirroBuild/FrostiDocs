@@ -15,6 +15,7 @@ export type Props = Readonly<{
   type?: "button" | "submit"
   uppercase: boolean
   variant: "primary" | "secondary" | "tertiary" | "plain"
+  disabled?: boolean
 }>
 
 const Button = ({
@@ -29,6 +30,7 @@ const Button = ({
   type,
   uppercase,
   variant,
+  disabled,
 }: Props) => {
   const classes = clsx(className, styles.button, {
     [styles["button--icon"]]: icon != null,
@@ -46,8 +48,12 @@ const Button = ({
     return (
       <a
         className={classes}
-        href={href}
-        onClick={onClick}
+        {...(disabled ?? false
+          ? {}
+          : {
+              href,
+              onClick,
+            })}
         {...(newTab
           ? {
               rel: "noopener noreferrer",
@@ -71,7 +77,12 @@ const Button = ({
   }
 
   return (
-    <button className={classes} onClick={onClick} type={type ?? "button"}>
+    <button
+      disabled={disabled}
+      className={classes}
+      onClick={onClick}
+      type={type ?? "button"}
+    >
       {icon}
       {children}
     </button>

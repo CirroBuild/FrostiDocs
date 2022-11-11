@@ -9,13 +9,14 @@ import { Screenshot } from "./screenshot"
 import styled from "styled-components"
 import { GetAccess } from "../get-access"
 import localStyle from "./styles.module.css"
+import customFields from "../../../config/customFields"
 
 const screenPath = (screen: string) => `/img/pages/cloud/screens/${screen}.png`
 
 const screenshots = [
   { src: screenPath("instances"), position: { top: 50, left: 0 } },
-  { src: screenPath("snapshots"), position: { top: 280, left: 50 } },
-  { src: screenPath("connect-go"), position: { top: 170, right: -100 } },
+  { src: screenPath("snapshots"), position: { top: 200, left: "15%" } },
+  { src: screenPath("connect-go"), position: { top: 100, right: 0 } },
 ]
 
 const Cards = styled.div`
@@ -46,16 +47,14 @@ export const Top = () => {
         The fastest open source time series database fully managed on the cloud.
       </Section.Subtitle>
 
-      <GetAccess className={localStyle.getAccess} />
-
       <Section noGap center>
         <div className={localStyle.topScreens}>
           {screenshots.map(({ src, position }) => (
             <Screenshot
               className={localStyle.screenshot}
               key={src}
-              width={679}
-              height={439}
+              width={543}
+              height={351}
               src={src}
               style={position}
             />
@@ -65,6 +64,8 @@ export const Top = () => {
         <Cards>
           <div className={flCss.flashy}>
             <h3 className={flCss.flashy__title}>Open source</h3>
+            <p>Install QuestDB on your server for free.</p>
+
             <ul className={style.card__list}>
               {["Free", "Apache 2.0 License", "Self-hosting"].map((item) => (
                 <li
@@ -76,18 +77,19 @@ export const Top = () => {
               ))}
             </ul>
 
-            <Button
-              variant="primary"
-              href="/get-questdb"
-              className={style.card__button}
-              newTab={false}
-            >
-              Install
-            </Button>
+            <div className={localStyle.cardButtons}>
+              <Button variant="tertiary" href={customFields.demoUrl}>
+                Live Demo
+              </Button>
+              <Button variant="primary" href="/get-questdb" newTab={false}>
+                Install
+              </Button>
+            </div>
           </div>
 
           <div className={flCss.flashy}>
             <h3 className={flCss.flashy__title}>Cloud</h3>
+            <p>Use a fully managed cloud solution.</p>
             <ul className={style.card__list}>
               {[
                 "Database-as-a-service",
@@ -105,13 +107,12 @@ export const Top = () => {
               ))}
             </ul>
 
-            <Button
-              variant="primary"
-              className={style.card__button}
-              to="/cloud/book-a-demo"
-            >
-              Schedule a call
-            </Button>
+            <div className={localStyle.cardButtons}>
+              <Button variant="tertiary" to="/pricing" newTab={false}>
+                Pricing
+              </Button>
+              <GetAccess />
+            </div>
           </div>
         </Cards>
       </Section>

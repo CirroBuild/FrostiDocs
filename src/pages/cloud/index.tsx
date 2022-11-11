@@ -17,9 +17,14 @@ const CloudPage = () => (
     <Top />
     <CompareFeatures />
 
-    <Section>
-      <Section.Subtitle center>Ready to get started?</Section.Subtitle>
-      <GetAccess />
+    <Section fullWidth>
+      <Section.Title size="small" center>
+        Ready to get started?
+      </Section.Title>
+
+      <Section noGap center>
+        <GetAccess />
+      </Section>
     </Section>
 
     <Section>

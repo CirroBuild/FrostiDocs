@@ -28,7 +28,13 @@
   border-bottom: 1px solid #515466;
 }
 
+.root tbody td:first-child {
+  text-align: left;
+  width: var(--first-col-width);
+}
+
 .root tbody td {
+  height: 3rem;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -40,11 +46,6 @@
   .root {
     --row-title-font-size: var(--font-size-large);
   }
-}
-
-.root tbody td:first-child {
-  text-align: left;
-  width: var(--first-col-width);
 }
 
 .availableNew {
@@ -89,4 +90,8 @@
 
 .link:hover {
   cursor: default;
+}
+
+.comingSoon {
+  font-size: 0.9rem;
 }

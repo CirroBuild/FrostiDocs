@@ -40,7 +40,7 @@ const Availability = ({ status }: { status: Status }) => {
     case "not-applicable":
       return <span>-</span>
     case "coming-soon":
-      return <span>Coming soon</span>
+      return <span className={style.comingSoon}>Coming soon</span>
     case "contact-us":
       return (
         <Dialog>
@@ -48,7 +48,7 @@ const Availability = ({ status }: { status: Status }) => {
             <span className={style.link}>Contact us</span>
           </Dialog.Trigger>
           <Dialog.Content title="Contact Us">
-            <ContactForm defaultOption="sla" />
+            <ContactForm interestedIn="sla" />
           </Dialog.Content>
         </Dialog>
       )

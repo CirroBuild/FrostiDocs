@@ -8,14 +8,8 @@ import { Dialog } from "../../../components/Dialog"
 import { ContactForm } from "../../cloud/ContactForm"
 import { Provider } from "./provider"
 import { Dropdown } from "./dropdown"
-import { plans } from "../plans/plans"
 import { regions } from "../pricing-table/specs"
 import type { RegionKey } from "../pricing-table/specs"
-
-const contactFormChoices = [
-  ...plans.map(({ type, title }) => ({ type, label: title })),
-  { type: "custom", label: "Custom plan" },
-]
 
 export const PricingChoices = () => {
   const awsImg = useBaseUrl("img/pages/enterprise/aws.png")
@@ -88,7 +82,7 @@ export const PricingChoices = () => {
             <Button uppercase={false}>Contact Us</Button>
           </Dialog.Trigger>
           <Dialog.Content>
-            <ContactForm options={contactFormChoices} defaultOption="custom" />
+            <ContactForm interestedIn="custom" />
           </Dialog.Content>
         </Dialog>
       </div>

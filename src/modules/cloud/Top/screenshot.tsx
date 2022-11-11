@@ -18,7 +18,7 @@ const Root = styled.div<{
     background: #2f313c url(${headerButtonsImgPath}) top left no-repeat;
     background-size: auto ${headHeight}px;
     box-shadow: ${isDarkTheme
-      ? `0 10px 30px 5px rgba(0, 0, 0, 1);`
+      ? `0 15px 20px 0 rgba(0, 0, 0, 0.7);`
       : `0 0 20px 0 rgba(0, 0, 0, 0.6);`};
   `};
 `

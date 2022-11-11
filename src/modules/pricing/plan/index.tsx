@@ -6,7 +6,6 @@ import clsx from "clsx"
 
 import { Dialog } from "../../../components/Dialog"
 import { ContactForm } from "../../cloud/ContactForm"
-import { plans } from "../plans/plans"
 
 export type PricingPlan = {
   type: "entry" | "performant" | "high-performance"
@@ -17,11 +16,6 @@ export type PricingPlan = {
   subtext: string
   highlighted?: boolean
 }
-
-const contactFormChoices = plans.map(({ type, title }) => ({
-  type,
-  label: title,
-}))
 
 export const Plan = (plan: PricingPlan) => (
   <article className={style.root}>
@@ -54,12 +48,8 @@ export const Plan = (plan: PricingPlan) => (
         <Dialog.Trigger>
           <Button size="small">Get Access</Button>
         </Dialog.Trigger>
-        <Dialog.Content title="Get Access">
-          <ContactForm
-            optionsLabel="What plan would you like to start with?"
-            options={contactFormChoices}
-            defaultOption={plan.type}
-          />
+        <Dialog.Content title="Join Public Preview">
+          <ContactForm interestedIn={plan.type} />
         </Dialog.Content>
       </Dialog>
     </div>

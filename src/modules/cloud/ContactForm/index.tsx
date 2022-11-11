@@ -5,31 +5,15 @@ import Button from "@theme/Button"
 import emailPattern from "../../../utils/emailPattern"
 import subscribeStyle from "../../../components/Subscribe/style.module.css"
 import style from "./styles.module.css"
+import clsx from "clsx"
+import type { PricingPlan } from "../../pricing/plan"
 
 type Props = {
-  options?: Array<{ type: string; label: string }>
-  optionsLabel?: string
-  defaultOption: Props["options"] extends Array<Props["options"]>
-    ? Props["options"][number]["type"]
-    : string
-  defaultName?: string
+  interestedIn?: PricingPlan["type"] | "custom" | "cloud" | "sla"
   defaultEmail?: string
-  defaultCompany?: string
 }
 
-const defaultOptions: Props["options"] = [
-  { type: "cloud", label: "QuestDB Cloud demo" },
-  { type: "sla", label: "Support with SLAs" },
-]
-
-export const ContactForm = ({
-  options = defaultOptions,
-  defaultOption,
-  optionsLabel = "What are you interested in?",
-  defaultName = "",
-  defaultEmail = "",
-  defaultCompany = "",
-}: Props) => {
+export const ContactForm = ({ defaultEmail = "", interestedIn }: Props) => {
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
 
@@ -41,9 +25,7 @@ export const ContactForm = ({
     const formData = new FormData(event.target as HTMLFormElement)
     const payload = {
       email: formData.get("email"),
-      name: formData.get("name"),
-      company: formData.get("company"),
-      interestedIn: formData.get("interested_in"),
+      interestedIn: formData.get("interestedIn"),
     }
 
     try {
@@ -70,58 +52,52 @@ export const ContactForm = ({
               Thank you, we will be in touch soon!
             </p>
           ) : (
-            <div className={style.inputs}>
-              <Input
-                className={subscribeStyle.input}
-                name="name"
-                defaultValue={defaultName}
-                type="text"
-                placeholder="Name"
-              />
-
-              <Input
-                className={subscribeStyle.input}
-                name="email"
-                defaultValue={defaultEmail}
-                type="email"
-                title="Email address should be valid"
-                placeholder="E-mail*"
-                required
-                pattern={emailPattern}
-              />
-
-              <Input
-                className={subscribeStyle.input}
-                name="company"
-                defaultValue={defaultCompany}
-                type="text"
-                placeholder="Company"
-              />
-
-              <h4>{optionsLabel}</h4>
-
-              <div className={style.radios}>
-                {options?.map((option) => (
-                  <label key={option.type}>
-                    <input
-                      type="radio"
-                      name="interested_in"
-                      value={option.type}
-                      defaultChecked={defaultOption === option.type}
-                    />
-                    {option.label}
-                  </label>
-                ))}
-              </div>
+            <div className={style.content}>
+              {typeof interestedIn === "string" && (
+                <input type="hidden" name="interestedIn" value={interestedIn} />
+              )}
 
               <p>
-                You will be added to our user database and signed up for our
-                product newsletter.
+                QuestDB Cloud is in public preview, available by invitation.
               </p>
 
-              <Button className={style.submit} variant="primary" type="submit">
-                {loading ? <span className={style.loader} /> : "Send"}
+              <p>Book a demo with us and get started</p>
+              <Button
+                className={style.bookDemoButton}
+                variant="primary"
+                href="/cloud/book-a-demo/"
+                newTab={false}
+              >
+                Book a Demo
               </Button>
+
+              <p>
+                alternatively, register for updates and get notified for general
+                availability
+              </p>
+
+              <div className={style.submitBlock}>
+                <Input
+                  className={clsx(subscribeStyle.input, style.input)}
+                  name="email"
+                  defaultValue={defaultEmail}
+                  type="email"
+                  title="Email address should be valid"
+                  placeholder="E-mail*"
+                  required
+                  pattern={emailPattern}
+                />
+
+                <Button
+                  className={clsx(style.submit, { [style.loader]: loading })}
+                  disabled={loading}
+                  variant="primary"
+                  type="submit"
+                  size="xsmall"
+                >
+                  {loading ? "Sending..." : "Send"}
+                </Button>
+              </div>
             </div>
           )}
         </CSSTransition>
