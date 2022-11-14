@@ -436,10 +436,34 @@ const Customer = () => {
         <div className={caCss.card}>
           <div className={caCss.card__illustration}>
             <img
-              alt="An photo of a cellphone with the Turk Telekom logo"
-              src="/img/pages/case-study/turk-telekom/card.png"
+              alt="A CNC milling machine built by DATRON"
+              height={360}
+              src="/img/pages/case-study/datron/summary.png"
+              width={640}
             />
           </div>
+          <p className={caCss.card__summary}>
+            <img
+              alt="Datron logo"
+              className={caCss.card__logo}
+              height={24}
+              src="/img/pages/customers/cards/datron.svg"
+              width={124}
+            />
+            “QuestDB offers new possibilities while reducing costs and
+            simplifying data analysis.”
+            <em className={caCss.card__author}>
+              - <strong>Tim Borowski</strong>, DATRON
+            </em>
+            <Button className={caCss.card__cta} to="/case-study/datron/">
+              View full case study
+            </Button>
+          </p>
+        </div>
+      </section>
+
+      <section className={clsx(seCss.section, seCss["section--inner"])}>
+        <div className={caCss.card}>
           <p className={caCss.card__summary}>
             <img
               alt="Türk Telekom logo"
@@ -459,6 +483,12 @@ const Customer = () => {
               View full case study
             </Button>
           </p>
+          <div className={caCss.card__illustration}>
+            <img
+              alt="An photo of a cellphone with the Turk Telekom logo"
+              src="/img/pages/case-study/turk-telekom/card.png"
+            />
+          </div>
         </div>
       </section>
     </Layout>
