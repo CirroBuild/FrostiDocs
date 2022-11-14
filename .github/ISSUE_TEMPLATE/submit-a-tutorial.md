@@ -10,8 +10,7 @@ assignees: ""
 
 Hi 👋, thank you for submitting a tutorial to QuestDB!
 
-Don't forget to replace the title of this issue with a short
-sentence that describes the topic of your tutorial!
+Please use this template to elaborate on your idea and our team will reach out to you once the proposal is reviewed.
 
 -->
 
@@ -19,17 +18,21 @@ sentence that describes the topic of your tutorial!
 
 Use this section to give a description of what your tutorial is about.
 
-Examples:
+- Title:
+- Who is this tutorial for:
 
-> I would like to write a tutorial that shows how to use QuestDB:
->
-> - "for storing IoT sensor data..."
-> - "for creating data visualizations..."
-> - "with an ML library..."
-> - "for monitoring an application..."
+Please select or describe the audience your proposal targets in terms of
+readers' familiarity with QuestDB:
 
-Are there any particular tools, concepts, languages or platforms that readers
-will learn about?
+- [ ] QuestDB users
+- [ ] Those interested in time series databases
+- [ ] Those not aware of time series databases yet
+- [ ] Others:
+
+- Outline:
+
+- Are there any particular tools, concepts, languages or platforms that readers
+  will learn about?
 
 💡 ...
 

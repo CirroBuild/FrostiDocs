@@ -58,24 +58,45 @@ yarn serve
 
 # Contributing
 
-Feel free to contribute to the project by forking the repository and submitting
-pull requests.
+We are always happy to have contributions to the project whether it is
+documentation, bug reports, blog posts, or feedback. To get started with
+contributing:
+
+- Have a look through
+  [GitHub issues](https://github.com/questdb/questdb.io/issues).
+- Read this section for guidelines.
+- For blog posts, follow
+  [blog guidelines](blog/__guidelines/blog_contribution.md)
+- Create a [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
+  of questdb.io and submit a pull request with your proposed changes.
+
+## Bugs and features
+
+Raise a [GH issue](https://github.com/questdb/questdb.io/issues/new/choose) for
+bug report, update request, or tutorial proposal using the respective template.
 
 ## Guidelines
 
-Consult the
-[guidelines](https://github.com/questdb/questdb.io/blob/master/docs/__guidelines/markdown.md).
+Check the following guides to ensure that your submission is consistent to our
+style:
 
-## Lexicon
-
-Consult the
-[lexicon](https://github.com/questdb/questdb.io/blob/master/docs/__guidelines/lexicon.md)
-for terminology we commonly use
+- [Markdown guidelines](https://github.com/questdb/questdb.io/blob/master/docs/__guidelines/markdown.md)
+- [Lexicon](https://github.com/questdb/questdb.io/blob/master/docs/__guidelines/lexicon.md)
+- [Naming convention](https://github.com/questdb/questdb.io/blob/master/docs/__guidelines/naming-convention.md)
+- [Code blocks](https://github.com/questdb/questdb.io/blob/master/docs/__guidelines/sql-code-blocks.md)
 
 ## Commits
 
 The commit messages must follow the
 [Conventional Commits](https://conventionalcommits.org/) spec.
+
+## Templates
+
+To ensure consistency across the document, please follow the templates for:
+
+- [Function](https://github.com/questdb/questdb.io/blob/master/docs/__guidelines/template/function.md)
+- [SQL keyword](https://github.com/questdb/questdb.io/blob/master/docs/__guidelines/template/sql.md)
+- [Blog](blog/__guidelines/template/blog.md)
 
 # Code Quality
 
@@ -97,3 +118,9 @@ hooks.
 
 On every `git commit` we check that images added to `static/img/*` do not exceed
 10MB.
+
+## Legal Notice
+
+When contributing to this project, you must agree that you have authored 100% of
+the content, that you have the necessary rights to the content and that the
+content you contribute may be provided under the project license.

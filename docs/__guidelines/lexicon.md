@@ -8,7 +8,8 @@ Please refer to these terms using the **exact** same casing.
 
 - InfluxDB line protocol
 - Embedded Java API
-- Postgres wire protocol
+- PostgreSQL wire protocol
+- PGWire
 - REST API (not HTTP API)
 - Web Console
 
