@@ -200,7 +200,7 @@ export const QueryScroller = () => {
               </h3>
               <p className={shCss.showcase__description}>
                 Search time series from most recent values to oldest with
-                “LATEST BY”
+                “LATEST ON”
               </p>
             </div>
             <div
