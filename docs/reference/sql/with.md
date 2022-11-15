@@ -4,9 +4,12 @@ sidebar_label: WITH
 description: WITH SQL keyword reference documentation.
 ---
 
-Name one or several sub-queries to be used within the main query.
+Supports Common Table Expressions (CTEs), e.i., naming one or several
+sub-queries to be used with a [`SELECT`](/docs/reference/sql/select/),
+[`INSERT`](/docs/reference/sql/insert/), or
+[`UPDATE`](/docs/reference/sql/update/) query.
 
-This clause makes it easy to simplify large or complex statements which involve
+Using a CTE makes it easy to simplify large or complex statements which involve
 sub-queries, particularly when such sub-queries are used several times.
 
 ## Syntax
@@ -15,10 +18,8 @@ sub-queries, particularly when such sub-queries are used several times.
 
 Where:
 
-- `subQueryName` is the alias for the sub-query
+- `alias` is the name given to the sub-query for ease of reusing
 - `subQuery` is a SQL query (e.g `SELECT * FROM table`)
-- `mainQuery` is the main SQL query which involves the `subQuery` using its
-  alias.
 
 ## Examples
 
@@ -37,4 +38,26 @@ SELECT user_name FROM first_5_users;
 WITH avg_distance AS (SELECT avg(trip_distance) average FROM trips)
 SELECT pickup_datetime, trips.trip_distance > avg_distance.average longer_than_average
 FROM trips CROSS JOIN avg_distance;
+```
+
+```questdb-sql title="Update with a sub-query"
+WITH up AS (
+    SELECT symbol, spread, ts
+    FROM temp_spreads
+    WHERE timestamp between '2022-01-02' and '2022-01-03'
+)
+UPDATE spreads s
+SET spread = up.spread
+FROM up
+WHERE up.ts = s.ts AND s.symbol = up.symbol;
+```
+
+```questdb-sql title="Insert with a sub-query"
+WITH up AS (
+    SELECT symbol, spread, ts
+    FROM temp_spreads
+    WHERE timestamp between '2022-01-02' and '2022-01-03'
+)
+INSERT INTO spreads
+SELECT * FROM up;
 ```

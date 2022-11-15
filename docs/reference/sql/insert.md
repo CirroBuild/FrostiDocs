@@ -8,18 +8,37 @@ Inserts data into a database table.
 
 ## Syntax
 
+Inserting values directly or using sub-queries:
+
 ![Flow chart showing the syntax of the INSERT keyword](/img/docs/diagrams/insert.svg)
 
-### Parameters
+Inserting using sub-query alias:
 
-Two parameters may be provided to optimize `INSERT AS SELECT` queries when
-inserting out-of-order records into an ordered dataset:
+![Flow chart showing the syntax of the WITH AS INSERT keyword](/img/docs/diagrams/withAsInsert.svg)
 
-- `batch` expects a `batchCount` (integer) value how many records to process at
-  any one time
-- `commitLag` expects a `lagAmount` with a modifier to specify the unit of time
-  for the value (i.e. `20s` for 20 seconds). The following table describes the
-  units that may be passed:
+### Description
+
+Inserting values directly or using sub-queries:
+
+- `VALUE`: Directly defines the values to be inserted.
+- `SELECT`: Inserts values based on the result of a
+  [SELECT](/docs/reference/sql/select/) query
+
+Setting sub-qeury alias:
+
+- `WITH AS`: Inserts values based on a subu-query, to which an alias is given by
+  using [WITH](/docs/reference/sql/with/).
+
+#### Parameters
+
+Two parameters may be provided to optimize `INSERT AS SELECT` or `WITH AS`
+queries when inserting out-of-order records into an ordered dataset:
+
+- `batch` expects a `batchCount` (integer) value defining how many records to
+  process at any one time.
+- `commitLag` expects a `lagAmount` with a modifier to specify the time unit for
+  the value (i.e. `20s` for 20 seconds). The following table describes the units
+  that may be used:
 
   | unit | description  |
   | ---- | ------------ |
@@ -62,7 +81,7 @@ VALUES(
 
 :::note
 
-Columns can be omitted during `INSERT` in which case value will be `NULL`
+Columns can be omitted during `INSERT` in which case the value will be `NULL`
 
 :::
 
@@ -82,6 +101,18 @@ INSERT INTO confirmed_trades
     WHERE trade_id = '47219345234';
 ```
 
+Using the [`WITH` keyword](/docs/reference/sql/with/) to set up an alias for a
+`SELECT` sub-query:
+
+```questdb-sql title="Insert with sub-query"
+WITH confirmed_id AS (
+    SELECT * FROM unconfirmed_trades
+    WHERE trade_id = '47219345234'
+    )
+INSERT INTO confirmed_trades
+SELECT * FROM confirmed_id;
+```
+
 Inserting out-of-order data into an ordered dataset may be optimized using
 `batch` and `commitLag` parameters:
 
@@ -93,15 +124,8 @@ FROM unordered_trades
 
 :::info
 
-- Using the lag and batch size parameters during `INSERT AS SELECT` statements is a convenient strategy to load and order large datasets from CSV in bulk. This strategy along with an example workflow is described in the [importing data guide](/docs/guides/importing-data).
-
-- More details on ingesting out-of-order data with context on _lag_ and
-  uncommitted record count see the guide for
-  [configuring commit lag of out-of-order data](/docs/guides/out-of-order-commit-lag)
-
-- Hints and an example workflow using `INSERT AS SELECT` for bulk CSV import of
-  out-of-order data can be found on the
-  [importing data via CSV](/docs/guides/importing-data#large-datasets-with-out-of-order-data)
-  documentation.
+More details on ingesting out-of-order data with context on _lag_ and
+uncommitted record count see the guide for
+[configuring commit lag of out-of-order data](/docs/guides/out-of-order-commit-lag)
 
 :::

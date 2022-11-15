@@ -12,8 +12,10 @@ Updates data in a database table.
 
 :::note
 
-- the same `columnName` cannot be specified multiple times after the SET keyword as it would be ambiguous
-- the designated timestamp column cannot be updated as it would lead to altering history of the time series data
+- the same `columnName` cannot be specified multiple times after the SET keyword
+  as it would be ambiguous
+- the designated timestamp column cannot be updated as it would lead to altering
+  history of the time series data
 
 :::
 
@@ -32,20 +34,20 @@ UPDATE spreads s SET s.spread = p.ask - p.bid FROM prices p WHERE s.symbol = p.s
 ```
 
 ```questdb-sql title="Update with multiple joins"
-UPDATE spreads s 
-SET s.spread = p.ask - p.bid 
-FROM prices p 
+UPDATE spreads s
+SET s.spread = p.ask - p.bid
+FROM prices p
 JOIN instruments i ON p.symbol = i.symbol
 WHERE s.timestamp = p.timestamp AND i.type = 'BOND';
 ```
 
-```questdb-sql title="Update with Common Table Expression"
+```questdb-sql title="Update with a sub-query"
 WITH up AS (
     SELECT symbol, spread, ts
     FROM temp_spreads
-    WHERE timestamp between '2022-01-02' and '2022-01-03' 
+    WHERE timestamp between '2022-01-02' and '2022-01-03'
 )
-UPDATE spreads s 
+UPDATE spreads s
 SET spread = up.spread
 FROM up
 WHERE up.ts = s.ts AND s.symbol = up.symbol;

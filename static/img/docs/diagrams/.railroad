@@ -37,12 +37,15 @@ indexDef
 insertInto
   ::= 'INSERT' ('batch' batchCount 'commitLag' n ( 'us' | 's' | 'm' | 'h' | 'd' ))?
   'INTO' tableName ( ( '(' columnName (',' columnName)*) ')')?
-  ( 'VALUES' ( ( '(' value ( ',' value)* ')' ) (',' '(' value ( ',' value)* ')' )* ) | 'SELECT' queryDef )
+  ( 'VALUES' ( ( '(' value ( ',' value)* ')' ) (',' '(' value ( ',' value)* ')' )* ) | 'SELECT' queryDef mainQuery )
   ';'
+
+withAsInsert
+  ::= ( 'WITH' subQueryName 'AS' '(' subQuery ')' ( ',' subQueryName 'AS' '(' subQuery ')' )* )? 
+  'INSERT' ( 'batch' batchCount 'commitLag' n ( 'us' | 's' | 'm' | 'h' | 'd' ) )? 'INTO' tableName 'SELECT' queryDef subQueryName ';'
 
 Backup
   ::= 'BACKUP' ( 'TABLE' tableName ( ',' tableName )* | 'DATABASE' ) ';'
-
 Snapshot
   ::= 'SNAPSHOT' ( 'PREPARE' | 'COMPLETE' ) ';'
 
