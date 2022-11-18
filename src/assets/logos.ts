@@ -70,7 +70,7 @@ export const logos: Record<string, CustomerLogo> = {
   },
   toggle: {
     src: "/img/pages/customers/logos/toggle.svg",
-    alt: "Toggle",
+    alt: "Toggle.ai logo",
     width: 140,
     height: 56,
   },
@@ -206,5 +206,5 @@ export const logos: Record<string, CustomerLogo> = {
     alt: "Datron logo",
     width: 144,
     height: 56,
-  }
+  },
 }
