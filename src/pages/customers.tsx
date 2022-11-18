@@ -88,6 +88,42 @@ type Customer = {
 
 const customers: Customer[] = [
   {
+    id: "central-group",
+    logo: {
+      ...logos["central-group"],
+      width: 200,
+      height: 20,
+    },
+    summary:
+      "QuestDB is the core engine driving real-time analytics data for Central Group, the largest retail company in Asia.",
+    image: {
+      alt: "Central Group logo",
+      src: "/img/pages/case-study/central-group/header.jpg",
+      width: 225,
+    },
+  },
+
+  {
+    id: "aquis",
+    logo: {
+      ...logos["aquis-exchange"],
+      height: 50,
+      width: 140,
+    },
+    summary:
+      "“QuestDB is a time series database truly built by developers for developers. We found that QuestDB provides a unicorn solution to handle extreme transactions per second while also offering a simplified SQL programming interface.”",
+    quote: {
+      author: "Viet Lee",
+      position: "CTO, Aquis",
+    },
+    image: {
+      alt: "Aquis logo",
+      src: "/img/pages/case-study/aquis/summary.jpg",
+      width: 525,
+    },
+  },
+
+  {
     id: "prediko",
     logo: {
       ...logos.prediko,
@@ -122,42 +158,6 @@ const customers: Customer[] = [
     image: {
       alt: "Copenhagen Atomics",
       src: "/img/pages/case-study/copenhagen-atomics/banner.png",
-    },
-  },
-
-  {
-    id: "central-group",
-    logo: {
-      ...logos["central-group"],
-      width: 200,
-      height: 20,
-    },
-    summary:
-      "QuestDB is the core engine driving real-time analytics data for Central Group, the largest retail company in Asia.",
-    image: {
-      alt: "Central Group logo",
-      src: "/img/pages/case-study/central-group/header.jpg",
-      width: 225,
-    },
-  },
-
-  {
-    id: "aquis",
-    logo: {
-      ...logos["aquis-exchange"],
-      height: 50,
-      width: 140,
-    },
-    summary:
-      "“QuestDB is a time series database truly built by developers for developers. We found that QuestDB provides a unicorn solution to handle extreme transactions per second while also offering a simplified SQL programming interface.”",
-    quote: {
-      author: "Viet Lee",
-      position: "CTO, Aquis",
-    },
-    image: {
-      alt: "Aquis logo",
-      src: "/img/pages/case-study/aquis/summary.jpg",
-      width: 525,
     },
   },
 
