@@ -160,7 +160,7 @@ const Prediko = () => {
           <h3>About the team</h3>
 
           <p className="font-size--large">
-            The founders of <a href="https://www.prediko.com/">Prediko</a>{" "}
+            The founders of <a href="https://prediko.io/">Prediko</a>{" "}
             spotted a gap in the market, where numerous omnichannel commerce
             businesses still plan their inventory on excel spreadsheets. Unlike
             large retail companies, small retailers and e-commerce businesses do
