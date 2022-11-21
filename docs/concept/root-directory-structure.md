@@ -29,13 +29,16 @@ By default, QuestDB's root directory will be the following:
 
 <TabItem value="nix">
 
+
 ```shell
 $HOME/.questdb
 ```
 
 </TabItem>
 
+
 <TabItem value="macos">
+
 
 ```shell
 /opt/homebrew/var/questdb
@@ -43,15 +46,19 @@ $HOME/.questdb
 
 </TabItem>
 
+
 <TabItem value="windows">
 
+
 ```shell
-C:\Windows\System32\questdb
+C:\Windows\System32\qdbroot
 ```
 
 </TabItem>
 
+
 </Tabs>
+
 
 ## `conf` directory
 
