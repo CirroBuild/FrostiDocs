@@ -150,9 +150,9 @@ function Navbar(): JSX.Element {
           <Button
             className={clsx(styles.ctaButton, styles.benchmarkButton)}
             size="xsmall"
-            to="/time-series-benchmark-suite/"
+            to="/blog/tags/benchmark/"
           >
-            Benchmark
+            Benchmarks
           </Button>
         </div>
       </div>
