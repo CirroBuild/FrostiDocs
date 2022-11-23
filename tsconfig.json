@@ -45,7 +45,8 @@
       "@theme/useResizeObserver": ["src/theme/useResizeObserver"],
       "@theme/useWindowWidth": ["src/theme/useWindowWidth"],
       "@theme/ILPClientsTable": ["src/theme/ILPClientsTable"],
-      "@theme/BlogPostItem": ["src/theme/BlogPostItem"]
+      "@theme/BlogPostItem": ["src/theme/BlogPostItem"],
+      "@theme/BlogPostPage": ["src/theme/BlogPostPage"]
     }
   },
   "include": ["src/", "types/"]

@@ -90,6 +90,9 @@ const config = {
         },
         showReadingTime: true,
         postsPerPage: 12,
+        blogPostComponent: require.resolve(
+          "./src/theme/BlogPostPage/index.tsx",
+        ),
         blogTagsPostsComponent: require.resolve(
           "./src/theme/BlogListPage/index.tsx",
         ),
