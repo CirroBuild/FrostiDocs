@@ -8,7 +8,6 @@ import { logos as logosManifest } from "../../assets/logos"
 import yahoo from "../../../static/img/pages/customers/logos/yahoo.svg"
 import kepler from "../../../static/img/pages/customers/logos/kepler.svg"
 import airbus from "../../../static/img/pages/customers/logos/airbus.svg"
-import yc from "../../../static/img/pages/customers/logos/yc.svg"
 import aquis from "../../../static/img/pages/customers/cards/aquis.svg"
 import central_group from "../../../static/img/pages/customers/logos/central_group.svg"
 import tqs_integration from "../../../static/img/pages/customers/logos/tqs-integration.svg"
@@ -23,6 +22,7 @@ import prediko from "../../../static/img/pages/customers/logos/prediko.svg"
 import electric_era from "../../../static/img/pages/customers/logos/electric-era.svg"
 import razor_secure from "../../../static/img/pages/customers/logos/razor_secure.svg"
 import datron from "../../../static/img/pages/customers/cards/datron.svg"
+import netapp from "../../../static/img/logos/netapp.svg"
 
 const svgs = [
   {
@@ -75,8 +75,9 @@ const svgs = [
   },
 
   {
-    ...logosManifest.yc,
-    svg: yc,
+    ...logosManifest.netapp,
+    svg: netapp,
+    width: 115,
   },
 
   {

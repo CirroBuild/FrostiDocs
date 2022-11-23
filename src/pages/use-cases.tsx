@@ -143,8 +143,8 @@ const monitoringCustomers: Customer[] = [
     logoWidth: 100,
   },
   {
-    key: "syntropy",
-    logoWidth: 120,
+    key: "netapp",
+    logoWidth: 100,
   },
   {
     key: "apacheNifi",

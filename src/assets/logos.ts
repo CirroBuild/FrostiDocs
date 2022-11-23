@@ -207,4 +207,10 @@ export const logos: Record<string, CustomerLogo> = {
     width: 144,
     height: 56,
   },
+  netapp: {
+    src: "/img/logos/netapp.svg",
+    alt: "NetApp Logo",
+    width: 144,
+    height: 56,
+  },
 }
