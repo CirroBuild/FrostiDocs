@@ -6,17 +6,6 @@ description: FAQ for QuestDB troubleshooting.
 The following document contains common hardware and software configuration
 issues met when running QuestDB, as well as solutions to them.
 
-## Why is ILP data not immediately available?
-
-InfluxDB line protocol (ILP) does not commit data on single lines or when the
-sender disconnects, but instead uses a number of rules to break incoming data
-into commit batches. This results in data not being visible in `SELECT` queries
-immediately after being received. Refer to our
-[guide to commit lag](/docs/guides/out-of-order-commit-lag) to understand the
-concept and
-[InfluxDB line protocol reference](/docs/reference/api/ilp/tcp-receiver#commit-strategy)
-to understand these rules.
-
 ## How do I delete a row?
 
 See our guide on [modifying data](/docs/guides/modifying-data).
@@ -41,8 +30,8 @@ The steps are as follows:
 1. Use `UPDATE` to copy the existing column content to the new column. Now, the
    column has the correct content with the new data type.
 1. Delete the old column.
-1. Rename the new column accordingly.
-For example, to change `old_col` from `STRING` to `SYMBOL` for table `my_table`:
+1. Rename the new column accordingly. For example, to change `old_col` from
+   `STRING` to `SYMBOL` for table `my_table`:
 
 ```questdb-sql
 ALTER TABLE my_table ADD COLUMN new_col SYMBOL;

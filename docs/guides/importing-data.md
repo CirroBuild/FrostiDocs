@@ -316,9 +316,9 @@ ordered CSV file `weather1mil.csv`, when importing, the log table shows:
 
 The log table contains only coarse-grained, top-level data. Import phase run
 times vary a lot (e.g. `partition_import` often takes 80% of the whole import
-execution time), and therefore [the server
-log](/docs/reference/configuration#logging) provides an alternative to follow
-more details of import:
+execution time), and therefore
+[the server log](/docs/reference/configuration#logging) provides an alternative
+to follow more details of import:
 
 ```log title="import log"
 2022-08-03T14:00:40.907224Z I i.q.c.t.ParallelCsvFileImporter started [importId=5502031634e923b2, phase=analyze_file_structure, file=`C:\dev\tmp\weather.csv`, workerCount=10]
@@ -511,8 +511,7 @@ TRUNCATE TABLE table_name;
 or import into another empty table and then use `INSERT INTO SELECT`:
 
 ```questdb-sql
-INSERT batch 100000 commitLag 180s
-INTO table_name
+INSERT INTO table_name batch 100000
 SELECT * FROM other_table;
 ```
 

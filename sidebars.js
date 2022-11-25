@@ -56,11 +56,11 @@ module.exports = {
       label: "Guides",
       type: "category",
       items: [
-        "guides/out-of-order-commit-lag",
         "guides/importing-data",
         "guides/importing-data-rest",
         "guides/modifying-data",
         "guides/working-with-timestamps-timezones",
+        "guides/out-of-order-commit-lag",
       ],
     },
     {

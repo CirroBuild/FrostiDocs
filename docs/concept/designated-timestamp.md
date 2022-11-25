@@ -10,11 +10,15 @@ QuestDB offers the option to elect a column as a _designated timestamp_. This
 allows you to specify which column the tables will be indexed by in order to
 leverage time-oriented language features and high-performance functionalities.
 
-A designated timestamp is elected by using the [`timestamp(columnName)`](/docs/reference/function/timestamp) function:
+A designated timestamp is elected by using the
+[`timestamp(columnName)`](/docs/reference/function/timestamp) function:
 
 - during a [CREATE TABLE](/docs/reference/sql/create-table#timestamp) operation
-- during a [SELECT](/docs/reference/sql/select#timestamp) operation (`dynamic timestamp`)
-- when ingesting data via ILP, for tables that do not already exist in QuestDB, partitions are applied automatically by day by default with a `timestamp` column
+- during a [SELECT](/docs/reference/sql/select#timestamp) operation
+  (`dynamic timestamp`)
+- when ingesting data via ILP, for tables that do not already exist in QuestDB,
+  partitions are applied automatically by day by default with a `timestamp`
+  column
 
 :::info
 
@@ -31,18 +35,9 @@ Checking if tables contain a designated timestamp column can be done via the
 
 ## Out-of-order policy
 
-As of version 6.0.0, QuestDB supports ingestion of records which are
-out-of-order (O3) by time. Configuring how often out-of-order data is committed
-is done via [commit lag and row count](/docs/guides/out-of-order-commit-lag).
-
-:::info
-
-In versions prior to 6.0.0, when a column was elected as a designated timestamp,
-it would enforce an order policy and O3 inserts would be rejected. In other
-words, new timestamp values needed to be greater than or equal to the most
-recent timestamp in the column.
-
-:::
+As of version 6.0.0, QuestDB supports the ingestion of records that are
+out-of-order (O3) by time. QuestDB detects and adjusts data ingestion for O3
+data automatically and no manual configuration is required.
 
 ## Advantages
 

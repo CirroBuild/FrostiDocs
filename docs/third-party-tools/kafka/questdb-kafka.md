@@ -149,10 +149,6 @@ similar to the following:
 "Arthur",42,"Dent","2022-11-01T13:11:55.558108Z"
 ```
 
-Depending on the [commit lag](/docs/guides/out-of-order-commit-lag/) setting, it
-can take up to 30 seconds for the table to become visible. The `curl` command
-may initially return the `table not found` error or an empty table as a result.
-
 If you can see the expected result then congratulations, you have successfully
 created and executed your first Kafka to QuestDB pipeline! 🎉
 

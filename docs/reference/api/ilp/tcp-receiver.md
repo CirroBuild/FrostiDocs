@@ -30,7 +30,8 @@ Although the original protocol does not support it, we have added authentication
 over TCP. This works by using an
 [elliptic curve P-256](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography)
 JSON Web Token (JWT) to sign a server challenge. Details of authentication over
-ILP can be found in the [authentication documentation](/docs/reference/api/ilp/authenticate/).
+ILP can be found in the
+[authentication documentation](/docs/reference/api/ilp/authenticate/).
 
 ## Insert data
 
@@ -70,10 +71,21 @@ The following input is tolerated by QuestDB:
   the timestamp
 - the timestamp is specified as a column instead of appending it to the end of
   the line
-- timestamp appears as a column and also present at the end of the line, the
+- timestamp appears as a column and is also present at the end of the line, the
   value sent as a field will be used
 
 ## Commit strategy
+
+:::note
+
+**Deprecated content**
+
+This section applies to QuestDB 6.5.5 and earlier versions. From
+[QuestDB 6.6](https://github.com/questdb/questdb/releases/tag/6.6) onwards, the
+database adjusts relevant settings automatically and provides maximum ingestion
+speed.
+
+:::
 
 ILP transactions are implicit; the protocol is built to stream data at a high
 rate of speed and to support batching. There are three ways data is committed
@@ -114,12 +126,12 @@ line.tcp.maintenance.job.interval=1000
 
 ### Interval-based commit
 
-A table's [commit lag](/docs/guides/out-of-order-commit-lag) metadata property determines how much uncommitted data will
-need to remain uncommitted for performance reasons. This lag value is measured
-in time units from the table's data. Data older than the lag value will be
-committed and become visible. ILP derives the commit interval as a function of
-the commit lag value for each table. The difference is that the commit interval
-is a wall clock.
+A table's [commit lag](/docs/guides/out-of-order-commit-lag) metadata property
+determines how much uncommitted data will need to remain uncommitted for
+performance reasons. This lag value is measured in time units from the table's
+data. Data older than the lag value will be committed and become visible. ILP
+derives the commit interval as a function of the commit lag value for each
+table. The difference is that the commit interval is a wall clock.
 
 The commit interval is calculated for each table as a fraction of the commit lag
 
@@ -135,9 +147,8 @@ interval can be set by the below configuration parameter.
 line.tcp.commit.interval.fraction=0.2
 ```
 
-If the result of commit interval is `0`, the
-default commit interval of `2` seconds will be used. This can be changed in the
-configuration:
+If the result of commit interval is `0`, the default commit interval of `2`
+seconds will be used. This can be changed in the configuration:
 
 ```shell title="Setting the default commit interval in milliseconds"
 line.tcp.commit.interval.default=5000

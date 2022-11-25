@@ -4,7 +4,7 @@ sidebar_label: INSERT
 description: INSERT SQL keyword reference documentation.
 ---
 
-Inserts data into a database table.
+`INSERT` ingests selected data into a database table.
 
 ## Syntax
 
@@ -29,24 +29,10 @@ Setting sub-qeury alias:
 - `WITH AS`: Inserts values based on a subu-query, to which an alias is given by
   using [WITH](/docs/reference/sql/with/).
 
-#### Parameters
-
-Two parameters may be provided to optimize `INSERT AS SELECT` or `WITH AS`
-queries when inserting out-of-order records into an ordered dataset:
+Parameter:
 
 - `batch` expects a `batchCount` (integer) value defining how many records to
   process at any one time.
-- `commitLag` expects a `lagAmount` with a modifier to specify the time unit for
-  the value (i.e. `20s` for 20 seconds). The following table describes the units
-  that may be used:
-
-  | unit | description  |
-  | ---- | ------------ |
-  | us   | microseconds |
-  | s    | seconds      |
-  | m    | minutes      |
-  | h    | hours        |
-  | d    | days         |
 
 ## Examples
 
@@ -113,19 +99,46 @@ INSERT INTO confirmed_trades
 SELECT * FROM confirmed_id;
 ```
 
-Inserting out-of-order data into an ordered dataset may be optimized using
-`batch` and `commitLag` parameters:
+## Parameters for QuestDB 6.5.5 and earlier versions
+
+:::note
+
+**Deprecated content**
+
+This section applies to QuestDB 6.5.5 and earlier versions. From
+[QuestDB 6.6](https://github.com/questdb/questdb/releases/tag/6.6) onwards, the
+database adjusts relevant settings automatically and provides maximum ingestion
+speed.
+
+:::
+
+Inserting values directly or using sub-queries:
+
+![Flow chart showing the syntax of the INSERT keyword with commit lag settings](/img/docs/diagrams/insertCommitLag.svg)
+
+Inserting using sub-query alias:
+
+![Flow chart showing the syntax of the WITH AS INSERT keyword with commit lag settings](/img/docs/diagrams/withAsInsertCommitLag.svg)
+
+The `commitLag` parameter may be provided to optimize `INSERT AS SELECT` or
+`WITH AS` queries when inserting
+[out-of-order records](/docs/guides/out-of-order-commit-lag) into an ordered
+dataset:
+
+- `commitLag` expects a `lagAmount` with a modifier to specify the time unit for
+  the value (i.e. `20s` for 20 seconds). The following table describes the units
+  that may be used:
+
+  | unit | description  |
+  | ---- | ------------ |
+  | us   | microseconds |
+  | s    | seconds      |
+  | m    | minutes      |
+  | h    | hours        |
+  | d    | days         |
 
 ```questdb-sql title="Insert as select with lag and batch size"
 INSERT batch 100000 commitLag 180s INTO trades
 SELECT ts, instrument, quantity, price
 FROM unordered_trades
 ```
-
-:::info
-
-More details on ingesting out-of-order data with context on _lag_ and
-uncommitted record count see the guide for
-[configuring commit lag of out-of-order data](/docs/guides/out-of-order-commit-lag)
-
-:::

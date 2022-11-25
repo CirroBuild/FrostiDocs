@@ -4,9 +4,8 @@ sidebar_label: Meta
 description: Table and database metadata function reference documentation.
 ---
 
-These functions provide table information including column details and metadata
-such as [commit lag parameters](/docs/guides/out-of-order-commit-lag). These
-functions are particularly useful for checking if tables contain a
+These functions provide table information including column details and metadata.
+These functions are particularly useful for checking if tables contain a
 [designated timestamp](/docs/concept/designated-timestamp) column.
 
 ## table_columns
@@ -71,12 +70,6 @@ SELECT type, count() FROM table_columns('my_table');
 
 `tables()` returns all tables in the database including table metadata.
 
-:::info
-
-`commitLag` is returned in _microseconds_
-
-:::
-
 **Arguments:**
 
 - `tables()` does not require arguments.
@@ -91,7 +84,7 @@ Returns a `table`.
 tables();
 ```
 
-| id  | name        | designatedTimestamp | partitionBy | maxUncommittedRows | commitLag |
+| id  | name        | designatedTimestamp | partitionBy | maxUncommittedRows | o3MaxLag  |
 | --- | ----------- | ------------------- | ----------- | ------------------ | --------- |
 | 1   | my_table    | ts                  | DAY         | 500000             | 300000000 |
 | 2   | device_data | null                | NONE        | 10000              | 30000000  |
@@ -100,7 +93,7 @@ tables();
 tables() ORDER BY name DESC;
 ```
 
-| id  | name        | designatedTimestamp | partitionBy | maxUncommittedRows | commitLag |
+| id  | name        | designatedTimestamp | partitionBy | maxUncommittedRows | o3MaxLag  |
 | --- | ----------- | ------------------- | ----------- | ------------------ | --------- |
 | 2   | device_data | null                | NONE        | 10000              | 30000000  |
 | 1   | my_table    | ts                  | DAY         | 500000             | 300000000 |
@@ -109,6 +102,6 @@ tables() ORDER BY name DESC;
 tables() WHERE partitionBy = 'DAY'
 ```
 
-| id  | name     | designatedTimestamp | partitionBy | maxUncommittedRows | commitLag |
-| --- | -------- | ------------------- | ----------- | ------------------ | --------- |
-| 1   | my_table | ts                  | DAY         | 500000             | 300000000 |
+| id  | name     | designatedTimestamp | partitionBy | maxUncommittedRows |
+| --- | -------- | ------------------- | ----------- | ------------------ |
+| 1   | my_table | ts                  | DAY         | 500000             |

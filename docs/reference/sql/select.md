@@ -4,7 +4,7 @@ sidebar_label: SELECT
 description: SELECT SQL keyword reference documentation.
 ---
 
-`SELECT` allows you to specify list of columns and expressions to be selected
+`SELECT` allows you to specify a list of columns and expressions to be selected
 and evaluated from a table.
 
 ## Syntax
@@ -13,14 +13,8 @@ and evaluated from a table.
 
 :::tip
 
-- While ingesting data using ILP, data may not be immediately available to a
-  `SELECT` query, due to the [commit lag](/docs/guides/out-of-order-commit-lag)
-  setting. Please see the
-  [InfluxDB line protocol reference](/docs/reference/api/ilp/tcp-receiver#commit-strategy)
-  for more information.
-
-- The `table` can either be in your database (in which case you would pass the
-  table's name), or the result of a sub query.
+The `table` can either be in your database (in which case you would pass the
+table's name), or the result of a sub-query.
 
 :::
 

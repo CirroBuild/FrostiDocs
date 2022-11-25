@@ -21,8 +21,10 @@ methods:
 - [Binaries](/docs/get-started/binaries/) for direct downloads to run on Linux,
   macOS or Windows
 - [Homebrew](/docs/get-started/homebrew/) for running QuestDB on macOS
-- [Create your first database](/docs/get-started/first-database/) provides a guide for once QuestDB is running
-- [Learn more](/docs/get-started/learn-more/) is a selection of useful concepts and guides for new QuestDB users
+- [Create your first database](/docs/get-started/first-database/) provides a
+  guide once QuestDB is running
+- [Learn more](/docs/get-started/learn-more/) is a selection of useful concepts
+  and guides for new QuestDB users
 
 ## Develop
 
@@ -44,8 +46,8 @@ programming languages through our various network endpoints.
 - [Large CSV import (COPY SQL)](/docs/guides/importing-data)
 - [Small CSV import (REST API)](/docs/guides/importing-data-rest)
 - [Modifying Data](/docs/guides/modifying-data)
-- [Out-of-order commit lag](/docs/guides/out-of-order-commit-lag)
 - [Timestamps and time zones](/docs/guides/working-with-timestamps-timezones)
+- [Out-of-order commit lag](/docs/guides/out-of-order-commit-lag)
 
 ## Deployment
 
@@ -59,10 +61,10 @@ programming languages through our various network endpoints.
 This section contains resources for managing QuestDB instances and has dedicated
 pages for the following topics:
 
-- [Design for performance](/docs/operations/design-for-performance) for configuring
-  table settings to improve performance
-- [Capacity planning](/docs/operations/capacity-planning) for configuring
-  server settings and system resources
+- [Design for performance](/docs/operations/design-for-performance) for
+  configuring table settings to improve performance
+- [Capacity planning](/docs/operations/capacity-planning) for configuring server
+  settings and system resources
 - [Data retention](/docs/operations/data-retention) strategy to delete old data
   and save disk space
 - [Health monitoring](/docs/operations/health-monitoring) endpoint for
@@ -76,10 +78,10 @@ This section describes how to integrate QuestDB with third-party tools and
 utilities for collecting metrics and visualizing data:
 
 - [Prometheus](/docs/third-party-tools/prometheus) monitoring and alerting.
-- [Grafana](/docs/third-party-tools/grafana) instructions for connecting
-  QuestDB as a datasource for building visualizations and dashboards
-- [Kafka](/docs/third-party-tools/kafka/overview) guide for ingesting data from topics
-  into QuestDB
+- [Grafana](/docs/third-party-tools/grafana) instructions for connecting QuestDB
+  as a datasource for building visualizations and dashboards
+- [Kafka](/docs/third-party-tools/kafka/overview) guide for ingesting data from
+  Kafka topics into QuestDB
 - [Telegraf](/docs/third-party-tools/telegraf) guide for collecting system
   metrics, specifying QuestDB as an output and visualizing the results
 
@@ -94,9 +96,8 @@ data, and introduces features and capabilities unique to the system.
   that enables time-oriented language capabilities and partitioning
 - [SQL extensions](/docs/concept/sql-extensions) allow performant time series
   analysis with a concise syntax
-- [JIT compiler](/docs/concept/jit-compiler) to speed up queries
-- [Partitions](/docs/concept/partitions) can be used for significant
-  performance benefits on calculations and queries
+- [JIT compiler](/docs/concept/jit-compiler) to speed up `WHERE` clauses
+- [Partitions](/docs/concept/partitions) can be used to perform time-based queries more efficiently
 - [Symbol](/docs/concept/symbol) type makes storing and retrieving repetitive
   strings efficient
 - [Indexes](/docs/concept/indexes) can be used for faster read access on
@@ -126,8 +127,8 @@ when starting services:
 
 ### Configuration
 
-The [configuration](/docs/reference/configuration) page shows all the
-properties that can be used to customize QuestDB.
+The [configuration](/docs/reference/configuration) page shows all the properties
+that can be used to customize QuestDB.
 
 ### ILP Client libraries
 
@@ -161,7 +162,6 @@ can be used in QuestDB.
 - [Bitwise](/docs/reference/operators/bitwise)
 - [Pattern matching](/docs/reference/operators/pattern-matching)
 - [Spatial](/docs/reference/operators/spatial)
-
 
 ### SQL
 

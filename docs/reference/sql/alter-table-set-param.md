@@ -4,17 +4,24 @@ sidebar_label: SET PARAM
 description: SET PARAM SQL keyword reference documentation.
 ---
 
-The following keywords allow for setting table parameters via SQL. This is
-useful for configuring out-of-order ILP data
-ingestion on a per-table basis. For more information on these values including
-details on why these settings should be applied, see the documentation for
-[out-of-order data commits](/docs/guides/out-of-order-commit-lag) and [ILP commit strategy](/docs/reference/api/ilp/tcp-receiver#commit-strategy).
+`ALTER TABLE SET PARAM` sets table parameters via SQL.
 
-:::info
+:::note
 
-Checking table metadata can be done via the `tables()` and `table_columns()`
-functions which are described in the
-[meta functions](/docs/reference/function/meta) documentation page.
+**Deprecated content**
+
+- For QuestDB 6.5.5 and earlier versions, the following keywords are useful for
+  configuring out-of-order ILP data ingestion on a per-table basis. For more
+  information on more details and when to apply them, see the documentation for
+  [out-of-order data commits](/docs/guides/out-of-order-commit-lag) and
+  [ILP commit strategy](/docs/reference/api/ilp/tcp-receiver#commit-strategy).
+
+- From QuestDB 6.6 onwards, the database adjusts relevant settings automatically
+  and provides maximum ingestion speed.
+
+- Checking table metadata can be done via the `tables()` and `table_columns()`
+  functions, as described in the [meta functions](/docs/reference/function/meta)
+  documentation page.
 
 :::
 
@@ -25,7 +32,8 @@ functions which are described in the
 
 The following two sections describe table parameters relating to out-of-order
 ingestion. For context on commit lag and max uncommitted rows, see the guide for
-[configuring commit lag of out-of-order data](/docs/guides/out-of-order-commit-lag) and [ILP commit strategy](/docs/reference/api/ilp/tcp-receiver#commit-strategy).
+[configuring commit lag of out-of-order data](/docs/guides/out-of-order-commit-lag)
+and [ILP commit strategy](/docs/reference/api/ilp/tcp-receiver#commit-strategy).
 
 ### commitLag
 

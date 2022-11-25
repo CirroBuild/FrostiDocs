@@ -35,12 +35,22 @@ indexDef
   ::='INDEX' '(' columnRef ('CAPACITY' valueBlockSize)?')'
 
 insertInto
-  ::= 'INSERT' ('batch' batchCount 'commitLag' n ( 'us' | 's' | 'm' | 'h' | 'd' ))?
+  ::= 'INSERT' ('batch' batchCount)?
   'INTO' tableName ( ( '(' columnName (',' columnName)*) ')')?
   ( 'VALUES' ( ( '(' value ( ',' value)* ')' ) (',' '(' value ( ',' value)* ')' )* ) | 'SELECT' queryDef mainQuery )
   ';'
 
 withAsInsert
+  ::= ( 'WITH' subQueryName 'AS' '(' subQuery ')' ( ',' subQueryName 'AS' '(' subQuery ')' )* )? 
+  'INSERT' ( 'batch' batchCount )? 'INTO' tableName 'SELECT' queryDef subQueryName ';'
+
+insertCommitLagInto
+  ::= 'INSERT' ('batch' batchCount 'commitLag' n ( 'us' | 's' | 'm' | 'h' | 'd' ))?
+  'INTO' tableName ( ( '(' columnName (',' columnName)*) ')')?
+  ( 'VALUES' ( ( '(' value ( ',' value)* ')' ) (',' '(' value ( ',' value)* ')' )* ) | 'SELECT' queryDef mainQuery )
+  ';'
+
+withAsInsertCommitLag
   ::= ( 'WITH' subQueryName 'AS' '(' subQuery ')' ( ',' subQueryName 'AS' '(' subQuery ')' )* )? 
   'INSERT' ( 'batch' batchCount 'commitLag' n ( 'us' | 's' | 'm' | 'h' | 'd' ) )? 'INTO' tableName 'SELECT' queryDef subQueryName ';'
 
@@ -59,8 +69,11 @@ Copy
 CreateTableTimestamp
   ::= 'CREATE' someCreateTableStatement 'timestamp' '(' columnName ')'
 
-createTableWithParams
+
+createTableWithCommitParams
   ::= 'WITH' 'maxUncommittedRows' '=' rowCount ',' 'commitLag' '=' n ( 'us' | 's' | 'm' | 'h' | 'd' )
+createTableWithMaxRowParams
+  ::= 'WITH' 'maxUncommittedRows' '=' rowCount
 
 dynamicTimestamp
   ::= 'SELECT' someSelectStatement 'timestamp' '(' columnName ')'
