@@ -16,52 +16,27 @@ import ca from "../../../static/img/pages/customers/logos/ca.svg"
 import turk_telekom from "../../../static/img/pages/customers/logos/turk_telekom.svg"
 import liveaction from "../../../static/img/pages/customers/logos/liveaction.svg"
 import apache_nifi from "../../../static/img/pages/customers/logos/apache-nifi.svg"
-import toggle from "../../../static/img/pages/customers/logos/toggle.svg"
 import synology from "../../../static/img/pages/customers/logos/synology.svg"
 import prediko from "../../../static/img/pages/customers/logos/prediko.svg"
 import electric_era from "../../../static/img/pages/customers/logos/electric-era.svg"
-import razor_secure from "../../../static/img/pages/customers/logos/razor_secure.svg"
 import datron from "../../../static/img/pages/customers/cards/datron.svg"
 import netapp from "../../../static/img/logos/netapp.svg"
 
 const svgs = [
   {
+    ...logosManifest["aquis-exchange"],
+    svg: aquis,
+  },
+
+  {
     ...logosManifest.yahoo,
     svg: yahoo,
     width: 120,
   },
+
   {
-    ...logosManifest.toggle,
-    svg: toggle,
-    width: 120,
-  },
-  {
-    ...logosManifest.apacheNifi,
-    svg: apache_nifi,
-    height: 45,
-  },
-  {
-    ...logosManifest.synology,
-    svg: synology,
-    width: 120,
-    height: 30,
-  },
-  {
-    ...logosManifest.prediko,
-    svg: prediko,
-    width: 120,
-    height: 30,
-  },
-  {
-    ...logosManifest.razor_secure,
-    width: 140,
-    height: 40,
-    svg: razor_secure,
-  },
-  {
-    ...logosManifest.electric_era,
-    svg: electric_era,
-    width: 120,
+    ...logosManifest.liveaction,
+    svg: liveaction,
   },
 
   {
@@ -75,29 +50,21 @@ const svgs = [
   },
 
   {
-    ...logosManifest.netapp,
-    svg: netapp,
-    width: 115,
-  },
-
-  {
-    ...logosManifest["aquis-exchange"],
-    svg: aquis,
-  },
-
-  {
     ...logosManifest["central-group"],
     svg: central_group,
   },
 
   {
-    ...logosManifest["tqs-integration"],
-    svg: tqs_integration,
+    ...logosManifest.prediko,
+    svg: prediko,
+    width: 120,
+    height: 30,
   },
 
   {
-    ...logosManifest.syndica,
-    svg: syndica,
+    ...logosManifest.netapp,
+    svg: netapp,
+    width: 115,
   },
 
   {
@@ -106,13 +73,37 @@ const svgs = [
   },
 
   {
+    ...logosManifest.syndica,
+    svg: syndica,
+  },
+
+  {
+    ...logosManifest.synology,
+    svg: synology,
+    width: 120,
+    height: 30,
+  },
+
+  {
+    ...logosManifest.electric_era,
+    svg: electric_era,
+    width: 120,
+  },
+
+  {
+    ...logosManifest.apacheNifi,
+    svg: apache_nifi,
+    height: 45,
+  },
+
+  {
     ...logosManifest["turk-telekom"],
     svg: turk_telekom,
   },
 
   {
-    ...logosManifest.liveaction,
-    svg: liveaction,
+    ...logosManifest["tqs-integration"],
+    svg: tqs_integration,
   },
 
   {
