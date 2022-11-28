@@ -187,7 +187,7 @@ const Prediko = () => {
             QuestDB works behind the scene for the Prediko Inventory OS.
           </p>
 
-          <h3>About the team</h3>
+          <h3>Why QuestDB?</h3>
 
           <p className="font-size--large">
             In the retail industry, Stock Keeping Unit (SKU) is used to track
