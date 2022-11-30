@@ -28,8 +28,8 @@ import Banner from "@theme/Banner"
   alt="A screenshot of the QuestDB Web Console with a SAMPLE BY query"
   height={467}
   src="/img/blog/2022-11-23/banner.png"
-  width={650}
-></Banner>
+  width={650}>
+</Banner>
 
 ## Introduction
 
