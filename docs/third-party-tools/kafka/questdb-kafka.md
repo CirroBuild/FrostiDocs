@@ -172,7 +172,7 @@ the Kafka Connect connector.
 The connector supports the following configuration options:
 
 | Name                              | Type      | Example                                                     | Default            | Meaning                                                    |
-| --------------------------------- | --------- | ----------------------------------------------------------- | ------------------ | ---------------------------------------------------------- |
+|-----------------------------------|-----------|-------------------------------------------------------------|--------------------|------------------------------------------------------------|
 | topics                            | `string`  | orders                                                      | N/A                | Topics to read from                                        |
 | key.converter                     | `string`  | <sub>org.apache.kafka.connect.storage.StringConverter</sub> | N/A                | Converter for keys stored in Kafka                         |
 | value.converter                   | `string`  | <sub>org.apache.kafka.connect.json.JsonConverter</sub>      | N/A                | Converter for values stored in Kafka                       |
@@ -182,6 +182,7 @@ The connector supports the following configuration options:
 | value.prefix                      | `string`  | from_value                                                  | N/A                | Prefix for value fields                                    |
 | <sub>skip.unsupported.types</sub> | `boolean` | false                                                       | false              | Skip unsupported types                                     |
 | <sub>timestamp.field.name</sub>   | `string`  | pickup_time                                                 | N/A                | Designated timestamp field name                            |
+| timestamp.units                   | `string`  | micros                                                      | auto               | Designated timestamp field units                           |
 | include.key                       | `boolean` | false                                                       | true               | Include message key in target table                        |
 | symbols                           | `string`  | instrument,stock                                            | N/A                | Comma separated list of columns that should be symbol type |
 | username                          | `string`  | user1                                                       | admin              | User name for QuestDB. Used only when token is non-empty   |
@@ -229,8 +230,13 @@ The connector supports
 If the message contains a timestamp field, the connector can use it as a
 timestamp for the row. The field name must be configured using the
 `timestamp.field.name` option. The field must either be an integer or a
-timestamp. When the field is set to an integer the connector will interpret it
-as a Unix timestamp in milliseconds.
+timestamp. When the field is set to an integer, the connector will autodetect its units. 
+This works for timestamps after 04/26/1970, 5:46:40 PM. The units can also be configured
+explicitly using the `timestamp.units` configuration, which supports the following values:
+- `nanos`
+- `micros`
+- `millis`
+-  `auto` (default)
 
 ### Symbol
 
