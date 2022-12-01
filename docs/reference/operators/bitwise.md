@@ -48,7 +48,7 @@ SELECT 5 & 3
 ## ^ XOR
 
 `^` is a binary operation that takes two bit patterns of equal length and
-performs the logical exclusive OR operation on each pair of corresponding bits.
+performs the logical exclusive OR (XOR) operation on each pair of corresponding bits.
 Expects a value of `long` or `int` type.
 
 **Examples:**
@@ -70,9 +70,9 @@ Expects a value of `long` or `int` type.
 **Examples:**
 
 ```questdb-sql
-SELECT 5 ^ 3
+SELECT 5 | 3
 ```
 
 | column |
 | ------ |
-| 6      |
+| 7      |
