@@ -24,16 +24,32 @@ To monitor various metrics of the QuestDB instances, refer to the
 ## Storage and filesystem
 
 The following sections describe aspects to consider regarding the storage of
-data and filesystem.
+data and file systems.
 
 ### Supported filesystem
 
-QuestDB officially supports **EXT4** or any filesystem that supports
-[mmap](https://man7.org/linux/man-pages/man2/mmap.2.html).
+QuestDB officially supports the following filesystems:
+
+- EXT4
+- APFS
+- NTFS
+- OVERLAYFS (used by Docker)
+
+Other file systems supporting
+[mmap](https://man7.org/linux/man-pages/man2/mmap.2.html) feature may work with
+QuestDB but they should not be used in production, as QuestDB does not run tests
+on them.
+
+When an unsupported file system is used, QuestDB logs show the following
+warning:
+
+```
+-> UNSUPPORTED (SYSTEM COULD BE UNSTABLE)"
+```
 
 :::caution
 
-Users **can't use NFS or a similar distributed filesystem** directly with a
+Users **can't use NFS or similar distributed filesystems** directly with a
 QuestDB database.
 
 :::

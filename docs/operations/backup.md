@@ -19,17 +19,23 @@ QuestDB provides two strategies for creating backups:
 
 ## Limitations
 
-There are some limitations of creating backups that users should note about the
-types of supported filesystems and what data is included in backups:
+QuestDB officially supports the following filesystems:
 
-- QuestDB officially supports **EXT4** or **XFS** or any filesystem that
-  supports [mmap](https://man7.org/linux/man-pages/man2/mmap.2.html) feature.
+- EXT4
+- APFS
+- NTFS
+- OVERLAYFS (used by Docker)
+
+Other file systems supporting
+[mmap](https://man7.org/linux/man-pages/man2/mmap.2.html) feature may work with
+QuestDB but they should not be used in production, as QuestDB does not run tests
+on them.
 
 :::caution
 
-- A backup includes contents of the database up to the point of executing a
-  backup. Any data inserted while a backup is underway is not stored as part of
-  the backup.
+- A backup includes the contents of the database up to the point of executing a
+backup. Any data inserted while a backup is underway is not stored as part of
+the backup.
 
 - Users can't use NFS or a similar distributed filesystem directly with QuestDB,
   but users may copy a backup to such a filesystem after a backup has been made.
@@ -50,8 +56,8 @@ documentation.
 cairo.sql.backup.root=/path/to/backup/dir
 ```
 
-A backup can then be triggered via [SQL command](/docs/reference/sql/backup)
-and the backup is complete as soon as the SQL query has finished executing:
+A backup can then be triggered via [SQL command](/docs/reference/sql/backup) and
+the backup is complete as soon as the SQL query has finished executing:
 
 ```questdb-sql
 -- backup whole database
