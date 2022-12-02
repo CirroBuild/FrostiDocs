@@ -415,55 +415,66 @@ docker run -it --rm --network=host -e PGPASSWORD=quest \
 <TabItem value="python">
 
 
-This example uses the [psycopg2](https://github.com/psycopg/psycopg2) database
-adapter, which does not support prepared statements (bind variables). This
-functionality is on the roadmap for the antecedent
-[psychopg3](https://github.com/psycopg/psycopg3/projects/1) adapter.
+This example uses the
+[psychopg3](https://www.psycopg.org/psycopg3/docs/) adapter.
+
+To [install](https://www.psycopg.org/psycopg3/docs/basic/install.html) the client library, use `pip`:
+
+```shell
+python3 -m pip install "psycopg[binary]"
+```
+
 
 ```python
-import psycopg2 as pg
-import datetime as dt
+import psycopg as pg
+import time
 
-connection = None
-cursor = None
-try:
-    connection = pg.connect(
-        user='admin',
-        password='quest',
-        host='127.0.0.1',
-        port='8812',
-        database='qdb')
-    cursor = connection.cursor()
+# Connect to an existing QuestDB instance
 
-    # text-only query
-    cursor.execute('''CREATE TABLE IF NOT EXISTS trades (
-        ts TIMESTAMP, date DATE, name STRING, value INT)
-        timestamp(ts);''')
+conn_str = 'user=admin password=quest host=127.0.0.1 port=8812 dbname=qdb'
+with pg.connect(conn_str, autocommit=True) as connection:
+    
+    # Open a cursor to perform database operations
 
-    # insert 10 records
-    for x in range(10):
-        now = dt.datetime.utcnow()
-        date = dt.datetime.now().date()
-        cursor.execute('''
-            INSERT INTO trades
-            VALUES (%s, %s, %s, %s);
-            ''',
-            (now, date, 'python example', x))
+    with connection.cursor() as cur:
 
-    # commit records
-    connection.commit()
+        # Execute a command: this creates a new table
 
-    cursor.execute('SELECT * FROM trades;')
-    records = cursor.fetchall()
-    for row in records:
-        print(row)
+        cur.execute('''
+          CREATE TABLE IF NOT EXISTS test_pg (
+              ts TIMESTAMP,
+              name STRING,
+              value INT
+          ) timestamp(ts);
+          ''')
+        
+        print('Table created.')
 
-finally:
-    if cursor:
-        cursor.close()
-    if connection:
-        connection.close()
-    print('Postgres connection is closed.')
+        # Insert data into the table.
+
+        for x in range(10):
+
+            # Converting datetime into millisecond for QuestDB
+
+            timestamp = time.time_ns() // 1000
+
+            cur.execute('''
+                INSERT INTO test_pg
+                    VALUES (%s, %s, %s);
+                ''',
+                (timestamp, 'python example', x))
+
+        print('Rows inserted.')
+
+        #Query the database and obtain data as Python objects.
+
+        cur.execute('SELECT * FROM trades_pg;')
+        records = cur.fetchall()
+        for row in records:
+            print(row)
+
+# the connection is now closed
+
 ```
 
 </TabItem>
