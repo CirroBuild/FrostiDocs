@@ -223,7 +223,13 @@ created.
 The parameter influences how often commits of out-of-order data occur. It may be
 set during table creation using the `WITH` keyword.
 
-- `maxUncommittedRows` - equivalent to `cairo.max.uncommitted.rows`
+`maxUncommittedRows` - defines the maximum number of uncommitted rows per-table
+to keep in memory before triggering a commit for a specific table.
+
+The purpose of specifying maximum uncommitted rows per table is to reduce the
+occurrences of resource-intensive commits when ingesting out-of-order data.
+
+The global setting for the same parameter is `cairo.max.uncommitted.rows`.
 
 ```questdb-sql title="Setting out-of-order table parameters via SQL"
 CREATE TABLE my_table (timestamp TIMESTAMP) TIMESTAMP(timestamp)

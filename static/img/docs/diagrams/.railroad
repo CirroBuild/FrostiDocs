@@ -196,6 +196,9 @@ detachPartition
    | 'ALTER' 'TABLE' tableName 'DETACH' 'PARTITION' 'WHERE' timestampColumn 'IN' '(' timestamp (',' timestamp)* ')'
 
 setParam
+ ::= 'SET' 'PARAM' ( 'maxUncommittedRows' '=' n)
+
+setParamCommitLag
  ::= 'SET' 'PARAM' ( 'maxUncommittedRows' '=' n | 'commitLag' '=' n ( 'us' | 's' | 'm' | 'h' | 'd' ))
 
 VacuumTable
