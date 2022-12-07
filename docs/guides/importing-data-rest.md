@@ -7,16 +7,35 @@ description:
 ---
 
 The REST API provides an `/imp` endpoint exposed on port `9000` by default. This
-endpoint allows streaming tabular text data directly into a table, supporting CSV, TAB
-and pipe (`|`) delimited inputs with optional headers. Data types and structures
-are detected automatically, but additional configuration can be provided to
-improve automatic detection.
+endpoint allows streaming tabular text data directly into a table, supporting
+CSV, TAB and pipe (`|`) delimited inputs with optional headers. Data types and
+structures are detected automatically, but additional configurations can be
+provided to improve automatic detection.
 
 :::note
 
-The REST API is better suited for regular uploads of small batches of data via CSV files into the same table. For database migrations, or uploading one large CSV file into QuestDB, users may consider using the `COPY` SQL command. See [COPY command documentation](/docs/reference/sql/copy/) and [Guide on CSV import](/docs/guides/importing-data) for more details.
+The REST API is better suited when the following conditions are true:
+
+- Regular uploads of small batches of data into the same table.
+- The file batches do not contain overlapping periods (they contain distinct
+  days/weeks/months). Otherwise, the import performance will be impacted.
+
+For database migrations, or uploading one large CSV file into QuestDB, users may
+consider using the `COPY` SQL command. See
+[COPY command documentation](/docs/reference/sql/copy/) and
+[Guide on CSV import](/docs/guides/importing-data) for more details.
 
 :::
+
+### Importing compressed files
+
+It is possible to upload compressed files directly without decompression:
+
+```bash
+gzip -cd compressed_data.tsv.gz | curl -v -F data=@- 'http://localhost:9000/imp'
+```
+
+The `data=@-` value instructs `curl` to read the file contents from `stdin`.
 
 ### Specifying a schema during CSV import
 
