@@ -148,11 +148,10 @@ const Team = () => (
       <div className={teCss.team}>
         <div>
           <p>
-            QuestDB is a remote-first company, with regional offices in London,
-            Berlin and San Francisco.
+            QuestDB is a remote-first company, with a regional office in London.
           </p>
           <p>
-            Our team is building the fastest open-source timeseries database
+            Our team is building the fastest open-source time series database
             from scratch and produces all of the components in-house. We are
             performance-obsessed and strive to create a product that developers
             want.
