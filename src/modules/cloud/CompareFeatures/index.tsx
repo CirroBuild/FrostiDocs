@@ -65,7 +65,7 @@ const SecurityFeaturesItems: Feature[] = [
   {
     title: "SSO Authentication",
     inOpenSource: "not-applicable",
-    inCloud: "coming-soon",
+    inCloud: "available-new",
   },
   {
     title: "TLS encryption",
