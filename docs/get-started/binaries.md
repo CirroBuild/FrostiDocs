@@ -8,105 +8,114 @@ description:
 
 import CodeBlock from "@theme/CodeBlock"
 import InterpolateReleaseData from "../../src/components/InterpolateReleaseData"
+import { getAssets } from '../../src/utils/get-assets'
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-This page describes how to install and use QuestDB via binaries. QuestDB comes
-with a script `questdb.sh` for Linux/FreeBSD and an executable `questdb.exe` for
-Windows. If you are looking for macOS, please check our
-[Homebrew](/docs/get-started/homebrew) section.
+export const platforms = [
+  { label: "Any (no JVM)", value: "noJre" },
+  { label: "Linux", value: "linux" },
+  { label: "FreeBSD", value: "bsd" },
+  { label: "Windows", value: "windows" },
+];
 
-## Download
-
-You can find the latest binaries on the [Get QuestDB](/get-questdb) page. The
-release notes are on our [GitHub release]({@githubUrl@}/releases) page.
+This page describes how to download and run QuestDB via binaries. QuestDB comes with a `questdb.sh` script on Linux or FreeBSD, and a `questdb.exe` executable on Windows. For macOS, check out [Homebrew](/docs/get-started/homebrew).
 
 ## Prerequisites
 
-### "Any (no JVM)" version
+### Java 11
 
-The file is named:
-
-<InterpolateReleaseData
-  renderText={(release) => {
-    return (
-      <CodeBlock className="language-shell">
-        {`questdb-${release.name}-no-jre-bin.tar.gz`}
-      </CodeBlock>
-    )
-  }}
-/>
-
-This binary is approximately 4MB.
-
-#### Java 11
-
-When using this binary you will need to have Java 11 installed locally. You can
-check which version is already installed on your system with:
+You need to have Java 11 installed locally. To check your installed version:
 
 ```shell
 java -version
 ```
 
-If you do not already have Java installed, download and install the package for
-your operating system. We support:
+If you do not have Java installed, install one of the following supported packages for your operating system:
 
 - AdoptOpenJDK
 - Amazon Corretto
 - OpenJDK
 - Oracle Java
 
-Other Java distributions are most likely working but we are not running tests on
-them.
+Other Java distributions might work but are not tested.
 
 #### `JAVA_HOME`
 
-The environment variable `JAVA_HOME` needs to be set to your JDK's installation
+The environment variable `JAVA_HOME` needs to point to your Java 11 installation
 folder.
 
-### Your operating system version
-
-The file is named:
+## Download the binaries
 
 <!-- prettier-ignore-start -->
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+<Tabs
+  defaultValue="noJre"
+  values={platforms}
+>
+  {platforms.map((platform) => (
+    <TabItem key={platform} value={platform.value}>
+      <InterpolateReleaseData
+        renderText={(release) => {
+          const assets = getAssets(release)
+          const href = assets[platform.value].href
+          return (
+            <a href={href} rel="noopener noreferrer" target="_blank">
+              {href.split("/").reverse()[0]}
+            </a>
+          )
+        }}
+      />
+    </TabItem>
+  ))}
+</Tabs>
 
-<Tabs defaultValue="linux" values={[
-  { label: "Linux", value: "linux" },
-  { label: "FreeBSD", value: "bsd" },
-  { label: "Windows", value: "windows" },
+<!-- prettier-ignore-end -->
+
+The Java runtime is packaged directly with QuestDB and you do not need anything else.
+
+## Extract the tarballs
+
+<!-- prettier-ignore-start -->
+
+<Tabs defaultValue="noJre" values={platforms}>
+  {platforms.map((platform) => (
+    <TabItem key={platform} value={platform.value}>
+      <InterpolateReleaseData
+        renderText={(release) => {
+          const assets = getAssets(release)
+          const href = assets[platform.value].href
+          return (
+            <CodeBlock className="language-shell">
+              {`tar -xvf ${href.split("/").reverse()[0]}`}
+            </CodeBlock>
+          )
+        }}
+      />
+    </TabItem>
+  ))}
+</Tabs>
+
+<!-- prettier-ignore-end -->
+
+## Run QuestDB
+
+<!-- prettier-ignore-start -->
+
+<Tabs defaultValue="nix"
+values={[
+  { label: "Linux/FreeBSD", value: "nix" },
+  { label: "Windows", value: "windows" }
 ]}>
 
 <!-- prettier-ignore-end -->
 
-<TabItem value="linux">
+<TabItem value="nix">
 
 
-<InterpolateReleaseData
-  renderText={(release) => {
-    return (
-      <CodeBlock className="language-shell">
-        {`questdb-${release.name}-rt-linux-amd64.tar.gz`}
-      </CodeBlock>
-    )
-  }}
-/>
-
-</TabItem>
-
-
-<TabItem value="bsd">
-
-
-<InterpolateReleaseData
-  renderText={(release) => {
-    return (
-      <CodeBlock className="language-shell">
-        {`questdb-${release.name}-rt-freebsd-amd64.tar.gz`}
-      </CodeBlock>
-    )
-  }}
-/>
+```shell
+./questdb.sh start
+```
 
 </TabItem>
 
@@ -114,124 +123,31 @@ import TabItem from "@theme/TabItem"
 <TabItem value="windows">
 
 
-<InterpolateReleaseData
-  renderText={(release) => {
-    return (
-      <CodeBlock className="language-shell">
-        {`questdb-${release.name}-rt-windows-amd64.tar.gz`}
-      </CodeBlock>
-    )
-  }}
-/>
+```shell
+questdb.exe start
+```
 
 </TabItem>
 
 
 </Tabs>
-
-
-This binary weights around 20MB, this depends on your operating system.
-
-When using this binary, you do not need anything on your machine, the Java
-runtime is packaged directly with QuestDB.
-
-## Extract the tarball
-
-<!-- prettier-ignore-start -->
-
-<Tabs defaultValue="any" values={[
-  { label: "Any (no JVM)", value: "any" },
-  { label: "Linux", value: "linux" },
-  { label: "FreeBSD", value: "bsd" },
-  { label: "Windows", value: "windows" },
-]}>
-
-<!-- prettier-ignore-end -->
-
-<TabItem value="any">
-
-
-<InterpolateReleaseData
-  renderText={(release) => {
-    return (
-      <CodeBlock className="language-shell">
-        {`tar -xvf questdb-${release.name}-no-jre-bin.tar.gz`}
-      </CodeBlock>
-    )
-  }}
-/>
-
-</TabItem>
-
-
-<TabItem value="linux">
-
-
-<InterpolateReleaseData
-  renderText={(release) => {
-    return (
-      <CodeBlock className="language-shell">
-        {`tar -xvf questdb-${release.name}-rt-linux-amd64.tar.gz`}
-      </CodeBlock>
-    )
-  }}
-/>
-
-</TabItem>
-
-
-<TabItem value="bsd">
-
-
-<InterpolateReleaseData
-  renderText={(release) => {
-    return (
-      <CodeBlock className="language-shell">
-        {`tar -xvf questdb-${release.name}-rt-freebsd-amd64.tar.gz`}
-      </CodeBlock>
-    )
-  }}
-/>
-
-</TabItem>
-
-
-<TabItem value="windows">
-
-
-<InterpolateReleaseData
-  renderText={(release) => {
-    return (
-      <CodeBlock className="language-shell">
-        {`tar -xvf questdb-${release.name}-rt-windows-amd64.tar.gz`}
-      </CodeBlock>
-    )
-  }}
-/>
-
-</TabItem>
-
-
-</Tabs>
-
 
 ### Upgrade QuestDB version
 
 :::note
 
-Check the [release note](https://github.com/questdb/questdb/releases) and ensure
+Check the [release notes](https://github.com/questdb/questdb/releases) and ensure
 that necessary [backup](/docs/operations/backup/) is completed.
 
 :::
 
-To upgrade QuestDB version, overwrite the binaries folder with new binaries and
-then restart the instance:
+To upgrade the QuestDB version: stop the instance, overwrite the binaries folder with new binaries, and then restart the instance:
 
 <!-- prettier-ignore-start -->
 
-<Tabs defaultValue="nix" 
-values={[ 
-  { label: "Linux/FreeBSD", value: "nix" }, 
+<Tabs defaultValue="nix"
+values={[
+  { label: "Linux/FreeBSD", value: "nix" },
   { label: "Windows", value: "windows" }
 ]}>
 
@@ -242,6 +158,9 @@ values={[
 
 ```shell
 ./questdb.sh stop
+
+(Overwrite the binaries folder with new binaries)
+
 ./questdb.sh start
 ```
 
@@ -253,6 +172,9 @@ values={[
 
 ```shell
 questdb.exe stop
+
+(Overwrite the binaries folder with new binaries)
+
 questdb.exe start
 ```
 
