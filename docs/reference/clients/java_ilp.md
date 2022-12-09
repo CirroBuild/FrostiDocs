@@ -3,48 +3,54 @@ title: Java ILP client
 description: Introducing QuestDB Java ILP Client
 ---
 
+<!-- prettier-ignore-start -->
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+import CodeBlock from "@theme/CodeBlock"
+import InterpolateReleaseData from "../../../src/components/InterpolateReleaseData"
+import { RemoteRepoExample } from '@theme/RemoteRepoExample'
+
+<!-- prettier-ignore-end -->
+
 ## Quickstart
 
 Add a QuestDB as a dependency to your build project:
 
 <!-- prettier-ignore-start -->
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
-import { RemoteRepoExample } from '@theme/RemoteRepoExample'
-
-<Tabs defaultValue="maven" values={[
-{ label: "Maven", value: "maven" },
-{ label: "Gradle", value: "gradle" },
-]}>
+<Tabs
+  defaultValue="maven"
+  values={[
+    { label: "Maven", value: "maven" },
+    { label: "Gradle", value: "gradle" },
+  ]}
+>
+  <TabItem value="maven">
+    <InterpolateReleaseData
+      renderText={(release) => (
+        <CodeBlock className="language-xml">
+          {`<dependency>
+  <groupId>org.questdb</groupId>
+  <artifactId>questdb</artifactId>
+  <version>${release.name}</version>
+</dependency>`}
+        </CodeBlock>
+      )}
+    />
+  </TabItem>
+  <TabItem value="gradle">
+    <InterpolateReleaseData
+      renderText={(release) => (
+        <CodeBlock className="language-text">
+          {`compile group: 'org.questdb', name: 'questdb', version: '${release.name}'`}
+        </CodeBlock>
+      )}
+    />
+  </TabItem>
+</Tabs>
 
 <!-- prettier-ignore-end -->
-
-<TabItem value="maven">
-
-
-```xml
-<dependency>
-    <groupId>org.questdb</groupId>
-    <artifactId>questdb</artifactId>
-    <version>6.4.3</version>
-</dependency>
-```
-
-</TabItem>
-
-
-<TabItem value="gradle">
-
-
-```text
-compile group: 'org.questdb', name: 'questdb', version: '6.4.3'
-```
-
-</TabItem>
-
-
-</Tabs>
 
 
 The code bellow creates an instance of a client, configures it to connect to a
