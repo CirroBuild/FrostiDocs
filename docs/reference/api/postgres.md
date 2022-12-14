@@ -12,12 +12,12 @@ QuestDB. Some features that exists for Postgres do not apply to QuestDB.
 
 ## Examples
 
-We provide examples in a number of programming languages.
-See our "develop" docs for:
+We provide examples in a number of programming languages. See our "develop" docs
+for:
 
-* [Inserting](/docs/develop/insert-data#postgresql-wire-protocol)
-* [Querying](/docs/develop/query-data#postgresql-wire-protocol)
-* [Updating](/docs/develop/update-data#postgres-compatibility)
+- [Inserting](/docs/develop/insert-data#postgresql-wire-protocol)
+- [Querying](/docs/develop/query-data#postgresql-wire-protocol)
+- [Updating](/docs/develop/update-data#postgres-compatibility)
 
 ## Compatibility
 
@@ -35,21 +35,20 @@ See our "develop" docs for:
 Examples which demonstrate how to use Postgres clients in a number of different
 languages can be found on the following pages:
 
-- [Insert data](/docs/develop/insert-data#postgresql-wire-protocol)
-  demonstrates how to use the parameterized queries and prepared statements to
-  insert data.
+- [Insert data](/docs/develop/insert-data#postgresql-wire-protocol) demonstrates
+  how to use the parameterized queries and prepared statements to insert data.
 - [Query data](/docs/develop/query-data#postgresql-wire-protocol) shows how to
   run queries against tables.
 - [Update data](/docs/develop/update-data#postgres-compatibility) shows how to
-  update tables.  
+  update tables.
 
 ### List of supported connection properties
 
 | Name       | Example                    | Description                                                                                                                          |
 | ---------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `database` | qdb                        | Should be set to any value for example `qdb`, database name is ignored, QuestDB does not have database instance name                 |
-| `user`     | admin                      | User name configured in `pg.user` property in `server.conf`. Default value is `admin`                                                |
-| `password` | quest                      | Password from `pg.password` property in `server.conf`. Default value is `quest`                                                      |
+| `user`     | admin                      | User name configured in `pg.user` or `pg.readonly.user` property in `server.conf`. Default value is `admin`                          |
+| `password` | quest                      | Password from `pg.password` or `pg.readonly.password` property in `server.conf`. Default value is `quest`                            |
 | `options`  | -c statement_timeout=60000 | The only supported option is `statement_timeout`. It specifies maximum execution time in milliseconds for SELECT or UPDATE statement |
 
 ### List of unsupported features
@@ -88,7 +87,6 @@ Support for `SELECT`, `INSERT`, `UPDATE`, `CREATE`, `DROP`, `TRUNCATE`.
 #### [ruby-pg](https://github.com/ged/ruby-pg) (Ruby) `1.4.3`
 
 #### [pg_connect](https://www.php.net/manual/en/function.pg-connect.php) (PHP) `8.1.0`
- 
 
 ### Drivers
 
