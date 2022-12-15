@@ -172,7 +172,7 @@ the Kafka Connect connector.
 The connector supports the following configuration options:
 
 | Name                              | Type      | Example                                                     | Default            | Meaning                                                    |
-|-----------------------------------|-----------|-------------------------------------------------------------|--------------------|------------------------------------------------------------|
+| --------------------------------- | --------- | ----------------------------------------------------------- | ------------------ | ---------------------------------------------------------- |
 | topics                            | `string`  | orders                                                      | N/A                | Topics to read from                                        |
 | key.converter                     | `string`  | <sub>org.apache.kafka.connect.storage.StringConverter</sub> | N/A                | Converter for keys stored in Kafka                         |
 | value.converter                   | `string`  | <sub>org.apache.kafka.connect.json.JsonConverter</sub>      | N/A                | Converter for values stored in Kafka                       |
@@ -185,6 +185,7 @@ The connector supports the following configuration options:
 | timestamp.units                   | `string`  | micros                                                      | auto               | Designated timestamp field units                           |
 | include.key                       | `boolean` | false                                                       | true               | Include message key in target table                        |
 | symbols                           | `string`  | instrument,stock                                            | N/A                | Comma separated list of columns that should be symbol type |
+| doubles                           | `string`  | volume,price                                                | N/A                | Comma separated list of columns that should be double type |
 | username                          | `string`  | user1                                                       | admin              | User name for QuestDB. Used only when token is non-empty   |
 | token                             | `string`  | <sub>QgHCOyq35D5HocCMrUGJinEsjEscJlC</sub>                  | N/A                | Token for QuestDB authentication                           |
 | tls                               | `boolean` | true                                                        | false              | Use TLS for QuestDB connection                             |
@@ -230,13 +231,15 @@ The connector supports
 If the message contains a timestamp field, the connector can use it as a
 timestamp for the row. The field name must be configured using the
 `timestamp.field.name` option. The field must either be an integer or a
-timestamp. When the field is set to an integer, the connector will autodetect its units. 
-This works for timestamps after 04/26/1970, 5:46:40 PM. The units can also be configured
-explicitly using the `timestamp.units` configuration, which supports the following values:
+timestamp. When the field is set to an integer, the connector will autodetect
+its units. This works for timestamps after 04/26/1970, 5:46:40 PM. The units can
+also be configured explicitly using the `timestamp.units` configuration, which
+supports the following values:
+
 - `nanos`
 - `micros`
 - `millis`
--  `auto` (default)
+- `auto` (default)
 
 ### Symbol
 
@@ -245,10 +248,39 @@ QuestDB supports a special type called
 configuration option to specify which columns should be created as the `symbol`
 type.
 
+### Numeric type inference for floating point type
+
+When a configured Kafka Connect deserializer provides a schema, the connector
+uses it to determine column types. If a schema is unavailable, the connector
+infers the type from the value. This might produce unexpected results for
+floating point numbers, which may be interpreted as `long` initially and
+generates an error.
+
+Consider this example:
+
+```json
+{
+  "instrument": "BTC-USD",
+  "volume": 42
+}
+```
+
+Kafka Connect JSON converter deserializes the `volume` field as a `long` value.
+The connector sends it to the QuestDB server as a `long` value. If the target
+table does not have a column `volume`, the database creates a `long` column. If
+the next message contains a floating point value for the `volume` field, the
+connector sends it to QuestDB as a `double` value. This causes an error because
+the existing column `volume` is of type `long`.
+
+To avoid this problem, the connector can be configured to send selected numeric
+columns as `double` regardless of the actual initial input value. Use the
+`doubles` configuration option to specify which columns should the connector
+always send as the `double` type.
+
 ### Target table considerations
 
-When a target table does not exist in QuestDB then it will be created
-automatically. This is the recommended approach for development and testing.
+When a target table does not exist in QuestDB, it will be created automatically.
+This is the recommended approach for development and testing.
 
 In production, it's recommended to use the SQL
 [CREATE TABLE](https://questdb.io/docs/reference/sql/create-table/) keyword,
