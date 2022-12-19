@@ -89,7 +89,7 @@ const config = {
           copyright: customFields.copyright,
         },
         showReadingTime: true,
-        postsPerPage: 12,
+        postsPerPage: 1000,
         blogPostComponent: require.resolve(
           "./src/theme/BlogPostPage/index.tsx",
         ),

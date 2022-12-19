@@ -3,10 +3,12 @@ import type { Props as BlogPostItemProps } from "@theme/BlogPostItem"
 import { Chip } from "../Chip"
 import styles from "./styles.module.css"
 import type { FrontMatter } from "../"
+import Link from "@docusaurus/Link"
 
 type Props = {
   content: Omit<BlogPostItemProps, "children">
   forcedTag?: { label: string; permalink: string }
+  belowFold: boolean
 }
 
 const ExternalChip = ({ permalink }) => {
@@ -22,7 +24,7 @@ const ExternalChip = ({ permalink }) => {
   )
 }
 
-export const ListItem = ({ forcedTag, content }: Props) => {
+export const ListItem = ({ forcedTag, content, belowFold }: Props) => {
   const tag = forcedTag ?? content.metadata.tags[0] ?? {}
   const frontMatter: FrontMatter = content.frontMatter
   const isExternal = Boolean(frontMatter.permalink)
@@ -40,11 +42,13 @@ export const ListItem = ({ forcedTag, content }: Props) => {
   return (
     <div className={styles.root}>
       <div className={styles.imageBox}>
-        <a
-          href={postUrl}
-          className={styles.image}
-          style={{ backgroundImage: `url(${imageUrl})` }}
-        />
+        <Link to={postUrl} className={styles.image}>
+          <img
+            loading={belowFold ? "lazy" : "eager"}
+            src={imageUrl}
+            alt={`Banner for blog post with title "${content.metadata.title}"`}
+          />
+        </Link>
         {isExternal && <ExternalChip permalink={postUrl} />}
       </div>
 
@@ -59,7 +63,7 @@ export const ListItem = ({ forcedTag, content }: Props) => {
         </div>
 
         <h3 className={styles.title}>
-          <a href={postUrl}>{content.metadata.title}</a>
+          <Link to={postUrl}>{content.metadata.title}</Link>
         </h3>
         <div className={styles.author}>
           by {author} on {content.metadata.formattedDate}

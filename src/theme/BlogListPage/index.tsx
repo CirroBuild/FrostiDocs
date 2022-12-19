@@ -128,10 +128,11 @@ function BlogListPage(props: Props): JSX.Element {
         </h2>
 
         <div className={styles.posts}>
-          {posts.map(({ content }) => (
+          {posts.map(({ content }, i) => (
             <ListItem
               key={content.metadata.permalink}
               content={content}
+              belowFold={i > 5}
               forcedTag={
                 isTagsPage
                   ? {

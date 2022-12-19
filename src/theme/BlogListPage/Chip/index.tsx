@@ -1,6 +1,7 @@
 import clsx from "clsx"
 import React from "react"
 import styles from "./styles.module.css"
+import Link from "@docusaurus/Link"
 
 type Skin = "primary" | "secondary"
 type Size = "small" | "medium" | "large"
@@ -33,12 +34,12 @@ export const Chip = ({
   size = "medium",
   active,
 }: Props) => (
-  <a
+  <Link
     className={clsx(styles.root, className, skins[skin], sizes[size], {
       [styles.active]: active,
     })}
-    href={permalink}
+    to={permalink}
   >
     {label}
-  </a>
+  </Link>
 )
