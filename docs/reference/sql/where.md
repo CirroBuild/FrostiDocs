@@ -139,7 +139,7 @@ SELECT * FROM users WHERE NOT name in('Tim', 'Tom');
 ## Numeric
 
 QuestDB can filter numeric values based on equality, inequality, comparison, and
-proximity
+proximity.
 
 :::note
 
@@ -280,7 +280,7 @@ SELECT scores WHERE ts = '2010-01-12T00:02:26.000000Z';
 
 ### Time range
 
-Return results within a defined range
+Returns results within a defined range.
 
 #### Syntax
 
@@ -308,23 +308,28 @@ SELECT * FROM scores WHERE ts IN '2018-05-23T12:15';
 
 ### Time range with modifier
 
-You can apply a modifier to further customize the range. The algorithm will
-calculate the resulting range by modifying the upper bound of the original range
-by the modifier parameter. An optional occurrence can be set to apply the time
-range repeatedly for a set number of times.
+You can apply a modifier to further customize the range. The modifier extends
+the upper bound of the original timestamp based on the modifier parameter. An
+optional interval with occurrence can be set, to apply the search in the given
+time range repeatedly, for a set number of times.
 
 #### Syntax
 
 ![Flow chart showing the syntax of the WHERE clause with a timestamp/modifier comparison](/img/docs/diagrams/whereTimestampIntervalSearch.svg)
 
-- `period` is an unsigned integer.
+- `timestamp` is the original time range for the query.
+- `modifier` is an unsigned integer modifying the upper bound applying to the
+`timestamp`.
 <!--change to signed when this is merged: https://github.com/questdb/questdb/issues/2509
 
   - A `positive` value extends the selected period.
   - A `negative` value reduces the selected period.
 -->
-- `interval` is an unsigned integer.
-- `repetition` is an unsigned integer.
+
+- `interval` is an unsigned integer indicating the desired interval period for
+  the time range.
+- `repetition` is an unsigned integer indicating the number of times the
+  interval should be applied.
 
 #### Examples
 
@@ -366,16 +371,19 @@ Modifying the interval:
 SELECT * FROM scores WHERE ts IN '2018-01-01;1d;1y;2';
 
 ```
-The range is Jan 1 2018 with a one-year interval and the total occurrence is two.
+
+The range is extended by one day from Jan 1 2018, with a one-year interval,
+repeated twice. This means that the query searches for results on Jan 1-2 in
+2018 and in 2019:
 
 | ts                          | score |
 | --------------------------- | ----- |
 | 2018-01-01T00:00:00.000000Z | 123.4 |
 | ...                         | ...   |
-| 2018-01-01T23:59:59.999999Z | 113.8 |
-| 2019-01-01T00:00:00.000000Z | 125.7 |
+| 2018-01-02T23:59:59.999999Z | 110.3 |
+| 2019-01-01T00:00:00.000000Z | 128.7 |
 | ...                         | ...   |
-| 2019-01-01T23:59:59.999999Z | 103.9 |
+| 2019-01-02T23:59:59.999999Z | 103.8 |
 
 ### IN with multiple arguments
 

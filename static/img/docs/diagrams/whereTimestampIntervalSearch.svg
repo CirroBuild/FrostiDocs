@@ -45,10 +45,10 @@
             <rect x="373" y="1" width="88" height="32" class="nonterminal"/>
             <text class="nonterminal" x="383" y="21">timestamp</text></a><rect x="483" y="3" width="24" height="32" rx="10"/>
          <rect x="481" y="1" width="24" height="32" class="terminal" rx="10"/>
-         <text class="terminal" x="491" y="21">;</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#multiplier" xlink:title="multiplier">
+         <text class="terminal" x="491" y="21">;</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#modifier" xlink:title="modifier">
             <rect x="527" y="3" width="78" height="32"/>
             <rect x="525" y="1" width="78" height="32" class="nonterminal"/>
-            <text class="nonterminal" x="535" y="21">multiplier</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#s" xlink:title="s">
+            <text class="nonterminal" x="535" y="21">modifier</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#s" xlink:title="s">
             <rect x="645" y="3" width="26" height="32"/>
             <rect x="643" y="1" width="26" height="32" class="nonterminal"/>
             <text class="nonterminal" x="653" y="21">s</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#m" xlink:title="m">
