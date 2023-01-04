@@ -45,7 +45,7 @@ PARTITION BY DAY;
 
 :::caution
 
-Use `DROP PARTITION` with care as QuestDB **cannot recover data from dropped
+Use `DROP PARTITION` with care, as QuestDB **cannot recover data from dropped
 partitions**.
 
 :::

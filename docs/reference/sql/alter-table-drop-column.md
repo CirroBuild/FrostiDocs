@@ -18,7 +18,7 @@ Windows in presence of active readers.
 
 :::caution
 
-Use `DROP COLUMN` with care as QuestDB **cannot recover data from dropped
+Use `DROP COLUMN` with care, as QuestDB **cannot recover data from dropped
 columns**!
 
 :::

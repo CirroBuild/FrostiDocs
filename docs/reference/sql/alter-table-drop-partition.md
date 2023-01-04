@@ -13,7 +13,7 @@ and will not continue through a list of partitions if one fails to be dropped.
 
 :::caution
 
-Use `DROP PARTITION` with care as QuestDB **cannot recover data from dropped
+Use `DROP PARTITION` with care, as QuestDB **cannot recover data from dropped
 partitions**!
 
 :::
