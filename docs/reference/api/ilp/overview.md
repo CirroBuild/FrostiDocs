@@ -99,6 +99,43 @@ CREATE TABLE readings (
 ) TIMESTAMP(timestamp) PARTITION BY DAY;
 ```
 
+### Designated timestamp
+
+Designated timestamp is the trailing value of an ILP message. It is optional,
+and when present, is a timestamp in Epoch nanoseconds. When the timestamp is
+omitted, the server will insert each message using the system clock as the row
+timestamp.
+
+:::warning
+
+- While
+  [`columnset` timestamp type units](/docs/reference/api/ilp/columnset-types#timestamp)
+  are microseconds, the designated timestamp units are nanoseconds by default,
+  and can be overridden via the `line.tcp.timestamp` configuration property.
+
+- The native timestamp format used by QuestDB is a Unix timestamp in microsecond
+  resolution; timestamps in nanoseconds will be parsed and truncated to
+  microseconds.
+
+:::
+
+```shell title="Example of ILP message with desginated timestamp value"
+tracking,loc=north val=200i 1000000000\n
+```
+
+```shell title="Example of ILP message sans timestamp"
+tracking,loc=north val=200i\n
+```
+
+:::note
+
+We recommend populating designated timestamp via trailing value syntax above.
+
+:::
+
+It is also possible to populate designated timestamp via `columnset`. Please see
+[mixed timestamp](/docs/reference/api/ilp/columnset-types#timestamp) reference.
+
 ### Irregularly-structured data
 
 InfluxDB line protocol makes it possible to send data under different shapes.
@@ -216,35 +253,3 @@ supported value types:
 [Float](/docs/reference/api/ilp/columnset-types#float),
 [String](/docs/reference/api/ilp/columnset-types#string) and
 [Timestamp](/docs/reference/api/ilp/columnset-types#timestamp)
-
-### Designated timestamp
-
-Designated timestamp is the trailing value of an ILP message. It is optional,
-and when present, is a timestamp in Epoch nanoseconds. When the timestamp is
-omitted, the server will insert each message using the system clock as the row
-timestamp.
-
-:::warning
-
-While `columnset` timestamp type units are microseconds, the designated
-timestamp units are nanoseconds. These are default units, which can be
-overridden via the `line.tcp.timestamp` configuration property.
-
-:::
-
-```shell title="Example of ILP message with desginated timestamp value"
-tracking,loc=north val=200i 1000000000\n
-```
-
-```shell title="Example of ILP message sans timestamp"
-tracking,loc=north val=200i\n
-```
-
-:::note
-
-We recommend populating designated timestamp via trailing value syntax above.
-
-:::
-
-It is also possible to populate designated timestamp via `columnset`. Please see
-[mixed timestamp](/docs/reference/api/ilp/columnset-types#timestamp) reference.

@@ -22,9 +22,14 @@ A designated timestamp is elected by using the
 
 :::info
 
-Checking if tables contain a designated timestamp column can be done via the
-`tables()` and `table_columns()` functions which are described in the
-[meta functions](/docs/reference/function/meta) documentation page.
+- Checking if tables contain a designated timestamp column can be done via the
+  `tables()` and `table_columns()` functions which are described in the
+  [meta functions](/docs/reference/function/meta) documentation page.
+
+- The native timestamp format used by QuestDB is a Unix timestamp in microsecond
+  resolution. See
+  [Timestamps in QuestDB](/docs/guides/working-with-timestamps-timezones#timestamps-in-questdb)
+  for more details.
 
 :::
 

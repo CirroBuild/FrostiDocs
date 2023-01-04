@@ -8,14 +8,22 @@ description: Timestamp function reference documentation.
 [designated timestamp](/docs/concept/designated-timestamp):
 
 - during a [CREATE TABLE](/docs/reference/sql/create-table#timestamp) operation
-- during a [SELECT](/docs/reference/sql/select#timestamp) operation (`dynamic timestamp`)
-- when ingesting data via ILP, for tables that do not already exist in QuestDB, partitions are applied automatically by day by default with a `timestamp` column
+- during a [SELECT](/docs/reference/sql/select#timestamp) operation
+  (`dynamic timestamp`)
+- when ingesting data via ILP, for tables that do not already exist in QuestDB,
+  partitions are applied automatically by day by default with a `timestamp`
+  column
 
 :::info
 
-Checking if tables contain a designated timestamp column can be done via the
-`tables()` and `table_columns()` functions which are described in the
-[meta functions](/docs/reference/function/meta) documentation page.
+- Checking if tables contain a designated timestamp column can be done via the
+  `tables()` and `table_columns()` functions which are described in the
+  [meta functions](/docs/reference/function/meta) documentation page.
+
+- The native timestamp format used by QuestDB is a Unix timestamp in microsecond
+  resolution. See
+  [Timestamps in QuestDB](/docs/guides/working-with-timestamps-timezones#timestamps-in-questdb)
+  for more details.
 
 :::
 
