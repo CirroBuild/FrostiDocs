@@ -98,11 +98,13 @@ export const Integration = () => (
 
           <>
             <SvgImage
+              title={logo.alt}
               image={React.createElement(logo.svg, {
                 className: styles.logo,
                 alt: logo.alt,
                 width: logo.width ?? 50,
                 height: logo.height ?? 50,
+                loading: "lazy",
               })}
             />
             {label}

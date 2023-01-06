@@ -47,8 +47,8 @@ const Availability = ({ status }: { status: Status }) => {
           <Dialog.Trigger>
             <span className={style.link}>Contact us</span>
           </Dialog.Trigger>
-          <Dialog.Content title="Contact Us">
-            <ContactForm interestedIn="sla" />
+          <Dialog.Content>
+            <ContactForm interestedIn="sla" modal />
           </Dialog.Content>
         </Dialog>
       )

@@ -48,7 +48,7 @@ const Footer = () => {
           alt="QuestDB logo"
           className={styles.logo}
           src="/img/footer/questdb.svg"
-          title="QuestDB - Fastest open source database for time series and analytics"
+          title="QuestDB - Fastest open source database for time-series and analytics"
           width={108}
           height={27}
         />

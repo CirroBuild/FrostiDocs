@@ -49,8 +49,6 @@
 }
 
 .success {
-  position: absolute;
-  --ifm-paragraph-margin-bottom: 0;
   font-size: var(--font-size-large);
   font-weight: var(--ifm-font-weight-bold);
 }

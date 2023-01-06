@@ -10,10 +10,10 @@ import { ActionFooter } from "../components/ActionFooter"
 import { Section } from "../components/Section"
 import { UseCases } from "../modules/use-cases"
 import { Integration } from "../modules/integration"
-import { FeatureTabs } from "../modules/feature-tabs"
 
 import feCss from "../css/index/feature.module.css"
 import seCss from "../css/section.module.css"
+import LiveDemo from "../modules/index-live-demo"
 
 const Cards = () => (
   <Section odd fullWidth>
@@ -94,6 +94,7 @@ const Console = () => (
 
     <Section center>
       <img
+        loading="lazy"
         alt="Artistic view of QuestDB's Web Console split in 3 components: the navigation tree, the SQL code editor and data displayed as a chart"
         width={600}
         height={467}
@@ -107,7 +108,7 @@ const Home = () => (
   <Layout
     canonical=""
     description={customFields.description}
-    title="QuestDB | Time series data, faster"
+    title="QuestDB | Fast SQL for time-series"
     replaceTitle
   >
     <Header />
@@ -116,15 +117,10 @@ const Home = () => (
       <UseCases />
     </Section>
 
+    <LiveDemo />
+
     <Section fullWidth odd>
       <Integration />
-    </Section>
-
-    <Section>
-      <Section.Title size="small" center>
-        Why choose QuestDB?
-      </Section.Title>
-      <FeatureTabs />
     </Section>
 
     <QueryScroller />

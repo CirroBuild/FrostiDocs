@@ -4,13 +4,13 @@ import Button from "@theme/Button"
 import { Dialog } from "../../components/Dialog"
 import { ContactForm } from "./ContactForm"
 
-export const GetAccess = () => (
+export const GetAccess = ({ trigger }: { trigger?: React.ReactNode }) => (
   <Dialog>
     <Dialog.Trigger>
-      <Button variant="primary">Join public preview</Button>
+      {trigger ?? <Button variant="primary">Join private preview</Button>}
     </Dialog.Trigger>
-    <Dialog.Content title="Join Public Preview" maxWidth="40rem">
-      <ContactForm interestedIn="cloud" />
+    <Dialog.Content>
+      <ContactForm interestedIn="cloud" modal />
     </Dialog.Content>
   </Dialog>
 )

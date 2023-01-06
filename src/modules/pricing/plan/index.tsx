@@ -6,6 +6,7 @@ import clsx from "clsx"
 
 import { Dialog } from "../../../components/Dialog"
 import { ContactForm } from "../../cloud/ContactForm"
+import styled from "styled-components"
 
 export type PricingPlan = {
   type: "entry" | "performant" | "high-performance"
@@ -16,6 +17,10 @@ export type PricingPlan = {
   subtext: string
   highlighted?: boolean
 }
+
+const StyledDialogContent = styled(Dialog.Content)`
+  padding: 0;
+`
 
 export const Plan = (plan: PricingPlan) => (
   <article className={style.root}>
@@ -48,9 +53,9 @@ export const Plan = (plan: PricingPlan) => (
         <Dialog.Trigger>
           <Button size="small">Get Access</Button>
         </Dialog.Trigger>
-        <Dialog.Content title="Join Public Preview">
-          <ContactForm interestedIn={plan.type} />
-        </Dialog.Content>
+        <StyledDialogContent>
+          <ContactForm interestedIn={plan.type} modal />
+        </StyledDialogContent>
       </Dialog>
     </div>
   </article>

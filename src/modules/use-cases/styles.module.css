@@ -23,7 +23,7 @@
 
 .list {
   list-style-type: none;
-  margin: 0 0 4rem 0;
+  margin: 0 0 2rem 0;
   padding: 0;
   width: 100%;
   display: flex;
@@ -42,6 +42,29 @@
   color: var(--palette-pink);
 }
 
-.button {
+.link, .link:hover {
+  text-transform: uppercase;
+  font-size: var(--font-size-normal);
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
   margin-top: auto;
+}
+
+:global(html[data-theme="light"]) .link,
+:global(html[data-theme="light"]) .link:hover {
+  color: var(--palette-charade);
+}
+
+.link {
+  opacity: 0.85;
+}
+
+.link:hover {
+  opacity: 1;
+}
+
+.link::after {
+  content: ">";
+  margin-left: 0.5rem;
 }

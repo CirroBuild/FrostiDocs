@@ -9,7 +9,7 @@ const BookADemo = () => {
 
   return (
     <Layout
-      canonical="/cloud"
+      canonical="/cloud/"
       description="Book a demo for the fastest open source time series database fully managed on the cloud"
       title={title}
       image="/img/pages/cloud/screens-thumb.png"

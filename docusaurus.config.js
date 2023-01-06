@@ -108,9 +108,6 @@ const config = {
     posthog: {
       apiKey: process.env.POSTHOG_API_KEY,
     },
-    announcementBar: {
-      id: "github-star",
-    },
     colorMode: {
       defaultMode: "dark",
       disableSwitch: false,
@@ -157,6 +154,10 @@ const config = {
             {
               label: "QuestDB Cloud",
               to: "/cloud/",
+            },
+            {
+              label: "QuestDB Open Source",
+              to: "/get-questdb/",
             },
             {
               label: "QuestDB Enterprise",

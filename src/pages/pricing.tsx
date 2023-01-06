@@ -40,7 +40,7 @@ const CloudPage = () => (
       </Section.Title>
 
       <Section noGap center>
-        <Button to="/cloud" uppercase={false}>
+        <Button to="/cloud/" uppercase={false}>
           More info
         </Button>
       </Section>

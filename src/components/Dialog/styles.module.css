@@ -21,7 +21,7 @@
   width: 90vw;
   max-width: 50rem;
   max-height: 85vh;
-  padding: 4rem;
+  padding: 2rem;
 }
 
 :global(html[data-theme="light"]) .content {
@@ -50,4 +50,10 @@
   cursor: pointer;
   background-image: url("/img/pages/cloud/close.svg?inline");
   background-color: transparent;
+}
+
+@media screen and (min-width: 600px) {
+  .content {
+    padding: 4rem;
+  }
 }

@@ -108,6 +108,7 @@ function Navbar(): JSX.Element {
               role="img"
               focusable="false"
             >
+              <title>An icon showing a hamburger menu</title>
               <path
                 stroke="currentColor"
                 strokeLinecap="round"
@@ -142,17 +143,10 @@ function Navbar(): JSX.Element {
           <Button
             className={clsx(styles.ctaButton, styles.getQuestdb)}
             size="xsmall"
-            to="/get-questdb/"
             variant="secondary"
+            to="/cloud/"
           >
             Get QuestDB
-          </Button>
-          <Button
-            className={clsx(styles.ctaButton, styles.benchmarkButton)}
-            size="xsmall"
-            to="/blog/tags/benchmark/"
-          >
-            Benchmarks
           </Button>
         </div>
       </div>

@@ -82,7 +82,7 @@ export const PricingChoices = () => {
             <Button uppercase={false}>Contact Us</Button>
           </Dialog.Trigger>
           <Dialog.Content>
-            <ContactForm interestedIn="custom" />
+            <ContactForm interestedIn="custom" modal />
           </Dialog.Content>
         </Dialog>
       </div>

@@ -5,11 +5,17 @@ import customFields from "../../config/customFields"
 import SubscribeIcon from "./subscribeIcon.svg"
 import Subscribe from "../Subscribe"
 import React from "react"
+import SvgImage from "../SvgImage"
 
 export const ActionFooter = () => (
   <div className={footerCss.cards}>
     <ActionCard
-      icon={<FossIcon />}
+      icon={
+        <SvgImage
+          image={<FossIcon />}
+          title="An icon showing wave propagation"
+        />
+      }
       title="Join our developer community"
       description="QuestDB is open source. Follow us on Twitter, star our GitHub repo, and join our developer community on Slack!"
     >
@@ -29,7 +35,12 @@ export const ActionFooter = () => (
     <ActionCard
       title="Subscribe to our newsletter"
       description="Stay up to date with all things QuestDB"
-      icon={<SubscribeIcon />}
+      icon={
+        <SvgImage
+          image={<SubscribeIcon />}
+          title="An icon showing a paper plane"
+        />
+      }
       skin="primary"
     >
       <Subscribe

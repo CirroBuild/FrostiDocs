@@ -1,23 +1,17 @@
-import Button from "@theme/Button"
 import React from "react"
+import Link from "@docusaurus/Link"
 import styles from "./styles.module.css"
 
 const useCases = [
   {
-    logo: {
-      alt:
-        "Speedometer illustration with an indicator pointing to high level speed",
-      src: "/img/pages/index/rawPower.svg",
-      width: 176,
-      height: 113,
-    },
-    title: "Built for performance",
+    title: "Performance",
     uses: [
-      "SIMD-optimized analytics",
-      "Row and column based access",
-      "Vectorized query execution",
-      "Tiny memory footprint",
-      "C++ and zero-GC Java",
+      "2M rows/s per node",
+      "5-10x faster vs Timescale & InfluxDB",
+      "Don’t worry about cardinality",
+      "Columnar storage",
+      "Data partitioned by time",
+      "SIMD-optimized queries",
     ],
     cta: {
       label: "See Benchmarks",
@@ -25,62 +19,43 @@ const useCases = [
     },
   },
   {
-    logo: {
-      alt:
-        "Illustration of a stylized code editor with a chart that shows the result of the query",
-      src: "/img/pages/index/easyToUse.svg",
-      width: 205,
-      height: 113,
-    },
-    title: "Optimized for time series",
+    title: "Developer experience",
     uses: [
-      "Relational model for time series",
-      "Data stored in chronological order",
-      "Time partitioned",
-      "Immediate consistency",
-      "Fast InfluxDB line protocol",
+      "SQL time series extensions",
+      "Built-in SQL optimizer and REST API",
+      "PostgreSQL driver compatibility",
+      "Real-time streaming API",
+      "SQL and time-series joins",
+      "Grafana integration",
     ],
     cta: {
-      label: "View Tutorials",
-      url: "/blog/tags/tutorial/",
+      label: "See live demo",
+      url: "https://demo.questdb.io",
     },
   },
   {
-    logo: {
-      alt: "Illustration of a code editor containing a SQL statement",
-      height: 113,
-      src: "/img/pages/index/featureRich.svg",
-      width: 176,
-    },
-    title: "Implemented with SQL",
+    title: "Operational simplicity",
     uses: [
-      "Time series and relational joins",
-      "Postgres compatibility",
-      "Aggregations and downsampling",
-      "Geospatial-native queries",
-      "Built-in SQL optimizer",
+      "Fully managed hosted cloud",
+      "Elastic cloud instances",
+      "TLS for all protocols",
+      "Online snapshot based backups",
+      "Monitoring dashboards",
+      "SSO authentication",
     ],
 
     cta: {
-      label: "Browse Docs",
-      url: "/docs/",
+      label: "See Cloud",
+      url: "/cloud/",
     },
   },
 ]
 
 export const UseCases = () => (
   <div className={styles.root}>
-    {useCases.map(({ logo, title, uses, cta }, index) => (
+    {useCases.map(({ title, uses, cta }, index) => (
       <div className={styles.card} key={index}>
-        <img
-          alt={logo.alt}
-          className={styles.illustration}
-          src={logo.src}
-          width={logo.width}
-          height={logo.height}
-        />
-
-        <h3>{title}</h3>
+        <h2>{title}</h2>
 
         <ul className={styles.list}>
           {uses.map((use, index) => (
@@ -90,15 +65,9 @@ export const UseCases = () => (
           ))}
         </ul>
 
-        <Button
-          className={styles.button}
-          uppercase={false}
-          newTab={false}
-          size="small"
-          href={cta.url}
-        >
+        <Link className={styles.link} href={cta.url}>
           {cta.label}
-        </Button>
+        </Link>
       </div>
     ))}
   </div>

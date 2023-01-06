@@ -20,7 +20,7 @@ const CoreFeaturesItems: Feature[] = [
     inCloud: "available",
   },
   {
-    title: "Time series-native SQL extensions",
+    title: "Time-series-native SQL extensions",
     inOpenSource: "available",
     inCloud: "available",
   },

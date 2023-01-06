@@ -50,6 +50,12 @@ const svgs = [
   },
 
   {
+    ...logosManifest.netapp,
+    svg: netapp,
+    width: 115,
+  },
+
+  {
     ...logosManifest["central-group"],
     svg: central_group,
   },
@@ -59,12 +65,6 @@ const svgs = [
     svg: prediko,
     width: 120,
     height: 30,
-  },
-
-  {
-    ...logosManifest.netapp,
-    svg: netapp,
-    width: 115,
   },
 
   {
@@ -121,6 +121,7 @@ export const Logos = ({ isDarkTheme }) => (
         className={clsx(styles.logo, { [styles.logoDark]: isDarkTheme })}
       >
         <SvgImage
+          title={`${alt} logo`}
           key={i}
           image={React.createElement(svg, {
             alt,
