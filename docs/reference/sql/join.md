@@ -148,31 +148,34 @@ CROSS JOIN deserts;
 
 ## ASOF JOIN
 
-`ASOF` joins are used on time series data to join two tables based on timestamp
-where timestamps do not exactly match. For a given record at a given timestamp,
-it will return the corresponding record in the other table at the closest
-timestamp **prior to** the timestamp in the first table.
+`ASOF` joins are used on time series data to join two tables based on timestamps
+that do not exactly match. For a given record at a given timestamp, it will
+return the corresponding record in the other table at the closest timestamp
+**prior to** the timestamp in the first table.
 
 :::note
 
-To be able to leverage `ASOF JOIN`, both joined table must have a designated
-`timestamp` column. To designate a column as `timestamp`, please refer to the
-[CREATE TABLE](/docs/reference/sql/create-table) section.
+To be able to leverage `ASOF JOIN`, both joined tables must have a
+[designated timestamp](/docs/concept/designated-timestamp/) column. 
 
 :::
 
 `ASOF` join is performed on tables or result sets that are ordered by time. When
-table is created as ordered by time order of records is enforced and timestamp
-column name is in table metadata. `ASOF` join will use timestamp column from
-metadata.
+a table is created as ordered by time, the order of records is enforced and the
+timestamp column name is in the table metadata. `ASOF` join will use this
+timestamp column from metadata.
 
 Given the following tables:
+
+Table `asks`:
 
 | ts                          | ask |
 | --------------------------- | --- |
 | 2019-10-17T00:00:00.000000Z | 100 |
 | 2019-10-17T00:00:00.200000Z | 101 |
 | 2019-10-17T00:00:00.400000Z | 102 |
+
+Table `bids`:
 
 | ts                          | bid |
 | --------------------------- | --- |
@@ -196,11 +199,12 @@ The above query returns these results:
 | 2019-10-17T00:00:00.300000Z | 102 | 101 |
 | 2019-10-17T00:00:00.500000Z | 103 | 102 |
 
-Note that there is no `ASKS` at timestamp `2019-10-17T00:00:00.100000Z`. The
-`ASOF JOIN` will look for the value in the `BIDS` table that has the closest
-timestamp prior to or equal to the target timestamp.
+Note that there are no records from the `asks` table at timestamp
+`2019-10-17T00:00:00.100000Z`. The `ASOF JOIN` will look for the value in the
+`bids` table that has the closest timestamp prior to or equal to the target
+timestamp.
 
-In case tables do not have designated timestamp column, but data is in
+In case tables do not have a designated timestamp column, but data is in
 chronological order, timestamp columns can be specified at runtime:
 
 ```questdb-sql
@@ -209,7 +213,7 @@ FROM (bids timestamp(ts))
 ASOF JOIN (asks timestamp (ts));
 ```
 
-The query above assumes that there is only one instrument in `BIDS` and `ASKS`
+The query above assumes that there is only one instrument in `bids` and `asks`
 tables and therefore does not use the optional `ON` clause. If both tables store
 data for multiple instruments `ON` clause will allow you to find bids for asks
 with matching instrument value:
@@ -235,11 +239,15 @@ one or no rows joined from the right table per each row from the left table.
 
 Consider the following tables:
 
+Table `asks`:
+
 | ts                          | ask |
 | --------------------------- | --- |
 | 2019-10-17T00:00:00.000000Z | 100 |
 | 2019-10-17T00:00:00.300000Z | 101 |
 | 2019-10-17T00:00:00.400000Z | 102 |
+
+Table `bids`:
 
 | ts                          | bid |
 | --------------------------- | --- |
@@ -277,13 +285,17 @@ tables. For each record from left table splice join will find prevailing record
 from right table and for each record from right table - prevailing record from
 left table.
 
-Considering the following tables.
+Considering the following tables:
+
+Table `asks`:
 
 | ts                          | ask |
 | --------------------------- | --- |
 | 2019-10-17T00:00:00.000000Z | 100 |
 | 2019-10-17T00:00:00.200000Z | 101 |
 | 2019-10-17T00:00:00.400000Z | 102 |
+
+Table `bids`:
 
 | ts                          | bid |
 | --------------------------- | --- |
