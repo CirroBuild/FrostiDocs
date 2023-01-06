@@ -34,7 +34,7 @@ export const Top = () => {
         </div>
 
         <Section noGap center>
-          <ContactForm />
+          <ContactForm interestedIn="cloud" />
         </Section>
       </div>
     </Section>
