@@ -28,6 +28,10 @@
   border-bottom: 1px solid #515466;
 }
 
+html[data-theme='light'] .root tbody tr:not(:last-child) {
+  border-bottom: 1px solid #c3cade;
+}
+
 .root tbody td:first-child {
   text-align: left;
   width: var(--first-col-width);
@@ -40,6 +44,14 @@
   align-items: center;
   padding: 0.5rem 1rem;
   font-size: var(--row-title-font-size);
+}
+
+html[data-theme='light'] .root tbody tr:nth-child(2n) {
+  background-color: #e6e8ef;
+}
+
+html[data-theme='light'] .root tbody tr:nth-child(2n+1) {
+  background-color: var(--ifm-table-stripe-background);
 }
 
 @media screen and (min-width: 800px) {

@@ -54,6 +54,10 @@
   margin-top: 0.15rem;
 }
 
+.bookADemo svg path {
+  fill: var(--ifm-font-color-base);
+}
+
 .bookADemo span {
   margin-left: 0.75rem;
 }

@@ -25,6 +25,10 @@
   color: var(--theme-input-text-color);
 }
 
+html[data-theme='light'] .input {
+  background-color: var(--theme-card-secondary-bg-color);
+}
+
 .submit {
   white-space: nowrap;
 }
