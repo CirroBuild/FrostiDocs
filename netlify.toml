@@ -87,9 +87,12 @@
   to = "/blog/2020/11/26/why-timeseries-data/"
 
 [[redirects]]
+  from = "/blog/2020/03/15/interthread"
+  to = "/blog/2021/11/03/interthread/"
+
+[[redirects]]
   from = "/tutorial/2021/01/13/application-uptime-monitoring-with-python-nuxtjs-questdb"
   to = "/blog/2021/01/13/application-uptime-monitoring-with-python-nuxtjs-questdb/"
-
 
 [[redirects]]
   from = "/tutorial/2021/01/18/low-code-bitcoin-ticker-workflow-with-time-series-database"
@@ -262,6 +265,14 @@
 [[redirects]]
   from = "/blog/2022/09/12/importing-3m-rows-with-io-uring"
   to = "/blog/2022/09/12/importing-300k-rows-with-io-uring/"
+
+[[redirects]]
+  from = "/docs/reference/sql/except-intersect"
+  to = "/docs/reference/sql/union-except-intersect/"
+
+[[redirects]]
+  from = "/docs/reference/sql/timestamp"
+  to = "/docs/reference/function/timestamp/"
 
 [[redirects]]
   from = "/docs/third-party-tools/kafka/"
