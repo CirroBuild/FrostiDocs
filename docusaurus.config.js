@@ -14,7 +14,21 @@ function variable() {
     node.value = node.value.replace(RE_VAR, getVariable)
   }
 
-  function linkVisitor(node) {
+  function linkVisitor(node, vFile) {
+    if (/^(https?:\/\/)(localhost|127\.0\.0\.1)(:\d+)?/.test(node.url)) {
+      console.log(
+        `Linking to ${node.url} is forbidden, changed URL text in ${vFile.path}`,
+      )
+      const { type, value, position } = node.children[0]
+      delete node.title
+      delete node.url
+      delete node.children
+      node.type = type
+      node.value = value
+      node.position = position
+      return
+    }
+
     node.url = node.url.replace(RE_VAR, getVariable)
 
     if (node.title) {
@@ -22,10 +36,10 @@ function variable() {
     }
   }
 
-  function transformer(ast) {
+  function transformer(ast, vFile) {
     visit(ast, "text", textVisitor)
     visit(ast, "code", textVisitor)
-    visit(ast, "link", linkVisitor)
+    visit(ast, "link", (node) => linkVisitor(node, vFile))
   }
 
   return transformer
@@ -42,7 +56,7 @@ const config = {
   projectName: "questdb",
   customFields: customFields,
   onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenMarkdownLinks: "throw",
   plugins: [
     require.resolve("./plugins/fetch-latest-release/index"),
     require.resolve("./plugins/fetch-repo/index"),
