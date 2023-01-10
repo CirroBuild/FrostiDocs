@@ -12,8 +12,7 @@ const CloudPage = () => (
     canonical="/pricing"
     description="Pricing details of QuestDB Cloud. We bring elasticity, availability and security with a fully managed Cloud offering"
     title="Pricing"
-    // @TODO: make banner
-    image="/img/pages/pricing/banner.png"
+    image="/img/pages/cloud/screens-thumb.png"
   >
     <Section>
       <Section.Title level={1} center>
