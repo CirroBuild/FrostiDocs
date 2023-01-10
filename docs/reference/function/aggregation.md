@@ -12,15 +12,15 @@ calculations.
 `avg(value)` calculates simple average of values ignoring missing data (e.g
 `null` values).
 
-**Arguments:**
+### Arguments
 
 - `value` is any numeric value.
 
-**Return value:**
+### Return value
 
 Return value type is `double`.
 
-**Examples:**
+### Examples
 
 ```questdb-sql title="Average transaction amount"
 SELECT avg(amount) FROM transactions;
@@ -34,7 +34,7 @@ SELECT avg(amount) FROM transactions;
 SELECT payment_type, avg(amount) FROM transactions;
 ```
 
-| cash_or_card | avg   |
+| payment_type | avg   |
 | :----------- | :---- |
 | cash         | 22.1  |
 | card         | 27.4  |
@@ -42,19 +42,34 @@ SELECT payment_type, avg(amount) FROM transactions;
 
 ## count
 
-`count()` or `count(*)` - counts rows irrespective of underlying data.
+- `count()` or `count(*)` - counts the number of rows irrespective of underlying data.
+- `count(column_name)` - counts the number of non-null values in a given column. 
 
-**Arguments:**
+### Arguments
 
-- `count` does not require arguments.
+- `count()` does not require arguments.
+- `count(column_name)` - supports the following data types: 
+  - `double`
+  -  `float`
+  -  `integer`
+  -  `character`
+  - `short`
+  - `byte`
+  -  `timestamp`
+  -  `date`
+  -  `long`
+  -  `long256`
+  -  `geohash`
+  -  `string`
+  -  `symbol`
 
-**Return value:**
+### Return value
 
 Return value type is `long`.
 
-**Examples:**
+### Examples
 
-- Count of rows in the transactions table.
+Count of rows in the `transactions` table:
 
 ```questdb-sql
 SELECT count() FROM transactions;
@@ -64,21 +79,44 @@ SELECT count() FROM transactions;
 | :---- |
 | 100   |
 
-- Count of rows in the transactions table aggregated by `payment_type` value.
+Count of rows in the `transactions` table aggregated by the `payment_type` value:
 
 ```questdb-sql
 SELECT payment_type, count() FROM transactions;
 ```
 
-| cash_or_card | count |
+| payment_type | count |
 | :----------- | :---- |
 | cash         | 25    |
 | card         | 70    |
 | null         | 5     |
 
+Count non-null transaction amounts:
+
+```questdb-sql 
+SELECT count(amount) FROM transactions;
+```
+
+| count |
+|:------|
+| 95    |
+               
+Count non-null transaction amounts by `payment_type`:
+
+```questdb-sql 
+SELECT payment_type, count(amount) FROM transactions;
+```
+
+| payment_type | count |
+|:-------------|:------|
+| cash         | 24    |
+| card         | 67    |
+| null         | 4     |
+
+
 :::note
 
-`null` values are aggregated with `count()`.
+`null` values are aggregated with `count()`, but not with `count(column_name)`
 
 :::
 
@@ -87,11 +125,11 @@ SELECT payment_type, count() FROM transactions;
 `count_distinct(column_name)` - counts distinct values in `string`, `symbol`,
 `long256`, `long`, or `int` columns.
 
-**Return value:**
+### Return value
 
 Return value type is `long`.
 
-**Examples:**
+### Examples
 
 - Count of distinct sides in the transactions table. Side column can either be
   `BUY` or `SELL` or `null`
@@ -111,7 +149,7 @@ SELECT count_distinct(side) FROM transactions;
 SELECT payment_type, count_distinct(counterparty) FROM transactions;
 ```
 
-| cash_or_card | count_distinct |
+| payment_type | count_distinct |
 | :----------- | :------------- |
 | cash         | 3              |
 | card         | 23             |
@@ -137,11 +175,11 @@ last row is always the one with the highest (latest) timestamp. For a table
 without a designated timestamp column, `first` returns the first row and `last`
 returns the last inserted row, regardless of any timestamp column.
 
-**Return value:**
+### Return value
 
 Return value type is `string`.
 
-**Examples:**
+### Examples
 
 Given a table `sensors`, which has a designated timestamp column:
 
@@ -206,17 +244,17 @@ SELECT last(device_id) FROM sensors_unordered;
 `haversine_dist_deg(lat, lon, ts)` - calculates the traveled distance for a
 series of latitude and longitude points.
 
-**Arguments:**
+### Arguments
 
 - `lat` is the latitude expressed as degrees in decimal format (`double`)
 - `lon` is the longitude expressed as degrees in decimal format (`double`)
 - `ts` is the `timestamp` for the data point
 
-**Return value:**
+### Return value
 
 Return value type is `double`.
 
-**Examples:**
+### Examples
 
 ```questdb-sql title="Calculate the aggregate traveled distance for each car_id"
 SELECT car_id, haversine_dist_deg(lat, lon, k)
@@ -231,15 +269,15 @@ are added using the
 [Kahan compensated sum algorithm](https://en.wikipedia.org/wiki/Kahan_summation_algorithm).
 This is only beneficial for floating-point values such as `float` or `double`.
 
-**Arguments:**
+### Arguments
 
 - `value` is any numeric value.
 
-**Return value:**
+### Return value
 
 Return value type is the same as the type of the argument.
 
-**Examples:**
+### Examples
 
 ```questdb-sql
 SELECT ksum(a)
@@ -255,15 +293,15 @@ FROM (SELECT rnd_double() a FROM long_sequence(100));
 `max(value)` - returns the highest value ignoring missing data (e.g `null`
 values).
 
-**Arguments:**
+### Arguments
 
 - `value` is any numeric value
 
-**Return value:**
+### Return value
 
 Return value type is the same as the type of the argument.
 
-**Examples:**
+### Examples
 
 ```questdb-sql title="Highest transaction amount"
 SELECT max(amount) FROM transactions;
@@ -277,7 +315,7 @@ SELECT max(amount) FROM transactions;
 SELECT payment_type, max(amount) FROM transactions;
 ```
 
-| cash_or_card | amount |
+| payment_type | amount |
 | :----------- | :----- |
 | cash         | 31.5   |
 | card         | 55.3   |
@@ -288,15 +326,15 @@ SELECT payment_type, max(amount) FROM transactions;
 `min(value)` - returns the lowest value ignoring missing data (e.g `null`
 values).
 
-**Arguments:**
+### Arguments
 
 - `value` is any numeric value
 
-**Return value:**
+### Return value
 
 Return value type is the same as the type of the argument.
 
-**Examples:**
+### Examples
 
 ```questdb-sql title="Lowest transaction amount"
 SELECT min(amount) FROM transactions;
@@ -310,7 +348,7 @@ SELECT min(amount) FROM transactions;
 SELECT payment_type, min(amount) FROM transactions;
 ```
 
-| cash_or_card | min  |
+| payment_type | min  |
 | :----------- | :--- |
 | cash         | 12.5 |
 | card         | 15.3 |
@@ -323,15 +361,15 @@ are added using the
 [Neumaier sum algorithm](https://en.wikipedia.org/wiki/Kahan_summation_algorithm#Further_enhancements).
 This is only beneficial for floating-point values such as `float` or `double`.
 
-**Arguments:**
+### Arguments
 
 - `value` is any numeric value.
 
-**Return value:**
+### Return value
 
 Return value type is `double`.
 
-**Examples:**
+### Examples
 
 ```questdb-sql
 SELECT nsum(a)
@@ -347,15 +385,15 @@ FROM (SELECT rnd_double() a FROM long_sequence(100));
 `stddev_samp(value)` - calculates the sample standard deviation of values
 ignoring missing data (e.g `null` values).
 
-**Arguments:**
+### Arguments
 
 - `value` is any numeric value.
 
-**Return value:**
+### Return value
 
 Return value type is `double`.
 
-**Examples:**
+### Examples
 
 ```questdb-sql
 SELECT stddev_samp(x)
@@ -370,15 +408,15 @@ FROM (SELECT x FROM long_sequence(100));
 
 `sum(value)` - adds values ignoring missing data (e.g `null` values).
 
-**Arguments:**
+### Arguments
 
 - `value` is any numeric value.
 
-**Return value:**
+### Return value
 
 Return value type is the same as the type of the argument.
 
-**Examples:**
+### Examples
 
 ```questdb-sql title="Sum all quantities in the transactions table"
 SELECT sum(quantity) FROM transactions;
