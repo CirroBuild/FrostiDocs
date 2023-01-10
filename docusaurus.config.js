@@ -15,7 +15,7 @@ function variable() {
   }
 
   function linkVisitor(node, vFile) {
-    if (/^(https?:\/\/)(localhost|127\.0\.0\.1)(:\d+)?/.test(node.url)) {
+    if (/^(https?:\/\/)?(localhost|127\.0\.0\.1)(:\d+)?/.test(node.url)) {
       console.log(
         `Linking to ${node.url} is forbidden, changed URL text in ${vFile.path}`,
       )
