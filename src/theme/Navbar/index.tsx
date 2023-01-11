@@ -118,8 +118,10 @@ function Navbar(): JSX.Element {
               />
             </svg>
           </div>
-          <a className={clsx("navbar__brand", styles.brand)} href="/">
-            QuestDB
+          <a 
+            href="/"
+          >
+            Frosti Build
           </a>
           {leftItems.map((item, i) => (
             <NavbarItem {...item} key={i} />
@@ -146,7 +148,7 @@ function Navbar(): JSX.Element {
             variant="secondary"
             to="/cloud/"
           >
-            Get QuestDB
+            Get Frosti
           </Button>
         </div>
       </div>
@@ -157,12 +159,11 @@ function Navbar(): JSX.Element {
       />
       <div className="navbar-sidebar">
         <div className="navbar-sidebar__brand">
-          <a
-            className={clsx("navbar__brand", styles.brand)}
+          <a 
             href="/"
             onClick={hideSidebar}
           >
-            QuestDB
+            Frosti Build
           </a>
 
           {!colorModeToggle.disabled && (
