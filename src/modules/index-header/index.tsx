@@ -9,13 +9,12 @@ export const Header = () => {
     <Section fullWidth center>
       <div className={styles.titles}>
         <Section.Title level={1} className={styles.header}>
-          Fast SQL for time-series
+          Develop faster with Frosti! 
         </Section.Title>
 
         <Section.Subtitle className={styles.subheader} center>
-          Columnar time-series database with high performance ingestion and SQL
-          analytics you know and love from QuestDB open source, now on the
-          cloud.
+        Meet Frosti, your automated cloud solution architect. Frosti translates your business logic to cloud infrastructure. 
+        Deploy in less than 5 minutes with a single build command.
         </Section.Subtitle>
 
         <div className={styles.getStartedButtons}>
