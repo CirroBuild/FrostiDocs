@@ -46,14 +46,14 @@ function variable() {
 }
 
 const config = {
-  title: "QuestDB: the database for time series",
-  tagline: "QuestDB is the fastest open source time series database",
+  title: "Frosti: Your virtual cloud assistant",
+  tagline: "You write the business logic, Frosti will handle the infra",
   url: `https://${consts.domain}`,
   baseUrl: "/",
   baseUrlIssueBanner: false,
-  favicon: "/img/favicon.png",
-  organizationName: "QuestDB",
-  projectName: "questdb",
+  favicon: "/img/frostiLogo.png",
+  organizationName: "Frosti",
+  projectName: "FrostiBuild",
   customFields: customFields,
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
@@ -78,7 +78,7 @@ const config = {
           {
             tagName: "meta",
             name: "theme-color",
-            content: "#d14671",
+            content: "#3EB79C",
           },
           {
             tagName: "meta",
@@ -157,76 +157,18 @@ const config = {
     navbar: {
       title: " ",
       logo: {
-        alt: "QuestDB",
-        src: "/img/navbar/questdb.svg",
+        alt: "Frosti",
+        src: "/img/navbar/frostiLogo.png",
       },
       items: [
-        {
-          label: "Product",
-          position: "left",
-          items: [
-            {
-              label: "QuestDB Cloud",
-              to: "/cloud/",
-            },
-            {
-              label: "QuestDB Open Source",
-              to: "/get-questdb/",
-            },
-            {
-              label: "QuestDB Enterprise",
-              to: "/enterprise/",
-            },
-            {
-              label: "Use Cases",
-              to: "/use-cases/",
-            },
-            {
-              label: "Customers",
-              to: "/customers/",
-            },
-            {
-              label: "Roadmap",
-              href: `https://github.com/orgs/questdb/projects/1/views/5`,
-            },
-          ],
-        },
-        {
-          label: "Learn",
-          position: "left",
-          items: [
-            {
-              label: "Blog",
-              to: "/blog/",
-              activeBaseRegex: "/blog/?$",
-            },
-            {
-              label: "Tutorials",
-              to: "/blog/tags/tutorial/",
-              activeBaseRegex: "/blog/tags/tutorial/?$",
-            },
-            {
-              label: "QuestDB Swag",
-              to: "/community/",
-            },
-            {
-              label: "Slack Community",
-              to: customFields.slackUrl,
-            },
-          ],
-        },
+        
         {
           label: "Docs",
           to: "/docs/",
           position: "left",
         },
         {
-          label: "Pricing",
-          to: "/pricing/",
-          position: "left",
-        },
-        {
-          label: "Star us",
+          label: "Frosti",
           href: "https://github.com/questdb/questdb",
           position: "right",
           className: "header-github-link",
@@ -243,26 +185,6 @@ const config = {
               label: "Cloud",
               to: "/cloud/",
             },
-            {
-              label: "Enterprise",
-              to: "/enterprise/",
-            },
-            {
-              label: "Pricing",
-              to: "/pricing/",
-            },
-            {
-              label: "Use Cases",
-              to: "/use-cases/",
-            },
-            {
-              label: "Customers",
-              to: "/customers/",
-            },
-            {
-              label: "Roadmap",
-              href: "https://github.com/orgs/questdb/projects/1/views/5",
-            },
           ],
         },
         {
@@ -271,26 +193,6 @@ const config = {
             {
               label: "Docs",
               to: "/docs/",
-            },
-            {
-              label: "Tutorials",
-              to: "/blog/tags/tutorial/",
-            },
-            {
-              label: "Blog",
-              to: "/blog/",
-            },
-            {
-              label: "Discussions",
-              to: customFields.linenUrl,
-            },
-            {
-              label: "Join Slack",
-              to: customFields.slackUrl,
-            },
-            {
-              label: "Swag",
-              to: "/community/",
             },
           ],
         },
@@ -301,19 +203,11 @@ const config = {
               label: "About us",
               to: "/about-us/",
             },
-            {
-              label: "Careers",
-              to: "/careers/",
-            },
           ],
         },
         {
           title: "Social",
           items: [
-            {
-              label: "Twitter",
-              href: customFields.twitterUrl,
-            },
             {
               label: "GitHub",
               href: customFields.githubUrl,
@@ -329,10 +223,6 @@ const config = {
             {
               label: "YouTube",
               to: customFields.videosUrl,
-            },
-            {
-              label: "Reddit",
-              href: customFields.redditUrl,
             },
           ],
         },

@@ -18,7 +18,7 @@ TypeScript, the styles in vanilla CSS with variables using
 </div>
 <div align="center">
   <a href="http://questdb.io">
-    questdb.io
+    Frosti
   </a>
 </div>
 <!-- prettier-ignore-end -->

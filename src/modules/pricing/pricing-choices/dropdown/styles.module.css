@@ -16,7 +16,7 @@
 }
 
 .root select:focus + .view {
-  outline: 1px solid #D14671;
+  outline: 1px solid #3EB79C;
 }
 
 .view {

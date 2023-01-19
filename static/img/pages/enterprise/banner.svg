@@ -38,30 +38,30 @@
   <path stroke="url(#paint2_linear)" stroke-width="13" d="M641 202h80"/>
   <path stroke="url(#paint3_linear)" stroke-width="13" d="M490 202h52"/>
   <rect width="107" height="31" x="534" y="147" fill="#282A36" rx="4"/>
-  <circle cx="549.9" cy="162" r="4.5" fill="#282A36" stroke="#D14671" stroke-width="2"/>
+  <circle cx="549.9" cy="162" r="4.5" fill="#282A36" stroke="#3EB79C" stroke-width="2"/>
   <rect width="107" height="31" x="534" y="186" fill="#282A36" rx="4"/>
-  <circle cx="549.9" cy="201" r="4.5" fill="#282A36" stroke="#D14671" stroke-width="2"/>
+  <circle cx="549.9" cy="201" r="4.5" fill="#282A36" stroke="#3EB79C" stroke-width="2"/>
   <rect width="107" height="31" x="534" y="225" fill="#282A36" rx="4"/>
-  <circle cx="549.9" cy="240" r="4.5" fill="#282A36" stroke="#D14671" stroke-width="2"/>
+  <circle cx="549.9" cy="240" r="4.5" fill="#282A36" stroke="#3EB79C" stroke-width="2"/>
   <rect width="107" height="31" x="534" y="264" fill="#282A36" rx="4"/>
-  <circle cx="549.9" cy="279" r="4.5" fill="#282A36" stroke="#D14671" stroke-width="2"/>
+  <circle cx="549.9" cy="279" r="4.5" fill="#282A36" stroke="#3EB79C" stroke-width="2"/>
   <rect width="33.4" height="7.2" x="785" y="313" fill="#E7A5B9" rx="3.6"/>
   <g filter="url(#filter0_d)">
-    <rect width="159.9" height="124.3" x="26" y="207" fill="#D14671" rx="5"/>
+    <rect width="159.9" height="124.3" x="26" y="207" fill="#3EB79C" rx="5"/>
   </g>
   <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity=".1" stroke-width="2.1" d="M43 256l16 13 13-17 15 12 10-12 9 11 22-11 7 17 15-8 20 9"/>
   <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M38 289l19-19 13 12 15-34 16 6 17-22 3 61 10-31 11 14 11-17 21 8"/>
-  <circle cx="38.2" cy="289.4" r="1.7" fill="#D14671" stroke="#fff" stroke-width=".6"/>
-  <circle cx="56" cy="269.7" r="1.7" fill="#D14671" stroke="#fff" stroke-width=".6"/>
-  <circle cx="69.8" cy="281.5" r="1.7" fill="#D14671" stroke="#fff" stroke-width=".6"/>
-  <circle cx="85.6" cy="248" r="1.7" fill="#D14671" stroke="#fff" stroke-width=".6"/>
-  <circle cx="117.2" cy="232.2" r="1.7" fill="#D14671" stroke="#fff" stroke-width=".6"/>
-  <circle cx="176.4" cy="267.7" r="1.7" fill="#D14671" stroke="#fff" stroke-width=".6"/>
-  <circle cx="121.1" cy="293.4" r="1.7" fill="#D14671" stroke="#fff" stroke-width=".6"/>
-  <circle cx="101.4" cy="253.9" r="1.7" fill="#D14671" stroke="#fff" stroke-width=".6"/>
-  <circle cx="131" cy="261.8" r="1.7" fill="#D14671" stroke="#fff" stroke-width=".6"/>
-  <circle cx="152.7" cy="259.8" r="1.7" fill="#D14671" stroke="#fff" stroke-width=".6"/>
-  <circle cx="142.8" cy="275.6" r="1.7" fill="#D14671" stroke="#fff" stroke-width=".6"/>
+  <circle cx="38.2" cy="289.4" r="1.7" fill="#3EB79C" stroke="#fff" stroke-width=".6"/>
+  <circle cx="56" cy="269.7" r="1.7" fill="#3EB79C" stroke="#fff" stroke-width=".6"/>
+  <circle cx="69.8" cy="281.5" r="1.7" fill="#3EB79C" stroke="#fff" stroke-width=".6"/>
+  <circle cx="85.6" cy="248" r="1.7" fill="#3EB79C" stroke="#fff" stroke-width=".6"/>
+  <circle cx="117.2" cy="232.2" r="1.7" fill="#3EB79C" stroke="#fff" stroke-width=".6"/>
+  <circle cx="176.4" cy="267.7" r="1.7" fill="#3EB79C" stroke="#fff" stroke-width=".6"/>
+  <circle cx="121.1" cy="293.4" r="1.7" fill="#3EB79C" stroke="#fff" stroke-width=".6"/>
+  <circle cx="101.4" cy="253.9" r="1.7" fill="#3EB79C" stroke="#fff" stroke-width=".6"/>
+  <circle cx="131" cy="261.8" r="1.7" fill="#3EB79C" stroke="#fff" stroke-width=".6"/>
+  <circle cx="152.7" cy="259.8" r="1.7" fill="#3EB79C" stroke="#fff" stroke-width=".6"/>
+  <circle cx="142.8" cy="275.6" r="1.7" fill="#3EB79C" stroke="#fff" stroke-width=".6"/>
   <path fill="#fff" d="M36 309h142v4H36z"/>
   <defs>
     <linearGradient id="paint0_linear" x1="641.4" x2="724.4" y1="277.5" y2="277.5" gradientUnits="userSpaceOnUse">

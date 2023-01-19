@@ -5,7 +5,7 @@ sidebar_label: Guide
 
 How To Guides should have a short description of what they intend to cover. If
 your How To has a corresponding section for reference elsewhere in the docs,
-make sure to include it here, or in a 'References' section. [References](sql.md)
+make sure to include it here, or in a 'References' section. 
 
 ## First step
 

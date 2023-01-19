@@ -45,12 +45,12 @@ const Footer = () => {
     <footer className={styles.root}>
       <div className={clsx(styles.content, styles.center)}>
         <img
-          alt="QuestDB logo"
+          alt="Frosti logo"
           className={styles.logo}
-          src="/img/footer/questdb.svg"
-          title="QuestDB - Fastest open source database for time-series and analytics"
-          width={108}
-          height={27}
+          src="/img/navbar/frostiLogo.png"
+          title="Frosti - Your virtual cloud assistant"
+          width={50}
+          height={50}
         />
 
         <div className={styles.tagline}>

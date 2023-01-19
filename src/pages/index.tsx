@@ -1,8 +1,6 @@
 import clsx from "clsx"
 import React from "react"
-import Customers from "../components/Customers"
 import customFields from "../config/customFields"
-import { QueryScroller } from "../components/QueryScroller"
 
 import Layout from "../theme/Layout"
 import { Header } from "../modules/index-header"
@@ -75,44 +73,14 @@ const Cards = () => (
   </Section>
 )
 
-const Console = () => (
-  <Section fullWidth>
-    <Section.Title size="small" center>
-      Interactive Console
-    </Section.Title>
-
-    <Section.Subtitle center>
-      Interactive console to import data (drag and drop) and start querying
-      right away.
-    </Section.Subtitle>
-
-    <Section.Subtitle center>
-      Check our{" "}
-      <a href="/docs/develop/web-console/">Web Console documentation</a> to get
-      started.
-    </Section.Subtitle>
-
-    <Section center>
-      <img
-        loading="lazy"
-        alt="Artistic view of QuestDB's Web Console split in 3 components: the navigation tree, the SQL code editor and data displayed as a chart"
-        width={600}
-        height={467}
-        src="/img/pages/index/console.svg"
-      />
-    </Section>
-  </Section>
-)
-
 const Home = () => (
   <Layout
     canonical=""
     description={customFields.description}
-    title="QuestDB | Fast SQL for time-series"
+    title="Frosti | Virtual Cloud Assistant"
     replaceTitle
   >
     <Header />
-    <Customers />
     <Section fullWidth center>
       <UseCases />
     </Section>
@@ -123,9 +91,8 @@ const Home = () => (
       <Integration />
     </Section>
 
-    <QueryScroller />
     <Cards />
-    <Console />
+ 
 
     <Section>
       <ActionFooter />

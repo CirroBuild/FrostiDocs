@@ -56,35 +56,6 @@ programming languages through our various network endpoints.
 - [Google Cloud Platform](/docs/deployment/google-cloud-platform)
 - [DigitalOcean Droplet](/docs/deployment/digitalocean)
 
-## Operations
-
-This section contains resources for managing QuestDB instances and has dedicated
-pages for the following topics:
-
-- [Design for performance](/docs/operations/design-for-performance) for
-  configuring table settings to improve performance
-- [Capacity planning](/docs/operations/capacity-planning) for configuring server
-  settings and system resources
-- [Data retention](/docs/operations/data-retention) strategy to delete old data
-  and save disk space
-- [Health monitoring](/docs/operations/health-monitoring) endpoint for
-  determining the status of the instance
-- [Backup and restore](/docs/operations/backup) using filesystem and
-  point-in-time backup functionality. Notes for cloud providers.
-
-## Third-party tools
-
-This section describes how to integrate QuestDB with third-party tools and
-utilities for collecting metrics and visualizing data:
-
-- [Prometheus](/docs/third-party-tools/prometheus) monitoring and alerting.
-- [Grafana](/docs/third-party-tools/grafana) instructions for connecting QuestDB
-  as a datasource for building visualizations and dashboards
-- [Kafka](/docs/third-party-tools/kafka/overview) guide for ingesting data from
-  Kafka topics into QuestDB
-- [Telegraf](/docs/third-party-tools/telegraf) guide for collecting system
-  metrics, specifying QuestDB as an output and visualizing the results
-
 ## Concepts
 
 This section describes the architecture of QuestDB, how it stores and queries
