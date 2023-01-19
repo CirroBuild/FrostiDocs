@@ -2,29 +2,19 @@
 title: Introduction
 slug: /
 description:
-  QuestDB is a relational column-oriented database designed for real-time
-  analytics on time series data.
+  Frosti is your virtual cloud assistant. 
 ---
 
-QuestDB is a relational column-oriented database designed for time series and
-event data. It uses SQL with extensions for time series to assist with real-time
-analytics. These pages cover core concepts of QuestDB, including setup steps,
-usage guides, and reference documentation for syntax, APIs and configuration.
+Frosti is a developer platform that automatically provisions, manages, and optimizes cloud infrastructure by inferring requirements from your application code.
+
+Just use the Azure, AWS, or GCP Sdks. Our developer platform will automatically provision the most secure, reliable and cost optimized cloud infrastructure based on the Sdks used. Don't worry about networking or load management. Aperi will know when to deploy architecture that's not obvious from the Sdks.
 
 ## Get Started
 
-This section explains how to install and run QuestDB using one of the following
+This section explains how to install and run Frosti using one of the following
 methods:
 
-- [Docker](/docs/get-started/docker/) for repeatable, portable and scalable
-  installations
-- [Binaries](/docs/get-started/binaries/) for direct downloads to run on Linux,
-  macOS or Windows
-- [Homebrew](/docs/get-started/homebrew/) for running QuestDB on macOS
-- [Create your first database](/docs/get-started/first-database/) provides a
-  guide once QuestDB is running
-- [Learn more](/docs/get-started/learn-more/) is a selection of useful concepts
-  and guides for new QuestDB users
+- [Homebrew](/docs/get-started/homebrew/) for running Frosti on macOS
 
 ## Develop
 
@@ -41,14 +31,6 @@ programming languages through our various network endpoints.
 - [Web Console](/docs/develop/web-console) for quick SQL queries, charting and
   CSV upload/export functionality
 
-## Guides
-
-- [Large CSV import (COPY SQL)](/docs/guides/importing-data)
-- [Small CSV import (REST API)](/docs/guides/importing-data-rest)
-- [Modifying Data](/docs/guides/modifying-data)
-- [Timestamps and time zones](/docs/guides/working-with-timestamps-timezones)
-- [Out-of-order commit lag](/docs/guides/out-of-order-commit-lag)
-
 ## Deployment
 
 - [AWS Marketplace AMI](/docs/deployment/aws-official-ami)
@@ -56,123 +38,10 @@ programming languages through our various network endpoints.
 - [Google Cloud Platform](/docs/deployment/google-cloud-platform)
 - [DigitalOcean Droplet](/docs/deployment/digitalocean)
 
-## Concepts
-
-This section describes the architecture of QuestDB, how it stores and queries
-data, and introduces features and capabilities unique to the system.
-
-- [Storage model](/docs/concept/storage-model) describes how QuestDB stores
-  records and partitions within tables
-- [Designated timestamp](/docs/concept/designated-timestamp) is a core feature
-  that enables time-oriented language capabilities and partitioning
-- [SQL extensions](/docs/concept/sql-extensions) allow performant time series
-  analysis with a concise syntax
-- [JIT compiler](/docs/concept/jit-compiler) to speed up `WHERE` clauses
-- [Partitions](/docs/concept/partitions) can be used to perform time-based queries more efficiently
-- [Symbol](/docs/concept/symbol) type makes storing and retrieving repetitive
-  strings efficient
-- [Indexes](/docs/concept/indexes) can be used for faster read access on
-  specific columns
-- [Geospatial data](/docs/concept/geohashes) with geohashes
-- [Root directory](/docs/concept/root-directory-structure) describes the
-  directory contents of QuestDB for storage and configuration
-
-## Reference
-
-This section contains the reference documentation for the following categories:
-
-### APIs
-
-- [REST](/docs/reference/api/rest)
-- [Postgres](/docs/reference/api/postgres)
-- [InfluxDB](/docs/reference/api/ilp/overview)
-- [Java (embedded)](/docs/reference/api/java-embedded)
-
-### Command-line options
-
-The following resource provides info on options that may be passed to QuestDB
-when starting services:
-
-- [Command-line options](/docs/reference/command-line-options) for starting and
-  running QuestDB from an executable
-
-### Configuration
+## Configuration
 
 The [configuration](/docs/reference/configuration) page shows all the properties
 that can be used to customize QuestDB.
-
-### ILP Client libraries
-
-- [Clients overview](/docs/reference/clients/overview)
-- [Java ILP client](/docs/reference/clients/java_ilp)
-
-### Data Types
-
-The [data types](/docs/reference/sql/datatypes) page lists the datatypes that
-can be used in QuestDB.
-
-### Functions
-
-- [Aggregate](/docs/reference/function/aggregation)
-- [Analytic](/docs/reference/function/analytic)
-- [Binary](/docs/reference/function/binary)
-- [Boolean](/docs/reference/function/boolean)
-- [Conditional](/docs/reference/function/conditional)
-- [Date and time](/docs/reference/function/date-time)
-- [Meta](/docs/reference/function/meta)
-- [Numeric](/docs/reference/function/numeric)
-- [Random value generator](/docs/reference/function/random-value-generator)
-- [Row generator](/docs/reference/function/row-generator)
-- [Spatial](/docs/reference/function/spatial)
-- [Text](/docs/reference/function/text)
-- [Timestamp generator](/docs/reference/function/timestamp-generator)
-- [Timestamp](/docs/reference/function/timestamp)
-
-### Operators
-
-- [Bitwise](/docs/reference/operators/bitwise)
-- [Pattern matching](/docs/reference/operators/pattern-matching)
-- [Spatial](/docs/reference/operators/spatial)
-
-### SQL
-
-- [SQL Execution order](/docs/reference/sql/datatypes)
-- [Data types](/docs/reference/sql/datatypes)
-- [ALTER TABLE ADD COLUMN](/docs/reference/sql/alter-table-add-column)
-- [ALTER TABLE RENAME COLUMN](/docs/reference/sql/alter-table-rename-column)
-- [ALTER TABLE DROP COLUMN](/docs/reference/sql/alter-table-drop-column)
-- [ALTER TABLE ATTACH PARTITION](/docs/reference/sql/alter-table-attach-partition)
-- [ALTER TABLE DETACH PARTITION](/docs/reference/sql/alter-table-detach-partition)
-- [ALTER TABLE DROP PARTITION](/docs/reference/sql/alter-table-drop-partition)
-- [ALTER TABLE SET PARAM](/docs/reference/sql/alter-table-set-param)
-- [ALTER TABLE ALTER COLUMN ADD INDEX](/docs/reference/sql/alter-table-alter-column-add-index)
-- [ALTER TABLE ALTER COLUMN DROP INDEX](/docs/reference/sql/alter-table-alter-column-drop-index)
-- [ALTER TABLE ALTER COLUMN CACHE | NOCACHE](/docs/reference/sql/alter-table-alter-column-cache)
-- [BACKUP](/docs/reference/sql/backup)
-- [CASE](/docs/reference/sql/case)
-- [CAST](/docs/reference/sql/cast)
-- [COPY](/docs/reference/sql/copy)
-- [CREATE TABLE](/docs/reference/sql/create-table)
-- [DISTINCT](/docs/reference/sql/distinct)
-- [FILL](/docs/reference/sql/fill)
-- [DROP TABLE](/docs/reference/sql/drop)
-- [GROUP BY](/docs/reference/sql/group-by)
-- [INSERT](/docs/reference/sql/insert)
-- [JOIN](/docs/reference/sql/join)
-- [LATEST ON](/docs/reference/sql/latest-on)
-- [LIMIT](/docs/reference/sql/limit)
-- [ORDER BY](/docs/reference/sql/order-by)
-- [REINDEX](/docs/reference/sql/reindex)
-- [RENAME TABLE](/docs/reference/sql/rename)
-- [SAMPLE BY](/docs/reference/sql/sample-by)
-- [SELECT](/docs/reference/sql/select)
-- [SHOW](/docs/reference/sql/show)
-- [SNAPSHOT](/docs/reference/sql/snapshot)
-- [TRUNCATE TABLE](/docs/reference/sql/truncate)
-- [UNION EXCEPT INTERSECT](/docs/reference/sql/union-except-intersect)
-- [VACUUM TABLE](/docs/reference/sql/vacuum-table)
-- [WHERE](/docs/reference/sql/where)
-- [WITH](/docs/reference/sql/with)
 
 ## Support
 
