@@ -34,13 +34,12 @@ const LiveDemo = () => {
         See live demo
       </Section.Title>
       <Section.Subtitle>
-        Query three large datasets and more than 2 billion rows in milliseconds
-        with SQL
+        Deploy your application to production in minutes. 
       </Section.Subtitle>
 
       <div className={styles.preview}>
         <Section.Subtitle className={styles.previewHeader}>
-          Try QuestDB demo in your browser
+          Try Frosti demo from your computer.
         </Section.Subtitle>
 
         <div className={styles.editor}>
@@ -61,13 +60,9 @@ const LiveDemo = () => {
         </div>
       </div>
       <Button
-        href={
-          typeof query === "number"
-            ? exampleQueries[query].url
-            : customFields.demoUrl
-        }
+        href="/"
       >
-        Load results&nbsp;&nbsp;&gt;
+        Watch the Demo &nbsp;&nbsp;&gt;
       </Button>
     </Section>
   )
