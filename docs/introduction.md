@@ -50,8 +50,6 @@ resources:
 
 - [Troubleshooting FAQ](/docs/troubleshooting/faq) guide with solutions for
   various HW & SW configuration issues
-- [List of OS error codes](/docs/troubleshooting/os-error-codes) page with the
-  list of Operating System error codes
 
 We are happy to help with any question you may have, particularly to help you
 optimize the performance of your application. Feel free to reach out using the
