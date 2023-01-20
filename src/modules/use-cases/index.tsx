@@ -4,14 +4,11 @@ import styles from "./styles.module.css"
 
 const useCases = [
   {
-    title: "Performance",
+    title: "Time to Market",
     uses: [
-      "2M rows/s per node",
-      "5-10x faster vs Timescale & InfluxDB",
-      "Don’t worry about cardinality",
-      "Columnar storage",
-      "Data partitioned by time",
-      "SIMD-optimized queries",
+      "Save months of dev time",
+      "Deploy app to cloud in minutes",
+      "Scale horizontally and vertically instantly",
     ],
     cta: {
       label: "See Benchmarks",
@@ -21,12 +18,9 @@ const useCases = [
   {
     title: "Developer experience",
     uses: [
-      "SQL time series extensions",
-      "Built-in SQL optimizer and REST API",
-      "PostgreSQL driver compatibility",
-      "Real-time streaming API",
-      "SQL and time-series joins",
-      "Grafana integration",
+      "Automatic discovery of required cloud resources",
+      "Simple, human readable sku choices",
+      "Avoid vendor lock in, simply use cloud primitive sdks",
     ],
     cta: {
       label: "See live demo",
@@ -34,14 +28,11 @@ const useCases = [
     },
   },
   {
-    title: "Operational simplicity",
+    title: "Operational Excellence",
     uses: [
-      "Fully managed hosted cloud",
-      "Elastic cloud instances",
-      "TLS for all protocols",
-      "Online snapshot based backups",
-      "Monitoring dashboards",
-      "SSO authentication",
+      "Enterprise grade security",
+      "Highly available production deployments",
+      "Cost optimized skus to your requirements",
     ],
 
     cta: {

@@ -17,7 +17,7 @@ export const ActionFooter = () => (
         />
       }
       title="Join our developer community"
-      description="QuestDB is open source. Follow us on Twitter, star our GitHub repo, and join our developer community on Slack!"
+      description="Frosti is open source. Follow us on LinkedIn, star our GitHub repo, and join our developer community on Slack!"
     >
       <a
         className={footerCss.card__link}

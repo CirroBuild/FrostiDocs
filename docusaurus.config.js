@@ -47,7 +47,7 @@ function variable() {
 
 const config = {
   title: "Frosti: Your virtual cloud assistant",
-  tagline: "You write the business logic, Frosti will handle the infra",
+  tagline: "You write the business logic, Frosti will handle the rest.",
   url: `https://${consts.domain}`,
   baseUrl: "/",
   baseUrlIssueBanner: false,

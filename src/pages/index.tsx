@@ -17,7 +17,7 @@ const Cards = () => (
   <Section odd fullWidth>
     <Section noGap>
       <Section.Title level={3} size="small" center>
-        Why time series?
+        Why Frosti?
       </Section.Title>
 
       <div
@@ -28,40 +28,25 @@ const Cards = () => (
       >
         {[
           {
-            header: "DevOps, monitoring and observability",
+            header: "Save 6+ Months of DevOps Time",
             content:
-              "Collect CPU, memory and storage metrics from your infrastructure and get real-time visibility into your entire stack.",
+              "Save months of work building cloud primitives and deployment processes. No more pain debugging failed deployment and misconfigurations. Frosti will automate the infrastructure provisioning and configuration.",
+          },
+          {
+            header: "Automatically Adopt Industry Cloud Best Practices",
+            content:
+              "Our developer platform will automatically provision the most secure, reliable and cost optimized cloud infrastructure based on the Sdks used. ",
+          },
+          {
+            header: "Deploy Everwhere",
+            content:
+              "Frosti provisions resources across GCP, AWS and Azure. Take your application and leverage best of class services across each cloud.",
           },
 
-          {
-            header: "Financial market data",
-            content:
-              "Store market tick data to identify historical trends, find correlations and analyze trades in real-time. Build aggregated views across multiple venues and efficiently compute live order books.",
-          },
+          
 
-          {
-            header: "Network traffic analysis",
-            content:
-              "Collect sFlow or other network traffic metadata to run analytics and detect anomalies in real-time.",
-          },
+          
 
-          {
-            header: "Connected devices",
-            content:
-              "Capture, store and respond to sensor data and telemetry at any resolution in industrial or machine-to-machine applications.",
-          },
-
-          {
-            header: "Application metrics",
-            content:
-              "Empower application developers and UX teams to track and visualize user behavior data, API calls, data latency, and other application events in real-time.",
-          },
-
-          {
-            header: "Machine learning with time-series data",
-            content:
-              "Use QuestDB with popular Python frameworks and tools for leveraging anomaly detection algorithms, machine learning libraries, statistical analysis with Pandas, or Jupyter notebooks.",
-          },
         ].map(({ header, content }, index) => (
           <div key={index} className={feCss.feature}>
             <h3 className={feCss.feature__header}>{header}</h3>
