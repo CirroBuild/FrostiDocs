@@ -3,9 +3,8 @@ import Layout from "../../theme/Layout"
 
 import { Section } from "../../components/Section"
 import { ActionFooter } from "../../components/ActionFooter"
-import { CompareFeatures } from "../../modules/cloud/CompareFeatures"
 import { Top } from "../../modules/cloud/Top"
-import { GetAccess } from "../../modules/cloud/get-access"
+
 
 const CloudPage = () => (
   <Layout
@@ -15,14 +14,7 @@ const CloudPage = () => (
     image="/img/pages/cloud/screens-thumb.png"
   >
     <Top />
-    <CompareFeatures />
-    <Section fullWidth>
-      <Section.Title center>Ready to get started?</Section.Title>
 
-      <Section noGap center>
-        <GetAccess />
-      </Section>
-    </Section>
     <Section>
       <ActionFooter />
     </Section>

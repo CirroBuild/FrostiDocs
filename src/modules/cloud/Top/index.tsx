@@ -4,12 +4,9 @@ import localStyle from "./styles.module.css"
 import { ContactForm } from "../ContactForm"
 
 const featureList = [
-  "Database-as-a-service",
-  "Infrastructure monitoring and logs",
-  "Built-in auth and TLS encryption",
-  "Decoupled compute and storage",
-  "Multiple regions",
-  "Additional database features",
+  "Automatic cloud resource provisioning and configuration",
+  "Built in enterprise grade security",
+  "Industry leading reliability and resiliency architectures",
 ]
 
 export const Top = () => {
@@ -17,11 +14,10 @@ export const Top = () => {
     <Section className={localStyle.section}>
       <div className={localStyle.columns}>
         <div className={localStyle.textColumn}>
-          <Section.Title level={1}>QuestDB Cloud</Section.Title>
+          <Section.Title level={1}>Frosti</Section.Title>
 
           <Section.Subtitle>
-            The fastest open source time series database fully managed on the
-            cloud.
+            Your virtual cloud assistant.
           </Section.Subtitle>
 
           <ul className={localStyle.list}>
