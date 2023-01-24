@@ -15,6 +15,8 @@ This section explains how to install and run Frosti using one of the following
 methods:
 
 - [Homebrew](/docs/get-started/homebrew/) for running Frosti on macOS
+
+## Develop
 - [First Application](/docs/get-started/first-app/) for writing your frist web application.
 
 ## Deployment

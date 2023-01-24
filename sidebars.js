@@ -35,21 +35,16 @@ module.exports = {
       type: "category",
       items: [
         "get-started/homebrew",
-        "get-started/first-app",
+        "get-started/provision",
       ],
     },
     {
-      label: "Deployment",
+      label: "Develop",
       type: "category",
       items: [
-        "deployment/azure",
-      ],
-    },
-    {
-      label: "Configure",
-      type: "category",
-      items: [
-        "configure/connect",
+        "develop/first-app",
+        "develop/connect",
+        "develop/cosmos",
       ],
     },
     {

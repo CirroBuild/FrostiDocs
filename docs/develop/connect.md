@@ -1,104 +1,46 @@
-# Connect
+---
+title: Connect ASP.NET App to Other Azure Services
+sidebar_label: Connect Other Azure Services
+description:
+  This document describes how to connect your application to the resources
+  deployed in Azure for local testing.
+---
 
-You can interact with a QuestDB database by connecting to one of its various
-network endpoints.
+## Prerequisites
+- Run "frosti provision" command atleast once
 
-|Network Endpoint|Port|Inserting & modifying data<sup>*</sup>|Querying data|
-|:---------------|:---|:-------------------------------------|:------------|
-|[Web Console](#web-console)|9000|SQL `INSERT`, `UPDATE`, CSV|SQL `SELECT`, charting|
-|[InfluxDB Line Protocol](#influxdb-line-protocol)|9009|High performance bulk insert|-|
-|[PostgreSQL wire protocol](#postgresql-wire-protocol)|8812|SQL `INSERT`, `UPDATE`|SQL `SELECT`|
-|[HTTP REST API](#http-rest-api)|9000|SQL `INSERT`, `UPDATE`, CSV|SQL `SELECT`, CSV|
+## Configuration of Connection Strings for Local Development Testing
 
-`*` `UPDATE` is available from [QuestDB 6.4](/blog/2022/05/31/questdb-release-6-4/).
+1. Find the file **Dev.frosti.json** which got created in the directory where you ran the **Frosti provision** command. Open the file and see the KeyVault endpoint created ("KV_Endpoint: "your_specific_keyvault"). Consider adding **appsettings.local.json** to your .gitignore for a production facing app. 
 
+2. Open program.c and add nuget pckg: Azure.Security.KeyVault.Secrets if its not there already
 
-:::note
+3. In Program.cs (or Startup.cs if it exists). Add the following lines: 
 
-All network ports may be [configured](/docs/reference/configuration).
+```csharp title="Program.cs"
+if (builder.Environment.IsDevelopment())
+{
+    builder.configuration.AddJsonFile("appsettings.frosti.json");
+}
 
-:::
-
-## Web console
-
-The [web console](/docs/develop/web-console) is a general admin and query
-interface.
-It's great for quickly trying things out. You can also chart your query results.
-
-Connect your web browser to http://[server-address]:9000/. When running locally,
-this will be [http://localhost:9000/](http://localhost:9000/).
-
-import Screenshot from "@theme/Screenshot"
-
-<a href="web-console">
-    <Screenshot
-    alt="Screenshot of the Web Console"
-    height={375}
-    small
-    src="/img/docs/console/overview.png"
-    width={500}
-    />
-</a>
-
-## InfluxDB Line Protocol
-
-The fastest way to insert data into QuestDB is using the InfluxDB Line
-Protocol (ILP).
-
-It is an insert-only protocol that bypasses SQL `INSERT` statements achieving
-higher throughput.
-
-```shell
-readings,city=London temperature=23.2 1465839830100400000\n
-readings,city=London temperature=23.6 1465839830100700000\n
-readings,make=Honeywell temperature=23.2,humidity=0.443 1465839830100800000\n
+var options = new SecretClientOptions()
+{
+    Retry =
+    {
+        Delay= TimeSpan.FromSeconds(2),
+        MaxDelay = TimeSpan.FromSeconds(16),
+        MaxRetries = 5,
+        Mode = RetryMode.Exponential
+    }
+};
+var client = new SecretClient(new Uri(builder.configuration["KV_ENDPOINT"]), new DefaultAzureCredential(), options);
 ```
 
-Our [ILP tutorial](/docs/develop/insert-data#influxdb-line-protocol) covers
-ingesting data with various client libraries.
+4. See subsequent articles to add service specific logic. For example, updating client to reference connection string in Key Vault referenced above.
 
-For a more in-depth understanding, see our
-[protocol documentation](/docs/reference/api/ilp/overview).
-
-## PostgreSQL wire protocol
-
-For SQL, we support the same wire protocol as PostgreSQL, allowing you to
-connect and query the database with various third-party pre-existing client
-libraries and tools.
-
-```python
-import psycopg2
-
-connection = None
-try:
-    connection = psycopg2.connect(
-        user="admin",
-        password="quest",
-        host="127.0.0.1",
-        port="8812",
-        database="qdb")
-finally:
-    if (connection):
-        connection.close()
-```
-
-See how you can connect through the PostgreSQL wire protocol from
-different programming languages to:
-
-* [Insert data](/docs/develop/insert-data#postgresql-wire-protocol)
-* [Query data](/docs/develop/query-data#postgresql-wire-protocol)
+Note:
+SQLConnection is the KV secret for SQL
+StorageConnection is the KV secret for Storage
 
 
-## HTTP REST API
 
-The HTTP interface that hosts the web console also provides a REST API for
-importing data, exporting data and querying.
-
-```shell
-curl -F data=@data.csv http://localhost:9000/imp
-```
-
-Find out how to:
-
-* [Insert data](/docs/develop/insert-data#http-rest-api)
-* [Query data](/docs/develop/query-data#http-rest-api)

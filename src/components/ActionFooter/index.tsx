@@ -34,7 +34,7 @@ export const ActionFooter = () => (
 
     <ActionCard
       title="Subscribe to our newsletter"
-      description="Stay up to date with all things QuestDB"
+      description="Stay up to date with all things Frosti"
       icon={
         <SvgImage
           image={<SubscribeIcon />}
