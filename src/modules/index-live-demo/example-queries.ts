@@ -6,7 +6,7 @@ export default [
     query: `
     brew install CirroBuild/tap/frosti
 az login
-frosti -n {namePrefix}
+frosti provision
     `,
   },
 

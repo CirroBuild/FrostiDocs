@@ -1,6 +1,6 @@
 ---
 title: Get started with Frosti via Homebrew (macOS)
-sidebar_label: Homebrew
+sidebar_label: Install
 description:
   A short guide for getting started with installing and running Frosti via
   Homebrew on macOS.
@@ -46,6 +46,21 @@ with a non-zero status if any potential problems are found:
 ```shell
 brew doctor
 ```
+
+## Install Az CLI
+
+1. If Az command line tool is not already installed, download Az with homebrew.
+
+```bash
+brew install az
+```
+
+2. Login to your Azure account.
+
+```bash
+az login
+```
+
 
 ## Next steps
 

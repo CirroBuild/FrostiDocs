@@ -33,9 +33,4 @@ dotnet run --urls=https://localhost:5001/
 
 3. Open a web browser, and navigate to the app at https://localhost:5001.
 
-## Publish your web app to PPE (Pre Production Environment)
-1. Run Frosti provision
 
-```bash 
-frosti provision -e ppe
-```

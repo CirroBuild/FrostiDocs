@@ -17,14 +17,29 @@ For this sample code, the container will use the category as a logical partition
 - Completed "Connect Other Azure Resources"
 - .NET 7 
 
+## Install the package
+
+Add the Microsoft.Azure.Cosmos NuGet package to the .NET project. Use the dotnet add package command specifying the name of the NuGet package.
+
+```bash title=".NET CLI"
+dotnet add package Microsoft.Azure.Cosmos
+```
+Build the project with the dotnet build command.
+
+```bash title=".NET CLI"
+dotnet build
+```
 ## Authenticate the Client
 
 From the project directory, open the Program.cs file. In your editor, add a using directive for Microsoft.Azure.Cosmos.
 
+```csharp title="Program.cs"
+using Microsoft.Azure.Cosmos;
+```
+
 Define a new instance of the CosmosClient class using the constructor, and client.GetSecret() method to get the Cosmos Db connection string stored in the Key Vault referenced in the previous article.
 
 ```csharp title="Program.cs"
-using Microsoft.Azure.Cosmos;
 // New instance of CosmosClient class
 var cosmosConnection = client.GetSecret("CosmosConnection").Value.Value;
 builder.Services.AddSingleton(s =>
