@@ -17,7 +17,7 @@ export const Top = () => {
           <Section.Title level={1}>Frosti</Section.Title>
 
           <Section.Subtitle>
-            Your virtual cloud assistant.
+            Your virtual DevOps engineer.
           </Section.Subtitle>
 
           <ul className={localStyle.list}>

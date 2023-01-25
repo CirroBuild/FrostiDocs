@@ -9,7 +9,7 @@ export const Header = () => {
     <Section fullWidth center>
       <div className={styles.titles}>
         <Section.Title level={1} className={styles.header}>
-          Your virtual cloud assistant.
+          Your virtual DevOps engineer
         </Section.Title>
 
         <Section.Subtitle className={styles.subheader} center>
