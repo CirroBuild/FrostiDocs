@@ -16,4 +16,4 @@ following channels:
 - [Raise an issue on GitHub]({@githubUrl@}/issues)
 - [Join the Community Slack]({@slackUrl@})
 - [Frosti on Stack Overflow]({@stackoverflowUrl@})
-- or email us at [hello@frosti.io](mailto:hello@questdb.io)
+- or email us at [frostibuild@gmail.com](mailto:frostibuild@gmail.com)
