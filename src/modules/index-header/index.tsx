@@ -19,7 +19,7 @@ export const Header = () => {
 
         <div className={styles.getStartedButtons}>
           <Link to="/cloud/" className={styles.joinPublicPreviewLink}>
-            <Button newTab={false}>Join private preview</Button>
+            <Button newTab={false}>Book a Demo</Button>
           </Link>
         </div>
       </div>

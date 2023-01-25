@@ -1,7 +1,8 @@
 import React from "react"
 import { Section } from "../../../components/Section"
 import localStyle from "./styles.module.css"
-import { ContactForm } from "../ContactForm"
+import Calendly from "../Calendly"
+
 
 const featureList = [
   "Automatic cloud resource provisioning and configuration",
@@ -14,10 +15,10 @@ export const Top = () => {
     <Section className={localStyle.section}>
       <div className={localStyle.columns}>
         <div className={localStyle.textColumn}>
-          <Section.Title level={1}>Frosti</Section.Title>
+          <Section.Title level={1}>Book a Demo</Section.Title>
 
           <Section.Subtitle>
-            Your virtual DevOps engineer.
+            Meet Frosti, your virtual DevOps engineer.
           </Section.Subtitle>
 
           <ul className={localStyle.list}>
@@ -29,9 +30,9 @@ export const Top = () => {
           </ul>
         </div>
 
-        <Section noGap center>
-          <ContactForm interestedIn="cloud" />
-        </Section>
+     
+        <Calendly />
+       
       </div>
     </Section>
   )

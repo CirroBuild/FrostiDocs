@@ -1,8 +1,6 @@
 import React from "react"
 import Layout from "../../theme/Layout"
 
-import { Section } from "../../components/Section"
-import { ActionFooter } from "../../components/ActionFooter"
 import { Top } from "../../modules/cloud/Top"
 
 
@@ -15,9 +13,7 @@ const CloudPage = () => (
   >
     <Top />
 
-    <Section>
-      <ActionFooter />
-    </Section>
+
   </Layout>
 )
 

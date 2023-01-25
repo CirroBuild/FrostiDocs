@@ -2,7 +2,7 @@
 title: Introduction
 slug: /
 description:
-  Frosti is your virtual cloud assistant. 
+  Frosti is your virtual DevOps engineer. 
 ---
 
 Frosti is a developer platform that automatically provisions, manages, and optimizes cloud infrastructure by inferring requirements from your application code.

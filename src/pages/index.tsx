@@ -4,7 +4,6 @@ import customFields from "../config/customFields"
 
 import Layout from "../theme/Layout"
 import { Header } from "../modules/index-header"
-import { ActionFooter } from "../components/ActionFooter"
 import { Section } from "../components/Section"
 import { UseCases } from "../modules/use-cases"
 import { Integration } from "../modules/integration"
@@ -76,11 +75,11 @@ const Home = () => (
       <Integration />
     </Section>
 
-    <Cards />
+  
  
 
     <Section>
-      <ActionFooter />
+      <Cards />
     </Section>
   </Layout>
 )
