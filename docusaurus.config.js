@@ -46,7 +46,7 @@ function variable() {
 }
 
 const config = {
-  title: "Frosti: Your virtual cloud assistant",
+  title: "Frosti: Your virtual DevOps engineer",
   tagline: "You write the business logic, Frosti will handle the rest.",
   url: `https://${consts.domain}`,
   baseUrl: "/",
@@ -169,7 +169,7 @@ const config = {
         },
         {
           label: "Frosti",
-          href: "https://github.com/questdb/questdb",
+          href: "https://github.com/CirroBuild/frosti-bucket",
           position: "right",
           className: "header-github-link",
           "aria-label": "GitHub repository",

@@ -7,16 +7,13 @@ import Link from "@docusaurus/Link"
 import styles from "./styles.module.css"
 import SvgImage from "../../components/SvgImage"
 
-import PostgresLogo from "../../../static/img/logos/pg.svg"
-import GrafanaLogo from "../../../static/img/logos/grafana.svg"
-import KafkaLogo from "../../../static/img/logos/kafka.svg"
-import PythonLogo from "../../../static/img/logos/python_grayscale.svg"
-import PandasLogo from "../../../static/img/logos/pandas.svg"
-import TelegrafLogo from "../../../static/img/logos/influxdata.svg"
-import MindsDBLogo from "../../../static/img/logos/mindsdb.svg"
-import CubeLogo from "../../../static/img/logos/cube.svg"
-import RedpandaLogo from "../../../static/img/logos/redpanda_grayscale.svg"
-import PlotlyLogo from "../../../static/img/logos/plotly.svg"
+import KeyVault from "../../../static/img/logos/Key-Vaults.svg"
+import StorageAccounts from "../../../static/img/logos/Storage-Accounts.svg"
+import AzureSQL from "../../../static/img/logos/SQL-Database.svg"
+import AzureCosmosDb from "../../../static/img/logos/Azure-Cosmos-DB.svg"
+import AppServices from "../../../static/img/logos/App-Services.svg"
+import AzureAD from "../../../static/img/logos/Managed-Identities.svg"
+
 
 const integrations: Array<{
   label: string
@@ -24,55 +21,34 @@ const integrations: Array<{
   src?: string
 }> = [
   {
-    logo: { ...logos.postgres, svg: PostgresLogo },
-    label: "Postgres",
-    src: "/docs/reference/api/postgres/",
+    logo: { ...logos.AppServices, svg: AppServices },
+    label: "App Services",
+    src: "/docs/develop/first-app/",
   },
   {
-    logo: { ...logos.grafana, svg: GrafanaLogo },
-    label: "Grafana",
-    src: "/docs/third-party-tools/grafana/",
+    logo: { ...logos.keyvault, svg: KeyVault },
+    label: "Key Vault",
+    src: "/docs/develop/connect/",
   },
   {
-    logo: { ...logos.kafka, svg: KafkaLogo },
-    label: "Kafka",
-    src: "/docs/third-party-tools/kafka/overview/",
+    logo: { ...logos.AzureAD, svg: AzureAD },
+    label: "Azure AD",
+    src: "/docs/develop/connect/",
   },
   {
-    logo: { ...logos.python, svg: PythonLogo },
-    label: "Python",
-    src: "https://github.com/questdb/py-questdb-client",
+    logo: { ...logos.AzureCosmosDb, svg: AzureCosmosDb },
+    label: "CosmosDb",
+    src: "/docs/develop/cosmos/",
   },
   {
-    logo: { ...logos.pandas, svg: PandasLogo },
-    label: "Pandas",
-    src: "/blog/2022/03/08/questdb-crypto-pandas/",
+    logo: { ...logos.AzureSQL, svg: AzureSQL },
+    label: "Azure SQL",
+    src: "/docs/develop/cosmos/",
   },
   {
-    logo: { ...logos.telegraf, svg: TelegrafLogo },
-    label: "Telegraf",
-    src: "/docs/third-party-tools/telegraf/",
-  },
-  {
-    logo: { ...logos.mindsDB, svg: MindsDBLogo },
-    label: "MindsDB",
-    src: "/blog/2022/04/18/enabling-machine-learning-in-questdb-with-mindsdb/",
-  },
-  {
-    logo: { ...logos.cube, svg: CubeLogo },
-    label: "Cube",
-    src: "/blog/2022/04/26/time-series-data-analytics-with-questdb-and-cube/",
-  },
-  {
-    logo: { ...logos.redpanda, width: 50, svg: RedpandaLogo },
-    label: "Redpanda",
-    src:
-      "/blog/2022/05/25/how-to-build-a-real-time-crypto-tracker-with-redpanda-and-questdb/",
-  },
-  {
-    logo: { ...logos.plotly, svg: PlotlyLogo },
-    label: "Plotly",
-    src: "/blog/2021/11/01/plotly-finnhub-realtime-dashboard/",
+    logo: { ...logos.StorageAccounts, svg: StorageAccounts },
+    label: "Storage Accounts",
+    src: "/docs/develop/cosmos/",
   },
 ]
 
@@ -107,7 +83,9 @@ export const Integration = () => (
                 loading: "lazy",
               })}
             />
-            {label}
+            <p style={{textAlign: "center"}}>
+              {label}
+            </p>
           </>,
         )
       })}

@@ -62,7 +62,7 @@ const Home = () => (
   <Layout
     canonical=""
     description={customFields.description}
-    title="Frosti | Virtual Cloud Assistant"
+    title="Frosti | Virtual DevOps Engineer"
     replaceTitle
   >
     <Header />
