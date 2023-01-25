@@ -15,7 +15,7 @@
   width: 50px;
   margin-right: var(--ifm-navbar-item-padding-horizontal);
   color: transparent;
-  background-image: url("../../assets/img/frostiLogo.png");
+  background-image: url("../../assets/img/Logo.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
@@ -26,7 +26,7 @@
 
 
 :global(html[data-theme="light"]) .brand {
-  background-image: url("../../assets/img/frostiLogo.png")
+  background-image: url("../../assets/img/Logo.png")
 }
 
 .inner {
