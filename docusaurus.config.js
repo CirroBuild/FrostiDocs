@@ -158,7 +158,7 @@ const config = {
       title: " ",
       logo: {
         alt: "Frosti",
-        src: "/img/navbar/Logo.svg",
+        src: "/img/navbar/frostiLogo.svg",
       },
       items: [
         

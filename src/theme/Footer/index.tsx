@@ -47,7 +47,7 @@ const Footer = () => {
         <img
           alt="Frosti logo"
           className={styles.logo}
-          src="/img/navbar/Logo.svg"
+          src="/img/navbar/frostiLogo.svg"
           title="Frosti - Your virtual cloud assistant"
           width={50}
           height={50}

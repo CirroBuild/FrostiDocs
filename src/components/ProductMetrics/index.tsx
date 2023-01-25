@@ -7,7 +7,7 @@ import SvgImage from "../SvgImage"
 import GithubLogo from "../../assets/img/github.svg"
 import SlackLogo from "../../assets/img/slack.svg"
 import DatabaseLogo from "../../assets/img/database.svg"
-import QuestDBLogo from "../../assets/img/Logo.svg"
+import QuestDBLogo from "../../assets/img/frostiLogo.svg"
 
 type Repository = {
   repo: {
