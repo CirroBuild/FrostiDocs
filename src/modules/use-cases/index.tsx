@@ -1,5 +1,4 @@
 import React from "react"
-import Link from "@docusaurus/Link"
 import styles from "./styles.module.css"
 
 const useCases = [
@@ -44,7 +43,7 @@ const useCases = [
 
 export const UseCases = () => (
   <div className={styles.root}>
-    {useCases.map(({ title, uses, cta }, index) => (
+    {useCases.map(({ title, uses }, index) => (
       <div className={styles.card} key={index}>
         <h2>{title}</h2>
 
@@ -56,9 +55,6 @@ export const UseCases = () => (
           ))}
         </ul>
 
-        <Link className={styles.link} href={cta.url}>
-          {cta.label}
-        </Link>
       </div>
     ))}
   </div>

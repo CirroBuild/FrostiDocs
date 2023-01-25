@@ -46,8 +46,7 @@ var options = new SecretClientOptions()
     {
         Delay= TimeSpan.FromSeconds(2),
         MaxDelay = TimeSpan.FromSeconds(16),
-        MaxRetries = 5,
-        Mode = RetryMode.Exponential
+        MaxRetries = 5
     }
 };
 var client = new SecretClient(new Uri(builder.Configuration["KV_ENDPOINT"]), new DefaultAzureCredential(), options);
