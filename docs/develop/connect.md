@@ -28,7 +28,7 @@ dotnet build
 
 ```csharp title="Program.cs"
 using Azure.Security.KeyVault.Secrets;
-using Azure.Identity
+using Azure.Identity;
 ```
 
 
@@ -40,19 +40,16 @@ if (builder.Environment.IsDevelopment())
     builder.Configuration.AddJsonFile("appsettings.frosti.json");
 }
 
-var options = new SecretClientOptions()
-{
-    Retry =
-    {
-        Delay= TimeSpan.FromSeconds(2),
-        MaxDelay = TimeSpan.FromSeconds(16),
-        MaxRetries = 5
-    }
-};
-var client = new SecretClient(new Uri(builder.Configuration["KV_ENDPOINT"]), new DefaultAzureCredential(), options);
+var client = new SecretClient(new Uri(builder.Configuration["KV_ENDPOINT"]), new DefaultAzureCredential());
 ```
 
-4. See subsequent articles to add service specific logic. For example, updating client to reference connection string in Key Vault referenced above.
+4. Navigate to the **root** directory of your project and run the provision command. This will prompt you with a list of services that will be provisioned for you. 
+
+```bash
+frosti provision
+```
+
+5. See subsequent articles to add service specific logic. For example, updating client to reference connection string in Key Vault referenced above.
 
 Note:
 SQLConnection is the KV secret for SQL
