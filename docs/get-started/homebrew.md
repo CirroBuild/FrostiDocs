@@ -1,11 +1,21 @@
 ---
-title: Get started with Frosti via Homebrew (macOS)
+title: Get started by Installing Frosti
 sidebar_label: Install
 description:
   A short guide for getting started with installing and running Frosti via
-  Homebrew on macOS.
+  Homebrew on macOS or Scoop on windows.
 ---
 
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+
+<Tabs defaultValue="mac" values={[
+  { label: "Mac", value: "mac" },
+  { label: "Windows", value: "windows" },
+]}>
+
+<TabItem value="mac">
 Each software release of Frosti is distributed via the
 [Homebrew](https://brew.sh/) package manager.
 
@@ -46,6 +56,32 @@ with a non-zero status if any potential problems are found:
 ```shell
 brew doctor
 ```
+
+
+</TabItem>
+
+
+<TabItem value="windows">
+Each software release of Frosti is distributed via the
+[Scoop](https://https://scoop.sh/) package manager.
+
+## Install Scoop
+
+Users who already have Scoop installed may skip this section and proceed to
+[Install Frosti](#install-Frosti). Otherwise, Scoop via powershell.
+
+```shell
+> Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
+> irm get.scoop.sh | iex
+```
+
+## Install Frosti
+```shell
+scoop install CirroBuild/tap/frosti
+```
+</TabItem>
+</Tabs>
+
 
 ## Install Az CLI
 
