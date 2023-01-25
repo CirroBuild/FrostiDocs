@@ -42,15 +42,17 @@ Define a new instance of the CosmosClient class using the constructor, and clien
 ```csharp title="Program.cs"
 // New instance of CosmosClient class
 var cosmosConnection = client.GetSecret("CosmosConnection").Value.Value;
-builder.Services.AddSingleton(s =>
+builder.Services.AddSingleton(async s =>
 {
-    CosmosClientOptions cosmosClientOptions = new CosmosClientOptions
-    {
-        MaxRetryAttemptsOnRateLimitedRequests = 3,
-        MaxRetryWaitTimeOnRateLimitedRequests = TimeSpan.FromSeconds(60)
-    };
     return new CosmosClient(cosmosConnection);
 });
+```
+
+## Provision a CosmosDb Account
+1. Run Frosti provision. This is all that's required to provision the Cosmos Db Account. The following steps demonstrate general Azure best practices for creating Db's and containers in your application code.
+
+```bash 
+frosti provision 
 ```
 
 ## Create and Query the database
@@ -72,8 +74,11 @@ Console.WriteLine($"New database:\t{database.Id}");
 ### Create a container
 The Database.CreateContainerIfNotExistsAsync will create a new container if it doesn't already exist. This method will also return a reference to the container.
 
-```csharp title="Program.cs"
+```csharp title="Homecontroller.cs"
 // Container reference with creation if it does not alredy exist
+
+// TODO Fix this sample
+
 Container container = await database.CreateContainerIfNotExistsAsync(
     id: "products",
     partitionKeyPath: "/categoryId",
@@ -86,12 +91,7 @@ Console.WriteLine($"New container:\t{container.Id}");
 ## Learn more about Cosmos Db CRUD Operations in .NET
 Follow this tutorial [Quickstart: Azure Cosmos DB for NoSQL client library for .NET](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/quickstart-dotnet?tabs=azure-cli%2Cwindows%2Cconnection-string%2Csign-in-azure-cli)
 
-## Provision a CosmosDb Account
-1. Run Frosti provision
 
-```bash 
-frosti provision 
-```
 
 ## Additional Resources 
 TO DO Check:
