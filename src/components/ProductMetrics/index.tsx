@@ -7,7 +7,7 @@ import SvgImage from "../SvgImage"
 import GithubLogo from "../../assets/img/github.svg"
 import SlackLogo from "../../assets/img/slack.svg"
 import DatabaseLogo from "../../assets/img/database.svg"
-import QuestDBLogo from "../../assets/img/frostiLogo.svg"
+import FrostiLogo from "../../assets/img/frosti.svg"
 
 type Repository = {
   repo: {
@@ -59,7 +59,7 @@ const ProductMetrics = () => {
       <div className={style.metric}>
         <div className={style.content}>
           <SvgImage
-            image={<QuestDBLogo width="60" height="60" />}
+            image={<FrostiLogo width="60" height="60" />}
             title="QuestDB logo"
           />
           <div className={style.text}>

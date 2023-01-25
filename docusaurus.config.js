@@ -51,7 +51,7 @@ const config = {
   url: `https://${consts.domain}`,
   baseUrl: "/",
   baseUrlIssueBanner: false,
-  favicon: "/img/frostiLogo.svg",
+  favicon: "/img/frosti.png",
   organizationName: "Frosti",
   projectName: "FrostiBuild",
   customFields: customFields,
@@ -158,7 +158,7 @@ const config = {
       title: " ",
       logo: {
         alt: "Frosti",
-        src: "/img/navbar/frostiLogo.svg",
+        src: "/img/frosti.svg",
       },
       items: [
         
