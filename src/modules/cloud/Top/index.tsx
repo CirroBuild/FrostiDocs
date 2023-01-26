@@ -35,9 +35,9 @@ export const Top = () => {
        
       </div>
       
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
 
       <div className={localStyle.titles}>
         <Section.Title level={1} className={localStyle.header}>
