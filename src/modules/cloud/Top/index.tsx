@@ -34,6 +34,16 @@ export const Top = () => {
         <Calendly />
        
       </div>
+      
+      <br/>
+      <br/>
+      <br/>
+
+      <div className={localStyle.titles}>
+        <Section.Title level={1} className={localStyle.header}>
+          or email us at <div style={{color:"#3EB79C", display:"inline"}}> frostibuild@gmail.com </div>
+        </Section.Title>
+      </div>
     </Section>
   )
 }

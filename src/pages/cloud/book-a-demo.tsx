@@ -16,6 +16,7 @@ const BookADemo = () => {
     >
       <Section>
         <Section.Title center>{title}</Section.Title>
+        <Section.Subtitle center>or email us at frostibuild.com</Section.Subtitle>
         <div className={style["calendly-inline-widget-wrapper"]}>
           <InlineWidget
             url="https://calendly.com/questdb-nic/questdb"

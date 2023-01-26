@@ -124,9 +124,9 @@ function Navbar(): JSX.Element {
             className={clsx(styles.ctaButton, styles.getQuestdb)}
             size="xsmall"
             variant="secondary"
-            to="/docs/get-started/homebrew"
+            to="/cloud/"
           >
-            Get Frosti
+            Contact Us
           </Button>
         </div>
       </div>

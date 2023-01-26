@@ -34,7 +34,7 @@ const LiveDemo = () => {
         See live demo
       </Section.Title>
       <Section.Subtitle>
-        Deploy your application to production in minutes. 
+        Deploy your application in minutes. 
       </Section.Subtitle>
 
       <div className={styles.preview}>

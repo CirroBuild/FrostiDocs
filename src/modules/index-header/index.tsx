@@ -9,17 +9,16 @@ export const Header = () => {
     <Section fullWidth center>
       <div className={styles.titles}>
         <Section.Title level={1} className={styles.header}>
-          Your virtual DevOps engineer
+          Your Virtual DevOps Engineer
         </Section.Title>
 
         <Section.Subtitle className={styles.subheader} center>
-          Frosti translates your business logic to cloud infrastructure. 
-          Deploy in less than 5 minutes with a single build command.
+          No more wasting time with cloud infrastructure or infrastructure as code
         </Section.Subtitle>
 
         <div className={styles.getStartedButtons}>
-          <Link to="/cloud/" className={styles.joinPublicPreviewLink}>
-            <Button newTab={false}>Book a Demo</Button>
+          <Link to="/docs/get-started/homebrew/" className={styles.joinPublicPreviewLink}>
+            <Button newTab={false}>Try it now</Button>
           </Link>
         </div>
       </div>
