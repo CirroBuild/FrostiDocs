@@ -3,11 +3,9 @@ import styles from "./styles.module.css"
 
 const useCases = [
   {
-    title: "Time to Market",
+    title: "Save Dev Time",
     uses: [
-      "Save months of dev time",
-      "Deploy app to cloud in minutes",
-      "Scale horizontally and vertically instantly",
+      "Write and test code against actual cloud resources at almost no cost and no headache from provisioning."
     ],
     cta: {
       label: "See Benchmarks",
@@ -15,11 +13,9 @@ const useCases = [
     },
   },
   {
-    title: "Developer experience",
+    title: "Scale Fast",
     uses: [
-      "Automatic discovery of required cloud resources",
-      "Simple, human readable sku choices",
-      "Avoid vendor lock in, simply use cloud primitive sdks",
+      "Don't get stuck on your PoC. Scale your infrastructure to test or production environments in a couple clicks."
     ],
     cta: {
       label: "See live demo",
@@ -27,11 +23,9 @@ const useCases = [
     },
   },
   {
-    title: "Operational Excellence",
+    title: "Secure & Reliable",
     uses: [
-      "Enterprise grade security",
-      "Highly available production deployments",
-      "Cost optimized skus to your requirements",
+      "Cost optimized infrastructure to deliver enterprise grade security and reliability for your environment."
     ],
 
     cta: {
@@ -49,9 +43,9 @@ export const UseCases = () => (
 
         <ul className={styles.list}>
           {uses.map((use, index) => (
-            <li key={index} className={styles.listItem}>
+            <p key={index} className={styles.listItem}>
               {use}
-            </li>
+            </p>
           ))}
         </ul>
 

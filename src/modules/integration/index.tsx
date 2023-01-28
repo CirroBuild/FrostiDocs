@@ -55,7 +55,7 @@ const integrations: Array<{
 export const Integration = () => (
   <Section noGap>
     <Section.Title size="small" center>
-      Use with your favorite services (and more coming soon!)
+      Integrate with your favorite services (and more soon!)
     </Section.Title>
 
     <div className={styles.integrations}>

@@ -13,7 +13,8 @@ export const Header = () => {
         </Section.Title>
 
         <Section.Subtitle className={styles.subheader} center>
-          No more wasting time with cloud infrastructure or infrastructure as code
+          No more wasting time with cloud infrastructure or infrastructure as code.
+          Welcome to the self provisioning platform.
         </Section.Subtitle>
 
         <div className={styles.getStartedButtons}>

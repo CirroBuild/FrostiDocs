@@ -39,7 +39,7 @@
 .listItem::before {
   content: "> ";
   margin-right: 0.5rem;
-  color: var(--palette-pink);
+  color: var(--palette-teal);
 }
 
 .link, .link:hover {
