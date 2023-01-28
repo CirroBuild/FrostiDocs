@@ -27,21 +27,35 @@ const Cards = () => (
       >
         {[
           {
-            header: "Save 6+ Months of DevOps Time",
-            content:
-              "Save months of work building cloud primitives and deployment processes. No more pain debugging failed deployment and misconfigurations. Frosti will automate the infrastructure provisioning and configuration.",
-          },
-          {
-            header: "Automatically Adopt Industry Cloud Best Practices",
-            content:
-              "Our developer platform will automatically provision the most secure, reliable and cost optimized cloud infrastructure based on the Sdks used. ",
-          },
-          {
             header: "Deploy Everwhere",
             content:
-              "Frosti provisions resources across GCP, AWS and Azure. Take your application and leverage best of class services across each cloud.",
+              "Provision resources across Azure, AWS, GCP, and others",
           },
-
+          {
+            header: "Zero Trust Security",
+            content:
+              "Secure access to resources following instustry leading standards via managed identities"
+          },
+          {
+            header: "Business Continuity and Disaster Recovery",
+            content:
+              "Our comprehensive solution keeps your data and operations safe and secure",
+          },
+          {
+            header: "Stay Updated",
+            content:
+              "Technology moves fast. Frosti keeps your infrastructure up-to-date in a few clicks",
+          },
+          {
+            header: "Declarative Deployment",
+            content:
+              "Easy, efficient, and deterministic deployment of your applications and infrastructure",
+          },
+          {
+            header: "Local Development",
+            content:
+              "Fast and flexible development via seamless connection to cloud resources",
+          },
           
 
           
