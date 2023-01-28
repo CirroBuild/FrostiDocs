@@ -168,6 +168,11 @@ const config = {
           position: "left",
         },
         {
+          label: "Blog",
+          to: "/blog/",
+          position: "left",
+        },
+        {
           label: "Frosti",
           href: "https://github.com/CirroBuild/frosti-bucket",
           position: "right",
