@@ -425,5 +425,5 @@ SELECT ts, avg(quantity*price) FROM trades SAMPLE BY 1d ALIGN TO CALENDAR;
 
 This section includes links to additional information such as tutorials.
 
-- [`SAMPLE BY`](/blog/2022/11/23/sql-extensions-time-series-data-questdb-part-ii):
+- [`SAMPLE BY`](/blog/):
   Blog post focusing on the data analysis ability of `SAMPLE BY`
