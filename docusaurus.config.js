@@ -187,8 +187,12 @@ const config = {
           title: "Product",
           items: [
             {
-              label: "Cloud",
+              label: "Contact Us",
               to: "/cloud/",
+            },
+            {
+              label: "Blog",
+              to: "/blog/",
             },
           ],
         },
@@ -198,15 +202,6 @@ const config = {
             {
               label: "Docs",
               to: "/docs/",
-            },
-          ],
-        },
-        {
-          title: "Company",
-          items: [
-            {
-              label: "About us",
-              to: "/about-us/",
             },
           ],
         },

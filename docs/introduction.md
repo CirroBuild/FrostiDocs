@@ -14,6 +14,5 @@ optimize the performance of your application. Feel free to reach out using the
 following channels:
 
 - [Raise an issue on GitHub]({@githubUrl@}/issues)
-- [Join the Community Slack]({@slackUrl@})
 - [Frosti on Stack Overflow]({@stackoverflowUrl@})
 - or email us at [frostibuild@gmail.com](mailto:frostibuild@gmail.com)
