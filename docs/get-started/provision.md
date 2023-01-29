@@ -1,12 +1,12 @@
 ---
-title: Deploying Azure Resources with Frosti
+title: Deploy Azure Resources with Frosti
 sidebar_label: Provision
 description:
   This document describes how to deploy resources to Azure using
   the Frosti developer platform.
 ---
 
-TBD Talk about provisioning to Azure
+See Develop section for an easy example on getting started with Frosti.
 
 ## Prerequisites
 

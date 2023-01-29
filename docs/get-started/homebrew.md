@@ -19,18 +19,13 @@ import TabItem from "@theme/TabItem"
 
 <br />
 
-## Install Visual Studio
-Download and Install [Visual Studio for Mac](https://visualstudio.microsoft.com/downloads/) if you don't have it already. The default setup should be fine.
-
-<br />
-
 ## Install Homebrew
 
 Users who already have [Homebrew](https://brew.sh/) installed may skip this section and proceed to
 [Install Frosti](#install-Frosti). Otherwise, Homebrew can be installed by
 running the official
 [installation script](https://github.com/Homebrew/install/blob/master/install.sh)
-via bash:
+via the terminal:
 
 ```shell
 /bin/bash -c \
@@ -63,11 +58,6 @@ az login
 
 
 <TabItem value="windows">
-
-<br />
-
-## Install Visual Studio
-Download and Install [Visual Studio](https://visualstudio.microsoft.com/downloads/) if you don't have it already. The default setup should be fine.
 
 <br />
 
