@@ -13,17 +13,13 @@ description:
 
 1. Find the file **Dev.frosti.json** which got created in the directory where you ran the **Frosti provision** command. Open the file and see the KeyVault endpoint created ("KV_Endpoint: "your_specific_keyvault"). Consider adding **appsettings.local.json** to your .gitignore for a production facing app. 
 
-2. Add the Azure.Security.KeyVault.Secrets NuGet package to the .NET project. Use the dotnet add package command specifying the name of the NuGet package.
+2. Add the Azure.Security.KeyVault.Secrets and Azure.Identity NuGet packages to the .NET project. In Visual Studio, use the package manager or use the below command prompts with dotnet CLI. 
 
 ```bash title=".NET CLI"
 dotnet add package Azure.Security.KeyVault.Secrets
 dotnet add package Azure.Identity
 ```
-Build the project with the dotnet build command.
 
-```bash title=".NET CLI"
-dotnet build
-```
 3. From the project directory, open the Program.cs file. In your editor, add a using directive for Azure.Security.KeyVault.Secrets and Azure.Identity.
 
 ```csharp title="Program.cs"
@@ -31,8 +27,7 @@ using Azure.Security.KeyVault.Secrets;
 using Azure.Identity;
 ```
 
-
-3. In Program.cs (or Startup.cs if it exists). Add the following lines: 
+3. In Program.cs (or Startup.cs if it exists). Add the following code below the line where builder is defined: 
 
 ```csharp title="Program.cs"
 if (builder.Environment.IsDevelopment())

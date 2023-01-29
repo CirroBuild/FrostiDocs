@@ -19,16 +19,12 @@ For this sample code, the container will use the category as a logical partition
 
 ## Install the package
 
-Add the Microsoft.Azure.Cosmos NuGet package to the .NET project. Use the dotnet add package command specifying the name of the NuGet package.
+Add the Microsoft.Azure.Cosmos NuGet package to the .NET project. In Visual Studio, use the package manager or use the below command prompt with dotnet CLI. 
 
 ```bash title=".NET CLI"
 dotnet add package Microsoft.Azure.Cosmos
 ```
-Build the project with the dotnet build command.
 
-```bash title=".NET CLI"
-dotnet build
-```
 ## Authenticate the Client
 
 From the project directory, open the Program.cs file. In your editor, add a using directive for Microsoft.Azure.Cosmos.
@@ -42,7 +38,7 @@ Define a new instance of the CosmosClient class using the constructor, and clien
 ```csharp title="Program.cs"
 // New instance of CosmosClient class
 var cosmosConnection = client.GetSecret("CosmosConnection").Value.Value;
-builder.Services.AddSingleton(async s =>
+builder.Services.AddSingleton(s =>
 {
     return new CosmosClient(cosmosConnection);
 });
@@ -55,43 +51,53 @@ builder.Services.AddSingleton(async s =>
 frosti provision 
 ```
 
-## Create and Query the database
+## Optional: Sample to Create and Query the database
 
 ### Create a database
 Next you'll create a database and container to store products, and perform queries to insert and read those items.
 
 Use the CosmosClient.CreateDatabaseIfNotExistsAsync method to create a new database if it doesn't already exist. This method will return a reference to the existing or newly created database.
-```csharp title="Program.cs"
+```csharp title="HomeController.cs"
 
-// New instance of Database class referencing the server-side database
-Database database = await cosmosConnection.CreateDatabaseIfNotExistsAsync(
-    id: "cosmicworks"
-);
+public class HomeController : Controller
+{
+    private readonly ILogger<HomeController> _logger;
+    private readonly CosmosClient _cosmosClient;
 
-Console.WriteLine($"New database:\t{database.Id}");
+    public HomeController(ILogger<HomeController> logger, cosmosClient)
+    {
+        _logger = logger;
+        _cosmosClient = cosmosClient;
+    }
+
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    public async Task<string> InitializeDatabase()
+    {
+        await _cosmosClient.CreateDatabaseIfNotExistsAsync("cosmicworks")
+        return "Success";
+    }
+
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+}
+
 ```
 
-### Create a container
-The Database.CreateContainerIfNotExistsAsync will create a new container if it doesn't already exist. This method will also return a reference to the container.
-
-```csharp title="Homecontroller.cs"
-// Container reference with creation if it does not alredy exist
-
-// TODO Fix this sample
-
-Container container = await database.CreateContainerIfNotExistsAsync(
-    id: "products",
-    partitionKeyPath: "/categoryId",
-    throughput: 400
-);
-
-Console.WriteLine($"New container:\t{container.Id}");
-```
 
 ## Learn more about Cosmos Db CRUD Operations in .NET
 Follow this tutorial [Quickstart: Azure Cosmos DB for NoSQL client library for .NET](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/quickstart-dotnet?tabs=azure-cli%2Cwindows%2Cconnection-string%2Csign-in-azure-cli)
-
-
 
 ## Additional Resources 
 TO DO Check:
