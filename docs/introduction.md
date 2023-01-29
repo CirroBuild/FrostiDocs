@@ -13,6 +13,5 @@ We are happy to help with any question you may have, particularly to help you
 optimize the performance of your application. Feel free to reach out using the
 following channels:
 
-- [Raise an issue on GitHub]({@githubUrl@}/issues)
 - [Frosti on Stack Overflow]({@stackoverflowUrl@})
 - or email us at [frostibuild@gmail.com](mailto:frostibuild@gmail.com)

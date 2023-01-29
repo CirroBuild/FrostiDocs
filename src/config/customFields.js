@@ -2,11 +2,11 @@ const consts = require("./consts")
 
 module.exports = {
   artifactHubUrl: "https://artifacthub.io/packages/helm/questdb/questdb",
-  copyright: `Copyright © ${new Date().getFullYear()} QuestDB`,
+  copyright: `Copyright © ${new Date().getFullYear()} Frosti`,
   crunchbaseUrl: "https://www.crunchbase.com/organization/quest-db",
   demoUrl: `https://demo.${consts.domain}`,
   description:
-    "QuestDB is an open source database designed to make time-series lightning fast and easy. It exposes a high performance REST API and is Postgres compatible.",
+    "Frosti is your virtual DevOps engineer.",
   dockerUrl: "https://hub.docker.com/r/questdb/questdb",
   domain: consts.domain,
   githubOrgUrl: "https://github.com/CirroBuild/frosti-bucket",

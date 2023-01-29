@@ -172,13 +172,6 @@ const config = {
           to: "/blog/",
           position: "left",
         },
-        {
-          label: "Frosti",
-          href: "https://github.com/CirroBuild/frosti-bucket",
-          position: "right",
-          className: "header-github-link",
-          "aria-label": "GitHub repository",
-        },
       ],
     },
     footer: {
@@ -208,10 +201,6 @@ const config = {
         {
           title: "Social",
           items: [
-            {
-              label: "GitHub",
-              href: customFields.githubUrl,
-            },
             {
               label: "StackOverflow",
               to: customFields.stackoverflowUrl,
