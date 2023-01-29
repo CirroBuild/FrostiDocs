@@ -71,6 +71,16 @@ const Cards = () => (
   </Section>
 )
 
+const Console = () => (
+    <Section center>
+      <img
+        loading="lazy"
+        alt="Before and After via Frosti"
+        src="/img/pages/index/web1.png"
+      />
+    </Section>
+)
+
 const Home = () => (
   <Layout
     canonical=""
@@ -84,6 +94,7 @@ const Home = () => (
     </Section>
 
     <LiveDemo />
+    <Console />
 
     <Section fullWidth odd>
       <Integration />
