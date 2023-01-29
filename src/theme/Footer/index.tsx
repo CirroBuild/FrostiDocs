@@ -1,6 +1,5 @@
 import useBaseUrl from "@docusaurus/useBaseUrl"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
-import Button from "@theme/Button"
 import clsx from "clsx"
 import React from "react"
 import customFields from "../../config/customFields"
