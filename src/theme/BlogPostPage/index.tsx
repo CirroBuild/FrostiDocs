@@ -7,8 +7,7 @@ import BlogSidebar from "@theme/BlogSidebar"
 import EditThisPage from "@theme/EditThisPage"
 import Layout from "@theme/Layout"
 import Toc from "@theme/TOC"
-import { Section } from "../../components/Section"
-import { ActionFooter } from "../../components/ActionFooter"
+
 
 function BlogPostPage(props: Props): JSX.Element {
   const { content: BlogPostContents, sidebar } = props
@@ -60,9 +59,7 @@ function BlogPostPage(props: Props): JSX.Element {
         </div>
       )}
 
-      <Section>
-        <ActionFooter />
-      </Section>
+
     </Layout>
   )
 }

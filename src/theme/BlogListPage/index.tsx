@@ -9,9 +9,7 @@ import { ThemeClassNames } from "@docusaurus/theme-common"
 
 import styles from "./styles.module.css"
 import { ListItem } from "./ListItem"
-import Subscribe from "../../components/Subscribe"
-import ActionCard from "../../components/ActionCard"
-import SubscribeIcon from "../../components/ActionFooter/subscribeIcon.svg"
+
 
 export type FrontMatter = OriginalFrontMatter & { permalink?: string }
 
@@ -67,23 +65,6 @@ function BlogListPage(props: Props): JSX.Element {
             />
           ))}
 
-          {posts.length === 11 && (
-            <ActionCard
-              title="Subscribe to our newsletter"
-              description="Stay up to date with all things QuestDB"
-              icon={<SubscribeIcon />}
-              skin="default"
-              className={styles.subscribeCard}
-            >
-              <Subscribe
-                placeholder="Email address"
-                submitButtonVariant="tertiary"
-                provider="newsletter"
-                className={styles.subscribe}
-                classNameInputs={styles.subscribeInputs}
-              />
-            </ActionCard>
-          )}
         </div>
 
         <BlogListPaginator metadata={metadata} />
