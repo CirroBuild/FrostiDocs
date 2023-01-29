@@ -16,12 +16,17 @@ import TabItem from "@theme/TabItem"
 ]}>
 
 <TabItem value="mac">
-Each software release of Frosti is distributed via the
-[Homebrew](https://brew.sh/) package manager.
+
+<br />
+
+## Install Visual Studio
+Download and Install [Visual Studio for Mac](https://visualstudio.microsoft.com/downloads/) if you don't have it already. The default setup should be fine.
+
+<br />
 
 ## Install Homebrew
 
-Users who already have Homebrew installed may skip this section and proceed to
+Users who already have [Homebrew](https://brew.sh/) installed may skip this section and proceed to
 [Install Frosti](#install-Frosti). Otherwise, Homebrew can be installed by
 running the official
 [installation script](https://github.com/Homebrew/install/blob/master/install.sh)
@@ -40,50 +45,7 @@ To install Frosti via Homebrew, run the following command:
 brew install CirroBuild/tap/frosti
 ```
 
-## Troubleshooting Homebrew issues
-
-It's recommended to first run `update` before trying to install packages or
-diagnose errors:
-
-```shell
-brew update
-```
-
-Homebrew comes with a basic diagnostic command which can help find
-inconsistencies with system settings and permissions. This command will exit
-with a non-zero status if any potential problems are found:
-
-```shell
-brew doctor
-```
-
-
-</TabItem>
-
-
-<TabItem value="windows">
-Each software release of Frosti is distributed via the
-[Scoop](https://https://scoop.sh/) package manager.
-
-## Install Scoop
-
-Users who already have Scoop installed may skip this section and proceed to
-[Install Frosti](#install-Frosti). Otherwise, Scoop via powershell.
-
-```shell
-> Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
-> irm get.scoop.sh | iex
-```
-
-## Install Frosti
-```shell
-scoop install CirroBuild/tap/frosti
-```
-</TabItem>
-</Tabs>
-
-
-## Install Az CLI
+## Install the Azure CLI
 
 1. If Az command line tool is not already installed, download Az with homebrew.
 
@@ -96,6 +58,56 @@ brew install az
 ```bash
 az login
 ```
+
+</TabItem>
+
+
+<TabItem value="windows">
+
+<br />
+
+## Install Visual Studio
+Download and Install [Visual Studio](https://visualstudio.microsoft.com/downloads/) if you don't have it already. The default setup should be fine.
+
+<br />
+
+## Install Scoop
+
+Users who already have [Scoop](https://https://scoop.sh/) installed may skip this section and proceed to
+[Install Frosti](#install-Frosti). Otherwise, Scoop via powershell.
+
+```shell
+> Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
+> irm get.scoop.sh | iex
+```
+
+Respond 'Yes' to the execution poilcy risk.
+
+<br />
+
+## Install Frosti
+
+To install Frosti via Homebrew, run the following command:
+
+```shell
+scoop bucket add frosti https://github.com/CirroBuild/frosti-bucket
+scoop install frosti
+```
+
+<br />
+
+## Install the Azure CLI
+
+1. Download and install the [azure cli](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli) if you don't have it already.
+
+2. Login to your Azure account.
+
+```bash
+az login
+```
+
+</TabItem>
+</Tabs>
 
 
 ## Next steps
