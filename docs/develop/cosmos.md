@@ -57,7 +57,7 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly CosmosClient _cosmosClient;
 
-    public HomeController(ILogger<HomeController> logger, cosmosClient)
+    public HomeController(ILogger<HomeController> logger, CosmosClient cosmosClient)
     {
         _logger = logger;
         _cosmosClient = cosmosClient;
