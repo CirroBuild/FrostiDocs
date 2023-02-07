@@ -80,12 +80,12 @@ const Console = () => (
     />
   </Section>
   <Section center>
-  <img
-    loading="lazy"
-    alt="Frosti Provision"
-    src="/img/pages/index/FrostiProvision.png"
-  />
-</Section>
+    <img
+      loading="lazy"
+      alt="Frosti Provision"
+      src="/img/pages/index/FrostiProvision.png"
+    />
+  </Section>
 )
 
 const Home = () => (
