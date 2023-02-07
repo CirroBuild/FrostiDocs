@@ -104,8 +104,8 @@ const Home = () => (
     </Section>
 
     <LiveDemo />
-    <Workflow/>
-    <Provision/>
+    <Workflow />
+    <Provision />
 
     <Section fullWidth odd>
       <Integration />
