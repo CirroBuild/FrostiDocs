@@ -71,7 +71,7 @@ const Cards = () => (
   </Section>
 )
 
-const Console = () => (
+const Workflow = () => (
   <Section center>
     <img
       loading="lazy"
@@ -79,6 +79,8 @@ const Console = () => (
       src="/img/pages/index/WorkflowDiagram.png"
     />
   </Section>
+)
+const Provision = () => (
   <Section center>
     <img
       loading="lazy"
@@ -87,6 +89,7 @@ const Console = () => (
     />
   </Section>
 )
+
 
 const Home = () => (
   <Layout
@@ -101,7 +104,8 @@ const Home = () => (
     </Section>
 
     <LiveDemo />
-    <Console />
+    <Workflow/>
+    <Provision/>
 
     <Section fullWidth odd>
       <Integration />
