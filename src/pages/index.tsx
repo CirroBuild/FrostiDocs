@@ -75,6 +75,7 @@ const Workflow = () => (
   <Section center>
     <img
       loading="lazy"
+      width="800px"
       alt="Before and After via Frosti"
       src="/img/pages/index/WorkflowDiagram.png"
     />
@@ -84,6 +85,7 @@ const Provision = () => (
   <Section center>
     <img
       loading="lazy"
+      width="900px"
       alt="Frosti Provision"
       src="/img/pages/index/FrostiProvision.png"
     />
@@ -105,14 +107,12 @@ const Home = () => (
 
     <LiveDemo />
     <Workflow />
-    <Provision />
+    
 
     <Section fullWidth odd>
       <Integration />
-    </Section>
-
-  
- 
+      <Provision />
+    </Section>    
 
     <Section>
       <Cards />
