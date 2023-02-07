@@ -83,6 +83,9 @@ const Workflow = () => (
 )
 const Provision = () => (
   <Section center>
+    <Section.Title size="small" center>
+      Frosti's Automated Deployment
+    </Section.Title>
     <img
       loading="lazy"
       width="900px"
@@ -111,12 +114,15 @@ const Home = () => (
 
     <Section fullWidth odd>
       <Integration />
-      <Provision />
     </Section>    
 
     <Section>
       <Cards />
     </Section>
+
+    <Section>
+      <Provision />
+    </Section>  
   </Layout>
 )
 
