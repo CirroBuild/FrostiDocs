@@ -76,9 +76,16 @@ const Console = () => (
     <img
       loading="lazy"
       alt="Before and After via Frosti"
-      src="/img/pages/index/web1.png"
+      src="/img/pages/index/WorkflowDiagram.png"
     />
   </Section>
+  <Section center>
+  <img
+    loading="lazy"
+    alt="Frosti Provision"
+    src="/img/pages/index/FrostiProvision.png"
+  />
+</Section>
 )
 
 const Home = () => (
