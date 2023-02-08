@@ -84,8 +84,9 @@ const Workflow = () => (
 const Provision = () => (
   <Section center>
     <Section.Title size="small" center>
-      Frosti's Automated Deployment
+      Frosti Automated Deployment
     </Section.Title>
+
     <img
       loading="lazy"
       width="900px"
