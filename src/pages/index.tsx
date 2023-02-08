@@ -75,7 +75,7 @@ const Workflow = () => (
   <Section center>
     <img
       loading="lazy"
-      width="800px"
+      width="900px"
       alt="Before and After via Frosti"
       src="/img/pages/index/WorkflowDiagram.png"
     />
@@ -84,7 +84,7 @@ const Workflow = () => (
 const Provision = () => (
   <Section noGap center>
     <Section.Title size="small" center>
-      Frosti Automated Deployment
+      Fully Automated Deployments
     </Section.Title>
 
     <img
@@ -121,7 +121,7 @@ const Home = () => (
       <Cards />
     </Section>
 
-    <Section>
+    <Section fullWidth odd>
       <Provision />
     </Section>  
   </Layout>
