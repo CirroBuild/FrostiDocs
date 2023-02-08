@@ -82,7 +82,7 @@ const Workflow = () => (
   </Section>
 )
 const Provision = () => (
-  <Section center>
+  <Section noGap center>
     <Section.Title size="small" center>
       Frosti Automated Deployment
     </Section.Title>
