@@ -36,6 +36,12 @@ installation. On Ubuntu it should be enough to run
 ## Local development
 
 ```script
+export REACT_APP_AI_CONNECTION=""
+```
+
+Add AI locally (Todo later: don't try to add AI locally)
+
+```script
 yarn start
 ```
 
