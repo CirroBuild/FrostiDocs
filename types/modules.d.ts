@@ -22,6 +22,7 @@ declare module "@docusaurus/useDocusaurusContext" {
   type Ctx = {
     siteConfig: Omit<DocusaurusConfig, "customFields" | "themeConfig"> & {
       customFields: {
+        ai_connection: string
         artifactHubUrl: string
         copyright: string
         crunchbaseUrl: string

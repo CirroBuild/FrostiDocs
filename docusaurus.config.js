@@ -54,7 +54,11 @@ const config = {
   favicon: "/img/frosti.png",
   organizationName: "Frosti",
   projectName: "FrostiBuild",
-  customFields: customFields,
+  customFields: 
+  {
+    customFields,
+    ai_connection: process.env.REACT_APP_AI_CONNECTION
+  },
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   plugins: [
@@ -246,7 +250,7 @@ const config = {
     ],
   ],
 }
-
+require('dotenv').config();
 module.exports = {
   ...config,
   ssrTemplate: ssrTemplate(config),

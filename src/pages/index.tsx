@@ -12,6 +12,16 @@ import feCss from "../css/index/feature.module.css"
 import seCss from "../css/section.module.css"
 import LiveDemo from "../modules/index-live-demo"
 
+import { ApplicationInsights } from '@microsoft/applicationinsights-web'
+import siteConfig from '@generated/docusaurus.config';
+
+const appInsights = new ApplicationInsights({ config: {
+  connectionString: siteConfig.customFields.ai_connection
+} });
+
+appInsights.loadAppInsights();
+appInsights.trackPageView();
+
 const Cards = () => (
   <Section odd fullWidth>
     <Section noGap>
