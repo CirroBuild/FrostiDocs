@@ -8,11 +8,13 @@ import styles from "./styles.module.css"
 import SvgImage from "../../components/SvgImage"
 
 import KeyVault from "../../../static/img/logos/Key-Vaults.svg"
-import StorageAccounts from "../../../static/img/logos/Storage-Accounts.svg"
+import Storage from "../../../static/img/logos/Storage-Accounts.svg"
 import AzureSQL from "../../../static/img/logos/SQL-Database.svg"
 import AzureCosmosDb from "../../../static/img/logos/Azure-Cosmos-DB.svg"
-import AppServices from "../../../static/img/logos/App-Services.svg"
-import AzureAD from "../../../static/img/logos/Managed-Identities.svg"
+import WebApp from "../../../static/img/logos/App-Services.svg"
+import ManagedIdentity from "../../../static/img/logos/Managed-Identities.svg"
+import AppInsights from "../../../static/img/logos/App-Insights.svg"
+import FunctionApp from "../../../static/img/logos/FunctionApp.svg"
 
 
 const integrations: Array<{
@@ -21,34 +23,44 @@ const integrations: Array<{
   src?: string
 }> = [
   {
-    logo: { ...logos.AppServices, svg: AppServices },
-    label: "App Services",
-    src: "/docs/develop/first-app/",
+    logo: { ...logos.AzureAD, svg: ManagedIdentity },
+    label: "Managed Identity",
+    src: "/docs/dotnet/managed-identity/",
   },
   {
-    logo: { ...logos.keyvault, svg: KeyVault },
-    label: "Key Vault",
-    src: "/docs/develop/connect/",
+    logo: { ...logos.KeyVault, svg: KeyVault },
+    label: "Azure KeyVault",
+    src: "/docs/dotnet/keyvault/",
   },
   {
-    logo: { ...logos.AzureAD, svg: AzureAD },
-    label: "Azure AD",
-    src: "/docs/develop/connect/",
+    logo: { ...logos.WebApp, svg: WebApp },
+    label: "Azure WebApp",
+    src: "/docs/dotnet/web-app/",
+  },
+  {
+    logo: { ...logos.FunctionApp, svg: FunctionApp },
+    label: "Azure FunctionApp",
+    src: "/docs/dotnet/function-app/",
   },
   {
     logo: { ...logos.AzureCosmosDb, svg: AzureCosmosDb },
-    label: "CosmosDb",
-    src: "/docs/develop/cosmos/",
+    label: "Azure CosmosDb",
+    src: "/docs/dotnet/cosmos/",
   },
   {
     logo: { ...logos.AzureSQL, svg: AzureSQL },
     label: "Azure SQL",
-    src: "/docs/develop/cosmos/",
+    src: "/docs/dotnet/sql/",
   },
   {
-    logo: { ...logos.StorageAccounts, svg: StorageAccounts },
-    label: "Storage Accounts",
-    src: "/docs/develop/cosmos/",
+    logo: { ...logos.AppInsights, svg: AppInsights },
+    label: "Application Inisghts",
+    src: "/docs/dotnet/app-insights/",
+  },
+  {
+    logo: { ...logos.StorageAccounts, svg: Storage },
+    label: "Azure Storage",
+    src: "/docs/dotnet/storage/",
   },
 ]
 
