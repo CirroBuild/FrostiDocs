@@ -131,7 +131,7 @@ const Home = () => (
       <Integration />
     </Section>    
 
-    <Section >
+    <Section>
       <Provision />
     </Section>  
 
