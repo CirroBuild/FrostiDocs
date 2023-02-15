@@ -116,6 +116,7 @@ const Home = () => (
   <Layout
     canonical=""
     description={customFields.description}
+    image="/img/pages/index/FrostiProvision.png"
     title="Frosti | Virtual DevOps Engineer"
     replaceTitle
   >

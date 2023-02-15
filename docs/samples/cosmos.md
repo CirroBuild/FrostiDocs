@@ -1,12 +1,12 @@
 ---
-title: Add SQL Db to ASP.NET web application
-sidebar_label: Add SQL Db
+title: Add Cosmos Db to ASP.NET web application
+sidebar_label: Add Cosmos Db
 description:
-  This tutorial will walk through the process of updating an existing ASP.NET web application that uses placeholder data to instead query from the API.
+  This tutorial will walk through the process of updating an existing ASP.NET web application to query from an Azure Cosmos Db.
 ---
 
 ## Prerequisites
-- Completed "Connect Other Azure Resources"
+- Completed "Create .NET Web App"
 
 ## Add the package
 
@@ -15,6 +15,10 @@ Add the Microsoft.Azure.Cosmos NuGet package to the .NET project. In Visual Stud
 ```bash title=".NET CLI"
 dotnet add package Microsoft.Azure.Cosmos
 ```
+
+## Create Cosmos Db Container Using Factory Pattern
+
+
 
 ## Connecting to Cosmos
 
@@ -27,12 +31,8 @@ using Microsoft.Azure.Cosmos;
 Define a new instance of the CosmosClient class using the constructor, and client.GetSecret() method to get the Cosmos Db connection string stored in the Key Vault referenced in the previous article.
 
 ```csharp title="Program.cs"
-// New instance of CosmosClient class
-var cosmosConnection = client.GetSecret("CosmosConnection").Value.Value;
-builder.Services.AddSingleton(s =>
-{
-    return new CosmosClient(cosmosConnection);
-});
+
+using Microsoft.Azure.Cosmos;
 ```
 
 ## Frosti
@@ -52,42 +52,9 @@ We'll create a database and container to store products within the HomeControlle
 
 ```csharp title="HomeController.cs"
 
-public class HomeController : Controller
-{
-    private readonly ILogger<HomeController> _logger;
-    private readonly CosmosClient _cosmosClient;
 
-    public HomeController(ILogger<HomeController> logger, CosmosClient cosmosClient)
-    {
-        _logger = logger;
-        _cosmosClient = cosmosClient;
-    }
-
-    public IActionResult Index()
-    {
-        return View();
-    }
-
-    public async Task<HttpStatusCode> InitializeDatabase()
-    {
-        var dbResp = await _cosmosClient.CreateDatabaseIfNotExistsAsync("cosmicworks");
-        var containerResp = await dbResp.Database.CreateContainerIfNotExistsAsync("products", "/category");
-        return containerResp.StatusCode;
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
-}
 
 ```
 
 ## Learn more about Cosmos Db CRUD Operations in .NET
-Follow this tutorial [Quickstart: Azure Cosmos DB for NoSQL client library for .NET](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/quickstart-dotnet?tabs=azure-cli%2Cwindows%2Cconnection-string%2Csign-in-azure-cli)
+Follow this tutorial [Azure SQL How To: Connect and Query Dotnet Visual Studio](https://learn.microsoft.com/en-us/azure/azure-sql/database/connect-query-dotnet-visual-studio?view=azuresql)

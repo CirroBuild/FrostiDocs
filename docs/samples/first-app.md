@@ -1,6 +1,6 @@
 ---
 title: Create My First Cloud Application
-sidebar_label: First Web App
+sidebar_label: Create .NET Web App
 description:
   This document shows how to launch a starter application to test Frosti.
 ---
@@ -59,5 +59,5 @@ git push -u origin --all
 
 5. Before hitting run, make sure to update `YOUR_SERVICE_CONNECTION` in the variables section from the file that just got loaded. See below on how to create/refernece a service connection.
 
-6. Just hit run, and you'll have yourself a PPE envionrment provisioned and deployed with your code. Prod coming soon. To see your website name, find the `AzureRmWebAppDeployment` job under `CodeDeploy`. You'll see the line "App Service Application URL: XX_YOUR_APP_URL_XX" 
+6. Just hit run, and you'll have yourself a PPE envionrment provisioned and deployed with your code. To see your website name, find the `AzureRmWebAppDeployment` job under `CodeDeploy`. You'll see the line "App Service Application URL: XX_YOUR_APP_URL_XX" 
 
