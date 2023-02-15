@@ -39,6 +39,16 @@ module.exports = {
       ],
     },
     {
+      label: "Samples",
+      type: "category",
+      items: [
+        "samples/first-app",
+        "samples/cosmos",
+        "samples/storage",
+        "samples/functions",
+      ],
+    },
+    {
       label: "Azure",
       type: "category",
       items: [

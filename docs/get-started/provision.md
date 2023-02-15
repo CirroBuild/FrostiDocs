@@ -36,7 +36,7 @@ Note: This will create a file frosti.yml, make sure to keep this file. It's need
 
 4. On the sidebar that pops up, leave Branch as main and select the frost.yml for Path. 
 
-5. Before hitting run, make sure to update `YOUR_SERVICE_CONNECTION` in the variables section from the file that just got loaded. See below on how to create/refernece a service connection.
+5. Before hitting run, make sure to update `YOUR_SERVICE_CONNECTION` in the variables section from the file that just got loaded. See below on how to create/reference a service connection.
 
 6. Just hit run, and you'll have yourself a PPE envionrment provisioned and deployed with your code. Prod coming soon. To see your website name, find the `AzureRmWebAppDeployment` job under `CodeDeploy`. You'll see the line "App Service Application URL: XX_YOUR_APP_URL_XX" 
 
