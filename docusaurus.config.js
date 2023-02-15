@@ -192,6 +192,10 @@ const config = {
               to: "/cloud/",
             },
             {
+              label: "Pricing",
+              to: "/pricing/",
+            },
+            {
               label: "Blog",
               to: "/blog/",
             },

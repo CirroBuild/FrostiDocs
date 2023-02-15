@@ -3,22 +3,19 @@ import Button from "@theme/Button"
 import { Section } from "../../../components/Section"
 import style from "./styles.module.css"
 import clsx from "clsx"
+import Link from "@docusaurus/Link"
 
-import { Dialog } from "../../../components/Dialog"
-import { ContactForm } from "../../cloud/ContactForm"
-import styled from "styled-components"
+
 
 export type PricingPlan = {
   type: "idea" | "beta" | "team" | "enterprise"
   title: string
   price: string
+  action: string
+  url: string
   specs: Array<{ label: string; value: string }>
   highlighted?: boolean
 }
-
-const StyledDialogContent = styled(Dialog.Content)`
-  padding: 0;
-`
 
 export const Plan = (plan: PricingPlan) => (
   <article className={style.root}>
@@ -43,14 +40,9 @@ export const Plan = (plan: PricingPlan) => (
     </div>
 
     <div className={style.cta}>
-      <Dialog>
-        <Dialog.Trigger>
-          <Button size="small">Get Access</Button>
-        </Dialog.Trigger>
-        <StyledDialogContent>
-          <ContactForm interestedIn={plan.type} modal />
-        </StyledDialogContent>
-      </Dialog>
+      <Link to={plan.url}>
+        <Button newTab={false} size="small">{plan.action}</Button>
+      </Link>
     </div>
   </article>
 )

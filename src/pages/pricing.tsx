@@ -11,15 +11,9 @@ const CloudPage = () => (
     title="Pricing"
     image="/img/pages/cloud/screens-thumb.png"
   >
-    <Section>
-      <Section.Title level={1} center>
-        Frosti Pricing
-      </Section.Title>
-
-      <Section.Subtitle center>
-        Never write Infrastructure as Code again. 
-      </Section.Subtitle>
-    </Section>
+    <Section.Title center>
+      Frosti Pricing
+    </Section.Title>
 
     <Section center noGap>
       <Plans />
