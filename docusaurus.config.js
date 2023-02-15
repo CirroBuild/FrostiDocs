@@ -131,7 +131,7 @@ const config = {
       disableSwitch: false,
       respectPrefersColorScheme: false,
     },
-    image: "/img/og.gif",
+    image: "/img/pages/index/FrostiProvision.png",
     gtag: {
       trackingID: "GTM-PVR7M2G",
       anonymizeIP: true,
