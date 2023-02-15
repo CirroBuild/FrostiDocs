@@ -2,92 +2,96 @@
 title: Azure Storage
 sidebar_label: Storage
 description:
-  This tutorial will walk through the process of updating an existing ASP.NET web application that uses placeholder data to instead query from the API.
+  Overview of Azure Storage using Frosti
 ---
 
-## Prerequisites
-- Completed "Connect Other Azure Resources"
-
-## Add the package
-
-Add the Microsoft.Azure.Cosmos NuGet package to the .NET project. In Visual Studio, use the package manager or use the below command prompt with dotnet CLI. 
-
-```bash title=".NET CLI"
-dotnet add package Microsoft.Azure.Cosmos
+## Blob Storage
+### Packages / SDKs
+Add the nuget package via the CLI or [Visual Studio](https://learn.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio)
+```bash title="Bash / CLI"
+dotnet add package Azure.Storage.Blobs
 ```
 
-## Connecting to Cosmos
+### Usage
+```csharp title="Example.cs"
+using Azure.Storage.Blobs;
 
-From the project directory, open the Program.cs file. In your editor, add a using directive for Microsoft.Azure.Cosmos.
+// other code
 
-```csharp title="Program.cs"
-using Microsoft.Azure.Cosmos;
+var blobClient = new BlobServiceClient(_configuration["StorageConnection"]);
+var containerClient = blobClient.GetBlobContainerClient("your-blob-name");
+var response = await containerClient.CreateIfNotExistsAsync();
+```
+Learn more about [Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-container-create) Operations
+
+## Queues
+### Packages / SDKs
+Add the nuget package via the CLI or [Visual Studio](https://learn.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio)
+```bash title="Bash / CLI"
+dotnet add package Azure.Storage.Queues
 ```
 
-Define a new instance of the CosmosClient class using the constructor, and client.GetSecret() method to get the Cosmos Db connection string stored in the Key Vault referenced in the previous article.
+### Usage
+```csharp title="Example.cs"
+using Azure.Storage.Queues;
 
-```csharp title="Program.cs"
-// New instance of CosmosClient class
-var cosmosConnection = client.GetSecret("CosmosConnection").Value.Value;
-builder.Services.AddSingleton(s =>
-{
-    return new CosmosClient(cosmosConnection);
-});
+// other code
+
+var queueClient = new QueueClient(_configuration["StorageConnection"], "your-queue-name");
+await queueClient.CreateIfNotExistsAsync();
+```
+Learn more about [Queue Storage](https://learn.microsoft.com/en-us/azure/storage/queues/storage-dotnet-how-to-use-queues?tabs=dotnet) Operations
+
+## Data Lake Gen 2
+### Packages / SDKs
+Add the nuget package via the CLI or [Visual Studio](https://learn.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio)
+```bash title="Bash / CLI"
+dotnet add package Azure.Storage.Files.DataLake
 ```
 
-## Frosti
-Run `frosti provision`. This is all that's required to provision the cosmos infrastructure. The following steps demonstrate general Azure best practices for creating Db's and containers in your application code.
+### Usage
+```csharp title="Example.cs"
+using Azure.Storage.Files.DataLake;
 
-## Optional: Sample to Create and Query the database
-The sample code described in this article creates a database named "cosmicworks" with a container named "products". The products table is designed to contain product details such as name, category, quantity, and a sale indicator. Each product also contains a unique identifier.
+// other code
 
-For this sample code, the container will use the "category" as a logical partition key.
+var dataLakeClient = new DataLakeServiceClient(_configuration["StorageConnection"]);
+await dataLakeClient.CreateFileSystemAsync("your-file-system");
+```
+Learn more about [Data Lake Gen2](https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-directory-file-acl-dotnet) Operations
 
-### Create a database
-We'll create a database and container to store products within the HomeController, and perform queries to insert and read those items. In order to initialize the database, you would go to `/home/initializedatabase`. This is just an example, this should most likely be done in app start.
-
-1. See the `InitializeDatabase` function. Use the CreateDatabaseIfNotExistsAsync method to create a new database if it doesn't already exist. This method will return a reference to the existing or newly created database.
-
-2. Create a container via the `CreateContainerIfNotExistsAsync` function.
-
-```csharp title="HomeController.cs"
-
-public class HomeController : Controller
-{
-    private readonly ILogger<HomeController> _logger;
-    private readonly CosmosClient _cosmosClient;
-
-    public HomeController(ILogger<HomeController> logger, CosmosClient cosmosClient)
-    {
-        _logger = logger;
-        _cosmosClient = cosmosClient;
-    }
-
-    public IActionResult Index()
-    {
-        return View();
-    }
-
-    public async Task<HttpStatusCode> InitializeDatabase()
-    {
-        var dbResp = await _cosmosClient.CreateDatabaseIfNotExistsAsync("cosmicworks");
-        var containerResp = await dbResp.Database.CreateContainerIfNotExistsAsync("products", "/category");
-        return containerResp.StatusCode;
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
-}
-
+## File Storage
+### Packages / SDKs
+Add the nuget package via the CLI or [Visual Studio](https://learn.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio)
+```bash title="Bash / CLI"
+dotnet add package Azure.Storage.Files.Shares
 ```
 
-## Learn more about Cosmos Db CRUD Operations in .NET
-Follow this tutorial [Quickstart: Azure Cosmos DB for NoSQL client library for .NET](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/quickstart-dotnet?tabs=azure-cli%2Cwindows%2Cconnection-string%2Csign-in-azure-cli)
+### Usage
+```csharp title="Example.cs"
+using Azure.Storage.Files.Shares;
+
+// other code
+
+var share = new ShareClient(_configuration["StorageConnection"], "your-share-name");
+await share.CreateIfNotExistsAsync();
+```
+Learn more about [Files Storage](https://learn.microsoft.com/en-us/azure/storage/files/storage-dotnet-how-to-use-files?tabs=dotnet) Operations
+
+## Table Storage
+### Packages / SDKs
+Add the nuget package via the CLI or [Visual Studio](https://learn.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio)
+```bash title="Bash / CLI"
+dotnet add package Azure.Data.Tables
+```
+
+### Usage
+```csharp title="Example.cs"
+using Azure.Data.Tables;
+
+// other code
+
+var tableClient = new TableServiceClient(_configuration["StorageConnection"]);
+var table = tableClient.CreateTableIfNotExists("yourtablename");
+```
+Learn more about [Table Storage](https://learn.microsoft.com/dotnet/api/overview/azure/data.tables-readme?view=azure-dotnet) Operations
