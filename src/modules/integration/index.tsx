@@ -25,42 +25,42 @@ const integrations: Array<{
   {
     logo: { ...logos.AzureAD, svg: ManagedIdentity },
     label: "Managed Identity",
-    src: "/docs/dotnet/managed-identity/",
+    src: "/docs/azure/managed-identity/",
   },
   {
     logo: { ...logos.KeyVault, svg: KeyVault },
     label: "Azure KeyVault",
-    src: "/docs/dotnet/keyvault/",
+    src: "/docs/azure/keyvault/",
   },
   {
     logo: { ...logos.WebApp, svg: WebApp },
     label: "Azure WebApp",
-    src: "/docs/dotnet/web-app/",
+    src: "/docs/azure/web-app/",
   },
   {
     logo: { ...logos.FunctionApp, svg: FunctionApp },
     label: "Azure FunctionApp",
-    src: "/docs/dotnet/function-app/",
+    src: "/docs/azure/function-app/",
   },
   {
     logo: { ...logos.AzureCosmosDb, svg: AzureCosmosDb },
     label: "Azure CosmosDb",
-    src: "/docs/dotnet/cosmos/",
+    src: "/docs/azure/cosmos/",
   },
   {
     logo: { ...logos.AzureSQL, svg: AzureSQL },
     label: "Azure SQL",
-    src: "/docs/dotnet/sql/",
+    src: "/docs/azure/sql/",
   },
   {
     logo: { ...logos.AppInsights, svg: AppInsights },
     label: "Application Inisghts",
-    src: "/docs/dotnet/app-insights/",
+    src: "/docs/azure/app-insights/",
   },
   {
     logo: { ...logos.StorageAccounts, svg: Storage },
     label: "Azure Storage",
-    src: "/docs/dotnet/storage/",
+    src: "/docs/azure/storage/",
   },
 ]
 
