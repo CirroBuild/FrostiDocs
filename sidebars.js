@@ -48,6 +48,21 @@ module.exports = {
       ],
     },
     {
+      label: "Azure",
+      type: "category",
+      items: [
+        "azure/overview",
+        "azure/managed-identity",
+        "azure/keyvault",
+        "azure/app-insights",
+        "azure/web-app",
+        "azure/function-app",
+        "azure/cosmos",
+        "azure/sql",
+        "azure/storage",
+      ],
+    },
+    {
       label: "Troubleshooting",
       type: "category",
       items: [

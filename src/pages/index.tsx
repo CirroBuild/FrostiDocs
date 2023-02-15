@@ -74,7 +74,7 @@ const Cards = () => (
           },
         ].map(({ header, content, isPreview }, index) => (
           <div key={index} className={feCss.feature}>
-            <h3 className={feCss.feature__header}>{header} {isPreview? <sub> (Preview)</sub> : <></>}</h3>
+            <h3 className={feCss.feature__header}>{header} {isPreview? <sub> [Preview]</sub> : <></>}</h3>
             <p className={feCss.feature__content}>{content}</p>
           </div>
         ))}
@@ -90,7 +90,7 @@ const Workflow = () => (
     </Section.Title>
     <img
       loading="lazy"
-      width="1100px"
+      width="1000px"
       alt="Before and After via Frosti"
       src="/img/pages/index/WorkflowDiagram.png"
     />
