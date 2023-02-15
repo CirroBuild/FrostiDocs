@@ -20,6 +20,7 @@ export const plans: PricingPlan[] = [
     action: "Sign Up",
     url: "/cloud/",
     specs: [
+      { label: "0", value: "Everything in Idea plus:" },
       { label: "1", value: "- Built in Security" },
       { label: "2", value: "- Automated CI/CD Pipeline" },
       { label: "3", value: "- Standalone Test Enviornment" },
@@ -33,6 +34,7 @@ export const plans: PricingPlan[] = [
     action: "Join Waiting List",
     url: "/cloud/",
     specs: [
+      { label: "0", value: "Everything in Beta plus:" },
       { label: "1", value: "- BCDR" },
       { label: "1", value: "- Up to 5 Members" },
       { label: "2", value: "- Multiple Subscriptions" },
@@ -46,6 +48,7 @@ export const plans: PricingPlan[] = [
     action: "Contact Us",
     url: "/cloud/",
     specs: [
+      { label: "0", value: "Everything in Team plus:" },
       { label: "1", value: "- Multiple Clouds" },
       { label: "2", value: "- Zero Trust Security" },
       { label: "3", value: "- Unlimited Members" },
