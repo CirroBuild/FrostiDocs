@@ -49,7 +49,7 @@ const integrations: Array<{
   },
   {
     logo: { ...logos.AzureSQL, svg: AzureSQL },
-    label: "Azure SQL",
+    label: "Azure SQL Db",
     src: "/docs/azure/sql/",
   },
   {
