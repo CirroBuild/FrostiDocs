@@ -13,6 +13,7 @@
 .heading {
   display: grid;
   text-align: center;
+  height:70px;
   background: var(--color-header);
   border-radius: 8px 8px 0 0;
   padding: 1rem 4rem;
