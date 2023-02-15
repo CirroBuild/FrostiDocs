@@ -27,6 +27,7 @@ export const plans: PricingPlan[] = [
     specs: [
       { label: "1", value: "- Up to 10 members" },
       { label: "2", value: "- Multiple subscriptions" },
+      { label: "1", value: "- BCDR prod envs" },
       { label: "2", value: "- Governance" },
     ],
   },
