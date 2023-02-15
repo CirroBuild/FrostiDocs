@@ -3,24 +3,19 @@ import Button from "@theme/Button"
 import { Section } from "../../../components/Section"
 import style from "./styles.module.css"
 import clsx from "clsx"
+import Link from "@docusaurus/Link"
 
-import { Dialog } from "../../../components/Dialog"
-import { ContactForm } from "../../cloud/ContactForm"
-import styled from "styled-components"
+
 
 export type PricingPlan = {
-  type: "entry" | "performant" | "high-performance"
+  type: "idea" | "beta" | "team" | "enterprise"
   title: string
-  description: string
   price: string
+  action: string
+  url: string
   specs: Array<{ label: string; value: string }>
-  subtext: string
   highlighted?: boolean
 }
-
-const StyledDialogContent = styled(Dialog.Content)`
-  padding: 0;
-`
 
 export const Plan = (plan: PricingPlan) => (
   <article className={style.root}>
@@ -30,33 +25,24 @@ export const Plan = (plan: PricingPlan) => (
       <Section.Title level={3} className={style.title}>
         {plan.title}
       </Section.Title>
-
-      <span className={style.description}>{plan.description}</span>
     </header>
 
     <div className={style.price}>
-      <span className={style.priceValue}>${plan.price}</span>
-      <span className={style.pricePeriod}>per hour</span>
+      <span className={style.priceValue}>{plan.price}</span>
     </div>
 
     <div className={style.specs}>
       {plan.specs.map((spec, index) => (
         <div key={index} className={style.spec}>
-          <span className={style.specLabel}>{spec.label}</span>
           <span className={style.specValue}>{spec.value}</span>
         </div>
       ))}
     </div>
 
     <div className={style.cta}>
-      <Dialog>
-        <Dialog.Trigger>
-          <Button size="small">Get Access</Button>
-        </Dialog.Trigger>
-        <StyledDialogContent>
-          <ContactForm interestedIn={plan.type} modal />
-        </StyledDialogContent>
-      </Dialog>
+      <Link to={plan.url}>
+        <Button newTab={false} size="small">{plan.action}</Button>
+      </Link>
     </div>
   </article>
 )

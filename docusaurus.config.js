@@ -164,11 +164,15 @@ const config = {
         alt: "Frosti",
         src: "/img/frosti.svg",
       },
-      items: [
-        
+      items: [    
         {
           label: "Docs",
           to: "/docs/",
+          position: "left",
+        },
+        {
+          label: "Pricing",
+          to: "/pricing/",
           position: "left",
         },
         {
@@ -186,6 +190,10 @@ const config = {
             {
               label: "Contact Us",
               to: "/cloud/",
+            },
+            {
+              label: "Pricing",
+              to: "/pricing/",
             },
             {
               label: "Blog",

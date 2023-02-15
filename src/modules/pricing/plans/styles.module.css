@@ -11,13 +11,12 @@
   --gap: 4rem;
   display: grid;
   gap: var(--gap);
-  grid-template-columns: repeat(var(--cols), 380px);
-  align-items: flex-end;
+  grid-template-columns: repeat(var(--cols), 285px);
 }
 
 @media screen and (min-width: 900px) {
   .plans {
-    --cols: 3;
+    --cols: 4;
     --gap: 2rem;
   }
 }
