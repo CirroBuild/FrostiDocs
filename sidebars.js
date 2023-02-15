@@ -39,15 +39,6 @@ module.exports = {
       ],
     },
     {
-      label: "Develop",
-      type: "category",
-      items: [
-        "develop/first-app",
-        "develop/connect",
-        "develop/cosmos",
-      ],
-    },
-    {
       label: "Azure",
       type: "category",
       items: [
