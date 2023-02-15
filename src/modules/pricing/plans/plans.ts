@@ -2,37 +2,40 @@ import type { PricingPlan } from "../plan"
 
 export const plans: PricingPlan[] = [
   {
-    type: "entry",
-    title: "Entry Level",
-    description: "Perfect to get started quickly",
-    price: "0.366",
+    type: "idea",
+    title: "Idea",
+    price: "Free",
     specs: [
-      { label: "CPU", value: "2 Cores" },
-      { label: "RAM", value: "8 GB" },
+      { label: "1", value: "- Use of dev env" },
+      { label: "2", value: "- Built in security" },
     ],
-    subtext: "Indicative pricing with 25 GB storage",
   },
   {
-    type: "performant",
-    title: "Performant",
-    description: "Offers better performance for demanding applications",
-    price: "0.686",
+    type: "beta",
+    title: "Beta",
+    price: "$1/month",
     specs: [
-      { label: "CPU", value: "4 Cores" },
-      { label: "RAM", value: "16 GB" },
+      { label: "1", value: "- Automated CI/CD pipeline" },
+      { label: "2", value: "- Standalone test envs" },
     ],
-    subtext: "Indicative pricing with 50 GB storage",
     highlighted: true,
   },
   {
-    type: "high-performance",
-    title: "High Performance",
-    description: "Handle heavy duty writes and reads",
-    price: "1.893",
+    type: "team",
+    title: "Team",
+    price: "Coming Soon",
     specs: [
-      { label: "CPU", value: "16 Cores" },
-      { label: "RAM", value: "64 GB" },
+      { label: "1", value: "- Up to 10 members" },
+      { label: "2", value: "- Multiple subscriptions" },
+      { label: "2", value: "- Governance" },
     ],
-    subtext: "Indicative pricing with 100 GB storage",
+  },
+  {
+    type: "enterprise",
+    title: "Enterprise",
+    price: "Custom",
+    specs: [
+      { label: "1", value: "- Zero Trust" },
+    ],
   },
 ]

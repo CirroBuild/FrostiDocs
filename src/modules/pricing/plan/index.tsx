@@ -9,12 +9,10 @@ import { ContactForm } from "../../cloud/ContactForm"
 import styled from "styled-components"
 
 export type PricingPlan = {
-  type: "entry" | "performant" | "high-performance"
+  type: "idea" | "beta" | "team" | "enterprise"
   title: string
-  description: string
   price: string
   specs: Array<{ label: string; value: string }>
-  subtext: string
   highlighted?: boolean
 }
 
@@ -30,19 +28,15 @@ export const Plan = (plan: PricingPlan) => (
       <Section.Title level={3} className={style.title}>
         {plan.title}
       </Section.Title>
-
-      <span className={style.description}>{plan.description}</span>
     </header>
 
     <div className={style.price}>
-      <span className={style.priceValue}>${plan.price}</span>
-      <span className={style.pricePeriod}>per hour</span>
+      <span className={style.priceValue}>{plan.price}</span>
     </div>
 
     <div className={style.specs}>
       {plan.specs.map((spec, index) => (
         <div key={index} className={style.spec}>
-          <span className={style.specLabel}>{spec.label}</span>
           <span className={style.specValue}>{spec.value}</span>
         </div>
       ))}

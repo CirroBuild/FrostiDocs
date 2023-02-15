@@ -164,11 +164,15 @@ const config = {
         alt: "Frosti",
         src: "/img/frosti.svg",
       },
-      items: [
-        
+      items: [    
         {
           label: "Docs",
           to: "/docs/",
+          position: "left",
+        },
+        {
+          label: "Pricing",
+          to: "/pricing/",
           position: "left",
         },
         {
