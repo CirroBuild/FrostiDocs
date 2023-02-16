@@ -22,6 +22,7 @@ dotnet add package Azure.Extensions.AspNetCore.Configuration.Secrets
 
 ```csharp title="Program.cs"
 using Azure.Extensions.AspNetCore.Configuration.Secrets;
+using Azure.Identity
 // more using references
 
 //Add the following lines under the var builder... line that already exists in Program.cs

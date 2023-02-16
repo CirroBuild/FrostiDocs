@@ -24,7 +24,7 @@ This tutorial will document how Cascade Brewing Co built their landing site.
 1. Open Visual Studio, select ***New*** and search ***Web Application***
 2. Select ***Web Application (Model-View-Controller)*** 
 
-## Create an ASP.NET web app
+## Edit Default View and Deploy Dev Environment
 1. Navigate to ***Views/Home/Index.cshtml*** edit the default heading to Cascade Brewing Co
 
 ```html title="index.cshtml"
@@ -41,9 +41,8 @@ This tutorial will document how Cascade Brewing Co built their landing site.
 
 3. Navigate to the **root** directory of your project on the terminal and run `frosti provision`.
 
-## Deploy App to Test Environment
+## Create Pipeline for Test Environment
 
-## Deploying to PPE/Production
 1. When you are ready to push your project to a preproduction or production enviornment. Go to [Azure DevOps](https://dev.azure.com) and create a project if you don't have one already.
 
 2. Go to `Repos` in the left navigation bar and copy the command to `Push an existing repository from command line`.
@@ -53,11 +52,33 @@ git remote add origin https://strubelkai@dev.azure.com/strubelkai/CascadeBrewing
 git push -u origin --all
 ```
 
-3. Go to `Pipelines`. Click New Pipeline. Choose Azure Git Repos. Then, select the repo you just pushed your changes to. Next, select Existing Azure Pipelines Yaml File.
+Note: If you receive the authentication failed error, make sure you are using the `Generate Git Credentials` option under `Clone` and not using your Azure account password.
 
-4. On the sidebar that pops up, leave Branch as main and select the frost.yml for Path. 
 
-5. Before hitting run, make sure to update `YOUR_SERVICE_CONNECTION` in the variables section from the file that just got loaded. See below on how to create/refernece a service connection.
+## Azure Service Connection
+1. Go to the gear icon in the bottom left corner (Project Settings).
 
-6. Just hit run, and you'll have yourself a PPE envionrment provisioned and deployed with your code. To see your website name, find the `AzureRmWebAppDeployment` job under `CodeDeploy`. You'll see the line "App Service Application URL: XX_YOUR_APP_URL_XX" 
+2. Click Service Connections under the Pipelines section.
+
+3. Click New Service Connection in the top right.
+
+4. Choose Azure Resource Manger and then select Service Principal (automatic).
+
+5. Choose the subscription you want to deploy to. (See this [article](https://blog.georgekosmidis.net/troubleshooting-you-dont-appear-to-have-an-active-azure-subscription.html) if you don't see any subs)
+
+6. Name your service connection. This is the name to use in the frosti.yml file above under `YOUR_SERVICE_CONNECTION`
+
+7. Grant access to all pipelines
+
+8. Click save.
+
+## Deploy App to Test Environment 
+
+1. Go to `Pipelines`. Click New Pipeline. Choose Azure Git Repos. Then, select the repo you just pushed your changes to. Next, select Existing Azure Pipelines Yaml File.
+
+2. On the sidebar that pops up, leave Branch as main and select the frost.yml for Path. 
+
+3. Before hitting run, make sure and remove `YOUR_SERVICE_CONNECTION` in the variables section from the file that just got loaded. We will add this back when we add other Azure resources in future tutorials.
+
+4. Just hit run, and you'll have yourself a PPE envionrment provisioned and deployed with your code. To see your website name, find the `AzureRmWebAppDeployment` job under `CodeDeploy`. You'll see the line "App Service Application URL: XX_YOUR_APP_URL_XX" 
 
