@@ -71,7 +71,7 @@ Run `frosti provision`. This is all that's required to provision the cosmos infr
 
 The following steps will demonstrate general Cosmos Db patterns for interacting with the created container.
 
-## Create a Model
+## Create a Model and Initialize Data
 
 So far we have created a database named "CascadeBrewsDb" with a container named "Brews". The Brews table is designed to contain product details such as name, category, quantity, and a sale indicator. Each product also contains a unique identifier.
 
@@ -147,7 +147,88 @@ namespace CascadeBrewingCo.Controllers
 }
 ```
 
+## Query Data
+
+Now that we have the beer inventory loaded in Cosmos Db, let's query them and display under a new tab in the website. First, let's define a new method to query the cosmos db and retrieve all entries in the "brews" container.
+
+``` csharp title="Controllers/InventoryController.cs"
+        [HttpGet]
+        public async Task<IActionResult> GetInventory()
+        {
+            var container = _cosmosClient.GetContainer("CascadeBrewsDb", "brews");
+            try
+            {
+                // Create query using a SQL string and parameters
+                var query = new QueryDefinition(
+                    query: "SELECT * FROM c"
+                );
+
+                using FeedIterator<Product> feed = container.GetItemQueryIterator<Product>(
+                    queryDefinition: query
+                );
+                List<Product> products = new List<Product>();
+                while (feed.HasMoreResults)
+                {
+                    FeedResponse<Product> response = await feed.ReadNextAsync();
+                    foreach (Product item in response)
+                    {
+                        products.Add(item);
+                        Console.WriteLine($"Found item:\t{item.name}");
+                    }
+                }
+                
+                return View(products);
+            }
+            catch
+            {
+                throw new Exception($"No Brews Today");
+            }
+
+        }
+
+
+```
+
+Next let's create a new View to display this data.
+
+``` csharp title="Views/Inventory/GetInventory.cshtml"
+@model List<CascadeBrewingCo.Models.Product>
+
+@{
+    ViewData["Title"] = "Brews On Tap";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+@foreach (var item in Model)
+{
+    <li>@item.name</li>
+}
+```
+
+Let's update the `_Layout` view to include a link in the header to this new view. Add a link to `On Tap` that points to the Inventory controller and calls the `GetInventory` action.
+
+``` csharp title="Views/Shared/_Layout.cshtml"
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Inventory" asp-action="GetInventory">On Tap</a>
+                        </li>
+                    </ul>
+                </div>
+```
+
 In Visual Studio, press the `Play` button to build the solution. This will launch the application in your browser (localhost:7090). Navigate to the localhost:7090/inventory/addinventory to execute the above code and add an entry in the db.
+
+## Final Result
+
+Now customers can see the list of available Brews with an updated online list of beer on tap.
+
+![Cascade Brewing Co. Web App with Cosmos Db ](/img/docs/samples/CosmosOnTap.png)
+
 
 ## Learn more about Cosmos Db CRUD Operations in .NET
 Follow this tutorial [Azure SQL How To: Connect and Query Dotnet Visual Studio](https://learn.microsoft.com/en-us/azure/azure-sql/database/connect-query-dotnet-visual-studio?view=azuresql)
