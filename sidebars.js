@@ -43,6 +43,7 @@ module.exports = {
       type: "category",
       items: [
         "samples/first-app",
+        "samples/cosmos",
       ],
     },
     {

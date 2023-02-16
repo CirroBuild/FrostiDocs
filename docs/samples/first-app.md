@@ -5,7 +5,7 @@ description:
   This document shows how to launch a starter application to test Frosti.
 ---
 
-The goal of this guide is to to create your first ASP.NET web app.
+This tutorial will demonstrate building a basic company site using an ASP.NET web application.
 
 ## Prerequisites
 - [Visual Studio](https://visualstudio.microsoft.com/downloads/)
@@ -41,16 +41,40 @@ This tutorial will document how Cascade Brewing Co built their landing site.
 
 3. Navigate to the **root** directory of your project on the terminal and run `frosti provision`.
 
+## Ready Application to Connect to Azure Services
+
+Frosti always provisions a managed identity and keyvault for secure communication between resources. 
+
+1. Add these nuget packages via the CLI or [Visual Studio](https://learn.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio)
+```bash title="Bash / CLI"
+dotnet add package Azure.Identity
+dotnet add package Azure.Extensions.AspNetCore.Configuration.Secrets
+```
+2. Connect to KeyVault by adding the lines
+
+```csharp title="Program.cs"
+using Azure.Extensions.AspNetCore.Configuration.Secrets;
+using Azure.Identity
+// more using references
+
+//Add the following lines under the var builder... line that already exists in Program.cs
+var builder = WebApplication.CreateBuilder(args);
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddJsonFile("appsettings.frosti.json");
+}
+
+builder.Configuration.AddAzureKeyVault(
+    new Uri(builder.Configuration["KV_ENDPOINT"]), 
+    new DefaultAzureCredential());
+```
+
 ## Create Pipeline for Test Environment
 
 1. When you are ready to push your project to a preproduction or production enviornment. Go to [Azure DevOps](https://dev.azure.com) and create a project if you don't have one already.
 
 2. Go to `Repos` in the left navigation bar and copy the command to `Push an existing repository from command line`.
-
-```bash 
-git remote add origin https://strubelkai@dev.azure.com/strubelkai/CascadeBrewingCo/_git/CascadeBrewingCo
-git push -u origin --all
-```
 
 Note: If you receive the authentication failed error, make sure you are using the `Generate Git Credentials` option under `Clone` and not using your Azure account password.
 
