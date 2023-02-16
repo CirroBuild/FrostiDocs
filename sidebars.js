@@ -44,6 +44,7 @@ module.exports = {
       items: [
         "samples/first-app",
         "samples/cosmos",
+        "samples/storage",
       ],
     },
     {
