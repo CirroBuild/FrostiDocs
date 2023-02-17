@@ -92,7 +92,7 @@ function Navbar(): JSX.Element {
   }
   const userInfo = useUserInfo();
 
-  function LoggedOut(props){
+  function LoggedOut(){
     if(isLoggedIn){
       return(
         <div>
@@ -175,7 +175,7 @@ function Navbar(): JSX.Element {
           >
             Contact Us
           </Button>
-          <LoggedOut isLoggedIn={userInfo} />
+          <LoggedOut />
         </div>
       </div>
       <div
