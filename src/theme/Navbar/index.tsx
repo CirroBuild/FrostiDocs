@@ -69,7 +69,47 @@ function Navbar(): JSX.Element {
 
   const { leftItems, rightItems } = splitNavItemsByPosition(items)
 
+  function useUserInfo() {
+    const [userInfo, setUserInfo] = useState(null);
   
+    useEffect(() => {
+      const getUserInfo = async () => {
+        const response = await fetch('/.auth/me');
+        const payload = await response.json();
+        const { clientPrincipal } = payload;
+        console.log(payload)
+        setUserInfo(clientPrincipal.userDetails);
+      }
+      getUserInfo()
+      .catch((e: Error) => {
+        console.log(e);
+      });
+    }, []);
+
+    return userInfo;
+  }
+  const userInfo = useUserInfo();
+
+  function LoggedOut(props){
+    if(props){
+      return(
+      <Button
+        className={clsx(styles.ctaButton, styles.getQuestdb)}
+        size="xsmall"
+        variant="secondary"
+        to="/.auth/login/aad/?post_login_redirect_uri=/enterprise/"
+      >
+        Sign Up
+      </Button>
+      )
+    }
+    return(
+      <div>
+        <p>{userInfo}</p>
+      </div>
+    )
+  }
+ 
 
   return (
     <nav
@@ -133,14 +173,7 @@ function Navbar(): JSX.Element {
           >
             Contact Us
           </Button>
-          <Button
-            className={clsx(styles.ctaButton, styles.getQuestdb)}
-            size="xsmall"
-            variant="secondary"
-            to="/.auth/login/aad/?post_login_redirect_uri=/enterprise/"
-          >
-            Sign Up
-          </Button>
+          <LoggedOut isLoggedIn={userInfo} />
         </div>
       </div>
       <div

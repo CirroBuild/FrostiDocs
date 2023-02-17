@@ -9,7 +9,6 @@ import Button from "@theme/Button"
 
 const Enterprise = () => {
 
-  let userLoggedIn = false;
   function useUserInfo() {
     const [userInfo, setUserInfo] = useState(null);
   
@@ -19,7 +18,6 @@ const Enterprise = () => {
         const payload = await response.json();
         const { clientPrincipal } = payload;
         console.log(payload)
-        userLoggedIn = true
         setUserInfo(clientPrincipal.userDetails);
       }
       getUserInfo()
@@ -45,7 +43,7 @@ const Enterprise = () => {
             Sign Up For Beta
           </h1>
           <p>{userInfo}</p>
-          <p>{userLoggedIn}</p>
+          
 
           <p
             className={clsx(
