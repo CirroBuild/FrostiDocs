@@ -68,7 +68,8 @@ function Navbar(): JSX.Element {
   }, [windowSize])
 
   const { leftItems, rightItems } = splitNavItemsByPosition(items)
-
+  
+  let isLoggedIn = false;
   function useUserInfo() {
     const [userInfo, setUserInfo] = useState(null);
   
@@ -77,6 +78,7 @@ function Navbar(): JSX.Element {
         const response = await fetch('/.auth/me');
         const payload = await response.json();
         const { clientPrincipal } = payload;
+        isLoggedIn = true;
         console.log(payload)
         setUserInfo(clientPrincipal.userDetails);
       }
@@ -91,8 +93,14 @@ function Navbar(): JSX.Element {
   const userInfo = useUserInfo();
 
   function LoggedOut(props){
-    if(props){
+    if(isLoggedIn){
       return(
+        <div>
+          <p>{userInfo}</p>
+        </div>
+      )
+    }
+    return(
       <Button
         className={clsx(styles.ctaButton, styles.getQuestdb)}
         size="xsmall"
@@ -101,12 +109,6 @@ function Navbar(): JSX.Element {
       >
         Sign Up
       </Button>
-      )
-    }
-    return(
-      <div>
-        <p>{userInfo}</p>
-      </div>
     )
   }
  
