@@ -9,6 +9,7 @@ import Button from "@theme/Button"
 
 const Enterprise = () => {
 
+  let userLoggedIn = false;
   function useUserInfo() {
     const [userInfo, setUserInfo] = useState(null);
   
@@ -16,8 +17,10 @@ const Enterprise = () => {
       const getUserInfo = async () => {
         const response = await fetch('/.auth/me');
         const payload = await response.json();
+        const { clientPrincipal } = payload;
         console.log(payload)
-        setUserInfo(payload);
+        userLoggedIn = true
+        setUserInfo(clientPrincipal.userDetails);
       }
       getUserInfo()
       .catch((e: Error) => {
@@ -42,6 +45,7 @@ const Enterprise = () => {
             Sign Up For Beta
           </h1>
           <p>{userInfo}</p>
+          <p>{userLoggedIn}</p>
 
           <p
             className={clsx(
