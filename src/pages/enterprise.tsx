@@ -16,9 +16,8 @@ const Enterprise = () => {
       const getUserInfo = async () => {
         const response = await fetch('/.auth/me');
         const payload = await response.json();
-        const { clientPrincipal } = payload;
         console.log(payload)
-        setUserInfo(clientPrincipal);
+        setUserInfo(payload);
       }
       getUserInfo()
       .catch((e: Error) => {

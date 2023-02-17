@@ -12,6 +12,7 @@
     "prepare": "node ./prepare.js"
   },
   "dependencies": {
+    "@azure/static-web-apps-cli": "^1.0.6",
     "@docusaurus/core": "2.0.0-alpha.75",
     "@docusaurus/module-type-aliases": "2.0.0-alpha.75",
     "@docusaurus/plugin-pwa": "2.0.0-alpha.75",
