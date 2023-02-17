@@ -132,7 +132,7 @@ function Navbar(): JSX.Element {
             className={clsx(styles.ctaButton, styles.getQuestdb)}
             size="xsmall"
             variant="secondary"
-            to="/.auth/login/aad/"
+            to="/.auth/login/aad/?post_login_redirect_uri=/enterprise/"
           >
             Sign Up
           </Button>
