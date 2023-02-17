@@ -46,7 +46,6 @@ builder.Services.AddSingleton(s =>
     return blobServiceClient;
 });
 
-
 // Create the container and return a container client object
 string containerName = "brews98109";
 BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
@@ -55,8 +54,6 @@ builder.Services.AddSingleton(s =>
     return containerClient;
 });
 // </create_container>
-
-
 ```
 
 ## Frosti
@@ -68,9 +65,7 @@ Now that we have the blobcontainerclient, let's create a container to store imag
 
 Let's define a method `GetBlob` that will create the container if it does not exist and return all images that are stored in the container if it exists.
 
-
 ``` csharp title="Controllers/ImageController.cs"
-
 using System;
 using Azure.Storage;
 using Azure.Storage.Blobs;
@@ -119,7 +114,6 @@ namespace CascadeBrewingCo.Controllers
         
     }
 }
-
 ```
 
 To display the images, let's create a new view.
@@ -140,16 +134,14 @@ To display the images, let's create a new view.
         </div>
     }
 }
-
-
 ```
 
 Finally, let's update the `_Layout` view to include a link in the header to this new view. Add a link to `Photos` that points to the Inventory controller and calls the `GetBlob` action.
 
 ``` csharp title="Views/Shared/_Layout.cshtml"
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="GetBlob">Photos</a>
-                        </li>
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="GetBlob">Photos</a>
+</li>
 ```
 
 ## Final Result
@@ -157,10 +149,6 @@ Finally, let's update the `_Layout` view to include a link in the header to this
 Now customers can see the list of available Brews with images of each beer on tap.
 
 ![Cascade Brewing Co. Web App with Cosmos Db ](/img/docs/samples/StorageOnTap.png)
-
-
-
-
 
 ## Learn more about Cosmos Db CRUD Operations in .NET
 Follow this tutorial [Quickstart: Azure Blob Storage client library for .NET](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-dotnet?tabs=visual-studio%2Cmanaged-identity%2Croles-azure-portal%2Csign-in-azure-cli%2Cidentity-visual-studio)

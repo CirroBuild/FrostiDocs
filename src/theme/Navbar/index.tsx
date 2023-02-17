@@ -128,6 +128,14 @@ function Navbar(): JSX.Element {
           >
             Contact Us
           </Button>
+          <Button
+            className={clsx(styles.ctaButton, styles.getQuestdb)}
+            size="xsmall"
+            variant="secondary"
+            to="/.auth/login/aad/"
+          >
+            Sign Up
+          </Button>
         </div>
       </div>
       <div
