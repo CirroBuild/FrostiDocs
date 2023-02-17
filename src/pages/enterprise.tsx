@@ -26,19 +26,16 @@ const Enterprise = () => {
               "text--center",
             )}
           >
-            Gain access to standalone, cloud hosted test instances to deploy your application.
+            For $1/month, gain access to standalone, cloud hosted test instances to deploy your application.
           </p>
 
           <Button
             size="xsmall"
-            to="https://billing.stripe.com/p/login/test_9AQ17Kcb02ay01i9AA"
+            to="https://buy.stripe.com/7sIcNV5NcbvMdDGfYY"
           >
-            Create Subscription
+            Get Started
           </Button>
           
-
-
-
           <img
             alt="Artistic view of the console with sub-queries"
             className={ilCss.illustration}
