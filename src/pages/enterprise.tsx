@@ -13,18 +13,19 @@ const Enterprise = () => {
     const [userInfo, setUserInfo] = useState(null);
   
     useEffect(() => {
-      async function getUserInfo() {
+      const getUserInfo = async () => {
         const response = await fetch('/.auth/me');
         const payload = await response.json();
         const { clientPrincipal } = payload;
-        return clientPrincipal;
+        console.log(payload)
+        setUserInfo(clientPrincipal);
       }
       getUserInfo()
-      .then((ui) => setUserInfo(ui))
       .catch((e: Error) => {
         console.log(e);
       });
     }, []);
+
     return userInfo;
   }
   const userInfo = useUserInfo();

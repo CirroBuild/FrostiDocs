@@ -30,6 +30,7 @@ function splitNavItemsByPosition(
       // @ts-expect-error: temporary, will be fixed in Docusaurus TODO remove soon
       (item.position ?? DefaultNavItemPosition) === "right",
   )
+  
   return {
     leftItems,
     rightItems,
@@ -67,6 +68,8 @@ function Navbar(): JSX.Element {
   }, [windowSize])
 
   const { leftItems, rightItems } = splitNavItemsByPosition(items)
+
+  
 
   return (
     <nav
