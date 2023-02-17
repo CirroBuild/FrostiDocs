@@ -2,16 +2,15 @@ import clsx from "clsx"
 import React from "react"
 import Layout from "../theme/Layout"
 import Subscribe from "../components/Subscribe"
+import peCss from "../css/property.module.css"
 import ilCss from "../css/enterprise/illustration.module.css"
 import seCss from "../css/section.module.css"
 import style from "../css/enterprise/style.module.css"
-import _quotes from "../assets/quotes"
+import Button from "@theme/Button"
 
 const Enterprise = () => {
   return (
-    <Layout canonical="/enterprise" 
-    description="Gain access to standalone, cloud hosted test instances to deploy your application." 
-    title="Sign Up for Frosti">
+    <Layout canonical="/enterprise" description="Gain access to standalone, cloud hosted test instances to deploy your application." title="Sign Up for Frosti">
       <section className={seCss["section--inner"]}>
         <div className={seCss.section__header}>
           <h1
@@ -20,7 +19,7 @@ const Enterprise = () => {
               seCss["section__title--accent"],
             )}
           >
-            Sign Up
+            Sign Up For Beta
           </h1>
 
           <p
@@ -33,12 +32,15 @@ const Enterprise = () => {
             Gain access to standalone, cloud hosted test instances to deploy your application.
           </p>
 
-          <Subscribe
-            placeholder="Work Email"
-            submitButtonText="Contact Us"
-            provider="enterprise"
-            className={style.subscribe}
-          />
+          <Button
+            size="xsmall"
+            to="https://billing.stripe.com/p/login/test_9AQ17Kcb02ay01i9AA"
+          >
+            Create Subscription
+          </Button>
+          
+
+
 
           <img
             alt="Artistic view of the console with sub-queries"
