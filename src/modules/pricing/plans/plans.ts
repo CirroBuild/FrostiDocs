@@ -18,7 +18,7 @@ export const plans: PricingPlan[] = [
     title: "Beta",
     price: "$1/month",
     action: "Sign Up",
-    url: "/cloud/",
+    url: "/enterprise/",
     specs: [
       { label: "0", value: "Everything in Idea plus:" },
       { label: "1", value: "- Built in Security" },
@@ -32,7 +32,7 @@ export const plans: PricingPlan[] = [
     title: "Team",
     price: "Coming Soon",
     action: "Join Waiting List",
-    url: "/cloud/",
+    url: "/enterprise/",
     specs: [
       { label: "0", value: "Everything in Beta plus:" },
       { label: "1", value: "- BCDR" },
