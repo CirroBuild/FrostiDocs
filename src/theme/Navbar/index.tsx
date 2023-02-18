@@ -164,10 +164,7 @@ function Navbar(): JSX.Element {
             <NavbarItem {...item} key={i} />
           ))}
           
-          <SearchBar
-            handleSearchBarToggle={setIsSearchBarExpanded}
-            isSearchBarExpanded={isSearchBarExpanded}
-          />
+
           <Button
             className={clsx(styles.ctaButton, styles.getQuestdb)}
             size="xsmall"

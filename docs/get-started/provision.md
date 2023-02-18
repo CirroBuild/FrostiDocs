@@ -19,6 +19,8 @@ See Develop section for an easy example on getting started with Frosti.
 
 2. When you are ready to test in your dev environment. Navigate to the **root** directory of your project on the terminal and run `frosti provision -s [YOUR_SUBSCRIPTION_ID]`.
 
+Note: -s is an optional parameter, `frosti provision` will provision resources to your default subscription if not specified
+
 3. This will prompt you with a list of services that will be provisioned for you. 
 Note: FunctionApp and WebApp will not appear on here for the Dev enviornment because you will be using your localhost for the dev env. 
 
