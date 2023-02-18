@@ -91,7 +91,7 @@ function Navbar(): JSX.Element {
   const userInfo = useUserInfo();
 
   function LoggedOut(){
-    if(userInfo === ""){
+    if(userInfo === "" || userInfo === null){
       return(
         <Button
           className={clsx(styles.ctaButton, styles.getQuestdb)}

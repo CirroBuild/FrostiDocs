@@ -57,7 +57,7 @@ const Enterprise = () => {
 
           <Button
             size="xsmall"
-            to="https://buy.stripe.com/7sIcNV5NcbvMdDGfYY"
+            to="/docs/get-started/provision/"
           >
             Get Started
           </Button>
