@@ -96,7 +96,7 @@ function Navbar(): JSX.Element {
         <Button
           className={clsx(styles.ctaButton, styles.getQuestdb)}
           size="xsmall"
-          variant="primary"
+          variant="secondary"
           to="/.auth/login/aad/?post_login_redirect_uri=/enterprise/"
         >
           Sign Up
@@ -105,14 +105,7 @@ function Navbar(): JSX.Element {
     }
     else {
       return(
-        <Button
-          className={clsx(styles.ctaButton, styles.getQuestdb)}
-          size="xsmall"
-          variant="plain"
-          to="/.auth/login/aad/?post_login_redirect_uri=/enterprise/"
-        >
-          <p>{userInfo[0]}</p>
-        </Button>
+        <div></div>
       )
     }
   }
@@ -177,6 +170,7 @@ function Navbar(): JSX.Element {
           >
             Contact Us
           </Button>
+          
           
         </div>
       </div>
