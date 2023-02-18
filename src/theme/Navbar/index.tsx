@@ -86,12 +86,12 @@ function Navbar(): JSX.Element {
       });
     }, []);
 
-    return String(userInfo), clientPrincipal;
+    return String(userInfo);
   }
-  let userInfo, clientPrincipal = useUserInfo();
+  var userInfo = useUserInfo();
 
   function LoggedOut(){
-    if(clientPrincipal === null){
+    if(userInfo === null){
       return(
         <Button
           className={clsx(styles.ctaButton, styles.getQuestdb)}
