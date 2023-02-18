@@ -3,7 +3,6 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import React, { ComponentProps, useCallback, useState, useEffect } from "react"
 
 import Button from "@theme/Button"
-import SearchBar from "@theme/SearchBar"
 import useLockBodyScroll from "@theme/hooks/useLockBodyScroll"
 import useWindowSize, { windowSizes } from "@theme/hooks/useWindowSize"
 
@@ -46,7 +45,7 @@ function Navbar(): JSX.Element {
     },
   } = useDocusaurusContext()
   const [sidebarShown, setSidebarShown] = useState(false)
-  const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false)
+  
 
   useLockBodyScroll(sidebarShown)
 
@@ -92,7 +91,7 @@ function Navbar(): JSX.Element {
   const userInfo = useUserInfo();
 
   function LoggedOut(){
-    if(!userInfo || userInfo.length === 0){
+    if(userInfo === ""){
       return(
         <Button
           className={clsx(styles.ctaButton, styles.getQuestdb)}
@@ -164,7 +163,7 @@ function Navbar(): JSX.Element {
             <NavbarItem {...item} key={i} />
           ))}
           
-
+          <LoggedOut />
           <Button
             className={clsx(styles.ctaButton, styles.getQuestdb)}
             size="xsmall"
@@ -173,7 +172,7 @@ function Navbar(): JSX.Element {
           >
             Contact Us
           </Button>
-          <LoggedOut />
+          
         </div>
       </div>
       <div
