@@ -91,7 +91,7 @@ function Navbar(): JSX.Element {
   const userInfo = useUserInfo();
 
   function LoggedOut(){
-    if(typeof userInfo === 'string' && userInfo.length > 0){
+    if( userInfo != 'NULL'){
       return(
         <Button
           className={clsx(styles.ctaButton, styles.getQuestdb)}
@@ -99,7 +99,6 @@ function Navbar(): JSX.Element {
           variant="secondary"
           to="/docs/get-started/provision/"
         >
-          console.log({userInfo});
           Start Now
         </Button>
       )
