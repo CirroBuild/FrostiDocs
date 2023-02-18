@@ -69,7 +69,7 @@ function Navbar(): JSX.Element {
 
   const { leftItems, rightItems } = splitNavItemsByPosition(items)
   
-  let isLoggedIn = false;
+
   function useUserInfo() {
     const [userInfo, setUserInfo] = useState(null);
   
@@ -78,7 +78,6 @@ function Navbar(): JSX.Element {
         const response = await fetch('/.auth/me');
         const payload = await response.json();
         const { clientPrincipal } = payload;
-        isLoggedIn = true;
         console.log(payload)
         setUserInfo(clientPrincipal.userDetails);
       }
@@ -88,28 +87,30 @@ function Navbar(): JSX.Element {
       });
     }, []);
 
-    return userInfo;
+    return String(userInfo);
   }
   const userInfo = useUserInfo();
 
   function LoggedOut(){
-    if(isLoggedIn){
+    if(!userInfo || userInfo.length === 0){
+      return(
+        <Button
+          className={clsx(styles.ctaButton, styles.getQuestdb)}
+          size="xsmall"
+          variant="secondary"
+          to="/.auth/login/aad/?post_login_redirect_uri=/enterprise/"
+        >
+          Sign Up
+        </Button>
+      )
+    }
+    else {
       return(
         <div>
           <p>{userInfo}</p>
         </div>
       )
     }
-    return(
-      <Button
-        className={clsx(styles.ctaButton, styles.getQuestdb)}
-        size="xsmall"
-        variant="secondary"
-        to="/.auth/login/aad/?post_login_redirect_uri=/enterprise/"
-      >
-        Sign Up
-      </Button>
-    )
   }
  
 
