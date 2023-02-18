@@ -91,19 +91,7 @@ function Navbar(): JSX.Element {
   var userInfo = useUserInfo();
 
   function LoggedOut(){
-    if(userInfo === null){
-      return(
-        <Button
-          className={clsx(styles.ctaButton, styles.getQuestdb)}
-          size="xsmall"
-          variant="secondary"
-          to="/.auth/login/aad/?post_login_redirect_uri=/enterprise/"
-        >
-          Sign Up
-        </Button>
-      )
-    }
-    else {
+    if(typeof userInfo === 'string' && userInfo.length > 0){
       return(
         <Button
           className={clsx(styles.ctaButton, styles.getQuestdb)}
@@ -113,6 +101,18 @@ function Navbar(): JSX.Element {
         >
           console.log({userInfo});
           Start Now
+        </Button>
+      )
+    }
+    else {
+      return(
+        <Button
+          className={clsx(styles.ctaButton, styles.getQuestdb)}
+          size="xsmall"
+          variant="secondary"
+          to="/.auth/login/aad/?post_login_redirect_uri=/enterprise/"
+        >
+          Sign Up
         </Button>
       )
     }
