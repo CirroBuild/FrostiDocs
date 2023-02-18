@@ -108,7 +108,7 @@ function Navbar(): JSX.Element {
         <Button
           className={clsx(styles.ctaButton, styles.getQuestdb)}
           size="xsmall"
-          variant="plain"
+          variant="secondary"
           to="/docs/get-started/provision/"
         >
           Start Now
