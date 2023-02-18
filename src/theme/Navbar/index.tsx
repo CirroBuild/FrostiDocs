@@ -88,7 +88,7 @@ function Navbar(): JSX.Element {
 
     return String(userInfo);
   }
-  var userInfo = useUserInfo();
+  const userInfo = useUserInfo();
 
   function LoggedOut(){
     if(typeof userInfo === 'string' && userInfo.length > 0){
