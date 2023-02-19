@@ -9,26 +9,9 @@ import Button from "@theme/Button"
 
 const Enterprise = () => {
 
-  function useUserInfo() {
-    const [userInfo, setUserInfo] = useState(null);
-  
-    useEffect(() => {
-      const getUserInfo = async () => {
-        const response = await fetch('/.auth/me');
-        const payload = await response.json();
-        const { clientPrincipal } = payload;
-        console.log(payload)
-        setUserInfo(clientPrincipal.userDetails);
-      }
-      getUserInfo()
-      .catch((e: Error) => {
-        console.log(e);
-      });
-    }, []);
-
-    return userInfo;
-  }
-  const userInfo = useUserInfo();
+  const baseUrl = "https://buy.stripe.com/7sIcNV5NcbvMdDGfYY?";
+  const checkOutString = baseUrl;
+//  const checkOutString = (userInfo !==null) ? baseUrl.concat("prefilled_email=", {userInfo['userDetails']}, "&client_reference_id=",{userInfo['userId']}) : baseUrl;
 
   return (
     <Layout canonical="/enterprise" description="Gain access to standalone, cloud hosted test instances to deploy your application." title="Sign Up for Frosti">
@@ -42,7 +25,7 @@ const Enterprise = () => {
           >
             Sign Up For Beta
           </h1>
-          <p>{userInfo}</p>
+         
           
 
           <p
@@ -57,7 +40,7 @@ const Enterprise = () => {
 
           <Button
             size="xsmall"
-            to="https://buy.stripe.com/7sIcNV5NcbvMdDGfYY"
+            to={checkOutString}
           >
             Get Started
           </Button>
