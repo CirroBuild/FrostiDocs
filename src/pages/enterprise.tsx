@@ -1,17 +1,28 @@
 import clsx from "clsx"
-import React from "react"
+import React, {useState, useEffect } from "react"
 import Layout from "../theme/Layout"
 import ilCss from "../css/enterprise/illustration.module.css"
 import seCss from "../css/section.module.css"
 import Button from "@theme/Button"
 
-
-
 const Enterprise = () => {
-
-  const baseUrl = "https://buy.stripe.com/7sIcNV5NcbvMdDGfYY?";
-  const checkOutString = baseUrl;
-//  const checkOutString = (userInfo !==null) ? baseUrl.concat("prefilled_email=", {userInfo['userDetails']}, "&client_reference_id=",{userInfo['userId']}) : baseUrl;
+  // const [userDetails, setUserDetails] = useState(null);
+  const baseUrl = "https://buy.stripe.com/7sIcNV5NcbvMdDGfYY"; 
+  const [checkOutString, setCheckOutString] = useState(baseUrl);
+  useEffect(() => {
+    const getCheckOutUrl = async () => {
+      const response = await fetch('/.auth/me');
+      const payload = await response.json();
+      const { clientPrincipal } = payload;
+      console.log(payload)
+      // setUserDetails(clientPrincipal.userDetails);
+      setCheckOutString(baseUrl.concat("?client_reference_id=", clientPrincipal.userDetails));
+    }
+    getCheckOutUrl()
+    .catch((e: Error) => {
+      console.log(e);
+    });
+  }, []);
 
   return (
     <Layout canonical="/enterprise" description="Gain access to standalone, cloud hosted test instances to deploy your application." title="Sign Up for Frosti">
@@ -25,7 +36,7 @@ const Enterprise = () => {
           >
             Sign Up For Beta
           </h1>
-         
+          
           
 
           <p

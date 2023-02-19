@@ -67,22 +67,22 @@ function Navbar(): JSX.Element {
   }, [windowSize])
 
   const { leftItems, rightItems } = splitNavItemsByPosition(items)
-  const [userInfo, setUserInfo] = useState("");
+  const [userInfo, setUserInfo] = useState(null);
   
 
-    useEffect(() => {
-      const getUserInfo = async () => {
-        const response = await fetch('/.auth/me');
-        const payload = await response.json();
-        const { clientPrincipal } = payload;
-        console.log(payload)
-        setUserInfo(clientPrincipal);
-      }
-      getUserInfo()
-      .catch((e: Error) => {
-        console.log(e);
-      });
-    }, []);
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const response = await fetch('/.auth/me');
+      const payload = await response.json();
+      const { clientPrincipal } = payload;
+      console.log(payload)
+      setUserInfo(clientPrincipal);
+    }
+    getUserInfo()
+    .catch((e: Error) => {
+      console.log(e);
+    });
+  }, []);
 
  
 
@@ -164,7 +164,7 @@ function Navbar(): JSX.Element {
           {rightItems.map((item, i) => (
             <NavbarItem {...item} key={i} />
           ))}
-          <LoggedOut />
+          
           <Button
             className={clsx(styles.ctaButton, styles.getQuestdb)}
             size="xsmall"
@@ -173,6 +173,7 @@ function Navbar(): JSX.Element {
           >
             Contact Us
           </Button>
+          <LoggedOut />
           
           
         </div>
