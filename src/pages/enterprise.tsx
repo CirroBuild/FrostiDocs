@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import React, {useEffect, useState} from "react"
+import React from "react"
 import Layout from "../theme/Layout"
 import ilCss from "../css/enterprise/illustration.module.css"
 import seCss from "../css/section.module.css"

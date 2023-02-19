@@ -67,7 +67,7 @@ function Navbar(): JSX.Element {
   }, [windowSize])
 
   const { leftItems, rightItems } = splitNavItemsByPosition(items)
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState("");
   
 
     useEffect(() => {
@@ -84,11 +84,11 @@ function Navbar(): JSX.Element {
       });
     }, []);
 
-  //const userInfo = useUserInfo();
+ 
 
   function LoggedOut(){
     console.log(userInfo);
-    if( userInfo !== null && userInfo['userInfo'] !== ""){
+    if( userInfo !== null){
       return(
         <Button
           className={clsx(styles.ctaButton, styles.getQuestdb)}
