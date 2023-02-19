@@ -16,7 +16,7 @@ const Enterprise = () => {
       const { clientPrincipal } = payload;
       console.log(payload)
       // setUserDetails(clientPrincipal.userDetails);
-      setCheckOutString(baseUrl.concat("?client_reference_id=", clientPrincipal.userDetails));
+      setCheckOutString(baseUrl.concat("?prefilled_email=", clientPrincipal.userDetails));
     }
     getCheckOutUrl()
     .catch((e: Error) => {
