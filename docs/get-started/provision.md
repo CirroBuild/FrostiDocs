@@ -29,24 +29,17 @@ Note: This will create a file frosti.yml, make sure to keep this file. It's need
 
 5. After this, simply build and run your project. Hit the Green Play button at the top to test your application locally using cloud resources.
 
-## Deploying to PPE/Production
-1. When you are ready to push your project to a preproduction or production enviornment. Go to [Azure DevOps](https://dev.azure.com) and create a project if you don't have one already.
+## Deploying to PPE/Production (Requires [Sign Up](https://frostibuild.com/enterprise) for the Beta)
+1. When you ran frosti locally, a frosti.yml file was created for you if you are part of the beta. Push this file up to github if you haven't already.
 
-2. Go to `Repos` in the left navigation bar and push your project to Azure Repos via git.
+2. This will automatically trigger a workflow that tries to automatically provision your ppe architecture. [Note: This will fail because github is missing your credentials to connect to azure]
 
-3. Go to `Pipelines`. Click New Pipeline. Choose Azure Git Repos. Then, select the repo you just pushed your changes to. Next, select Existing Azure Pipelines Yaml File.
+3. Run `az ad sp create-for-rbac --name "FrostiApp" --role contributor --scopes /subscriptions/{sub_id} --sdk-auth` on the terminal. Copy the response, including the brackets [{}].
 
-4. On the sidebar that pops up, leave Branch as main and select the frost.yml for Path. 
+4. Go to Settings tab in your Github project. On the left sidebar, go to "Secrets and variables". Click New repository secret.
 
-5. Before hitting run, make sure to update `YOUR_SERVICE_CONNECTION` in the variables section from the file that just got loaded. See below on how to create/reference a service connection.
+5. Add "AZURE_CREDENTIALS" as the name and the copied value from step 3 as the value. Frosti is now ready to deploy.
 
-6. Just hit run, and you'll have yourself a PPE envionrment provisioned and deployed with your code. Prod coming soon. To see your website name, find the `AzureRmWebAppDeployment` job under `CodeDeploy`. You'll see the line "App Service Application URL: XX_YOUR_APP_URL_XX" 
+6. Anytime something is merged to main, frosti will automatically deploy the changes to ppe.
 
-## Azure Service Connection
-1. Go to the gear icon in the bottom left corner (Project Settings).
-2. Click Service Connections under the Pipelines section.
-3. Click New Service Connection in the top right.
-4. Choose Azure Resource Manger and then select Service Principal (automatic).
-5. Choose the subscription you want to deploy to. (See this [article](https://blog.georgekosmidis.net/troubleshooting-you-dont-appear-to-have-an-active-azure-subscription.html) if you don't see any subs)
-6. Name your service connection. This is the name to use in the frosti.yml file above under `YOUR_SERVICE_CONNECTION`
-7. Click save.
+7. To monitor the status of your deployments, go to Actions in your Git Repo, and look at the action "Frosti Provision and Deploy." You can also manually deploy a new deployment by clicking `Run workflow`
