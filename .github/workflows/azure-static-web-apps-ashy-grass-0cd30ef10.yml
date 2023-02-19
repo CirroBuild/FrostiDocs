@@ -21,6 +21,8 @@ jobs:
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
+        env:
+          REACT_APP_AI_CONNECTION: ${{ secrets.REACT_APP_AI_CONNECTION }}
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ASHY_GRASS_0CD30EF10 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
@@ -28,6 +30,7 @@ jobs:
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/" # App source code path
+          config_file_location: "static"
           api_location: "" # Api source code path - optional
           output_location: "yarn build" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
