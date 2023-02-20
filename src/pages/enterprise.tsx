@@ -56,8 +56,10 @@ const Enterprise = () => {
             For $1/month, gain access to standalone, cloud hosted test instances to deploy your application.
           </p>
 
-          <p>For Stripe checkout, copy your AAD object ID (shown below) into the `AAD Object ID` field. 
-            Frosti will use this ID to grant you access to the Beta Frosti release.</p>
+          <p>
+            For Stripe checkout, copy your AAD object ID (shown below) into the `AAD Object ID` field. 
+            Frosti will use this ID to grant you access to the Beta Frosti release.
+          </p>
           <h2>{oid}</h2>
           <Button
             size="xsmall"
