@@ -18,7 +18,7 @@ const Enterprise = () => {
       const claims = clientPrincipal.claims;
       let oid = "";
       for (let i = 0; i < claims.length; i++){
-        let obj = claims[i];
+        const obj = claims[i];
         if(obj.typ === "http://schemas.microsoft.com/identity/claims/objectidentifier")
           oid = obj.val;
       }
