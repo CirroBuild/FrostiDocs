@@ -260,7 +260,6 @@ const config = {
 }
 require('dotenv').config();
 module.exports = {
-  staticDirectories: ['static'],
   ...config,
   ssrTemplate: ssrTemplate(config),
 }

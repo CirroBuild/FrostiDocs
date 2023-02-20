@@ -57,7 +57,9 @@ const Enterprise = () => {
           </p>
 
           <p>
-            For Stripe checkout, copy your AAD object ID (shown below) into the `AAD Object ID` field. 
+            For Stripe checkout, copy your AAD object ID (shown below) into the `AAD Object ID` field.  
+          </p>
+          <p>
             Frosti will use this ID to grant you access to the Beta Frosti release.
           </p>
           <h2>{userData.oid}</h2>
