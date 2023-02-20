@@ -8,8 +8,8 @@ import Button from "@theme/Button"
 const Enterprise = () => {
   // const [userDetails, setUserDetails] = useState(null);
   const baseUrl = "https://buy.stripe.com/7sIcNV5NcbvMdDGfYY"; 
-  const [checkOutString, setCheckOutString] = useState(baseUrl);
-  let oid = "";
+  const [userData, setUserData] = useState({checkOutString:baseUrl, oid:""});
+  let temp_oid = "";
   useEffect(() => {
     const getCheckOutUrl = async () => {
       const response = await fetch('/.auth/me');
@@ -20,10 +20,10 @@ const Enterprise = () => {
       for (let i = 0; i < claims.length; i++){
         const obj = claims[i];
         if(obj.typ === "http://schemas.microsoft.com/identity/claims/objectidentifier")
-          oid = obj.val;
+          temp_oid = obj.val;
       }
       // setUserDetails(clientPrincipal.userDetails);
-      setCheckOutString(baseUrl.concat("?prefilled_email=", clientPrincipal.userDetails, "&client_reference_id=", oid));
+      setUserData({checkOutString: baseUrl.concat("?prefilled_email=", clientPrincipal.userDetails, "&client_reference_id=", temp_oid), oid:temp_oid});
     }
     getCheckOutUrl()
     .catch((e: Error) => {
@@ -60,11 +60,11 @@ const Enterprise = () => {
             For Stripe checkout, copy your AAD object ID (shown below) into the `AAD Object ID` field. 
             Frosti will use this ID to grant you access to the Beta Frosti release.
           </p>
-          <h2>{oid}</h2>
+          <h2>{userData.oid}</h2>
           <Button
             size="xsmall"
             newTab
-            to={checkOutString}
+            to={userData.checkOutString}
           >
             Get Started
           </Button>
