@@ -9,6 +9,7 @@ const Enterprise = () => {
   // const [userDetails, setUserDetails] = useState(null);
   const baseUrl = "https://buy.stripe.com/7sIcNV5NcbvMdDGfYY"; 
   const [checkOutString, setCheckOutString] = useState(baseUrl);
+  let oid = "";
   useEffect(() => {
     const getCheckOutUrl = async () => {
       const response = await fetch('/.auth/me');
@@ -16,7 +17,6 @@ const Enterprise = () => {
       const { clientPrincipal } = payload;
       console.log(payload)
       const claims = clientPrincipal.claims;
-      let oid = "";
       for (let i = 0; i < claims.length; i++){
         const obj = claims[i];
         if(obj.typ === "http://schemas.microsoft.com/identity/claims/objectidentifier")
@@ -56,8 +56,12 @@ const Enterprise = () => {
             For $1/month, gain access to standalone, cloud hosted test instances to deploy your application.
           </p>
 
+          <p>For Stripe checkout, copy your AAD object ID (shown below) into the `AAD Object ID` field. 
+            Frosti will use this ID to grant you access to the Beta Frosti release.</p>
+          <h2>{oid}</h2>
           <Button
             size="xsmall"
+            newTab
             to={checkOutString}
           >
             Get Started
