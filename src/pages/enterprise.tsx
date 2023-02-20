@@ -9,7 +9,7 @@ const Enterprise = () => {
   // const [userDetails, setUserDetails] = useState(null);
   const baseUrl = "https://buy.stripe.com/7sIcNV5NcbvMdDGfYY"; 
   const [userData, setUserData] = useState({checkOutString:baseUrl, oid:""});
-  let temp_oid = "";
+  let tempOid = "";
   useEffect(() => {
     const getCheckOutUrl = async () => {
       const response = await fetch('/.auth/me');
@@ -20,10 +20,10 @@ const Enterprise = () => {
       for (let i = 0; i < claims.length; i++){
         const obj = claims[i];
         if(obj.typ === "http://schemas.microsoft.com/identity/claims/objectidentifier")
-          temp_oid = obj.val;
+          tempOid = obj.val;
       }
       // setUserDetails(clientPrincipal.userDetails);
-      setUserData({checkOutString: baseUrl.concat("?prefilled_email=", clientPrincipal.userDetails, "&client_reference_id=", temp_oid), oid:temp_oid});
+      setUserData({checkOutString: baseUrl.concat("?prefilled_email=", clientPrincipal.userDetails, "&client_reference_id=", tempOid), oid:tempOid});
     }
     getCheckOutUrl()
     .catch((e: Error) => {
