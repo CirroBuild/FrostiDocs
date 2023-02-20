@@ -19,8 +19,8 @@ const Enterprise = () => {
       let oid = "";
       for (var i = 0; i < claims.length; i++){
         var obj = claims[i];
-        if(obj['typ'] == "http://schemas.microsoft.com/identity/claims/objectidentifier")
-          oid = obj['val'];
+        if(obj.typ == "http://schemas.microsoft.com/identity/claims/objectidentifier")
+          oid = obj.val;
       }
       // setUserDetails(clientPrincipal.userDetails);
       setCheckOutString(baseUrl.concat("?prefilled_email=", clientPrincipal.userDetails, "&client_reference_id=", oid));
