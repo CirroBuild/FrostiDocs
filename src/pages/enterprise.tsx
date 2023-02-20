@@ -53,11 +53,11 @@ const Enterprise = () => {
               "text--center",
             )}
           >
-            For $1/month, gain access to standalone, cloud hosted test instances to deploy your application.
+            For <strong>$10</strong>, gain access to standalone, cloud hosted Test instances to deploy your application.
           </p>
 
           <p>
-            For Stripe checkout, copy your AAD object ID (shown below) into the `AAD Object ID` field.  
+            Please run <kbd>az ad signed-in-user show</kbd> and copy the id value (without the quotes) for the stripe checkout.
           </p>
           <p>
             Frosti will use this ID to grant you access to the Beta Frosti release.
@@ -68,7 +68,7 @@ const Enterprise = () => {
             newTab
             to={userData.checkOutString}
           >
-            Get Started
+            Checkout
           </Button>
           
           <img

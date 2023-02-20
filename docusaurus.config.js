@@ -242,7 +242,6 @@ const config = {
           rehypePlugins: [katex],
           sidebarPath: require.resolve("./sidebars.js"),
         },
-
         sitemap: {
           changefreq: "daily",
           priority: 0.7,
