@@ -17,9 +17,9 @@ const Enterprise = () => {
       console.log(payload)
       const claims = clientPrincipal.claims;
       let oid = "";
-      for (var i = 0; i < claims.length; i++){
-        var obj = claims[i];
-        if(obj.typ == "http://schemas.microsoft.com/identity/claims/objectidentifier")
+      for (let i = 0; i < claims.length; i++){
+        let obj = claims[i];
+        if(obj.typ === "http://schemas.microsoft.com/identity/claims/objectidentifier")
           oid = obj.val;
       }
       // setUserDetails(clientPrincipal.userDetails);
