@@ -86,34 +86,6 @@ function Navbar(): JSX.Element {
 
  
 
-  function LoggedOut(){
-    console.log(userInfo);
-    if( userInfo !== null){
-      return(
-        <Button
-          className={clsx(styles.ctaButton, styles.getQuestdb)}
-          size="xsmall"
-          variant="secondary"
-          to="/docs/get-started/provision/"
-        >
-          Start Now
-        </Button>
-      )
-    }
-    else {
-      return(
-        <Button
-          className={clsx(styles.ctaButton, styles.getQuestdb)}
-          size="xsmall"
-          variant="secondary"
-          to="/enterprise/"
-        >
-          Sign Up
-        </Button>
-      )
-    }
-  }
- 
 
   return (
     <nav
@@ -173,7 +145,7 @@ function Navbar(): JSX.Element {
           >
             Contact Us
           </Button>
-          <LoggedOut />
+        
           
           
         </div>
