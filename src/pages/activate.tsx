@@ -7,7 +7,7 @@ import Button from "@theme/Button"
 
 
 
-const Enterprise = () => {
+const Activate = () => {
 
   function useUserInfo() {
     const [userInfo, setUserInfo] = useState(null);
@@ -75,4 +75,4 @@ const Enterprise = () => {
   )
 }
 
-export default Enterprise
+export default Activate
