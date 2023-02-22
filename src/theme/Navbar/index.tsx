@@ -67,25 +67,6 @@ function Navbar(): JSX.Element {
   }, [windowSize])
 
   const { leftItems, rightItems } = splitNavItemsByPosition(items)
-  const [userInfo, setUserInfo] = useState(null);
-  
-
-  useEffect(() => {
-    const getUserInfo = async () => {
-      const response = await fetch('/.auth/me');
-      const payload = await response.json();
-      const { clientPrincipal } = payload;
-      console.log(payload)
-      setUserInfo(clientPrincipal);
-    }
-    getUserInfo()
-    .catch((e: Error) => {
-      console.log(e);
-    });
-  }, []);
-
- 
-
 
   return (
     <nav
