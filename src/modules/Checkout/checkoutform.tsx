@@ -12,6 +12,9 @@ export default function CheckoutForm() {
 
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const oid = new URLSearchParams(window.location.search).get(
+    "oid"
+  );
 
   useEffect(() => {
     if (stripe == null) {
@@ -26,13 +29,24 @@ export default function CheckoutForm() {
       return;
     }
 
+    const addBetaUser = async () => {
+      if(oid != null && clientSecret != null)
+      {
+          await fetch(`https://frostifu-ppe-eus-functionappc1ed.azurewebsites.net/api/AddBetaUser?objectId=${oid}&clientSecret=${clientSecret}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", 'Access-Control-Allow-Origin':'*' },
+        })
+      }
+    }
+
     const retrievePaymentIntent = async () => {
         console.log(clientSecret);
-        await stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+        await stripe.retrievePaymentIntent(clientSecret).then(async ({ paymentIntent }) => {
             if(paymentIntent !== undefined){
                 switch (paymentIntent.status) {
                 case "succeeded":
                 setMessage("Payment succeeded!");
+                await addBetaUser();
                 break;
                 case "processing":
                 setMessage("Your payment is processing.");

@@ -6,7 +6,8 @@ import Checkout from "../modules/Checkout"
 
 const SignUp = () => {
 
- 
+
+
 
   return (
     <Layout canonical="/signup" description="Gain access to standalone, cloud hosted test instances to deploy your application." title="Sign Up for Frosti">
