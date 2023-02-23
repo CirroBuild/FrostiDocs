@@ -29,9 +29,33 @@ const Activate = () => {
     return userInfo;
   }
   const userInfo = useUserInfo();
+  const oid = new URLSearchParams(window.location.search).get(
+    "oid"
+  );
+  const clientSecret = new URLSearchParams(window.location.search).get(
+    "clientSecret"
+  );
+
+  const addBetaUser = async () => {
+    console.log(`Adding user start`)
+
+    if(oid != null && clientSecret != null)
+    {
+        console.log(`Adding user: ${oid}`)
+        await fetch(`https://frostifu-ppe-eus-functionappc1ed.azurewebsites.net/api/AddBetaUser?objectId=${oid}&clientSecret=${clientSecret}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", 'Access-Control-Allow-Origin':'*' },
+      })
+    }
+  }
+  addBetaUser()
+  .then(() => console.log('Retrieving Payment Intent'))
+    .catch((e: Error) => {
+    console.log(e);
+    });
 
   return (
-    <Layout canonical="/enterprise" description="Gain access to standalone, cloud hosted test instances to deploy your application." title="Sign Up for Frosti">
+    <Layout canonical="/activate" description="Gain access to standalone, cloud hosted test instances to deploy your application." title="Sign Up for Frosti">
       <section className={seCss["section--inner"]}>
         <div className={seCss.section__header}>
           <h1

@@ -6,7 +6,7 @@ import {
   useElements
 } from "@stripe/react-stripe-js";
 
-export default function CheckoutForm() {
+export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -21,32 +21,16 @@ export default function CheckoutForm() {
       return;
     }
 
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    );
-
     if (clientSecret == null) {
       return;
     }
 
-    const addBetaUser = async () => {
-      if(oid != null && clientSecret != null)
-      {
-          await fetch(`https://frostifu-ppe-eus-functionappc1ed.azurewebsites.net/api/AddBetaUser?objectId=${oid}&clientSecret=${clientSecret}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", 'Access-Control-Allow-Origin':'*' },
-        })
-      }
-    }
-
     const retrievePaymentIntent = async () => {
-        console.log(clientSecret);
         await stripe.retrievePaymentIntent(clientSecret).then(async ({ paymentIntent }) => {
             if(paymentIntent !== undefined){
                 switch (paymentIntent.status) {
                 case "succeeded":
                 setMessage("Payment succeeded!");
-                await addBetaUser();
                 break;
                 case "processing":
                 setMessage("Your payment is processing.");
@@ -62,7 +46,7 @@ export default function CheckoutForm() {
         })
     }
     retrievePaymentIntent()
-    .then(() => console.log('this will succeed'))
+    .then(() => console.log('Retrieving Payment Intent'))
     .catch((e: Error) => {
     console.log(e);
     });
@@ -79,26 +63,30 @@ export default function CheckoutForm() {
 
     setIsLoading(true);
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: "http://frostibuild.com/activate",
-      },
-    });
-
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your `return_url`. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the `return_url`.
-    if (error.type === "card_error" || error.type === "validation_error") {
-        setMessage("Error");  
-    } else {
-      setMessage("An unexpected error occurred.");
+    if(oid != null && clientSecret != null)
+    {
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          // Make sure to change this to your payment completion page
+          return_url: `http://frostibuild.com/activate?oid=${oid}&clientSecret=${clientSecret}`,
+        },
+      });
+  
+      // This point will only be reached if there is an immediate error when
+      // confirming the payment. Otherwise, your customer will be redirected to
+      // your `return_url`. For some payment methods like iDEAL, your customer will
+      // be redirected to an intermediate site first to authorize the payment, then
+      // redirected to the `return_url`.
+      if (error.type === "card_error" || error.type === "validation_error") {
+          setMessage("Error");  
+      } else {
+        setMessage("An unexpected error occurred.");
+      }
+  
+      setIsLoading(false);
     }
 
-    setIsLoading(false);
   };
 
 

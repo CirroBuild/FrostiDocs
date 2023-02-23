@@ -15,6 +15,7 @@ const Checkout = () => {
   
   const [clientSecret, setClientSecret] = useState("");
 
+
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     const createPaymentIntent = async () => {
@@ -46,7 +47,7 @@ const Checkout = () => {
     <div className="Checkout">
       {clientSecret !== null && clientSecret!==""  && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm clientSecret={clientSecret} />
         </Elements>
       )}
     </div>
