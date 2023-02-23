@@ -4,9 +4,7 @@ import Layout from "../theme/Layout"
 import ilCss from "../css/enterprise/illustration.module.css"
 import seCss from "../css/section.module.css"
 import Button from "@theme/Button"
-
-
-const {URLSearchParams} = require('url')
+import {URLSearchParams} from 'url'
 
 const Activate = () => {
 
@@ -30,6 +28,7 @@ const Activate = () => {
     return userInfo;
   }
   const userInfo = useUserInfo();
+  
   const oid = new URLSearchParams(location.search).get(
     "oid"
   );

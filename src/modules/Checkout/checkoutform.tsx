@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
+import {URLSearchParams} from 'url'
 import {
   PaymentElement,
   LinkAuthenticationElement,
   useStripe,
   useElements
-} from "@stripe/react-stripe-js";
+} from "@stripe/react-stripe-js"
 
-const {URLSearchParams} = require('url')
+
 
 export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
   const stripe = useStripe();
