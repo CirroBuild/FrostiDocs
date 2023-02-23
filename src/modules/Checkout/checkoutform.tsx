@@ -11,6 +11,7 @@ export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
   const elements = useElements();
 
   const [message, setMessage] = useState('');
+  const [paymentID, setPaymentID] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const oid = new URLSearchParams(window.location.search).get(
     "oid"
@@ -28,6 +29,7 @@ export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
     const retrievePaymentIntent = async () => {
         await stripe.retrievePaymentIntent(clientSecret).then(async ({ paymentIntent }) => {
             if(paymentIntent !== undefined){
+                setPaymentID(paymentIntent.id);
                 switch (paymentIntent.status) {
                 case "succeeded":
                 setMessage("Payment succeeded!");
@@ -69,7 +71,7 @@ export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
         elements,
         confirmParams: {
           // Make sure to change this to your payment completion page
-          return_url: `http://frostibuild.com/activate?oid=${oid}&clientSecret=${clientSecret}`,
+          return_url: `https://frostibuild.com/activate?oid=${oid}&PID=${paymentID}`,
         },
       });
   

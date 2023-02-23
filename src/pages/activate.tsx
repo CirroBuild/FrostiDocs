@@ -5,8 +5,6 @@ import ilCss from "../css/enterprise/illustration.module.css"
 import seCss from "../css/section.module.css"
 import Button from "@theme/Button"
 
-
-
 const Activate = () => {
 
   function useUserInfo() {
@@ -32,17 +30,17 @@ const Activate = () => {
   const oid = new URLSearchParams(window.location.search).get(
     "oid"
   );
-  const clientSecret = new URLSearchParams(window.location.search).get(
-    "clientSecret"
+  const PID = new URLSearchParams(window.location.search).get(
+    "PID"
   );
 
   const addBetaUser = async () => {
     console.log(`Adding user start`)
 
-    if(oid != null && clientSecret != null)
+    if(oid != null && PID != null)
     {
-        console.log(`Adding user: ${oid}`)
-        await fetch(`https://frostifu-ppe-eus-functionappc1ed.azurewebsites.net/api/AddBetaUser?objectId=${oid}&clientSecret=${clientSecret}`, {
+        console.log(`Adding user: ${oid} and PID ${PID}`)
+        await fetch(`https://frostifu-ppe-eus-functionappc1ed.azurewebsites.net/api/AddBetaUser?objectId=${oid}&PID=${PID}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", 'Access-Control-Allow-Origin':'*' },
       })
@@ -55,7 +53,7 @@ const Activate = () => {
     });
 
   return (
-    <Layout canonical="/activate" description="Gain access to standalone, cloud hosted test instances to deploy your application." title="Sign Up for Frosti">
+    <Layout canonical="/enterprise" description="Gain access to standalone, cloud hosted test instances to deploy your application." title="Sign Up for Frosti">
       <section className={seCss["section--inner"]}>
         <div className={seCss.section__header}>
           <h1
