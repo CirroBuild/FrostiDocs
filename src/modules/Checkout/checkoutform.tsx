@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {URLSearchParams} from 'url';
 import {
   PaymentElement,
   LinkAuthenticationElement,
@@ -15,12 +14,12 @@ export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
   const [paymentID, setPaymentID] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
-  const getOid = (): string | null | undefined => {
+  const getOid = (): string | null => {
     const isClient = typeof window !== "undefined"
   
     const objectId = () => {
       if (!isClient) {
-        return undefined
+        return null
       }
   
       return new URLSearchParams(window.location.search).get(

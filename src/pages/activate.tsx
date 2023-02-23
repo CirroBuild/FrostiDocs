@@ -4,7 +4,6 @@ import Layout from "../theme/Layout"
 import ilCss from "../css/enterprise/illustration.module.css"
 import seCss from "../css/section.module.css"
 import Button from "@theme/Button"
-import {URLSearchParams} from 'url'
 
 const Activate = () => {
 
@@ -29,12 +28,12 @@ const Activate = () => {
   }
   const userInfo = useUserInfo();
   
-  const getOid = (): string | null | undefined => {
+  const getOid = (): string | null => {
     const isClient = typeof window !== "undefined"
   
     const objectId = () => {
       if (!isClient) {
-        return undefined
+        return null
       }
   
       return new URLSearchParams(window.location.search).get(
@@ -46,12 +45,12 @@ const Activate = () => {
 
   const oid = getOid()
 
-  const getPID = (): string | null | undefined => {
+  const getPID = (): string | null => {
     const isClient = typeof window !== "undefined"
   
     const pid = () => {
       if (!isClient) {
-        return undefined
+        return null
       }
   
       return new URLSearchParams(window.location.search).get(
