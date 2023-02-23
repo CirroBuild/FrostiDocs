@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import {URLSearchParams} from 'url'
+import React, { useEffect, useState } from "react";
+import {URLSearchParams} from 'url';
 import {
   PaymentElement,
   LinkAuthenticationElement,
@@ -17,7 +17,7 @@ export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
   const [paymentID, setPaymentID] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
-  const oid = new URLSearchParams(location.search).get(
+  const oid = new URLSearchParams(document.location.search).get(
     "oid"
   );
 

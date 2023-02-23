@@ -29,10 +29,10 @@ const Activate = () => {
   }
   const userInfo = useUserInfo();
   
-  const oid = new URLSearchParams(location.search).get(
+  const oid = new URLSearchParams(document.location.search).get(
     "oid"
   );
-  const PID = new URLSearchParams(location.search).get(
+  const PID = new URLSearchParams(document.location.search).get(
     "PID"
   );
 
