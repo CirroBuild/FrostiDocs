@@ -7,11 +7,6 @@ import {
   useElements
 } from "@stripe/react-stripe-js"
 
-import type { Props } from "@theme/DocPage"
-
-type Routes = Props["route"]["routes"]
-
-
 export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
   const stripe = useStripe();
   const elements = useElements();
