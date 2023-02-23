@@ -5,6 +5,9 @@ import ilCss from "../css/enterprise/illustration.module.css"
 import seCss from "../css/section.module.css"
 import Button from "@theme/Button"
 
+
+const URLSearchParams = window.URLSearchParams;
+
 const Activate = () => {
 
   function useUserInfo() {
