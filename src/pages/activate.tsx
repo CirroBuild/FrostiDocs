@@ -6,7 +6,7 @@ import seCss from "../css/section.module.css"
 import Button from "@theme/Button"
 
 
-const URLSearchParams = window.URLSearchParams;
+const {URLSearchParams} = require('url')
 
 const Activate = () => {
 
@@ -30,10 +30,10 @@ const Activate = () => {
     return userInfo;
   }
   const userInfo = useUserInfo();
-  const oid = new URLSearchParams(window.location.search).get(
+  const oid = new URLSearchParams(location.search).get(
     "oid"
   );
-  const PID = new URLSearchParams(window.location.search).get(
+  const PID = new URLSearchParams(location.search).get(
     "PID"
   );
 

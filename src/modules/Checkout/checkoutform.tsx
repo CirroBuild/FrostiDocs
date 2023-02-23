@@ -6,7 +6,7 @@ import {
   useElements
 } from "@stripe/react-stripe-js";
 
-const URLSearchParams = window.URLSearchParams;
+const {URLSearchParams} = require('url')
 
 export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
   const stripe = useStripe();
@@ -15,9 +15,11 @@ export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
   const [message, setMessage] = useState('');
   const [paymentID, setPaymentID] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const oid = new URLSearchParams(window.location.search).get(
+  
+  const oid = new URLSearchParams(location.search).get(
     "oid"
   );
+
 
   useEffect(() => {
     if (stripe == null) {
