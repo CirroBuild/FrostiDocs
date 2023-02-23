@@ -7,6 +7,9 @@ import {
   useElements
 } from "@stripe/react-stripe-js"
 
+import type { Props } from "@theme/DocPage"
+
+type Routes = Props["route"]["routes"]
 
 
 export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
@@ -17,9 +20,22 @@ export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
   const [paymentID, setPaymentID] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
-  const oid = new URLSearchParams(document.location.search).get(
-    "oid"
-  );
+  const getOid = (): string | null | undefined => {
+    const isClient = typeof window !== "undefined"
+  
+    const objectId = () => {
+      if (!isClient) {
+        return undefined
+      }
+  
+      return new URLSearchParams(window.location.search).get(
+        "oid"
+      );
+    }
+    return objectId()
+  }
+
+  const oid = getOid()
 
 
   useEffect(() => {

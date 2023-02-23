@@ -29,12 +29,39 @@ const Activate = () => {
   }
   const userInfo = useUserInfo();
   
-  const oid = new URLSearchParams(document.location.search).get(
-    "oid"
-  );
-  const PID = new URLSearchParams(document.location.search).get(
-    "PID"
-  );
+  const getOid = (): string | null | undefined => {
+    const isClient = typeof window !== "undefined"
+  
+    const objectId = () => {
+      if (!isClient) {
+        return undefined
+      }
+  
+      return new URLSearchParams(window.location.search).get(
+        "oid"
+      );
+    }
+    return objectId()
+  }
+
+  const oid = getOid()
+
+  const getPID = (): string | null | undefined => {
+    const isClient = typeof window !== "undefined"
+  
+    const pid = () => {
+      if (!isClient) {
+        return undefined
+      }
+  
+      return new URLSearchParams(window.location.search).get(
+        "PID"
+      );
+    }
+    return pid()
+  }
+
+  const PID = getPID()
 
   const addBetaUser = async () => {
     console.log(`Adding user start`)
