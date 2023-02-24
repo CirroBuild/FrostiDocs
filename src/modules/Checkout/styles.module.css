@@ -3,6 +3,10 @@
     align-items: center;
   }
   
+  label {
+    color: white;
+  }
+  
   body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 16px;

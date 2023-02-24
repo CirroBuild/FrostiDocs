@@ -39,7 +39,7 @@ const Checkout = () => {
 
   const options = {
     clientSecret,
-    theme: "stripe",
+    theme: "night",
   };
 
   return (
