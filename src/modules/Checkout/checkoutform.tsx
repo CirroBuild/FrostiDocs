@@ -109,7 +109,6 @@ export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
 
 
   return (
-    <>
     <form id="payment-form" onSubmit={handleSubmit}>
       <LinkAuthenticationElement
         id="link-authentication-element"
@@ -123,6 +122,5 @@ export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
       {/* Show any error or success messages */}
       {message !== "" && <div id="payment-message">{message}</div>}
     </form>
-    </>
   );
 }
