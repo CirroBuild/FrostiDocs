@@ -65,7 +65,6 @@ const Activate = () => {
   const addBetaUser = async () => {
     if(objectId != null && sessionId != null)
     {
-        console.log(`Adding user: ${objectId} and sessionId ${sessionId}`)
         await fetch(`https://frostifu-ppe-eus-functionappc1ed.azurewebsites.net/api/AddBetaUser?objectId=${objectId}&sessionId=${sessionId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", 'Access-Control-Allow-Origin':'*' },

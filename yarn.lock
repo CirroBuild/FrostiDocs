@@ -2368,18 +2368,6 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
   integrity sha512-ONhaKPIufzzrlNbqtWFFd+jlnemX6lJAgq9ZeiZtS7I1PIf/la7CW4m83rTXRnVnsMbW2k56pGYu7AUFJD9Pow==
 
-"@stripe/react-stripe-js@1.7.2":
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/@stripe/react-stripe-js/-/react-stripe-js-1.7.2.tgz#87cc5464378fb28bc7390702415cf70f13a46bcd"
-  integrity sha512-IAVg2nPUPoSwI//XDRCO7D8mGeK4+N3Xg63fYZHmlfEWAuFVcuaqJKTT67uzIdKYZhHZ/NMdZw/ttz+GOjP/rQ==
-  dependencies:
-    prop-types "^15.7.2"
-
-"@stripe/stripe-js@1.29.0":
-  version "1.29.0"
-  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.29.0.tgz#f41e46aee711d1eabcb3bbc77376016a250ec962"
-  integrity sha512-OsUxk0VLlum8E2d6onlEdKuQcvLMs7qTrOXCnl/BGV3fAm65qr6h3e1IZ5AX4lgUlPRrzRcddSOA5DvkKKYLvg==
-
 "@styled-icons/bootstrap@10.46.0":
   version "10.46.0"
   resolved "https://registry.yarnpkg.com/@styled-icons/bootstrap/-/bootstrap-10.46.0.tgz#fc70c883a3ee94038a873f6cd4484e9623f41579"
@@ -2970,11 +2958,6 @@
   version "17.0.9"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.9.tgz#0b7f161afb5b1cc12518d29b2cdc7175d5490628"
   integrity sha512-5dNBXu/FOER+EXnyah7rn8xlNrfMOQb/qXnw4NQgLkCygKBKhdmF/CA5oXVOKZLBEahw8s2WP9LxIcN/oDDRgQ==
-
-"@types/node@>=8.1.0":
-  version "18.13.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.13.0.tgz#0400d1e6ce87e9d3032c19eb6c58205b0d3f7850"
-  integrity sha512-gC3TazRzGoOnoKAhUx+Q0t8S9Tzs74z7m0ipwGpSqQrleP14hKxP4/JUeEQcD3W1/aIpnWl8pHowI7WokuZpXg==
 
 "@types/node@^14.14.28":
   version "14.18.7"
@@ -11017,7 +11000,7 @@ q@^1.1.2:
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
-qs@6.11.0, qs@^6.11.0:
+qs@6.11.0:
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.0.tgz#fd0d963446f7a65e1367e01abd85429453f0c37a"
   integrity sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==
@@ -11294,14 +11277,6 @@ react-side-effect@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/react-side-effect/-/react-side-effect-2.1.1.tgz#66c5701c3e7560ab4822a4ee2742dee215d72eb3"
   integrity sha512-2FoTQzRNTncBVtnzxFOk2mCpcfxQpenBMbk5kSVBg5UcPqV9fRbgY2zhb7GTWWOlpFmAxhClBDlIq8Rsubz1yQ==
-
-react-stripe-js@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/react-stripe-js/-/react-stripe-js-1.1.2.tgz#52ab507f762387d9a8036ce9dff2ebdfd5c5d4eb"
-  integrity sha512-ovMKYhMA+k9o7SKvj56XTUpSD5DenB/LlLfqTwqnxXN1hfVfOcNAfnCH9pBLKBq98bfdSXNavyqv6ky5vqToMQ==
-  dependencies:
-    "@stripe/react-stripe-js" "1.7.2"
-    "@stripe/stripe-js" "1.29.0"
 
 react-style-singleton@^2.2.1:
   version "2.2.1"
@@ -12754,14 +12729,6 @@ strip-outer@^1.0.0:
   integrity sha512-k55yxKHwaXnpYGsOzg4Vl8+tDrWylxDEpknGjhTiZB8dFRU5rTo9CAzeycivxV3s+zlTKwrs6WxMxR95n26kwg==
   dependencies:
     escape-string-regexp "^1.0.2"
-
-stripe@^11.11.0:
-  version "11.11.0"
-  resolved "https://registry.yarnpkg.com/stripe/-/stripe-11.11.0.tgz#9817317a9709a44ec4548dfa18f33f58beb8040d"
-  integrity sha512-CT8TZJ+bUaMmqCOljHdKwHTWym0bscrCHrKmvK2KoTaz/9gDIzG+lXTJOFUOb3K7Jwaoaori4yEVzOgA7U46+g==
-  dependencies:
-    "@types/node" ">=8.1.0"
-    qs "^6.11.0"
 
 strnum@^1.0.4:
   version "1.0.5"
