@@ -37,45 +37,43 @@ const Activate = () => {
       }
   
       return new URLSearchParams(window.location.search).get(
-        "oid"
+        "objectId"
       );
     }
     return objectId()
   }
 
-  const oid = getOid()
+  const objectId = getOid()
 
-  const getPID = (): string | null => {
+  const getSid = (): string | null => {
     const isClient = typeof window !== "undefined"
   
-    const pid = () => {
+    const sid = () => {
       if (!isClient) {
         return null
       }
   
       return new URLSearchParams(window.location.search).get(
-        "PID"
+        "sessionId"
       );
     }
-    return pid()
+    return sid()
   }
 
-  const PID = getPID()
+  const sessionId = getSid()
 
   const addBetaUser = async () => {
-    console.log(`Adding user start`)
-
-    if(oid != null && PID != null)
+    if(objectId != null && sessionId != null)
     {
-        console.log(`Adding user: ${oid} and PID ${PID}`)
-        await fetch(`https://frostifu-ppe-eus-functionappc1ed.azurewebsites.net/api/AddBetaUser?objectId=${oid}&PID=${PID}`, {
+        console.log(`Adding user: ${objectId} and sessionId ${sessionId}`)
+        await fetch(`https://frostifu-ppe-eus-functionappc1ed.azurewebsites.net/api/AddBetaUser?objectId=${objectId}&sessionId=${sessionId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", 'Access-Control-Allow-Origin':'*' },
       })
     }
   }
   addBetaUser()
-  .then(() => console.log('Retrieving Payment Intent'))
+  .then(() => console.log('Adding Beta User'))
     .catch((e: Error) => {
     console.log(e);
     });
@@ -90,7 +88,7 @@ const Activate = () => {
               seCss["section__title--accent"],
             )}
           >
-            Enrolled in Beta!
+            You have succesfully enrolled in Beta!
           </h1>
           <p>{userInfo}</p>
           
@@ -102,14 +100,14 @@ const Activate = () => {
               "text--center",
             )}
           >
-            You have unlocked the Frosti test environment. Feel free to contact us with any questions.
+            Run <kbd>frosti provision</kbd> again and the Test Env workflow will be created for you.
           </p>
 
           <Button
             size="xsmall"
-            to="/docs/get-started/provision/"
+            to="/docs/get-started/provision/#deploying-to-ppeproduction-requires-sign-up-for-the-beta"
           >
-            Get Started
+            More Info
           </Button>
           
           <img
