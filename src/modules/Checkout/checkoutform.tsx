@@ -45,19 +45,22 @@ export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
         await stripe.retrievePaymentIntent(clientSecret).then(async ({ paymentIntent }) => {
             if(paymentIntent !== undefined){
                 setPaymentID(paymentIntent.id);
-                switch (paymentIntent.status) {
-                case "succeeded":
-                setMessage("Payment succeeded!");
-                break;
-                case "processing":
-                setMessage("Your payment is processing.");
-                break;
-                case "requires_payment_method":
-                setMessage("Your payment was not successful, please try again.");
-                break;
-                default:
-                setMessage("Something went wrong.");
-                break;
+                if(paymentID !== '')
+                {
+                  switch (paymentIntent.status) {
+                    case "succeeded":
+                    setMessage("Payment succeeded!");
+                    break;
+                    case "processing":
+                    setMessage("Your payment is processing.");
+                    break;
+                    case "requires_payment_method":
+                    setMessage("Your payment was not successful, please try again.");
+                    break;
+                    default:
+                    setMessage("Something went wrong.");
+                    break;
+                  }
                 }
             }
         })
@@ -114,6 +117,7 @@ export default function CheckoutForm( {clientSecret} : {clientSecret: string}) {
         id="link-authentication-element"
       />
       <PaymentElement id="payment-element"  />
+      <br /> 
       <button disabled={isLoading || stripe == null || elements == null} id="submit">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner" /> : "Pay now"}
