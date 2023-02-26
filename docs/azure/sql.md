@@ -1,6 +1,6 @@
 ---
-title: Azure SQL
-sidebar_label: SQL
+title: Azure SQL (Preview)
+sidebar_label: SQL (Preview)
 description:
   Overview of Azure SQL Db using Frosti
 ---

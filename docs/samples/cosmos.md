@@ -36,6 +36,10 @@ Define a new instance of the CosmosClient class using the constructor, and clien
 // <endpoint_key> 
 // New instance of CosmosClient class using an endpoint and key string
 var client = new CosmosClient(builder.Configuration["CosmosConnection"]);
+builder.Services.AddSingleton(s =>
+{
+    return client;
+});
 // </endpoint_key>
 
 ```
@@ -47,16 +51,12 @@ Below the Cosmos Client creation, create a database and container to store the b
 ```csharp title="Program.cs"
 // <create_database>
 // New instance of Database class referencing the server-side database
-Database database = await client.CreateDatabaseIfNotExistsAsync("CascadeBrewsDb");
-builder.Services.AddSingleton(s =>
-{
-    return client;
-});
+var databaseResponse = await client.CreateDatabaseIfNotExistsAsync("CascadeBrewsDb");
 // </create_database>
 
 // <create_container>
 // New instance of Container class referencing the server-side container
-Container container = await database.CreateContainerIfNotExistsAsync(
+var container = await databaseResponse.Database.CreateContainerIfNotExistsAsync(
     id: "brews",
     partitionKeyPath: "/categoryId",
     throughput: 400
