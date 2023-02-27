@@ -30,7 +30,7 @@ Note: This will create a file frosti.yml, make sure to keep this file. It's need
 5. After this, simply build and run your project. Hit the Green Play button at the top to test your application locally using cloud resources.
 
 ## Deploying to PPE/Production (Requires [Sign Up](https://frostibuild.com/enterprise) for the Beta)
-1. When you ran frosti locally, a frosti.yml file was created for you if you are part of the beta. Push this file up to github if you haven't already.
+1. When you ran frosti locally, a frosti.yml file was created for you if you are part of the beta. Push this file up to github if you haven't already. The file is located at .github/frosti.yml. Run `git add .github/*` and commit the new file.
 
 2. This will automatically trigger a workflow that tries to automatically provision your ppe architecture. [Note: This will fail because github is missing your credentials to connect to azure]
 
