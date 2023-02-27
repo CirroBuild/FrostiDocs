@@ -1,36 +1,12 @@
 import clsx from "clsx"
-import React, {useState, useEffect } from "react"
+import React from "react"
 import Layout from "../theme/Layout"
+import CodeBlock from "@theme/CodeBlock"
 import ilCss from "../css/enterprise/illustration.module.css"
 import seCss from "../css/section.module.css"
-import Button from "@theme/Button"
 
 const Enterprise = () => {
-  // const [userDetails, setUserDetails] = useState(null);
-  const baseUrl = "https://buy.stripe.com/7sIcNV5NcbvMdDGfYY"; 
-  const [userData, setUserData] = useState({checkOutString:baseUrl, oid:""});
-  let tempOid = "";
-  useEffect(() => {
-    const getCheckOutUrl = async () => {
-      const response = await fetch('/.auth/me');
-      const payload = await response.json();
-      const { clientPrincipal } = payload;
-      console.log(payload)
-      const claims = clientPrincipal.claims;
-      for (let i = 0; i < claims.length; i++){
-        const obj = claims[i];
-        if(obj.typ === "http://schemas.microsoft.com/identity/claims/objectidentifier")
-          tempOid = obj.val;
-      }
-      // setUserDetails(clientPrincipal.userDetails);
-      setUserData({checkOutString: baseUrl.concat("?prefilled_email=", clientPrincipal.userDetails, "&client_reference_id=", tempOid), oid:tempOid});
-    }
-    getCheckOutUrl()
-    .catch((e: Error) => {
-      console.log(e);
-    });
-  }, []);
-
+ 
   return (
     <Layout canonical="/enterprise" description="Gain access to standalone, cloud hosted test instances to deploy your application." title="Sign Up for Frosti">
       <section className={seCss["section--inner"]}>
@@ -53,23 +29,22 @@ const Enterprise = () => {
               "text--center",
             )}
           >
-            For <strong>$10</strong>, gain access to standalone, cloud hosted Test instances to deploy your application.
+            For <strong>$10</strong>, gain access to standalone, cloud hosted Test instances to deploy your application.  
+          </p>
+          <p
+            className={clsx(
+              seCss.section__subtitle,
+              seCss["section__subtitle--accent"],
+              "text--center",
+            )}
+          >
+            Simply run the following command after installing Frosti:
           </p>
 
-          <p>
-            Please run <kbd>az ad signed-in-user show</kbd> and copy the id value (without the quotes) for the stripe checkout.
-          </p>
-          <p>
-            Frosti will use this ID to grant you access to the Beta Frosti release.
-          </p>
-          <h2>{userData.oid}</h2>
-          <Button
-            size="xsmall"
-            newTab
-            to={userData.checkOutString}
-          >
-            Checkout
-          </Button>
+          <CodeBlock className="language-shell">
+            frosti signup beta
+          </CodeBlock>
+
           
           <img
             alt="Artistic view of the console with sub-queries"

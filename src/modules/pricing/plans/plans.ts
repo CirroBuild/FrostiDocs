@@ -16,7 +16,7 @@ export const plans: PricingPlan[] = [
   {
     type: "beta",
     title: "Beta",
-    price: "$1/month",
+    price: "$10",
     action: "Sign Up",
     url: "/enterprise/",
     specs: [
