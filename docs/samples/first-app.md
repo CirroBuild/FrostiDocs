@@ -7,6 +7,8 @@ description:
 
 This tutorial will demonstrate building a basic company site using an ASP.NET web application.
 
+See the finished application code for this 3 part tutorial [here](https://github.com/strubelkai/CascadeBrewingCo).
+
 ## Prerequisites
 - [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 - The .NET SDK (usually automatically included when Visual Studio installed)
