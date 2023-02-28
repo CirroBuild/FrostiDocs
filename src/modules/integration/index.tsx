@@ -67,7 +67,8 @@ const integrations: Array<{
 export const Integration = () => (
   <Section noGap>
     <Section.Title size="small" center>
-      Integrate with your favorite services (and more soon!)
+      Integrate with your favorite services 
+      <p style={{fontSize:20}}>(and more soon!)</p>
     </Section.Title>
 
     <div className={styles.integrations}>

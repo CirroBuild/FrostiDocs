@@ -5,7 +5,7 @@ const useCases = [
   {
     title: "Save Dev Time",
     uses: [
-      "Write and test code against actual cloud resources at almost no cost and no headache from provisioning."
+      "Frosti writes the Infrastructure-as-Code so you don't have to. Write and test code against actual cloud resources."
     ],
     cta: {
       label: "See Benchmarks",

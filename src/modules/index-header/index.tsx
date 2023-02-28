@@ -13,13 +13,16 @@ export const Header = () => {
         </Section.Title>
 
         <Section.Subtitle className={styles.subheader} center>
-          No more wasting time with cloud infrastructure or infrastructure as code.
-          Welcome to the self provisioning platform.
+          Frosti scans your application code to automatically provision the most 
+          secure, reliable, and cost optimized cloud infrasture.
         </Section.Subtitle>
 
         <div className={styles.getStartedButtons}>
           <Link to="/docs/get-started/homebrew/" className={styles.joinPublicPreviewLink}>
-            <Button newTab={false}>Try it now</Button>
+            <Button newTab={false}>Try it free</Button>
+          </Link>
+          <Link to="/enterprise" className={styles.joinPublicPreviewLink}>
+            <Button newTab={false} variant="secondary">Sign up for Beta</Button>
           </Link>
         </div>
       </div>
