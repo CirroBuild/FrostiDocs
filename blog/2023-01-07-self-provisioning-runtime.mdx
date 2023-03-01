@@ -66,7 +66,7 @@ For example, memory management used to be a task that fell on programmers. It wa
 to many security and reliability risks. Eventually, storage became cheap enough (and enough keyboards were hurled against the wall
 debugging seg faults) that a new paradigm developed where programming languages handled memory management for you. 
 A similar shift is occuring in the world of cloud provisioning. 
-Repeatable tasks such as provisioning storage or dbs for the application can 
+Repeatable tasks such as provisioning storage or setting up virtual networks for the application can 
 be abstracted away from the developer, creating a more reliable and secure stack.
 
 A self provisioning run time evaluates the program and provisions the necessary infrastructure via static 
@@ -80,8 +80,6 @@ Container container = await database.CreateContainerIfNotExistsAsync(
     partitionKeyPath: "/categoryId",
     throughput: 400
 );
-
-Console.WriteLine($"New container:\t{container.Id}");
 ```
 
 It can be inferred that a Cosmos Db Account needs to be provisioned in the users Azure subscription. 

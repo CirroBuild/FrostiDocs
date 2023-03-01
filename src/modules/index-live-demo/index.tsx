@@ -60,7 +60,7 @@ const LiveDemo = () => {
         </div>
       </div>
       <Button
-        href="https://www.youtube.com/watch?v=_2iMvt4Q9Vc"
+        href="https://www.youtube.com/watch?v=ctpJgqjIemw"
       >
         Watch the Demo &nbsp;&nbsp;&gt;
       </Button>
