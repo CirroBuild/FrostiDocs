@@ -36,6 +36,7 @@ module.exports = {
       items: [
         "get-started/homebrew",
         "get-started/provision",
+        "get-started/parameters",
       ],
     },
     {
