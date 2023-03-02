@@ -14,4 +14,4 @@ optimize the performance of your application. Feel free to reach out using the
 following channels:
 
 - [Frosti on Stack Overflow]({@stackoverflowUrl@})
-- or email us at [frostibuild@gmail.com](mailto:frostibuild@gmail.com)
+- or email us at [kaistrubel@frostibuild.com](mailto:kaistrubel@frostibuild.com)
