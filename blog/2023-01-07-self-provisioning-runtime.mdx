@@ -14,16 +14,21 @@ image: /img/pages/index/FrostiProvision.png
 
 import Banner from "@theme/Banner"
 
-Today we'll explore the emerging trend of "Self Provisiong Runtimes" or "Infrastructure from Code".
+## Executive Summary
 
-  "If the Platonic ideal of Developer Experience is a world where you ”Just Write Business Logic”, 
-  the logical endgame is a language+infrastructure combination that figures out everything else...
+Infrastructure as Code brought a much needed advancement to cloud automation by enabling 
+repeatable and predictable deployments of complex infrastructure. While this change brought many 
+benfits, it also created a very painful experience for developers who are now forced to debug complex 
+JSON configuration files and connection failures. 
 
-  Advancements in two fields — programming languages and cloud infrastructure — will converge in a
-  single paradigm: where all resources required by a program will be automatically provisioned, 
-  and optimized, by the environment that runs it."
- 
-  Shawn Wang (swyx) in ["Self Provisioning Runtime"](https://www.swyx.io/self-provisioning-runtime)
+Pulumi took a huge leap forward enabling developers to declare this same logic
+in the programming languages they were familiar with. However, the burden of defining and configuring
+this infrastructure remained on the developer.
+
+Frosti is the next leap forward in this evolution. Rather than having
+developers define infrastructure in their application code, we enable them to abstract this step away entirely and
+simply write their applicaiton code. Our infrastructure interpreter scans the applicaiton and automatically provisions 
+the infrastructure they need based on the usage of Azure/AWS/GCP sdks.
 
 <!--truncate-->
 <Banner
@@ -54,6 +59,7 @@ both unsustainable and a significant time sink for a series of tasks that are no
 >
   Devs today outrunning the avalanche of growing DevOps responsibilities
 </Banner>
+
 
 ## The New Paradigm
 

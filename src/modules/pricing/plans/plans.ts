@@ -53,7 +53,7 @@ export const plans: PricingPlan[] = [
       { label: "2", value: "- Zero Trust Security" },
       { label: "3", value: "- Unlimited Members" },
       { label: "4", value: "- Parallel Deployments" },
-      { label: "5", value: "- 24x7 Support Inlcuded" },
+      { label: "5", value: "- 24x7 Support Included" },
     ],
   },
 ]
