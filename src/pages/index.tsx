@@ -111,6 +111,21 @@ const Provision = () => (
   </Section>
 )
 
+const CloudOrchestration = () => (
+  <Section noGap center>
+    <Section.Title size="small" center>
+      Infrastructure as Code Toolsets
+    </Section.Title>
+
+    <img
+      loading="lazy"
+      width="1400px"
+      alt="Frosti Provision"
+      src="/img/pages/index/CloudOrchestration.png"
+    />
+  </Section>
+)
+
 
 const Home = () => (
   <Layout
@@ -125,6 +140,11 @@ const Home = () => (
       <UseCases />
     </Section>
 
+    <Section fullWidth center>
+      <CloudOrchestration />
+    </Section>
+
+    
     <LiveDemo />
     <Workflow />
 
