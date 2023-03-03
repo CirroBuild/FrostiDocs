@@ -114,7 +114,7 @@ const Provision = () => (
 const CloudOrchestration = () => (
   <Section noGap center>
     <Section.Title size="small" center>
-      Infrastructure as Code Toolsets
+      Infrastructure as Code Tools
     </Section.Title>
 
     <img
