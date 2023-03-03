@@ -14,7 +14,7 @@ module.exports = ({ customFields, favicon, organizationName, url }) => `
     <link href="https://www.google-analytics.com" rel="dns-prefetch" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/img/icons/apple-180x180.png" sizes="180x180" />
+    <link rel="apple-touch-icon" href="/img/Frosti.png" />
     <meta name="msapplication-config" content="/browserconfig.xml" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <%~ it.headTags %>

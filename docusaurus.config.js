@@ -137,12 +137,11 @@ const config = {
       anonymizeIP: true,
     },
     prism: {
-      defaultLanguage: "questdb-sql",
+      defaultLanguage: "cpp",
       additionalLanguages: [
         "rust",
         "csharp",
         "julia",
-        "cpp",
         "java",
         "ebnf",
         "ini",
