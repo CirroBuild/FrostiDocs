@@ -113,10 +113,6 @@ const Provision = () => (
 
 const CloudOrchestration = () => (
   <Section noGap center>
-    <Section.Title size="small" center>
-      Infrastructure as Code Tools
-    </Section.Title>
-
     <img
       loading="lazy"
       width="1400px"

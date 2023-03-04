@@ -32,7 +32,7 @@ Note: This will create a file frosti.yml, make sure to keep this file. It's need
 
 2. This will automatically trigger a workflow that tries to automatically provision your ppe architecture. [Note: This will fail because github is missing your credentials to connect to azure]
 
-3. Run `az ad sp create-for-rbac --name "FrostiApp" --role contributor --scopes /subscriptions/{sub_id} --sdk-auth` on the terminal. Copy the response, including the brackets [{}].
+3. Run `az ad sp create-for-rbac --name "FrostiApp" --role contributor --sdk-auth --scopes /subscriptions/{sub_id}` on the terminal. Copy the response, including the brackets [{}].
 
 4. Go to Settings tab in your Github project. On the left sidebar, go to "Secrets and variables". Click New repository secret.
 
