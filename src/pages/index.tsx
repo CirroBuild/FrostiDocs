@@ -15,12 +15,20 @@ import LiveDemo from "../modules/index-live-demo"
 import { ApplicationInsights } from '@microsoft/applicationinsights-web'
 import siteConfig from '@generated/docusaurus.config';
 
-const appInsights = new ApplicationInsights({ config: {
-  connectionString: siteConfig.customFields.ai_connection
-} });
+if (process.env.NODE_ENV === 'development') {
+  // dev code
+}
+else
+{
+  console.log("Sent to AI")
+  const appInsights = new ApplicationInsights({ config: {
+    connectionString: siteConfig.customFields.ai_connection
+  } });
+  
+  appInsights.loadAppInsights();
+  appInsights.trackPageView();
+}
 
-appInsights.loadAppInsights();
-appInsights.trackPageView();
 
 const Cards = () => (
   <Section noGap odd fullWidth>
@@ -113,6 +121,7 @@ const Provision = () => (
 
 const CloudOrchestration = () => (
   <Section noGap center>
+
     <img
       loading="lazy"
       width="1400px"
