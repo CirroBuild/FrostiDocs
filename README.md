@@ -5,6 +5,8 @@
 TypeScript, the styles in vanilla CSS with variables using
 [CSS Modules](https://github.com/css-modules/css-modules).
 
+The doc site was forked from [QuestDb](https://github.com/questdb/questdb.io). Thanks!
+
 ## Installation
 
 ```script
