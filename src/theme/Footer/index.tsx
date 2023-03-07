@@ -3,6 +3,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import clsx from "clsx"
 import React from "react"
 import customFields from "../../config/customFields"
+import Button from "@theme/Button"
 import styles from "./styles.module.css"
 
 type Props = {
@@ -54,7 +55,24 @@ const Footer = () => {
 
         <div className={styles.tagline}>
           <p>{siteConfig.tagline}</p>
-
+          <Button
+            className={styles.githubButton}
+            href={customFields.githubUrl}
+            icon={
+              <img
+                alt="GitHub logo"
+                height={22}
+                src="/img/github.svg"
+                title="GitHub"
+                width={22}
+              />
+            }
+            size="xsmall"
+            uppercase={false}
+            variant="secondary"
+          >
+            Star us on GitHub
+          </Button>
         </div>
         <div className={styles.links}>
           {links.map((linkItem, i) => (
