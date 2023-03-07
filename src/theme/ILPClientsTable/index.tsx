@@ -32,7 +32,7 @@ const clients: Client[] = [
   },
   {
     label: "Java",
-    docsUrl: "/docs/reference/clients/java_ilp/",
+    docsUrl: "/docs/",
     logoSrc: "/img/logos/java.svg",
   },
   {

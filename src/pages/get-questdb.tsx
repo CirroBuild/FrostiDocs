@@ -155,7 +155,7 @@ const GetQuestdbPage = () => {
         title="Linux"
       >
         <p className={biCss.binary__docs}>
-          <Link to="/docs/get-started/binaries#your-operating-system-version">
+          <Link to="/docs/">
             Docs
           </Link>
         </p>
@@ -406,7 +406,7 @@ helm install my-questdb questdb/questdb --version ${customFields.helmVersion}`}
 </dependency>`}
           </CodeBlock>
           <p className={biCss.binary__docs}>
-            <Link to="/docs/reference/api/java-embedded">Docs</Link>
+            <Link to="/docs/">Docs</Link>
           </p>
         </Binary>
         <Binary
@@ -427,7 +427,7 @@ helm install my-questdb questdb/questdb --version ${customFields.helmVersion}`}
           </CodeBlock>
           <div style={{ height: "2.75rem" }} />
           <p className={biCss.binary__docs}>
-            <Link to="/docs/reference/api/java-embedded">Docs</Link>
+            <Link to="/docs/">Docs</Link>
           </p>
         </Binary>
       </div>

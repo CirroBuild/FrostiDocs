@@ -137,7 +137,7 @@ questdb.exe start
 :::note
 
 Check the [release notes](https://github.com/questdb/questdb/releases) and ensure
-that necessary [backup](/docs/operations/backup/) is completed.
+that necessary [backup](/docs) is completed.
 
 :::
 
@@ -187,5 +187,5 @@ questdb.exe start
 ## Next steps
 
 Once you extracted the tarball, you are ready to use QuestDB. Navigate to our
-[command-line options](/docs/reference/command-line-options) page to learn more
+[command-line options](/docs) page to learn more
 about its usage.

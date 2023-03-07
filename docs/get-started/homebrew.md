@@ -103,5 +103,5 @@ az login
 ## Next steps
 
 Once you installed the Frosti with Homebrew, you can navigate to our
-[Deployment](/docs/deployment/azure) page to learn more
+[Deployment](/docs) page to learn more
 about its usage.
